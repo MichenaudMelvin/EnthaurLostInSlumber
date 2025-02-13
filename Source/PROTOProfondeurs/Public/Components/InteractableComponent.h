@@ -32,7 +32,7 @@ public:
 	}
 
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Interaction")
 	FText InteractionName;
 
 	UPROPERTY()
