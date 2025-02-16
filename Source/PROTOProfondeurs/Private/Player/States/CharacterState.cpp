@@ -2,6 +2,7 @@
 
 
 #include "Player/States/CharacterState.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
@@ -9,6 +10,11 @@
 const FPlayerInputs& UCharacterState::GetInputs() const
 {
 	return Controller->GetPlayerInputs();
+}
+
+bool UCharacterState::IsFalling() const
+{
+	return Character->GetCharacterMovement()->IsFalling();
 }
 
 void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
@@ -58,10 +64,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 #endif
 }
 
-void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
-{
-	PlayStateAnimation();
-}
+void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID) {}
 
 void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID) {}
 
@@ -74,15 +77,4 @@ void UCharacterState::StateTick_Implementation(float DeltaTime)
 
 	Character->AddControllerYawInput(GetInputs().InputLook.X);
 	Character->AddControllerPitchInput(GetInputs().InputLook.Y);
-}
-
-void UCharacterState::PlayStateAnimation()
-{
-	if(StateAnimation == nullptr)
-	{
-		Character->StopAnimMontage(nullptr);
-		return;
-	}
-
-	Character->PlayAnimMontage(StateAnimation);
 }

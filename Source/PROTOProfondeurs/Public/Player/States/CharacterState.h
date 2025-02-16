@@ -49,17 +49,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterStateMachine")
 	ECharacterStateID StateID;
 
-	/**
-	 * @brief For now, we will use the ABP
-	 */
-	UPROPERTY(EditDefaultsOnly, Category = "Animation")
-	TObjectPtr<UAnimMontage> StateAnimation;
-
 	UPROPERTY(EditDefaultsOnly, Category = "Camera")
 	bool bAllowCameraMovement = true;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
 	const FPlayerInputs& GetInputs() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	bool IsFalling() const;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Debug", meta = (ToolTip = "Enable debug features for the current state"))
@@ -79,6 +76,4 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, Category = "CharacterStateMachine")
 	void StateTick(float DeltaTime);
-
-	virtual void PlayStateAnimation();
 };

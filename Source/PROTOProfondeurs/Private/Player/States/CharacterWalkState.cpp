@@ -16,14 +16,12 @@ void UCharacterWalkState::StateTick_Implementation(float DeltaTime)
 {
 	Super::StateTick_Implementation(DeltaTime);
 
-	const bool bIsFalling = Character->GetCharacterMovement()->IsFalling();
-
-	if(GetInputs().bInputJump && !bIsFalling)
+	if(GetInputs().bInputJump && !IsFalling())
 	{
 		StateMachine->ChangeState(ECharacterStateID::Jump);
 	}
 
-	else if(bIsFalling)
+	else if(IsFalling())
 	{
 		StateMachine->ChangeState(ECharacterStateID::Fall);
 	}

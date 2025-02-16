@@ -24,6 +24,8 @@ protected:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+#pragma region Components
+
 	/** First person camera */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
@@ -31,6 +33,13 @@ protected:
 	/** Character mesh */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
+
+public:
+	UCameraComponent* GetCamera() const {return CameraComponent;}
+
+	USkeletalMeshComponent* GetCharacterMesh() const {return CharacterMesh;}
+
+#pragma endregion
 
 #pragma region StateMachine
 
@@ -65,5 +74,12 @@ public:
 public:
 	const TArray<UCharacterState*>& GetStates() const {return States;}
 
-#pragma endregion 
+#pragma endregion
+
+public:
+	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
+	FVector GetBottomLocation() const;
+
+	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
+	FVector GetTopLocation() const;
 };

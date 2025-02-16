@@ -119,4 +119,18 @@ void AFirstPersonCharacter::DisplayStates(bool bDisplay)
 {
 	bDebugStates = bDisplay;
 }
+
+FVector AFirstPersonCharacter::GetBottomLocation() const
+{
+	FVector TargetLocation = GetActorLocation();
+	TargetLocation.Z -= GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	return TargetLocation;
+}
+
+FVector AFirstPersonCharacter::GetTopLocation() const
+{
+	FVector TargetLocation = GetActorLocation();
+	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	return TargetLocation;
+}
 #endif

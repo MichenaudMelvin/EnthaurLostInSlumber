@@ -18,4 +18,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Movement", meta = (ClampMin = 0.0f, Units = "cm/s"))
 	float MoveSpeed = 600.0f;
+
+public:
+	float GetMoveSpeed() const {return MoveSpeed;}
 };
