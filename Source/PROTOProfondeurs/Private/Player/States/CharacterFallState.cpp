@@ -6,6 +6,7 @@
 #include "Player/FirstPersonCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
 
 UCharacterFallState::UCharacterFallState()
@@ -21,6 +22,10 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 	{
 		bCanDoCoyoteTime = true;
 		CoyoteTime = 0.0f;
+	}
+	else
+	{
+		bCanDoCoyoteTime = false;
 	}
 
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
@@ -49,12 +54,12 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 			}
 #endif
 		}
-	}
 
-	// if (GetInputs().bInputJump)
-	// {
-	// 	StateMachine->ChangeState(ECharacterStateID::Jump);
-	// }
+		if (GetInputs().bInputJump)
+		{
+			StateMachine->ChangeState(ECharacterStateID::Jump);
+		}
+	}
 
 	if(Character->GetCharacterMovement()->IsFalling())
 	{

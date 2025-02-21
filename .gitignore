@@ -31,6 +31,7 @@
 **/*[Bb]inaries/Win64/*DebugGame.target
 
 !**/*[Bb]inaries/Win64/UnrealEditor-*.dll
+**/*[Bb]inaries/Win64/UnrealEditor-*-*.dll
 **/*[Bb]inaries/Win64/*DebugGame.dll
 
 # VSCode files

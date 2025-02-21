@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UInteractableComponent;
 class UCharacterStateMachine;
 class UCharacterState;
 enum class ECharacterStateID : uint8;
@@ -73,6 +74,22 @@ public:
 
 public:
 	const TArray<UCharacterState*>& GetStates() const {return States;}
+
+#pragma endregion
+
+#pragma region InteractionTrace
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
+	float InteractionTraceLength = 100.0f;
+
+	UPROPERTY(BlueprintReadOnly, Category = "InteractionTrace")
+	TObjectPtr<UInteractableComponent> CurrentInteractable;
+
+	void InteractionTrace();
+
+public:
+	UInteractableComponent* GetCurrentInteractable() const {return CurrentInteractable;}
 
 #pragma endregion
 

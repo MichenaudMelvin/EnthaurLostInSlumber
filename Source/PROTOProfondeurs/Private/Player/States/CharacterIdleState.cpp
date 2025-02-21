@@ -4,6 +4,7 @@
 #include "Player/States/CharacterIdleState.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
+#include "Settings/DefaultInputSettings.h"
 
 UCharacterIdleState::UCharacterIdleState()
 {
@@ -13,6 +14,8 @@ UCharacterIdleState::UCharacterIdleState()
 void UCharacterIdleState::StateTick_Implementation(float DeltaTime)
 {
 	Super::StateTick_Implementation(DeltaTime);
+
+	const UDefaultInputSettings* InputSettings = GetDefault<UDefaultInputSettings>();
 
 	if (GetInputs().bInputJump)
 	{
@@ -24,7 +27,7 @@ void UCharacterIdleState::StateTick_Implementation(float DeltaTime)
 		StateMachine->ChangeState(ECharacterStateID::Crouch);
 	}
 
-	else if (GetInputs().InputMove.Length() > 0.1f)
+	else if (GetInputs().InputMove.Length() > InputSettings->MoveInputThreshold)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Walk);
 	}

@@ -1,11 +1,10 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
-#include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "Engine/LocalPlayer.h"
+#include "Components/InteractableComponent.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 
@@ -42,6 +41,7 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	TickStateMachine(DeltaSeconds);
+	InteractionTrace();
 }
 
 void AFirstPersonCharacter::InitStateMachine()
@@ -118,6 +118,58 @@ void AFirstPersonCharacter::CreateStates()
 void AFirstPersonCharacter::DisplayStates(bool bDisplay)
 {
 	bDebugStates = bDisplay;
+}
+
+void AFirstPersonCharacter::InteractionTrace()
+{
+	FVector StartLocation = CameraComponent->GetComponentLocation();
+	FVector EndLocation = (CameraComponent->GetForwardVector() * InteractionTraceLength) + StartLocation;
+
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(this);
+
+	FHitResult HitResult;
+	FCollisionQueryParams CollisionParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+
+	if (!bHit)
+	{
+		CurrentInteractable = nullptr;
+		return;
+	}
+
+	if (HitResult.GetActor() == nullptr)
+	{
+		CurrentInteractable = nullptr;
+		return;
+	}
+
+	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UInteractableComponent::StaticClass());
+	if (FoundComp == nullptr)
+	{
+		CurrentInteractable = nullptr;
+		return;
+	}
+
+	UInteractableComponent* TargetInteractable = Cast<UInteractableComponent>(FoundComp);
+	if (TargetInteractable == nullptr)
+	{
+		CurrentInteractable = nullptr;
+		return;
+	}
+
+	if (TargetInteractable->CheckComponent(HitResult.GetComponent()))
+	{
+		CurrentInteractable = TargetInteractable;
+
+#if WITH_EDITORONLY_DATA
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("Interaction: %s"), *CurrentInteractable->GetInteractionName().ToString()));
+#endif
+	}
+	else
+	{
+		CurrentInteractable = nullptr;
+	}
 }
 
 FVector AFirstPersonCharacter::GetBottomLocation() const

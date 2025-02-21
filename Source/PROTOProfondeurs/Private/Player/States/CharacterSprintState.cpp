@@ -6,6 +6,7 @@
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
+#include "Settings/DefaultInputSettings.h"
 
 UCharacterSprintState::UCharacterSprintState()
 {
@@ -18,6 +19,7 @@ void UCharacterSprintState::StateTick_Implementation(float DeltaTime)
 	Super::StateTick_Implementation(DeltaTime);
 
 	const bool bIsFalling = Character->GetCharacterMovement()->IsFalling();
+	const UDefaultInputSettings* InputSettings = GetDefault<UDefaultInputSettings>();
 
 	if(GetInputs().bInputJump && !bIsFalling)
 	{
@@ -39,7 +41,7 @@ void UCharacterSprintState::StateTick_Implementation(float DeltaTime)
 		StateMachine->ChangeState(ECharacterStateID::Crouch);
 	}
 
-	else if (GetInputs().InputMove.Length() == 0.0f)
+	else if (GetInputs().InputMove.Length() < InputSettings->MoveInputThreshold)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Idle);
 	}
