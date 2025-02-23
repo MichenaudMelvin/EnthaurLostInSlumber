@@ -30,7 +30,10 @@
 !**/*[Bb]inaries/Win64/*.target
 **/*[Bb]inaries/Win64/*DebugGame.target
 
+# Developement dlls
 !**/*[Bb]inaries/Win64/UnrealEditor-*.dll
+
+# Hot Reload and Debug dlls
 **/*[Bb]inaries/Win64/UnrealEditor-*-*.dll
 **/*[Bb]inaries/Win64/*DebugGame.dll
 

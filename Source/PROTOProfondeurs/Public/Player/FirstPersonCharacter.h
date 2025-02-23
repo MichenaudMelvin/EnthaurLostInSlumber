@@ -99,4 +99,6 @@ public:
 
 	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
+
+	APlayerController* GetPlayerController() const {return Cast<APlayerController>(GetController());};
 };
