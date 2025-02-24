@@ -64,7 +64,9 @@ protected:
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "CharacterStateMachine|Debug")
 	bool bDebugStates = false;
+#endif
 
+#if WITH_EDITOR
 	UFUNCTION(Exec)
 	void DisplayStates(bool bDisplay);
 

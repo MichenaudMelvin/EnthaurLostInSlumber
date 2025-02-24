@@ -121,7 +121,9 @@ public:
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Inputs|Debug")
 	bool bDebugInputs = false;
+#endif
 
+#if WITH_EDITOR
 	UFUNCTION(Exec)
 	void DisplayInputs(bool bDisplay);
 #endif

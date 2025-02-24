@@ -22,13 +22,6 @@ enum class ECharacterStateID : uint8
 	Jump,
 	Fall,
 	Interact,
-
-#if WITH_EDITORONLY_DATA
-	/**
-	 * @brief TestState is only available in editor and cannot be packaged
-	 */
-	TestState
-#endif
 };
 
 UCLASS(Abstract, Blueprintable)

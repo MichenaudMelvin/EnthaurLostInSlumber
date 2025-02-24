@@ -224,7 +224,7 @@ void AFirstPersonController::OnInputInteract(const FInputActionValue& InputActio
 	PlayerInputs.bInputInteract = InputActionValue.Get<bool>();
 }
 
-#if WITH_EDITORONLY_DATA
+#if WITH_EDITOR
 void AFirstPersonController::DisplayInputs(bool bDisplay)
 {
 	bDebugInputs = bDisplay;

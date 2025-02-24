@@ -114,11 +114,12 @@ void AFirstPersonCharacter::CreateStates()
 	}
 }
 
-#if WITH_EDITORONLY_DATA
+#if WITH_EDITOR
 void AFirstPersonCharacter::DisplayStates(bool bDisplay)
 {
 	bDebugStates = bDisplay;
 }
+#endif
 
 void AFirstPersonCharacter::InteractionTrace()
 {
@@ -185,4 +186,3 @@ FVector AFirstPersonCharacter::GetTopLocation() const
 	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
 	return TargetLocation;
 }
-#endif
