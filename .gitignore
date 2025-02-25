@@ -27,10 +27,13 @@
 **/*[Bb]inaries/Win64/*
 !**/*[Bb]inaries/Win64/UnrealEditor.modules
 
-!**/*[Bb]inaries/Win64/*.target
-**/*[Bb]inaries/Win64/*DebugGame.target
+!**/*[Bb]inaries/Win64/*Editor.target
 
+# Developement dlls
 !**/*[Bb]inaries/Win64/UnrealEditor-*.dll
+
+# Hot Reload and Debug dlls
+**/*[Bb]inaries/Win64/UnrealEditor-*-*.dll
 **/*[Bb]inaries/Win64/*DebugGame.dll
 
 # VSCode files
