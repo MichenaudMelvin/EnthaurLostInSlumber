@@ -42,8 +42,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterStateMachine")
 	ECharacterStateID StateID;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Camera")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	bool bAllowCameraMovement = true;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
+	TSubclassOf<UCameraShakeBase> ViewBobbing;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
 	const FPlayerInputs& GetInputs() const;

@@ -64,9 +64,25 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 #endif
 }
 
-void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID) {}
+void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
+{
+	if(ViewBobbing == nullptr)
+	{
+		return;
+	}
 
-void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID) {}
+	Controller->ClientStartCameraShake(ViewBobbing, 1.0f, ECameraShakePlaySpace::World);
+}
+
+void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID)
+{
+	if(ViewBobbing == nullptr)
+	{
+		return;
+	}
+
+	Controller->ClientStopCameraShake(ViewBobbing);
+}
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)
 {

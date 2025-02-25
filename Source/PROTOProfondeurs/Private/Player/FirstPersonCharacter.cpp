@@ -7,6 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 
@@ -33,6 +34,25 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (GetController() == nullptr)
+	{
+		return;
+	}
+
+	AFirstPersonController* CastedController = Cast<AFirstPersonController>(GetController());
+	if (CastedController == nullptr)
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("PlayerController of %s is %s but should be %s"), *GetClass()->GetName(), *GetController()->GetClass()->GetName(), *AFirstPersonController::StaticClass()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	FirstPersonController = CastedController;
 
 	CreateStates();
 	InitStateMachine();

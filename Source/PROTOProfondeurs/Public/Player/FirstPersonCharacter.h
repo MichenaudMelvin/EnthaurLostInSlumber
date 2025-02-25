@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class AFirstPersonController;
 class UInteractableComponent;
 class UCharacterStateMachine;
 class UCharacterState;
@@ -27,6 +28,7 @@ protected:
 
 #pragma region Components
 
+protected:
 	/** First person camera */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
@@ -34,6 +36,9 @@ protected:
 	/** Character mesh */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Controller")
+	AFirstPersonController* FirstPersonController;
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
@@ -119,5 +124,5 @@ public:
 	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
 
-	APlayerController* GetPlayerController() const {return Cast<APlayerController>(GetController());}
+	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
 };
