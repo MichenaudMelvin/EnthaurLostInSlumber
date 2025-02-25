@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "CharacterState.generated.h"
 
+class UViewBobbing;
 struct FPlayerInputs;
 class AFirstPersonController;
 class AFirstPersonCharacter;
@@ -46,7 +47,7 @@ protected:
 	bool bAllowCameraMovement = true;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
-	TSubclassOf<UCameraShakeBase> ViewBobbing;
+	TSubclassOf<UViewBobbing> ViewBobbing;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
 	const FPlayerInputs& GetInputs() const;

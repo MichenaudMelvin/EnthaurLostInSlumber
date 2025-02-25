@@ -5,6 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
+#include "Player/Camera/ViewBobbing.h"
 #include "Player/States/CharacterStateMachine.h"
 
 const FPlayerInputs& UCharacterState::GetInputs() const
