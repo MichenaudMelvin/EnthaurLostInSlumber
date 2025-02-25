@@ -79,7 +79,7 @@ public:
 
 #pragma endregion
 
-#pragma region InteractionTrace
+#pragma region Interaction
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
@@ -95,6 +95,23 @@ public:
 
 #pragma endregion
 
+#pragma region Ground
+
+protected:
+	virtual void Landed(const FHitResult& Hit) override;
+
+	void GroundTrace();
+
+	void AboveActor(AActor* ActorBellow);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Ground")
+	TObjectPtr<AActor> GroundActor;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Ground", meta = (Units = "cm"))
+	float GroundTraceLength = 10.0f;
+
+#pragma endregion
+
 public:
 	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
 	FVector GetBottomLocation() const;
@@ -102,5 +119,5 @@ public:
 	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
 
-	APlayerController* GetPlayerController() const {return Cast<APlayerController>(GetController());};
+	APlayerController* GetPlayerController() const {return Cast<APlayerController>(GetController());}
 };

@@ -1,10 +1,12 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
+#include "GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 
@@ -42,7 +44,15 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 
 	TickStateMachine(DeltaSeconds);
 	InteractionTrace();
+	GroundTrace();
+
+	if (GetCharacterMovement()->IsFalling() && GroundActor != nullptr)
+	{
+		GroundActor = nullptr;
+	}
 }
+
+#pragma region StateMachine
 
 void AFirstPersonCharacter::InitStateMachine()
 {
@@ -121,6 +131,10 @@ void AFirstPersonCharacter::DisplayStates(bool bDisplay)
 }
 #endif
 
+#pragma endregion
+
+#pragma region Interaction
+
 void AFirstPersonCharacter::InteractionTrace()
 {
 	FVector StartLocation = CameraComponent->GetComponentLocation();
@@ -172,6 +186,61 @@ void AFirstPersonCharacter::InteractionTrace()
 		CurrentInteractable = nullptr;
 	}
 }
+
+#pragma endregion
+
+#pragma region Ground
+
+void AFirstPersonCharacter::Landed(const FHitResult& Hit)
+{
+	Super::Landed(Hit);
+
+	AboveActor(Hit.GetActor());
+}
+
+void AFirstPersonCharacter::GroundTrace()
+{
+	if (GetCharacterMovement()->IsFalling())
+	{
+		return;
+	}
+
+	FVector StartLocation = GetBottomLocation();
+	FVector EndLocation = StartLocation;
+	EndLocation.Z -= GroundTraceLength;
+
+	FHitResult HitResult;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility);
+
+	if (!bHit)
+	{
+		return;
+	}
+
+	AboveActor(HitResult.GetActor());
+}
+
+void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
+{
+	if (ActorBellow == nullptr)
+	{
+		return;
+	}
+
+	if (ActorBellow == GroundActor)
+	{
+		return;
+	}
+
+	GroundActor = ActorBellow;
+
+	if (GroundActor->Implements<UGroundAction>())
+	{
+		IGroundAction::Execute_OnActorAbove(GroundActor, this);
+	}
+}
+
+#pragma endregion
 
 FVector AFirstPersonCharacter::GetBottomLocation() const
 {
