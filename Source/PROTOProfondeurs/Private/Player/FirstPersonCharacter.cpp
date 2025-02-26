@@ -64,12 +64,7 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 
 	TickStateMachine(DeltaSeconds);
 	InteractionTrace();
-	GroundTrace();
-
-	if (GetCharacterMovement()->IsFalling() && GroundActor != nullptr)
-	{
-		GroundActor = nullptr;
-	}
+	GroundMovement();
 }
 
 #pragma region StateMachine
@@ -218,26 +213,30 @@ void AFirstPersonCharacter::Landed(const FHitResult& Hit)
 	AboveActor(Hit.GetActor());
 }
 
-void AFirstPersonCharacter::GroundTrace()
+bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
 {
-	if (GetCharacterMovement()->IsFalling())
-	{
-		return;
-	}
-
 	FVector StartLocation = GetBottomLocation();
 	FVector EndLocation = StartLocation;
 	EndLocation.Z -= GroundTraceLength;
 
-	FHitResult HitResult;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility);
+	FCollisionQueryParams CollisionQueryParams;
+	CollisionQueryParams.bReturnPhysicalMaterial = true;
 
-	if (!bHit)
+	return GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionQueryParams);
+}
+
+void AFirstPersonCharacter::GroundMovement()
+{
+	FHitResult Hit;
+	if (!GetCharacterMovement()->IsFalling() && GroundTrace(Hit))
 	{
-		return;
+		AboveActor(Hit.GetActor());
 	}
 
-	AboveActor(HitResult.GetActor());
+	if (GetCharacterMovement()->IsFalling() && GroundActor != nullptr)
+	{
+		GroundActor = nullptr;
+	}
 }
 
 void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
@@ -274,4 +273,21 @@ FVector AFirstPersonCharacter::GetTopLocation() const
 	FVector TargetLocation = GetActorLocation();
 	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
 	return TargetLocation;
+}
+
+bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const
+{
+	FHitResult Hit;
+	if (!GroundTrace(Hit))
+	{
+		return false;
+	}
+
+	SlopeNormal = Hit.ImpactNormal;
+
+	float DotResult = FVector::DotProduct(SlopeNormal, FVector::UpVector);
+
+	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
+
+	return true;
 }

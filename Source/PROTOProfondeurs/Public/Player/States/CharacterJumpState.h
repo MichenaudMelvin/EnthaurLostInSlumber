@@ -21,6 +21,8 @@ protected:
 
 	virtual void StateTick_Implementation(float DeltaTime) override;
 
+	virtual void StateExit_Implementation(const ECharacterStateID& NextStateID) override;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Movement|Jump", meta = (ClampMin = 0.0f, Units = "cm/s"))
 	float MaxHeight = 200.0f;
 
@@ -34,4 +36,6 @@ private:
 	float JumpVelocity = 0.0f;
 
 	float JumpGravity = 0.0f;
+
+	float PreviousGravityScale = 0.0f;
 };

@@ -7,6 +7,7 @@
 #include "Player/FirstPersonController.h"
 #include "Player/Camera/ViewBobbing.h"
 #include "Player/States/CharacterStateMachine.h"
+#include "Player/States/CharacterStateSettings.h"
 
 const FPlayerInputs& UCharacterState::GetInputs() const
 {
@@ -16,6 +17,36 @@ const FPlayerInputs& UCharacterState::GetInputs() const
 bool UCharacterState::IsFalling() const
 {
 	return Character->GetCharacterMovement()->IsFalling();
+}
+
+void UCharacterState::CheckGround()
+{
+	FHitResult HitResult;
+	if (!Character->GroundTrace(HitResult))
+	{
+		return;
+	}
+
+	if (HitResult.PhysMaterial == nullptr)
+	{
+		return;
+	}
+
+	if (HitResult.PhysMaterial->SurfaceType != CurrentSurface)
+	{
+		CurrentSurface = HitResult.PhysMaterial->SurfaceType;
+		OnWalkOnNewSurface(CurrentSurface);
+	}
+}
+
+void UCharacterState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysicalSurface>& NewSurface)
+{
+	const UCharacterStateSettings* StateSettings = GetDefault<UCharacterStateSettings>();
+
+	if (NewSurface == StateSettings->SlipperySurface)
+	{
+		StateMachine->ChangeState(ECharacterStateID::Slide);
+	}
 }
 
 void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
@@ -75,6 +106,20 @@ void UCharacterState::StateEnter_Implementation(const ECharacterStateID& Previou
 	Controller->ClientStartCameraShake(ViewBobbing, 1.0f, ECameraShakePlaySpace::World);
 }
 
+void UCharacterState::StateTick_Implementation(float DeltaTime)
+{
+	if (bCheckGround)
+	{
+		CheckGround();
+	}
+
+	if (bAllowCameraMovement)
+	{
+		Character->AddControllerYawInput(GetInputs().InputLook.X);
+		Character->AddControllerPitchInput(GetInputs().InputLook.Y);
+	}
+}
+
 void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID)
 {
 	if(ViewBobbing == nullptr)
@@ -83,15 +128,4 @@ void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStat
 	}
 
 	Controller->ClientStopCameraShake(ViewBobbing);
-}
-
-void UCharacterState::StateTick_Implementation(float DeltaTime)
-{
-	if (!bAllowCameraMovement)
-	{
-		return;
-	}
-
-	Character->AddControllerYawInput(GetInputs().InputLook.X);
-	Character->AddControllerPitchInput(GetInputs().InputLook.Y);
 }

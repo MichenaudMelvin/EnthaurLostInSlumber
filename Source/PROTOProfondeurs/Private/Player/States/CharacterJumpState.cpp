@@ -11,6 +11,7 @@ UCharacterJumpState::UCharacterJumpState()
 {
 	StateID = ECharacterStateID::Jump;
 	MoveSpeed = 400.0f;
+	bCheckGround = false;
 }
 
 void UCharacterJumpState::StateInit(UCharacterStateMachine* InStateMachine)
@@ -24,6 +25,8 @@ void UCharacterJumpState::StateInit(UCharacterStateMachine* InStateMachine)
 void UCharacterJumpState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
 {
 	Super::StateEnter_Implementation(PreviousStateID);
+
+	PreviousGravityScale = Character->GetCharacterMovement()->GravityScale;
 
 	Character->GetCharacterMovement()->AirControl = AirControl;
 	Character->GetCharacterMovement()->GravityScale = 0.0f;
@@ -42,4 +45,11 @@ void UCharacterJumpState::StateTick_Implementation(float DeltaTime)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Fall);
 	}
+}
+
+void UCharacterJumpState::StateExit_Implementation(const ECharacterStateID& NextStateID)
+{
+	Super::StateExit_Implementation(NextStateID);
+
+	Character->GetCharacterMovement()->GravityScale = PreviousGravityScale;
 }

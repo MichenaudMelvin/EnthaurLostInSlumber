@@ -23,6 +23,7 @@ enum class ECharacterStateID : uint8
 	Jump,
 	Fall,
 	Interact,
+	Slide,
 };
 
 UCLASS(Abstract, Blueprintable)
@@ -55,6 +56,18 @@ protected:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool IsFalling() const;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Ground")
+	bool bCheckGround = false;
+
+	UFUNCTION(BlueprintCallable, Category = "Character|Ground")
+	void CheckGround();
+
+	UPROPERTY(BlueprintReadOnly, Category = "Character|Ground")
+	TEnumAsByte<EPhysicalSurface> CurrentSurface;
+
+	UFUNCTION(BlueprintNativeEvent, Category = "Character|Ground")
+	void OnWalkOnNewSurface(const TEnumAsByte<EPhysicalSurface>& NewSurface);
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Debug", meta = (ToolTip = "Enable debug features for the current state"))
 	bool bDebugState = false;
@@ -69,8 +82,8 @@ public:
 	void StateEnter(const ECharacterStateID& PreviousStateID);
 
 	UFUNCTION(BlueprintNativeEvent, Category = "CharacterStateMachine")
-	void StateExit(const ECharacterStateID& NextStateID);
+	void StateTick(float DeltaTime);
 
 	UFUNCTION(BlueprintNativeEvent, Category = "CharacterStateMachine")
-	void StateTick(float DeltaTime);
+	void StateExit(const ECharacterStateID& NextStateID);
 };

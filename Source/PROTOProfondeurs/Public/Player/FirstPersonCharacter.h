@@ -105,7 +105,12 @@ public:
 protected:
 	virtual void Landed(const FHitResult& Hit) override;
 
-	void GroundTrace();
+public:
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ground")
+	bool GroundTrace(FHitResult& HitResult) const;
+
+protected:
+	void GroundMovement();
 
 	void AboveActor(AActor* ActorBellow);
 
@@ -118,11 +123,14 @@ protected:
 #pragma endregion
 
 public:
-	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetBottomLocation() const;
 
-	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
 };
