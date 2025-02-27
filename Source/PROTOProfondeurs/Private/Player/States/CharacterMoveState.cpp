@@ -26,3 +26,8 @@ void UCharacterMoveState::StateTick_Implementation(float DeltaTime)
 	Character->AddMovementInput(Character->GetActorForwardVector(), GetInputs().InputMove.Y);
 	Character->AddMovementInput(Character->GetActorRightVector(), GetInputs().InputMove.X);
 }
+
+void UCharacterMoveState::SetNewSpeed(const float NewSpeed)
+{
+	Character->GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+}

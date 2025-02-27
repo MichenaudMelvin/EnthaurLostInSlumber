@@ -68,11 +68,24 @@ void UCharacterStateMachine::ChangeState(ECharacterStateID NextStateID)
 	CurrentState->StateEnter(PreviousStateID);
 }
 
-UCharacterState* UCharacterStateMachine::FindState(const ECharacterStateID& StateID) const
+UCharacterState* UCharacterStateMachine::FindState(ECharacterStateID StateID) const
 {
 	for (UCharacterState* State : StateList)
 	{
 		if(StateID == State->GetStateID())
+		{
+			return State;
+		}
+	}
+
+	return nullptr;
+}
+
+UCharacterState* UCharacterStateMachine::FindStateByClass(TSubclassOf<UCharacterState> StateClass)
+{
+	for (UCharacterState* State : StateList)
+	{
+		if(State->IsA(StateClass))
 		{
 			return State;
 		}
