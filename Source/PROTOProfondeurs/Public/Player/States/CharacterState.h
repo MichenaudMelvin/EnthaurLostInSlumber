@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "CharacterState.generated.h"
 
+class UViewBobbing;
 struct FPlayerInputs;
 class AFirstPersonController;
 class AFirstPersonCharacter;
@@ -22,6 +23,7 @@ enum class ECharacterStateID : uint8
 	Jump,
 	Fall,
 	Interact,
+	Slide,
 };
 
 UCLASS(Abstract, Blueprintable)
@@ -42,14 +44,29 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterStateMachine")
 	ECharacterStateID StateID;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Camera")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	bool bAllowCameraMovement = true;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
+	TSubclassOf<UViewBobbing> ViewBobbing;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
 	const FPlayerInputs& GetInputs() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool IsFalling() const;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Ground")
+	bool bCheckGround = false;
+
+	UFUNCTION(BlueprintCallable, Category = "Character|Ground")
+	void CheckGround();
+
+	UPROPERTY(BlueprintReadOnly, Category = "Character|Ground")
+	TEnumAsByte<EPhysicalSurface> CurrentSurface;
+
+	UFUNCTION(BlueprintNativeEvent, Category = "Character|Ground")
+	void OnWalkOnNewSurface(const TEnumAsByte<EPhysicalSurface>& NewSurface);
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Debug", meta = (ToolTip = "Enable debug features for the current state"))
@@ -65,8 +82,8 @@ public:
 	void StateEnter(const ECharacterStateID& PreviousStateID);
 
 	UFUNCTION(BlueprintNativeEvent, Category = "CharacterStateMachine")
-	void StateExit(const ECharacterStateID& NextStateID);
+	void StateTick(float DeltaTime);
 
 	UFUNCTION(BlueprintNativeEvent, Category = "CharacterStateMachine")
-	void StateTick(float DeltaTime);
+	void StateExit(const ECharacterStateID& NextStateID);
 };

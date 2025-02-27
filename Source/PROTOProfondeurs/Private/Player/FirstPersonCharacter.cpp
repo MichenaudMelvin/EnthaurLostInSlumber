@@ -1,10 +1,13 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
+#include "GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 
@@ -32,6 +35,25 @@ void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (GetController() == nullptr)
+	{
+		return;
+	}
+
+	AFirstPersonController* CastedController = Cast<AFirstPersonController>(GetController());
+	if (CastedController == nullptr)
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("PlayerController of %s is %s but should be %s"), *GetClass()->GetName(), *GetController()->GetClass()->GetName(), *AFirstPersonController::StaticClass()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	FirstPersonController = CastedController;
+
 	CreateStates();
 	InitStateMachine();
 }
@@ -42,7 +64,10 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 
 	TickStateMachine(DeltaSeconds);
 	InteractionTrace();
+	GroundMovement();
 }
+
+#pragma region StateMachine
 
 void AFirstPersonCharacter::InitStateMachine()
 {
@@ -121,6 +146,10 @@ void AFirstPersonCharacter::DisplayStates(bool bDisplay)
 }
 #endif
 
+#pragma endregion
+
+#pragma region Interaction
+
 void AFirstPersonCharacter::InteractionTrace()
 {
 	FVector StartLocation = CameraComponent->GetComponentLocation();
@@ -173,6 +202,65 @@ void AFirstPersonCharacter::InteractionTrace()
 	}
 }
 
+#pragma endregion
+
+#pragma region Ground
+
+void AFirstPersonCharacter::Landed(const FHitResult& Hit)
+{
+	Super::Landed(Hit);
+
+	AboveActor(Hit.GetActor());
+}
+
+bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
+{
+	FVector StartLocation = GetBottomLocation();
+	FVector EndLocation = StartLocation;
+	EndLocation.Z -= GroundTraceLength;
+
+	FCollisionQueryParams CollisionQueryParams;
+	CollisionQueryParams.bReturnPhysicalMaterial = true;
+
+	return GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionQueryParams);
+}
+
+void AFirstPersonCharacter::GroundMovement()
+{
+	FHitResult Hit;
+	if (!GetCharacterMovement()->IsFalling() && GroundTrace(Hit))
+	{
+		AboveActor(Hit.GetActor());
+	}
+
+	if (GetCharacterMovement()->IsFalling() && GroundActor != nullptr)
+	{
+		GroundActor = nullptr;
+	}
+}
+
+void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
+{
+	if (ActorBellow == nullptr)
+	{
+		return;
+	}
+
+	if (ActorBellow == GroundActor)
+	{
+		return;
+	}
+
+	GroundActor = ActorBellow;
+
+	if (GroundActor->Implements<UGroundAction>())
+	{
+		IGroundAction::Execute_OnActorAbove(GroundActor, this);
+	}
+}
+
+#pragma endregion
+
 FVector AFirstPersonCharacter::GetBottomLocation() const
 {
 	FVector TargetLocation = GetActorLocation();
@@ -185,4 +273,21 @@ FVector AFirstPersonCharacter::GetTopLocation() const
 	FVector TargetLocation = GetActorLocation();
 	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
 	return TargetLocation;
+}
+
+bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const
+{
+	FHitResult Hit;
+	if (!GroundTrace(Hit))
+	{
+		return false;
+	}
+
+	SlopeNormal = Hit.ImpactNormal;
+
+	float DotResult = FVector::DotProduct(SlopeNormal, FVector::UpVector);
+
+	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
+
+	return true;
 }

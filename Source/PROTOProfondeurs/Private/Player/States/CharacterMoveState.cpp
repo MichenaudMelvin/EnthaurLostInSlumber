@@ -6,11 +6,17 @@
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 
+UCharacterMoveState::UCharacterMoveState()
+{
+	bCheckGround = true;
+}
+
 void UCharacterMoveState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
 {
 	Super::StateEnter_Implementation(PreviousStateID);
 
 	Character->GetCharacterMovement()->MaxWalkSpeed = MoveSpeed;
+	Character->GetCharacterMovement()->MaxAcceleration = MoveAcceleration;
 }
 
 void UCharacterMoveState::StateTick_Implementation(float DeltaTime)

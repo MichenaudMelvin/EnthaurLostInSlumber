@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class AFirstPersonController;
 class UInteractableComponent;
 class UCharacterStateMachine;
 class UCharacterState;
@@ -27,6 +28,7 @@ protected:
 
 #pragma region Components
 
+protected:
 	/** First person camera */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
@@ -34,6 +36,9 @@ protected:
 	/** Character mesh */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Controller")
+	AFirstPersonController* FirstPersonController;
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
@@ -79,7 +84,7 @@ public:
 
 #pragma endregion
 
-#pragma region InteractionTrace
+#pragma region Interaction
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
@@ -95,12 +100,37 @@ public:
 
 #pragma endregion
 
+#pragma region Ground
+
+protected:
+	virtual void Landed(const FHitResult& Hit) override;
+
 public:
-	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ground")
+	bool GroundTrace(FHitResult& HitResult) const;
+
+protected:
+	void GroundMovement();
+
+	void AboveActor(AActor* ActorBellow);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Ground")
+	TObjectPtr<AActor> GroundActor;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Ground", meta = (Units = "cm"))
+	float GroundTraceLength = 10.0f;
+
+#pragma endregion
+
+public:
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetBottomLocation() const;
 
-	UFUNCTION(Blueprintable, BlueprintPure, Category = "Character")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
 
-	APlayerController* GetPlayerController() const {return Cast<APlayerController>(GetController());};
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
+
+	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
 };
