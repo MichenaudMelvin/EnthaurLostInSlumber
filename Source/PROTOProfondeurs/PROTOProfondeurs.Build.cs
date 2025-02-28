@@ -8,7 +8,7 @@ public class PROTOProfondeurs : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "CableComponent", "DeveloperSettings", "FCTween", "EngineCameras", "PhysicsCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "CableComponent", "DeveloperSettings", "EnhancedInput", "FCTween", "EngineCameras", "PhysicsCore" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

@@ -1,4 +1,6 @@
-﻿UENUM(BlueprintType)
+﻿#pragma once
+
+UENUM(BlueprintType)
 enum class ENerveReactiveInteractionType : uint8
 {
 	ACTIVATE,
