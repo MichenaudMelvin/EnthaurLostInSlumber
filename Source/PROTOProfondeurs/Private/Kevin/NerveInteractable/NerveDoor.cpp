@@ -21,6 +21,12 @@ void ANerveDoor::BeginPlay()
 	Super::BeginPlay();
 
 	DoorMaterial = Mesh->CreateDynamicMaterialInstance(0, Mesh->GetMaterial(0));
+
+	if (IsActiveAtStart)
+	{
+		DoorMaterial->SetScalarParameterValue("State", 2.f);
+		Mesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	}
 }
 
 // Called every frame
@@ -29,34 +35,61 @@ void ANerveDoor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ANerveDoor::Activate_Implementation()
+void ANerveDoor::Trigger_Implementation()
 {
-	INerveReactive::Activate_Implementation();
+	INerveReactive::Trigger_Implementation();
 
-	Mesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-	FCTween::Play(
-		0.f,
-		2.f,
-		[&](float x)
-		{
-			DoorMaterial->SetScalarParameterValue("State", x);
-		},
-		1.f,
-		EFCEase::InSine);
+	if (IsLocked)
+	{
+		IsOpened = !IsOpened;
+		return;
+	}
+	
+	if (IsOpened)
+	{
+		Mesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		FCTween::Play(
+			2.f,
+			0.f,
+			[&](float x)
+			{
+				DoorMaterial->SetScalarParameterValue("State", x);
+			},
+			0.5f,
+			EFCEase::InSine);
+	} else
+	{
+		Mesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		FCTween::Play(
+			0.f,
+			2.f,
+			[&](float x)
+			{
+				DoorMaterial->SetScalarParameterValue("State", x);
+			},
+			1.5f,
+			EFCEase::OutSine);
+	}
+	IsOpened = !IsOpened;
 }
 
-void ANerveDoor::Deactivate_Implementation()
+void ANerveDoor::SetLock_Implementation(bool state)
 {
-	INerveReactive::Deactivate_Implementation();
-
-	Mesh->SetCollisionEnabled(ECollisionEnabled::Type::PhysicsOnly);
-	FCTween::Play(
-		2.f,
-		0.f,
-		[&](float x)
+	INerveReactive::SetLock_Implementation(state);
+	
+	if (state)
+	{
+		if (IsOpened != IsActiveAtStart)
 		{
-			DoorMaterial->SetScalarParameterValue("State", x);
-		},
-		1.f,
-		EFCEase::InSine);
+			Trigger_Implementation();
+			IsLocked = true;
+		}
+	} else
+	{
+		if (IsOpened != IsActiveAtStart)
+		{
+			IsLocked = false;
+			Trigger_Implementation();
+		}
+	}
 }

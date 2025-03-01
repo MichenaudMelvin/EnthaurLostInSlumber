@@ -45,6 +45,7 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 	if (OtherActor->IsA(ANerve::StaticClass()))
 	{
 		ANerve* Nerve = Cast<ANerve>(OtherActor);
+		Nerve->SetCurrentReceptacle(this);
 
 		FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, false);
 		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
@@ -52,11 +53,11 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 
 		Nerve->GetInteractable()->OnInteract.AddDynamic(Nerve, &ANerve::Interaction);
 
-		EnableLinkedObjects();
+		TriggerLinkedObjects();
 	}
 }
 
-void ANerveReceptacle::EnableLinkedObjects()
+void ANerveReceptacle::TriggerLinkedObjects()
 {
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
@@ -65,54 +66,12 @@ void ANerveReceptacle::EnableLinkedObjects()
 	{
 		if (Actor->Implements<UNerveReactive>())
 		{
-			switch (ObjectReactive[Actor])
+			if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
 			{
-			case ENerveReactiveInteractionType::ACTIVATE:
-				{
-					INerveReactive::Execute_Activate(Actor);
-					break;
-				}
-			case ENerveReactiveInteractionType::DEACTIVATE:
-				{
-					INerveReactive::Execute_Deactivate(Actor);
-					break;
-				}
-			case ENerveReactiveInteractionType::FORCE_DEFAULT_STATE:
-			default:
-				{
-					break;
-				}
-			}
-		}
-	}
-}
-
-void ANerveReceptacle::DisableLinkedObjects()
-{
-	TArray<AActor*> Actors;
-	ObjectReactive.GetKeys(Actors);
-	
-	for (AActor* Actor : Actors)
-	{
-		if (Actor->Implements<UNerveReactive>())
-		{
-			switch (ObjectReactive[Actor])
+				INerveReactive::Execute_SetLock(Actor, true);
+			} else
 			{
-			case ENerveReactiveInteractionType::ACTIVATE:
-				{
-					INerveReactive::Execute_Deactivate(Actor);
-					break;
-				}
-			case ENerveReactiveInteractionType::DEACTIVATE:
-				{
-					INerveReactive::Execute_Activate(Actor);
-					break;
-				}
-			case ENerveReactiveInteractionType::FORCE_DEFAULT_STATE:
-			default:
-				{
-					break;
-				}
+				INerveReactive::Execute_Trigger(Actor);
 			}
 		}
 	}

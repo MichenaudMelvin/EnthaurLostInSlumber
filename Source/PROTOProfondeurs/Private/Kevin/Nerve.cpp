@@ -6,7 +6,11 @@
 #include "MainSettings.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/Character.h"
+#include "Kevin/NerveReceptacle.h"
 #include "Kevin/PlayerToNervePhysicConstraint.h"
+#include "Kevin/UI/InGameUI.h"
+#include "Kismet/GameplayStatics.h"
+#include "Player/FirstPersonController.h"
 #include "PROTOProfondeurs/Macro.h"
 
 
@@ -44,6 +48,12 @@ void ANerve::Tick(float DeltaSeconds)
 
 void ANerve::Interaction(APlayerController* PlayerController, APawn* Pawn)
 {
+	if (CurrentAttachedReceptacle != nullptr)
+	{
+		CurrentAttachedReceptacle->TriggerLinkedObjects();
+		CurrentAttachedReceptacle = nullptr;
+	}
+	
 	NerveBall->SetSimulatePhysics(false);
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 

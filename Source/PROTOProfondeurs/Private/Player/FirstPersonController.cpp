@@ -4,6 +4,8 @@
 #include "Player/FirstPersonController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Blueprint/UserWidget.h"
+#include "Kevin/UI/InGameUI.h"
 
 void FAction::BindAction(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object)
 {
@@ -86,6 +88,12 @@ void AFirstPersonController::BeginPlay()
 	}
 
 	Subsystem->AddMappingContext(DefaultMappingContext, 0);
+	
+	CurrentInGameUI = CreateWidget<UInGameUI>(this, InGameWidgetClass);
+	if (CurrentInGameUI)
+	{
+		CurrentInGameUI->AddToViewport();
+	}
 }
 
 void AFirstPersonController::Tick(float DeltaSeconds)

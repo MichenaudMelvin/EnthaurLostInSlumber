@@ -22,6 +22,16 @@ public:
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> DoorMaterial;
 
+private:
+	UPROPERTY(EditAnywhere)
+	bool IsActiveAtStart;
+
+	UPROPERTY()
+	bool IsOpened;
+
+	UPROPERTY()
+	bool IsLocked;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -29,6 +39,7 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	virtual void Activate_Implementation() override;
-	virtual void Deactivate_Implementation() override;
+	virtual void Trigger_Implementation() override;
+	virtual void SetLock_Implementation(bool state) override;
+	bool GetActiveAtStart() const { return IsActiveAtStart; }
 };

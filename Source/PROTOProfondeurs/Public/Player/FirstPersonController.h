@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "FirstPersonController.generated.h"
 
+class UInGameUI;
 struct FInputActionValue;
 class UInputAction;
 enum class ETriggerEvent : uint8;
@@ -64,10 +65,20 @@ class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> InGameWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UInGameUI> CurrentInGameUI;
+
 protected:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
+
+public:
+	UInGameUI* GetCurrentInGameUI() { return CurrentInGameUI; }
 
 #pragma region Inputs
 	virtual void SetupInputComponent() override;

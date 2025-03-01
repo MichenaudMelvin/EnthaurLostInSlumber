@@ -22,6 +22,7 @@ public:
 
 	float GetCableLength() const { return CableLength; }
 	float GetCableMaxExtension() const { return CableMaxExtension; }
+	void SetCurrentReceptacle(ANerveReceptacle* Receptacle) {CurrentAttachedReceptacle = Receptacle; }
 	TObjectPtr<UInteractableComponent> GetInteractable() const { return InteractableComponent; }
 
 	UFUNCTION()
@@ -49,7 +50,27 @@ private:
 	float CableLength;
 	UPROPERTY(EditAnywhere)
 	float CableMaxExtension;
+	UPROPERTY(EditAnywhere)
+	float DistanceNeededToPropulsion;
+
+public:
+	float GetDistanceNeededToPropulsion() const
+	{
+		return DistanceNeededToPropulsion;
+	}
+
+	FVector2f GetPropulsionForceMinMax() const
+	{
+		return PropulsionForceMinMax;
+	}
+
+private:
+	UPROPERTY(EditAnywhere)
+	FVector2f PropulsionForceMinMax;
 
 	UPROPERTY()
 	TObjectPtr<UPlayerToNervePhysicConstraint> PhysicConstraint;
+
+	UPROPERTY()
+	TObjectPtr<ANerveReceptacle> CurrentAttachedReceptacle;
 };

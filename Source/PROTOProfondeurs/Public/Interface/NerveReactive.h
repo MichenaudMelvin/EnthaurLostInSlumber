@@ -24,9 +24,9 @@ class PROTOPROFONDEURS_API INerveReactive
 public:
 
 	UFUNCTION(BlueprintNativeEvent)
-	void Activate();
+	void Trigger();
 
 	UFUNCTION(BlueprintNativeEvent)
-	void Deactivate();
+	void SetLock(bool state);
 	
 };

@@ -28,6 +28,7 @@ public:
 	
 	void Init(ANerve* vLinkedNerve, ACharacter* vPlayerCharacter);
 	void ReleasePlayer();
+	bool IsMovingTowardsPosition(const FVector& TargetPosition, float AcceptanceThreshold) const;
 
 	UPROPERTY()
 	ANerve* LinkedNerve;
@@ -39,4 +40,6 @@ public:
 private:
 	UPROPERTY()
 	float DefaultMaxSpeed;
+	UPROPERTY()
+	bool IsPropultionActive;
 };
