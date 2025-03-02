@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Environement/WeakZoneInterface.h"
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
@@ -14,7 +15,7 @@ enum class ECharacterStateID : uint8;
 class UCameraComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter
+class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface
 {
 	GENERATED_BODY()
 
@@ -122,6 +123,12 @@ protected:
 
 #pragma endregion
 
+protected:
+	bool bCanTakeAmber = false;
+
+public:
+	bool CantTakeAmber() const {return bCanTakeAmber;}
+
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetBottomLocation() const;
@@ -133,4 +140,8 @@ public:
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
+
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
 };

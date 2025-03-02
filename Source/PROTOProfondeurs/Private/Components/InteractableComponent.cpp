@@ -12,6 +12,11 @@ UInteractableComponent::UInteractableComponent()
 
 void UInteractableComponent::AddInteractable(UPrimitiveComponent* ComponentToAdd)
 {
+	if (ComponentToAdd == nullptr)
+	{
+		return;
+	}
+
 	InteractableComponentSet.Add(ComponentToAdd);
 }
 
@@ -22,6 +27,11 @@ void UInteractableComponent::AddInteractables(TArray<UPrimitiveComponent*> Compo
 
 void UInteractableComponent::RemoveInteractable(UPrimitiveComponent* ComponentToRemove)
 {
+	if (ComponentToRemove == nullptr)
+	{
+		return;
+	}
+
 	InteractableComponentSet.Remove(ComponentToRemove);
 }
 

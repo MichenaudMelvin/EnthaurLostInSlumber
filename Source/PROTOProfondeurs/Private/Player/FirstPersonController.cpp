@@ -5,6 +5,13 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
+FAction::FAction()
+{
+	TriggerEvents.Add(ETriggerEvent::Triggered);
+	TriggerEvents.Add(ETriggerEvent::Started);
+	TriggerEvents.Add(ETriggerEvent::Completed);
+}
+
 void FAction::BindAction(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object)
 {
 	if (Action == nullptr)
@@ -53,6 +60,9 @@ void FPlayerInputs::DisplayInputsOnScreen(float DisplayTime, const FColor& Debug
 
 	Message += "\nbInputInteract: ";
 	Message += bInputInteract ? "true" : "false";
+
+	Message += "\bInputTakeAmber";
+	Message += bInputTakeAmber ? "true" : "false";
 
 	GEngine->AddOnScreenDebugMessage(-1, DisplayTime, DebugColor, FString::Printf(TEXT("%s"), *Message));
 }
@@ -119,6 +129,7 @@ void AFirstPersonController::SetupInputComponent()
 	CrouchAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputCrouch, const FInputActionValue&);
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputJump, const FInputActionValue&);
 	InteractAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteract, const FInputActionValue&);
+	TakeAmberAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputTakeAmber, const FInputActionValue&);
 
 	MoveAction.BindAction(EnhancedInputComponent, this);
 	LookAction.BindAction(EnhancedInputComponent, this);
@@ -126,6 +137,7 @@ void AFirstPersonController::SetupInputComponent()
 	CrouchAction.BindAction(EnhancedInputComponent, this);
 	JumpAction.BindAction(EnhancedInputComponent, this);
 	InteractAction.BindAction(EnhancedInputComponent, this);
+	TakeAmberAction.BindAction(EnhancedInputComponent, this);
 }
 
 void AFirstPersonController::OnInputMove(const FInputActionValue& InputActionValue)
@@ -222,6 +234,22 @@ void AFirstPersonController::OnInputInteract(const FInputActionValue& InputActio
 #endif
 
 	PlayerInputs.bInputInteract = InputActionValue.Get<bool>();
+}
+
+void AFirstPersonController::OnInputTakeAmber(const FInputActionValue& InputActionValue)
+{
+#if WITH_EDITOR
+	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
+	{
+		const FString Message = FString::Printf(TEXT("TakeAmber action has wrong Value type"));
+
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
+		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+		return;
+	}
+#endif
+
+	PlayerInputs.bInputTakeAmber = InputActionValue.Get<bool>();
 }
 
 #if WITH_EDITOR
