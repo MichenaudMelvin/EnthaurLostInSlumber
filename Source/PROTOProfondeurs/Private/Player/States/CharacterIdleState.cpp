@@ -33,6 +33,11 @@ void UCharacterIdleState::StateTick_Implementation(float DeltaTime)
 		StateMachine->ChangeState(ECharacterStateID::Interact);
 	}
 
+	else if (GetInputs().bInputTakeAmber)
+	{
+		StateMachine->ChangeState(ECharacterStateID::TakeAmber);
+	}
+
 	else if (GetInputs().InputMove.Length() > InputSettings->MoveInputThreshold)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Walk);

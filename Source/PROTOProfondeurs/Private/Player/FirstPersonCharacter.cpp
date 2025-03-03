@@ -291,3 +291,17 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 
 	return true;
 }
+
+void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
+{
+	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
+
+	bCanTakeAmber = bIsZoneActive;
+}
+
+void AFirstPersonCharacter::OnExitWeakZone_Implementation()
+{
+	IWeakZoneInterface::OnExitWeakZone_Implementation();
+
+	bCanTakeAmber = false;
+}
