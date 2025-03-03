@@ -24,6 +24,7 @@ public:
 	float GetCableMaxExtension() const { return CableMaxExtension; }
 	void SetCurrentReceptacle(ANerveReceptacle* Receptacle) {CurrentAttachedReceptacle = Receptacle; }
 	TObjectPtr<UInteractableComponent> GetInteractable() const { return InteractableComponent; }
+	void DetachNerveBall();
 
 	UFUNCTION()
 	void Interaction(APlayerController* PlayerController, APawn* Pawn);
@@ -52,6 +53,9 @@ private:
 	float CableMaxExtension;
 	UPROPERTY(EditAnywhere)
 	float DistanceNeededToPropulsion;
+
+	UPROPERTY()
+	FVector DefaultPosition;
 
 public:
 	float GetDistanceNeededToPropulsion() const

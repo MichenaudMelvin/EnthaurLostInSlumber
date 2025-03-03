@@ -37,15 +37,20 @@ void UInGameUI::SetPropulsionActive(bool active)
 			});
 	} else
 	{
-		CurrentTween->Destroy();
-		FCTween::Play(
-			1.f,
-			0.f,
-			[&](float x)
-			{
-				PropulsionIndicator->SetOpacity(x);
-			},
-			0.5f,
-			EFCEase::OutSine);
+		if (CurrentTween != nullptr)
+		{
+			CurrentTween->Destroy();
+			FCTween::Play(
+				1.f,
+				0.f,
+				[&](float x)
+				{
+					PropulsionIndicator->SetOpacity(x);
+				},
+				0.5f,
+				EFCEase::OutSine);
+
+			CurrentTween = nullptr;
+		}
 	}
 }

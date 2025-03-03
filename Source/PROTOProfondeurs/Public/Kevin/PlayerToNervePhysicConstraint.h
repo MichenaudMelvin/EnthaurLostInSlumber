@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "PlayerToNervePhysicConstraint.generated.h"
 
+class AFirstPersonController;
 class ANerve;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
@@ -22,20 +23,25 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	void HandlePropulsion();
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 	
 	void Init(ANerve* vLinkedNerve, ACharacter* vPlayerCharacter);
-	void ReleasePlayer();
+	void ReleasePlayer(const bool DetachFromPlayer = false);
 	bool IsMovingTowardsPosition(const FVector& TargetPosition, float AcceptanceThreshold) const;
 
 	UPROPERTY()
-	ANerve* LinkedNerve;
+	TObjectPtr<ANerve> LinkedNerve;
 	UPROPERTY()
-	ACharacter* PlayerCharacter;
+	TObjectPtr<ACharacter> PlayerCharacter;
+	UPROPERTY()
+	TObjectPtr<AFirstPersonController> PlayerController;
 	UPROPERTY()
 	FVector PreviousVelocity;
+	UPROPERTY()
+	bool IsAlreadyPropulsing = false;
 
 private:
 	UPROPERTY()

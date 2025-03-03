@@ -3,6 +3,7 @@
 
 #include "Kevin/Nerve.h"
 
+#include "FCTween.h"
 #include "MainSettings.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/Character.h"
@@ -39,11 +40,33 @@ void ANerve::BeginPlay()
 	Super::BeginPlay();
 
 	InteractableComponent->AddInteractable(NerveBall);
+	DefaultPosition = NerveBall->GetComponentLocation();
 }
 
 void ANerve::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+}
+
+void ANerve::DetachNerveBall()
+{
+	NerveBall->SetSimulatePhysics(true);
+	NerveBall->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	
+	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true);
+	NerveBall->AttachToComponent(GetRootComponent(), Rules);
+
+	FCTween::Play(
+			NerveBall->GetComponentLocation(),
+			DefaultPosition,
+			[&](const FVector& Pos)
+			{
+				NerveBall->SetWorldLocation(Pos);
+			},
+			1.f,
+			EFCEase::OutElastic);
+
+	InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
 }
 
 void ANerve::Interaction(APlayerController* PlayerController, APawn* Pawn)

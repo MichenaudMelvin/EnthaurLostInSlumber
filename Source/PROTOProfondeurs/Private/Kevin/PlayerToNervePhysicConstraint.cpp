@@ -3,7 +3,9 @@
 
 #include "Kevin/PlayerToNervePhysicConstraint.h"
 
+#include "EnhancedInputComponent.h"
 #include "MainSettings.h"
+#include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kevin/Nerve.h"
@@ -29,6 +31,8 @@ UPlayerToNervePhysicConstraint::UPlayerToNervePhysicConstraint()
 void UPlayerToNervePhysicConstraint::BeginPlay()
 {
 	Super::BeginPlay();
+
+	PlayerController = Cast<AFirstPersonController>(UGameplayStatics::GetPlayerController(this, 0));
 }
 
 void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -51,15 +55,28 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 	{
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f - Lerp);
 	}
-
-	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, FString::Printf(TEXT("%f"), Distance));
-	if (Distance >= LinkedNerve->GetDistanceNeededToPropulsion() && !IsPropultionActive)
+	
+	if (Distance >= LinkedNerve->GetDistanceNeededToPropulsion())
 	{
-		Cast<AFirstPersonController>(UGameplayStatics::GetPlayerController(this, 0))->GetCurrentInGameUI()->SetPropulsionActive(true);
-		IsPropultionActive = true;
+		if (!IsPropultionActive)
+		{
+			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(true);
+			IsPropultionActive = true;
+		}
+		
+		if (PlayerController->GetPlayerInputs().bInputInteract && !IsAlreadyPropulsing)
+		{
+			IsAlreadyPropulsing = true;
+			
+			const FVector Direction = PlayerCharacter->GetComponentByClass<UCameraComponent>()->GetForwardVector();
+			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceMinMax().X, LinkedNerve->GetPropulsionForceMinMax().Y, Lerp);
+			
+			PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
+			ReleasePlayer(true);
+		}
 	} else if (Distance < LinkedNerve->GetDistanceNeededToPropulsion() && IsPropultionActive)
 	{
-		Cast<AFirstPersonController>(UGameplayStatics::GetPlayerController(this, 0))->GetCurrentInGameUI()->SetPropulsionActive(false);
+		PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
 		IsPropultionActive = false;
 	}
 }
@@ -71,11 +88,15 @@ void UPlayerToNervePhysicConstraint::Init(ANerve* vLinkedNerve, ACharacter* vPla
 	DefaultMaxSpeed = vPlayerCharacter->GetCharacterMovement()->MaxWalkSpeed;
 }
 
-void UPlayerToNervePhysicConstraint::ReleasePlayer()
+void UPlayerToNervePhysicConstraint::ReleasePlayer(const bool DetachFromPlayer)
 {
-	Cast<AFirstPersonController>(UGameplayStatics::GetPlayerController(this, 0))->GetCurrentInGameUI()->SetPropulsionActive(true);
-	
+	PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
 	PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed;
+
+	if (DetachFromPlayer)
+	{
+		LinkedNerve->DetachNerveBall();
+	}
 	DestroyComponent();
 }
 
