@@ -24,6 +24,7 @@ enum class ECharacterStateID : uint8
 	Fall,
 	Interact,
 	Slide,
+	TakeAmber,
 };
 
 UCLASS(Abstract, Blueprintable)
