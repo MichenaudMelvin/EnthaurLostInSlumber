@@ -39,29 +39,22 @@ private:
 	TObjectPtr<USceneComponent> Root;
 
 	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UCableComponent> CableComponent;
-
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UStaticMeshComponent> NerveBall;
-
-	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UInteractableComponent> InteractableComponent;
-	
-	UPROPERTY(EditAnywhere)
-	float CableLength;
-	UPROPERTY(EditAnywhere)
-	float CableMaxExtension;
-	UPROPERTY(EditAnywhere)
-	float DistanceNeededToPropulsion;
 
 	UPROPERTY()
 	FVector DefaultPosition;
 
 public:
-	float GetDistanceNeededToPropulsion() const
-	{
-		return DistanceNeededToPropulsion;
-	}
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float CableLength;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float CableMaxExtension;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float DistanceNeededToPropulsion;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<UCableComponent> CableComponent;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<UStaticMeshComponent> NerveBall;
 
 	FVector2f GetPropulsionForceMinMax() const
 	{

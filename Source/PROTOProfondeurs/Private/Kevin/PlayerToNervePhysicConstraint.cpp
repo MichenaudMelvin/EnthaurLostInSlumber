@@ -56,7 +56,7 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f - Lerp);
 	}
 	
-	if (Distance >= LinkedNerve->GetDistanceNeededToPropulsion())
+	if (Distance >= LinkedNerve->DistanceNeededToPropulsion)
 	{
 		if (!IsPropultionActive)
 		{
@@ -74,7 +74,7 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
 			ReleasePlayer(true);
 		}
-	} else if (Distance < LinkedNerve->GetDistanceNeededToPropulsion() && IsPropultionActive)
+	} else if (Distance < LinkedNerve->DistanceNeededToPropulsion && IsPropultionActive)
 	{
 		PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
 		IsPropultionActive = false;
