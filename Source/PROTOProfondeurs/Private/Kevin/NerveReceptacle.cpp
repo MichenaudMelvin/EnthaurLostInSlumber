@@ -61,7 +61,7 @@ void ANerveReceptacle::TriggerLinkedObjects()
 {
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
-	
+
 	for (AActor* Actor : Actors)
 	{
 		if (Actor->Implements<UNerveReactive>())

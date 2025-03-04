@@ -261,6 +261,24 @@ void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 
 #pragma endregion
 
+#pragma region Amber
+
+void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
+{
+	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
+
+	bCanTakeAmber = bIsZoneActive;
+}
+
+void AFirstPersonCharacter::OnExitWeakZone_Implementation()
+{
+	IWeakZoneInterface::OnExitWeakZone_Implementation();
+
+	bCanTakeAmber = false;
+}
+
+#pragma endregion
+
 FVector AFirstPersonCharacter::GetBottomLocation() const
 {
 	FVector TargetLocation = GetActorLocation();
@@ -290,18 +308,4 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
 
 	return true;
-}
-
-void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
-{
-	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
-
-	bCanTakeAmber = bIsZoneActive;
-}
-
-void AFirstPersonCharacter::OnExitWeakZone_Implementation()
-{
-	IWeakZoneInterface::OnExitWeakZone_Implementation();
-
-	bCanTakeAmber = false;
 }

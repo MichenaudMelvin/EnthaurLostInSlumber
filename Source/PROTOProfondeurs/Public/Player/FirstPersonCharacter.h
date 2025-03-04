@@ -123,11 +123,24 @@ protected:
 
 #pragma endregion
 
+#pragma region Amber
+
 protected:
 	bool bCanTakeAmber = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Amber")
+	bool bAmberFilled = false;
+
 public:
-	bool CantTakeAmber() const {return bCanTakeAmber;}
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
+
+	void FillAmber(bool bRefill) {bAmberFilled = bRefill;}
+
+	bool IsAmberFilled() const {return bAmberFilled;}
+
+#pragma endregion
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
@@ -140,8 +153,4 @@ public:
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
-
-	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
-
-	virtual void OnExitWeakZone_Implementation() override;
 };
