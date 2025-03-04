@@ -9,6 +9,26 @@
 #include "Player/States/CharacterStateMachine.h"
 #include "Player/States/CharacterStateSettings.h"
 
+void UCharacterState::StartCameraShake()
+{
+	if(ViewBobbing == nullptr)
+	{
+		return;
+	}
+
+	CurrentViewBobbing = Cast<UViewBobbing>(Controller->PlayerCameraManager->StartCameraShake(ViewBobbing, 1.0f, ECameraShakePlaySpace::World));
+}
+
+void UCharacterState::StopCameraShake()
+{
+	if(ViewBobbing == nullptr)
+	{
+		return;
+	}
+
+	Controller->ClientStopCameraShake(ViewBobbing);
+}
+
 const FPlayerInputs& UCharacterState::GetInputs() const
 {
 	return Controller->GetPlayerInputs();
@@ -98,12 +118,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 
 void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
 {
-	if(ViewBobbing == nullptr)
-	{
-		return;
-	}
-
-	Controller->ClientStartCameraShake(ViewBobbing, 1.0f, ECameraShakePlaySpace::World);
+	StartCameraShake();
 }
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)
@@ -122,10 +137,5 @@ void UCharacterState::StateTick_Implementation(float DeltaTime)
 
 void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID)
 {
-	if(ViewBobbing == nullptr)
-	{
-		return;
-	}
-
-	Controller->ClientStopCameraShake(ViewBobbing);
+	StopCameraShake();
 }
