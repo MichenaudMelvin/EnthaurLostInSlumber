@@ -39,7 +39,7 @@ protected:
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Controller")
-	AFirstPersonController* FirstPersonController;
+	TObjectPtr<AFirstPersonController> FirstPersonController;
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
@@ -148,6 +148,14 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
+
+	/**
+	 * @brief 
+	 * @param TopLocation true will return the top location of the player, false will return the bottom location
+	 * @return 
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	FVector GetPlayerLocation(bool TopLocation) const;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;

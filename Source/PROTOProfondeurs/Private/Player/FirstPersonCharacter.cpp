@@ -16,7 +16,7 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(34.0f, 88.0f);
 
-	// Create a CameraComponent	
+	// Create a CameraComponent
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f)); // Position the camera
@@ -281,15 +281,18 @@ void AFirstPersonCharacter::OnExitWeakZone_Implementation()
 
 FVector AFirstPersonCharacter::GetBottomLocation() const
 {
-	FVector TargetLocation = GetActorLocation();
-	TargetLocation.Z -= GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
-	return TargetLocation;
+	return GetPlayerLocation(false);
 }
 
 FVector AFirstPersonCharacter::GetTopLocation() const
 {
+	return GetPlayerLocation(true);
+}
+
+FVector AFirstPersonCharacter::GetPlayerLocation(bool TopLocation) const
+{
 	FVector TargetLocation = GetActorLocation();
-	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight() * (TopLocation ? 1 : -1);
 	return TargetLocation;
 }
 
