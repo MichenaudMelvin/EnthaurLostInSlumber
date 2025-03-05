@@ -74,10 +74,14 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
 			ReleasePlayer(true);
 		}
-	} else if (Distance < LinkedNerve->DistanceNeededToPropulsion && IsPropultionActive)
+	} else if (Distance < LinkedNerve->DistanceNeededToPropulsion)
 	{
-		PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
-		IsPropultionActive = false;
+
+		if (IsPropultionActive)
+		{
+			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
+			IsPropultionActive = false;
+		}
 	}
 }
 

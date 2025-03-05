@@ -88,5 +88,5 @@ void ANerve::Interaction(APlayerController* PlayerController, APawn* Pawn)
 		Pawn->AddComponentByClass(UPlayerToNervePhysicConstraint::StaticClass(), false, FTransform::Identity, false)
 	);
 	PhysicConstraint->Init(this, Cast<ACharacter>(Pawn));
-	InteractableComponent->OnInteract.Clear();
+	InteractableComponent->RemoveInteractable(NerveBall);
 }
