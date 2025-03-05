@@ -7,6 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kevin/UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
@@ -169,10 +170,18 @@ void AFirstPersonCharacter::InteractionTrace()
 
 	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, InteractableObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
 
+	if (!bHit)
+	{
+		SetInteractionUI(false);
+		CurrentInteractable = nullptr;
+		return;
+	}
+
 	// bool bHit = GetWorld()->LineTraceSingleByObjectType(HitResult, StartLocation, EndLocation, ObjectParams);
 
 	if (!bHit || HitResult.GetActor() == nullptr)
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
@@ -180,6 +189,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UInteractableComponent::StaticClass());
 	if (FoundComp == nullptr)
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
@@ -187,12 +197,14 @@ void AFirstPersonCharacter::InteractionTrace()
 	UInteractableComponent* TargetInteractable = Cast<UInteractableComponent>(FoundComp);
 	if (TargetInteractable == nullptr)
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
 
 	if (TargetInteractable->CheckComponent(HitResult.GetComponent()))
 	{
+		SetInteractionUI(true);
 		CurrentInteractable = TargetInteractable;
 
 #if WITH_EDITORONLY_DATA
@@ -201,6 +213,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	}
 	else
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 	}
 }
@@ -314,4 +327,10 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
 
 	return true;
+}
+
+void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
+{
+	if (CurrentInteractable != nullptr)
+		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
 }

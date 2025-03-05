@@ -167,4 +167,6 @@ public:
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
+
+	void SetInteractionUI(bool bState) const;
 };
