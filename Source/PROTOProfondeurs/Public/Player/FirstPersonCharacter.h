@@ -91,8 +91,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
 	float InteractionTraceLength = 100.0f;
 
-	UPROPERTY(BlueprintReadOnly, Category = "InteractionTrace")
+	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UInteractableComponent> CurrentInteractable;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TArray<TEnumAsByte<EObjectTypeQuery>> InteractableObjectTypes;
 
 	void InteractionTrace();
 
@@ -105,6 +108,9 @@ public:
 
 protected:
 	virtual void Landed(const FHitResult& Hit) override;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Ground")
+	TArray<TEnumAsByte<EObjectTypeQuery>> GroundObjectTypes;
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ground")

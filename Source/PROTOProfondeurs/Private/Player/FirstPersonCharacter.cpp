@@ -10,6 +10,8 @@
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "KismetTraceUtils.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -29,6 +31,10 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	CharacterMesh->bCastDynamicShadow = false;
 	CharacterMesh->CastShadow = false;
 	CharacterMesh->SetRelativeLocation(FVector(-30.0f, 0.0f, -150.0f));
+
+	InteractableObjectTypes.Add(ObjectTypeQuery1);
+	GroundObjectTypes.Add(ObjectTypeQuery1);
+	GroundObjectTypes.Add(ObjectTypeQuery2);
 }
 
 void AFirstPersonCharacter::BeginPlay()
@@ -159,16 +165,13 @@ void AFirstPersonCharacter::InteractionTrace()
 	ActorsToIgnore.Add(this);
 
 	FHitResult HitResult;
-	FCollisionQueryParams CollisionParams;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+	// const FCollisionObjectQueryParams ObjectParams = ConfigureCollisionObjectParams(InteractableObjectTypes);
 
-	if (!bHit)
-	{
-		CurrentInteractable = nullptr;
-		return;
-	}
+	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, InteractableObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
 
-	if (HitResult.GetActor() == nullptr)
+	// bool bHit = GetWorld()->LineTraceSingleByObjectType(HitResult, StartLocation, EndLocation, ObjectParams);
+
+	if (!bHit || HitResult.GetActor() == nullptr)
 	{
 		CurrentInteractable = nullptr;
 		return;
@@ -222,7 +225,12 @@ bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
 	FCollisionQueryParams CollisionQueryParams;
 	CollisionQueryParams.bReturnPhysicalMaterial = true;
 
-	return GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionQueryParams);
+	// const FCollisionObjectQueryParams ObjectParams = ConfigureCollisionObjectParams(GroundObjectTypes);
+
+	TArray<AActor*> ActorsToIgnore;
+
+	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
+	//return GetWorld()->LineTraceSingleByObjectType(HitResult, StartLocation, EndLocation, ObjectParams, CollisionQueryParams);
 }
 
 void AFirstPersonCharacter::GroundMovement()
@@ -241,12 +249,7 @@ void AFirstPersonCharacter::GroundMovement()
 
 void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 {
-	if (ActorBellow == nullptr)
-	{
-		return;
-	}
-
-	if (ActorBellow == GroundActor)
+	if (ActorBellow == nullptr || ActorBellow == GroundActor)
 	{
 		return;
 	}
