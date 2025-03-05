@@ -7,7 +7,7 @@
 #include "Player/FirstPersonController.h"
 #include "Player/Camera/ViewBobbing.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Player/States/CharacterStateSettings.h"
+#include "Physics/TracePhysicsSettings.h"
 
 void UCharacterState::StartCameraShake()
 {
@@ -61,7 +61,7 @@ void UCharacterState::CheckGround()
 
 void UCharacterState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysicalSurface>& NewSurface)
 {
-	const UCharacterStateSettings* StateSettings = GetDefault<UCharacterStateSettings>();
+	const UTracePhysicsSettings* StateSettings = GetDefault<UTracePhysicsSettings>();
 
 	if (NewSurface == StateSettings->SlipperySurface)
 	{
