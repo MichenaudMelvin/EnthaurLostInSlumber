@@ -144,4 +144,5 @@ public:
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
+	void SetInteractionUI(bool bState) const;
 };

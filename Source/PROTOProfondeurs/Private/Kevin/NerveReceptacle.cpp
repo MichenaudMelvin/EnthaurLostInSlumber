@@ -51,7 +51,7 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
 		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
 
-		Nerve->GetInteractable()->OnInteract.AddDynamic(Nerve, &ANerve::Interaction);
+		Nerve->GetInteractable()->AddInteractable(Nerve->NerveBall);
 
 		TriggerLinkedObjects();
 	}
