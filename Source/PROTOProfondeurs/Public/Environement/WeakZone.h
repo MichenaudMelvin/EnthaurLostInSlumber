@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "WeakZone.generated.h"
 
+class UInteractableComponent;
 class UBoxComponent;
 
 UCLASS()
@@ -19,6 +20,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+	virtual void Destroyed() override;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
 	TObjectPtr<USceneComponent> Root;
 
@@ -30,8 +35,14 @@ protected:
 	TObjectPtr<UBillboardComponent> BillboardComponent;
 #endif
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void InitZone();
+
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void DestroyZone();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zone")
+	FVector ZoneSize = FVector(100.0f);
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Materials")
 	FName ZoneLocationParamName = "ZoneLocation";
@@ -44,9 +55,24 @@ protected:
 
 	bool bIsZoneActive = true;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interactable")
+	TObjectPtr<UInteractableComponent> Interactable;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
+	TObjectPtr<UStaticMesh> InteractionMesh;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interactable")
+	TArray<UStaticMeshComponent*> InteractionPoints;
+
+	UPROPERTY(EditInstanceOnly, Category = "Interactable", meta = (DisplayName = "InteractionPoints", MakeEditWidget))
+	TArray<FTransform> InteractionTransformPoints;
+
 	UFUNCTION()
 	void OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
 	void OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	UFUNCTION()
+	void OnInteract(APlayerController* Controller, APawn* Pawn);
 };

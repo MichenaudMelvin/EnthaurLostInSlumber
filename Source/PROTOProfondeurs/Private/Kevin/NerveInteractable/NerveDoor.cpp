@@ -76,7 +76,7 @@ void ANerveDoor::Trigger_Implementation()
 void ANerveDoor::SetLock_Implementation(bool state)
 {
 	INerveReactive::SetLock_Implementation(state);
-	
+
 	if (state)
 	{
 		if (IsOpened != IsActiveAtStart)

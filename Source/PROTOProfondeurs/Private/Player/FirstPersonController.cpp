@@ -150,113 +150,36 @@ void AFirstPersonController::SetupInputComponent()
 
 void AFirstPersonController::OnInputMove(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Axis2D)
-	{
-		const FString Message = FString::Printf(TEXT("Move action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.InputMove = InputActionValue.Get<FVector2D>();
 }
 
 void AFirstPersonController::OnInputLook(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Axis2D)
-	{
-		const FString Message = FString::Printf(TEXT("Look action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.InputLook = InputActionValue.Get<FVector2D>();
 }
 
 void AFirstPersonController::OnInputSprint(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("Sprint action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputSprint = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputCrouch(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("Crouch action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputCrouch = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputJump(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("Jump action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputJump = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputInteract(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("Interact action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputInteract = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputTakeAmber(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("TakeAmber action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputTakeAmber = InputActionValue.Get<bool>();
 }
 

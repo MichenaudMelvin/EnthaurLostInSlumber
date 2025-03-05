@@ -14,10 +14,7 @@ void UCharacterTakeAmberState::StateEnter_Implementation(const ECharacterStateID
 {
 	Super::StateEnter_Implementation(PreviousStateID);
 
-	if (!Character->CantTakeAmber())
-	{
-		StateMachine->ChangeState(ECharacterStateID::Idle);
-	}
+	
 }
 
 void UCharacterTakeAmberState::StateTick_Implementation(float DeltaTime)

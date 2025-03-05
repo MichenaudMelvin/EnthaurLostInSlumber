@@ -16,7 +16,7 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(34.0f, 88.0f);
 
-	// Create a CameraComponent	
+	// Create a CameraComponent
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f)); // Position the camera
@@ -261,17 +261,38 @@ void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 
 #pragma endregion
 
+#pragma region Amber
+
+void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
+{
+	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
+
+	bCanTakeAmber = bIsZoneActive;
+}
+
+void AFirstPersonCharacter::OnExitWeakZone_Implementation()
+{
+	IWeakZoneInterface::OnExitWeakZone_Implementation();
+
+	bCanTakeAmber = false;
+}
+
+#pragma endregion
+
 FVector AFirstPersonCharacter::GetBottomLocation() const
 {
-	FVector TargetLocation = GetActorLocation();
-	TargetLocation.Z -= GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
-	return TargetLocation;
+	return GetPlayerLocation(false);
 }
 
 FVector AFirstPersonCharacter::GetTopLocation() const
 {
+	return GetPlayerLocation(true);
+}
+
+FVector AFirstPersonCharacter::GetPlayerLocation(bool TopLocation) const
+{
 	FVector TargetLocation = GetActorLocation();
-	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight() * (TopLocation ? 1 : -1);
 	return TargetLocation;
 }
 
@@ -290,18 +311,4 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
 
 	return true;
-}
-
-void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
-{
-	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
-
-	bCanTakeAmber = bIsZoneActive;
-}
-
-void AFirstPersonCharacter::OnExitWeakZone_Implementation()
-{
-	IWeakZoneInterface::OnExitWeakZone_Implementation();
-
-	bCanTakeAmber = false;
 }

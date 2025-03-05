@@ -39,7 +39,7 @@ protected:
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Controller")
-	AFirstPersonController* FirstPersonController;
+	TObjectPtr<AFirstPersonController> FirstPersonController;
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
@@ -123,11 +123,24 @@ protected:
 
 #pragma endregion
 
+#pragma region Amber
+
 protected:
 	bool bCanTakeAmber = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Amber")
+	bool bAmberFilled = false;
+
 public:
-	bool CantTakeAmber() const {return bCanTakeAmber;}
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
+
+	void FillAmber(bool bRefill) {bAmberFilled = bRefill;}
+
+	bool IsAmberFilled() const {return bAmberFilled;}
+
+#pragma endregion
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
@@ -136,12 +149,16 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
 
+	/**
+	 * @brief 
+	 * @param TopLocation true will return the top location of the player, false will return the bottom location
+	 * @return 
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	FVector GetPlayerLocation(bool TopLocation) const;
+
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
-
-	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
-
-	virtual void OnExitWeakZone_Implementation() override;
 };
