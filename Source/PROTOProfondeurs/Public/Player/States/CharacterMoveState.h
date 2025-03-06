@@ -29,4 +29,11 @@ public:
 	float GetMoveSpeed() const {return MoveSpeed;}
 
 	float GetMoveAcceleration() const {return MoveAcceleration;}
+
+	/**
+	 * @brief Update the current speed of the Character
+	 * @param NewSpeed is temporary, everytime you change to this state, Character speed will be the MoveSpeed
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+	void SetNewSpeed(const float NewSpeed);
 };

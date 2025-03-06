@@ -4,6 +4,17 @@
 #include "Player/FirstPersonController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Blueprint/UserWidget.h"
+#include "Kevin/UI/InGameUI.h"
+#include "Player/FirstPersonCharacter.h"
+#include "Player/FirstPersonSpectator.h"
+
+FAction::FAction()
+{
+	TriggerEvents.Add(ETriggerEvent::Triggered);
+	TriggerEvents.Add(ETriggerEvent::Started);
+	TriggerEvents.Add(ETriggerEvent::Completed);
+}
 
 void FAction::BindAction(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object)
 {
@@ -54,6 +65,9 @@ void FPlayerInputs::DisplayInputsOnScreen(float DisplayTime, const FColor& Debug
 	Message += "\nbInputInteract: ";
 	Message += bInputInteract ? "true" : "false";
 
+	Message += "\bInputTakeAmber";
+	Message += bInputTakeAmber ? "true" : "false";
+
 	GEngine->AddOnScreenDebugMessage(-1, DisplayTime, DebugColor, FString::Printf(TEXT("%s"), *Message));
 }
 #endif
@@ -86,6 +100,18 @@ void AFirstPersonController::BeginPlay()
 	}
 
 	Subsystem->AddMappingContext(DefaultMappingContext, 0);
+	OwnCharacter = Cast<AFirstPersonCharacter>(GetPawn());
+
+	if (SpectatorClass == nullptr)
+	{
+		SpectatorClass = AFirstPersonSpectator::StaticClass();
+	}
+
+	CurrentInGameUI = CreateWidget<UInGameUI>(this, InGameWidgetClass);
+	if (CurrentInGameUI)
+	{
+		CurrentInGameUI->AddToViewport();
+	}
 }
 
 void AFirstPersonController::Tick(float DeltaSeconds)
@@ -99,6 +125,33 @@ void AFirstPersonController::Tick(float DeltaSeconds)
 	}
 #endif
 }
+
+// #if !UE_BUILD_SHIPPING
+void AFirstPersonController::PossessSpectator()
+{
+	Spectator = GetWorld()->SpawnActor<AFirstPersonSpectator>(SpectatorClass, GetPawn()->GetActorLocation(), GetPawn()->GetActorRotation());
+	UnPossess();
+	Possess(Spectator);
+}
+
+void AFirstPersonController::UnPossessSpectator(bool bTeleport)
+{
+	if (Spectator == nullptr)
+	{
+		return;
+	}
+
+	if (bTeleport)
+	{
+		OwnCharacter->SetActorLocation(Spectator->GetActorLocation());
+	}
+
+	UnPossess();
+	Possess(OwnCharacter);
+
+	Spectator->Destroy();
+}
+// #endif
 
 #pragma region Inputs
 
@@ -119,6 +172,7 @@ void AFirstPersonController::SetupInputComponent()
 	CrouchAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputCrouch, const FInputActionValue&);
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputJump, const FInputActionValue&);
 	InteractAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteract, const FInputActionValue&);
+	TakeAmberAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputTakeAmber, const FInputActionValue&);
 
 	MoveAction.BindAction(EnhancedInputComponent, this);
 	LookAction.BindAction(EnhancedInputComponent, this);
@@ -126,102 +180,42 @@ void AFirstPersonController::SetupInputComponent()
 	CrouchAction.BindAction(EnhancedInputComponent, this);
 	JumpAction.BindAction(EnhancedInputComponent, this);
 	InteractAction.BindAction(EnhancedInputComponent, this);
+	TakeAmberAction.BindAction(EnhancedInputComponent, this);
 }
 
 void AFirstPersonController::OnInputMove(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Axis2D)
-	{
-		const FString Message = FString::Printf(TEXT("Move action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.InputMove = InputActionValue.Get<FVector2D>();
 }
 
 void AFirstPersonController::OnInputLook(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Axis2D)
-	{
-		const FString Message = FString::Printf(TEXT("Look action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.InputLook = InputActionValue.Get<FVector2D>();
 }
 
 void AFirstPersonController::OnInputSprint(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("Sprint action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputSprint = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputCrouch(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("Crouch action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputCrouch = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputJump(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("Jump action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputJump = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputInteract(const FInputActionValue& InputActionValue)
 {
-#if WITH_EDITOR
-	if (InputActionValue.GetValueType() != EInputActionValueType::Boolean)
-	{
-		const FString Message = FString::Printf(TEXT("Interact action has wrong Value type"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-		return;
-	}
-#endif
-
 	PlayerInputs.bInputInteract = InputActionValue.Get<bool>();
+}
+
+void AFirstPersonController::OnInputTakeAmber(const FInputActionValue& InputActionValue)
+{
+	PlayerInputs.bInputTakeAmber = InputActionValue.Get<bool>();
 }
 
 #if WITH_EDITOR

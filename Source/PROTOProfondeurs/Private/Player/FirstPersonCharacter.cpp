@@ -7,16 +7,20 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kevin/UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "KismetTraceUtils.h"
+#include "Physics/TracePhysicsSettings.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(34.0f, 88.0f);
 
-	// Create a CameraComponent	
+	// Create a CameraComponent
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f)); // Position the camera
@@ -152,24 +156,23 @@ void AFirstPersonCharacter::DisplayStates(bool bDisplay)
 
 void AFirstPersonCharacter::InteractionTrace()
 {
-	FVector StartLocation = CameraComponent->GetComponentLocation();
-	FVector EndLocation = (CameraComponent->GetForwardVector() * InteractionTraceLength) + StartLocation;
+	const UTracePhysicsSettings* TraceSettings =  GetDefault<UTracePhysicsSettings>();
 
-	TArray<AActor*> ActorsToIgnore;
-	ActorsToIgnore.Add(this);
-
-	FHitResult HitResult;
-	FCollisionQueryParams CollisionParams;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
-
-	if (!bHit)
+	if (TraceSettings == nullptr)
 	{
-		CurrentInteractable = nullptr;
 		return;
 	}
 
-	if (HitResult.GetActor() == nullptr)
+	FVector StartLocation = CameraComponent->GetComponentLocation();
+	FVector EndLocation = (CameraComponent->GetForwardVector() * InteractionTraceLength) + StartLocation;
+
+	FHitResult HitResult;
+	FCollisionQueryParams CollisionParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, TraceSettings->InteractionTraceChannel, CollisionParams);
+
+	if (!bHit || HitResult.GetActor() == nullptr)
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
@@ -177,6 +180,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UInteractableComponent::StaticClass());
 	if (FoundComp == nullptr)
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
@@ -184,12 +188,14 @@ void AFirstPersonCharacter::InteractionTrace()
 	UInteractableComponent* TargetInteractable = Cast<UInteractableComponent>(FoundComp);
 	if (TargetInteractable == nullptr)
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
 
 	if (TargetInteractable->CheckComponent(HitResult.GetComponent()))
 	{
+		SetInteractionUI(true);
 		CurrentInteractable = TargetInteractable;
 
 #if WITH_EDITORONLY_DATA
@@ -198,6 +204,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	}
 	else
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 	}
 }
@@ -215,6 +222,13 @@ void AFirstPersonCharacter::Landed(const FHitResult& Hit)
 
 bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
 {
+	const UTracePhysicsSettings* TraceSettings =  GetDefault<UTracePhysicsSettings>();
+
+	if (TraceSettings == nullptr)
+	{
+		return false;
+	}
+
 	FVector StartLocation = GetBottomLocation();
 	FVector EndLocation = StartLocation;
 	EndLocation.Z -= GroundTraceLength;
@@ -222,7 +236,12 @@ bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
 	FCollisionQueryParams CollisionQueryParams;
 	CollisionQueryParams.bReturnPhysicalMaterial = true;
 
-	return GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionQueryParams);
+	// const FCollisionObjectQueryParams ObjectParams = ConfigureCollisionObjectParams(TraceSettings->GroundObjectTypes);
+
+	TArray<AActor*> ActorsToIgnore;
+
+	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, TraceSettings->GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
+	// return GetWorld()->LineTraceSingleByObjectType(HitResult, StartLocation, EndLocation, ObjectParams, CollisionQueryParams);
 }
 
 void AFirstPersonCharacter::GroundMovement()
@@ -241,12 +260,7 @@ void AFirstPersonCharacter::GroundMovement()
 
 void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 {
-	if (ActorBellow == nullptr)
-	{
-		return;
-	}
-
-	if (ActorBellow == GroundActor)
+	if (ActorBellow == nullptr || ActorBellow == GroundActor)
 	{
 		return;
 	}
@@ -261,17 +275,38 @@ void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 
 #pragma endregion
 
+#pragma region Amber
+
+void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
+{
+	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
+
+	bCanTakeAmber = bIsZoneActive;
+}
+
+void AFirstPersonCharacter::OnExitWeakZone_Implementation()
+{
+	IWeakZoneInterface::OnExitWeakZone_Implementation();
+
+	bCanTakeAmber = false;
+}
+
+#pragma endregion
+
 FVector AFirstPersonCharacter::GetBottomLocation() const
 {
-	FVector TargetLocation = GetActorLocation();
-	TargetLocation.Z -= GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
-	return TargetLocation;
+	return GetPlayerLocation(false);
 }
 
 FVector AFirstPersonCharacter::GetTopLocation() const
 {
+	return GetPlayerLocation(true);
+}
+
+FVector AFirstPersonCharacter::GetPlayerLocation(bool TopLocation) const
+{
 	FVector TargetLocation = GetActorLocation();
-	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight() * (TopLocation ? 1 : -1);
 	return TargetLocation;
 }
 
@@ -290,4 +325,10 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
 
 	return true;
+}
+
+void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
+{
+	if (CurrentInteractable != nullptr)
+		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
 }

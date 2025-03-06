@@ -24,7 +24,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "CharacterStateMachine")
 	ECharacterStateID CurrentStateID;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "CharacterStateMachine")
 	TObjectPtr<UCharacterState> CurrentState;
 
 public:
@@ -37,5 +37,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CharacterStateMachine")
 	void ChangeState(ECharacterStateID NextStateID);
 
-	UCharacterState* FindState(const ECharacterStateID& StateID) const;
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
+	UCharacterState* FindState(ECharacterStateID StateID) const;
+
+	ECharacterStateID GetCurrentStateID() const {return CurrentStateID;}
+
+	UCharacterState* GetCurrentState() const {return CurrentState;}
+
+private:
+	/**
+	 * @brief BlueprintOnly
+	 * @param StateClass 
+	 * @return 
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine", meta = (DeterminesOutputType = "StateClass"))
+	UCharacterState* FindStateByClass(TSubclassOf<UCharacterState> StateClass);
 };

@@ -24,6 +24,7 @@ enum class ECharacterStateID : uint8
 	Fall,
 	Interact,
 	Slide,
+	TakeAmber,
 };
 
 UCLASS(Abstract, Blueprintable)
@@ -49,6 +50,15 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TSubclassOf<UViewBobbing> ViewBobbing;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Camera")
+	TObjectPtr<UViewBobbing> CurrentViewBobbing;
+
+	UFUNCTION(BlueprintCallable, Category = "Camera")
+	void StartCameraShake();
+
+	UFUNCTION(BlueprintCallable, Category = "Camera")
+	void StopCameraShake();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
 	const FPlayerInputs& GetInputs() const;

@@ -6,6 +6,9 @@
 #include "GameFramework/PlayerController.h"
 #include "FirstPersonController.generated.h"
 
+class AFirstPersonSpectator;
+class AFirstPersonCharacter;
+class UInGameUI;
 struct FInputActionValue;
 class UInputAction;
 enum class ETriggerEvent : uint8;
@@ -15,6 +18,8 @@ USTRUCT(Blueprintable)
 struct FAction
 {
 	GENERATED_BODY()
+
+	FAction();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inputs")
 	TObjectPtr<UInputAction> Action;
@@ -26,7 +31,7 @@ struct FAction
 	 * @brief Function needs to be a UFunction
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "Inputs")
-	FName FunctionName;
+	FName FunctionName = NAME_None;
 
 	void BindAction(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object);
 };
@@ -54,6 +59,9 @@ struct FPlayerInputs
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	bool bInputInteract = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	bool bInputTakeAmber = false;
+
 #if !UE_BUILD_SHIPPING
 	void DisplayInputsOnScreen(float DisplayTime = 0.0f, const FColor& DebugColor = FColor::Cyan) const;
 #endif
@@ -64,12 +72,41 @@ class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> InGameWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UInGameUI> CurrentInGameUI;
+
 protected:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
 
+// #if !UE_BUILD_SHIPPING
+	UPROPERTY()
+	TObjectPtr<AFirstPersonCharacter> OwnCharacter;
+
+	UPROPERTY()
+	TObjectPtr<AFirstPersonSpectator> Spectator;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Spectator")
+	TSubclassOf<AFirstPersonSpectator> SpectatorClass;
+
+	UFUNCTION(Exec)
+	void PossessSpectator();
+
+	UFUNCTION(Exec)
+	void UnPossessSpectator(bool bTeleport = true);
+// #endif
+
+public:
+	UInGameUI* GetCurrentInGameUI() { return CurrentInGameUI; }
+
 #pragma region Inputs
+
+protected:
 	virtual void SetupInputComponent() override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
@@ -93,6 +130,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FAction InteractAction;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
+	FAction TakeAmberAction;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	FPlayerInputs PlayerInputs;
 
@@ -113,6 +153,9 @@ protected:
 
 	UFUNCTION()
 	void OnInputInteract(const FInputActionValue& InputActionValue);
+
+	UFUNCTION()
+	void OnInputTakeAmber(const FInputActionValue& InputActionValue);
 
 public:
 	const FPlayerInputs& GetPlayerInputs() const {return PlayerInputs;}

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Environement/WeakZoneInterface.h"
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
@@ -14,7 +15,7 @@ enum class ECharacterStateID : uint8;
 class UCameraComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter
+class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface
 {
 	GENERATED_BODY()
 
@@ -38,7 +39,7 @@ protected:
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Controller")
-	AFirstPersonController* FirstPersonController;
+	TObjectPtr<AFirstPersonController> FirstPersonController;
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
@@ -90,7 +91,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
 	float InteractionTraceLength = 100.0f;
 
-	UPROPERTY(BlueprintReadOnly, Category = "InteractionTrace")
+	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UInteractableComponent> CurrentInteractable;
 
 	void InteractionTrace();
@@ -122,6 +123,25 @@ protected:
 
 #pragma endregion
 
+#pragma region Amber
+
+protected:
+	bool bCanTakeAmber = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Amber")
+	bool bAmberFilled = false;
+
+public:
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
+
+	void FillAmber(bool bRefill) {bAmberFilled = bRefill;}
+
+	bool IsAmberFilled() const {return bAmberFilled;}
+
+#pragma endregion
+
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetBottomLocation() const;
@@ -129,8 +149,18 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
 
+	/**
+	 * @brief 
+	 * @param TopLocation true will return the top location of the player, false will return the bottom location
+	 * @return 
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	FVector GetPlayerLocation(bool TopLocation) const;
+
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
+
+	void SetInteractionUI(bool bState) const;
 };
