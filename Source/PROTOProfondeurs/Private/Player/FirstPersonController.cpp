@@ -143,7 +143,7 @@ void AFirstPersonController::UnPossessSpectator(bool bTeleport)
 
 	if (bTeleport)
 	{
-		OwnCharacter->SetActorTransform(Spectator->GetActorTransform());
+		OwnCharacter->SetActorLocation(Spectator->GetActorLocation());
 	}
 
 	UnPossess();

@@ -2,9 +2,6 @@
 
 
 #include "Kevin/PlayerToNervePhysicConstraint.h"
-
-#include "EnhancedInputComponent.h"
-#include "MainSettings.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -13,7 +10,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Player/FirstPersonController.h"
-#include "PROTOProfondeurs/Macro.h"
 
 
 // Sets default values for this component's properties
