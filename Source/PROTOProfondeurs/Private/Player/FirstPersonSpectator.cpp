@@ -19,7 +19,10 @@ AFirstPersonSpectator::AFirstPersonSpectator()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(Root);
+
+#if WITH_EDITORONLY_DATA
 	Camera->bCameraMeshHiddenInGame = false;
+#endif
 }
 
 void AFirstPersonSpectator::Tick(float DeltaTime)
