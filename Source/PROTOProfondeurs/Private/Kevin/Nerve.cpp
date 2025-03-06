@@ -4,16 +4,11 @@
 #include "Kevin/Nerve.h"
 
 #include "FCTween.h"
-#include "MainSettings.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/Character.h"
 #include "Kevin/NerveReceptacle.h"
 #include "Kevin/PlayerToNervePhysicConstraint.h"
-#include "Kevin/UI/InGameUI.h"
-#include "Kismet/GameplayStatics.h"
-#include "Player/FirstPersonController.h"
-#include "PROTOProfondeurs/Macro.h"
-
+#include "Player/CharacterSettings.h"
 
 // Sets default values
 ANerve::ANerve()
@@ -66,7 +61,11 @@ void ANerve::DetachNerveBall()
 			1.f,
 			EFCEase::OutElastic);
 
-	InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
+	InteractableComponent->AddInteractable(NerveBall);
+	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
+	{
+		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
+	}
 }
 
 void ANerve::Interaction(APlayerController* PlayerController, APawn* Pawn)
@@ -82,7 +81,7 @@ void ANerve::Interaction(APlayerController* PlayerController, APawn* Pawn)
 
 	FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, false);
 	NerveBall->AttachToComponent(Pawn->GetRootComponent(), Rules);
-	NerveBall->SetRelativeLocation(GetDefault<UMainSettings>()->PawnGrabObjectOffset);
+	NerveBall->SetRelativeLocation(GetDefault<UCharacterSettings>()->PawnGrabObjectOffset);
 
 	PhysicConstraint = Cast<UPlayerToNervePhysicConstraint>(
 		Pawn->AddComponentByClass(UPlayerToNervePhysicConstraint::StaticClass(), false, FTransform::Identity, false)
