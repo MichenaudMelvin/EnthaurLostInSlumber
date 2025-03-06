@@ -61,6 +61,7 @@ void ANerve::DetachNerveBall()
 			1.f,
 			EFCEase::OutElastic);
 
+	InteractableComponent->AddInteractable(NerveBall);
 	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
 	{
 		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
