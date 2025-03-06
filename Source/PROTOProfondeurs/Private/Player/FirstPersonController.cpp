@@ -6,6 +6,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "Blueprint/UserWidget.h"
 #include "Kevin/UI/InGameUI.h"
+#include "Player/FirstPersonCharacter.h"
+#include "Player/FirstPersonSpectator.h"
 
 FAction::FAction()
 {
@@ -98,7 +100,13 @@ void AFirstPersonController::BeginPlay()
 	}
 
 	Subsystem->AddMappingContext(DefaultMappingContext, 0);
-	
+	OwnCharacter = Cast<AFirstPersonCharacter>(GetPawn());
+
+	if (SpectatorClass == nullptr)
+	{
+		SpectatorClass = AFirstPersonSpectator::StaticClass();
+	}
+
 	CurrentInGameUI = CreateWidget<UInGameUI>(this, InGameWidgetClass);
 	if (CurrentInGameUI)
 	{
@@ -117,6 +125,33 @@ void AFirstPersonController::Tick(float DeltaSeconds)
 	}
 #endif
 }
+
+// #if !UE_BUILD_SHIPPING
+void AFirstPersonController::PossessSpectator()
+{
+	Spectator = GetWorld()->SpawnActor<AFirstPersonSpectator>(SpectatorClass, GetPawn()->GetActorLocation(), GetPawn()->GetActorRotation());
+	UnPossess();
+	Possess(Spectator);
+}
+
+void AFirstPersonController::UnPossessSpectator(bool bTeleport)
+{
+	if (Spectator == nullptr)
+	{
+		return;
+	}
+
+	if (bTeleport)
+	{
+		OwnCharacter->SetActorLocation(Spectator->GetActorLocation());
+	}
+
+	UnPossess();
+	Possess(OwnCharacter);
+
+	Spectator->Destroy();
+}
+// #endif
 
 #pragma region Inputs
 

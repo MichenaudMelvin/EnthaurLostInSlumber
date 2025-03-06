@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "FirstPersonController.generated.h"
 
+class AFirstPersonSpectator;
+class AFirstPersonCharacter;
 class UInGameUI;
 struct FInputActionValue;
 class UInputAction;
@@ -71,7 +73,7 @@ class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UUserWidget> InGameWidgetClass;
 
 	UPROPERTY()
@@ -82,10 +84,29 @@ protected:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+// #if !UE_BUILD_SHIPPING
+	UPROPERTY()
+	TObjectPtr<AFirstPersonCharacter> OwnCharacter;
+
+	UPROPERTY()
+	TObjectPtr<AFirstPersonSpectator> Spectator;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Spectator")
+	TSubclassOf<AFirstPersonSpectator> SpectatorClass;
+
+	UFUNCTION(Exec)
+	void PossessSpectator();
+
+	UFUNCTION(Exec)
+	void UnPossessSpectator(bool bTeleport = true);
+// #endif
+
 public:
 	UInGameUI* GetCurrentInGameUI() { return CurrentInGameUI; }
 
 #pragma region Inputs
+
+protected:
 	virtual void SetupInputComponent() override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")

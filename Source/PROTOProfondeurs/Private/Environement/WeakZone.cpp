@@ -6,6 +6,7 @@
 #include "MovieSceneTracksComponentTypes.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
+#include "Physics/TracePhysicsSettings.h"
 #include "Player/FirstPersonCharacter.h"
 
 #if WITH_EDITORONLY_DATA
@@ -35,11 +36,19 @@ void AWeakZone::BeginPlay()
 {
 	Super::BeginPlay();
 
+	const UTracePhysicsSettings* TraceSettings =  GetDefault<UTracePhysicsSettings>();
+
+	if (TraceSettings == nullptr)
+	{
+		return;
+	}
+
 	BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AWeakZone::OnZoneBeginOverlap);
 	BoxComponent->OnComponentEndOverlap.AddDynamic(this, &AWeakZone::OnZoneEndOverlap);
 
 	for (UStaticMeshComponent* Mesh : InteractionPoints)
 	{
+		Mesh->SetCollisionResponseToChannel(TraceSettings->InteractionTraceChannel, ECR_Block);
 		Interactable->AddInteractable(Mesh);
 	}
 
