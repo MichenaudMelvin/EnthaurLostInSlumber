@@ -4,7 +4,7 @@
 #include "Player/States/CharacterSlideState.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Player/States/CharacterStateSettings.h"
+#include "Physics/TracePhysicsSettings.h"
 
 UCharacterSlideState::UCharacterSlideState()
 {
@@ -30,7 +30,7 @@ void UCharacterSlideState::StateTick_Implementation(float DeltaTime)
 
 void UCharacterSlideState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysicalSurface>& NewSurface)
 {
-	const UCharacterStateSettings* StateSettings = GetDefault<UCharacterStateSettings>();
+	const UTracePhysicsSettings* StateSettings = GetDefault<UTracePhysicsSettings>();
 
 	if (NewSurface != StateSettings->SlipperySurface)
 	{

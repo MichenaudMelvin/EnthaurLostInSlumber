@@ -54,3 +54,8 @@ void UInGameUI::SetPropulsionActive(bool active)
 		}
 	}
 }
+
+void UInGameUI::SetInteraction(const bool bActive) const
+{
+	bActive ? Interact->SetOpacity(1.f) : Interact->SetOpacity(0.f);
+}

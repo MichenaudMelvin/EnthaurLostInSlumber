@@ -91,7 +91,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
 	float InteractionTraceLength = 100.0f;
 
-	UPROPERTY(BlueprintReadOnly, Category = "InteractionTrace")
+	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UInteractableComponent> CurrentInteractable;
 
 	void InteractionTrace();
@@ -161,4 +161,6 @@ public:
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
+
+	void SetInteractionUI(bool bState) const;
 };
