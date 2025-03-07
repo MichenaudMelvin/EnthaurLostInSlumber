@@ -28,8 +28,9 @@ void UCharacterJumpState::StateEnter_Implementation(const ECharacterStateID& Pre
 
 	PreviousGravityScale = Character->GetCharacterMovement()->GravityScale;
 
-	Character->GetCharacterMovement()->AirControl = AirControl;
 	Character->GetCharacterMovement()->GravityScale = 0.0f;
+	Character->GetCharacterMovement()->AirControl = AirControl;
+	Character->GetCharacterMovement()->BrakingDecelerationFalling = FallingDeceleration;
 
 	Character->GetCharacterMovement()->Velocity.Z = JumpVelocity;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);

@@ -3,8 +3,12 @@
 
 #include "Player/States/CharacterMoveState.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Player/CharacterSettings.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
+#include "Player/Camera/ViewBobbing.h"
+#include "Saves/SettingsSave.h"
 
 UCharacterMoveState::UCharacterMoveState()
 {
@@ -25,6 +29,26 @@ void UCharacterMoveState::StateTick_Implementation(float DeltaTime)
 
 	Character->AddMovementInput(Character->GetActorForwardVector(), GetInputs().InputMove.Y);
 	Character->AddMovementInput(Character->GetActorRightVector(), GetInputs().InputMove.X);
+
+	if(CurrentViewBobbing && GetSettings() && GetSettings()->bViewBobbing)
+	{
+		float SpeedRange = UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->MaxWalkSpeed, 0.0f, MoveSpeed);
+		CurrentViewBobbing->ShakeScale = SpeedRange;
+	}
+}
+
+void UCharacterMoveState::UpdateCameraSteering(float DeltaTime)
+{
+	if (FMath::Abs(GetInputs().InputMove.X) < GetDefault<UCharacterSettings>()->MoveInputThreshold)
+	{
+		TargetSteering = 0.0f;
+	}
+	else
+	{
+		TargetSteering = MaxSteering * (GetInputs().InputMove.X > 0.0f ? 1.0f : -1.0f);
+	}
+
+	Super::UpdateCameraSteering(DeltaTime);
 }
 
 void UCharacterMoveState::SetNewSpeed(const float NewSpeed)
