@@ -17,7 +17,13 @@ public:
 	ANerveDoor();
 
 	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UStaticMeshComponent> Mesh;
+	TObjectPtr<USceneComponent> Root;
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UStaticMeshComponent> MeshDoor;
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UStaticMeshComponent> MeshDoorFrame;
 
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> DoorMaterial;
