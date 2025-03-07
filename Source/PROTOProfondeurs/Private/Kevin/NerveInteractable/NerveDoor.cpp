@@ -11,8 +11,14 @@ ANerveDoor::ANerveDoor()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Door Mesh"));
-	Mesh->SetupAttachment(RootComponent);
+	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Door Mesh"));
+	SetRootComponent(Root);
+
+	MeshDoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Door Frame"));
+	MeshDoorFrame->SetupAttachment(Root);
+
+	MeshDoor = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Door"));
+	MeshDoor->SetupAttachment(Root);
 }
 
 // Called when the game starts or when spawned
@@ -20,12 +26,12 @@ void ANerveDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	DoorMaterial = Mesh->CreateDynamicMaterialInstance(0, Mesh->GetMaterial(0));
+	DoorMaterial = MeshDoor->CreateDynamicMaterialInstance(0, MeshDoor->GetMaterial(0));
 
 	if (IsActiveAtStart)
 	{
 		DoorMaterial->SetScalarParameterValue("State", 2.f);
-		Mesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	}
 }
 
@@ -47,7 +53,7 @@ void ANerveDoor::Trigger_Implementation()
 	
 	if (IsOpened)
 	{
-		Mesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 		FCTween::Play(
 			2.f,
 			0.f,
@@ -59,7 +65,7 @@ void ANerveDoor::Trigger_Implementation()
 			EFCEase::InSine);
 	} else
 	{
-		Mesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 		FCTween::Play(
 			0.f,
 			2.f,
