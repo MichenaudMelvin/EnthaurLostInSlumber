@@ -23,7 +23,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Accessibility")
 	bool bViewBobbing = true;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Accessibility")
+	bool bCameraSteering = true;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Accessibility", meta = (ClampMin = 0.1f, ClampMax = 10.0f, UIMin = 0.1f, UIMax = 10.0f))
 	float MouseSensitivity = 1.0f;
+
 #pragma endregion
 };

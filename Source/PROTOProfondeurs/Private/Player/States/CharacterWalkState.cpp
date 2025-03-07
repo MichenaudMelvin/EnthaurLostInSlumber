@@ -10,6 +10,8 @@
 UCharacterWalkState::UCharacterWalkState()
 {
 	StateID = ECharacterStateID::Walk;
+	MaxSteering = 2.5f;
+	SteeringSpeed = 1.5f;
 }
 
 void UCharacterWalkState::StateTick_Implementation(float DeltaTime)

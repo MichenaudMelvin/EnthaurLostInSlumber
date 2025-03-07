@@ -2,7 +2,10 @@
 
 
 #include "Player/States/CharacterIdleState.h"
+
+#include "Camera/CameraComponent.h"
 #include "Player/CharacterSettings.h"
+#include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
 
@@ -10,6 +13,13 @@ UCharacterIdleState::UCharacterIdleState()
 {
 	StateID = ECharacterStateID::Idle;
 	bCheckGround = true;
+}
+
+void UCharacterIdleState::StateInit(UCharacterStateMachine* InStateMachine)
+{
+	Super::StateInit(InStateMachine);
+
+	Character->GetCamera()->FieldOfView = TargetFOV;
 }
 
 void UCharacterIdleState::StateTick_Implementation(float DeltaTime)

@@ -15,5 +15,7 @@ public:
 	UCharacterIdleState();
 
 protected:
+	virtual void StateInit(UCharacterStateMachine* InStateMachine) override;
+
 	virtual void StateTick_Implementation(float DeltaTime) override;
 };

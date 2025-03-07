@@ -25,6 +25,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (ClampMin = 0.0f))
 	float MoveAcceleration = 2048.0f;
 
+	virtual void UpdateCameraSteering(float DeltaTime) override;
+
 public:
 	float GetMoveSpeed() const {return MoveSpeed;}
 
