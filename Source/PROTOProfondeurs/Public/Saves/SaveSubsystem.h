@@ -3,58 +3,69 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
+#include "DefaultSave.h"
 #include "Kismet/GameplayStatics.h"
-#include "SaveStatics.generated.h"
+#include "Subsystems/GameInstanceSubsystem.h"
+#include "SaveSubsystem.generated.h"
 
 class UDefaultSave;
 
-UCLASS()
-class PROTOPROFONDEURS_API USaveStatics : public UBlueprintFunctionLibrary
+/**
+ * @brief This subsystem is abstract
+ */
+UCLASS(Abstract, Category = "Save")
+class PROTOPROFONDEURS_API USaveSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
+
+protected:
+	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 
 #pragma region SaveFunctions
 
 public:
 	/**
 	 * @brief Create a new save
-	 * @param SaveClass The type of save you want to create
 	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
 	 * @return The created save
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (DeterminesOutputType = "SaveClass"), Category = "Saves", meta = (DisplayName = "CreateSave"))
-	static UDefaultSave* CreateSaveBP(const TSubclassOf<UDefaultSave> SaveClass, const int SaveIndex);
+	UFUNCTION(BlueprintCallable, Category = "Saves", meta = (DisplayName = "CreateSave"))
+	void CreateSave(const int SaveIndex);
 
 	/**
 	 * @brief Save to a slot
-	 * @param SaveObject The affected save object
 	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
 	 * @return The save object
 	 */
-	UFUNCTION(BlueprintCallable, meta = (DeterminesOutputType = "SaveObject"), Category = "Saves")
-	static UDefaultSave* SaveToSlot(UDefaultSave* SaveObject, const int SaveIndex);
+	UFUNCTION(BlueprintCallable, Category = "Saves")
+	UDefaultSave* SaveToSlot(const int SaveIndex);
 
 	/**
 	 * @brief Load a save
-	 * @param SaveClass The type of save you want to load
 	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
 	 * @param bCreateNewSaveIfDoesntExist This will create a new save if the one you're trying to load doesn't exist
 	 * @return The save object
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (DeterminesOutputType = "SaveClass"), Category = "Saves", meta = (DisplayName = "LoadSave"))
-	static UDefaultSave* LoadSaveBP(const TSubclassOf<UDefaultSave> SaveClass, const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true);
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Saves", meta = (DisplayName = "LoadSave"))
+	UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true);
 
 	/**
-	 * @brief Delete a save
-	 * @param SaveObject The save object
+	 * @brief Reset a save to defaults parameters
 	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
-	 * @return Successfully delete the save or not
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saves")
-	static bool DeleteSaveSlot(UDefaultSave* SaveObject, const int SaveIndex);
+	void ResetSaveToDefault(const int SaveIndex);
 
 #pragma endregion
+
+protected:
+	/**
+	 * @brief Must be assigned in the subsystem ctor
+	 */
+	TSubclassOf<UDefaultSave> SaveClass;
+
+	UPROPERTY()
+	TObjectPtr<UDefaultSave> SaveObject;
 };
 
 #pragma region TemplateFunctions
@@ -70,7 +81,7 @@ inline SaveT* CreateSave(const int SaveIndex)
 {
 	SaveT* NewSave = Cast<SaveT>(UGameplayStatics::CreateSaveGameObject(SaveT::StaticClass()));
 	NewSave->SetSaveIndex(SaveIndex);
-	NewSave = Cast<SaveT>(USaveStatics::SaveToSlot(NewSave, SaveIndex));
+	NewSave = Cast<SaveT>(USaveSubsystem::SaveToSlot(NewSave, SaveIndex));
 
 	return NewSave;
 }

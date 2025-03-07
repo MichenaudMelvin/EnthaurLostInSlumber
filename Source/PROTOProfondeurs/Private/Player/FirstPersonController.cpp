@@ -18,7 +18,7 @@ FAction::FAction()
 
 void FAction::BindAction(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object)
 {
-	if (Action == nullptr)
+	if (!Action)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("Action is nullptr for the target function: %s"), *FunctionName.ToString());
@@ -29,7 +29,7 @@ void FAction::BindAction(UEnhancedInputComponent* EnhancedInputComponent, UObjec
 		return;
 	}
 
-	if (Object == nullptr)
+	if (!Object)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("Object is nullptr for the target function: %s"), *FunctionName.ToString());
@@ -77,18 +77,18 @@ void AFirstPersonController::BeginPlay()
 	Super::BeginPlay();
 
 	ULocalPlayer* LocalPlayer = GetLocalPlayer();
-	if (LocalPlayer == nullptr)
+	if (!LocalPlayer)
 	{
 		return;
 	}
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
-	if(Subsystem == nullptr)
+	if(!Subsystem)
 	{
 		return;
 	}
 
-	if (DefaultMappingContext == nullptr)
+	if (!DefaultMappingContext)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("Missing DefaultMappingContext in %s"), *GetClass()->GetName());
@@ -102,7 +102,7 @@ void AFirstPersonController::BeginPlay()
 	Subsystem->AddMappingContext(DefaultMappingContext, 0);
 	OwnCharacter = Cast<AFirstPersonCharacter>(GetPawn());
 
-	if (SpectatorClass == nullptr)
+	if (!SpectatorClass)
 	{
 		SpectatorClass = AFirstPersonSpectator::StaticClass();
 	}
@@ -136,7 +136,7 @@ void AFirstPersonController::PossessSpectator()
 
 void AFirstPersonController::UnPossessSpectator(bool bTeleport)
 {
-	if (Spectator == nullptr)
+	if (!Spectator)
 	{
 		return;
 	}

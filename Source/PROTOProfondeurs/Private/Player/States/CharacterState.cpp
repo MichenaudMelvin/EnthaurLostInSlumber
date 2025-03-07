@@ -3,15 +3,23 @@
 
 #include "Player/States/CharacterState.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/Camera/ViewBobbing.h"
 #include "Player/States/CharacterStateMachine.h"
 #include "Physics/TracePhysicsSettings.h"
+#include "Saves/SettingsSave.h"
+#include "Saves/SettingsSubsystem.h"
 
 void UCharacterState::StartCameraShake()
 {
-	if(ViewBobbing == nullptr)
+	if(!ViewBobbing)
+	{
+		return;
+	}
+
+	if (GetSettings() && !GetSettings()->bViewBobbing)
 	{
 		return;
 	}
@@ -21,7 +29,7 @@ void UCharacterState::StartCameraShake()
 
 void UCharacterState::StopCameraShake()
 {
-	if(ViewBobbing == nullptr)
+	if(!ViewBobbing)
 	{
 		return;
 	}
@@ -59,6 +67,23 @@ void UCharacterState::CheckGround()
 	}
 }
 
+USettingsSave* UCharacterState::GetSettings() const
+{
+	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(Character);
+	if (!GameInstance)
+	{
+		return nullptr;
+	}
+
+	USettingsSubsystem* SettingsSubsystem = GameInstance->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return nullptr;
+	}
+
+	return SettingsSubsystem->GetSettings();
+}
+
 void UCharacterState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysicalSurface>& NewSurface)
 {
 	const UTracePhysicsSettings* StateSettings = GetDefault<UTracePhysicsSettings>();
@@ -74,7 +99,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 	StateMachine = InStateMachine;
 
 #if WITH_EDITOR
-	if (StateMachine == nullptr)
+	if (!StateMachine)
 	{
 		const FString Message = FString::Printf(TEXT("StateMachine is null in state %s (StateID is %d)"), *GetClass()->GetName(), StateID);
 
@@ -87,7 +112,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 	Character = InStateMachine->GetCharacter();
 
 #if WITH_EDITOR
-	if (Character == nullptr)
+	if (!Character)
 	{
 		const FString Message = FString::Printf(TEXT("Character is null in state %s (StateID is %d)"), *GetClass()->GetName(), StateID);
 
@@ -98,7 +123,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 #endif
 
 	AController* TargetController = Character->GetController();
-	if (TargetController == nullptr)
+	if (!TargetController)
 	{
 		return;
 	}
@@ -106,7 +131,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 	Controller = Cast<AFirstPersonController>(TargetController);
 
 #if WITH_EDITOR
-	if (Controller == nullptr)
+	if (!Controller)
 	{
 		const FString Message = FString::Printf(TEXT("Controller is null in state %s (StateID is %d)"), *GetClass()->GetName(), StateID);
 
@@ -130,8 +155,17 @@ void UCharacterState::StateTick_Implementation(float DeltaTime)
 
 	if (bAllowCameraMovement)
 	{
-		Character->AddControllerYawInput(GetInputs().InputLook.X);
-		Character->AddControllerPitchInput(GetInputs().InputLook.Y);
+		const USettingsSave* Settings = GetSettings();
+		if (!Settings)
+		{
+			return;
+		}
+
+		float TargetYaw = GetInputs().InputLook.X * Settings->MouseSensitivity;
+		float TargetPitch = GetInputs().InputLook.Y * Settings->MouseSensitivity * (Settings->bInvertYAxis ? -1 : 1);
+
+		Character->AddControllerYawInput(TargetYaw);
+		Character->AddControllerPitchInput(TargetPitch);
 	}
 }
 

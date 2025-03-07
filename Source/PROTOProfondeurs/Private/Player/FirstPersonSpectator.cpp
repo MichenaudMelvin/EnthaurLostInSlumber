@@ -31,7 +31,7 @@ void AFirstPersonSpectator::Tick(float DeltaTime)
 
 	APlayerController* PlayerController = Cast<APlayerController>(Controller);
 
-	if (PlayerController == nullptr)
+	if (!PlayerController)
 	{
 		return;
 	}

@@ -39,13 +39,13 @@ void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (GetController() == nullptr)
+	if (!GetController())
 	{
 		return;
 	}
 
 	AFirstPersonController* CastedController = Cast<AFirstPersonController>(GetController());
-	if (CastedController == nullptr)
+	if (!CastedController)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("PlayerController of %s is %s but should be %s"), *GetClass()->GetName(), *GetController()->GetClass()->GetName(), *AFirstPersonController::StaticClass()->GetName());
@@ -77,7 +77,7 @@ void AFirstPersonCharacter::InitStateMachine()
 {
 	StateMachine = NewObject<UCharacterStateMachine>();
 
-	if (StateMachine == nullptr)
+	if (!StateMachine)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("Failed to create StateMachine"));
@@ -93,7 +93,7 @@ void AFirstPersonCharacter::InitStateMachine()
 
 void AFirstPersonCharacter::TickStateMachine(float DeltaTime)
 {
-	if (StateMachine == nullptr)
+	if (!StateMachine)
 	{
 		return;
 	}
@@ -116,7 +116,7 @@ void AFirstPersonCharacter::CreateStates()
 			continue;
 		}
 
-		if (State.Value == nullptr)
+		if (!State.Value)
 		{
 #if WITH_EDITOR
 			const FString Message = FString::Printf(TEXT("Cannot create state because stateClass is nullptr"));
@@ -128,7 +128,7 @@ void AFirstPersonCharacter::CreateStates()
 		}
 
 		UCharacterState* NewState = NewObject<UCharacterState>(this, State.Value);
-		if (NewState == nullptr)
+		if (!NewState)
 		{
 #if WITH_EDITOR
 			const FString Message = FString::Printf(TEXT("Failed to create state %d"), State.Key);
@@ -158,7 +158,7 @@ void AFirstPersonCharacter::InteractionTrace()
 {
 	const UTracePhysicsSettings* TraceSettings =  GetDefault<UTracePhysicsSettings>();
 
-	if (TraceSettings == nullptr)
+	if (!TraceSettings)
 	{
 		return;
 	}
@@ -170,7 +170,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	FCollisionQueryParams CollisionParams;
 	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, TraceSettings->InteractionTraceChannel, CollisionParams);
 
-	if (!bHit || HitResult.GetActor() == nullptr)
+	if (!bHit || !HitResult.GetActor())
 	{
 		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
@@ -178,7 +178,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	}
 
 	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UInteractableComponent::StaticClass());
-	if (FoundComp == nullptr)
+	if (!FoundComp)
 	{
 		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
@@ -186,7 +186,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	}
 
 	UInteractableComponent* TargetInteractable = Cast<UInteractableComponent>(FoundComp);
-	if (TargetInteractable == nullptr)
+	if (!TargetInteractable)
 	{
 		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
@@ -224,7 +224,7 @@ bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
 {
 	const UTracePhysicsSettings* TraceSettings =  GetDefault<UTracePhysicsSettings>();
 
-	if (TraceSettings == nullptr)
+	if (!TraceSettings)
 	{
 		return false;
 	}
@@ -252,7 +252,7 @@ void AFirstPersonCharacter::GroundMovement()
 		AboveActor(Hit.GetActor());
 	}
 
-	if (GetCharacterMovement()->IsFalling() && GroundActor != nullptr)
+	if (GetCharacterMovement()->IsFalling() && GroundActor)
 	{
 		GroundActor = nullptr;
 	}
@@ -260,7 +260,7 @@ void AFirstPersonCharacter::GroundMovement()
 
 void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 {
-	if (ActorBellow == nullptr || ActorBellow == GroundActor)
+	if (!ActorBellow || ActorBellow == GroundActor)
 	{
 		return;
 	}
