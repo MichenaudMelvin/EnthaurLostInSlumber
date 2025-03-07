@@ -26,7 +26,7 @@ void UCharacterCrouchState::StateInit(UCharacterStateMachine* InStateMachine)
 	DefaultCameraLocation = Character->GetCamera()->GetRelativeLocation();
 
 	UCharacterState* FoundState = StateMachine->FindState(ECharacterStateID::Walk);
-	if (FoundState == nullptr)
+	if (!FoundState)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("No walk state found"));
@@ -38,7 +38,7 @@ void UCharacterCrouchState::StateInit(UCharacterStateMachine* InStateMachine)
 	}
 
 	UCharacterMoveState* WalkState = Cast<UCharacterMoveState>(FoundState);
-	if (WalkState == nullptr)
+	if (!WalkState)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("WalkState should be %s instead of %s"), *UCharacterMoveState::StaticClass()->GetName(), *WalkState->GetClass()->GetName());

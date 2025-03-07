@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "CharacterState.generated.h"
 
+class USettingsSave;
 class UViewBobbing;
 struct FPlayerInputs;
 class AFirstPersonController;
@@ -77,6 +78,8 @@ protected:
 
 	UFUNCTION(BlueprintNativeEvent, Category = "Character|Ground")
 	void OnWalkOnNewSurface(const TEnumAsByte<EPhysicalSurface>& NewSurface);
+
+	USettingsSave* GetSettings() const;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Debug", meta = (ToolTip = "Enable debug features for the current state"))
