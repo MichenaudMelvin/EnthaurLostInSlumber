@@ -64,6 +64,11 @@ void ANerveReceptacle::TriggerLinkedObjects()
 
 	for (AActor* Actor : Actors)
 	{
+		if (!IsValid(Actor))
+		{
+			continue;
+		}
+		
 		if (Actor->Implements<UNerveReactive>())
 		{
 			if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
