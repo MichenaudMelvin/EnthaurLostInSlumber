@@ -15,6 +15,11 @@
 
 #pragma region States
 
+UCharacterState::UCharacterState()
+{
+	ViewBobbing = UViewBobbing::GetEmptyOscillator();
+}
+
 void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 {
 	StateMachine = InStateMachine;
@@ -63,10 +68,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 #endif
 }
 
-void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
-{
-	StartCameraShake();
-}
+void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID){}
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)
 {
@@ -76,14 +78,12 @@ void UCharacterState::StateTick_Implementation(float DeltaTime)
 	}
 
 	CameraMovement(DeltaTime);
-	UpdateCameraSteering(DeltaTime);
 	UpdateCameraFOV(DeltaTime);
+	UpdateViewBobbing(DeltaTime);
+	UpdateCameraSteering(DeltaTime);
 }
 
-void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID)
-{
-	StopCameraShake();
-}
+void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID){}
 
 #pragma endregion
 
@@ -133,26 +133,6 @@ void UCharacterState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysi
 
 #pragma region Camera
 
-void UCharacterState::StartCameraShake()
-{
-	if(!ViewBobbing || !GetSettings() || !GetSettings()->bViewBobbing)
-	{
-		return;
-	}
-
-	CurrentViewBobbing = Cast<UViewBobbing>(Controller->PlayerCameraManager->StartCameraShake(ViewBobbing, 1.0f, ECameraShakePlaySpace::World));
-}
-
-void UCharacterState::StopCameraShake()
-{
-	if(!ViewBobbing)
-	{
-		return;
-	}
-
-	Controller->ClientStopCameraShake(ViewBobbing);
-}
-
 void UCharacterState::CameraMovement(float DeltaTime)
 {
 	if (!bAllowCameraMovement)
@@ -178,6 +158,27 @@ void UCharacterState::UpdateCameraFOV(float DeltaTime)
 	float CurrentFOV = Character->GetCamera()->FieldOfView;
 	float FOV = FMath::Lerp(CurrentFOV, TargetFOV, DeltaTime);
 	Character->GetCamera()->SetFieldOfView(FOV);
+}
+
+void UCharacterState::UpdateViewBobbing(float DeltaTime)
+{
+	if (!Character->GetViewBobbingObject() || !GetSettings())
+	{
+		return;
+	}
+
+	const FWaveOscillator CurrentWaveOscillator = Character->GetViewBobbingObject()->GetOscillator();
+	const FWaveOscillator TargetWaveOscillator = GetSettings()->bViewBobbing ? ViewBobbing : UViewBobbing::GetEmptyOscillator();
+
+	float TargetAmplitude = FMath::Lerp(CurrentWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
+	float TargetFrequency = FMath::Lerp(CurrentWaveOscillator.Frequency, TargetWaveOscillator.Frequency, DeltaTime);
+
+	FWaveOscillator Oscillator;
+	Oscillator.Amplitude = TargetAmplitude;
+	Oscillator.Frequency = TargetFrequency;
+	Oscillator.InitialOffsetType = ViewBobbing.InitialOffsetType;
+
+	Character->GetViewBobbingObject()->SetOscillator(Oscillator);
 }
 
 void UCharacterState::UpdateCameraSteering(float DeltaTime)
