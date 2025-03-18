@@ -24,14 +24,14 @@ protected:
 	 * @brief The save index; this is different from the user index and allow to create multiple saves with a same name
 	 */
 	UPROPERTY(BlueprintReadOnly, Category = "Save")
-	int SaveIndex{0};
+	uint8 SaveIndex = 0;
 
 public:
 	inline FString GetSlotName() const {return SlotName;}
 
-	inline void SetSaveIndex(const int NewSaveIndex) {SaveIndex = NewSaveIndex;}
+	inline void SetSaveIndex(const uint8 NewSaveIndex) {SaveIndex = NewSaveIndex;}
 
-	inline int GetSaveIndex() const {return SaveIndex;}
+	inline uint8 GetSaveIndex() const {return SaveIndex;}
 
 #if WITH_EDITOR
 	virtual void PrintVariables() const;

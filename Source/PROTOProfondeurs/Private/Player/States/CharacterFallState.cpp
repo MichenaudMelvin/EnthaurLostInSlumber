@@ -31,6 +31,7 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
 	Character->GetCharacterMovement()->AirControl = AirControl;
+	Character->GetCharacterMovement()->BrakingDecelerationFalling = FallingDeceleration;
 }
 
 void UCharacterFallState::StateTick_Implementation(float DeltaTime)

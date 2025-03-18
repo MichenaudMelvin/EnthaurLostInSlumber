@@ -32,6 +32,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Movement|Jump", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f))
 	float AirControl = 1.0f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Movement|Jump", meta = (ClampMin = 0.0f))
+	float FallingDeceleration = 100.0f;
+
 private:
 	float JumpVelocity = 0.0f;
 
