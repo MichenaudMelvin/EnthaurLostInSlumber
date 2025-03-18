@@ -18,6 +18,8 @@ public class PRFUI : ModuleRules
             {
                 "CoreUObject",
                 "Engine",
+                "ModelViewViewModel",
+                "ModelViewViewModelBlueprint",
                 "Slate",
                 "SlateCore",
                 "UMG"

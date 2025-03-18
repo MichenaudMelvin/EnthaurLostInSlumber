@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MVVMViewModelBase.h"
 #include "TestModel.h"
 #include "UObject/Object.h"
 #include "TestViewModel.generated.h"
@@ -10,30 +11,27 @@
 /**
  * 
  */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCounterUpdated);
-
-UCLASS(Blueprintable)
-class PRFUI_API UTestViewModel : public UObject
+UCLASS()
+class PRFUI_API UTestViewModel : public UMVVMViewModelBase
 {
 	GENERATED_BODY()
 
-private:
-	int32 Counter = 0;
-
 public:
-	UPROPERTY(BlueprintAssignable)
-	FOnCounterUpdated OnCounterUpdated;
 
-	UFUNCTION(BlueprintCallable)
-	void IncreaseCounter()
-	{
-		Counter++;
-		OnCounterUpdated.Broadcast();
-	}
+	void Initialize(UTestModel* InModel);
+	virtual void BeginDestroy() override;
 
 	UFUNCTION(BlueprintPure)
-	FText GetCounterText() const
-	{
-		return FText::FromString(FString::Printf(TEXT("%d"), Counter));
-	}
+	int32 GetCounter() const;
+
+protected:
+	UPROPERTY(BlueprintReadOnly, FieldNotify, Getter)
+	int32 Counter = 1;
+
+private:
+	UPROPERTY()
+	TObjectPtr<UTestModel> Model;
+
+	UFUNCTION()
+	void OnModelCounterChanged(const int32 InValue);
 };
