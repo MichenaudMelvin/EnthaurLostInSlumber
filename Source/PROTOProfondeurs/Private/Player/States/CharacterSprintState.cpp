@@ -12,6 +12,8 @@ UCharacterSprintState::UCharacterSprintState()
 {
 	StateID = ECharacterStateID::Sprint;
 	MoveSpeed = 1200.0f;
+	MaxSteering = 5.0f;
+	SteeringSpeed = 2.0f;
 }
 
 void UCharacterSprintState::StateTick_Implementation(float DeltaTime)

@@ -2,6 +2,7 @@
 
 
 #include "Player/States/CharacterState.h"
+#include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
@@ -12,91 +13,17 @@
 #include "Saves/SettingsSave.h"
 #include "Saves/SettingsSubsystem.h"
 
-void UCharacterState::StartCameraShake()
+#pragma region States
+
+UCharacterState::UCharacterState()
 {
-	if(!ViewBobbing)
-	{
-		return;
-	}
-
-	if (GetSettings() && !GetSettings()->bViewBobbing)
-	{
-		return;
-	}
-
-	CurrentViewBobbing = Cast<UViewBobbing>(Controller->PlayerCameraManager->StartCameraShake(ViewBobbing, 1.0f, ECameraShakePlaySpace::World));
-}
-
-void UCharacterState::StopCameraShake()
-{
-	if(!ViewBobbing)
-	{
-		return;
-	}
-
-	Controller->ClientStopCameraShake(ViewBobbing);
-}
-
-const FPlayerInputs& UCharacterState::GetInputs() const
-{
-	return Controller->GetPlayerInputs();
-}
-
-bool UCharacterState::IsFalling() const
-{
-	return Character->GetCharacterMovement()->IsFalling();
-}
-
-void UCharacterState::CheckGround()
-{
-	FHitResult HitResult;
-	if (!Character->GroundTrace(HitResult))
-	{
-		return;
-	}
-
-	if (HitResult.PhysMaterial == nullptr)
-	{
-		return;
-	}
-
-	if (HitResult.PhysMaterial->SurfaceType != CurrentSurface)
-	{
-		CurrentSurface = HitResult.PhysMaterial->SurfaceType;
-		OnWalkOnNewSurface(CurrentSurface);
-	}
-}
-
-USettingsSave* UCharacterState::GetSettings() const
-{
-	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(Character);
-	if (!GameInstance)
-	{
-		return nullptr;
-	}
-
-	USettingsSubsystem* SettingsSubsystem = GameInstance->GetSubsystem<USettingsSubsystem>();
-	if (!SettingsSubsystem)
-	{
-		return nullptr;
-	}
-
-	return SettingsSubsystem->GetSettings();
-}
-
-void UCharacterState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysicalSurface>& NewSurface)
-{
-	const UTracePhysicsSettings* StateSettings = GetDefault<UTracePhysicsSettings>();
-
-	if (NewSurface == StateSettings->SlipperySurface)
-	{
-		StateMachine->ChangeState(ECharacterStateID::Slide);
-	}
+	ViewBobbing = UViewBobbing::GetEmptyOscillator();
 }
 
 void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 {
 	StateMachine = InStateMachine;
+	TargetSteering = MaxSteering;
 
 #if WITH_EDITOR
 	if (!StateMachine)
@@ -141,10 +68,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 #endif
 }
 
-void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
-{
-	StartCameraShake();
-}
+void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID){}
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)
 {
@@ -153,23 +77,152 @@ void UCharacterState::StateTick_Implementation(float DeltaTime)
 		CheckGround();
 	}
 
-	if (bAllowCameraMovement)
+	CameraMovement(DeltaTime);
+	UpdateCameraFOV(DeltaTime);
+	UpdateViewBobbing(DeltaTime);
+	UpdateCameraSteering(DeltaTime);
+}
+
+void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID){}
+
+#pragma endregion
+
+#pragma region Character
+
+const FPlayerInputs& UCharacterState::GetInputs() const
+{
+	return Controller->GetPlayerInputs();
+}
+
+bool UCharacterState::IsFalling() const
+{
+	return Character->GetCharacterMovement()->IsFalling();
+}
+
+void UCharacterState::CheckGround()
+{
+	FHitResult HitResult;
+	if (!Character->GroundTrace(HitResult))
 	{
-		const USettingsSave* Settings = GetSettings();
-		if (!Settings)
-		{
-			return;
-		}
+		return;
+	}
 
-		float TargetYaw = GetInputs().InputLook.X * Settings->MouseSensitivity;
-		float TargetPitch = GetInputs().InputLook.Y * Settings->MouseSensitivity * (Settings->bInvertYAxis ? -1 : 1);
+	if (HitResult.PhysMaterial == nullptr)
+	{
+		return;
+	}
 
-		Character->AddControllerYawInput(TargetYaw);
-		Character->AddControllerPitchInput(TargetPitch);
+	if (HitResult.PhysMaterial->SurfaceType != CurrentSurface)
+	{
+		CurrentSurface = HitResult.PhysMaterial->SurfaceType;
+		OnWalkOnNewSurface(CurrentSurface);
 	}
 }
 
-void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID)
+void UCharacterState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysicalSurface>& NewSurface)
 {
-	StopCameraShake();
+	const UTracePhysicsSettings* StateSettings = GetDefault<UTracePhysicsSettings>();
+
+	if (NewSurface == StateSettings->SlipperySurface)
+	{
+		StateMachine->ChangeState(ECharacterStateID::Slide);
+	}
+}
+
+#pragma endregion
+
+#pragma region Camera
+
+void UCharacterState::CameraMovement(float DeltaTime)
+{
+	if (!bAllowCameraMovement)
+	{
+		return;
+	}
+
+	const USettingsSave* Settings = GetSettings();
+	if (!Settings)
+	{
+		return;
+	}
+
+	float TargetYaw = GetInputs().InputLook.X * Settings->MouseSensitivity;
+	float TargetPitch = GetInputs().InputLook.Y * Settings->MouseSensitivity * (Settings->bInvertYAxis ? -1 : 1);
+
+	Character->AddControllerYawInput(TargetYaw);
+	Character->AddControllerPitchInput(TargetPitch);
+}
+
+void UCharacterState::UpdateCameraFOV(float DeltaTime)
+{
+	float CurrentFOV = Character->GetCamera()->FieldOfView;
+	float FOV = FMath::Lerp(CurrentFOV, TargetFOV, DeltaTime);
+	Character->GetCamera()->SetFieldOfView(FOV);
+}
+
+void UCharacterState::UpdateViewBobbing(float DeltaTime)
+{
+	if (!Character->GetViewBobbingObject() || !GetSettings())
+	{
+		return;
+	}
+
+	const FWaveOscillator CurrentWaveOscillator = Character->GetViewBobbingObject()->GetOscillator();
+	const FWaveOscillator TargetWaveOscillator = GetSettings()->bViewBobbing ? ViewBobbing : UViewBobbing::GetEmptyOscillator();
+
+	float TargetAmplitude = FMath::Lerp(CurrentWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
+	float TargetFrequency = FMath::Lerp(CurrentWaveOscillator.Frequency, TargetWaveOscillator.Frequency, DeltaTime);
+
+	FWaveOscillator Oscillator;
+	Oscillator.Amplitude = TargetAmplitude;
+	Oscillator.Frequency = TargetFrequency;
+	Oscillator.InitialOffsetType = ViewBobbing.InitialOffsetType;
+
+	Character->GetViewBobbingObject()->SetOscillator(Oscillator);
+}
+
+void UCharacterState::UpdateCameraSteering(float DeltaTime)
+{
+	FRotator TargetRotation = Controller->GetControlRotation();
+
+	if (!GetSettings() || !GetSettings()->bCameraSteering)
+	{
+		TargetRotation.Roll = 0;
+		Controller->SetControlRotation(TargetRotation);
+		return;
+	}
+
+	float CurrentRoll = TargetRotation.Roll;
+	while (CurrentRoll > 180.0f)
+	{
+		CurrentRoll -= 360.0f;
+	}
+
+	while(CurrentRoll < -180.0f)
+	{
+		CurrentRoll += 360.0f;
+	}
+
+	float LerpRoll = FMath::Lerp(CurrentRoll, TargetSteering, DeltaTime * SteeringSpeed);
+	TargetRotation.Roll = LerpRoll;
+	Controller->SetControlRotation(TargetRotation);
+}
+
+#pragma endregion
+
+USettingsSave* UCharacterState::GetSettings() const
+{
+	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(Character);
+	if (!GameInstance)
+	{
+		return nullptr;
+	}
+
+	USettingsSubsystem* SettingsSubsystem = GameInstance->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return nullptr;
+	}
+
+	return SettingsSubsystem->GetSettings();
 }

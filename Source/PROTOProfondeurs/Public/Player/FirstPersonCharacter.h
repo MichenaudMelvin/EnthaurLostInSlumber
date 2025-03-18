@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UViewBobbing;
 class AFirstPersonController;
 class UInteractableComponent;
 class UCharacterStateMachine;
@@ -45,6 +46,17 @@ public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
 
 	USkeletalMeshComponent* GetCharacterMesh() const {return CharacterMesh;}
+
+#pragma endregion
+
+#pragma region Camera
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Camera")
+	TObjectPtr<UViewBobbing> ViewBobbing;
+
+public:
+	UViewBobbing* GetViewBobbingObject() const {return ViewBobbing;}
 
 #pragma endregion
 
