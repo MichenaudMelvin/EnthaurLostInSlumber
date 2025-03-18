@@ -210,6 +210,20 @@ void UCharacterState::UpdateCameraSteering(float DeltaTime)
 
 #pragma endregion
 
+#pragma region Noise
+
+void UCharacterState::EmitNoise() const
+{
+	if (!bDoesMakeNoise)
+	{
+		return;
+	}
+
+	Character->MakeNoise(Loudness, Character, Character->GetActorLocation(), NoiseRange, NoiseTag);
+}
+
+#pragma endregion
+
 USettingsSave* UCharacterState::GetSettings() const
 {
 	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(Character);

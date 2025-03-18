@@ -12,9 +12,10 @@
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "KismetTraceUtils.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
+#include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Hearing.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -34,6 +35,10 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	CharacterMesh->bCastDynamicShadow = false;
 	CharacterMesh->CastShadow = false;
 	CharacterMesh->SetRelativeLocation(FVector(-30.0f, 0.0f, -150.0f));
+
+	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
+	HearingStimuli->bAutoRegister = true;
+	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
 }
 
 void AFirstPersonCharacter::BeginPlay()
