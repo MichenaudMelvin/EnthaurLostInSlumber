@@ -20,11 +20,20 @@ public class PRFUI : ModuleRules
                 "DeveloperSettings",
                 "Engine",
                 "ModelViewViewModel",
-                "ModelViewViewModelBlueprint",
                 "Slate",
                 "SlateCore",
                 "UMG"
             }
         );
+
+        if (Target.bBuildEditor)
+        {
+            PrivateDependencyModuleNames.AddRange(
+                new string[]
+                {
+                    "ModelViewViewModelBlueprint",
+                }
+            );
+        }
     }
 }

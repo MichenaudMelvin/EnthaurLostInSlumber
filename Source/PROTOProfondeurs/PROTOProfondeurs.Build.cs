@@ -7,7 +7,7 @@ public class PROTOProfondeurs : ModuleRules
 	public PROTOProfondeurs(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
+
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"CableComponent",
@@ -28,8 +28,17 @@ public class PROTOProfondeurs : ModuleRules
 		{
 			"PRFUI",
 			"ModelViewViewModel",
-			"ModelViewViewModelBlueprint"
 		});
+
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.AddRange(
+				new string[]
+				{
+					"ModelViewViewModelBlueprint",
+				}
+			);
+		}
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
