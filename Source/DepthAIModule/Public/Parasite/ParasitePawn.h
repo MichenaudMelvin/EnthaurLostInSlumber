@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "ParasitePawn.generated.h"
 
+class AAIPath;
 class UBoxComponent;
 class UAIPerceptionComponent;
 class UFloatingPawnMovement;
@@ -29,4 +30,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> ParasiteMesh;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	TObjectPtr<AAIPath> TargetPath;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName PathKeyName = "AIPath";
 };

@@ -22,4 +22,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName SpawnLocationKeyName = "SpawnLocation";
+
+public:
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Navigation")
+	bool IsPointReachable(const FVector Point) const;
 };

@@ -2,6 +2,9 @@
 
 
 #include "DefaultAIController.h"
+
+#include "NavigationPath.h"
+#include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 ADefaultAIController::ADefaultAIController()
@@ -22,5 +25,18 @@ void ADefaultAIController::BeginPlay()
 	{
 		GetBlackboardComponent()->SetValueAsVector(SpawnLocationKeyName, GetPawn()->GetActorLocation());
 	}
+}
+
+bool ADefaultAIController::IsPointReachable(const FVector Point) const
+{
+	FVector PathStart = GetPawn()->GetActorLocation();
+	UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(GetPawn(), PathStart, Point, NULL);
+
+	if (!NavPath)
+	{
+		return false;
+	}
+
+	return !NavPath->IsPartial();
 }
 
