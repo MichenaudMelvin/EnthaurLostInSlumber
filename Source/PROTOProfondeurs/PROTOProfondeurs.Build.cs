@@ -20,7 +20,8 @@ public class PROTOProfondeurs : ModuleRules
 			"FCTween",
 			"InputCore",
 			"PhysicsCore",
-			"UMG"
+			"UMG",
+			"AIModule"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]

@@ -51,7 +51,7 @@ protected:
 	FName ZoneExtentParamName = "ZoneExtent";
 
 	UPROPERTY(BlueprintReadOnly, Category = "Materials")
-	TArray<UMaterialInstanceDynamic*> AllMaterialInstances;
+	TArray<TObjectPtr<UMaterialInstanceDynamic>> AllMaterialInstances;
 
 	bool bIsZoneActive = true;
 
@@ -62,7 +62,7 @@ protected:
 	TObjectPtr<UStaticMesh> InteractionMesh;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interactable")
-	TArray<UStaticMeshComponent*> InteractionPoints;
+	TArray<TObjectPtr<UStaticMeshComponent>> InteractionPoints;
 
 	UPROPERTY(EditInstanceOnly, Category = "Interactable", meta = (DisplayName = "InteractionPoints", MakeEditWidget))
 	TArray<FTransform> InteractionTransformPoints;
