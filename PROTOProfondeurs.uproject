@@ -34,6 +34,14 @@
 		{
 			"Name": "ModelViewViewModelPreview",
 			"Enabled": true
+		},
+		{
+			"Name": "PCGGeometryScriptInterop",
+			"Enabled": true
+		},
+		{
+			"Name": "PCGExternalDataInterop",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
