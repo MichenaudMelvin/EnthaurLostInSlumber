@@ -68,5 +68,8 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 		return;
 	}
 
+	// emit noise on landing
+	EmitNoise();
+
 	StateMachine->ChangeState(ECharacterStateID::Idle);
 }

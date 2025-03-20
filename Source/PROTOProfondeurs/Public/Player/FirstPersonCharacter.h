@@ -11,6 +11,7 @@ class UViewBobbing;
 class AFirstPersonController;
 class UInteractableComponent;
 class UCharacterStateMachine;
+class UAIPerceptionStimuliSourceComponent;
 class UCharacterState;
 enum class ECharacterStateID : uint8;
 class UCameraComponent;
@@ -42,6 +43,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Controller")
 	TObjectPtr<AFirstPersonController> FirstPersonController;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Stimuli")
+	TObjectPtr<UAIPerceptionStimuliSourceComponent> HearingStimuli;
+
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
 
@@ -70,7 +74,7 @@ protected:
 	TMap<ECharacterStateID, TSubclassOf<UCharacterState>> CharacterStates;
 
 	UPROPERTY(BlueprintReadOnly, VisibleInstanceOnly, Category = "CharacterStateMachine")
-	TArray<UCharacterState*> States;
+	TArray<TObjectPtr<UCharacterState>> States;
 
 	void InitStateMachine();
 
@@ -93,7 +97,7 @@ public:
 #endif
 
 public:
-	const TArray<UCharacterState*>& GetStates() const {return States;}
+	const TArray<TObjectPtr<UCharacterState>>& GetStates() const {return States;}
 
 #pragma endregion
 
@@ -164,7 +168,7 @@ public:
 	/**
 	 * @brief 
 	 * @param TopLocation true will return the top location of the player, false will return the bottom location
-	 * @return 
+	 * @return The return location
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetPlayerLocation(bool TopLocation) const;
