@@ -75,9 +75,13 @@ class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UUserWidget> InGameWidgetClass;
-
 	UPROPERTY()
 	TObjectPtr<UInGameUI> CurrentInGameUI;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> DeathWidgetClass;
+	UPROPERTY()
+	TObjectPtr<class UDeathMenuUI> CurrentDeathUI;
 
 protected:
 	virtual void BeginPlay() override;
@@ -103,6 +107,7 @@ protected:
 
 public:
 	UInGameUI* GetCurrentInGameUI() { return CurrentInGameUI; }
+	
 
 #pragma region Inputs
 
@@ -172,4 +177,14 @@ private:
 #endif
 
 #pragma endregion
+
+#pragma region Respawn
+	
+	UFUNCTION(BlueprintCallable)
+	void KillPlayer();
+	
+	UFUNCTION(BlueprintCallable)
+	void RespawnPlayer(FVector RespawnPosition);
+	
+#pragma endregion 
 };

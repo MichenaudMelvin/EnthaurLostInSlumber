@@ -13,6 +13,9 @@
 #include "Player/States/CharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "KismetTraceUtils.h"
+#include "GameFramework/GameStateBase.h"
+#include "Kevin/UI/DeathMenuUI.h"
+#include "Kismet/GameplayStatics.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
 
