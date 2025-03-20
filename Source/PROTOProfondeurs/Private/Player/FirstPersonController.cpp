@@ -5,6 +5,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Blueprint/UserWidget.h"
+#include "Kevin/UI/DeathMenuUI.h"
 #include "Kevin/UI/InGameUI.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonSpectator.h"
@@ -242,3 +243,17 @@ void AFirstPersonController::DisplayInputs(bool bDisplay)
 #endif
 
 #pragma endregion
+
+void AFirstPersonController::KillPlayer()
+{
+	SetPause(true);
+	CurrentDeathUI = CreateWidget<UDeathMenuUI>(this, DeathWidgetClass);
+	if (CurrentDeathUI)
+	{
+		CurrentDeathUI->AddToViewport();
+	}
+}
+
+void AFirstPersonController::RespawnPlayer(FVector RespawnPosition)
+{
+}
