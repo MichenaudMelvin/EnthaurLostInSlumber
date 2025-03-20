@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UTestViewModel;
 class UViewBobbing;
 class AFirstPersonController;
 class UInteractableComponent;
@@ -175,4 +176,7 @@ public:
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
 
 	void SetInteractionUI(bool bState) const;
+
+protected:
+	TObjectPtr<UTestViewModel> ViewModel;
 };

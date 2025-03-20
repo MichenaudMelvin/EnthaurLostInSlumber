@@ -62,6 +62,9 @@ struct FPlayerInputs
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	bool bInputTakeAmber = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	bool bInputPauseGame = false;
+
 #if !UE_BUILD_SHIPPING
 	void DisplayInputsOnScreen(float DisplayTime = 0.0f, const FColor& DebugColor = FColor::Cyan) const;
 #endif
@@ -133,6 +136,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FAction TakeAmberAction;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
+	FAction PauseGameAction;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	FPlayerInputs PlayerInputs;
 
@@ -157,6 +163,9 @@ protected:
 	UFUNCTION()
 	void OnInputTakeAmber(const FInputActionValue& InputActionValue);
 
+	UFUNCTION()
+	void OnInputPauseGame(const FInputActionValue& InputActionValue);
+
 public:
 	const FPlayerInputs& GetPlayerInputs() const {return PlayerInputs;}
 
@@ -170,6 +179,13 @@ private:
 	UFUNCTION(Exec)
 	void DisplayInputs(bool bDisplay);
 #endif
+
+#pragma endregion
+
+#pragma region UI Menus
+	
+private:
+	bool bIsInMenus = false;
 
 #pragma endregion
 };

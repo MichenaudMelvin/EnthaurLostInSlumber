@@ -28,7 +28,7 @@ void UTestView::NativeConstruct()
 	}
 
 	// Listen for ViewModel's property changes (via delegates or polling)
-	ViewModel->OnModelCounterChanged.AddDynamic(this, &UTestView::UpdateCounterText);
+	//ViewModel->OnModelCounterChanged.AddDynamic(this, &UTestView::UpdateCounterText);
 }
 
 void UTestView::OnIncreaseKeyClicked()

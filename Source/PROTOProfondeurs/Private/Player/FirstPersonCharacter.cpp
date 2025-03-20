@@ -15,6 +15,7 @@
 #include "KismetTraceUtils.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
+#include "PRFUI/Public/TestMVVM/TestViewModel.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -87,6 +88,9 @@ void AFirstPersonCharacter::BeginPlay()
 
 	CreateStates();
 	InitStateMachine();
+
+	ViewModel = NewObject<UTestViewModel>();
+	ensure(ViewModel);
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)

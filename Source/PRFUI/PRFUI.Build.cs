@@ -17,6 +17,7 @@ public class PRFUI : ModuleRules
             new string[]
             {
                 "CoreUObject",
+                "DeveloperSettings",
                 "Engine",
                 "ModelViewViewModel",
                 "ModelViewViewModelBlueprint",
