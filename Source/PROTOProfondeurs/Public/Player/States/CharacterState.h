@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Shakes/WaveOscillatorCameraShakePattern.h"
 #include "UObject/Object.h"
 #include "CharacterState.generated.h"
 
@@ -37,13 +38,15 @@ class PROTOPROFONDEURS_API UCharacterState : public UObject
 	GENERATED_BODY()
 
 #pragma region States
+public:
+	UCharacterState();
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "CharacterStateMachine")
 	TObjectPtr<UCharacterStateMachine> StateMachine;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterStateMachine")
-	ECharacterStateID StateID;
+	ECharacterStateID StateID = ECharacterStateID::None;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Debug", meta = (ToolTip = "Enable debug features for the current state"))
@@ -88,7 +91,7 @@ protected:
 	void CheckGround();
 
 	UPROPERTY(BlueprintReadOnly, Category = "Character|Ground")
-	TEnumAsByte<EPhysicalSurface> CurrentSurface;
+	TEnumAsByte<EPhysicalSurface> CurrentSurface = SurfaceType1;
 
 	UFUNCTION(BlueprintNativeEvent, Category = "Character|Ground")
 	void OnWalkOnNewSurface(const TEnumAsByte<EPhysicalSurface>& NewSurface);
@@ -102,16 +105,7 @@ protected:
 	bool bAllowCameraMovement = true;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
-	TSubclassOf<UViewBobbing> ViewBobbing;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Camera")
-	TObjectPtr<UViewBobbing> CurrentViewBobbing;
-
-	UFUNCTION(BlueprintCallable, Category = "Camera")
-	void StartCameraShake();
-
-	UFUNCTION(BlueprintCallable, Category = "Camera")
-	void StopCameraShake();
+	FWaveOscillator ViewBobbing;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Camera", DisplayName = "FOV", meta = (ClampMin = 5.0f, ClampMax = 170.0f, UIMin = 5.0f, UIMax = 170.0f))
 	float TargetFOV = 90.0f;
@@ -127,6 +121,7 @@ private:
 
 	void UpdateCameraFOV(float DeltaTime);
 
+	void UpdateViewBobbing(float DeltaTime);
 
 protected:
 	float TargetSteering = 0.0f;
