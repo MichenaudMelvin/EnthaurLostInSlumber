@@ -12,8 +12,8 @@
 	{
 		"MajorVersion": 5,
 		"MinorVersion": 5,
-		"PatchVersion": 4,
-		"Changelist": 40574608,
+		"PatchVersion": 3,
+		"Changelist": 39772772,
 		"CompatibleChangelist": 37670630,
 		"IsLicenseeVersion": 0,
 		"IsPromotedBuild": 0,
@@ -6899,6 +6899,38 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystem/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGExternalDataInterop/Binaries/Win64/UnrealEditor-PCGExternalDataInterop.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGExternalDataInterop/Binaries/Win64/UnrealEditor-PCGExternalDataInterop.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGExternalDataInterop/Binaries/Win64/UnrealEditor-PCGExternalDataInteropEditor.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGExternalDataInterop/Binaries/Win64/UnrealEditor-PCGExternalDataInteropEditor.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGExternalDataInterop/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGGeometryScriptInterop/Binaries/Win64/UnrealEditor-PCGGeometryScriptInterop.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGGeometryScriptInterop/Binaries/Win64/UnrealEditor-PCGGeometryScriptInterop.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGGeometryScriptInterop/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
 		{
@@ -33548,6 +33580,14 @@
 			"Type": "UFS"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGExternalDataInterop/PCGExternalDataInterop.uplugin",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/PCGInterops/PCGGeometryScriptInterop/PCGGeometryScriptInterop.uplugin",
+			"Type": "UFS"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/PCG/PCG.uplugin",
 			"Type": "UFS"
 		},
@@ -33901,6 +33941,8 @@
 		"OnlineSubsystemUtils",
 		"OodleNetwork",
 		"PCG",
+		"PCGExternalDataInterop",
+		"PCGGeometryScriptInterop",
 		"Paper2D",
 		"PerforceSourceControl",
 		"PixWinPlugin",
