@@ -50,6 +50,8 @@ void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	SetRespawnPosition(this->GetActorLocation());
+	
 	if (!GetController())
 	{
 		return;

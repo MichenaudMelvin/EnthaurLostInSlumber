@@ -177,10 +177,16 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
+	FVector GetRespawnPosition() const { return RespawnPosition; }
+	void SetRespawnPosition(const FVector& Position) { RespawnPosition = Position; }
+
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
 
 	void SetInteractionUI(bool bState) const;
 
 protected:
 	TObjectPtr<UTestViewModel> ViewModel;
+
+private:
+	FVector RespawnPosition;
 };
