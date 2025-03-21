@@ -13,6 +13,7 @@
 UCharacterMoveState::UCharacterMoveState()
 {
 	bCheckGround = true;
+	bDoesMakeNoise = true;
 }
 
 void UCharacterMoveState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
@@ -26,6 +27,8 @@ void UCharacterMoveState::StateEnter_Implementation(const ECharacterStateID& Pre
 void UCharacterMoveState::StateTick_Implementation(float DeltaTime)
 {
 	Super::StateTick_Implementation(DeltaTime);
+
+	EmitNoise();
 
 	Character->AddMovementInput(Character->GetActorForwardVector(), GetInputs().InputMove.Y);
 	Character->AddMovementInput(Character->GetActorRightVector(), GetInputs().InputMove.X);

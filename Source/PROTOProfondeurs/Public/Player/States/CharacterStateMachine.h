@@ -19,7 +19,8 @@ protected:
 	UPROPERTY()
 	TObjectPtr<AFirstPersonCharacter> Character;
 
-	TArray<UCharacterState*> StateList;
+	UPROPERTY()
+	TArray<TObjectPtr<UCharacterState>> StateList;
 
 	UPROPERTY(BlueprintReadOnly, Category = "CharacterStateMachine")
 	ECharacterStateID CurrentStateID;

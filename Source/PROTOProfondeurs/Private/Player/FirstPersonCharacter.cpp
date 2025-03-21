@@ -13,8 +13,14 @@
 #include "Player/States/CharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "KismetTraceUtils.h"
+#include "GameFramework/GameStateBase.h"
+#include "Kevin/UI/DeathMenuUI.h"
+#include "Kismet/GameplayStatics.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
+#include "PRFUI/Public/TestMVVM/TestViewModel.h"
+#include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Hearing.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -34,12 +40,18 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	CharacterMesh->bCastDynamicShadow = false;
 	CharacterMesh->CastShadow = false;
 	CharacterMesh->SetRelativeLocation(FVector(-30.0f, 0.0f, -150.0f));
+
+	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
+	HearingStimuli->bAutoRegister = true;
+	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
 }
 
 void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	SetRespawnPosition(this->GetActorLocation());
+	
 	if (!GetController())
 	{
 		return;
@@ -87,6 +99,9 @@ void AFirstPersonCharacter::BeginPlay()
 
 	CreateStates();
 	InitStateMachine();
+
+	ViewModel = NewObject<UTestViewModel>();
+	ensure(ViewModel);
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)

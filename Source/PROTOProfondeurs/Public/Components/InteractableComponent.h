@@ -23,7 +23,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Interactable")
 	inline bool CheckComponent(const UPrimitiveComponent* ComponentToCheck) const
 	{
-		if (ComponentToCheck == nullptr)
+		if (!ComponentToCheck)
 		{
 			return false;
 		}

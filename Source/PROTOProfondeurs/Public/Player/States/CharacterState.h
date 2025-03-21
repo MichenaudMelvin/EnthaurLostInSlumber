@@ -130,6 +130,25 @@ protected:
 
 #pragma endregion
 
+#pragma region Noise
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise")
+	bool bDoesMakeNoise = false;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise", meta = (EditCondition = bDoesMakeNoise, ClampMin = 0.0f, Units = "cm"))
+	float NoiseRange = 500.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f, EditCondition = bDoesMakeNoise))
+	float Loudness = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise", meta = (EditCondition = bDoesMakeNoise))
+	FName NoiseTag;
+
+	void EmitNoise() const;
+
+#pragma endregion
+
 protected:
 	USettingsSave* GetSettings() const;
 };
