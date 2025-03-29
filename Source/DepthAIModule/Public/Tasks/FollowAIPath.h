@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
+#include "Components/TimelineComponent.h"
 #include "FollowAIPath.generated.h"
 
 UCLASS()
@@ -27,6 +28,9 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector PathIndex;
 
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	FBlackboardKeySelector WalkOnFloor;
+
 	UPROPERTY(EditInstanceOnly, Category = "Path", meta = (ClampMin = 0.0f, Units = "cm"))
 	float Tolerance = 0.1f;
 
@@ -36,7 +40,10 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	bool bRotateWithMovement = true;
 
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	TObjectPtr<UCurveFloat> MovementCurve;
+
 	FVector TargetLocation;
 
-	bool bUseNavMesh;
+	FTimeline MovementTimeline;
 };

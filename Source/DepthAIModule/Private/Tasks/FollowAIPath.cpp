@@ -1,10 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "FollowAIPath.h"
+#include "Tasks/FollowAIPath.h"
 #include "AIController.h"
 #include "DefaultAIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
@@ -18,6 +19,12 @@ UFollowAIPath::UFollowAIPath()
 
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, AIPath), AAIPath::StaticClass());
 	PathIndex.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, PathIndex));
+	WalkOnFloor.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, WalkOnFloor));
+
+	// static ConstructorHelpers::FObjectFinder<UCurveFloat> Curve(TEXT("/Engine/Niagara/DefaultAssets/Curves/Templates/LinearRampUp"));
+	// check(Curve.Succeeded());
+	//
+	// MovementCurve = Curve.Object;
 }
 
 void UFollowAIPath::InitializeFromAsset(UBehaviorTree& Asset)
@@ -29,6 +36,7 @@ void UFollowAIPath::InitializeFromAsset(UBehaviorTree& Asset)
 	{
 		AIPath.ResolveSelectedKey(*BBAsset);
 		PathIndex.ResolveSelectedKey(*BBAsset);
+		WalkOnFloor.ResolveSelectedKey(*BBAsset);
 	}
 }
 
@@ -63,9 +71,11 @@ EBTNodeResult::Type UFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
 	TargetLocation = Path->GetPointLocation(Index);
 
-	bUseNavMesh = Controller->IsPointReachable(TargetLocation);
+	bool bWalkOnFloor = BlackboardComponent->GetValue<UBlackboardKeyType_Bool>(WalkOnFloor.GetSelectedKeyID());
 
-	if (bUseNavMesh)
+	// bWalkOnFloor = Controller->IsPointReachable(TargetLocation);
+
+	if (bWalkOnFloor)
 	{
 		UAIBlueprintHelperLibrary::SimpleMoveToLocation(OwnerComp.GetAIOwner(), TargetLocation);
 	}
@@ -85,20 +95,31 @@ void UFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemor
 		return;
 	}
 
-	if (!bUseNavMesh)
+	UBlackboardComponent* BlackboardComponent = OwnerComp.GetBlackboardComponent();
+	if (!BlackboardComponent)
 	{
-		FVector LerpResult = UKismetMathLibrary::VLerp(Pawn->GetActorLocation(), TargetLocation, DeltaSeconds * LerpSpeed);
-		Pawn->SetActorLocation(LerpResult);
+		FinishLatentTask(OwnerComp, EBTNodeResult::Failed);
+		return;
+	}
+
+	bool bWalkOnFloor = BlackboardComponent->GetValue<UBlackboardKeyType_Bool>(WalkOnFloor.GetSelectedKeyID());
+
+	if (!bWalkOnFloor)
+	{
+		MovementTimeline.TickTimeline(DeltaSeconds);
+		return;
+		// FVector LerpResult = UKismetMathLibrary::VLerp(Pawn->GetActorLocation(), TargetLocation, DeltaSeconds * LerpSpeed);
+		// Pawn->SetActorLocation(LerpResult);
 	}
 
 	if (bRotateWithMovement)
 	{
 		USceneComponent* Root = OwnerComp.GetAIOwner()->GetPawn()->GetRootComponent();
 		FRotator RootRotation = Root->GetComponentRotation();
-
+	
 		FVector RootVelocity = Root->GetComponentVelocity();
 		FRotator VelocityRotator = FRotationMatrix::MakeFromX(RootVelocity).Rotator();
-
+	
 		RootRotation.Yaw = VelocityRotator.Yaw;
 		Root->SetWorldRotation(RootRotation);
 	}
