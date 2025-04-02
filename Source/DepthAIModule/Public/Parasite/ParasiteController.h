@@ -1,0 +1,36 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "DefaultAIController.h"
+#include "Perception/AIPerceptionTypes.h"
+#include "ParasiteController.generated.h"
+
+class UAIPerceptionComponent;
+
+UCLASS()
+class DEPTHAIMODULE_API AParasiteController : public ADefaultAIController
+{
+	GENERATED_BODY()
+
+public:
+	AParasiteController();
+
+protected:
+	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
+
+	void OnHearTarget(AActor* Actor, const FAIStimulus& Stimulus);
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName HeardNoiseKeyName = "HeardNoise";
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName MoveLocationKeyName = "MoveLocation";
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Behavior", meta = (ClampMin = 0.0f, Units = "cm"))
+	float HearingZTolerance = 100.0f;
+};

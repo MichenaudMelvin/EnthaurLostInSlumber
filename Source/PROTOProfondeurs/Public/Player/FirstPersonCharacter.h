@@ -7,9 +7,12 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UTestViewModel;
+class UViewBobbing;
 class AFirstPersonController;
 class UInteractableComponent;
 class UCharacterStateMachine;
+class UAIPerceptionStimuliSourceComponent;
 class UCharacterState;
 enum class ECharacterStateID : uint8;
 class UCameraComponent;
@@ -41,10 +44,24 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Controller")
 	TObjectPtr<AFirstPersonController> FirstPersonController;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Stimuli")
+	TObjectPtr<UAIPerceptionStimuliSourceComponent> HearingStimuli;
+
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
 
 	USkeletalMeshComponent* GetCharacterMesh() const {return CharacterMesh;}
+
+#pragma endregion
+
+#pragma region Camera
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Camera")
+	TObjectPtr<UViewBobbing> ViewBobbing;
+
+public:
+	UViewBobbing* GetViewBobbingObject() const {return ViewBobbing;}
 
 #pragma endregion
 
@@ -58,7 +75,7 @@ protected:
 	TMap<ECharacterStateID, TSubclassOf<UCharacterState>> CharacterStates;
 
 	UPROPERTY(BlueprintReadOnly, VisibleInstanceOnly, Category = "CharacterStateMachine")
-	TArray<UCharacterState*> States;
+	TArray<TObjectPtr<UCharacterState>> States;
 
 	void InitStateMachine();
 
@@ -81,7 +98,7 @@ public:
 #endif
 
 public:
-	const TArray<UCharacterState*>& GetStates() const {return States;}
+	const TArray<TObjectPtr<UCharacterState>>& GetStates() const {return States;}
 
 #pragma endregion
 
@@ -91,7 +108,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
 	float InteractionTraceLength = 100.0f;
 
-	UPROPERTY(BlueprintReadOnly, Category = "InteractionTrace")
+	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UInteractableComponent> CurrentInteractable;
 
 	void InteractionTrace();
@@ -152,7 +169,7 @@ public:
 	/**
 	 * @brief 
 	 * @param TopLocation true will return the top location of the player, false will return the bottom location
-	 * @return 
+	 * @return The return location
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetPlayerLocation(bool TopLocation) const;
@@ -160,5 +177,16 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
+	FVector GetRespawnPosition() const { return RespawnPosition; }
+	void SetRespawnPosition(const FVector& Position) { RespawnPosition = Position; }
+
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
+
+	void SetInteractionUI(bool bState) const;
+
+protected:
+	TObjectPtr<UTestViewModel> ViewModel;
+
+private:
+	FVector RespawnPosition;
 };

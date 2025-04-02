@@ -2,9 +2,12 @@
 
 
 #include "Player/States/CharacterIdleState.h"
+
+#include "Camera/CameraComponent.h"
+#include "Player/CharacterSettings.h"
+#include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Settings/DefaultInputSettings.h"
 
 UCharacterIdleState::UCharacterIdleState()
 {
@@ -12,11 +15,18 @@ UCharacterIdleState::UCharacterIdleState()
 	bCheckGround = true;
 }
 
+void UCharacterIdleState::StateInit(UCharacterStateMachine* InStateMachine)
+{
+	Super::StateInit(InStateMachine);
+
+	Character->GetCamera()->FieldOfView = TargetFOV;
+}
+
 void UCharacterIdleState::StateTick_Implementation(float DeltaTime)
 {
 	Super::StateTick_Implementation(DeltaTime);
 
-	const UDefaultInputSettings* InputSettings = GetDefault<UDefaultInputSettings>();
+	const UCharacterSettings* CharacterSettings = GetDefault<UCharacterSettings>();
 
 	if (GetInputs().bInputJump)
 	{
@@ -38,7 +48,7 @@ void UCharacterIdleState::StateTick_Implementation(float DeltaTime)
 		StateMachine->ChangeState(ECharacterStateID::TakeAmber);
 	}
 
-	else if (GetInputs().InputMove.Length() > InputSettings->MoveInputThreshold)
+	else if (GetInputs().InputMove.Length() > CharacterSettings->MoveInputThreshold)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Walk);
 	}

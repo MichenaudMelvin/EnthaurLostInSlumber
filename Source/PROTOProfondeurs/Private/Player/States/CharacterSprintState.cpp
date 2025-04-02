@@ -3,15 +3,17 @@
 
 #include "Player/States/CharacterSprintState.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/CharacterSettings.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Settings/DefaultInputSettings.h"
 
 UCharacterSprintState::UCharacterSprintState()
 {
 	StateID = ECharacterStateID::Sprint;
 	MoveSpeed = 1200.0f;
+	MaxSteering = 5.0f;
+	SteeringSpeed = 2.0f;
 }
 
 void UCharacterSprintState::StateTick_Implementation(float DeltaTime)
@@ -19,7 +21,7 @@ void UCharacterSprintState::StateTick_Implementation(float DeltaTime)
 	Super::StateTick_Implementation(DeltaTime);
 
 	const bool bIsFalling = Character->GetCharacterMovement()->IsFalling();
-	const UDefaultInputSettings* InputSettings = GetDefault<UDefaultInputSettings>();
+	const UCharacterSettings* CharacterSettings = GetDefault<UCharacterSettings>();
 
 	if(GetInputs().bInputJump && !bIsFalling)
 	{
@@ -46,7 +48,7 @@ void UCharacterSprintState::StateTick_Implementation(float DeltaTime)
 		StateMachine->ChangeState(ECharacterStateID::Interact);
 	}
 
-	else if (GetInputs().InputMove.Length() < InputSettings->MoveInputThreshold)
+	else if (GetInputs().InputMove.Length() < CharacterSettings->MoveInputThreshold)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Idle);
 	}

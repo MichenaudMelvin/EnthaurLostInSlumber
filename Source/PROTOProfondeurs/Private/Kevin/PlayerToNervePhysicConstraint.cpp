@@ -2,9 +2,6 @@
 
 
 #include "Kevin/PlayerToNervePhysicConstraint.h"
-
-#include "EnhancedInputComponent.h"
-#include "MainSettings.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -13,7 +10,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Player/FirstPersonController.h"
-#include "PROTOProfondeurs/Macro.h"
 
 
 // Sets default values for this component's properties
@@ -74,10 +70,14 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
 			ReleasePlayer(true);
 		}
-	} else if (Distance < LinkedNerve->DistanceNeededToPropulsion && IsPropultionActive)
+	} else if (Distance < LinkedNerve->DistanceNeededToPropulsion)
 	{
-		PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
-		IsPropultionActive = false;
+
+		if (IsPropultionActive)
+		{
+			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
+			IsPropultionActive = false;
+		}
 	}
 }
 

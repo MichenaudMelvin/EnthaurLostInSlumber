@@ -11,5 +11,11 @@ public class PROTOProfondeursEditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 
 		ExtraModuleNames.AddRange( new string[] { "PROTOProfondeurs" } );
+		RegisterModulesCreatedByRider();
+	}
+
+	private void RegisterModulesCreatedByRider()
+	{
+		ExtraModuleNames.AddRange(new string[] { "PRFUI", "DepthAIModule", "PRFEditor" });
 	}
 }

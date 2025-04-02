@@ -21,11 +21,18 @@ public:
 	TObjectPtr<UImage> Crosshair;
 	
 	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UImage> Interact;
+	
+	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> PropulsionIndicator;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UImage> SpikeModel;
 
 	virtual void NativeConstruct() override;
 
 	void SetPropulsionActive(bool active);
+	void SetInteraction(bool bActive) const;
 
 private:
 	FCTweenInstance* CurrentTween;

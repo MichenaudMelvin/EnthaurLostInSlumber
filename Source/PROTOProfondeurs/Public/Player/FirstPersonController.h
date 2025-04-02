@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "FirstPersonController.generated.h"
 
+class AFirstPersonSpectator;
+class AFirstPersonCharacter;
 class UInGameUI;
 struct FInputActionValue;
 class UInputAction;
@@ -60,6 +62,9 @@ struct FPlayerInputs
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	bool bInputTakeAmber = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	bool bInputPauseGame = false;
+
 #if !UE_BUILD_SHIPPING
 	void DisplayInputsOnScreen(float DisplayTime = 0.0f, const FColor& DebugColor = FColor::Cyan) const;
 #endif
@@ -71,21 +76,45 @@ class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UUserWidget> InGameWidgetClass;
-
 	UPROPERTY()
 	TObjectPtr<UInGameUI> CurrentInGameUI;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> DeathWidgetClass;
+	UPROPERTY()
+	TObjectPtr<class UDeathMenuUI> CurrentDeathUI;
 
 protected:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
 
+// #if !UE_BUILD_SHIPPING
+	UPROPERTY()
+	TObjectPtr<AFirstPersonCharacter> OwnCharacter;
+
+	UPROPERTY()
+	TObjectPtr<AFirstPersonSpectator> Spectator;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Spectator")
+	TSubclassOf<AFirstPersonSpectator> SpectatorClass;
+
+	UFUNCTION(Exec)
+	void PossessSpectator();
+
+	UFUNCTION(Exec)
+	void UnPossessSpectator(bool bTeleport = true);
+// #endif
+
 public:
 	UInGameUI* GetCurrentInGameUI() { return CurrentInGameUI; }
+	
 
 #pragma region Inputs
+
+protected:
 	virtual void SetupInputComponent() override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
@@ -112,6 +141,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FAction TakeAmberAction;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
+	FAction PauseGameAction;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	FPlayerInputs PlayerInputs;
 
@@ -136,6 +168,9 @@ public:
 	UFUNCTION()
 	void OnInputTakeAmber(const FInputActionValue& InputActionValue);
 
+	UFUNCTION()
+	void OnInputPauseGame(const FInputActionValue& InputActionValue);
+
 public:
 	const FPlayerInputs& GetPlayerInputs() const {return PlayerInputs;}
 
@@ -151,4 +186,21 @@ private:
 #endif
 
 #pragma endregion
+
+#pragma region UI Menus
+	
+private:
+	bool bIsInMenus = false;
+
+#pragma endregion
+
+#pragma region Respawn
+	
+	UFUNCTION(BlueprintCallable)
+	void KillPlayer();
+	
+	UFUNCTION(BlueprintCallable)
+	void RespawnPlayer(FVector RespawnPosition);
+	
+#pragma endregion 
 };

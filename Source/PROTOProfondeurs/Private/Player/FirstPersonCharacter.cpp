@@ -7,9 +7,20 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kevin/UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "KismetTraceUtils.h"
+#include "GameFramework/GameStateBase.h"
+#include "Kevin/UI/DeathMenuUI.h"
+#include "Kismet/GameplayStatics.h"
+#include "Physics/TracePhysicsSettings.h"
+#include "Player/CharacterSettings.h"
+#include "PRFUI/Public/TestMVVM/TestViewModel.h"
+#include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Hearing.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -29,19 +40,25 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	CharacterMesh->bCastDynamicShadow = false;
 	CharacterMesh->CastShadow = false;
 	CharacterMesh->SetRelativeLocation(FVector(-30.0f, 0.0f, -150.0f));
+
+	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
+	HearingStimuli->bAutoRegister = true;
+	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
 }
 
 void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (GetController() == nullptr)
+	SetRespawnPosition(this->GetActorLocation());
+	
+	if (!GetController())
 	{
 		return;
 	}
 
 	AFirstPersonController* CastedController = Cast<AFirstPersonController>(GetController());
-	if (CastedController == nullptr)
+	if (!CastedController)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("PlayerController of %s is %s but should be %s"), *GetClass()->GetName(), *GetController()->GetClass()->GetName(), *AFirstPersonController::StaticClass()->GetName());
@@ -54,8 +71,37 @@ void AFirstPersonCharacter::BeginPlay()
 
 	FirstPersonController = CastedController;
 
+	const UCharacterSettings* CharacterSettings = GetDefault<UCharacterSettings>();
+	if (!CharacterSettings)
+	{
+		return;
+	}
+
+	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CharacterSettings->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
+	if (!CameraShake)
+	{
+		return;
+	}
+
+	UViewBobbing* CastedCameraShake = Cast<UViewBobbing>(CameraShake);
+	if (!CastedCameraShake)
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("ViewBobbingClass in %s is class of %s but should be %s"), *CharacterSettings->GetClass()->GetName(), *CameraShake->GetClass()->GetName(), *UViewBobbing::StaticClass()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	ViewBobbing = CastedCameraShake;
+
 	CreateStates();
 	InitStateMachine();
+
+	ViewModel = NewObject<UTestViewModel>();
+	ensure(ViewModel);
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)
@@ -73,7 +119,7 @@ void AFirstPersonCharacter::InitStateMachine()
 {
 	StateMachine = NewObject<UCharacterStateMachine>();
 
-	if (StateMachine == nullptr)
+	if (!StateMachine)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("Failed to create StateMachine"));
@@ -89,7 +135,7 @@ void AFirstPersonCharacter::InitStateMachine()
 
 void AFirstPersonCharacter::TickStateMachine(float DeltaTime)
 {
-	if (StateMachine == nullptr)
+	if (!StateMachine)
 	{
 		return;
 	}
@@ -112,7 +158,7 @@ void AFirstPersonCharacter::CreateStates()
 			continue;
 		}
 
-		if (State.Value == nullptr)
+		if (!State.Value)
 		{
 #if WITH_EDITOR
 			const FString Message = FString::Printf(TEXT("Cannot create state because stateClass is nullptr"));
@@ -124,7 +170,7 @@ void AFirstPersonCharacter::CreateStates()
 		}
 
 		UCharacterState* NewState = NewObject<UCharacterState>(this, State.Value);
-		if (NewState == nullptr)
+		if (!NewState)
 		{
 #if WITH_EDITOR
 			const FString Message = FString::Printf(TEXT("Failed to create state %d"), State.Key);
@@ -152,44 +198,46 @@ void AFirstPersonCharacter::DisplayStates(bool bDisplay)
 
 void AFirstPersonCharacter::InteractionTrace()
 {
-	FVector StartLocation = CameraComponent->GetComponentLocation();
-	FVector EndLocation = (CameraComponent->GetForwardVector() * InteractionTraceLength) + StartLocation;
+	const UTracePhysicsSettings* TraceSettings =  GetDefault<UTracePhysicsSettings>();
 
-	TArray<AActor*> ActorsToIgnore;
-	ActorsToIgnore.Add(this);
-
-	FHitResult HitResult;
-	FCollisionQueryParams CollisionParams;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
-
-	if (!bHit)
+	if (!TraceSettings)
 	{
-		CurrentInteractable = nullptr;
 		return;
 	}
 
-	if (HitResult.GetActor() == nullptr)
+	FVector StartLocation = CameraComponent->GetComponentLocation();
+	FVector EndLocation = (CameraComponent->GetForwardVector() * InteractionTraceLength) + StartLocation;
+
+	FHitResult HitResult;
+	FCollisionQueryParams CollisionParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, TraceSettings->InteractionTraceChannel, CollisionParams);
+
+	if (!bHit || !HitResult.GetActor())
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
 
 	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UInteractableComponent::StaticClass());
-	if (FoundComp == nullptr)
+	if (!FoundComp)
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
 
 	UInteractableComponent* TargetInteractable = Cast<UInteractableComponent>(FoundComp);
-	if (TargetInteractable == nullptr)
+	if (!TargetInteractable)
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 		return;
 	}
 
 	if (TargetInteractable->CheckComponent(HitResult.GetComponent()))
 	{
+		SetInteractionUI(true);
 		CurrentInteractable = TargetInteractable;
 
 #if WITH_EDITORONLY_DATA
@@ -198,6 +246,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	}
 	else
 	{
+		SetInteractionUI(false);
 		CurrentInteractable = nullptr;
 	}
 }
@@ -215,6 +264,13 @@ void AFirstPersonCharacter::Landed(const FHitResult& Hit)
 
 bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
 {
+	const UTracePhysicsSettings* TraceSettings =  GetDefault<UTracePhysicsSettings>();
+
+	if (!TraceSettings)
+	{
+		return false;
+	}
+
 	FVector StartLocation = GetBottomLocation();
 	FVector EndLocation = StartLocation;
 	EndLocation.Z -= GroundTraceLength;
@@ -222,7 +278,12 @@ bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
 	FCollisionQueryParams CollisionQueryParams;
 	CollisionQueryParams.bReturnPhysicalMaterial = true;
 
-	return GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionQueryParams);
+	// const FCollisionObjectQueryParams ObjectParams = ConfigureCollisionObjectParams(TraceSettings->GroundObjectTypes);
+
+	TArray<AActor*> ActorsToIgnore;
+
+	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, TraceSettings->GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
+	// return GetWorld()->LineTraceSingleByObjectType(HitResult, StartLocation, EndLocation, ObjectParams, CollisionQueryParams);
 }
 
 void AFirstPersonCharacter::GroundMovement()
@@ -233,7 +294,7 @@ void AFirstPersonCharacter::GroundMovement()
 		AboveActor(Hit.GetActor());
 	}
 
-	if (GetCharacterMovement()->IsFalling() && GroundActor != nullptr)
+	if (GetCharacterMovement()->IsFalling() && GroundActor)
 	{
 		GroundActor = nullptr;
 	}
@@ -241,12 +302,7 @@ void AFirstPersonCharacter::GroundMovement()
 
 void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 {
-	if (ActorBellow == nullptr)
-	{
-		return;
-	}
-
-	if (ActorBellow == GroundActor)
+	if (!ActorBellow || ActorBellow == GroundActor)
 	{
 		return;
 	}
@@ -311,4 +367,10 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
 
 	return true;
+}
+
+void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
+{
+	if (CurrentInteractable != nullptr)
+		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
 }
