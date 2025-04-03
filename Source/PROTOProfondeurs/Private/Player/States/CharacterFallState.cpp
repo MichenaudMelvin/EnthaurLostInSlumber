@@ -30,10 +30,10 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 	}
 
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
-	Character->GetCharacterMovement()->Velocity += ProjectionVelocity;
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
 	Character->GetCharacterMovement()->AirControl = AirControl;
 	Character->GetCharacterMovement()->BrakingDecelerationFalling = FallingDeceleration;
+	LaunchCharacter();
 }
 
 void UCharacterFallState::StateTick_Implementation(float DeltaTime)
@@ -73,5 +73,16 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 	// emit noise on landing
 	EmitNoise();
 
+	SetProjectionVelocity(FVector::ZeroVector);
 	StateMachine->ChangeState(ECharacterStateID::Idle);
+}
+
+void UCharacterFallState::SetProjectionVelocity(const FVector& Velocity)
+{
+	ProjectionVelocity = Velocity;
+}
+
+void UCharacterFallState::LaunchCharacter() const
+{
+	Character->GetCharacterMovement()->Velocity += ProjectionVelocity;
 }

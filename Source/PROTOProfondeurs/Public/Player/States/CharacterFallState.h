@@ -40,5 +40,9 @@ private:
 	float CoyoteTime = 0.0f;
 
 public:
-	void SetProjectionVelocity(const FVector& Velocity) {ProjectionVelocity = Velocity;}
+	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
+	void SetProjectionVelocity(const FVector& Velocity);
+
+	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
+	void LaunchCharacter() const;
 };
