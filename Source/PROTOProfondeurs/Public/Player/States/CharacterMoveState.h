@@ -45,4 +45,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void LockMovement(const bool bLockMovement) {bMovementLocked = bLockMovement;}
+
+	bool MovementLocked() const {return bMovementLocked;}
 };

@@ -183,7 +183,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void StopCharacter() const;
 
-	FVector GetRespawnPosition() const { return RespawnPosition; }
+	UFUNCTION(BlueprintCallable, BlueprintPure,Category = "Character")
+	bool IsStopped() const;
+
+	FVector GetRespawnPosition() const {return RespawnPosition;}
+
 	void SetRespawnPosition(const FVector& Position) { RespawnPosition = Position; }
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
