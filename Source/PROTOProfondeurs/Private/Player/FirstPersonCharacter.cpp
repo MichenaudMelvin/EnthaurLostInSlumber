@@ -21,6 +21,7 @@
 #include "PRFUI/Public/TestMVVM/TestViewModel.h"
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
+#include "Player/States/CharacterFallState.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -367,6 +368,43 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
 
 	return true;
+}
+
+void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) const
+{
+	UCharacterFallState* FallState = FindState<UCharacterFallState>(StateMachine);
+	if (!FallState)
+	{
+		return;
+	}
+
+	FallState->SetProjectionVelocity(ProjectionVelocity);
+	StateMachine->ChangeState(ECharacterStateID::Fall);
+}
+
+void AFirstPersonCharacter::StopCharacter() const
+{
+	if (!StateMachine)
+	{
+		return;
+	}
+
+	UCharacterState* CurrentState = StateMachine->ChangeState(ECharacterStateID::Fall);
+	GetCharacterMovement()->Velocity = FVector::ZeroVector;
+	GetCharacterMovement()->GravityScale = 0.0f;
+
+	if (!CurrentState)
+	{
+		return;
+	}
+
+	UCharacterFallState* FallState = Cast<UCharacterFallState>(CurrentState);
+	if (!FallState)
+	{
+		return;
+	}
+
+	FallState->LockMovement(true);
 }
 
 void AFirstPersonCharacter::SetInteractionUI(const bool bState) const

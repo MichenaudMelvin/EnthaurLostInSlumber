@@ -177,6 +177,12 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
+	UFUNCTION(BlueprintCallable, Category = "Character")
+	void EjectCharacter(const FVector ProjectionVelocity) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Character")
+	void StopCharacter() const;
+
 	FVector GetRespawnPosition() const { return RespawnPosition; }
 	void SetRespawnPosition(const FVector& Position) { RespawnPosition = Position; }
 

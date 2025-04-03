@@ -29,6 +29,8 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 		bCanDoCoyoteTime = false;
 	}
 
+	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
+	Character->GetCharacterMovement()->Velocity += ProjectionVelocity;
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
 	Character->GetCharacterMovement()->AirControl = AirControl;
 	Character->GetCharacterMovement()->BrakingDecelerationFalling = FallingDeceleration;
