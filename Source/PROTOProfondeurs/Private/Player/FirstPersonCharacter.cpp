@@ -384,28 +384,21 @@ void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) con
 
 void AFirstPersonCharacter::StopCharacter() const
 {
+	if (StateMachine)
+	{
+		UCharacterState* CurrentState = StateMachine->ChangeState(ECharacterStateID::Fall);
+		if (CurrentState)
+		{
+			UCharacterFallState* FallState = Cast<UCharacterFallState>(CurrentState);
+			if (FallState)
+			{
+				FallState->LockMovement(true);
+			}
+		}
+	}
+
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 	GetCharacterMovement()->GravityScale = 0.0f;
-
-	if (!StateMachine)
-	{
-		return;
-	}
-
-	UCharacterState* CurrentState = StateMachine->ChangeState(ECharacterStateID::Fall);
-
-	if (!CurrentState)
-	{
-		return;
-	}
-
-	UCharacterFallState* FallState = Cast<UCharacterFallState>(CurrentState);
-	if (!FallState)
-	{
-		return;
-	}
-
-	FallState->LockMovement(true);
 }
 
 bool AFirstPersonCharacter::IsStopped() const

@@ -36,6 +36,11 @@ public:
 
 	AFirstPersonCharacter* GetCharacter() const {return Character;}
 
+	/**
+	 * @brief Change a State
+	 * @param NextStateID The id of the target next state
+	 * @return Return the object of the next state
+	 */
 	UFUNCTION(BlueprintCallable, Category = "CharacterStateMachine")
 	UCharacterState* ChangeState(ECharacterStateID NextStateID);
 
