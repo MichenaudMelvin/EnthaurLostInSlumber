@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Environement/WeakZoneInterface.h"
+#include "PROTOProfondeurs/Public/GameElements/WeakZoneInterface.h"
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
