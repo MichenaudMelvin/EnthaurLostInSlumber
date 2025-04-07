@@ -30,10 +30,10 @@ void UCharacterMoveState::StateTick_Implementation(float DeltaTime)
 	Character->AddMovementInput(Character->GetActorForwardVector(), GetInputs().InputMove.Y);
 	Character->AddMovementInput(Character->GetActorRightVector(), GetInputs().InputMove.X);
 
-	if(CurrentViewBobbing && GetSettings() && GetSettings()->bViewBobbing)
+	if(Character->GetViewBobbingObject() && GetSettings() && GetSettings()->bViewBobbing)
 	{
 		float SpeedRange = UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->MaxWalkSpeed, 0.0f, MoveSpeed);
-		CurrentViewBobbing->ShakeScale = SpeedRange;
+		Character->GetViewBobbingObject()->ShakeScale = SpeedRange;
 	}
 }
 
