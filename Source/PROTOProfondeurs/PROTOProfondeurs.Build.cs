@@ -21,7 +21,8 @@ public class PROTOProfondeurs : ModuleRules
 			"InputCore",
 			"PhysicsCore",
 			"UMG",
-			"AIModule"
+			"AIModule",
+			"AkAudio"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
