@@ -91,11 +91,11 @@ SourceArt/**/*.tga
 *_BuiltData.uasset
 
 #Wwise
-!Plugins/Wwise/Binaries/*
-!Plugins/Wwise/Binaries/Win64/*.dll
-!Plugins/Wwise/Binaries/Mac/*.dylib
-!Plugins/Wwise/ThirdParty/**/*.dll
-!Plugins/Wwise/ThirdParty/**/*.lib
-!Plugins/WwiseNiagara/Binaries/*
-!Plugins/WwiseNiagara/Binaries/Win64/*.dll
-!Plugins/WwiseNiagara/Binaries/Mac/*.dylib
+!**/*[Pp]lugins/Wwise/Binaries/*
+!**/*[Pp]lugins/Wwise/Binaries/Win64/*.dll
+!**/*[Pp]lugins/Wwise/Binaries/Mac/*.dylib
+!**/*[Pp]lugins/Wwise/ThirdParty/**/*.dll
+!**/*[Pp]lugins/Wwise*/ThirdParty/**/*.lib
+!**/*[Pp]lugins/WwiseNiagara/Binaries/*
+!**/*[Pp]lugins/WwiseNiagara/Binaries/Win64/*.dll
+!**/*[Pp]lugins/WwiseNiagara/Binaries/Mac/*.dylib
