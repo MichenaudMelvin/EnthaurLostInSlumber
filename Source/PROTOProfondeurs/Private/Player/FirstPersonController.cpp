@@ -5,9 +5,11 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Blueprint/UserWidget.h"
-#include "Kevin/UI/InGameUI.h"
+#include "UI/DeathMenuUI.h"
+#include "UI/InGameUI.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonSpectator.h"
+#include "PRFUI/Public/PRFUIManager.h"
 
 FAction::FAction()
 {
@@ -173,6 +175,7 @@ void AFirstPersonController::SetupInputComponent()
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputJump, const FInputActionValue&);
 	InteractAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteract, const FInputActionValue&);
 	TakeAmberAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputTakeAmber, const FInputActionValue&);
+	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputPauseGame, const FInputActionValue&);
 
 	MoveAction.BindAction(EnhancedInputComponent, this);
 	LookAction.BindAction(EnhancedInputComponent, this);
@@ -181,6 +184,7 @@ void AFirstPersonController::SetupInputComponent()
 	JumpAction.BindAction(EnhancedInputComponent, this);
 	InteractAction.BindAction(EnhancedInputComponent, this);
 	TakeAmberAction.BindAction(EnhancedInputComponent, this);
+	PauseGameAction.BindAction(EnhancedInputComponent, this);
 }
 
 void AFirstPersonController::OnInputMove(const FInputActionValue& InputActionValue)
@@ -218,6 +222,19 @@ void AFirstPersonController::OnInputTakeAmber(const FInputActionValue& InputActi
 	PlayerInputs.bInputTakeAmber = InputActionValue.Get<bool>();
 }
 
+void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActionValue)
+{
+	PlayerInputs.bInputPauseGame = InputActionValue.Get<bool>();
+
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	UIManager->ShowPauseMenu(this);
+}
+
 #if WITH_EDITOR
 void AFirstPersonController::DisplayInputs(bool bDisplay)
 {
@@ -226,3 +243,17 @@ void AFirstPersonController::DisplayInputs(bool bDisplay)
 #endif
 
 #pragma endregion
+
+void AFirstPersonController::KillPlayer()
+{
+	SetPause(true);
+	CurrentDeathUI = CreateWidget<UDeathMenuUI>(this, DeathWidgetClass);
+	if (CurrentDeathUI)
+	{
+		CurrentDeathUI->AddToViewport();
+	}
+}
+
+void AFirstPersonController::RespawnPlayer(FVector RespawnPosition)
+{
+}

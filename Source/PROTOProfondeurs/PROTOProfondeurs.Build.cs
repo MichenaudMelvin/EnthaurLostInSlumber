@@ -7,10 +7,38 @@ public class PROTOProfondeurs : ModuleRules
 	public PROTOProfondeurs(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "CableComponent", "DeveloperSettings", "EnhancedInput", "FCTween", "EngineCameras", "PhysicsCore", "UMG" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PublicDependencyModuleNames.AddRange(new string[]
+		{
+			"CableComponent",
+			"Core",
+			"CoreUObject",
+			"DeveloperSettings",
+			"Engine",
+			"EngineCameras",
+			"EnhancedInput",
+			"FCTween",
+			"InputCore",
+			"PhysicsCore",
+			"UMG",
+			"AIModule"
+		});
+
+		PrivateDependencyModuleNames.AddRange(new string[]
+		{
+			"PRFUI",
+			"ModelViewViewModel",
+		});
+
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.AddRange(
+				new string[]
+				{
+					"ModelViewViewModelBlueprint",
+				}
+			);
+		}
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

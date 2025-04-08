@@ -6,6 +6,8 @@
 #include "UObject/Object.h"
 #include "TestModel.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCounterChanged, int32, NewCounterValue);
+
 /**
  * 
  */
@@ -15,6 +17,17 @@ class PRFUI_API UTestModel : public UObject
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(BlueprintReadWrite, Category = "Example")
-	int32 Counter = 0;
+	UTestModel();
+
+	UFUNCTION(BlueprintCallable)
+	void IncreaseCounter(int32 Amount);
+
+	UFUNCTION(BlueprintPure)
+	int32 GetCounter() const;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnCounterChanged OnCounterChanged;
+
+private:
+	int32 Counter;
 };

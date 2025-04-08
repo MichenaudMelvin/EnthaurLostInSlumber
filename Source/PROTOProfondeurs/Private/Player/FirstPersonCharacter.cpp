@@ -1,20 +1,26 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
-#include "GroundAction.h"
+#include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Kevin/UI/InGameUI.h"
+#include "UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "KismetTraceUtils.h"
+#include "GameFramework/GameStateBase.h"
+#include "UI/DeathMenuUI.h"
+#include "Kismet/GameplayStatics.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
+#include "PRFUI/Public/TestMVVM/TestViewModel.h"
+#include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Hearing.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -34,12 +40,18 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	CharacterMesh->bCastDynamicShadow = false;
 	CharacterMesh->CastShadow = false;
 	CharacterMesh->SetRelativeLocation(FVector(-30.0f, 0.0f, -150.0f));
+
+	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
+	HearingStimuli->bAutoRegister = true;
+	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
 }
 
 void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	SetRespawnPosition(this->GetActorLocation());
+	
 	if (!GetController())
 	{
 		return;
@@ -87,6 +99,9 @@ void AFirstPersonCharacter::BeginPlay()
 
 	CreateStates();
 	InitStateMachine();
+
+	ViewModel = NewObject<UTestViewModel>();
+	ensure(ViewModel);
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)

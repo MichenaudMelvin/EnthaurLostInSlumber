@@ -17,11 +17,23 @@ public class PRFUI : ModuleRules
             new string[]
             {
                 "CoreUObject",
+                "DeveloperSettings",
                 "Engine",
+                "ModelViewViewModel",
                 "Slate",
                 "SlateCore",
                 "UMG"
             }
         );
+
+        if (Target.bBuildEditor)
+        {
+            PrivateDependencyModuleNames.AddRange(
+                new string[]
+                {
+                    "ModelViewViewModelBlueprint",
+                }
+            );
+        }
     }
 }
