@@ -30,17 +30,6 @@ AAIPath::AAIPath()
 	GroundObjectTypes.Add(ObjectTypeQuery2);
 }
 
-void AAIPath::OnConstruction(const FTransform& Transform)
-{
-	Super::OnConstruction(Transform);
-
-	FVector SplineRelativeLocation = Spline->GetRelativeLocation();
-	SplineRelativeLocation.Z = SplineHeight;
-	Spline->SetRelativeLocation(SplineRelativeLocation);
-
-	UpdatePoints(true);
-}
-
 void AAIPath::BeginPlay()
 {
 	Super::BeginPlay();
@@ -50,32 +39,36 @@ void AAIPath::BeginPlay()
 #endif
 }
 
+void AAIPath::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	FVector SplineRelativeLocation = Spline->GetRelativeLocation();
+	SplineRelativeLocation.Z = SplineHeight;
+	Spline->SetRelativeLocation(SplineRelativeLocation);
+
+	UpdatePoints(true);
+
+#if WITH_EDITORONLY_DATA
+	if (AttachedAI)
+	{
+		AttachedAI->OnConstruction(AttachedAI->GetActorTransform());
+	}
+#endif
+}
+
 void AAIPath::UpdatePoints(bool bInConstructionScript)
 {
 #if WITH_EDITORONLY_DATA
 	Arrows.Empty();
 #endif
 
-	FVector TraceDirection = GetDirection();
-
-	TraceDirection *= (SplineHeight + TraceLength) * (bInvertDirection ? -1 : 1);
-
 	for (int i = 0; i < Spline->GetNumberOfSplinePoints(); i++)
 	{
-		FVector PointLocation = Spline->GetLocationAtSplinePoint(i, ESplineCoordinateSpace::World);
-		PointLocation.Z = Spline->GetComponentLocation().Z;
-		Spline->SetLocationAtSplinePoint(i, PointLocation, ESplineCoordinateSpace::World);
-
 		Spline->SetTangentsAtSplinePoint(i, FVector::ZeroVector, FVector::ZeroVector, ESplineCoordinateSpace::World, true);
 
-		FVector EndLocation = PointLocation;
-		EndLocation += TraceDirection;
-
-		TArray<AActor*> ActorsToIgnore;
-		ActorsToIgnore.Add(this);
-
 		FHitResult HitResult;
-		bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, PointLocation, EndLocation, GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, false);
+		bool bHit = GetTracedPointLocation(i, HitResult);
 
 		if (!bHit)
 		{
@@ -130,6 +123,8 @@ FVector AAIPath::GetDirection()
 		break;
 	}
 
+	VectorDirection *= (bInvertDirection ? -1 : 1);
+
 	return VectorDirection;
 }
 
@@ -137,3 +132,47 @@ FVector AAIPath::GetPointLocation(int8 PointIndex) const
 {
 	return Spline->GetLocationAtSplinePoint(PointIndex, ESplineCoordinateSpace::World);
 }
+
+bool AAIPath::GetTracedPointLocation(int8 PointIndex, FHitResult& HitResult)
+{
+	FVector TraceDirection = GetDirection();
+
+	TraceDirection *= (SplineHeight + TraceLength);
+
+	FVector PointLocation = Spline->GetLocationAtSplinePoint(PointIndex, ESplineCoordinateSpace::World);
+	FVector EndLocation = PointLocation;
+	EndLocation += TraceDirection;
+
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(this);
+
+	return UKismetSystemLibrary::LineTraceSingleForObjects(this, PointLocation, EndLocation, GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, false);
+}
+
+bool AAIPath::IsOnFloor() const
+{
+	return Direction == EAxis::Z && bInvertDirection;
+}
+
+#if WITH_EDITORONLY_DATA
+bool AAIPath::AttachAI(APawn* AI)
+{
+	if (!AI || AttachedAI)
+	{
+		return false;
+	}
+
+	AttachedAI = AI;
+	return true;
+}
+
+void AAIPath::DetachAI(APawn* AI)
+{
+	if (!AI)
+	{
+		return;
+	}
+
+	AttachedAI = nullptr;
+}
+#endif

@@ -1,26 +1,27 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
-#include "GroundAction.h"
+#include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Kevin/UI/InGameUI.h"
+#include "UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "KismetTraceUtils.h"
 #include "GameFramework/GameStateBase.h"
-#include "Kevin/UI/DeathMenuUI.h"
+#include "UI/DeathMenuUI.h"
 #include "Kismet/GameplayStatics.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
 #include "PRFUI/Public/TestMVVM/TestViewModel.h"
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
+#include "Player/States/CharacterFallState.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -367,6 +368,42 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(DotResult));
 
 	return true;
+}
+
+void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) const
+{
+	UCharacterFallState* FallState = FindState<UCharacterFallState>(StateMachine);
+	if (!FallState)
+	{
+		return;
+	}
+
+	FallState->SetProjectionVelocity(ProjectionVelocity);
+	StateMachine->ChangeState(ECharacterStateID::Fall);
+}
+
+void AFirstPersonCharacter::StopCharacter() const
+{
+	if (StateMachine)
+	{
+		UCharacterState* CurrentState = StateMachine->ChangeState(ECharacterStateID::Fall);
+		if (CurrentState)
+		{
+			UCharacterFallState* FallState = Cast<UCharacterFallState>(CurrentState);
+			if (FallState)
+			{
+				FallState->LockMovement(true);
+			}
+		}
+	}
+
+	GetCharacterMovement()->Velocity = FVector::ZeroVector;
+	GetCharacterMovement()->GravityScale = 0.0f;
+}
+
+bool AFirstPersonCharacter::IsStopped() const
+{
+	return GetCharacterMovement()->Velocity == FVector::ZeroVector && GetCharacterMovement()->GravityScale == 0.0f;
 }
 
 void AFirstPersonCharacter::SetInteractionUI(const bool bState) const

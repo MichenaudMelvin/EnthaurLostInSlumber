@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Environement/WeakZoneInterface.h"
+#include "PROTOProfondeurs/Public/GameElements/WeakZoneInterface.h"
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
@@ -177,7 +177,17 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
-	FVector GetRespawnPosition() const { return RespawnPosition; }
+	UFUNCTION(BlueprintCallable, Category = "Character")
+	void EjectCharacter(const FVector ProjectionVelocity) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Character")
+	void StopCharacter() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure,Category = "Character")
+	bool IsStopped() const;
+
+	FVector GetRespawnPosition() const {return RespawnPosition;}
+
 	void SetRespawnPosition(const FVector& Position) { RespawnPosition = Position; }
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}

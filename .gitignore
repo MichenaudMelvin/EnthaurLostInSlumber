@@ -89,3 +89,13 @@ SourceArt/**/*.tga
 
 # Built data for maps
 *_BuiltData.uasset
+
+#Wwise
+!**/*[Pp]lugins/Wwise/Binaries/*
+!**/*[Pp]lugins/Wwise/Binaries/Win64/*.dll
+!**/*[Pp]lugins/Wwise/Binaries/Mac/*.dylib
+!**/*[Pp]lugins/Wwise/ThirdParty/**/*.dll
+!**/*[Pp]lugins/Wwise*/ThirdParty/**/*.lib
+!**/*[Pp]lugins/WwiseNiagara/Binaries/*
+!**/*[Pp]lugins/WwiseNiagara/Binaries/Win64/*.dll
+!**/*[Pp]lugins/WwiseNiagara/Binaries/Mac/*.dylib

@@ -240,3 +240,5 @@ USettingsSave* UCharacterState::GetSettings() const
 
 	return SettingsSubsystem->GetSettings();
 }
+
+

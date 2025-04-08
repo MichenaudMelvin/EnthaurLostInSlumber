@@ -20,6 +20,8 @@ void UCharacterMoveState::StateEnter_Implementation(const ECharacterStateID& Pre
 {
 	Super::StateEnter_Implementation(PreviousStateID);
 
+	LockMovement(false);
+
 	Character->GetCharacterMovement()->MaxWalkSpeed = MoveSpeed;
 	Character->GetCharacterMovement()->MaxAcceleration = MoveAcceleration;
 }
@@ -28,10 +30,20 @@ void UCharacterMoveState::StateTick_Implementation(float DeltaTime)
 {
 	Super::StateTick_Implementation(DeltaTime);
 
-	EmitNoise();
+	ApplyMovement();
+}
+
+void UCharacterMoveState::ApplyMovement()
+{
+	if (bMovementLocked)
+	{
+		return;
+	}
 
 	Character->AddMovementInput(Character->GetActorForwardVector(), GetInputs().InputMove.Y);
 	Character->AddMovementInput(Character->GetActorRightVector(), GetInputs().InputMove.X);
+
+	EmitNoise();
 
 	if(Character->GetViewBobbingObject() && GetSettings() && GetSettings()->bViewBobbing)
 	{

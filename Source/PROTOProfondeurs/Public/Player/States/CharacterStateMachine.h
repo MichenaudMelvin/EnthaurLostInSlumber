@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CharacterState.h"
 #include "UObject/Object.h"
 #include "CharacterStateMachine.generated.h"
 
@@ -35,8 +36,13 @@ public:
 
 	AFirstPersonCharacter* GetCharacter() const {return Character;}
 
+	/**
+	 * @brief Change a State
+	 * @param NextStateID The id of the target next state
+	 * @return Return the object of the next state
+	 */
 	UFUNCTION(BlueprintCallable, Category = "CharacterStateMachine")
-	void ChangeState(ECharacterStateID NextStateID);
+	UCharacterState* ChangeState(ECharacterStateID NextStateID);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
 	UCharacterState* FindState(ECharacterStateID StateID) const;
@@ -45,12 +51,31 @@ public:
 
 	UCharacterState* GetCurrentState() const {return CurrentState;}
 
-private:
-	/**
-	 * @brief BlueprintOnly
-	 * @param StateClass 
-	 * @return 
-	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine", meta = (DeterminesOutputType = "StateClass"))
 	UCharacterState* FindStateByClass(TSubclassOf<UCharacterState> StateClass);
 };
+
+template<typename StateT = UCharacterState>
+inline StateT* FindState(UCharacterStateMachine* StateMachine)
+{
+	if (!StateMachine)
+	{
+		return nullptr;
+	}
+
+	UCharacterState* State = StateMachine->FindStateByClass(StateT::StaticClass());
+	if (!State)
+	{
+		return nullptr;
+	}
+
+	StateT* CastState = Cast<StateT>(State);
+	if (!CastState)
+	{
+		return nullptr;
+	}
+
+	return CastState;
+}
+
+
