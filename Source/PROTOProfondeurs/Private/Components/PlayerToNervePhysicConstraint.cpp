@@ -12,18 +12,11 @@
 #include "Player/FirstPersonController.h"
 
 
-// Sets default values for this component's properties
 UPlayerToNervePhysicConstraint::UPlayerToNervePhysicConstraint()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
-
-// Called when the game starts
 void UPlayerToNervePhysicConstraint::BeginPlay()
 {
 	Super::BeginPlay();
@@ -35,42 +28,43 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	float Distance = FVector::Dist(PlayerCharacter->GetActorLocation(), LinkedNerve->GetActorLocation());
+	float Distance = LinkedNerve->GetCableLength();
 	float Lerp = UKismetMathLibrary::NormalizeToRange(
 			Distance,
-			LinkedNerve->GetCableLength(),
+			0.0f,
 			LinkedNerve->GetCableMaxExtension()
 		);
+
 	Lerp = FMath::Clamp(Lerp, 0.f, 1.f);
 	Lerp = FMath::Sin((Lerp * PI) / 2.f);
-	
-	if (IsMovingTowardsPosition(LinkedNerve->GetActorLocation(), 0.2f))
+
+	if (IsMovingTowardsPosition(LinkedNerve->GetLastCableLocation(), 0.2f))
 	{
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f + Lerp);
 	} else
 	{
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f - Lerp);
 	}
-	
-	if (Distance >= LinkedNerve->DistanceNeededToPropulsion)
+
+	if (Distance >= LinkedNerve->GetDistanceNeededToPropulsion())
 	{
 		if (!IsPropultionActive)
 		{
 			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(true);
 			IsPropultionActive = true;
 		}
-		
+
 		if (PlayerController->GetPlayerInputs().bInputInteract && !IsAlreadyPropulsing)
 		{
 			IsAlreadyPropulsing = true;
-			
+
 			const FVector Direction = PlayerCharacter->GetComponentByClass<UCameraComponent>()->GetForwardVector();
 			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceMinMax().X, LinkedNerve->GetPropulsionForceMinMax().Y, Lerp);
-			
+
 			PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
 			ReleasePlayer(true);
 		}
-	} else if (Distance < LinkedNerve->DistanceNeededToPropulsion)
+	} else if (Distance < LinkedNerve->GetDistanceNeededToPropulsion())
 	{
 
 		if (IsPropultionActive)

@@ -20,7 +20,7 @@ ANerveReceptacle::ANerveReceptacle()
 	PrimaryActorTick.bCanEverTick = true;
 
 	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Torus"));
-	
+
 	Collision = CreateDefaultSubobject<USphereComponent>("Collision");
 	Collision->SetupAttachment(NerveReceptacle);
 }
@@ -51,7 +51,7 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
 		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
 
-		Nerve->GetInteractable()->AddInteractable(Nerve->NerveBall);
+		Nerve->GetInteractable()->AddInteractable(Nerve->GetNerveBall());
 
 		TriggerLinkedObjects();
 	}
