@@ -5,6 +5,8 @@
 
 #include "FCTween.h"
 #include "Components/InteractableComponent.h"
+#include "Components/LightComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
 
@@ -23,6 +25,9 @@ ARespawnTree::ARespawnTree()
 
 	RespawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Respawn Point"));
 	RespawnPoint->SetupAttachment(Root);
+
+	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
+	Light->SetupAttachment(Root);
 
 	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 	Interaction->OnInteract.AddDynamic(this, &ARespawnTree::ActivateRespawn);
@@ -58,6 +63,17 @@ void ARespawnTree::ActivateRespawn(APlayerController* PlayerController, APawn* P
 			},
 			0.5f,
 			EFCEase::InSine);
+
+	FCTween::Play(
+		0.f,
+		lightLevel,
+		[&](float intensity)
+		{
+			Light->SetIntensity(intensity);
+		},
+		0.5f,
+		EFCEase::InSine
+	);
 }
 
 
