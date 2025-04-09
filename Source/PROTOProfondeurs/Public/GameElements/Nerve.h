@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Nerve.generated.h"
 
+class AFirstPersonController;
 class ANerveReceptacle;
 class UPlayerToNervePhysicConstraint;
 class UInteractableComponent;
@@ -22,9 +23,11 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void OnConstruction(const FTransform& Transform) override;
+
 	virtual void Tick(float DeltaSeconds) override;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<USceneComponent> Root;
 
 #pragma region Cables
@@ -33,10 +36,10 @@ protected:
 	UPROPERTY()
 	TArray<TObjectPtr<UCableComponent>> Cables;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float CableLength;
+	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
+	float StartCableLength = 100.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableMaxExtension = 1000.0f;
 
 	void InitCable(const TObjectPtr<UCableComponent>& Cable) const;
@@ -45,11 +48,14 @@ protected:
 
 	void ApplyCablesPhysics();
 
-	UPROPERTY(EditDefaultsOnly, Category = "Cables", meta = (UIMin = 0.0f))
+	UPROPERTY(EditDefaultsOnly, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableOffset = 1.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables")
 	TArray<TEnumAsByte<EObjectTypeQuery>> CableColliders;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables")
+	TObjectPtr<UMaterial> CableMaterial;
 
 public:
 	FVector GetLastCableLocation() const;
@@ -58,12 +64,15 @@ public:
 
 	float GetCableMaxExtension() const {return CableMaxExtension;}
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
+	FVector GetCableDirection() const;
+
 #pragma endregion
 
 #pragma region NerveBall
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
 	FVector DefaultNervePosition = FVector::ZeroVector;
@@ -75,16 +84,25 @@ public:
 
 	UStaticMeshComponent* GetNerveBall() const {return NerveBall;}
 
+	/**
+	 * @brief Is attached to something else
+	 * @return 
+	 */
+	bool IsNerveBallAttached() const;
+
 #pragma endregion
 
 #pragma region Interaction
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UInteractableComponent> InteractableComponent;
 
 	UFUNCTION()
-	void Interaction(APlayerController* PlayerController, APawn* Pawn);
+	void Interaction(APlayerController* InPlayerController, APawn* Pawn);
+
+	UPROPERTY()
+	TObjectPtr<AFirstPersonController> PlayerController;
 
 public:
 	TObjectPtr<UInteractableComponent> GetInteractable() const {return InteractableComponent;}
@@ -97,16 +115,16 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UPlayerToNervePhysicConstraint> PhysicConstraint;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float DistanceNeededToPropulsion;
+	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, Units = "cm"))
+	float DistanceNeededToPropulsion = 500.0f;
 
-	UPROPERTY(EditAnywhere)
-	FVector2D PropulsionForceMinMax;
+	UPROPERTY(EditAnywhere, Category = "Physics")
+	FFloatRange PropulsionForceRange = FFloatRange(500.0f, 1000.0f);
 
 public:
 	float GetDistanceNeededToPropulsion() const {return DistanceNeededToPropulsion;}
 
-	FVector2D GetPropulsionForceMinMax() const {return PropulsionForceMinMax;}
+	FFloatRange GetPropulsionForceRange() const {return PropulsionForceRange;}
 
 #pragma endregion
 

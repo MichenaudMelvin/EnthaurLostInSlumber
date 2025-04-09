@@ -10,6 +10,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/CharacterSettings.h"
+#include "Player/FirstPersonController.h"
 
 ANerve::ANerve()
 {
@@ -46,6 +47,20 @@ void ANerve::BeginPlay()
 	DefaultNervePosition = NerveBall->GetComponentLocation();
 }
 
+void ANerve::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	NerveBall->SetRelativeLocation(FVector(StartCableLength, 0.0f, 0.0f));
+
+	if (StartCableLength > CableMaxExtension)
+	{
+		CableMaxExtension = StartCableLength + 1000.0f;
+	}
+
+	InitCable(Cables[0]);
+}
+
 void ANerve::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
@@ -57,6 +72,12 @@ void ANerve::Tick(float DeltaSeconds)
 
 void ANerve::InitCable(const TObjectPtr<UCableComponent>& Cable) const
 {
+	if (!Cable)
+	{
+		return;
+	}
+
+	// Cable->bAttachEnd = false;
 	Cable->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
 	Cable->EndLocation = FVector::ZeroVector;
 	Cable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -64,6 +85,7 @@ void ANerve::InitCable(const TObjectPtr<UCableComponent>& Cable) const
 	Cable->SetGenerateOverlapEvents(false);
 	Cable->CableLength = 0.0f;
 	Cable->SolverIterations = 16;
+	Cable->SetMaterial(0, CableMaterial);
 }
 
 void ANerve::ApplyCablesPhysics()
@@ -85,7 +107,6 @@ void ANerve::ApplyCablesPhysics()
 	FVector CurrentCableStartLocation = CurrentCable->GetComponentLocation();
 	FVector CurrentCableEndLocation = CurrentCable->GetAttachedComponent()->GetComponentLocation();
 
-
 	TArray<AActor*> Ignore;
 	Ignore.Add(this);
 	FHitResult Hit;
@@ -96,7 +117,7 @@ void ANerve::ApplyCablesPhysics()
 	{
 		UCableComponent* LastCable = Cables[CurrentIndex - 1];
 		FVector LastCableStartLocation = LastCable->GetComponentLocation();
-		bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, LastCableStartLocation, CurrentCableEndLocation, CableColliders, false, Ignore, EDrawDebugTrace::ForOneFrame, Hit, true);
+		bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, LastCableStartLocation, CurrentCableEndLocation, CableColliders, false, Ignore, EDrawDebugTrace::None, Hit, true);
 
 		if (!bHit)
 		{
@@ -176,13 +197,25 @@ float ANerve::GetCableLength() const
 	return Distance;
 }
 
+FVector ANerve::GetCableDirection() const
+{
+	int LastIndex = Cables.Num() - 1;
+
+	if (!Cables[LastIndex])
+	{
+		return FVector::ZeroVector;
+	}
+
+	return UKismetMathLibrary::GetDirectionUnitVector(Cables[LastIndex]->GetComponentLocation(), NerveBall->GetComponentLocation());
+}
+
 #pragma endregion
 
 #pragma region NerveBall
 
 void ANerve::AttachNerveBall(AActor* ActorToAttach)
 {
-	NerveBall->SetSimulatePhysics(false);
+	// NerveBall->SetSimulatePhysics(false);
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
 	bShouldApplyCablePhysics = true;
@@ -194,13 +227,15 @@ void ANerve::AttachNerveBall(AActor* ActorToAttach)
 
 void ANerve::DetachNerveBall()
 {
-	NerveBall->SetSimulatePhysics(true);
-	NerveBall->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	// NerveBall->SetSimulatePhysics(true);
+	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
+	PlayerController = nullptr;
 	bShouldApplyCablePhysics = false;
 
-	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true);
-	NerveBall->AttachToComponent(GetRootComponent(), Rules);
+	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, true);
+
+	NerveBall->AttachToComponent(RootComponent, Rules);
 
 	FCTween::Play(
 			NerveBall->GetComponentLocation(),
@@ -219,11 +254,16 @@ void ANerve::DetachNerveBall()
 	}
 }
 
+bool ANerve::IsNerveBallAttached() const
+{
+	return !NerveBall->IsAttachedTo(RootComponent);
+}
+
 #pragma endregion
 
 #pragma region Interaction
 
-void ANerve::Interaction(APlayerController* PlayerController, APawn* Pawn)
+void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
 {
 	if (CurrentAttachedReceptacle != nullptr)
 	{
@@ -231,6 +271,7 @@ void ANerve::Interaction(APlayerController* PlayerController, APawn* Pawn)
 		CurrentAttachedReceptacle = nullptr;
 	}
 
+	PlayerController = Cast<AFirstPersonController>(InPlayerController);
 	AttachNerveBall(Pawn);
 
 	PhysicConstraint = Cast<UPlayerToNervePhysicConstraint>(

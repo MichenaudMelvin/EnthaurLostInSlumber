@@ -13,11 +13,9 @@
 #include "Kismet/GameplayStatics.h"
 
 
-// Sets default values
 ANerveReceptacle::ANerveReceptacle()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Torus"));
 
@@ -25,18 +23,11 @@ ANerveReceptacle::ANerveReceptacle()
 	Collision->SetupAttachment(NerveReceptacle);
 }
 
-// Called when the game starts or when spawned
 void ANerveReceptacle::BeginPlay()
 {
 	Super::BeginPlay();
 
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &ANerveReceptacle::TriggerEnter);
-}
-
-// Called every frame
-void ANerveReceptacle::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -68,7 +59,7 @@ void ANerveReceptacle::TriggerLinkedObjects()
 		{
 			continue;
 		}
-		
+
 		if (Actor->Implements<UNerveReactive>())
 		{
 			if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)

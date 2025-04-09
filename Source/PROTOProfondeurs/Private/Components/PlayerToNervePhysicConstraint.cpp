@@ -28,6 +28,11 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (!PlayerController->GetPlayerInputs().bInputInteract)
+	{
+		bHasReleasedInteraction = true;
+	}
+
 	float Distance = LinkedNerve->GetCableLength();
 	float Lerp = UKismetMathLibrary::NormalizeToRange(
 			Distance,
@@ -58,8 +63,9 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 		{
 			IsAlreadyPropulsing = true;
 
+			// const FVector Direction = LinkedNerve->GetCableDirection() * -1;
 			const FVector Direction = PlayerCharacter->GetComponentByClass<UCameraComponent>()->GetForwardVector();
-			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceMinMax().X, LinkedNerve->GetPropulsionForceMinMax().Y, Lerp);
+			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceRange().GetLowerBoundValue(), LinkedNerve->GetPropulsionForceRange().GetUpperBoundValue(), Lerp);
 
 			PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
 			ReleasePlayer(true);
@@ -71,6 +77,11 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 		{
 			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
 			IsPropultionActive = false;
+		}
+
+		else if (bHasReleasedInteraction && PlayerController->GetPlayerInputs().bInputInteract)
+		{
+			ReleasePlayer(true);
 		}
 	}
 }
@@ -98,14 +109,14 @@ bool UPlayerToNervePhysicConstraint::IsMovingTowardsPosition(const FVector& Targ
 {
 	const UCharacterMovementComponent* MovementComponent = PlayerCharacter->GetCharacterMovement();
 	if (!MovementComponent) return false;
-	
+
 	const FVector Velocity = MovementComponent->Velocity;
 	if (Velocity.IsNearlyZero()) return false;
-	
+
 	const FVector CurrentLocation = PlayerCharacter->GetActorLocation();
 	const FVector ToTargetDirection = (TargetPosition - CurrentLocation).GetSafeNormal();
 	const FVector MovementDirection = Velocity.GetSafeNormal();
-	
+
 	const float DotProduct = FVector::DotProduct(MovementDirection, ToTargetDirection);
 	return DotProduct >= AcceptanceThreshold;
 }

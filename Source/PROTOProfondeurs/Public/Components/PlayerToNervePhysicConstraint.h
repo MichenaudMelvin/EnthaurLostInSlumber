@@ -15,19 +15,14 @@ class PROTOPROFONDEURS_API UPlayerToNervePhysicConstraint : public UActorCompone
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
 	UPlayerToNervePhysicConstraint();
 
 protected:
-	// Called when the game starts
 	virtual void BeginPlay() override;
 
 public:
-	void HandlePropulsion();
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-	                           FActorComponentTickFunction* ThisTickFunction) override;
-	
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	void Init(ANerve* vLinkedNerve, ACharacter* vPlayerCharacter);
 	void ReleasePlayer(const bool DetachFromPlayer = false);
 	bool IsMovingTowardsPosition(const FVector& TargetPosition, float AcceptanceThreshold) const;
@@ -42,6 +37,8 @@ public:
 	FVector PreviousVelocity;
 	UPROPERTY()
 	bool IsAlreadyPropulsing = false;
+
+	bool bHasReleasedInteraction = false;
 
 private:
 	UPROPERTY()
