@@ -6,6 +6,7 @@
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Subsystems/PRFAISubsystem.h"
 
 ADefaultAIController::ADefaultAIController()
 {
@@ -24,6 +25,32 @@ void ADefaultAIController::BeginPlay()
 	if (GetBlackboardComponent() && GetPawn())
 	{
 		GetBlackboardComponent()->SetValueAsVector(SpawnLocationKeyName, GetPawn()->GetActorLocation());
+	}
+
+	UPRFAISubsystem* AISubsystem = GetWorld()->GetSubsystem<UPRFAISubsystem>();
+	if(AISubsystem)
+	{
+		AISubsystem->AddAI(this);
+	}
+}
+
+void ADefaultAIController::Destroyed()
+{
+	Super::Destroyed();
+
+	UPRFAISubsystem* AISubsystem = GetWorld()->GetSubsystem<UPRFAISubsystem>();
+	if(AISubsystem)
+	{
+		AISubsystem->RemoveAI(this);
+	}
+}
+void ADefaultAIController::TickAI_Implementation(float DeltaTime)
+{
+	IAIInterface::TickAI_Implementation(DeltaTime);
+
+	if (GetPawn())
+	{
+		GetPawn()->Tick(DeltaTime);
 	}
 }
 

@@ -9,21 +9,16 @@
 #include "UI/InGameUI.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Physics/NervePhysicsConstraint.h"
+#include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 
 
-// Sets default values for this component's properties
 UPlayerToNervePhysicConstraint::UPlayerToNervePhysicConstraint()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
-
-// Called when the game starts
 void UPlayerToNervePhysicConstraint::BeginPlay()
 {
 	Super::BeginPlay();
@@ -35,42 +30,54 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	float Distance = FVector::Dist(PlayerCharacter->GetActorLocation(), LinkedNerve->GetActorLocation());
+	if (!PlayerController->GetPlayerInputs().bInputInteract)
+	{
+		bHasReleasedInteraction = true;
+	}
+
+	float Distance = LinkedNerve->GetCableLength();
 	float Lerp = UKismetMathLibrary::NormalizeToRange(
 			Distance,
-			LinkedNerve->GetCableLength(),
+			0.0f,
 			LinkedNerve->GetCableMaxExtension()
 		);
+
 	Lerp = FMath::Clamp(Lerp, 0.f, 1.f);
 	Lerp = FMath::Sin((Lerp * PI) / 2.f);
-	
-	if (IsMovingTowardsPosition(LinkedNerve->GetActorLocation(), 0.2f))
+
+	if (IsMovingTowardsPosition(LinkedNerve->GetLastCableLocation(), 0.2f))
 	{
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f + Lerp);
 	} else
 	{
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f - Lerp);
 	}
-	
-	if (Distance >= LinkedNerve->DistanceNeededToPropulsion)
+
+	if (Distance >= LinkedNerve->GetDistanceNeededToPropulsion())
 	{
 		if (!IsPropultionActive)
 		{
 			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(true);
 			IsPropultionActive = true;
 		}
-		
+
 		if (PlayerController->GetPlayerInputs().bInputInteract && !IsAlreadyPropulsing)
 		{
 			IsAlreadyPropulsing = true;
-			
-			const FVector Direction = PlayerCharacter->GetComponentByClass<UCameraComponent>()->GetForwardVector();
-			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceMinMax().X, LinkedNerve->GetPropulsionForceMinMax().Y, Lerp);
-			
-			PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
+
+			FVector CableDirection = LinkedNerve->GetCableDirection() * -1;
+			const FVector CameraDirection = PlayerCharacter->GetCamera()->GetForwardVector();
+
+			const FFloatRange& CameraRange = GetDefault<UNervePhysicsConstraint>()->CameraPropulsion;
+			CableDirection.Z = FMath::Clamp(CameraDirection.Z, CameraRange.GetLowerBoundValue(), CameraRange.GetUpperBoundValue());
+
+			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceRange().GetLowerBoundValue(), LinkedNerve->GetPropulsionForceRange().GetUpperBoundValue(), Lerp);
+
+			PlayerCharacter->EjectCharacter(CableDirection * Force);
+
 			ReleasePlayer(true);
 		}
-	} else if (Distance < LinkedNerve->DistanceNeededToPropulsion)
+	} else if (Distance < LinkedNerve->GetDistanceNeededToPropulsion())
 	{
 
 		if (IsPropultionActive)
@@ -78,13 +85,24 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
 			IsPropultionActive = false;
 		}
+
+		else if (bHasReleasedInteraction && PlayerController->GetPlayerInputs().bInputInteract)
+		{
+			ReleasePlayer(true);
+		}
 	}
 }
 
 void UPlayerToNervePhysicConstraint::Init(ANerve* vLinkedNerve, ACharacter* vPlayerCharacter)
 {
-	this->LinkedNerve = vLinkedNerve;
-	this->PlayerCharacter = vPlayerCharacter;
+	LinkedNerve = vLinkedNerve;
+	AFirstPersonCharacter* CastCharacter = Cast<AFirstPersonCharacter>(vPlayerCharacter);
+	if (!CastCharacter)
+	{
+		return;
+	}
+
+	PlayerCharacter = CastCharacter;
 	DefaultMaxSpeed = vPlayerCharacter->GetCharacterMovement()->MaxWalkSpeed;
 }
 
@@ -104,14 +122,14 @@ bool UPlayerToNervePhysicConstraint::IsMovingTowardsPosition(const FVector& Targ
 {
 	const UCharacterMovementComponent* MovementComponent = PlayerCharacter->GetCharacterMovement();
 	if (!MovementComponent) return false;
-	
+
 	const FVector Velocity = MovementComponent->Velocity;
 	if (Velocity.IsNearlyZero()) return false;
-	
+
 	const FVector CurrentLocation = PlayerCharacter->GetActorLocation();
 	const FVector ToTargetDirection = (TargetPosition - CurrentLocation).GetSafeNormal();
 	const FVector MovementDirection = Velocity.GetSafeNormal();
-	
+
 	const float DotProduct = FVector::DotProduct(MovementDirection, ToTargetDirection);
 	return DotProduct >= AcceptanceThreshold;
 }
