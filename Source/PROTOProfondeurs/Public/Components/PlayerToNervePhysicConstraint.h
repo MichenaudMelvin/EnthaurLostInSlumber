@@ -9,7 +9,7 @@
 class AFirstPersonController;
 class ANerve;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup = (Physics), meta=(BlueprintSpawnableComponent))
 class PROTOPROFONDEURS_API UPlayerToNervePhysicConstraint : public UActorComponent
 {
 	GENERATED_BODY()

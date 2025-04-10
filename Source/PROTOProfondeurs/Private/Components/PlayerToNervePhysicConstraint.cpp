@@ -9,6 +9,7 @@
 #include "UI/InGameUI.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 
 
@@ -67,7 +68,16 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			const FVector Direction = PlayerCharacter->GetComponentByClass<UCameraComponent>()->GetForwardVector();
 			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceRange().GetLowerBoundValue(), LinkedNerve->GetPropulsionForceRange().GetUpperBoundValue(), Lerp);
 
-			PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
+			AFirstPersonCharacter* Character = Cast<AFirstPersonCharacter>(PlayerCharacter);
+			if (Character)
+			{
+				Character->EjectCharacter(Direction * Force);
+			}
+			else
+			{
+				PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
+			}
+
 			ReleasePlayer(true);
 		}
 	} else if (Distance < LinkedNerve->GetDistanceNeededToPropulsion())
@@ -88,8 +98,8 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 
 void UPlayerToNervePhysicConstraint::Init(ANerve* vLinkedNerve, ACharacter* vPlayerCharacter)
 {
-	this->LinkedNerve = vLinkedNerve;
-	this->PlayerCharacter = vPlayerCharacter;
+	LinkedNerve = vLinkedNerve;
+	PlayerCharacter = vPlayerCharacter;
 	DefaultMaxSpeed = vPlayerCharacter->GetCharacterMovement()->MaxWalkSpeed;
 }
 
