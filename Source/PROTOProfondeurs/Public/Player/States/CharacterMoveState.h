@@ -27,8 +27,6 @@ protected:
 
 	virtual void ApplyMovement();
 
-	virtual void UpdateCameraSteering(float DeltaTime) override;
-
 	bool bMovementLocked = false;
 
 public:
