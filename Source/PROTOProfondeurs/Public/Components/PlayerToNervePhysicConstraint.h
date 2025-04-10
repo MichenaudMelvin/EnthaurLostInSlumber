@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "PlayerToNervePhysicConstraint.generated.h"
 
+class AFirstPersonCharacter;
 class AFirstPersonController;
 class ANerve;
 
@@ -29,12 +30,16 @@ public:
 
 	UPROPERTY()
 	TObjectPtr<ANerve> LinkedNerve;
+
 	UPROPERTY()
-	TObjectPtr<ACharacter> PlayerCharacter;
+	TObjectPtr<AFirstPersonCharacter> PlayerCharacter;
+
 	UPROPERTY()
 	TObjectPtr<AFirstPersonController> PlayerController;
+
 	UPROPERTY()
 	FVector PreviousVelocity;
+
 	UPROPERTY()
 	bool IsAlreadyPropulsing = false;
 

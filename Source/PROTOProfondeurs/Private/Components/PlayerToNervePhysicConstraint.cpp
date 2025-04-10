@@ -9,6 +9,7 @@
 #include "UI/InGameUI.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Physics/NervePhysicsConstraint.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 
@@ -64,19 +65,15 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 		{
 			IsAlreadyPropulsing = true;
 
-			// const FVector Direction = LinkedNerve->GetCableDirection() * -1;
-			const FVector Direction = PlayerCharacter->GetComponentByClass<UCameraComponent>()->GetForwardVector();
+			FVector CableDirection = LinkedNerve->GetCableDirection() * -1;
+			const FVector CameraDirection = PlayerCharacter->GetCamera()->GetForwardVector();
+
+			const FFloatRange& CameraRange = GetDefault<UNervePhysicsConstraint>()->CameraPropulsion;
+			CableDirection.Z = FMath::Clamp(CameraDirection.Z, CameraRange.GetLowerBoundValue(), CameraRange.GetUpperBoundValue());
+
 			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceRange().GetLowerBoundValue(), LinkedNerve->GetPropulsionForceRange().GetUpperBoundValue(), Lerp);
 
-			AFirstPersonCharacter* Character = Cast<AFirstPersonCharacter>(PlayerCharacter);
-			if (Character)
-			{
-				Character->EjectCharacter(Direction * Force);
-			}
-			else
-			{
-				PlayerCharacter->GetCharacterMovement()->AddImpulse(Direction * Force, true);
-			}
+			PlayerCharacter->EjectCharacter(CableDirection * Force);
 
 			ReleasePlayer(true);
 		}
@@ -99,7 +96,13 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 void UPlayerToNervePhysicConstraint::Init(ANerve* vLinkedNerve, ACharacter* vPlayerCharacter)
 {
 	LinkedNerve = vLinkedNerve;
-	PlayerCharacter = vPlayerCharacter;
+	AFirstPersonCharacter* CastCharacter = Cast<AFirstPersonCharacter>(vPlayerCharacter);
+	if (!CastCharacter)
+	{
+		return;
+	}
+
+	PlayerCharacter = CastCharacter;
 	DefaultMaxSpeed = vPlayerCharacter->GetCharacterMovement()->MaxWalkSpeed;
 }
 
