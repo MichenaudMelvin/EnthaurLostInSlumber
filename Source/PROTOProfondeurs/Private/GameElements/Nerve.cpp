@@ -247,6 +247,20 @@ void ANerve::DetachNerveBall()
 			1.f,
 			EFCEase::OutElastic);
 
+	// delete all cables except the first one
+	for (int i = Cables.Num() - 1; i > 0; i--)
+	{
+		UCableComponent* CurrentCable = Cables[i];
+		Cables.RemoveAt(i);
+		CurrentCable->DestroyComponent(true);
+	}
+
+	if(Cables[0])
+	{
+		Cables[0]->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
+		Cables[0]->EndLocation = FVector::ZeroVector;
+	}
+
 	InteractableComponent->AddInteractable(NerveBall);
 	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
 	{
