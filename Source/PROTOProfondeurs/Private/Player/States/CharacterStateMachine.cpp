@@ -42,13 +42,13 @@ void UCharacterStateMachine::TickStateMachine(float DeltaTime)
 	CurrentState->StateTick(DeltaTime);
 }
 
-void UCharacterStateMachine::ChangeState(ECharacterStateID NextStateID)
+UCharacterState* UCharacterStateMachine::ChangeState(ECharacterStateID NextStateID)
 {
 	UCharacterState* NextState = FindState(NextStateID);
 
 	if(NextState == nullptr)
 	{
-		return;
+		return nullptr;
 	}
 
 	if(CurrentState != nullptr)
@@ -62,10 +62,11 @@ void UCharacterStateMachine::ChangeState(ECharacterStateID NextStateID)
 
 	if(CurrentState == nullptr)
 	{
-		return;
+		return nullptr;
 	}
 
 	CurrentState->StateEnter(PreviousStateID);
+	return NextState;
 }
 
 UCharacterState* UCharacterStateMachine::FindState(ECharacterStateID StateID) const

@@ -25,6 +25,7 @@ enum class ECharacterStateID : uint8
 	Jump,
 	Fall,
 	Interact,
+	Stop,
 	Slide,
 	TakeAmber,
 };

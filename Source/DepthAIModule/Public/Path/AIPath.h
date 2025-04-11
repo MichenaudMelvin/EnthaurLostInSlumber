@@ -17,9 +17,9 @@ public:
 	AAIPath();
 
 protected:
-	virtual void OnConstruction(const FTransform& Transform) override;
-
 	virtual void BeginPlay() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<USceneComponent> Root;
@@ -55,10 +55,32 @@ protected:
 
 	void UpdatePoints(bool bInConstructionScript);
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Direction")
 	FVector GetDirection();
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(Transient, VisibleInstanceOnly, Category = "AI")
+	TObjectPtr<APawn> AttachedAI;
+#endif
 
 public:
 	FVector GetPointLocation(int8 PointIndex) const;
 
 	USplineComponent* GetSpline() const {return Spline;}
+
+	/**
+	 * @brief Should be used only onConstruction (use GetPointLocation() otherwise)
+	 * @param PointIndex
+	 * @param HitResult 
+	 * @return 
+	 */
+	bool GetTracedPointLocation(int8 PointIndex, FHitResult& HitResult);
+
+	bool IsOnFloor() const;
+
+#if WITH_EDITORONLY_DATA
+	bool AttachAI(APawn* AI);
+
+	void DetachAI(APawn* AI);
+#endif
 };

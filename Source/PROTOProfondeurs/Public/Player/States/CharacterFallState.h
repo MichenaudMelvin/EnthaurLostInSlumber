@@ -31,8 +31,18 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Movement|Fall", meta = (ClampMin = 0.0f))
 	float FallingDeceleration = 100.0f;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Movement|Projection")
+	FVector ProjectionVelocity = FVector::ZeroVector;
+
 private:
 	bool bCanDoCoyoteTime = false;
 
 	float CoyoteTime = 0.0f;
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
+	void SetProjectionVelocity(const FVector& Velocity);
+
+	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
+	void LaunchCharacter() const;
 };
