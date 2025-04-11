@@ -52,20 +52,6 @@ void UCharacterMoveState::ApplyMovement()
 	}
 }
 
-void UCharacterMoveState::UpdateCameraSteering(float DeltaTime)
-{
-	if (FMath::Abs(GetInputs().InputMove.X) < GetDefault<UCharacterSettings>()->MoveInputThreshold)
-	{
-		TargetSteering = 0.0f;
-	}
-	else
-	{
-		TargetSteering = MaxSteering * (GetInputs().InputMove.X > 0.0f ? 1.0f : -1.0f);
-	}
-
-	Super::UpdateCameraSteering(DeltaTime);
-}
-
 void UCharacterMoveState::SetNewSpeed(const float NewSpeed)
 {
 	Character->GetCharacterMovement()->MaxWalkSpeed = NewSpeed;

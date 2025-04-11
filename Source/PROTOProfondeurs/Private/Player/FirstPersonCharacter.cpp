@@ -6,16 +6,13 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
+#include "GameElements/AmberOre.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "KismetTraceUtils.h"
-#include "GameFramework/GameStateBase.h"
-#include "UI/DeathMenuUI.h"
-#include "Kismet/GameplayStatics.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
 #include "PRFUI/Public/TestMVVM/TestViewModel.h"
@@ -45,6 +42,12 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
 	HearingStimuli->bAutoRegister = true;
 	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
+
+	AmberInventory.Add(EAmberType::NecroseAmber, 0);
+	AmberInventory.Add(EAmberType::WeakAmber, 0);
+
+	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 1);
+	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 3);
 }
 
 void AFirstPersonCharacter::BeginPlay()
@@ -323,15 +326,46 @@ void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
-
-	bCanTakeAmber = bIsZoneActive;
 }
 
 void AFirstPersonCharacter::OnExitWeakZone_Implementation()
 {
 	IWeakZoneInterface::OnExitWeakZone_Implementation();
+}
 
-	bCanTakeAmber = false;
+void AFirstPersonCharacter::MineAmber(const EAmberType& AmberType, const int Amount)
+{
+	int* Count = AmberInventory.Find(AmberType);
+	int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
+
+	// Count == nullptr means AmberType key doesn't exist
+	if (!Count || !MaxCapacity)
+	{
+		return;
+	}
+
+	*Count += Amount;
+	*Count = FMath::Clamp(*Count, 0.0f, *MaxCapacity);
+
+	OnAmberUpdate.Broadcast(AmberType, *Count);
+}
+
+void AFirstPersonCharacter::UseAmber(const EAmberType& AmberType, const int Amount)
+{
+	MineAmber(AmberType, -Amount);
+}
+
+bool AFirstPersonCharacter::IsAmberTypeFilled(const EAmberType& AmberType) const
+{
+	const int* Count = AmberInventory.Find(AmberType);
+	const int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
+
+	if (!Count || !MaxCapacity)
+	{
+		return false;
+	}
+
+	return *Count == *MaxCapacity;
 }
 
 #pragma endregion
@@ -384,26 +418,17 @@ void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) con
 
 void AFirstPersonCharacter::StopCharacter() const
 {
-	if (StateMachine)
+	if (!StateMachine)
 	{
-		UCharacterState* CurrentState = StateMachine->ChangeState(ECharacterStateID::Fall);
-		if (CurrentState)
-		{
-			UCharacterFallState* FallState = Cast<UCharacterFallState>(CurrentState);
-			if (FallState)
-			{
-				FallState->LockMovement(true);
-			}
-		}
+		return;
 	}
 
-	GetCharacterMovement()->Velocity = FVector::ZeroVector;
-	GetCharacterMovement()->GravityScale = 0.0f;
+	StateMachine->ChangeState(ECharacterStateID::Stop);
 }
 
 bool AFirstPersonCharacter::IsStopped() const
 {
-	return GetCharacterMovement()->Velocity == FVector::ZeroVector && GetCharacterMovement()->GravityScale == 0.0f;
+	return StateMachine->GetCurrentStateID() == ECharacterStateID::Stop;
 }
 
 void AFirstPersonCharacter::SetInteractionUI(const bool bState) const

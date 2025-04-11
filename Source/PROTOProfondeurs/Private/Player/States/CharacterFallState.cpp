@@ -2,6 +2,7 @@
 
 
 #include "Player/States/CharacterFallState.h"
+#include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Components/CapsuleComponent.h"
@@ -29,6 +30,7 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 		bCanDoCoyoteTime = false;
 	}
 
+	SpikeBrakeTime = 0.0f;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
 	Character->GetCharacterMovement()->AirControl = AirControl;
@@ -62,6 +64,41 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 		if (GetInputs().bInputJump)
 		{
 			StateMachine->ChangeState(ECharacterStateID::Jump);
+		}
+	}
+
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%f"), SpikeBrakeTime));
+	if (Controller->GetPlayerInputs().bInputInteract)
+	{
+		SpikeBrakeTime += DeltaTime;
+		SpikeBrakeTime = FMath::Clamp(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
+	}
+	else if (!Controller->GetPlayerInputs().bInputInteract)
+	{
+		if (SpikeBrakeTime >= SpikeBrakeDuration)
+		{
+			FVector StartLocation = Character->GetCamera()->GetComponentLocation();
+			FVector EndLocation = (Character->GetCamera()->GetForwardVector() * SpikeBrakeTraceLength) + StartLocation;
+
+			TArray<AActor*> ActorsToIgnore;
+			ActorsToIgnore.Add(Character);
+
+			FHitResult Hit;
+			bool bHit = UKismetSystemLibrary::LineTraceSingle(Character, StartLocation, EndLocation, UEngineTypes::ConvertToTraceType(SpikeBrakeTraceTypeQuery), false, ActorsToIgnore, EDrawDebugTrace::ForDuration, Hit, false);
+
+			if (bHit)
+			{
+				StateMachine->ChangeState(ECharacterStateID::Stop);
+			}
+			else
+			{
+				SpikeBrakeTime = 0.0f;
+			}
+		}
+		else
+		{
+			SpikeBrakeTime -= DeltaTime;
+			SpikeBrakeTime = FMath::Clamp(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
 		}
 	}
 
