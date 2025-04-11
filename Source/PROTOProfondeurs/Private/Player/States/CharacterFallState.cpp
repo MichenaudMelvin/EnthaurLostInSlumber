@@ -6,6 +6,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
@@ -83,15 +84,18 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 			ActorsToIgnore.Add(Character);
 
 			FHitResult Hit;
-			bool bHit = UKismetSystemLibrary::LineTraceSingle(Character, StartLocation, EndLocation, UEngineTypes::ConvertToTraceType(SpikeBrakeTraceTypeQuery), false, ActorsToIgnore, EDrawDebugTrace::ForDuration, Hit, false);
+			bool bHit = UKismetSystemLibrary::LineTraceSingle(Character, StartLocation, EndLocation, UEngineTypes::ConvertToTraceType(SpikeBrakeTraceTypeQuery), false, ActorsToIgnore, EDrawDebugTrace::None, Hit, false);
 
 			if (bHit)
 			{
+				Character->PlantSpike(Hit.Location);
 				StateMachine->ChangeState(ECharacterStateID::Stop);
+				return;
 			}
 			else
 			{
-				SpikeBrakeTime = 0.0f;
+				SpikeBrakeTime -= DeltaTime;
+				SpikeBrakeTime = FMath::Clamp(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
 			}
 		}
 		else
@@ -100,6 +104,9 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 			SpikeBrakeTime = FMath::Clamp(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
 		}
 	}
+
+	float Alpha = UKismetMathLibrary::NormalizeToRange(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
+	Character->UpdateSpikeOffset(Alpha);
 
 	if(Character->GetCharacterMovement()->IsFalling())
 	{

@@ -8,6 +8,7 @@
 #include "Components/InteractableComponent.h"
 #include "GameElements/AmberOre.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
@@ -22,16 +23,13 @@
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
-	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(34.0f, 88.0f);
 
-	// Create a CameraComponent
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
-	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f)); // Position the camera
+	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f));
 	CameraComponent->bUsePawnControlRotation = true;
 
-	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
 	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("First Person Mesh"));
 	CharacterMesh->SetOnlyOwnerSee(true);
 	CharacterMesh->SetupAttachment(CameraComponent);
@@ -42,6 +40,9 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
 	HearingStimuli->bAutoRegister = true;
 	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
+
+	SpikeMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SpikeMesh"));
+	SpikeMesh->SetupAttachment(CameraComponent);
 
 	AmberInventory.Add(EAmberType::NecroseAmber, 0);
 	AmberInventory.Add(EAmberType::WeakAmber, 0);
@@ -54,8 +55,12 @@ void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetRespawnPosition(this->GetActorLocation());
-	
+	SetRespawnPosition(GetActorLocation());
+
+	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
+	SpikeTargetTransform = SpikeRelativeTransform;
+	SpikeParent = SpikeMesh->GetAttachParent();
+
 	if (!GetController())
 	{
 		return;
@@ -115,6 +120,7 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 	TickStateMachine(DeltaSeconds);
 	InteractionTrace();
 	GroundMovement();
+	UpdateSpikeLocation(DeltaSeconds);
 }
 
 #pragma region StateMachine
@@ -391,6 +397,55 @@ bool AFirstPersonCharacter::HasRequiredQuantity(const EAmberType& AmberType, con
 
 #pragma endregion
 
+#pragma region Spike
+
+void AFirstPersonCharacter::PlantSpike(const FVector& TargetLocation)
+{
+	SpikeMesh->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	bUseSpikeRelativeTransform = false;
+	SpikeTargetTransform = FTransform(TargetLocation);
+}
+
+void AFirstPersonCharacter::ReGrabSpike()
+{
+	SpikeMesh->AttachToComponent(SpikeParent, FAttachmentTransformRules::KeepWorldTransform);
+	bUseSpikeRelativeTransform = true;
+	SpikeTargetTransform = SpikeRelativeTransform;
+}
+
+void AFirstPersonCharacter::UpdateSpikeOffset(float Alpha) const
+{
+	FVector DefaultLocation = SpikeRelativeTransform.GetLocation();
+	FVector OffsetLocation = DefaultLocation - (FVector::ForwardVector * SpikeChargingOffset);
+	FVector TargetLocation = UKismetMathLibrary::VLerp(DefaultLocation, OffsetLocation, Alpha);
+
+	SpikeMesh->SetRelativeLocation(TargetLocation);
+}
+
+void AFirstPersonCharacter::UpdateSpikeLocation(float DeltaTime) const
+{
+	float Alpha = DeltaTime * SpikeLerpSpeed;
+
+	FVector CurrentLocation = bUseSpikeRelativeTransform ? SpikeMesh->GetRelativeLocation() : SpikeMesh->GetComponentLocation();
+	FVector TargetLocation = UKismetMathLibrary::VLerp(CurrentLocation, SpikeTargetTransform.GetLocation(), Alpha);
+
+	if (bUseSpikeRelativeTransform)
+	{
+		FRotator TargetRotator = UKismetMathLibrary::RLerp(SpikeMesh->GetRelativeRotation(), SpikeTargetTransform.GetRotation().Rotator(), Alpha, true);
+
+		SpikeMesh->SetRelativeRotation(TargetRotator);
+		SpikeMesh->SetRelativeLocation(TargetLocation);
+	}
+	else
+	{
+		SpikeMesh->SetWorldLocation(TargetLocation);
+	}
+}
+
+#pragma endregion
+
+#pragma region CharacterFunctions
+
 FVector AFirstPersonCharacter::GetBottomLocation() const
 {
 	return GetPlayerLocation(false);
@@ -452,8 +507,24 @@ bool AFirstPersonCharacter::IsStopped() const
 	return StateMachine->GetCurrentStateID() == ECharacterStateID::Stop;
 }
 
+#pragma endregion
+
 void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
 {
 	if (CurrentInteractable != nullptr)
 		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
 }
+
+#if WITH_EDITORONLY_DATA
+
+void AFirstPersonCharacter::ChangeState(const ECharacterStateID& State) const
+{
+	if (!StateMachine)
+	{
+		return;
+	}
+
+	StateMachine->ChangeState(State);
+}
+
+#endif
