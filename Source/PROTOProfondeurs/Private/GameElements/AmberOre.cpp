@@ -28,6 +28,13 @@ void AAmberOre::BeginPlay()
 	Interactable->OnInteract.AddDynamic(this, &AAmberOre::OnInteract);
 }
 
+void AAmberOre::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	UpdateMaterial(false);
+}
+
 void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn)
 {
 	if (Pawn == nullptr)
@@ -41,12 +48,31 @@ void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn)
 		return;
 	}
 
-	if (Character->IsAmberFilled())
+	if (Character->IsAmberTypeFilled(AmberType))
 	{
 		return;
 	}
 
-	Character->FillAmber(true);
+	Character->MineAmber(AmberType, OreAmount);
 	Interactable->RemoveInteractable(Mesh);
+
+	UpdateMaterial(true);
+
 	Interactable->OnInteract.RemoveDynamic(this, &AAmberOre::OnInteract);
+}
+
+void AAmberOre::UpdateMaterial(bool bPickedUp) const
+{
+	TObjectPtr<UMaterialInterface> TargetMaterial = nullptr;
+	switch (AmberType)
+	{
+	case EAmberType::NecroseAmber:
+		TargetMaterial = bPickedUp ? NecroseMaterialPickUp : NecroseMaterial;
+		break;
+	case EAmberType::WeakAmber:
+		TargetMaterial = bPickedUp ? WeakMaterialPickUp : WeakMaterial;
+		break;
+	}
+
+	Mesh->SetMaterial(0, TargetMaterial);
 }

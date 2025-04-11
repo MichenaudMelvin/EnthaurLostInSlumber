@@ -6,6 +6,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
+#include "GameElements/AmberOre.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
@@ -41,6 +42,12 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
 	HearingStimuli->bAutoRegister = true;
 	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
+
+	AmberInventory.Add(EAmberType::NecroseAmber, 0);
+	AmberInventory.Add(EAmberType::WeakAmber, 0);
+
+	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 1);
+	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 3);
 }
 
 void AFirstPersonCharacter::BeginPlay()
@@ -319,15 +326,46 @@ void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
-
-	bCanTakeAmber = bIsZoneActive;
 }
 
 void AFirstPersonCharacter::OnExitWeakZone_Implementation()
 {
 	IWeakZoneInterface::OnExitWeakZone_Implementation();
+}
 
-	bCanTakeAmber = false;
+void AFirstPersonCharacter::MineAmber(const EAmberType& AmberType, const int Amount)
+{
+	int* Count = AmberInventory.Find(AmberType);
+	int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
+
+	// Count == nullptr means AmberType key doesn't exist
+	if (!Count || !MaxCapacity)
+	{
+		return;
+	}
+
+	*Count += Amount;
+	*Count = FMath::Clamp(*Count, 0.0f, *MaxCapacity);
+
+	OnAmberUpdate.Broadcast(AmberType, *Count);
+}
+
+void AFirstPersonCharacter::UseAmber(const EAmberType& AmberType, const int Amount)
+{
+	MineAmber(AmberType, -Amount);
+}
+
+bool AFirstPersonCharacter::IsAmberTypeFilled(const EAmberType& AmberType) const
+{
+	const int* Count = AmberInventory.Find(AmberType);
+	const int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
+
+	if (!Count || !MaxCapacity)
+	{
+		return false;
+	}
+
+	return *Count == *MaxCapacity;
 }
 
 #pragma endregion

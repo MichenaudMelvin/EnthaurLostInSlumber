@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+enum class EAmberType : uint8;
 class UTestViewModel;
 class UViewBobbing;
 class AFirstPersonController;
@@ -16,6 +17,8 @@ class UAIPerceptionStimuliSourceComponent;
 class UCharacterState;
 enum class ECharacterStateID : uint8;
 class UCameraComponent;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberType, int, AmberAmount);
 
 UCLASS()
 class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface
@@ -143,19 +146,26 @@ protected:
 #pragma region Amber
 
 protected:
-	bool bCanTakeAmber = false;
-
 	UPROPERTY(BlueprintReadOnly, Category = "Amber")
-	bool bAmberFilled = false;
+	TMap<EAmberType, int> AmberInventory;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	TMap<EAmberType, int> AmberInventoryMaxCapacity;
+
+	UPROPERTY(BlueprintAssignable, Category = "Amber")
+	FKOnAmberUpdate OnAmberUpdate;
 
 public:
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
 
-	void FillAmber(bool bRefill) {bAmberFilled = bRefill;}
+	void MineAmber(const EAmberType& AmberType, const int Amount);
 
-	bool IsAmberFilled() const {return bAmberFilled;}
+	void UseAmber(const EAmberType& AmberType, const int Amount);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
+	bool IsAmberTypeFilled(const EAmberType& AmberType) const;
 
 #pragma endregion
 

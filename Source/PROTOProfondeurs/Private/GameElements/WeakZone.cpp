@@ -6,6 +6,7 @@
 #include "MovieSceneTracksComponentTypes.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
+#include "GameElements/AmberOre.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/FirstPersonCharacter.h"
 
@@ -205,12 +206,12 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn)
 		return;
 	}
 
-	if (!Character->IsAmberFilled())
+	if (!Character->IsAmberTypeFilled(EAmberType::WeakAmber))
 	{
 		return;
 	}
 
-	Character->FillAmber(false);
+	Character->UseAmber(EAmberType::WeakAmber, 1);
 	Destroy();
 }
 
