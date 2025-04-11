@@ -4,6 +4,7 @@
 #include "Player/FirstPersonController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "UIManagerSettings.h"
 #include "Blueprint/UserWidget.h"
 #include "Kevin/UI/DeathMenuUI.h"
 #include "Kevin/UI/InGameUI.h"
@@ -232,7 +233,7 @@ void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActi
 		return;
 	}
 
-	UIManager->ShowPauseMenu(this);
+	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);
 }
 
 #if WITH_EDITOR

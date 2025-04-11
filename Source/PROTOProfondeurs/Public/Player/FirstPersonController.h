@@ -188,9 +188,6 @@ private:
 #pragma endregion
 
 #pragma region UI Menus
-	
-private:
-	bool bIsInMenus = false;
 
 #pragma endregion
 

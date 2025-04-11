@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "Components/TextBlock.h"
+#include "Components/Button.h"
 #include "PRFPauseMenu.generated.h"
 
 /**
@@ -21,8 +21,15 @@ public:
 	static void TogglePauseMenu();
 
 protected:
-	virtual void NativeOnInitialized() override;
+	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
+
+	UFUNCTION()
+	void HandleOptionsMenuButton();
 
 	/*UPROPERTY(Meta = (BindWidget))
 	UTextBlock* TestBlock;*/
+
+	UPROPERTY(Meta = (BindWidget))
+	UButton* OptionsMenuButton;
 };
