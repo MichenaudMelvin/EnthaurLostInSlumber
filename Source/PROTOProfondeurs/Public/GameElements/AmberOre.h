@@ -56,7 +56,7 @@ protected:
 	int OreAmount = 1;
 
 	UFUNCTION()
-	void OnInteract(APlayerController* Controller, APawn* Pawn);
+	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
 	void UpdateMaterial(bool bPickedUp) const;
 };

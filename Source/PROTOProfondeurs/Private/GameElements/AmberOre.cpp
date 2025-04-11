@@ -35,15 +35,15 @@ void AAmberOre::OnConstruction(const FTransform& Transform)
 	UpdateMaterial(false);
 }
 
-void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn)
+void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
-	if (Pawn == nullptr)
+	if (!Pawn)
 	{
 		return;
 	}
 
 	AFirstPersonCharacter* Character = Cast<AFirstPersonCharacter>(Pawn);
-	if (Character == nullptr)
+	if (!Character)
 	{
 		return;
 	}

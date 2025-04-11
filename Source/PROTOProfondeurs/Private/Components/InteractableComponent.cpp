@@ -43,9 +43,24 @@ void UInteractableComponent::RemoveInteractables(TArray<UPrimitiveComponent*> Co
 	}
 }
 
-#pragma endregion
+void UInteractableComponent::SelectPrimitive(UPrimitiveComponent* PrimitiveComponent)
+{
+	if (!PrimitiveComponent)
+	{
+		return;
+	}
+
+	if (!InteractableComponentSet.Contains(PrimitiveComponent))
+	{
+		return;
+	}
+
+	TargetPrimitive = PrimitiveComponent;
+}
 
 void UInteractableComponent::Interact(APlayerController* PlayerController, APawn* Player)
 {
-	OnInteract.Broadcast(PlayerController, Player);
+	OnInteract.Broadcast(PlayerController, Player, TargetPrimitive);
 }
+
+#pragma endregion

@@ -99,7 +99,7 @@ protected:
 	TObjectPtr<UInteractableComponent> InteractableComponent;
 
 	UFUNCTION()
-	void Interaction(APlayerController* InPlayerController, APawn* Pawn);
+	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
 	UPROPERTY()
 	TObjectPtr<AFirstPersonController> PlayerController;

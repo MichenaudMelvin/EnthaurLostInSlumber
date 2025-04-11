@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AmberOre.h"
 #include "GameFramework/Actor.h"
 #include "WeakZone.generated.h"
 
@@ -67,6 +68,12 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Interactable", meta = (DisplayName = "InteractionPoints", MakeEditWidget))
 	TArray<FTransform> InteractionTransformPoints;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	EAmberType AmberType = EAmberType::WeakAmber;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber", meta = (ClampMin = 0))
+	int CostByPoint = 1;
+
 	UFUNCTION()
 	void OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
@@ -74,5 +81,5 @@ protected:
 	void OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION()
-	void OnInteract(APlayerController* Controller, APawn* Pawn);
+	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 };

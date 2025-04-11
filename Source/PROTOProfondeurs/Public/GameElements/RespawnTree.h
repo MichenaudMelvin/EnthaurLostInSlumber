@@ -21,12 +21,14 @@ protected:
 
 private:
 	UFUNCTION()
-	void ActivateRespawn(APlayerController* PlayerController, APawn* Pawn);
-	
+	void ActivateRespawn(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> TreeModel;
+
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<class UInteractableComponent> Interaction;
+
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USceneComponent> RespawnPoint;
 

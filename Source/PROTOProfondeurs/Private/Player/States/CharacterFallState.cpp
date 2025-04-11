@@ -67,7 +67,6 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 		}
 	}
 
-	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%f"), SpikeBrakeTime));
 	if (Controller->GetPlayerInputs().bInputInteract)
 	{
 		SpikeBrakeTime += DeltaTime;

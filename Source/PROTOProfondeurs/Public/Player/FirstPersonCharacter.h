@@ -116,6 +116,8 @@ protected:
 
 	void InteractionTrace();
 
+	void RemoveInteraction();
+
 public:
 	UInteractableComponent* GetCurrentInteractable() const {return CurrentInteractable;}
 
@@ -152,20 +154,25 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TMap<EAmberType, int> AmberInventoryMaxCapacity;
 
+public:
 	UPROPERTY(BlueprintAssignable, Category = "Amber")
 	FKOnAmberUpdate OnAmberUpdate;
 
-public:
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
 	void MineAmber(const EAmberType& AmberType, const int Amount);
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
 	void UseAmber(const EAmberType& AmberType, const int Amount);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
 	bool IsAmberTypeFilled(const EAmberType& AmberType) const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
+	bool HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const;
 
 #pragma endregion
 

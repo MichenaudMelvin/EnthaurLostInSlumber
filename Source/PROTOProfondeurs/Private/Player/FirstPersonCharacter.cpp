@@ -218,24 +218,21 @@ void AFirstPersonCharacter::InteractionTrace()
 
 	if (!bHit || !HitResult.GetActor())
 	{
-		SetInteractionUI(false);
-		CurrentInteractable = nullptr;
+		RemoveInteraction();
 		return;
 	}
 
 	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UInteractableComponent::StaticClass());
 	if (!FoundComp)
 	{
-		SetInteractionUI(false);
-		CurrentInteractable = nullptr;
+		RemoveInteraction();
 		return;
 	}
 
 	UInteractableComponent* TargetInteractable = Cast<UInteractableComponent>(FoundComp);
 	if (!TargetInteractable)
 	{
-		SetInteractionUI(false);
-		CurrentInteractable = nullptr;
+		RemoveInteraction();
 		return;
 	}
 
@@ -243,6 +240,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	{
 		SetInteractionUI(true);
 		CurrentInteractable = TargetInteractable;
+		CurrentInteractable->SelectPrimitive(HitResult.GetComponent());
 
 #if WITH_EDITORONLY_DATA
 		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("Interaction: %s"), *CurrentInteractable->GetInteractionName().ToString()));
@@ -250,9 +248,20 @@ void AFirstPersonCharacter::InteractionTrace()
 	}
 	else
 	{
-		SetInteractionUI(false);
-		CurrentInteractable = nullptr;
+		RemoveInteraction();
 	}
+}
+
+void AFirstPersonCharacter::RemoveInteraction()
+{
+	SetInteractionUI(false);
+	if(!CurrentInteractable)
+	{
+		return;
+	}
+
+	CurrentInteractable->SelectPrimitive(nullptr);
+	CurrentInteractable = nullptr;
 }
 
 #pragma endregion
@@ -366,6 +375,18 @@ bool AFirstPersonCharacter::IsAmberTypeFilled(const EAmberType& AmberType) const
 	}
 
 	return *Count == *MaxCapacity;
+}
+
+bool AFirstPersonCharacter::HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const
+{
+	const int* Count = AmberInventory.Find(AmberType);
+
+	if (!Count)
+	{
+		return false;
+	}
+
+	return *Count >= Quantity;
 }
 
 #pragma endregion

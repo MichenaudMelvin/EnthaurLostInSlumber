@@ -2,8 +2,6 @@
 
 
 #include "PROTOProfondeurs/Public/GameElements/WeakZone.h"
-
-#include "MovieSceneTracksComponentTypes.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
 #include "GameElements/AmberOre.h"
@@ -193,7 +191,7 @@ void AWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	}
 }
 
-void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn)
+void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (Pawn == nullptr)
 	{
@@ -206,12 +204,30 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn)
 		return;
 	}
 
-	if (!Character->IsAmberTypeFilled(EAmberType::WeakAmber))
+	if (!Character->HasRequiredQuantity(EAmberType::WeakAmber, CostByPoint))
 	{
 		return;
 	}
 
-	Character->UseAmber(EAmberType::WeakAmber, 1);
-	Destroy();
+	Character->UseAmber(AmberType, CostByPoint);
+
+	if (!InteractionComponent)
+	{
+		return;
+	}
+
+	UStaticMeshComponent* MeshComp = Cast<UStaticMeshComponent>(InteractionComponent);
+	if (!MeshComp)
+	{
+		return;
+	}
+
+	InteractionPoints.Remove(MeshComp);
+	MeshComp->DestroyComponent();
+
+	if (InteractionPoints.Num() == 0)
+	{
+		Destroy();
+	}
 }
 

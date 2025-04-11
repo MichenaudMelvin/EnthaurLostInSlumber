@@ -40,7 +40,7 @@ void ARespawnTree::BeginPlay()
 	Interaction->AddInteractable(TreeModel);
 }
 
-void ARespawnTree::ActivateRespawn(APlayerController* PlayerController, APawn* Pawn)
+void ARespawnTree::ActivateRespawn(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (bIsActivated)
 		return;

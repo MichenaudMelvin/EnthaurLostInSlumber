@@ -277,7 +277,7 @@ bool ANerve::IsNerveBallAttached() const
 
 #pragma region Interaction
 
-void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
+void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (CurrentAttachedReceptacle != nullptr)
 	{
@@ -285,7 +285,7 @@ void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
 		CurrentAttachedReceptacle = nullptr;
 	}
 
-	PlayerController = Cast<AFirstPersonController>(InPlayerController);
+	PlayerController = Cast<AFirstPersonController>(Controller);
 	AttachNerveBall(Pawn);
 
 	PhysicConstraint = Cast<UPlayerToNervePhysicConstraint>(
