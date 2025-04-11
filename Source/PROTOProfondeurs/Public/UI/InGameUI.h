@@ -27,7 +27,14 @@ public:
 	TObjectPtr<UImage> PropulsionIndicator;
 
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> SpikeModel;
+	TObjectPtr<UImage> AmbreGauge1;
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UImage> AmbreGauge2;
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UImage> AmbreGauge3;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UImage> NecrosisGauge;
 
 	virtual void NativeConstruct() override;
 
