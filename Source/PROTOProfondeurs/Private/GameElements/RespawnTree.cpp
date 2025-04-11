@@ -60,5 +60,25 @@ void ARespawnTree::ActivateRespawn(APlayerController* Controller, APawn* Pawn, U
 			EFCEase::InSine);
 }
 
+void ARespawnTree::OnEnterWeakZone_Implementation(bool bIsZoneActive)
+{
+	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
+
+	if (bIsZoneActive && Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::ActivateRespawn))
+	{
+		Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::ActivateRespawn);
+	}
+}
+
+void ARespawnTree::OnExitWeakZone_Implementation()
+{
+	IWeakZoneInterface::OnExitWeakZone_Implementation();
+
+	if (!Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::ActivateRespawn))
+	{
+		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::ActivateRespawn);
+	}
+}
+
 
 

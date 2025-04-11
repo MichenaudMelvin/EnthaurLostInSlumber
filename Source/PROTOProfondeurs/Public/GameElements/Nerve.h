@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "CableComponent.h"
+#include "WeakZoneInterface.h"
 #include "GameFramework/Actor.h"
 #include "Nerve.generated.h"
 
@@ -13,7 +14,7 @@ class UPlayerToNervePhysicConstraint;
 class UInteractableComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API ANerve : public AActor
+class PROTOPROFONDEURS_API ANerve : public AActor, public IWeakZoneInterface
 {
 	GENERATED_BODY()
 
@@ -33,7 +34,7 @@ protected:
 #pragma region Cables
 
 protected:
-	UPROPERTY()
+	UPROPERTY(EditDefaultsOnly, Category = "Cables")
 	TArray<TObjectPtr<UCableComponent>> Cables;
 
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
@@ -125,6 +126,15 @@ public:
 	float GetDistanceNeededToPropulsion() const {return DistanceNeededToPropulsion;}
 
 	FFloatRange GetPropulsionForceRange() const {return PropulsionForceRange;}
+
+#pragma endregion
+
+#pragma region WeakZone
+
+private:
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
 
 #pragma endregion
 
