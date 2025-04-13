@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "GameElements/AmberOre.h"
 #include "InGameUI.generated.h"
 
 class FCTweenInstance;
@@ -27,14 +28,29 @@ public:
 	TObjectPtr<UImage> PropulsionIndicator;
 
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> AmbreGauge1;
+	TObjectPtr<UImage> NecrosisGauge1;
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> AmbreGauge2;
+	TObjectPtr<UImage> NecrosisGauge2;
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> AmbreGauge3;
+	TObjectPtr<UImage> NecrosisGauge3;
 
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> NecrosisGauge;
+	TObjectPtr<UImage> GrayAmberGauge;
+
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> GrayAmberGauge_Enabled;
+	
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> NecrosisAmberGauge_Step1;
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> NecrosisAmberGauge_Step2;
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> NecrosisAmberGauge_Step3;
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> NecrosisAmberGauge_Used;
+
+	UPROPERTY()
+	TObjectPtr<class AFirstPersonCharacter> Player;
 
 	virtual void NativeConstruct() override;
 
@@ -43,4 +59,10 @@ public:
 
 private:
 	FCTweenInstance* CurrentTween;
+	TObjectPtr<UImage> Img;
+
+protected:
+	UFUNCTION()
+	void AmberChargeChanged(EAmberType AmberType, int AmberAmount);
+	virtual void NativeOnInitialized() override;
 };

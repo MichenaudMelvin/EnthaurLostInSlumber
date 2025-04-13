@@ -30,6 +30,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
 	TObjectPtr<UBoxComponent> BoxComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeakZone")
+	TObjectPtr<class UPostProcessComponent> BlackAndWhiteShader;
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
 	TObjectPtr<UBillboardComponent> BillboardComponent;
@@ -43,6 +46,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zone")
 	FVector ZoneSize = FVector(100.0f);
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UMaterialInstanceDynamic> DynamicPPMaterial;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Materials")
 	FName ZoneLocationParamName = "ZoneLocation";

@@ -152,10 +152,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TMap<EAmberType, int> AmberInventoryMaxCapacity;
 
+public:
 	UPROPERTY(BlueprintAssignable, Category = "Amber")
 	FKOnAmberUpdate OnAmberUpdate;
 
-public:
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;

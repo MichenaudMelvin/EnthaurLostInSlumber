@@ -46,8 +46,8 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	AmberInventory.Add(EAmberType::NecroseAmber, 0);
 	AmberInventory.Add(EAmberType::WeakAmber, 0);
 
-	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 1);
-	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 3);
+	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 3);
+	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 1);
 }
 
 void AFirstPersonCharacter::BeginPlay()
