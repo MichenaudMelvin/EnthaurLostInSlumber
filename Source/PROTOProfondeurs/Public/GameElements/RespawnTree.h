@@ -3,41 +3,41 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "WeakZoneInterface.h"
 #include "GameFramework/Actor.h"
 #include "RespawnTree.generated.h"
 
 UCLASS()
-class PROTOPROFONDEURS_API ARespawnTree : public AActor
+class PROTOPROFONDEURS_API ARespawnTree : public AActor, public IWeakZoneInterface
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ARespawnTree();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
 	UFUNCTION()
-	void ActivateRespawn(APlayerController* PlayerController, APawn* Pawn);
-	
+	void ActivateRespawn(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> TreeModel;
+
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<class UInteractableComponent> Interaction;
+
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USceneComponent> RespawnPoint;
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<class UPointLightComponent> Light;
 
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
 
 	UPROPERTY()
 	bool bIsActivated;
-	
-	UPROPERTY(EditAnywhere)
-	float lightLevel;
+
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
 };

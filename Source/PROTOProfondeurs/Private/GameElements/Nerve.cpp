@@ -77,7 +77,6 @@ void ANerve::InitCable(const TObjectPtr<UCableComponent>& Cable) const
 		return;
 	}
 
-	// Cable->bAttachEnd = false;
 	Cable->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
 	Cable->EndLocation = FVector::ZeroVector;
 	Cable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -277,7 +276,7 @@ bool ANerve::IsNerveBallAttached() const
 
 #pragma region Interaction
 
-void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
+void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (CurrentAttachedReceptacle != nullptr)
 	{
@@ -285,7 +284,7 @@ void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
 		CurrentAttachedReceptacle = nullptr;
 	}
 
-	PlayerController = Cast<AFirstPersonController>(InPlayerController);
+	PlayerController = Cast<AFirstPersonController>(Controller);
 	AttachNerveBall(Pawn);
 
 	PhysicConstraint = Cast<UPlayerToNervePhysicConstraint>(
@@ -294,6 +293,26 @@ void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
 
 	PhysicConstraint->Init(this, Cast<ACharacter>(Pawn));
 	InteractableComponent->RemoveInteractable(NerveBall);
+}
+
+void ANerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
+{
+	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
+
+	if (bIsZoneActive && InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
+	{
+		InteractableComponent->OnInteract.RemoveDynamic(this, &ANerve::Interaction);
+	}
+}
+
+void ANerve::OnExitWeakZone_Implementation()
+{
+	IWeakZoneInterface::OnExitWeakZone_Implementation();
+
+	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
+	{
+		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
+	}
 }
 
 #pragma endregion
