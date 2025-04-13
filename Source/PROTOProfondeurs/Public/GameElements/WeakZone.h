@@ -34,6 +34,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeakZone")
 	TObjectPtr<class UPostProcessComponent> BlackAndWhiteShader;
 
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UMaterialInstanceDynamic> MaterialBlackAndWhite;
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
 	TObjectPtr<UBillboardComponent> BillboardComponent;

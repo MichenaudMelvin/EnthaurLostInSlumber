@@ -2,8 +2,11 @@
 
 
 #include "PROTOProfondeurs/Public/GameElements/WeakZone.h"
+
+#include "FCTween.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
+#include "Components/PostProcessComponent.h"
 #include "GameElements/AmberOre.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/FirstPersonCharacter.h"
@@ -21,6 +24,9 @@ AWeakZone::AWeakZone()
 
 	BoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("WeakZone"));
 	BoxComponent->SetupAttachment(RootComponent);
+
+	BlackAndWhiteShader = CreateDefaultSubobject<UPostProcessComponent>(TEXT("Black and White Shader"));
+	BlackAndWhiteShader->SetupAttachment(RootComponent);
 
 #if WITH_EDITORONLY_DATA
 	BillboardComponent = CreateDefaultSubobject<UBillboardComponent>(TEXT("Billboard"));
@@ -227,7 +233,18 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 
 	if (InteractionPoints.Num() == 0)
 	{
-		Destroy();
+		FCTween::Play(
+			1.f,
+			0.f,
+			[&](float X)
+			{
+				MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
+			},
+			5.f,
+			EFCEase::OutCubic)->SetOnComplete([&]
+			{
+				Destroy();
+			});
 	}
 }
 

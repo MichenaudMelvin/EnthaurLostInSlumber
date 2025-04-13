@@ -31,11 +31,17 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USceneComponent> RespawnPoint;
 
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<class UPointLightComponent> Light;
+
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
 
 	UPROPERTY()
 	bool bIsActivated;
+
+	UPROPERTY(EditAnywhere)
+	float lightLevel;
 
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
