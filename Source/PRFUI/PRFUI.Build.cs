@@ -19,6 +19,7 @@ public class PRFUI : ModuleRules
                 "CoreUObject",
                 "DeveloperSettings",
                 "Engine",
+                "EnhancedInput",
                 "ModelViewViewModel",
                 "Slate",
                 "SlateCore",

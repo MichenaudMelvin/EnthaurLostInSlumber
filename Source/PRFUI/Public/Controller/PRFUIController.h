@@ -3,23 +3,52 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputMappingContext.h"
 #include "GameFramework/Controller.h"
 #include "PRFUIController.generated.h"
 
+USTRUCT(Blueprintable)
+struct FActionUI
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inputs")
+	TObjectPtr<UInputAction> ActionUI;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inputs")
+	TArray<ETriggerEvent> TriggerEventsUI;
+
+	/**
+	 * @brief Function needs to be a UFunction
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "Inputs")
+	FName FunctionNameUI = NAME_None;
+
+	void BindActionUI(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object);
+};
+
 UCLASS()
-class PRFUI_API APRFUIController : public AController
+class PRFUI_API APRFUIController : public APlayerController
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	APRFUIController();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void SetupInputComponent() override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
+	FActionUI ResumeAction;
+
+	UFUNCTION()
+	void OnInputResume(const FInputActionValue& InputActionValue);
+
 public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 };

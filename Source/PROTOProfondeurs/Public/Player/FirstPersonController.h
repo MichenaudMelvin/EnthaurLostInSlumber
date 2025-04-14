@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputMappingContext.h"
 #include "GameFramework/PlayerController.h"
 #include "FirstPersonController.generated.h"
 
