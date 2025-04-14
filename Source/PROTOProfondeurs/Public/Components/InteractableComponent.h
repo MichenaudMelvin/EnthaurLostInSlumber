@@ -8,7 +8,7 @@
 
 #pragma region Delegates
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnInteract, APlayerController*, Controller, APawn*, Pawn);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FKOnInteract, APlayerController*, Controller, APawn*, Pawn, UPrimitiveComponent*, InteractComponent);
 
 #pragma endregion
 
@@ -38,6 +38,9 @@ protected:
 	UPROPERTY()
 	TSet<UPrimitiveComponent*> InteractableComponentSet;
 
+	UPROPERTY()
+	TObjectPtr<UPrimitiveComponent> TargetPrimitive;
+
 #pragma region Add/Remove Interactable
 
 public:
@@ -58,6 +61,8 @@ public:
 public:
 	UPROPERTY(BlueprintAssignable, Category = "Interaction")
 	FKOnInteract OnInteract;
+
+	void SelectPrimitive(UPrimitiveComponent* PrimitiveComponent);
 
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
 	void Interact(APlayerController* PlayerController, APawn* Player);

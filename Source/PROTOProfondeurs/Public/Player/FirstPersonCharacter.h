@@ -3,10 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Environement/WeakZoneInterface.h"
+#include "PROTOProfondeurs/Public/GameElements/WeakZoneInterface.h"
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+enum class EAmberType : uint8;
 class UTestViewModel;
 class UViewBobbing;
 class AFirstPersonController;
@@ -16,6 +17,8 @@ class UAIPerceptionStimuliSourceComponent;
 class UCharacterState;
 enum class ECharacterStateID : uint8;
 class UCameraComponent;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberType, int, AmberAmount);
 
 UCLASS()
 class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface
@@ -33,11 +36,9 @@ protected:
 #pragma region Components
 
 protected:
-	/** First person camera */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
 
-	/** Character mesh */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
 
@@ -46,6 +47,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Stimuli")
 	TObjectPtr<UAIPerceptionStimuliSourceComponent> HearingStimuli;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Spike")
+	TObjectPtr<USkeletalMeshComponent> SpikeMesh;
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
@@ -113,6 +117,8 @@ protected:
 
 	void InteractionTrace();
 
+	void RemoveInteraction();
+
 public:
 	UInteractableComponent* GetCurrentInteractable() const {return CurrentInteractable;}
 
@@ -143,21 +149,64 @@ protected:
 #pragma region Amber
 
 protected:
-	bool bCanTakeAmber = false;
-
 	UPROPERTY(BlueprintReadOnly, Category = "Amber")
-	bool bAmberFilled = false;
+	TMap<EAmberType, int> AmberInventory;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	TMap<EAmberType, int> AmberInventoryMaxCapacity;
 
 public:
+	UPROPERTY(BlueprintAssignable, Category = "Amber")
+	FKOnAmberUpdate OnAmberUpdate;
+
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
 
-	void FillAmber(bool bRefill) {bAmberFilled = bRefill;}
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
+	void MineAmber(const EAmberType& AmberType, const int Amount);
 
-	bool IsAmberFilled() const {return bAmberFilled;}
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
+	void UseAmber(const EAmberType& AmberType, const int Amount);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
+	bool IsAmberTypeFilled(const EAmberType& AmberType) const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
+	bool HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const;
 
 #pragma endregion
+
+#pragma region Spike
+
+protected:
+	FTransform SpikeRelativeTransform;
+
+	UPROPERTY()
+	TObjectPtr<USceneComponent> SpikeParent;
+
+	FTransform SpikeTargetTransform;
+
+	bool bUseSpikeRelativeTransform = true;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Spike", meta = (UIMin = 0.0f))
+	float SpikeLerpSpeed = 2.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Spike", meta = (UIMin = 0.0f, Units = "cm"))
+	float SpikeChargingOffset = 25.0f;
+
+	void UpdateSpikeLocation(float DeltaTime) const;
+
+public:
+	void PlantSpike(const FVector& TargetLocation);
+
+	void ReGrabSpike();
+
+	void UpdateSpikeOffset(float Alpha) const;
+
+#pragma endregion
+
+#pragma region CharacterFunctions
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
@@ -177,16 +226,46 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
-	FVector GetRespawnPosition() const { return RespawnPosition; }
-	void SetRespawnPosition(const FVector& Position) { RespawnPosition = Position; }
+	UFUNCTION(BlueprintCallable, Category = "Character")
+	void EjectCharacter(const FVector ProjectionVelocity) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Character")
+	void StopCharacter() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure,Category = "Character")
+	bool IsStopped() const;
 
 	AFirstPersonController* GetPlayerController() const {return FirstPersonController;}
 
+#pragma endregion
+
+#pragma region Respawn
+
+private:
+	FVector RespawnPosition;
+
+public:
+	FVector GetRespawnPosition() const {return RespawnPosition;}
+
+	void SetRespawnPosition(const FVector& Position) {RespawnPosition = Position;}
+
+#pragma endregion
+
+public:
 	void SetInteractionUI(bool bState) const;
 
 protected:
 	TObjectPtr<UTestViewModel> ViewModel;
 
+#pragma region Debug
+
+#if WITH_EDITORONLY_DATA
+
 private:
-	FVector RespawnPosition;
+	UFUNCTION(Exec)
+	void ChangeState(const ECharacterStateID& State) const;
+
+#endif
+
+#pragma endregion
 };

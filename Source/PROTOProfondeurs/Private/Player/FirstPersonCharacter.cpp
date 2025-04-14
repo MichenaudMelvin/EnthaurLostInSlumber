@@ -1,39 +1,35 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
-#include "GroundAction.h"
+#include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
+#include "GameElements/AmberOre.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Kevin/UI/InGameUI.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "KismetTraceUtils.h"
-#include "GameFramework/GameStateBase.h"
-#include "Kevin/UI/DeathMenuUI.h"
-#include "Kismet/GameplayStatics.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
 #include "PRFUI/Public/TestMVVM/TestViewModel.h"
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
+#include "Player/States/CharacterFallState.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
-	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(34.0f, 88.0f);
 
-	// Create a CameraComponent
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
-	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f)); // Position the camera
+	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f));
 	CameraComponent->bUsePawnControlRotation = true;
 
-	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
 	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("First Person Mesh"));
 	CharacterMesh->SetOnlyOwnerSee(true);
 	CharacterMesh->SetupAttachment(CameraComponent);
@@ -44,14 +40,27 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
 	HearingStimuli->bAutoRegister = true;
 	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
+
+	SpikeMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SpikeMesh"));
+	SpikeMesh->SetupAttachment(CameraComponent);
+
+	AmberInventory.Add(EAmberType::NecroseAmber, 0);
+	AmberInventory.Add(EAmberType::WeakAmber, 0);
+
+	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 3);
+	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 1);
 }
 
 void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetRespawnPosition(this->GetActorLocation());
-	
+	SetRespawnPosition(GetActorLocation());
+
+	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
+	SpikeTargetTransform = SpikeRelativeTransform;
+	SpikeParent = SpikeMesh->GetAttachParent();
+
 	if (!GetController())
 	{
 		return;
@@ -111,6 +120,7 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 	TickStateMachine(DeltaSeconds);
 	InteractionTrace();
 	GroundMovement();
+	UpdateSpikeLocation(DeltaSeconds);
 }
 
 #pragma region StateMachine
@@ -214,24 +224,21 @@ void AFirstPersonCharacter::InteractionTrace()
 
 	if (!bHit || !HitResult.GetActor())
 	{
-		SetInteractionUI(false);
-		CurrentInteractable = nullptr;
+		RemoveInteraction();
 		return;
 	}
 
 	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UInteractableComponent::StaticClass());
 	if (!FoundComp)
 	{
-		SetInteractionUI(false);
-		CurrentInteractable = nullptr;
+		RemoveInteraction();
 		return;
 	}
 
 	UInteractableComponent* TargetInteractable = Cast<UInteractableComponent>(FoundComp);
 	if (!TargetInteractable)
 	{
-		SetInteractionUI(false);
-		CurrentInteractable = nullptr;
+		RemoveInteraction();
 		return;
 	}
 
@@ -239,6 +246,7 @@ void AFirstPersonCharacter::InteractionTrace()
 	{
 		SetInteractionUI(true);
 		CurrentInteractable = TargetInteractable;
+		CurrentInteractable->SelectPrimitive(HitResult.GetComponent());
 
 #if WITH_EDITORONLY_DATA
 		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("Interaction: %s"), *CurrentInteractable->GetInteractionName().ToString()));
@@ -246,9 +254,20 @@ void AFirstPersonCharacter::InteractionTrace()
 	}
 	else
 	{
-		SetInteractionUI(false);
-		CurrentInteractable = nullptr;
+		RemoveInteraction();
 	}
+}
+
+void AFirstPersonCharacter::RemoveInteraction()
+{
+	SetInteractionUI(false);
+	if(!CurrentInteractable)
+	{
+		return;
+	}
+
+	CurrentInteractable->SelectPrimitive(nullptr);
+	CurrentInteractable = nullptr;
 }
 
 #pragma endregion
@@ -322,18 +341,110 @@ void AFirstPersonCharacter::AboveActor(AActor* ActorBellow)
 void AFirstPersonCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
-
-	bCanTakeAmber = bIsZoneActive;
 }
 
 void AFirstPersonCharacter::OnExitWeakZone_Implementation()
 {
 	IWeakZoneInterface::OnExitWeakZone_Implementation();
+}
 
-	bCanTakeAmber = false;
+void AFirstPersonCharacter::MineAmber(const EAmberType& AmberType, const int Amount)
+{
+	int* Count = AmberInventory.Find(AmberType);
+	int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
+
+	// Count == nullptr means AmberType key doesn't exist
+	if (!Count || !MaxCapacity)
+	{
+		return;
+	}
+
+	*Count += Amount;
+	*Count = FMath::Clamp(*Count, 0.0f, *MaxCapacity);
+
+	OnAmberUpdate.Broadcast(AmberType, *Count);
+}
+
+void AFirstPersonCharacter::UseAmber(const EAmberType& AmberType, const int Amount)
+{
+	MineAmber(AmberType, -Amount);
+}
+
+bool AFirstPersonCharacter::IsAmberTypeFilled(const EAmberType& AmberType) const
+{
+	const int* Count = AmberInventory.Find(AmberType);
+	const int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
+
+	if (!Count || !MaxCapacity)
+	{
+		return false;
+	}
+
+	return *Count == *MaxCapacity;
+}
+
+bool AFirstPersonCharacter::HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const
+{
+	const int* Count = AmberInventory.Find(AmberType);
+
+	if (!Count)
+	{
+		return false;
+	}
+
+	return *Count >= Quantity;
 }
 
 #pragma endregion
+
+#pragma region Spike
+
+void AFirstPersonCharacter::PlantSpike(const FVector& TargetLocation)
+{
+	SpikeMesh->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	bUseSpikeRelativeTransform = false;
+	SpikeTargetTransform = FTransform(TargetLocation);
+}
+
+void AFirstPersonCharacter::ReGrabSpike()
+{
+	SpikeMesh->AttachToComponent(SpikeParent, FAttachmentTransformRules::KeepWorldTransform);
+	bUseSpikeRelativeTransform = true;
+	SpikeTargetTransform = SpikeRelativeTransform;
+}
+
+void AFirstPersonCharacter::UpdateSpikeOffset(float Alpha) const
+{
+	FVector DefaultLocation = SpikeRelativeTransform.GetLocation();
+	FVector OffsetLocation = DefaultLocation - (FVector::ForwardVector * SpikeChargingOffset);
+	FVector TargetLocation = UKismetMathLibrary::VLerp(DefaultLocation, OffsetLocation, Alpha);
+
+	SpikeMesh->SetRelativeLocation(TargetLocation);
+}
+
+void AFirstPersonCharacter::UpdateSpikeLocation(float DeltaTime) const
+{
+	float Alpha = DeltaTime * SpikeLerpSpeed;
+
+	FVector CurrentLocation = bUseSpikeRelativeTransform ? SpikeMesh->GetRelativeLocation() : SpikeMesh->GetComponentLocation();
+	FVector TargetLocation = UKismetMathLibrary::VLerp(CurrentLocation, SpikeTargetTransform.GetLocation(), Alpha);
+
+	if (bUseSpikeRelativeTransform)
+	{
+		FRotator TargetRotator = UKismetMathLibrary::RLerp(SpikeMesh->GetRelativeRotation(), SpikeTargetTransform.GetRotation().Rotator(), Alpha, true);
+
+		SpikeMesh->SetRelativeRotation(TargetRotator);
+		SpikeMesh->SetRelativeLocation(TargetLocation);
+	}
+	else
+	{
+		SpikeMesh->SetWorldLocation(TargetLocation);
+	}
+}
+
+#pragma endregion
+
+#pragma region CharacterFunctions
 
 FVector AFirstPersonCharacter::GetBottomLocation() const
 {
@@ -369,8 +480,51 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	return true;
 }
 
+void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) const
+{
+	UCharacterFallState* FallState = FindState<UCharacterFallState>(StateMachine);
+	if (!FallState)
+	{
+		return;
+	}
+
+	FallState->SetProjectionVelocity(ProjectionVelocity);
+	StateMachine->ChangeState(ECharacterStateID::Fall);
+}
+
+void AFirstPersonCharacter::StopCharacter() const
+{
+	if (!StateMachine)
+	{
+		return;
+	}
+
+	StateMachine->ChangeState(ECharacterStateID::Stop);
+}
+
+bool AFirstPersonCharacter::IsStopped() const
+{
+	return StateMachine->GetCurrentStateID() == ECharacterStateID::Stop;
+}
+
+#pragma endregion
+
 void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
 {
 	if (CurrentInteractable != nullptr)
 		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
 }
+
+#if WITH_EDITORONLY_DATA
+
+void AFirstPersonCharacter::ChangeState(const ECharacterStateID& State) const
+{
+	if (!StateMachine)
+	{
+		return;
+	}
+
+	StateMachine->ChangeState(State);
+}
+
+#endif

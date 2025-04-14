@@ -23,7 +23,6 @@ UCharacterState::UCharacterState()
 void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 {
 	StateMachine = InStateMachine;
-	TargetSteering = MaxSteering;
 
 #if WITH_EDITOR
 	if (!StateMachine)
@@ -80,7 +79,6 @@ void UCharacterState::StateTick_Implementation(float DeltaTime)
 	CameraMovement(DeltaTime);
 	UpdateCameraFOV(DeltaTime);
 	UpdateViewBobbing(DeltaTime);
-	UpdateCameraSteering(DeltaTime);
 }
 
 void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID){}
@@ -181,33 +179,6 @@ void UCharacterState::UpdateViewBobbing(float DeltaTime)
 	Character->GetViewBobbingObject()->SetOscillator(Oscillator);
 }
 
-void UCharacterState::UpdateCameraSteering(float DeltaTime)
-{
-	FRotator TargetRotation = Controller->GetControlRotation();
-
-	if (!GetSettings() || !GetSettings()->bCameraSteering)
-	{
-		TargetRotation.Roll = 0;
-		Controller->SetControlRotation(TargetRotation);
-		return;
-	}
-
-	float CurrentRoll = TargetRotation.Roll;
-	while (CurrentRoll > 180.0f)
-	{
-		CurrentRoll -= 360.0f;
-	}
-
-	while(CurrentRoll < -180.0f)
-	{
-		CurrentRoll += 360.0f;
-	}
-
-	float LerpRoll = FMath::Lerp(CurrentRoll, TargetSteering, DeltaTime * SteeringSpeed);
-	TargetRotation.Roll = LerpRoll;
-	Controller->SetControlRotation(TargetRotation);
-}
-
 #pragma endregion
 
 #pragma region Noise
@@ -240,3 +211,5 @@ USettingsSave* UCharacterState::GetSettings() const
 
 	return SettingsSubsystem->GetSettings();
 }
+
+

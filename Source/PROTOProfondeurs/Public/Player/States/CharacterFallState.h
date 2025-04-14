@@ -31,8 +31,29 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Movement|Fall", meta = (ClampMin = 0.0f))
 	float FallingDeceleration = 100.0f;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Movement|Projection")
+	FVector ProjectionVelocity = FVector::ZeroVector;
+
+	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "s"))
+	float SpikeBrakeDuration = 0.75f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "cm"))
+	float SpikeBrakeTraceLength = 200.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake")
+	TEnumAsByte<ECollisionChannel> SpikeBrakeTraceTypeQuery = ECC_GameTraceChannel1;
+
 private:
 	bool bCanDoCoyoteTime = false;
 
 	float CoyoteTime = 0.0f;
+
+	float SpikeBrakeTime = 0.0f;
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
+	void SetProjectionVelocity(const FVector& Velocity);
+
+	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
+	void LaunchCharacter() const;
 };
