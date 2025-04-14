@@ -97,14 +97,9 @@ void AAIPath::UpdatePoints(bool bInConstructionScript)
 	}
 }
 
-FVector AAIPath::GetDirection()
+FVector AAIPath::GetDirection() const
 {
 	FVector VectorDirection;
-
-	if (bAutoDirection)
-	{
-		Direction;
-	}
 
 	switch (Direction)
 	{
@@ -128,9 +123,11 @@ FVector AAIPath::GetDirection()
 	return VectorDirection;
 }
 
-FVector AAIPath::GetPointLocation(int8 PointIndex) const
+FVector AAIPath::GetPointLocation(int8 PointIndex, float PawnHeight) const
 {
-	return Spline->GetLocationAtSplinePoint(PointIndex, ESplineCoordinateSpace::World);
+	FVector PointLocation = Spline->GetLocationAtSplinePoint(PointIndex, ESplineCoordinateSpace::World);
+	PointLocation += (GetDirection() * PawnHeight * -1);
+	return PointLocation;
 }
 
 bool AAIPath::GetTracedPointLocation(int8 PointIndex, FHitResult& HitResult)

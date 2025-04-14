@@ -44,9 +44,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Trace")
 	TArray<TEnumAsByte<EObjectTypeQuery>> GroundObjectTypes;
 
-	UPROPERTY()
-	bool bAutoDirection = false;
-
 	UPROPERTY(EditInstanceOnly, Category = "Direction", meta = (EditCondition = "!bAutoDirection"))
 	TEnumAsByte<EAxis::Type> Direction = EAxis::Z;
 
@@ -55,16 +52,16 @@ protected:
 
 	void UpdatePoints(bool bInConstructionScript);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Direction")
-	FVector GetDirection();
-
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(Transient, VisibleInstanceOnly, Category = "AI")
+	UPROPERTY(VisibleInstanceOnly, Category = "AI")
 	TObjectPtr<APawn> AttachedAI;
 #endif
 
 public:
-	FVector GetPointLocation(int8 PointIndex) const;
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Direction")
+	FVector GetDirection() const;
+
+	FVector GetPointLocation(int8 PointIndex, float PawnHeight) const;
 
 	USplineComponent* GetSpline() const {return Spline;}
 
