@@ -21,6 +21,7 @@ public:
 	// Can also be used for menus with a fixed part and a inner part that changes (options menu) 
 	void OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu);
 	void CloseCurrentMenu();
+	void CloseAllMenus();
 
 	UUserWidget* GetPauseMenu() const { return PauseMenu; }
 

@@ -55,6 +55,8 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	
 	if (GEngine)
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::FromInt(MenuStack.Num()));
+		
 		for (const TPair<FString, TWeakObjectPtr<UUserWidget>>& Pair : MenuClasses)
 		{
 			const FString& YoMenuName = Pair.Key;
@@ -100,6 +102,14 @@ void UPRFUIManager::CloseCurrentMenu()
 	if (MenuStack.Num() == 0)
 	{
 		// Switch input mapping input context to Game
+	}
+}
+
+void UPRFUIManager::CloseAllMenus()
+{
+	for (const TPair<FString, TWeakObjectPtr<UUserWidget>>& Pair : MenuClasses)
+	{
+		CloseCurrentMenu();
 	}
 }
 
