@@ -34,7 +34,7 @@ protected:
 #pragma region Cables
 
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Cables")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
 	TArray<TObjectPtr<UCableComponent>> Cables;
 
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
@@ -48,6 +48,10 @@ protected:
 	bool bShouldApplyCablePhysics = false;
 
 	void ApplyCablesPhysics();
+
+	bool CanCurrentCableBeRemoved(UCableComponent* CurrentCable, UCableComponent* LastCable);
+
+	FVector LastImpactNormal = FVector::ZeroVector;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableOffset = 1.0f;
