@@ -38,6 +38,8 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 		ANerve* Nerve = Cast<ANerve>(OtherActor);
 		Nerve->SetCurrentReceptacle(this);
 
+		OnNerveConnect();
+
 		FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, false);
 		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
 		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
