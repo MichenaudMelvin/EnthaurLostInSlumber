@@ -28,10 +28,10 @@ protected:
 	TObjectPtr<USplineComponent> Spline;
 
 #if WITH_EDITORONLY_DATA
-	UPROPERTY()
+	UPROPERTY(Transient)
 	TObjectPtr<UBillboardComponent> BillboardComponent;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 	TArray<TObjectPtr<class UArrowComponent>> Arrows;
 #endif
 
