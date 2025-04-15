@@ -122,6 +122,8 @@ protected:
 public:
 	UInteractableComponent* GetCurrentInteractable() const {return CurrentInteractable;}
 
+	void SetInteractionUI(bool bState) const;
+
 #pragma endregion
 
 #pragma region Ground
@@ -250,9 +252,6 @@ public:
 	void SetRespawnPosition(const FVector& Position) {RespawnPosition = Position;}
 
 #pragma endregion
-
-public:
-	void SetInteractionUI(bool bState) const;
 
 protected:
 	TObjectPtr<UTestViewModel> ViewModel;

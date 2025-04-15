@@ -41,11 +41,6 @@ void UCharacterSprintState::StateTick_Implementation(float DeltaTime)
 		StateMachine->ChangeState(ECharacterStateID::Crouch);
 	}
 
-	else if (GetInputs().bInputInteract)
-	{
-		StateMachine->ChangeState(ECharacterStateID::Interact);
-	}
-
 	else if (GetInputs().InputMove.Length() < CharacterSettings->MoveInputThreshold)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Idle);

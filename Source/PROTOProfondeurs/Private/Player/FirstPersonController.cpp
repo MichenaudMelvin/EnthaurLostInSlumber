@@ -67,9 +67,6 @@ void FPlayerInputs::DisplayInputsOnScreen(float DisplayTime, const FColor& Debug
 	Message += "\nbInputInteract: ";
 	Message += bInputInteract ? "true" : "false";
 
-	Message += "\bInputTakeAmber";
-	Message += bInputTakeAmber ? "true" : "false";
-
 	GEngine->AddOnScreenDebugMessage(-1, DisplayTime, DebugColor, FString::Printf(TEXT("%s"), *Message));
 }
 #endif
@@ -174,7 +171,6 @@ void AFirstPersonController::SetupInputComponent()
 	CrouchAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputCrouch, const FInputActionValue&);
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputJump, const FInputActionValue&);
 	InteractAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteract, const FInputActionValue&);
-	TakeAmberAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputTakeAmber, const FInputActionValue&);
 	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputPauseGame, const FInputActionValue&);
 
 	MoveAction.BindAction(EnhancedInputComponent, this);
@@ -183,7 +179,6 @@ void AFirstPersonController::SetupInputComponent()
 	CrouchAction.BindAction(EnhancedInputComponent, this);
 	JumpAction.BindAction(EnhancedInputComponent, this);
 	InteractAction.BindAction(EnhancedInputComponent, this);
-	TakeAmberAction.BindAction(EnhancedInputComponent, this);
 	PauseGameAction.BindAction(EnhancedInputComponent, this);
 }
 
@@ -215,11 +210,6 @@ void AFirstPersonController::OnInputJump(const FInputActionValue& InputActionVal
 void AFirstPersonController::OnInputInteract(const FInputActionValue& InputActionValue)
 {
 	PlayerInputs.bInputInteract = InputActionValue.Get<bool>();
-}
-
-void AFirstPersonController::OnInputTakeAmber(const FInputActionValue& InputActionValue)
-{
-	PlayerInputs.bInputTakeAmber = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActionValue)

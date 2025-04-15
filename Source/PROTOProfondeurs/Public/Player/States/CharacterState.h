@@ -27,7 +27,6 @@ enum class ECharacterStateID : uint8
 	Interact,
 	Stop,
 	Slide,
-	TakeAmber,
 };
 
 /**

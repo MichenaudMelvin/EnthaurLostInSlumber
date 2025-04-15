@@ -121,6 +121,11 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 	InteractionTrace();
 	GroundMovement();
 	UpdateSpikeLocation(DeltaSeconds);
+
+	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteract)
+	{
+		CurrentInteractable->Interact(GetPlayerController(), this);
+	}
 }
 
 #pragma region StateMachine
@@ -268,6 +273,14 @@ void AFirstPersonCharacter::RemoveInteraction()
 
 	CurrentInteractable->SelectPrimitive(nullptr);
 	CurrentInteractable = nullptr;
+}
+
+void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
+{
+	if (CurrentInteractable != nullptr)
+	{
+		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
+	}
 }
 
 #pragma endregion
@@ -508,12 +521,6 @@ bool AFirstPersonCharacter::IsStopped() const
 }
 
 #pragma endregion
-
-void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
-{
-	if (CurrentInteractable != nullptr)
-		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
-}
 
 #if WITH_EDITORONLY_DATA
 
