@@ -112,6 +112,13 @@ EBTNodeResult::Type UFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 
 		MovementTimeline.SetPlayRate(1/Time);
 		MovementTimeline.PlayFromStart();
+
+		if (bRotateWithMovement)
+		{
+			FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(StartLocation, TargetLocation);
+			FRotator TargetRotation = FRotationMatrix::MakeFromXZ(ForwardDirection, (Path->GetDirection() * -1)).Rotator();
+			CurrentPawn->SetActorRotation(TargetRotation);
+		}
 	}
 
 	return EBTNodeResult::InProgress;
@@ -144,9 +151,9 @@ void UFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemor
 		return;
 	}
 
-	if (bRotateWithMovement)
+	if (bRotateWithMovement && CurrentPawn)
 	{
-		USceneComponent* Root = OwnerComp.GetAIOwner()->GetPawn()->GetRootComponent();
+		USceneComponent* Root = CurrentPawn->GetRootComponent();
 		FRotator RootRotation = Root->GetComponentRotation();
 
 		FVector RootVelocity = Root->GetComponentVelocity();
