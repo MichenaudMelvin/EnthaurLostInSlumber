@@ -61,9 +61,6 @@ struct FPlayerInputs
 	bool bInputInteract = false;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
-	bool bInputTakeAmber = false;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	bool bInputPauseGame = false;
 
 #if !UE_BUILD_SHIPPING
@@ -140,9 +137,6 @@ protected:
 	FAction InteractAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction TakeAmberAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FAction PauseGameAction;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
@@ -165,9 +159,6 @@ protected:
 
 	UFUNCTION()
 	void OnInputInteract(const FInputActionValue& InputActionValue);
-
-	UFUNCTION()
-	void OnInputTakeAmber(const FInputActionValue& InputActionValue);
 
 	UFUNCTION()
 	void OnInputPauseGame(const FInputActionValue& InputActionValue);

@@ -36,11 +36,6 @@ void UCharacterWalkState::StateTick_Implementation(float DeltaTime)
 		StateMachine->ChangeState(ECharacterStateID::Crouch);
 	}
 
-	else if (GetInputs().bInputInteract)
-	{
-		StateMachine->ChangeState(ECharacterStateID::Interact);
-	}
-
 	else if (GetInputs().InputMove.Length() == 0.0f)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Idle);

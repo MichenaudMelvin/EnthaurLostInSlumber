@@ -86,25 +86,25 @@ void AFirstPersonCharacter::BeginPlay()
 		return;
 	}
 
-	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CharacterSettings->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
-	if (!CameraShake)
-	{
-		return;
-	}
-
-	UViewBobbing* CastedCameraShake = Cast<UViewBobbing>(CameraShake);
-	if (!CastedCameraShake)
-	{
-#if WITH_EDITOR
-		const FString Message = FString::Printf(TEXT("ViewBobbingClass in %s is class of %s but should be %s"), *CharacterSettings->GetClass()->GetName(), *CameraShake->GetClass()->GetName(), *UViewBobbing::StaticClass()->GetName());
-
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
-		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
-#endif
-		return;
-	}
-
-	ViewBobbing = CastedCameraShake;
+// 	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CharacterSettings->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
+// 	if (!CameraShake)
+// 	{
+// 		return;
+// 	}
+//
+// 	UViewBobbing* CastedCameraShake = Cast<UViewBobbing>(CameraShake);
+// 	if (!CastedCameraShake)
+// 	{
+// #if WITH_EDITOR
+// 		const FString Message = FString::Printf(TEXT("ViewBobbingClass in %s is class of %s but should be %s"), *CharacterSettings->GetClass()->GetName(), *CameraShake->GetClass()->GetName(), *UViewBobbing::StaticClass()->GetName());
+//
+// 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+// 		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+// #endif
+// 		return;
+// 	}
+//
+// 	ViewBobbing = CastedCameraShake;
 
 	CreateStates();
 	InitStateMachine();
@@ -121,6 +121,11 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 	InteractionTrace();
 	GroundMovement();
 	UpdateSpikeLocation(DeltaSeconds);
+
+	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteract)
+	{
+		CurrentInteractable->Interact(GetPlayerController(), this);
+	}
 }
 
 #pragma region StateMachine
@@ -268,6 +273,14 @@ void AFirstPersonCharacter::RemoveInteraction()
 
 	CurrentInteractable->SelectPrimitive(nullptr);
 	CurrentInteractable = nullptr;
+}
+
+void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
+{
+	if (CurrentInteractable != nullptr)
+	{
+		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
+	}
 }
 
 #pragma endregion
@@ -508,12 +521,6 @@ bool AFirstPersonCharacter::IsStopped() const
 }
 
 #pragma endregion
-
-void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
-{
-	if (CurrentInteractable != nullptr)
-		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
-}
 
 #if WITH_EDITORONLY_DATA
 
