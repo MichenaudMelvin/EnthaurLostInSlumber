@@ -3,6 +3,7 @@
 #include "Player/FirstPersonCharacter.h"
 #include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
+#include "Components/CameraShakeComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
@@ -29,6 +30,8 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f));
 	CameraComponent->bUsePawnControlRotation = true;
+
+	ShakeManager = CreateDefaultSubobject<UCameraShakeComponent>(TEXT("Shake Manager"));
 
 	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("First Person Mesh"));
 	CharacterMesh->SetOnlyOwnerSee(true);

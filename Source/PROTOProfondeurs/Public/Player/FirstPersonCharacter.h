@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UCameraShakeComponent;
 enum class EAmberType : uint8;
 class UTestViewModel;
 class UViewBobbing;
@@ -39,6 +40,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Camera")
+	TObjectPtr<UCameraShakeComponent> ShakeManager;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
 
@@ -53,8 +57,8 @@ protected:
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
-
 	USkeletalMeshComponent* GetCharacterMesh() const {return CharacterMesh;}
+	UCameraShakeComponent* GetCameraShake() const {return ShakeManager;}
 
 #pragma endregion
 
