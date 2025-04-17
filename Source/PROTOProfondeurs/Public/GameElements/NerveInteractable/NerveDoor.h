@@ -22,9 +22,6 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> MeshDoor;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UStaticMeshComponent> MeshDoorFrame;
-
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> DoorMaterial;
 

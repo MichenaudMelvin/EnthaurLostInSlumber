@@ -14,9 +14,6 @@ ANerveDoor::ANerveDoor()
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Door Mesh"));
 	SetRootComponent(Root);
 
-	MeshDoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Door Frame"));
-	MeshDoorFrame->SetupAttachment(Root);
-
 	MeshDoor = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Door"));
 	MeshDoor->SetupAttachment(Root);
 }
