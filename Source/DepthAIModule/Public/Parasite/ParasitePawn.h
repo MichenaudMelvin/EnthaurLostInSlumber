@@ -30,9 +30,6 @@ protected:
 #endif
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<USceneComponent> RootPivot;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UBoxComponent> ParasiteCollision;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
@@ -49,4 +46,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName WalkOnFloorKeyName = "WalkOnFloor";
+
+public:
+	UBoxComponent* GetCollisionComp() {return ParasiteCollision;}
 };

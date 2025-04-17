@@ -22,13 +22,14 @@ public class PROTOProfondeurs : ModuleRules
 			"PhysicsCore",
 			"UMG",
 			"AIModule",
-			"AkAudio"
+			"AkAudio",
+			"BUITween"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			"PRFUI",
-			"ModelViewViewModel",
+			"ModelViewViewModel", "BUITween",
 		});
 
 		if (Target.bBuildEditor)

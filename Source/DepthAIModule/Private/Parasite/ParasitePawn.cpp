@@ -14,11 +14,8 @@ AParasitePawn::AParasitePawn()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	RootPivot = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	SetRootComponent(RootPivot);
-
 	ParasiteCollision = CreateDefaultSubobject<UBoxComponent>("ParasiteHitBox");
-	ParasiteCollision->SetupAttachment(RootPivot);
+	SetRootComponent(ParasiteCollision);
 
 	ParasiteCollision->SetCollisionObjectType(ECC_Pawn);
 	ParasiteCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -29,7 +26,6 @@ AParasitePawn::AParasitePawn()
 
 	MovementComponent = CreateDefaultSubobject<UGravityPawnMovement>("Movement");
 	MovementComponent->MaxSpeed = 400.0f;
-	MovementComponent->UpdatedComponent = ParasiteCollision;
 
 	AIControllerClass = AParasiteController::StaticClass();
 }
@@ -67,8 +63,6 @@ void AParasitePawn::OnConstruction(const FTransform& Transform)
 		return;
 	}
 
-	ParasiteCollision->SetRelativeLocation(FVector(0, 0, ParasiteCollision->GetUnscaledBoxExtent().Z));
-
 	if (!TargetPath)
 	{
 		return;
@@ -82,18 +76,23 @@ void AParasitePawn::OnConstruction(const FTransform& Transform)
 		return;
 	}
 
-	SetActorLocation(HitResult.Location);
+	FVector ActorLocation = HitResult.Location;
+	ActorLocation += (TargetPath->GetDirection() * -1 * ParasiteCollision->GetUnscaledBoxExtent().Z);
+	SetActorLocation(ActorLocation);
 
-	FRotator Rotation = UKismetMathLibrary::MakeRotationFromAxes(FVector::ZeroVector, FVector::RightVector, HitResult.ImpactNormal);
+	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.ImpactNormal);
 	SetActorRotation(Rotation);
-
-
 }
 
 #if WITH_EDITOR
 void AParasitePawn::PreEditChange(FProperty* PropertyAboutToChange)
 {
 	Super::PreEditChange(PropertyAboutToChange);
+
+	if (!PropertyAboutToChange)
+	{
+		return;
+	}
 
 	if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AParasitePawn, TargetPath))
 	{

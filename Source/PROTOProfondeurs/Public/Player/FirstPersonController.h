@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputMappingContext.h"
 #include "GameFramework/PlayerController.h"
 #include "FirstPersonController.generated.h"
 
@@ -58,9 +59,6 @@ struct FPlayerInputs
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	bool bInputInteract = false;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
-	bool bInputTakeAmber = false;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	bool bInputPauseGame = false;
@@ -139,9 +137,6 @@ protected:
 	FAction InteractAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction TakeAmberAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FAction PauseGameAction;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
@@ -166,9 +161,6 @@ protected:
 	void OnInputInteract(const FInputActionValue& InputActionValue);
 
 	UFUNCTION()
-	void OnInputTakeAmber(const FInputActionValue& InputActionValue);
-
-	UFUNCTION()
 	void OnInputPauseGame(const FInputActionValue& InputActionValue);
 
 public:
@@ -188,9 +180,6 @@ private:
 #pragma endregion
 
 #pragma region UI Menus
-	
-private:
-	bool bIsInMenus = false;
 
 #pragma endregion
 

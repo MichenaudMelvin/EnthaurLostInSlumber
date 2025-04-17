@@ -34,9 +34,6 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Path", meta = (ClampMin = 0.0f, Units = "cm"))
 	float Tolerance = 0.1f;
 
-	UPROPERTY(EditInstanceOnly, Category = "Path", meta = (ClampMin = 0.0f, Units = "s"))
-	float LerpSpeed = 1.0f;
-
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	bool bRotateWithMovement = true;
 
@@ -45,5 +42,23 @@ protected:
 
 	FVector TargetLocation;
 
+#pragma region WalkOnWall
+
+protected:
+	UPROPERTY()
+	TObjectPtr<APawn> CurrentPawn;
+
+	UPROPERTY()
+	TObjectPtr<UBehaviorTreeComponent> CurrentOwnerComp;
+
+	FVector StartLocation;
+
 	FTimeline MovementTimeline;
+
+	UFUNCTION()
+	void MovementUpdate(float Alpha);
+
+	UFUNCTION()
+	void FinishTask();
+#pragma endregion
 };

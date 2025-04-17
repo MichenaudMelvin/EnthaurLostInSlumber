@@ -19,19 +19,27 @@ public:
 	ANerveReceptacle();
 	void TriggerLinkedObjects();
 
+	// Create Event
+	UFUNCTION(BlueprintImplementableEvent, Category = "BaseCharacter")
+	void OnNerveConnect();
+
 protected:
 	UFUNCTION()
 	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	virtual void BeginPlay() override;
 
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	TObjectPtr<USphereComponent> Collision;
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> NerveReceptacle;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<USphereComponent> Collision;
-
 	UPROPERTY(EditAnywhere)
 	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
+
+	UPROPERTY(EditAnywhere)
+	FName ConnectedShaderTag;
+	
 };

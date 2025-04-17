@@ -77,7 +77,6 @@ void ANerve::InitCable(const TObjectPtr<UCableComponent>& Cable) const
 		return;
 	}
 
-	// Cable->bAttachEnd = false;
 	Cable->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
 	Cable->EndLocation = FVector::ZeroVector;
 	Cable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -107,29 +106,21 @@ void ANerve::ApplyCablesPhysics()
 	FVector CurrentCableStartLocation = CurrentCable->GetComponentLocation();
 	FVector CurrentCableEndLocation = CurrentCable->GetAttachedComponent()->GetComponentLocation();
 
-	TArray<AActor*> Ignore;
-	Ignore.Add(this);
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(this);
 	FHitResult Hit;
-
-	bool bHit;
 
 	if (Cables.Num() >= 2)
 	{
 		UCableComponent* LastCable = Cables[CurrentIndex - 1];
-		FVector LastCableStartLocation = LastCable->GetComponentLocation();
-		bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, LastCableStartLocation, CurrentCableEndLocation, CableColliders, false, Ignore, EDrawDebugTrace::None, Hit, true);
 
-		if (!bHit)
+		if (CanCurrentCableBeRemoved(CurrentCable, LastCable))
 		{
-			LastCable->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
-			LastCable->EndLocation = FVector::ZeroVector;
-			Cables.Remove(CurrentCable);
-			CurrentCable->DestroyComponent(true);
 			return;
 		}
 	}
 
-	bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, CurrentCableStartLocation, CurrentCableEndLocation, CableColliders, false, Ignore, EDrawDebugTrace::None, Hit, true);
+	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, CurrentCableStartLocation, CurrentCableEndLocation, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
 
 	if (!bHit)
 	{
@@ -148,9 +139,11 @@ void ANerve::ApplyCablesPhysics()
 		return;
 	}
 
+	LastImpactNormal = Hit.Normal;
+
 	FVector Direction = UKismetMathLibrary::GetDirectionUnitVector(CurrentCableEndLocation, Hit.Location);
 
-	bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, CurrentCableEndLocation, Hit.Location, CableColliders, false, Ignore, EDrawDebugTrace::None, Hit, true);
+	bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, CurrentCableEndLocation, Hit.Location, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
 	if (!bHit)
 	{
 		CastComp->DestroyComponent(true);
@@ -169,6 +162,44 @@ void ANerve::ApplyCablesPhysics()
 	CurrentCable->EndLocation = RelativeLocation;
 
 	Cables.Add(CastComp);
+}
+
+bool ANerve::CanCurrentCableBeRemoved(UCableComponent* CurrentCable, UCableComponent* LastCable)
+{
+	if (!CurrentCable || !LastCable)
+	{
+		return false;
+	}
+
+	FVector CurrentCableLocation = CurrentCable->GetComponentLocation();
+	FVector CurrentCableEndLocation = CurrentCable->GetAttachedComponent()->GetComponentLocation();
+
+	FVector CableDirection = CurrentCableLocation - CurrentCableEndLocation;
+	CableDirection.Normalize();
+	float DotResult = FVector::DotProduct((LastImpactNormal * -1), CableDirection);
+
+	if (DotResult < -0.5f)
+	{
+		return false;
+	}
+
+	FHitResult Hit;
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(this);
+
+	FVector LastCableStartLocation = LastCable->GetComponentLocation();
+	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, LastCableStartLocation, CurrentCableEndLocation, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
+
+	if (bHit)
+	{
+		return false;
+	}
+
+	LastCable->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
+	LastCable->EndLocation = FVector::ZeroVector;
+	Cables.Remove(CurrentCable);
+	CurrentCable->DestroyComponent(true);
+	return true;
 }
 
 FVector ANerve::GetLastCableLocation() const
@@ -277,7 +308,7 @@ bool ANerve::IsNerveBallAttached() const
 
 #pragma region Interaction
 
-void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
+void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (CurrentAttachedReceptacle != nullptr)
 	{
@@ -285,7 +316,7 @@ void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
 		CurrentAttachedReceptacle = nullptr;
 	}
 
-	PlayerController = Cast<AFirstPersonController>(InPlayerController);
+	PlayerController = Cast<AFirstPersonController>(Controller);
 	AttachNerveBall(Pawn);
 
 	PhysicConstraint = Cast<UPlayerToNervePhysicConstraint>(
@@ -294,6 +325,26 @@ void ANerve::Interaction(APlayerController* InPlayerController, APawn* Pawn)
 
 	PhysicConstraint->Init(this, Cast<ACharacter>(Pawn));
 	InteractableComponent->RemoveInteractable(NerveBall);
+}
+
+void ANerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
+{
+	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
+
+	if (bIsZoneActive && InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
+	{
+		InteractableComponent->OnInteract.RemoveDynamic(this, &ANerve::Interaction);
+	}
+}
+
+void ANerve::OnExitWeakZone_Implementation()
+{
+	IWeakZoneInterface::OnExitWeakZone_Implementation();
+
+	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
+	{
+		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
+	}
 }
 
 #pragma endregion

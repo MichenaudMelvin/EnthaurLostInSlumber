@@ -4,6 +4,7 @@
 #include "Player/FirstPersonController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "UIManagerSettings.h"
 #include "Blueprint/UserWidget.h"
 #include "UI/DeathMenuUI.h"
 #include "UI/InGameUI.h"
@@ -66,9 +67,6 @@ void FPlayerInputs::DisplayInputsOnScreen(float DisplayTime, const FColor& Debug
 
 	Message += "\nbInputInteract: ";
 	Message += bInputInteract ? "true" : "false";
-
-	Message += "\bInputTakeAmber";
-	Message += bInputTakeAmber ? "true" : "false";
 
 	GEngine->AddOnScreenDebugMessage(-1, DisplayTime, DebugColor, FString::Printf(TEXT("%s"), *Message));
 }
@@ -174,7 +172,6 @@ void AFirstPersonController::SetupInputComponent()
 	CrouchAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputCrouch, const FInputActionValue&);
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputJump, const FInputActionValue&);
 	InteractAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteract, const FInputActionValue&);
-	TakeAmberAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputTakeAmber, const FInputActionValue&);
 	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputPauseGame, const FInputActionValue&);
 
 	MoveAction.BindAction(EnhancedInputComponent, this);
@@ -183,7 +180,6 @@ void AFirstPersonController::SetupInputComponent()
 	CrouchAction.BindAction(EnhancedInputComponent, this);
 	JumpAction.BindAction(EnhancedInputComponent, this);
 	InteractAction.BindAction(EnhancedInputComponent, this);
-	TakeAmberAction.BindAction(EnhancedInputComponent, this);
 	PauseGameAction.BindAction(EnhancedInputComponent, this);
 }
 
@@ -217,11 +213,6 @@ void AFirstPersonController::OnInputInteract(const FInputActionValue& InputActio
 	PlayerInputs.bInputInteract = InputActionValue.Get<bool>();
 }
 
-void AFirstPersonController::OnInputTakeAmber(const FInputActionValue& InputActionValue)
-{
-	PlayerInputs.bInputTakeAmber = InputActionValue.Get<bool>();
-}
-
 void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActionValue)
 {
 	PlayerInputs.bInputPauseGame = InputActionValue.Get<bool>();
@@ -232,7 +223,7 @@ void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActi
 		return;
 	}
 
-	UIManager->ShowPauseMenu(this);
+	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);
 }
 
 #if WITH_EDITOR

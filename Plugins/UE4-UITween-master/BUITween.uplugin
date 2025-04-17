@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "BUITween",
+	"Description": "Tweening library for UMG",
+	"Category": "Other",
+	"CreatedBy": "benui & The Hoodie Guy",
+	"CreatedByURL": "https://benui.ca/",
+	"DocsURL": "https://github.com/TheHoodieGuy02/UE4-UITween/",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "BUITween",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

@@ -9,7 +9,10 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
+#include "Components/BoxComponent.h"
+#include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Parasite/ParasitePawn.h"
 #include "Path/AIPath.h"
 
 UFollowAIPath::UFollowAIPath()
@@ -20,11 +23,6 @@ UFollowAIPath::UFollowAIPath()
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, AIPath), AAIPath::StaticClass());
 	PathIndex.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, PathIndex));
 	WalkOnFloor.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, WalkOnFloor));
-
-	// static ConstructorHelpers::FObjectFinder<UCurveFloat> Curve(TEXT("/Engine/Niagara/DefaultAssets/Curves/Templates/LinearRampUp"));
-	// check(Curve.Succeeded());
-	//
-	// MovementCurve = Curve.Object;
 }
 
 void UFollowAIPath::InitializeFromAsset(UBehaviorTree& Asset)
@@ -38,6 +36,18 @@ void UFollowAIPath::InitializeFromAsset(UBehaviorTree& Asset)
 		PathIndex.ResolveSelectedKey(*BBAsset);
 		WalkOnFloor.ResolveSelectedKey(*BBAsset);
 	}
+
+	if (!MovementCurve)
+	{
+		return;
+	}
+
+	FOnTimelineFloat UpdateEvent;
+	FOnTimelineEvent FinishEvent;
+	UpdateEvent.BindDynamic(this, &UFollowAIPath::MovementUpdate);
+	FinishEvent.BindDynamic(this, &UFollowAIPath::FinishTask);
+	MovementTimeline.AddInterpFloat(MovementCurve, UpdateEvent);
+	MovementTimeline.SetTimelineFinishedFunc(FinishEvent);
 }
 
 EBTNodeResult::Type UFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -68,16 +78,47 @@ EBTNodeResult::Type UFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 		return EBTNodeResult::Failed;
 	}
 
+	CurrentPawn = Controller->GetPawn();
+	if (!CurrentPawn)
+	{
+		return EBTNodeResult::Failed;
+	}
+
+	float PawnHeight = 0.0f;
+	AParasitePawn* ParasitePawn = Cast<AParasitePawn>(CurrentPawn);
+	if (ParasitePawn)
+	{
+		PawnHeight = ParasitePawn->GetCollisionComp()->GetUnscaledBoxExtent().Z;
+	}
+
 	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
-	TargetLocation = Path->GetPointLocation(Index);
+	TargetLocation = Path->GetPointLocation(Index, PawnHeight);
 
 	bool bWalkOnFloor = BlackboardComponent->GetValue<UBlackboardKeyType_Bool>(WalkOnFloor.GetSelectedKeyID());
-
-	// bWalkOnFloor = Controller->IsPointReachable(TargetLocation);
 
 	if (bWalkOnFloor)
 	{
 		UAIBlueprintHelperLibrary::SimpleMoveToLocation(OwnerComp.GetAIOwner(), TargetLocation);
+	}
+	else
+	{
+		CurrentOwnerComp = &OwnerComp;
+		StartLocation = CurrentPawn->GetActorLocation();
+
+		float Distance = FVector::Dist(StartLocation, TargetLocation);
+		float Speed = CurrentPawn->GetMovementComponent()->GetMaxSpeed();
+
+		float Time = Distance/Speed;
+
+		MovementTimeline.SetPlayRate(1/Time);
+		MovementTimeline.PlayFromStart();
+
+		if (bRotateWithMovement)
+		{
+			FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(StartLocation, TargetLocation);
+			FRotator TargetRotation = FRotationMatrix::MakeFromXZ(ForwardDirection, (Path->GetDirection() * -1)).Rotator();
+			CurrentPawn->SetActorRotation(TargetRotation);
+		}
 	}
 
 	return EBTNodeResult::InProgress;
@@ -108,18 +149,16 @@ void UFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemor
 	{
 		MovementTimeline.TickTimeline(DeltaSeconds);
 		return;
-		// FVector LerpResult = UKismetMathLibrary::VLerp(Pawn->GetActorLocation(), TargetLocation, DeltaSeconds * LerpSpeed);
-		// Pawn->SetActorLocation(LerpResult);
 	}
 
-	if (bRotateWithMovement)
+	if (bRotateWithMovement && CurrentPawn)
 	{
-		USceneComponent* Root = OwnerComp.GetAIOwner()->GetPawn()->GetRootComponent();
+		USceneComponent* Root = CurrentPawn->GetRootComponent();
 		FRotator RootRotation = Root->GetComponentRotation();
-	
+
 		FVector RootVelocity = Root->GetComponentVelocity();
 		FRotator VelocityRotator = FRotationMatrix::MakeFromX(RootVelocity).Rotator();
-	
+
 		RootRotation.Yaw = VelocityRotator.Yaw;
 		Root->SetWorldRotation(RootRotation);
 	}
@@ -130,4 +169,15 @@ void UFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemor
 	{
 		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 	}
+}
+
+void UFollowAIPath::MovementUpdate(float Alpha)
+{
+	FVector LerpResult = UKismetMathLibrary::VLerp(StartLocation, TargetLocation, Alpha);
+	CurrentPawn->SetActorLocation(LerpResult);
+}
+
+void UFollowAIPath::FinishTask()
+{
+	FinishLatentTask(*CurrentOwnerComp, EBTNodeResult::Succeeded);
 }

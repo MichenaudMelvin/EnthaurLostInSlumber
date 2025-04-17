@@ -4,6 +4,7 @@
 #include "GameElements/NerveReceptacle.h"
 
 #include "Enumerations.h"
+#include "Components/CameraShakeComponent.h"
 #include "Components/InteractableComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
@@ -11,6 +12,7 @@
 #include "GameElements/Nerve.h"
 #include "Components/PlayerToNervePhysicConstraint.h"
 #include "Kismet/GameplayStatics.h"
+#include "Player/FirstPersonCharacter.h"
 
 
 ANerveReceptacle::ANerveReceptacle()
@@ -38,6 +40,8 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 		ANerve* Nerve = Cast<ANerve>(OtherActor);
 		Nerve->SetCurrentReceptacle(this);
 
+		OnNerveConnect();
+
 		FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, false);
 		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
 		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
@@ -52,6 +56,9 @@ void ANerveReceptacle::TriggerLinkedObjects()
 {
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
+	
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	Player->GetCameraShake()->MakeSmallCameraShake();
 
 	for (AActor* Actor : Actors)
 	{
