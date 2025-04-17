@@ -11,7 +11,6 @@ UCharacterJumpState::UCharacterJumpState()
 {
 	StateID = ECharacterStateID::Jump;
 	MoveSpeed = 400.0f;
-	bCheckGround = false;
 }
 
 void UCharacterJumpState::StateInit(UCharacterStateMachine* InStateMachine)

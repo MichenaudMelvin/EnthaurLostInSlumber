@@ -71,11 +71,6 @@ void UCharacterState::StateEnter_Implementation(const ECharacterStateID& Previou
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)
 {
-	if (bCheckGround)
-	{
-		CheckGround();
-	}
-
 	CameraMovement(DeltaTime);
 	UpdateCameraFOV(DeltaTime);
 	UpdateViewBobbing(DeltaTime);
@@ -95,36 +90,6 @@ const FPlayerInputs& UCharacterState::GetInputs() const
 bool UCharacterState::IsFalling() const
 {
 	return Character->GetCharacterMovement()->IsFalling();
-}
-
-void UCharacterState::CheckGround()
-{
-	FHitResult HitResult;
-	if (!Character->GroundTrace(HitResult))
-	{
-		return;
-	}
-
-	if (HitResult.PhysMaterial == nullptr)
-	{
-		return;
-	}
-
-	if (HitResult.PhysMaterial->SurfaceType != CurrentSurface)
-	{
-		CurrentSurface = HitResult.PhysMaterial->SurfaceType;
-		OnWalkOnNewSurface(CurrentSurface);
-	}
-}
-
-void UCharacterState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysicalSurface>& NewSurface)
-{
-	const UTracePhysicsSettings* StateSettings = GetDefault<UTracePhysicsSettings>();
-
-	if (NewSurface == StateSettings->SlipperySurface)
-	{
-		StateMachine->ChangeState(ECharacterStateID::Slide);
-	}
 }
 
 #pragma endregion
