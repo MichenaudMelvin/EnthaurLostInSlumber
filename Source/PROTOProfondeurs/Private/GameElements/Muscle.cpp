@@ -107,6 +107,11 @@ void AMuscle::OnConstruction(const FTransform& Transform)
 	bDefaultSolidity = bIsSolid;
 	CurrentZScale = MuscleHeight.GetUpperBoundValue();
 
+	if (!MuscleMeshComp)
+	{
+		return;
+	}
+
 	MuscleMeshComp->SetStaticMesh(MuscleMesh);
 
 	RebuildMuscleMesh();
@@ -199,6 +204,11 @@ bool AMuscle::IsDeformed() const
 
 void AMuscle::RebuildMuscleMesh() const
 {
+	if (!MuscleMeshComp)
+	{
+		return;
+	}
+
 	MuscleMeshComp->SetRelativeScale3D(FVector(MuscleSize.X, MuscleSize.Y, CurrentZScale));
 
 #if WITH_EDITORONLY_DATA
