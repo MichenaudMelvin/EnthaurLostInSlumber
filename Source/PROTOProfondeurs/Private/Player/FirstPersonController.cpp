@@ -65,8 +65,11 @@ void FPlayerInputs::DisplayInputsOnScreen(float DisplayTime, const FColor& Debug
 	Message += "\nbInputJump: ";
 	Message += bInputJump ? "true" : "false";
 
-	Message += "\nbInputInteract: ";
-	Message += bInputInteract ? "true" : "false";
+	Message += "\nbInputInteractPressed: ";
+	Message += bInputInteractPressed ? "true" : "false";
+
+	Message += "\nbInputInteractTrigger: ";
+	Message += bInputInteractTrigger ? "true" : "false";
 
 	GEngine->AddOnScreenDebugMessage(-1, DisplayTime, DebugColor, FString::Printf(TEXT("%s"), *Message));
 }
@@ -171,7 +174,8 @@ void AFirstPersonController::SetupInputComponent()
 	SprintAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputSprint, const FInputActionValue&);
 	CrouchAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputCrouch, const FInputActionValue&);
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputJump, const FInputActionValue&);
-	InteractAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteract, const FInputActionValue&);
+	InteractPressedAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteractPressed, const FInputActionValue&);
+	InteractTriggerAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteractTrigger, const FInputActionValue&);
 	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputPauseGame, const FInputActionValue&);
 
 	MoveAction.BindAction(EnhancedInputComponent, this);
@@ -179,7 +183,8 @@ void AFirstPersonController::SetupInputComponent()
 	SprintAction.BindAction(EnhancedInputComponent, this);
 	CrouchAction.BindAction(EnhancedInputComponent, this);
 	JumpAction.BindAction(EnhancedInputComponent, this);
-	InteractAction.BindAction(EnhancedInputComponent, this);
+	InteractPressedAction.BindAction(EnhancedInputComponent, this);
+	InteractTriggerAction.BindAction(EnhancedInputComponent, this);
 	PauseGameAction.BindAction(EnhancedInputComponent, this);
 }
 
@@ -208,9 +213,14 @@ void AFirstPersonController::OnInputJump(const FInputActionValue& InputActionVal
 	PlayerInputs.bInputJump = InputActionValue.Get<bool>();
 }
 
-void AFirstPersonController::OnInputInteract(const FInputActionValue& InputActionValue)
+void AFirstPersonController::OnInputInteractPressed(const FInputActionValue& InputActionValue)
 {
-	PlayerInputs.bInputInteract = InputActionValue.Get<bool>();
+	PlayerInputs.bInputInteractPressed = InputActionValue.Get<bool>();
+}
+
+void AFirstPersonController::OnInputInteractTrigger(const FInputActionValue& InputActionValue)
+{
+	PlayerInputs.bInputInteractTrigger = InputActionValue.Get<bool>();
 }
 
 void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActionValue)

@@ -125,7 +125,7 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 	GroundMovement();
 	UpdateSpikeLocation(DeltaSeconds);
 
-	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteract)
+	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteractPressed)
 	{
 		CurrentInteractable->Interact(GetPlayerController(), this);
 	}

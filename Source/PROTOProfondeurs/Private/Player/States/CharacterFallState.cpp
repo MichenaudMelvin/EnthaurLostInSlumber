@@ -31,6 +31,7 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 	}
 
 	SpikeBrakeTime = 0.0f;
+	bHasPressedInteraction = false;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
 	Character->GetCharacterMovement()->AirControl = AirControl;
@@ -67,12 +68,12 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 		}
 	}
 
-	if (Controller->GetPlayerInputs().bInputInteract)
+	if (Controller->GetPlayerInputs().bInputInteractTrigger)
 	{
 		SpikeBrakeTime += DeltaTime;
 		SpikeBrakeTime = FMath::Clamp(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
 	}
-	else if (!Controller->GetPlayerInputs().bInputInteract)
+	else if (!Controller->GetPlayerInputs().bInputInteractTrigger)
 	{
 		if (SpikeBrakeTime >= SpikeBrakeDuration)
 		{

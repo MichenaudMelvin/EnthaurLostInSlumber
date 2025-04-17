@@ -58,7 +58,10 @@ struct FPlayerInputs
 	bool bInputJump = false;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
-	bool bInputInteract = false;
+	bool bInputInteractPressed = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	bool bInputInteractTrigger = false;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	bool bInputPauseGame = false;
@@ -76,11 +79,13 @@ class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UUserWidget> InGameWidgetClass;
+
 	UPROPERTY()
 	TObjectPtr<UInGameUI> CurrentInGameUI;
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UUserWidget> DeathWidgetClass;
+
 	UPROPERTY()
 	TObjectPtr<class UDeathMenuUI> CurrentDeathUI;
 
@@ -108,7 +113,6 @@ protected:
 
 public:
 	UInGameUI* GetCurrentInGameUI() { return CurrentInGameUI; }
-	
 
 #pragma region Inputs
 
@@ -134,7 +138,10 @@ protected:
 	FAction JumpAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction InteractAction;
+	FAction InteractPressedAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
+	FAction InteractTriggerAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FAction PauseGameAction;
@@ -158,7 +165,10 @@ protected:
 	void OnInputJump(const FInputActionValue& InputActionValue);
 
 	UFUNCTION()
-	void OnInputInteract(const FInputActionValue& InputActionValue);
+	void OnInputInteractPressed(const FInputActionValue& InputActionValue);
+
+	UFUNCTION()
+	void OnInputInteractTrigger(const FInputActionValue& InputActionValue);
 
 	UFUNCTION()
 	void OnInputPauseGame(const FInputActionValue& InputActionValue);
@@ -184,12 +194,12 @@ private:
 #pragma endregion
 
 #pragma region Respawn
-	
+
 	UFUNCTION(BlueprintCallable)
 	void KillPlayer();
-	
+
 	UFUNCTION(BlueprintCallable)
 	void RespawnPlayer(FVector RespawnPosition);
-	
+
 #pragma endregion 
 };

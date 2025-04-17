@@ -30,7 +30,7 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!PlayerController->GetPlayerInputs().bInputInteract)
+	if (!PlayerController->GetPlayerInputs().bInputInteractPressed)
 	{
 		bHasReleasedInteraction = true;
 	}
@@ -61,7 +61,7 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			IsPropultionActive = true;
 		}
 
-		if (PlayerController->GetPlayerInputs().bInputInteract && !IsAlreadyPropulsing)
+		if (PlayerController->GetPlayerInputs().bInputInteractPressed && !IsAlreadyPropulsing)
 		{
 			IsAlreadyPropulsing = true;
 
@@ -86,7 +86,7 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			IsPropultionActive = false;
 		}
 
-		else if (bHasReleasedInteraction && PlayerController->GetPlayerInputs().bInputInteract)
+		else if (bHasReleasedInteraction && PlayerController->GetPlayerInputs().bInputInteractPressed)
 		{
 			ReleasePlayer(true);
 		}
