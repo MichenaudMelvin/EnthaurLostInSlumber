@@ -4,6 +4,7 @@
 #include "Controller/PRFUIController.h"
 
 #include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "PRFUIManager.h"
 
 void FActionUI::BindActionUI(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object)
@@ -44,7 +45,31 @@ APRFUIController::APRFUIController()
 void APRFUIController::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	ULocalPlayer* LocalPlayer = GetLocalPlayer();
+	if (!LocalPlayer)
+	{
+		return;
+	}
+
+	UEnhancedInputLocalPlayerSubsystem* Subsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+	if(!Subsystem)
+	{
+		return;
+	}
+
+	if (!DefaultMappingContext)
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("Missing DefaultMappingContext in %s"), *GetClass()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	Subsystem->AddMappingContext(DefaultMappingContext, 0);
 }
 
 void APRFUIController::SetupInputComponent()

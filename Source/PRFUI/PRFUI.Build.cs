@@ -21,9 +21,10 @@ public class PRFUI : ModuleRules
                 "Engine",
                 "EnhancedInput",
                 "ModelViewViewModel",
+                "PROTOProfondeurs",
                 "Slate",
                 "SlateCore",
-                "UMG"
+                "UMG",
             }
         );
 
