@@ -1,0 +1,10 @@
+{
+	"BuildId": "37670630",
+	"Modules": 
+	{
+		"DepthAIModule": "UnrealEditor-DepthAIModule-0002.dll",
+		"PRFEditor": "UnrealEditor-PRFEditor-0002.dll",
+		"PRFUI": "UnrealEditor-PRFUI-0002.dll",
+		"PROTOProfondeurs": "UnrealEditor-PROTOProfondeurs-0002.dll"
+	}
+}
