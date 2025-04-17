@@ -176,7 +176,12 @@ void AFirstPersonController::SetupInputComponent()
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputJump, const FInputActionValue&);
 	InteractPressedAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteractPressed, const FInputActionValue&);
 	InteractTriggerAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteractTrigger, const FInputActionValue&);
-	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputPauseGame, const FInputActionValue&);
+	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputPauseGame);
+
+	NavigateAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputNavigate);
+	SelectAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputSelect);
+	BackAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputBack);
+	ResumeAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputResume);
 
 	MoveAction.BindAction(EnhancedInputComponent, this);
 	LookAction.BindAction(EnhancedInputComponent, this);
@@ -186,6 +191,11 @@ void AFirstPersonController::SetupInputComponent()
 	InteractPressedAction.BindAction(EnhancedInputComponent, this);
 	InteractTriggerAction.BindAction(EnhancedInputComponent, this);
 	PauseGameAction.BindAction(EnhancedInputComponent, this);
+	
+	NavigateAction.BindAction(EnhancedInputComponent, this);
+	SelectAction.BindAction(EnhancedInputComponent, this);
+	BackAction.BindAction(EnhancedInputComponent, this);
+	ResumeAction.BindAction(EnhancedInputComponent, this);
 }
 
 void AFirstPersonController::OnInputMove(const FInputActionValue& InputActionValue)
@@ -223,17 +233,62 @@ void AFirstPersonController::OnInputInteractTrigger(const FInputActionValue& Inp
 	PlayerInputs.bInputInteractTrigger = InputActionValue.Get<bool>();
 }
 
-void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActionValue)
+void AFirstPersonController::OnInputPauseGame()
 {
-	PlayerInputs.bInputPauseGame = InputActionValue.Get<bool>();
-
 	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
 	if (!IsValid(UIManager))
 	{
 		return;
 	}
 
+	UIManager->CurrentContext = EPRFUIState::PauseMenu;
 	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);
+}
+
+void AFirstPersonController::OnInputNavigate(const FInputActionValue& InputActionValue)
+{
+	
+}
+
+void AFirstPersonController::OnInputSelect()
+{
+	
+}
+
+void AFirstPersonController::OnInputBack()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	UIManager->CloseCurrentMenu();
+	
+}
+
+void AFirstPersonController::OnInputResume()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	switch (UIManager->CurrentContext)
+	{
+		case EPRFUIState::PauseMenu:
+			UIManager->CurrentContext = EPRFUIState::Gameplay;
+        	UIManager->CloseAllMenus();
+			break;
+
+		case EPRFUIState::MainMenu:
+			UIManager->CloseCurrentMenu();
+			break;
+
+		default:
+			break;
+	}
 }
 
 #if WITH_EDITOR
