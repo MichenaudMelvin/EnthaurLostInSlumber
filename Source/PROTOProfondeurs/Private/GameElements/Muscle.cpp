@@ -261,10 +261,12 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 
 	float ActorVelocityLength = OtherComp ? OtherComp->GetComponentVelocity().Size() : HitActor->GetVelocity().Size();
 
-	if (ActorVelocityLength < MinVelocity)
+	if (ActorVelocityLength < MinTriggerVelocity)
 	{
 		return;
 	}
+
+	ActorVelocityLength = FMath::Clamp(ActorVelocityLength, MinTriggerVelocity, MaxLaunchVelocity);
 
 	StartDeformation();
 

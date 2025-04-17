@@ -122,7 +122,10 @@ protected:
 	float FixedVelocity = 5000.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, ClampMax = 2500.0f, UIMin = 0.0f, UIMax = 2500.0f))
-	float MinVelocity = 1000.0f;
+	float MinTriggerVelocity = 1000.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, UIMin = 0.0f))
+	float MaxLaunchVelocity = 3500.0f;
 
 	UFUNCTION(CallInEditor, Category = "Physics")
 	void ToggleMuscleSolidity();
