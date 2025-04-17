@@ -3,9 +3,12 @@
 
 #include "PRFUIManager.h"
 
+#include "EnhancedInputSubsystems.h"
 #include "UIManagerSettings.h"
 #include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "Player/FirstPersonController.h"
 
 void UPRFUIManager::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -33,7 +36,7 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	MenuStack.Add(InMenuClass);
 
 	InMenuClass->AddToViewport();
-	SetUIInputMode();
+	//SetUIInputMode();
 
 	if (MenuStack.Num() >= 2)
 	{
@@ -49,8 +52,34 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 
 	if (MenuStack.Num() == 1)
 	{
-		// Switch input mapping input context to UI
+		UWorld* World = GEngine->GetCurrentPlayWorld();
+		if (!IsValid(World))
+		{
+			return;
+		}
 		
+		ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
+		if (!IsValid(LocalPlayer))
+		{
+			return;
+		}
+		
+		UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+		if (!IsValid(InputSubsystem))
+		{
+			return;
+		}
+
+		AFirstPersonController* FirstPersonController = Cast<AFirstPersonController>(UGameplayStatics::GetPlayerController(this, 0));
+		if (!IsValid(FirstPersonController))
+		{
+			return;
+		}
+
+		InputSubsystem->ClearAllMappings();
+		InputSubsystem->AddMappingContext(FirstPersonController->GetUIMappingContext(), 0);
+		SetUIInputMode();
+		CenterCursor();
 	}
 	
 	if (GEngine)
@@ -62,18 +91,18 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 			const FString& YoMenuName = Pair.Key;
 			const TWeakObjectPtr<UUserWidget>& WidgetPtr = Pair.Value;
 
-			FString Output;
+			FString Output1;
 
 			if (WidgetPtr.IsValid())
 			{
-				Output = FString::Printf(TEXT("Menu: %s → %s"), *YoMenuName, *WidgetPtr->GetName());
+				Output1 = FString::Printf(TEXT("Menu: %s → %s"), *YoMenuName, *WidgetPtr->GetName());
 			}
 			else
 			{
-				Output = FString::Printf(TEXT("Menu: %s → Invalid (GC'd or destroyed)"), *YoMenuName);
+				Output1 = FString::Printf(TEXT("Menu: %s → Invalid (GC'd or destroyed)"), *YoMenuName);
 			}
 
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, Output);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, Output1);
 		}
 	}
 }
@@ -81,6 +110,12 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 void UPRFUIManager::CloseCurrentMenu()
 {
 	if (MenuStack.Num() == 0)
+	{
+		return;
+	}
+
+	// If we are in the main menu then we don't want to remove the first UI as we always need the "press any key"
+	if (MenuStack.Num() == 1 && CurrentContext == EPRFUIState::MainMenu)
 	{
 		return;
 	}
@@ -101,7 +136,33 @@ void UPRFUIManager::CloseCurrentMenu()
 
 	if (MenuStack.Num() == 0)
 	{
-		// Switch input mapping input context to Game
+		UWorld* World = GEngine->GetCurrentPlayWorld();
+		if (!IsValid(World))
+		{
+			return;
+		}
+		
+		ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
+		if (!IsValid(LocalPlayer))
+		{
+			return;
+		}
+		
+		UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+		if (!IsValid(InputSubsystem))
+		{
+			return;
+		}
+
+		AFirstPersonController* FirstPersonController = Cast<AFirstPersonController>(UGameplayStatics::GetPlayerController(this, 0));
+		if (!IsValid(FirstPersonController))
+		{
+			return;
+		}
+
+		InputSubsystem->ClearAllMappings();
+		InputSubsystem->AddMappingContext(FirstPersonController->GetDefaultMappingContext(), 0);
+		SetGameInputMode();
 	}
 }
 
@@ -127,7 +188,13 @@ void UPRFUIManager::SetUIInputMode() const
 		return;
 	}
 
-	//PlayerController->SetInputMode(FInputModeGameAndUI());
+	UWidget* TestWidget = MenuStack.Last().Get();
+	if (!IsValid(TestWidget))
+	{
+		return;
+	}
+
+	UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PlayerController, MenuStack.Last().Get());
 	UGameplayStatics::SetGamePaused(this, true);
 	PlayerController->bShowMouseCursor = true;
 }
@@ -146,10 +213,32 @@ void UPRFUIManager::SetGameInputMode() const
 		return;
 	}
 
-	PlayerController->SetInputMode(FInputModeGameOnly());
-
+	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController);
 	UGameplayStatics::SetGamePaused(this, false);
 	PlayerController->bShowMouseCursor = false;
+}
+
+void UPRFUIManager::CenterCursor() const
+{
+	UWorld* World = GEngine->GetCurrentPlayWorld();
+	if (!IsValid(World))
+	{
+		return;
+	}
+
+	APlayerController* PlayerController = World->GetFirstPlayerController();
+	if (!IsValid(PlayerController))
+	{
+		return;
+	}
+
+	FVector2D ViewportSize;
+	GEngine->GameViewport->GetViewportSize(ViewportSize);
+
+	const int32 CenterX = FMath::RoundToInt(ViewportSize.X * 0.5f);
+	const int32 CenterY = FMath::RoundToInt(ViewportSize.Y * 0.5f);
+
+	PlayerController->SetMouseLocation(CenterX, CenterY);
 }
 
 void UPRFUIManager::HandleMenuCollection(UUserWidget* InMenuClass, bool bAddMenu)

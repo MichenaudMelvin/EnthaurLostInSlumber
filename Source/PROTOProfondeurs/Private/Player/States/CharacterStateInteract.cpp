@@ -4,6 +4,7 @@
 #include "CharacterStateInteract.h"
 #include "Components/InteractableComponent.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
 
 UCharacterStateInteract::UCharacterStateInteract()

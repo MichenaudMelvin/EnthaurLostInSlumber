@@ -42,28 +42,28 @@ struct FPlayerInputs
 {
 	GENERATED_BODY()
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	FVector2D InputMove = FVector2D::ZeroVector;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	FVector2D InputLook = FVector2D::ZeroVector;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	bool bInputSprint = false;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	bool bInputCrouch = false;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	bool bInputJump = false;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	bool bInputInteract = false;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	bool bInputTakeAmber = false;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
+	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	bool bInputPauseGame = false;
 
 #if !UE_BUILD_SHIPPING
@@ -118,36 +118,42 @@ public:
 protected:
 	virtual void SetupInputComponent() override;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	TObjectPtr<UInputMappingContext> DefaultMappingContext;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction MoveAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction LookAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction SprintAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction CrouchAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction JumpAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction InteractAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction TakeAmberAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
-	FAction PauseGameAction;
-
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs")
 	FPlayerInputs PlayerInputs;
 
+#pragma region IMC_Default
+
+public:
+	TObjectPtr<UInputMappingContext> GetDefaultMappingContext() { return DefaultMappingContext; }
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction MoveAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction LookAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction SprintAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction CrouchAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction JumpAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction InteractAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction TakeAmberAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction PauseGameAction;
+	
 	UFUNCTION()
 	void OnInputMove(const FInputActionValue& InputActionValue);
 
@@ -170,7 +176,44 @@ protected:
 	void OnInputTakeAmber(const FInputActionValue& InputActionValue);
 
 	UFUNCTION()
-	void OnInputPauseGame(const FInputActionValue& InputActionValue);
+	void OnInputPauseGame();
+
+#pragma endregion
+
+#pragma region IMC_UI
+
+public:
+	TObjectPtr<UInputMappingContext> GetUIMappingContext() { return UIMappingContext; }
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
+	TObjectPtr<UInputMappingContext> UIMappingContext;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
+	FAction NavigateAction;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
+	FAction SelectAction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
+	FAction BackAction;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
+	FAction ResumeAction;
+
+	UFUNCTION()
+	void OnInputNavigate(const FInputActionValue& InputActionValue);
+
+	UFUNCTION()
+	void OnInputSelect();
+
+	UFUNCTION()
+	void OnInputBack();
+
+	UFUNCTION()
+	void OnInputResume();
+
+#pragma endregion
 
 public:
 	const FPlayerInputs& GetPlayerInputs() const {return PlayerInputs;}
