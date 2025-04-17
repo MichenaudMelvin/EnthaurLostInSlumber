@@ -12,7 +12,6 @@
 UCharacterIdleState::UCharacterIdleState()
 {
 	StateID = ECharacterStateID::Idle;
-	bCheckGround = true;
 }
 
 void UCharacterIdleState::StateInit(UCharacterStateMachine* InStateMachine)

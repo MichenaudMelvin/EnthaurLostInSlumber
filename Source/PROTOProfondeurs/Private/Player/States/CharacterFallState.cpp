@@ -14,14 +14,13 @@
 UCharacterFallState::UCharacterFallState()
 {
 	StateID = ECharacterStateID::Fall;
-	bCheckGround = false;
 }
 
 void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
 {
 	Super::StateEnter_Implementation(PreviousStateID);
 
-	if (PreviousStateID != ECharacterStateID::Jump)
+	if (PreviousStateID != ECharacterStateID::Jump && PreviousStateID != ECharacterStateID::Fall)
 	{
 		bCanDoCoyoteTime = true;
 		CoyoteTime = 0.0f;

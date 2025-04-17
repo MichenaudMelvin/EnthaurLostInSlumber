@@ -26,7 +26,6 @@ enum class ECharacterStateID : uint8
 	Fall,
 	Interact,
 	Stop,
-	Slide,
 };
 
 /**
@@ -83,18 +82,6 @@ protected:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool IsFalling() const;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Ground")
-	bool bCheckGround = false;
-
-	UFUNCTION(BlueprintCallable, Category = "Character|Ground")
-	void CheckGround();
-
-	UPROPERTY(BlueprintReadOnly, Category = "Character|Ground")
-	TEnumAsByte<EPhysicalSurface> CurrentSurface = SurfaceType1;
-
-	UFUNCTION(BlueprintNativeEvent, Category = "Character|Ground")
-	void OnWalkOnNewSurface(const TEnumAsByte<EPhysicalSurface>& NewSurface);
 
 #pragma endregion
 

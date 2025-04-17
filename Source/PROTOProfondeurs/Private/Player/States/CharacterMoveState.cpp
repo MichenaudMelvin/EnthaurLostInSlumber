@@ -12,7 +12,6 @@
 
 UCharacterMoveState::UCharacterMoveState()
 {
-	bCheckGround = true;
 	bDoesMakeNoise = true;
 }
 

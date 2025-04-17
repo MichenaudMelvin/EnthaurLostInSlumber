@@ -19,7 +19,4 @@ public:
 
 	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Ground")
 	TArray<TEnumAsByte<EObjectTypeQuery>> GroundObjectTypes;
-
-	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Ground")
-	TEnumAsByte<EPhysicalSurface> SlipperySurface = SurfaceType1;
 };
