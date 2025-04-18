@@ -524,17 +524,3 @@ bool AFirstPersonCharacter::IsStopped() const
 }
 
 #pragma endregion
-
-#if WITH_EDITORONLY_DATA
-
-void AFirstPersonCharacter::ChangeState(const ECharacterStateID& State) const
-{
-	if (!StateMachine)
-	{
-		return;
-	}
-
-	StateMachine->ChangeState(State);
-}
-
-#endif
