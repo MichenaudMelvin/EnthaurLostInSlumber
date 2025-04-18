@@ -62,6 +62,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Cables")
 	TObjectPtr<UMaterial> CableMaterial;
 
+	void ResetCables();
+
 public:
 	FVector GetLastCableLocation() const;
 
