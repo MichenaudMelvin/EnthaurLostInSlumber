@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "GameElements/NerveReceptacle.h"
 #include "Components/PlayerToNervePhysicConstraint.h"
+#include "Components/SplineComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/CharacterSettings.h"
@@ -19,6 +20,10 @@ ANerve::ANerve()
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(Root);
 
+	SplineCable = CreateDefaultSubobject<USplineComponent>(TEXT("SplineCable"));
+	SplineCable->SetupAttachment(RootComponent);
+	SplineCable->ClearSplinePoints(false);
+
 	UCableComponent* RootCable = CreateDefaultSubobject<UCableComponent>(TEXT("Cable"));
 	RootCable->SetupAttachment(RootComponent);
 
@@ -26,11 +31,12 @@ ANerve::ANerve()
 
 	Cables.Empty();
 
-	InitCable(RootCable);
+	InitCable(RootCable, 0);
 	Cables.Add(RootCable);
 
 	NerveBall = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Sphere"));
 	NerveBall->SetupAttachment(RootComponent);
+
 
 	InteractableComponent = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 	InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
@@ -58,7 +64,7 @@ void ANerve::OnConstruction(const FTransform& Transform)
 		CableMaxExtension = StartCableLength + 1000.0f;
 	}
 
-	InitCable(Cables[0]);
+	InitCable(Cables[0], 0);
 }
 
 void ANerve::Tick(float DeltaSeconds)
@@ -70,7 +76,7 @@ void ANerve::Tick(float DeltaSeconds)
 
 #pragma region Cables
 
-void ANerve::InitCable(const TObjectPtr<UCableComponent>& Cable) const
+void ANerve::InitCable(const TObjectPtr<UCableComponent>& Cable, const int CableIndex) const
 {
 	if (!Cable)
 	{
@@ -85,6 +91,13 @@ void ANerve::InitCable(const TObjectPtr<UCableComponent>& Cable) const
 	Cable->CableLength = 0.0f;
 	Cable->SolverIterations = 16;
 	Cable->SetMaterial(0, CableMaterial);
+
+	if (!Cables.IsValidIndex(CableIndex) || !Cables[CableIndex])
+	{
+		return;
+	}
+
+	// SplineCable->AddSplinePoint(Cables[CableIndex]->GetComponentLocation(), ESplineCoordinateSpace::World);
 }
 
 void ANerve::ApplyCablesPhysics()
@@ -93,6 +106,8 @@ void ANerve::ApplyCablesPhysics()
 	{
 		return;
 	}
+
+	UpdateSpline();
 
 	int CurrentIndex = Cables.Num() - 1;
 
@@ -156,7 +171,7 @@ void ANerve::ApplyCablesPhysics()
 	CastComp->SetWorldLocation(WorldLocation);
 
 	CastComp->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepWorld, false));
-	InitCable(CastComp);
+	InitCable(CastComp, CurrentIndex);
 
 	CurrentCable->AttachEndTo.ComponentProperty = NAME_None;
 	CurrentCable->EndLocation = RelativeLocation;
@@ -202,6 +217,35 @@ bool ANerve::CanCurrentCableBeRemoved(UCableComponent* CurrentCable, UCableCompo
 	return true;
 }
 
+void ANerve::ResetCables()
+{
+	// delete all cables except the first one
+	for (int i = Cables.Num() - 1; i > 0; i--)
+	{
+		UCableComponent* CurrentCable = Cables[i];
+		Cables.RemoveAt(i);
+		CurrentCable->DestroyComponent(true);
+	}
+
+	if(Cables[0])
+	{
+		Cables[0]->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
+		Cables[0]->EndLocation = FVector::ZeroVector;
+	}
+}
+
+void ANerve::UpdateSpline()
+{
+	SplineCable->ClearSplinePoints(true);
+
+	for (int i = 0; i < Cables.Num(); i++)
+	{
+		SplineCable->AddSplinePoint(Cables[i]->GetComponentLocation(), ESplineCoordinateSpace::World, true);
+	}
+
+	SplineCable->AddSplinePoint(NerveBall->GetComponentLocation(), ESplineCoordinateSpace::World, true);
+}
+
 FVector ANerve::GetLastCableLocation() const
 {
 	int LastIndex = Cables.Num() - 1;
@@ -240,6 +284,12 @@ FVector ANerve::GetCableDirection() const
 	return UKismetMathLibrary::GetDirectionUnitVector(Cables[LastIndex]->GetComponentLocation(), NerveBall->GetComponentLocation());
 }
 
+FVector ANerve::GetCablePosition(float Percent) const
+{
+	float Distance = FMath::Lerp(0.0f, SplineCable->GetSplineLength(), Percent);
+	return SplineCable->GetLocationAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::World);
+}
+
 #pragma endregion
 
 #pragma region NerveBall
@@ -247,6 +297,7 @@ FVector ANerve::GetCableDirection() const
 void ANerve::AttachNerveBall(AActor* ActorToAttach)
 {
 	// NerveBall->SetSimulatePhysics(false);
+	ResetCables();
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
 	bShouldApplyCablePhysics = true;
@@ -278,19 +329,7 @@ void ANerve::DetachNerveBall()
 			1.f,
 			EFCEase::OutElastic);
 
-	// delete all cables except the first one
-	for (int i = Cables.Num() - 1; i > 0; i--)
-	{
-		UCableComponent* CurrentCable = Cables[i];
-		Cables.RemoveAt(i);
-		CurrentCable->DestroyComponent(true);
-	}
-
-	if(Cables[0])
-	{
-		Cables[0]->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
-		Cables[0]->EndLocation = FVector::ZeroVector;
-	}
+	ResetCables();
 
 	InteractableComponent->AddInteractable(NerveBall);
 	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))

@@ -8,6 +8,7 @@
 #include "GameFramework/Actor.h"
 #include "Nerve.generated.h"
 
+class USplineComponent;
 class AFirstPersonController;
 class ANerveReceptacle;
 class UPlayerToNervePhysicConstraint;
@@ -37,13 +38,16 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
 	TArray<TObjectPtr<UCableComponent>> Cables;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
+	TObjectPtr<USplineComponent> SplineCable;
+
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float StartCableLength = 100.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableMaxExtension = 1000.0f;
 
-	void InitCable(const TObjectPtr<UCableComponent>& Cable) const;
+	void InitCable(const TObjectPtr<UCableComponent>& Cable, const int CableIndex) const;
 
 	bool bShouldApplyCablePhysics = false;
 
@@ -62,6 +66,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Cables")
 	TObjectPtr<UMaterial> CableMaterial;
 
+	void ResetCables();
+
+	void UpdateSpline();
+
 public:
 	FVector GetLastCableLocation() const;
 
@@ -71,6 +79,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCableDirection() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
+	FVector GetCablePosition(float Percent) const;
 
 #pragma endregion
 

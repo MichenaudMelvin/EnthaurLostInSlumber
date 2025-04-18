@@ -56,7 +56,7 @@ void ANerveReceptacle::TriggerLinkedObjects()
 {
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
-	
+
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	Player->GetCameraShake()->MakeSmallCameraShake();
 

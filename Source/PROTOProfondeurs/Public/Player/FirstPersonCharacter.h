@@ -259,16 +259,4 @@ public:
 
 protected:
 	TObjectPtr<UTestViewModel> ViewModel;
-
-#pragma region Debug
-
-#if WITH_EDITORONLY_DATA
-
-private:
-	UFUNCTION(Exec)
-	void ChangeState(const ECharacterStateID& State) const;
-
-#endif
-
-#pragma endregion
 };
