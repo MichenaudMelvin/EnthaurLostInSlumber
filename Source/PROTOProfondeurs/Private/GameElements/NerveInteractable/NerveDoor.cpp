@@ -21,7 +21,7 @@ ANerveDoor::ANerveDoor()
 // Called when the game starts or when spawned
 void ANerveDoor::BeginPlay()
 {
-	Super::BeginPlay();
+	Super::BeginPlay();: 
 
 	DoorMaterial = MeshDoor->CreateDynamicMaterialInstance(0, MeshDoor->GetMaterial(0));
 
