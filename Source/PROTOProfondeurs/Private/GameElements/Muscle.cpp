@@ -2,7 +2,10 @@
 
 
 #include "GameElements/Muscle.h"
+
+#include "Components/CameraShakeComponent.h"
 #include "Components/InteractableComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/FirstPersonCharacter.h"
@@ -334,6 +337,8 @@ void AMuscle::UpdateMuscleStateTransition(float Alpha)
 
 void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent)
 {
+	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->GetCameraShake()->MakeSmallCameraShake();
+	
 	ToggleMuscleSolidity();
 }
 
