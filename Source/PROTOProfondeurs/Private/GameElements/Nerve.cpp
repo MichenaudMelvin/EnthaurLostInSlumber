@@ -351,7 +351,7 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 {
 	if (CurrentAttachedReceptacle != nullptr)
 	{
-		CurrentAttachedReceptacle->TriggerLinkedObjects();
+		CurrentAttachedReceptacle->TriggerLinkedObjects(this);
 		CurrentAttachedReceptacle = nullptr;
 	}
 
