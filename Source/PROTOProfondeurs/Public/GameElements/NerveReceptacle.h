@@ -17,13 +17,14 @@ class PROTOPROFONDEURS_API ANerveReceptacle : public AActor
 
 public:
 	ANerveReceptacle();
-	void TriggerLinkedObjects();
+	void TriggerLinkedObjects(class ANerve* Nerve);
 
 	// Create Event
 	UFUNCTION(BlueprintImplementableEvent, Category = "BaseCharacter")
 	void OnNerveConnect();
 
 protected:
+	void PlayElectricityAnimation(ANerve* Nerve);
 	UFUNCTION()
 	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
@@ -32,14 +33,20 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
 	TObjectPtr<USphereComponent> Collision;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> NerveReceptacle;
 
 	UPROPERTY(EditAnywhere)
-	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
-
-	UPROPERTY(EditAnywhere)
 	FName ConnectedShaderTag;
+
+	UPROPERTY()
+	class AElectricityFeedback* NerveElectricityFeedback;
+
+	UPROPERTY()
+	ANerve* KeepInMemoryNerve;
 	
 };
