@@ -2,12 +2,12 @@
 
 
 #include "Path/AIPath.h"
-#include "Components/ArrowComponent.h"
 #include "Components/SplineComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 #if WITH_EDITORONLY_DATA
+#include "Components/ArrowComponent.h"
 #include "Components/BillboardComponent.h"
 #endif
 
@@ -185,7 +185,15 @@ bool AAIPath::IsOnFloor() const
 #if WITH_EDITORONLY_DATA
 bool AAIPath::AttachAI(APawn* AI)
 {
-	if (!AI || AttachedAI)
+	if (!AI)
+	{
+		return false;
+	}
+	else if (AI == AttachedAI)
+	{
+		return true;
+	}
+	else if (AttachedAI)
 	{
 		return false;
 	}

@@ -3,6 +3,9 @@
 
 #include "Tasks/MoveToWithRotation.h"
 #include "AIController.h"
+#include "GameFramework/PawnMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 UMoveToWithRotation::UMoveToWithRotation()
 {
@@ -15,12 +18,32 @@ void UMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* Nod
 {
 	Super::TickTask(OwnerComp, NodeMemory, DeltaSeconds);
 
-	USceneComponent* Root = OwnerComp.GetAIOwner()->GetPawn()->GetRootComponent();
-	FRotator RootRotation = Root->GetComponentRotation();
+	APawn* Pawn = OwnerComp.GetAIOwner()->GetPawn();
+	if (!Pawn || !Pawn->GetMovementComponent())
+	{
+		return;
+	}
 
-	FVector RootVelocity = Root->GetComponentVelocity();
-	FRotator VelocityRotator = FRotationMatrix::MakeFromX(RootVelocity).Rotator();
+	FVector PawnLocation = Pawn->GetActorLocation();
 
-	RootRotation.Yaw = VelocityRotator.Yaw;
-	Root->SetWorldRotation(RootRotation);
+	FVector EndLocation = PawnLocation;
+	EndLocation.Z -= GroundTraceLength;
+
+	TArray<AActor*> Actors;
+	Actors.Add(Pawn);
+
+	FHitResult HitResult;
+	UKismetSystemLibrary::LineTraceSingle(Pawn, PawnLocation, EndLocation, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, Actors, EDrawDebugTrace::None, HitResult, true);
+
+	FVector ForwardVector = Pawn->GetMovementComponent()->Velocity;
+	FVector RightVector = UKismetMathLibrary::RotateAngleAxis(ForwardVector, 90.0f, HitResult.Normal);
+	ForwardVector.Normalize();
+	RightVector.Normalize();
+
+	FRotator XZRotator = FRotationMatrix::MakeFromXZ(ForwardVector, HitResult.Normal).Rotator();
+	FRotator YZRotator = FRotationMatrix::MakeFromYZ(RightVector, HitResult.Normal).Rotator();
+
+	FRotator TargetRotation(YZRotator.Pitch, XZRotator.Yaw, XZRotator.Roll);
+
+	Pawn->SetActorRotation(TargetRotation);
 }

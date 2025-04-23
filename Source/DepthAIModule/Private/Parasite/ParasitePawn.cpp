@@ -13,6 +13,7 @@
 AParasitePawn::AParasitePawn()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bStartWithTickEnabled = false;
 
 	ParasiteCollision = CreateDefaultSubobject<UBoxComponent>("ParasiteHitBox");
 	SetRootComponent(ParasiteCollision);
@@ -51,6 +52,11 @@ void AParasitePawn::BeginPlay()
 	{
 		ParasiteController->GetBlackboardComponent()->SetValueAsObject(PathKeyName, TargetPath);
 		ParasiteController->GetBlackboardComponent()->SetValueAsBool(WalkOnFloorKeyName, TargetPath->IsOnFloor());
+
+		if (!TargetPath->IsOnFloor())
+		{
+			MovementComponent->SetGravityScale(0.0f);
+		}
 	}
 }
 
@@ -68,6 +74,15 @@ void AParasitePawn::OnConstruction(const FTransform& Transform)
 		return;
 	}
 
+#if WITH_EDITORONLY_DATA
+	bool bIsAttached = TargetPath->AttachAI(this);
+
+	if (!bIsAttached)
+	{
+		return;
+	}
+#endif
+
 	FHitResult HitResult;
 	bool bHit = TargetPath->GetTracedPointLocation(0, HitResult);
 
@@ -80,7 +95,7 @@ void AParasitePawn::OnConstruction(const FTransform& Transform)
 	ActorLocation += (TargetPath->GetDirection() * -1 * ParasiteCollision->GetUnscaledBoxExtent().Z);
 	SetActorLocation(ActorLocation);
 
-	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.ImpactNormal);
+	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.Normal);
 	SetActorRotation(Rotation);
 }
 
@@ -113,12 +128,11 @@ void AParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyChange
 	{
 		if (TargetPath)
 		{
-			bool bSuccess = TargetPath->AttachAI(this);
+			bool bIsAttached = TargetPath->AttachAI(this);
 
-			if (!bSuccess)
+			if (!bIsAttached)
 			{
 				TargetPath = nullptr;
-				return;
 			}
 		}
 	}

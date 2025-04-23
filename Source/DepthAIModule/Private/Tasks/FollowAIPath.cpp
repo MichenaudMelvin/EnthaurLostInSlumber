@@ -9,11 +9,13 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
-#include "Components/BoxComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Parasite/ParasitePawn.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "GameplayTask.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 #include "Path/AIPath.h"
+#include "Tasks/AITask_MoveTo.h"
 
 UFollowAIPath::UFollowAIPath()
 {
@@ -23,6 +25,7 @@ UFollowAIPath::UFollowAIPath()
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, AIPath), AAIPath::StaticClass());
 	PathIndex.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, PathIndex));
 	WalkOnFloor.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, WalkOnFloor));
+	TargetKeyLocation.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UFollowAIPath, TargetKeyLocation));
 }
 
 void UFollowAIPath::InitializeFromAsset(UBehaviorTree& Asset)
@@ -54,56 +57,56 @@ EBTNodeResult::Type UFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 {
 	Super::ExecuteTask(OwnerComp, NodeMemory);
 
+	EBTNodeResult::Type NodeResult = EBTNodeResult::Failed;
+
 	UBlackboardComponent* BlackboardComponent = OwnerComp.GetBlackboardComponent();
 	if (!BlackboardComponent)
 	{
-		return EBTNodeResult::Failed;
+		return NodeResult;
 	}
 
 	UObject* KeyObject = BlackboardComponent->GetValue<UBlackboardKeyType_Object>(AIPath.GetSelectedKeyID());
 	if (!KeyObject)
 	{
-		return EBTNodeResult::Failed;
+		return NodeResult;
 	}
 
 	AAIPath* Path = Cast<AAIPath>(KeyObject);
 	if (!Path)
 	{
-		return EBTNodeResult::Failed;
+		return NodeResult;
 	}
 
 	ADefaultAIController* Controller = Cast<ADefaultAIController>(OwnerComp.GetAIOwner());
 	if (!Controller)
 	{
-		return EBTNodeResult::Failed;
+		return NodeResult;
 	}
 
 	CurrentPawn = Controller->GetPawn();
 	if (!CurrentPawn)
 	{
-		return EBTNodeResult::Failed;
-	}
-
-	float PawnHeight = 0.0f;
-	AParasitePawn* ParasitePawn = Cast<AParasitePawn>(CurrentPawn);
-	if (ParasitePawn)
-	{
-		PawnHeight = ParasitePawn->GetCollisionComp()->GetUnscaledBoxExtent().Z;
+		return NodeResult;
 	}
 
 	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
-	TargetLocation = Path->GetPointLocation(Index, PawnHeight);
+	TargetLocation = Path->GetPointLocation(Index, 0.0f);
 
 	bool bWalkOnFloor = BlackboardComponent->GetValue<UBlackboardKeyType_Bool>(WalkOnFloor.GetSelectedKeyID());
 
 	if (bWalkOnFloor)
 	{
-		UAIBlueprintHelperLibrary::SimpleMoveToLocation(OwnerComp.GetAIOwner(), TargetLocation);
+		BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(TargetKeyLocation.SelectedKeyName, TargetLocation);
+		NodeResult = EBTNodeResult::Succeeded;
 	}
 	else
 	{
 		CurrentOwnerComp = &OwnerComp;
 		StartLocation = CurrentPawn->GetActorLocation();
+
+		FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(StartLocation, TargetLocation);
+		FRotator TargetRotation = FRotationMatrix::MakeFromXZ(ForwardDirection, (Path->GetDirection() * -1)).Rotator();
+		CurrentPawn->SetActorRotation(TargetRotation);
 
 		float Distance = FVector::Dist(StartLocation, TargetLocation);
 		float Speed = CurrentPawn->GetMovementComponent()->GetMaxSpeed();
@@ -113,28 +116,15 @@ EBTNodeResult::Type UFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 		MovementTimeline.SetPlayRate(1/Time);
 		MovementTimeline.PlayFromStart();
 
-		if (bRotateWithMovement)
-		{
-			FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(StartLocation, TargetLocation);
-			FRotator TargetRotation = FRotationMatrix::MakeFromXZ(ForwardDirection, (Path->GetDirection() * -1)).Rotator();
-			CurrentPawn->SetActorRotation(TargetRotation);
-		}
+		NodeResult = EBTNodeResult::InProgress;
 	}
 
-	return EBTNodeResult::InProgress;
+	return NodeResult;
 }
 
 void UFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	Super::TickTask(OwnerComp, NodeMemory, DeltaSeconds);
-
-	APawn* Pawn = OwnerComp.GetAIOwner()->GetPawn();
-
-	if(!Pawn)
-	{
-		FinishLatentTask(OwnerComp, EBTNodeResult::Failed);
-		return;
-	}
 
 	UBlackboardComponent* BlackboardComponent = OwnerComp.GetBlackboardComponent();
 	if (!BlackboardComponent)
@@ -145,29 +135,22 @@ void UFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemor
 
 	bool bWalkOnFloor = BlackboardComponent->GetValue<UBlackboardKeyType_Bool>(WalkOnFloor.GetSelectedKeyID());
 
-	if (!bWalkOnFloor)
+#if WITH_EDITORONLY_DATA
+	if (bDebugTask && CurrentPawn)
 	{
-		MovementTimeline.TickTimeline(DeltaSeconds);
+		UKismetSystemLibrary::DrawDebugPoint(CurrentPawn, StartLocation, DebugPointSize, FColor::Green, 0.0f);
+
+		UKismetSystemLibrary::DrawDebugPoint(CurrentPawn, TargetLocation, DebugPointSize, FColor::Red, 0.0f);
+	}
+#endif
+
+	if (bWalkOnFloor)
+	{
 		return;
 	}
-
-	if (bRotateWithMovement && CurrentPawn)
+	else
 	{
-		USceneComponent* Root = CurrentPawn->GetRootComponent();
-		FRotator RootRotation = Root->GetComponentRotation();
-
-		FVector RootVelocity = Root->GetComponentVelocity();
-		FRotator VelocityRotator = FRotationMatrix::MakeFromX(RootVelocity).Rotator();
-
-		RootRotation.Yaw = VelocityRotator.Yaw;
-		Root->SetWorldRotation(RootRotation);
-	}
-
-	FVector PawnLocation = Pawn->GetActorLocation();
-
-	if (PawnLocation.Equals(TargetLocation, Tolerance))
-	{
-		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+		MovementTimeline.TickTimeline(DeltaSeconds);
 	}
 }
 

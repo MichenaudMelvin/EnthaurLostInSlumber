@@ -31,6 +31,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shake")
 	TSubclassOf<UCameraShakeBase> LittleShake;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shake")
+	TSubclassOf<UCameraShakeBase> BigShake;
+
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
@@ -38,6 +41,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void MakeSmallCameraShake();
+	UFUNCTION(BlueprintCallable)
+	void MakeBigCameraShake();
 
 private:
 	UPROPERTY()
