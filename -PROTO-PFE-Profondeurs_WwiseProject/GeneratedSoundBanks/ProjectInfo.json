@@ -3,7 +3,7 @@
   "Project": {
    "Name": "-PROTO-PFE-Profondeurs_WwiseProject",
    "GUID": "{B5DC1177-C412-4544-92EE-69C3E3E38429}",
-   "Generator": "2024.1.3.8749"
+   "Generator": "2024.1.1.8691"
   },
   "CacheRoot": "../.cache",
   "Platforms": [
@@ -31,6 +31,6 @@
     "UseAsStandIn": "true"
    }
   ],
-  "FileHash": "{2DD12895-FF61-FA87-A10D-AC5B0A80E1FD}"
+  "FileHash": "{3F530F12-0DE3-3912-0E98-901C573715C4}"
  }
 }
