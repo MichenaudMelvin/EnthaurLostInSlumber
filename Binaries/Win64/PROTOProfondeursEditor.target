@@ -8194,6 +8194,21 @@
 			"Type": "RequiredResource"
 		},
 		{
+<<<<<<< HEAD
+=======
+			"Path": "$(ProjectDir)/Plugins/UE4-UITween-master/Binaries/Win64/UnrealEditor-BUITween.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/UE4-UITween-master/Binaries/Win64/UnrealEditor-BUITween.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/UE4-UITween-master/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+>>>>>>> origin/RayanLDv2
 			"Path": "$(ProjectDir)/Plugins/WwiseNiagara/Binaries/Win64/UnrealEditor-WwiseNiagara.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -34176,6 +34191,7 @@
 			"Type": "UFS"
 		},
 		{
+<<<<<<< HEAD
 			"Path": "$(ProjectDir)/Plugins/WwiseNiagara/WwiseNiagara.uplugin",
 			"Type": "UFS"
 		},
@@ -34294,6 +34310,14 @@
 		{
 			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/iZotope.dll",
 			"Type": "NonUFS"
+=======
+			"Path": "$(ProjectDir)/Plugins/UE4-UITween-master/BUITween.uplugin",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/WwiseNiagara/WwiseNiagara.uplugin",
+			"Type": "UFS"
+>>>>>>> origin/RayanLDv2
 		},
 		{
 			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/WwiseSoundEngine.uplugin",
@@ -34329,6 +34353,10 @@
 		"AudioWidgets",
 		"AutomationUtils",
 		"AvfMedia",
+<<<<<<< HEAD
+=======
+		"BUITween",
+>>>>>>> origin/RayanLDv2
 		"BackChannel",
 		"BaseCharacterFXEditor",
 		"BlendSpaceMotionAnalysis",
