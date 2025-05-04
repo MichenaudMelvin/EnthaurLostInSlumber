@@ -8,6 +8,7 @@
 #include "GameElements/NerveReceptacle.h"
 #include "Components/PlayerToNervePhysicConstraint.h"
 #include "Components/SplineComponent.h"
+#include "Components/SplineMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/CharacterSettings.h"
@@ -19,24 +20,21 @@ ANerve::ANerve()
 
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(Root);
+	Root->SetMobility(EComponentMobility::Static);
 
 	SplineCable = CreateDefaultSubobject<USplineComponent>(TEXT("SplineCable"));
 	SplineCable->SetupAttachment(RootComponent);
-	SplineCable->ClearSplinePoints(false);
+	SplineCable->SetMobility(EComponentMobility::Static);
 
-	UCableComponent* RootCable = CreateDefaultSubobject<UCableComponent>(TEXT("Cable"));
-	RootCable->SetupAttachment(RootComponent);
-
-	RootCable->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
-
-	Cables.Empty();
-
-	InitCable(RootCable, 0);
-	Cables.Add(RootCable);
+	USplineMeshComponent* SplineMesh = CreateDefaultSubobject<USplineMeshComponent>(TEXT("Spline Mesh"));
+	SplineMesh->SetMobility(EComponentMobility::Movable);
+	SplineMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	SplineMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
+	SplineMesh->SetGenerateOverlapEvents(false);
+	SplineMeshes.Add(SplineMesh);
 
 	NerveBall = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Sphere"));
 	NerveBall->SetupAttachment(RootComponent);
-
 
 	InteractableComponent = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 	InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
@@ -51,20 +49,26 @@ void ANerve::BeginPlay()
 
 	InteractableComponent->AddInteractable(NerveBall);
 	DefaultNervePosition = NerveBall->GetComponentLocation();
+
+	FOnTimelineFloat UpdateEvent;
+	FOnTimelineEvent FinishEvent;
+	UpdateEvent.BindDynamic(this, &ANerve::RetractCable);
+	FinishEvent.BindDynamic(this, &ANerve::FinishRetractCable);
+	RetractTimeline.AddInterpFloat(RetractionCurve, UpdateEvent);
+	RetractTimeline.SetTimelineFinishedFunc(FinishEvent);
+	RetractTimeline.SetPlayRate(1/RetractionDuration);
 }
 
 void ANerve::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	NerveBall->SetRelativeLocation(FVector(StartCableLength, 0.0f, 0.0f));
+	ResetCables();
 
 	if (StartCableLength > CableMaxExtension)
 	{
 		CableMaxExtension = StartCableLength + 1000.0f;
 	}
-
-	InitCable(Cables[0], 0);
 }
 
 void ANerve::Tick(float DeltaSeconds)
@@ -72,32 +76,148 @@ void ANerve::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	ApplyCablesPhysics();
+	if (RetractTimeline.IsPlaying())
+	{
+		RetractTimeline.TickTimeline(DeltaSeconds);
+	}
 }
 
 #pragma region Cables
 
-void ANerve::InitCable(const TObjectPtr<UCableComponent>& Cable, const int CableIndex) const
+void ANerve::AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace, bool bCreateSplineMesh)
 {
-	if (!Cable)
+	int Index = SplineCable->GetNumberOfSplinePoints();
+	SplineCable->AddSplinePoint(SpawnLocation, CoordinateSpace, false);
+	SplineCable->SetTangentAtSplinePoint(Index, FVector::ZeroVector, ESplineCoordinateSpace::Local, false);
+
+	// correct the location of the last spline point
+	int LastIndex = Index - 1;
+	if (LastIndex > 0)
+	{
+		SplineCable->SetLocationAtSplinePoint(LastIndex, SpawnLocation, CoordinateSpace, false);
+	}
+
+	SplineCable->UpdateSpline();
+
+	if (!bCreateSplineMesh || SplineCable->GetNumberOfSplinePoints() < 2)
 	{
 		return;
 	}
 
-	Cable->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
-	Cable->EndLocation = FVector::ZeroVector;
-	Cable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	Cable->SetCollisionResponseToAllChannels(ECR_Ignore);
-	Cable->SetGenerateOverlapEvents(false);
-	Cable->CableLength = 0.0f;
-	Cable->SolverIterations = 16;
-	Cable->SetMaterial(0, CableMaterial);
+	FVector EndSplineLocation = CoordinateSpace == ESplineCoordinateSpace::World ? NerveBall->GetComponentLocation() : NerveBall->GetRelativeLocation();
+	AddSplineMesh(SpawnLocation, EndSplineLocation, CoordinateSpace);
+}
 
-	if (!Cables.IsValidIndex(CableIndex) || !Cables[CableIndex])
+void ANerve::AddSplineMesh(const FVector& StartLocation, const FVector& EndLocation, const ESplineCoordinateSpace::Type& CoordinateSpace)
+{
+	UActorComponent* Comp = AddComponentByClass(USplineMeshComponent::StaticClass(), false, FTransform::Identity, false);
+	if (!Comp)
 	{
 		return;
 	}
 
-	// SplineCable->AddSplinePoint(Cables[CableIndex]->GetComponentLocation(), ESplineCoordinateSpace::World);
+	USplineMeshComponent* SplineMesh = Cast<USplineMeshComponent>(Comp);
+	if (!SplineMesh)
+	{
+		return;
+	}
+
+	SplineMesh->SetMobility(EComponentMobility::Movable);
+	SplineMesh->SetStaticMesh(CableMesh);
+	SplineMesh->SetMaterial(0, CableMaterial);
+
+	SplineMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	SplineMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
+	SplineMesh->SetGenerateOverlapEvents(false);
+
+	FVector StartSplineLocation;
+	FVector EndSplineLocation;
+	if (CoordinateSpace == ESplineCoordinateSpace::World)
+	{
+		StartSplineLocation = UKismetMathLibrary::InverseTransformLocation(GetActorTransform(), StartLocation);
+		EndSplineLocation = UKismetMathLibrary::InverseTransformLocation(GetActorTransform(), EndLocation);
+	}
+	else
+	{
+		StartSplineLocation = StartLocation;
+		EndSplineLocation = EndLocation;
+	}
+
+	SplineMesh->SetForwardAxis(CableForwardAxis, false);
+
+	SplineMesh->SetStartPosition(StartSplineLocation, false);
+	SplineMesh->SetEndPosition(EndSplineLocation, false);
+
+	FVector SplineDirection = UKismetMathLibrary::GetDirectionUnitVector(StartSplineLocation, EndSplineLocation);
+	SplineMesh->SetStartTangent(SplineDirection, false);
+	SplineMesh->SetEndTangent(SplineDirection, false);
+
+	SplineMesh->SetStartScale(CableScale, false);
+	SplineMesh->SetEndScale(CableScale, false);
+
+	SplineMesh->UpdateMesh();
+
+	SplineMeshes.Add(SplineMesh);
+
+	if (SplineMeshes.Num() < 2)
+	{
+		return;
+	}
+
+	// correct the location of the last spline
+	int LastIndex = SplineMeshes.Num() - 2;
+	SplineMeshes[LastIndex]->SetEndPosition(StartSplineLocation);
+}
+
+void ANerve::RemoveLastSplinePoint()
+{
+	int32 LastSplinePointIndex = SplineCable->GetNumberOfSplinePoints() - 1;
+	SplineCable->RemoveSplinePoint(LastSplinePointIndex, true);
+
+	int LastSplineMeshIndex = (SplineMeshes.Num() - 1);
+	if (!SplineMeshes.IsValidIndex(LastSplineMeshIndex))
+	{
+		return;
+	}
+
+	USplineMeshComponent* LastSplineMesh = SplineMeshes[LastSplineMeshIndex];
+
+	if (!LastSplineMesh)
+	{
+		return;
+	}
+
+	LastSplineMesh->DestroyComponent();
+
+	SplineMeshes.RemoveAt(LastSplineMeshIndex);
+}
+
+void ANerve::UpdateLastSplinePointLocation(const FVector& NewLocation)
+{
+	int32 LastSplinePointIndex = SplineCable->GetNumberOfSplinePoints() - 1;
+	SplineCable->SetLocationAtSplinePoint(LastSplinePointIndex, NewLocation, ESplineCoordinateSpace::World);
+
+	int LastSplineMeshIndex = (SplineMeshes.Num() - 1);
+	if (!SplineMeshes.IsValidIndex(LastSplineMeshIndex))
+	{
+		return;
+	}
+
+	USplineMeshComponent* LastSplineMesh = SplineMeshes[LastSplineMeshIndex];
+
+	if (!LastSplineMesh)
+	{
+		return;
+	}
+
+	FVector RelativeNewLocation = UKismetMathLibrary::InverseTransformLocation(GetActorTransform(), NewLocation);
+	LastSplineMesh->SetEndPosition(RelativeNewLocation, false);
+
+	FVector SplineDirection = UKismetMathLibrary::GetDirectionUnitVector(LastSplineMesh->GetStartPosition(), RelativeNewLocation);
+	LastSplineMesh->SetStartTangent(SplineDirection, false);
+	LastSplineMesh->SetEndTangent(SplineDirection, false);
+
+	LastSplineMesh->UpdateMesh();
 }
 
 void ANerve::ApplyCablesPhysics()
@@ -107,90 +227,66 @@ void ANerve::ApplyCablesPhysics()
 		return;
 	}
 
-	UpdateSpline();
-
-	int CurrentIndex = Cables.Num() - 1;
-
-	UCableComponent* CurrentCable = Cables[CurrentIndex];
-
-	if (!CurrentCable)
+	if (SplineCable->GetNumberOfSplinePoints() < 2)
 	{
 		return;
 	}
 
-	FVector CurrentCableStartLocation = CurrentCable->GetComponentLocation();
-	FVector CurrentCableEndLocation = CurrentCable->GetAttachedComponent()->GetComponentLocation();
+	int32 LastPointIndex = SplineCable->GetNumberOfSplinePoints() - 2;
+
+	FVector LastCableStartLocation = SplineCable->GetLocationAtSplinePoint(LastPointIndex, ESplineCoordinateSpace::World);
+	FVector CableEndLocation = NerveBall->GetComponentLocation();
+
+	UpdateLastSplinePointLocation(CableEndLocation);
+
+	if (SplineCable->GetNumberOfSplineSegments() >= 2)
+	{
+		if (CanCurrentCableBeRemoved())
+		{
+			RemoveLastSplinePoint();
+			return;
+		}
+	}
 
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
 	FHitResult Hit;
 
-	if (Cables.Num() >= 2)
-	{
-		UCableComponent* LastCable = Cables[CurrentIndex - 1];
-
-		if (CanCurrentCableBeRemoved(CurrentCable, LastCable))
-		{
-			return;
-		}
-	}
-
-	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, CurrentCableStartLocation, CurrentCableEndLocation, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
+	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, LastCableStartLocation, CableEndLocation, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
 
 	if (!bHit)
 	{
 		return;
 	}
 
-	UActorComponent* Comp = AddComponentByClass(UCableComponent::StaticClass(), false, FTransform::Identity, false);
-	if (!Comp)
-	{
-		return;
-	}
+	ImpactNormals.Add(Hit.Normal);
 
-	UCableComponent* CastComp = Cast<UCableComponent>(Comp);
-	if (!CastComp)
-	{
-		return;
-	}
+	FVector Direction = UKismetMathLibrary::GetDirectionUnitVector(CableEndLocation, Hit.Location);
 
-	LastImpactNormal = Hit.Normal;
-
-	FVector Direction = UKismetMathLibrary::GetDirectionUnitVector(CurrentCableEndLocation, Hit.Location);
-
-	bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, CurrentCableEndLocation, Hit.Location, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
+	bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, CableEndLocation, Hit.Location, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
 	if (!bHit)
 	{
-		CastComp->DestroyComponent(true);
 		return;
 	}
 
 	FVector WorldLocation = Hit.Location - (Direction * CableOffset);
-	FVector RelativeLocation = UKismetMathLibrary::InverseTransformLocation(GetActorTransform(), WorldLocation);
 
-	CastComp->SetWorldLocation(WorldLocation);
-
-	CastComp->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepWorld, false));
-	InitCable(CastComp, CurrentIndex);
-
-	CurrentCable->AttachEndTo.ComponentProperty = NAME_None;
-	CurrentCable->EndLocation = RelativeLocation;
-
-	Cables.Add(CastComp);
+	AddSplinePoint(WorldLocation, ESplineCoordinateSpace::World, true);
 }
 
-bool ANerve::CanCurrentCableBeRemoved(UCableComponent* CurrentCable, UCableComponent* LastCable)
+bool ANerve::CanCurrentCableBeRemoved()
 {
-	if (!CurrentCable || !LastCable)
-	{
-		return false;
-	}
+	int32 CurrentPointIndex = SplineCable->GetNumberOfSplinePoints() - 1;
+	int32 LastPointIndex = CurrentPointIndex - 1;
 
-	FVector CurrentCableLocation = CurrentCable->GetComponentLocation();
-	FVector CurrentCableEndLocation = CurrentCable->GetAttachedComponent()->GetComponentLocation();
+	FVector CurrentPointLocation = SplineCable->GetLocationAtSplinePoint(CurrentPointIndex, ESplineCoordinateSpace::World);
+	FVector LastCableLocation = SplineCable->GetLocationAtSplinePoint(LastPointIndex, ESplineCoordinateSpace::World);
 
-	FVector CableDirection = CurrentCableLocation - CurrentCableEndLocation;
+	FVector CableDirection = CurrentPointLocation - LastCableLocation;
 	CableDirection.Normalize();
+
+	int LastImpactNormalIndex = (ImpactNormals.Num() - 1);
+	FVector LastImpactNormal = ImpactNormals[LastImpactNormalIndex];
 	float DotResult = FVector::DotProduct((LastImpactNormal * -1), CableDirection);
 
 	if (DotResult < -0.5f)
@@ -202,92 +298,129 @@ bool ANerve::CanCurrentCableBeRemoved(UCableComponent* CurrentCable, UCableCompo
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
 
-	FVector LastCableStartLocation = LastCable->GetComponentLocation();
-	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, LastCableStartLocation, CurrentCableEndLocation, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
+	int32 OtherPointIndex = LastPointIndex - 1;
+	FVector OtherPointLocation = SplineCable->GetLocationAtSplinePoint(OtherPointIndex, ESplineCoordinateSpace::World);
+	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, OtherPointLocation, CurrentPointLocation, CableColliders, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, true);
 
 	if (bHit)
 	{
 		return false;
 	}
 
-	LastCable->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
-	LastCable->EndLocation = FVector::ZeroVector;
-	Cables.Remove(CurrentCable);
-	CurrentCable->DestroyComponent(true);
+	ImpactNormals.RemoveAt(LastImpactNormalIndex);
 	return true;
 }
 
 void ANerve::ResetCables()
 {
-	// delete all cables except the first one
-	for (int i = Cables.Num() - 1; i > 0; i--)
-	{
-		UCableComponent* CurrentCable = Cables[i];
-		Cables.RemoveAt(i);
-		CurrentCable->DestroyComponent(true);
-	}
-
-	if(Cables[0])
-	{
-		Cables[0]->AttachEndTo.ComponentProperty = GET_MEMBER_NAME_CHECKED(ANerve, NerveBall);
-		Cables[0]->EndLocation = FVector::ZeroVector;
-	}
-}
-
-void ANerve::UpdateSpline()
-{
 	SplineCable->ClearSplinePoints(true);
-
-	for (int i = 0; i < Cables.Num(); i++)
+	for (TObjectPtr<USplineMeshComponent> SplineMesh : SplineMeshes)
 	{
-		SplineCable->AddSplinePoint(Cables[i]->GetComponentLocation(), ESplineCoordinateSpace::World, true);
+		if (SplineMesh)
+		{
+			SplineMesh->DestroyComponent();
+		}
 	}
 
-	SplineCable->AddSplinePoint(NerveBall->GetComponentLocation(), ESplineCoordinateSpace::World, true);
+	SplineMeshes.Empty();
+
+	ImpactNormals.Empty();
+
+	FVector CableEndLocation = FVector(StartCableLength, 0.0f, 0.0f);
+
+	AddSplinePoint(FVector::ZeroVector, ESplineCoordinateSpace::Local, false);
+	AddSplinePoint(CableEndLocation, ESplineCoordinateSpace::Local, false);
+
+	AddSplineMesh(FVector::ZeroVector, CableEndLocation, ESplineCoordinateSpace::Local);
+
+	NerveBall->SetRelativeLocation(CableEndLocation);
 }
 
-FVector ANerve::GetLastCableLocation() const
+void ANerve::RetractCable(float Alpha)
 {
-	int LastIndex = Cables.Num() - 1;
+	float Distance = FMath::Lerp(SplineCable->GetDistanceAlongSplineAtSplinePoint(1), SplineCable->GetSplineLength(), Alpha);
+	FVector TargetLocation = SplineCable->GetLocationAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::Local);
 
-	if (!Cables[LastIndex])
+	NerveBall->SetRelativeLocation(TargetLocation);
+
+	int LastSplineMeshIndex = (SplineMeshes.Num() - 1);
+	if (!SplineMeshes.IsValidIndex(LastSplineMeshIndex))
 	{
-		return FVector::ZeroVector;
+		return;
 	}
 
-	return Cables[LastIndex]->GetComponentLocation();
+	USplineMeshComponent* LastSplineMesh = SplineMeshes[LastSplineMeshIndex];
+
+	if (!LastSplineMesh)
+	{
+		return;
+	}
+
+	LastSplineMesh->SetEndPosition(TargetLocation, false);
+
+	FVector SplineDirection = UKismetMathLibrary::GetDirectionUnitVector(LastSplineMesh->GetStartPosition(), TargetLocation);
+	LastSplineMesh->SetStartTangent(SplineDirection, false);
+	LastSplineMesh->SetEndTangent(SplineDirection, false);
+
+	LastSplineMesh->UpdateMesh();
+
+	float LastDistance = SplineCable->GetDistanceAlongSplineAtSplinePoint(RetractionIndex);
+
+	if (Distance > LastDistance)
+	{
+		return;
+	}
+
+	RetractionIndex--;
+
+	LastSplineMesh->DestroyComponent();
+
+	SplineMeshes.RemoveAt(LastSplineMeshIndex);
+}
+
+void ANerve::FinishRetractCable()
+{
+	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	InteractableComponent->AddInteractable(NerveBall);
+	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
+	{
+		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
+	}
+
+	ResetCables();
+}
+
+FVector ANerve::GetLastCableLocation(const ESplineCoordinateSpace::Type& CoordinateSpace) const
+{
+	int32 LastIndex = (SplineCable->GetNumberOfSplinePoints() - 1);
+	return SplineCable->GetLocationAtSplinePoint(LastIndex, CoordinateSpace);
 }
 
 float ANerve::GetCableLength() const
 {
-	float Distance = 0.0f;
-	for (TObjectPtr<UCableComponent> Cable : Cables)
-	{
-		FVector NerveBallRelativeLocation = UKismetMathLibrary::InverseTransformLocation(GetActorTransform(), NerveBall->GetComponentLocation());
-		FVector EndLocation = Cable->AttachEndTo.ComponentProperty == NAME_None ? Cable->EndLocation : NerveBallRelativeLocation;
-
-		Distance += FVector::Dist(Cable->GetRelativeLocation(), EndLocation);
-	}
-
-	return Distance;
+	return SplineCable->GetSplineLength();
 }
 
 FVector ANerve::GetCableDirection() const
 {
-	int LastIndex = Cables.Num() - 1;
-
-	if (!Cables[LastIndex])
+	if (SplineCable->GetNumberOfSplinePoints() < 2)
 	{
 		return FVector::ZeroVector;
 	}
 
-	return UKismetMathLibrary::GetDirectionUnitVector(Cables[LastIndex]->GetComponentLocation(), NerveBall->GetComponentLocation());
+	int32 CurrentPointIndex = SplineCable->GetNumberOfSplinePoints() - 1;
+	int32 LastPointIndex = CurrentPointIndex - 1;
+
+	FVector CurrentPointLocation = SplineCable->GetLocationAtSplinePoint(CurrentPointIndex, ESplineCoordinateSpace::World);
+	FVector LastPointLocation = SplineCable->GetLocationAtSplinePoint(LastPointIndex, ESplineCoordinateSpace::World);
+
+	return UKismetMathLibrary::GetDirectionUnitVector(CurrentPointLocation, LastPointLocation);
 }
 
-FVector ANerve::GetCablePosition(float Percent) const
+FVector ANerve::GetCablePosition(float Percent, ESplineCoordinateSpace::Type CoordinateSpace) const
 {
 	float Distance = FMath::Lerp(0.0f, SplineCable->GetSplineLength(), Percent);
-	return SplineCable->GetLocationAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::World);
+	return SplineCable->GetLocationAtDistanceAlongSpline(Distance, CoordinateSpace);
 }
 
 #pragma endregion
@@ -296,8 +429,6 @@ FVector ANerve::GetCablePosition(float Percent) const
 
 void ANerve::AttachNerveBall(AActor* ActorToAttach)
 {
-	// NerveBall->SetSimulatePhysics(false);
-	ResetCables();
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
 	bShouldApplyCablePhysics = true;
@@ -309,33 +440,18 @@ void ANerve::AttachNerveBall(AActor* ActorToAttach)
 
 void ANerve::DetachNerveBall()
 {
-	// NerveBall->SetSimulatePhysics(true);
-	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-
 	PlayerController = nullptr;
 	bShouldApplyCablePhysics = false;
 
 	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, true);
-
 	NerveBall->AttachToComponent(RootComponent, Rules);
 
-	FCTween::Play(
-			NerveBall->GetComponentLocation(),
-			DefaultNervePosition,
-			[&](const FVector& Pos)
-			{
-				NerveBall->SetWorldLocation(Pos);
-			},
-			1.f,
-			EFCEase::OutElastic);
+	SplineCable->AddSplinePointAtIndex(DefaultNervePosition, 1, ESplineCoordinateSpace::World, true);
+	SplineCable->SetTangentAtSplinePoint(1, FVector::ZeroVector, ESplineCoordinateSpace::Local);
 
-	ResetCables();
+	RetractionIndex = SplineCable->GetNumberOfSplinePoints() - 2;
 
-	InteractableComponent->AddInteractable(NerveBall);
-	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
-	{
-		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
-	}
+	RetractTimeline.ReverseFromEnd();
 }
 
 bool ANerve::IsNerveBallAttached() const
@@ -384,6 +500,24 @@ void ANerve::OnExitWeakZone_Implementation()
 	{
 		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
 	}
+}
+
+void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
+{
+	CurrentAttachedReceptacle = Receptacle;
+
+	if (!CurrentAttachedReceptacle)
+	{
+		return;
+	}
+
+	bShouldApplyCablePhysics = false;
+	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
+	NerveBall->AttachToComponent(RootComponent, Rules);
+
+	NerveBall->SetWorldLocation(Receptacle->GetActorLocation());
+	UpdateLastSplinePointLocation(Receptacle->GetActorLocation());
+	InteractableComponent->AddInteractable(NerveBall);
 }
 
 #pragma endregion

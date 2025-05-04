@@ -24,7 +24,8 @@ ANerveReceptacle::ANerveReceptacle()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Torus"));
+	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Receptacle"));
+	SetRootComponent(NerveReceptacle);
 
 	Collision = CreateDefaultSubobject<USphereComponent>("Collision");
 	Collision->SetupAttachment(NerveReceptacle);
@@ -47,11 +48,7 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 
 		OnNerveConnect();
 
-		FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, false);
-		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
 		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
-
-		Nerve->GetInteractable()->AddInteractable(Nerve->GetNerveBall());
 
 		PlayElectricityAnimation(Nerve);
 	}
@@ -64,7 +61,6 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	Player->GetCameraShake()->MakeBigCameraShake();
-	
 
 	for (auto Actor : Actors)
 	{
@@ -93,19 +89,19 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 {
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	Player->GetCameraShake()->MakeSmallCameraShake();
-	
+
 	NerveElectricityFeedback = GetWorld()->SpawnActor<AElectricityFeedback>(GetDefault<UBPRefParameters>()->ElectricityFeedback, Nerve->GetActorTransform());
 	KeepInMemoryNerve = Nerve;
 
 	float Duration = KeepInMemoryNerve->GetCableLength() / 750.f;
-	
+
 	FCTween::Play(0.f, 30.f,
 		[&](const float& F)
 		{
 			NerveElectricityFeedback->Radius = F;
 		},
 		.25f, EFCEase::InCubic);
-	
+
 	FCTween::Play(0.f, 1.f,
 		[&](const float& F)
 		{
@@ -122,7 +118,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 				NerveElectricityFeedback->Radius = F;
 			},
 			1.f);
-			
+
 			FCTween::Play(1.f, 0.f,
 			[&](const float& F)
 			{
