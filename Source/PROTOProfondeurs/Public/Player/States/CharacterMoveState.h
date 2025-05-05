@@ -6,6 +6,9 @@
 #include "CharacterState.h"
 #include "CharacterMoveState.generated.h"
 
+class UAkAudioEvent;
+class UAkSwitchValue;
+
 UCLASS(Abstract)
 class PROTOPROFONDEURS_API UCharacterMoveState : public UCharacterState
 {
@@ -25,9 +28,27 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (ClampMin = 0.0f))
 	float MoveAcceleration = 2048.0f;
 
-	virtual void ApplyMovement();
+	virtual void ApplyMovement(float DeltaTime);
 
 	bool bMovementLocked = false;
+
+#pragma region Noise
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise|Footsteps")
+	TObjectPtr<UAkAudioEvent> SpeedEvent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise|Footsteps")
+	TObjectPtr<UAkSwitchValue> FootstepsSpeedNoise;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise|Footsteps", meta = (ClampMin = 0.0f, ClampMax = 10.0f, UIMin = 0.0f, UIMax = 10.0f, Units = "s"))
+	float FootstepsSpeedDelay = 0.4f;
+
+	float FootstepsDelay = 0.0f;
+
+	void PlayFootstepNoise(float DeltaTime);
+
+#pragma endregion
 
 public:
 	float GetMoveSpeed() const {return MoveSpeed;}
