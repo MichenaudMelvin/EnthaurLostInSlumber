@@ -17,14 +17,17 @@ class DEPTHAIMODULE_API UGravityPawnMovement : public UFloatingPawnMovement
 public:
 	UGravityPawnMovement();
 
+protected:
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Gravity", meta = (ClampMin = 0.0f))
 	float GravityScale = 1.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Gravity")
 	FVector GravityDirection = FVector::DownVector;
+
+	UPROPERTY(BlueprintReadOnly)
+	float VerticalVelocity = 0.0f;
 
 public:
 	void SetGravityScale(const float InGravityScale) {GravityScale = InGravityScale;}

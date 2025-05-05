@@ -3,11 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CableComponent.h"
 #include "WeakZoneInterface.h"
+#include "Components/SplineComponent.h"
+#include "Components/SplineMeshComponent.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
 #include "Nerve.generated.h"
 
+class USplineMeshComponent;
+class USplineComponent;
 class AFirstPersonController;
 class ANerveReceptacle;
 class UPlayerToNervePhysicConstraint;
@@ -35,7 +39,10 @@ protected:
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
-	TArray<TObjectPtr<UCableComponent>> Cables;
+	TObjectPtr<USplineComponent> SplineCable;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
+	TArray<TObjectPtr<USplineMeshComponent>> SplineMeshes;
 
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float StartCableLength = 100.0f;
@@ -43,15 +50,25 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableMaxExtension = 1000.0f;
 
-	void InitCable(const TObjectPtr<UCableComponent>& Cable) const;
+	void AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World, bool bCreateSplineMesh = true);
+
+	void AddSplineMesh(const FVector& StartLocation, const FVector& EndLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World);
+
+	void RemoveLastSplinePoint();
+
+	/**
+	 * @brief 
+	 * @param NewLocation Should be a world location
+	 */
+	void UpdateLastSplinePointLocation(const FVector& NewLocation);
 
 	bool bShouldApplyCablePhysics = false;
 
 	void ApplyCablesPhysics();
 
-	bool CanCurrentCableBeRemoved(UCableComponent* CurrentCable, UCableComponent* LastCable);
+	bool CanCurrentCableBeRemoved();
 
-	FVector LastImpactNormal = FVector::ZeroVector;
+	TArray<FVector> ImpactNormals;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableOffset = 1.0f;
@@ -59,11 +76,38 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Cables")
 	TArray<TEnumAsByte<EObjectTypeQuery>> CableColliders;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Cables")
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	TObjectPtr<UStaticMesh> CableMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	TObjectPtr<UMaterial> CableMaterial;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	TEnumAsByte<ESplineMeshAxis::Type> CableForwardAxis = ESplineMeshAxis::Z;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	FVector2D CableScale = FVector2D(0.1f, 0.1f);
+
+	void ResetCables();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Retraction", meta = (ClampMin = 0.0f, Units = "s"))
+	float RetractionDuration = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Retraction")
+	TObjectPtr<UCurveFloat> RetractionCurve;
+
+	int32 RetractionIndex = -1;
+
+	FTimeline RetractTimeline;
+
+	UFUNCTION()
+	void RetractCable(float Alpha);
+
+	UFUNCTION()
+	void FinishRetractCable();
+
 public:
-	FVector GetLastCableLocation() const;
+	FVector GetLastCableLocation(const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World) const;
 
 	float GetCableLength() const;
 
@@ -71,6 +115,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCableDirection() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
+	FVector GetCablePosition(float Percent, ESplineCoordinateSpace::Type CoordinateSpace = ESplineCoordinateSpace::World) const;
 
 #pragma endregion
 
@@ -147,5 +194,5 @@ protected:
 	TObjectPtr<ANerveReceptacle> CurrentAttachedReceptacle;
 
 public:
-	void SetCurrentReceptacle(ANerveReceptacle* Receptacle) {CurrentAttachedReceptacle = Receptacle;}
+	void SetCurrentReceptacle(ANerveReceptacle* Receptacle);
 };

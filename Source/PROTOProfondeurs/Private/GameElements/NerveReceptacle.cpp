@@ -4,6 +4,7 @@
 #include "GameElements/NerveReceptacle.h"
 
 #include "Enumerations.h"
+#include "FCTween.h"
 #include "Components/CameraShakeComponent.h"
 #include "Components/InteractableComponent.h"
 #include "Components/SphereComponent.h"
@@ -11,7 +12,11 @@
 #include "Interface/NerveReactive.h"
 #include "GameElements/Nerve.h"
 #include "Components/PlayerToNervePhysicConstraint.h"
+#include "Components/PostProcessComponent.h"
+#include "Components/SplineComponent.h"
+#include "Gamefeel/ElectricityFeedback.h"
 #include "Kismet/GameplayStatics.h"
+#include "Parameters/BPRefParameters.h"
 #include "Player/FirstPersonCharacter.h"
 
 
@@ -19,7 +24,8 @@ ANerveReceptacle::ANerveReceptacle()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Torus"));
+	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Receptacle"));
+	SetRootComponent(NerveReceptacle);
 
 	Collision = CreateDefaultSubobject<USphereComponent>("Collision");
 	Collision->SetupAttachment(NerveReceptacle);
@@ -33,7 +39,7 @@ void ANerveReceptacle::BeginPlay()
 }
 
 void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                    UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor->IsA(ANerve::StaticClass()))
 	{
@@ -42,41 +48,88 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 
 		OnNerveConnect();
 
-		FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, false);
-		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
 		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
 
-		Nerve->GetInteractable()->AddInteractable(Nerve->GetNerveBall());
-
-		TriggerLinkedObjects();
+		PlayElectricityAnimation(Nerve);
 	}
 }
 
-void ANerveReceptacle::TriggerLinkedObjects()
+void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 {
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
-	
+
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	Player->GetCameraShake()->MakeSmallCameraShake();
+	Player->GetCameraShake()->MakeBigCameraShake();
 
-	for (AActor* Actor : Actors)
+	for (auto Actor : Actors)
 	{
-		if (!IsValid(Actor))
-		{
-			continue;
-		}
-
 		if (Actor->Implements<UNerveReactive>())
 		{
-			if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
+			if (!IsValid(Actor))
 			{
-				INerveReactive::Execute_SetLock(Actor, true);
-			} else
+				continue;
+			}
+			
+			if (Actor->Implements<UNerveReactive>())
 			{
-				INerveReactive::Execute_Trigger(Actor);
+				if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
+				{
+					INerveReactive::Execute_SetLock(Actor, true);
+				} else
+				{
+					INerveReactive::Execute_Trigger(Actor);
+				}
 			}
 		}
 	}
+}
+
+void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
+{
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	Player->GetCameraShake()->MakeSmallCameraShake();
+
+	NerveElectricityFeedback = GetWorld()->SpawnActor<AElectricityFeedback>(GetDefault<UBPRefParameters>()->ElectricityFeedback, Nerve->GetActorTransform());
+	KeepInMemoryNerve = Nerve;
+
+	float Duration = KeepInMemoryNerve->GetCableLength() / 750.f;
+
+	FCTween::Play(0.f, 30.f,
+		[&](const float& F)
+		{
+			NerveElectricityFeedback->Radius = F;
+		},
+		.25f, EFCEase::InCubic);
+
+	FCTween::Play(0.f, 1.f,
+		[&](const float& F)
+		{
+			FVector NewPos = KeepInMemoryNerve->GetCablePosition(F);
+			NerveElectricityFeedback->SetActorLocation(NewPos);
+		},
+		Duration, EFCEase::Linear)->SetOnComplete([&]
+		{
+			TriggerLinkedObjects(KeepInMemoryNerve);
+			
+			FCTween::Play(30.f, 200.f,
+			[&](const float& F)
+			{
+				NerveElectricityFeedback->Radius = F;
+			},
+			1.f);
+
+			FCTween::Play(1.f, 0.f,
+			[&](const float& F)
+			{
+				NerveElectricityFeedback->Material->SetScalarParameterValue("Opacity", F);
+			},
+			2.f)->SetOnComplete([&]
+			{
+				NerveElectricityFeedback->Destroy();
+				NerveElectricityFeedback = nullptr;
+				KeepInMemoryNerve = nullptr;
+			});
+		});
 }
 

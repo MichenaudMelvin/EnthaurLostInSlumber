@@ -18,5 +18,18 @@ void UGravityPawnMovement::TickComponent(float DeltaTime, enum ELevelTick TickTy
 
 void UGravityPawnMovement::ApplyGravity(float DeltaTime)
 {
-	Velocity = ((GetWorld()->GetDefaultGravityZ() * -1.0f) * GravityDirection * GravityScale * DeltaTime);
+	// gravity = m/s²
+
+	// m/s
+	VerticalVelocity = GetWorld()->GetDefaultGravityZ() * DeltaTime * GravityScale;
+
+	// m
+	FVector Delta = VerticalVelocity * DeltaTime * (GravityDirection * -1);
+
+	bool bHit = MoveUpdatedComponent(Delta, UpdatedComponent->GetComponentRotation(), true);
+
+	if (bHit)
+	{
+		VerticalVelocity = 0.0f;
+	}
 }

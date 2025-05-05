@@ -53,3 +53,8 @@ void UCameraShakeComponent::MakeSmallCameraShake()
 	PlayerController->ClientStartCameraShake(LittleShake);
 }
 
+void UCameraShakeComponent::MakeBigCameraShake()
+{
+	PlayerController->ClientStartCameraShake(BigShake);
+}
+

@@ -30,7 +30,7 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!PlayerController->GetPlayerInputs().bInputInteract)
+	if (!PlayerController->GetPlayerInputs().bInputInteractTrigger)
 	{
 		bHasReleasedInteraction = true;
 	}
@@ -53,6 +53,11 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f - Lerp);
 	}
 
+	if (!bHasReleasedInteraction)
+	{
+		return;
+	}
+
 	if (Distance >= LinkedNerve->GetDistanceNeededToPropulsion())
 	{
 		if (!IsPropultionActive)
@@ -61,11 +66,11 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			IsPropultionActive = true;
 		}
 
-		if (PlayerController->GetPlayerInputs().bInputInteract && !IsAlreadyPropulsing)
+		if (PlayerController->GetPlayerInputs().bInputInteractPressed && !IsAlreadyPropulsing)
 		{
 			IsAlreadyPropulsing = true;
 
-			FVector CableDirection = LinkedNerve->GetCableDirection() * -1;
+			FVector CableDirection = LinkedNerve->GetCableDirection();
 			const FVector CameraDirection = PlayerCharacter->GetCamera()->GetForwardVector();
 
 			const FFloatRange& CameraRange = GetDefault<UNervePhysicsConstraint>()->CameraPropulsion;
@@ -86,7 +91,7 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 			IsPropultionActive = false;
 		}
 
-		else if (bHasReleasedInteraction && PlayerController->GetPlayerInputs().bInputInteract)
+		else if (PlayerController->GetPlayerInputs().bInputInteractPressed)
 		{
 			ReleasePlayer(true);
 		}
@@ -108,13 +113,17 @@ void UPlayerToNervePhysicConstraint::Init(ANerve* vLinkedNerve, ACharacter* vPla
 
 void UPlayerToNervePhysicConstraint::ReleasePlayer(const bool DetachFromPlayer)
 {
-	PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
-	PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed;
+	if (PlayerCharacter && PlayerController)
+	{
+		PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
+		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed;
+	}
 
-	if (DetachFromPlayer)
+	if (DetachFromPlayer && LinkedNerve)
 	{
 		LinkedNerve->DetachNerveBall();
 	}
+
 	DestroyComponent();
 }
 

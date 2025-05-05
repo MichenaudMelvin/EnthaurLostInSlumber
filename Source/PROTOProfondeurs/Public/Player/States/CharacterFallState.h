@@ -50,6 +50,8 @@ private:
 
 	float SpikeBrakeTime = 0.0f;
 
+	bool bHasPressedInteraction = false;
+
 public:
 	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
 	void SetProjectionVelocity(const FVector& Velocity);

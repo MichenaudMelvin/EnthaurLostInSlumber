@@ -1,0 +1,91 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "1355168291",
+    "Type": "User",
+    "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
+    "Language": "SFX",
+    "Hash": "{30F9328F-264B-E177-6F4E-1C4A8A70DB5B}",
+    "ObjectPath": "Init",
+    "ShortName": "Init",
+    "Path": "Init.bnk",
+    "Plugins": {
+     "AudioDevices": [
+      {
+       "Id": "2317455096",
+       "Name": "No_Output",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\No_Output",
+       "GUID": "{DF563AD4-AF16-4B95-87CD-5C1861D07C3E}",
+       "LibName": "No Output",
+       "LibId": "11862023"
+      },
+      {
+       "Id": "3859886410",
+       "Name": "System",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\System",
+       "GUID": "{8EA8FBC0-75CB-480A-AF56-63363062FD17}",
+       "LibName": "System",
+       "LibId": "11403271"
+      }
+     ]
+    },
+    "Busses": [
+     {
+      "Id": "3803692087",
+      "Name": "Master Audio Bus",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "675352309",
+      "Name": "SWG_MC_FS_Speed",
+      "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Speed",
+      "GUID": "{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}",
+      "Switches": [
+       {
+        "Id": "712161704",
+        "Name": "Run",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Speed\\Run",
+        "GUID": "{37199D4B-2906-4A43-ADE9-1164C8E55247}"
+       },
+       {
+        "Id": "2108779966",
+        "Name": "Walk",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Speed\\Walk",
+        "GUID": "{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"
+       }
+      ]
+     },
+     {
+      "Id": "2206848095",
+      "Name": "SWG_MC_FS_Material",
+      "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Material",
+      "GUID": "{983C266D-D7D3-4883-95CD-0BAE399BC4C5}",
+      "Switches": [
+       {
+        "Id": "1312110196",
+        "Name": "Muscle",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Material\\Muscle",
+        "GUID": "{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"
+       },
+       {
+        "Id": "1744723399",
+        "Name": "Bone",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Material\\Bone",
+        "GUID": "{181A0A9E-1350-4650-9A67-C81EA9235993}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{9D057DDA-23E3-B5C8-66AA-FE74BB404936}"
+ }
+}

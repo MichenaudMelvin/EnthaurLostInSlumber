@@ -65,8 +65,11 @@ void FPlayerInputs::DisplayInputsOnScreen(float DisplayTime, const FColor& Debug
 	Message += "\nbInputJump: ";
 	Message += bInputJump ? "true" : "false";
 
-	Message += "\nbInputInteract: ";
-	Message += bInputInteract ? "true" : "false";
+	Message += "\nbInputInteractPressed: ";
+	Message += bInputInteractPressed ? "true" : "false";
+
+	Message += "\nbInputInteractTrigger: ";
+	Message += bInputInteractTrigger ? "true" : "false";
 
 	GEngine->AddOnScreenDebugMessage(-1, DisplayTime, DebugColor, FString::Printf(TEXT("%s"), *Message));
 }
@@ -171,16 +174,28 @@ void AFirstPersonController::SetupInputComponent()
 	SprintAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputSprint, const FInputActionValue&);
 	CrouchAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputCrouch, const FInputActionValue&);
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputJump, const FInputActionValue&);
-	InteractAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteract, const FInputActionValue&);
-	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputPauseGame, const FInputActionValue&);
+	InteractPressedAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteractPressed, const FInputActionValue&);
+	InteractTriggerAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AFirstPersonController, OnInputInteractTrigger, const FInputActionValue&);
+	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputPauseGame);
+
+	NavigateAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputNavigate);
+	SelectAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputSelect);
+	BackAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputBack);
+	ResumeAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AFirstPersonController, OnInputResume);
 
 	MoveAction.BindAction(EnhancedInputComponent, this);
 	LookAction.BindAction(EnhancedInputComponent, this);
 	SprintAction.BindAction(EnhancedInputComponent, this);
 	CrouchAction.BindAction(EnhancedInputComponent, this);
 	JumpAction.BindAction(EnhancedInputComponent, this);
-	InteractAction.BindAction(EnhancedInputComponent, this);
+	InteractPressedAction.BindAction(EnhancedInputComponent, this);
+	InteractTriggerAction.BindAction(EnhancedInputComponent, this);
 	PauseGameAction.BindAction(EnhancedInputComponent, this);
+	
+	NavigateAction.BindAction(EnhancedInputComponent, this);
+	SelectAction.BindAction(EnhancedInputComponent, this);
+	BackAction.BindAction(EnhancedInputComponent, this);
+	ResumeAction.BindAction(EnhancedInputComponent, this);
 }
 
 void AFirstPersonController::OnInputMove(const FInputActionValue& InputActionValue)
@@ -208,22 +223,72 @@ void AFirstPersonController::OnInputJump(const FInputActionValue& InputActionVal
 	PlayerInputs.bInputJump = InputActionValue.Get<bool>();
 }
 
-void AFirstPersonController::OnInputInteract(const FInputActionValue& InputActionValue)
+void AFirstPersonController::OnInputInteractPressed(const FInputActionValue& InputActionValue)
 {
-	PlayerInputs.bInputInteract = InputActionValue.Get<bool>();
+	PlayerInputs.bInputInteractPressed = InputActionValue.Get<bool>();
 }
 
-void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActionValue)
+void AFirstPersonController::OnInputInteractTrigger(const FInputActionValue& InputActionValue)
 {
-	PlayerInputs.bInputPauseGame = InputActionValue.Get<bool>();
+	PlayerInputs.bInputInteractTrigger = InputActionValue.Get<bool>();
+}
 
+void AFirstPersonController::OnInputPauseGame()
+{
 	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
 	if (!IsValid(UIManager))
 	{
 		return;
 	}
 
+	UIManager->CurrentContext = EPRFUIState::PauseMenu;
 	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);
+}
+
+void AFirstPersonController::OnInputNavigate(const FInputActionValue& InputActionValue)
+{
+	
+}
+
+void AFirstPersonController::OnInputSelect()
+{
+	
+}
+
+void AFirstPersonController::OnInputBack()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	UIManager->CloseCurrentMenu();
+	
+}
+
+void AFirstPersonController::OnInputResume()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	switch (UIManager->CurrentContext)
+	{
+		case EPRFUIState::PauseMenu:
+			UIManager->CurrentContext = EPRFUIState::Gameplay;
+        	UIManager->CloseAllMenus();
+			break;
+
+		case EPRFUIState::MainMenu:
+			UIManager->CloseCurrentMenu();
+			break;
+
+		default:
+			break;
+	}
 }
 
 #if WITH_EDITOR

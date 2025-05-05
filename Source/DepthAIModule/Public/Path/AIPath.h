@@ -53,7 +53,7 @@ protected:
 	void UpdatePoints(bool bInConstructionScript);
 
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(VisibleInstanceOnly, Category = "AI")
+	UPROPERTY(VisibleInstanceOnly, Transient, Category = "AI")
 	TObjectPtr<APawn> AttachedAI;
 #endif
 
