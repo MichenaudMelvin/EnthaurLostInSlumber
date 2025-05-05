@@ -2,9 +2,10 @@
 
 
 #include "Player/States/CharacterMoveState.h"
+#include "AkComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Player/CharacterSettings.h"
+#include "Physics/SurfaceSettings.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/Camera/ViewBobbing.h"
@@ -23,16 +24,19 @@ void UCharacterMoveState::StateEnter_Implementation(const ECharacterStateID& Pre
 
 	Character->GetCharacterMovement()->MaxWalkSpeed = MoveSpeed;
 	Character->GetCharacterMovement()->MaxAcceleration = MoveAcceleration;
+
+	FootstepsDelay = FootstepsSpeedDelay;
+	Character->GetFootstepsSoundComp()->SetSwitch(FootstepsSpeedNoise);
 }
 
 void UCharacterMoveState::StateTick_Implementation(float DeltaTime)
 {
 	Super::StateTick_Implementation(DeltaTime);
 
-	ApplyMovement();
+	ApplyMovement(DeltaTime);
 }
 
-void UCharacterMoveState::ApplyMovement()
+void UCharacterMoveState::ApplyMovement(float DeltaTime)
 {
 	if (bMovementLocked)
 	{
@@ -49,6 +53,46 @@ void UCharacterMoveState::ApplyMovement()
 		float SpeedRange = UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->MaxWalkSpeed, 0.0f, MoveSpeed);
 		Character->GetViewBobbingObject()->ShakeScale = SpeedRange;
 	}
+
+	PlayFootstepNoise(DeltaTime);
+}
+
+void UCharacterMoveState::PlayFootstepNoise(float DeltaTime)
+{
+	if (!FootstepsSpeedNoise)
+	{
+		return;
+	}
+
+	FootstepsDelay += DeltaTime;
+
+	if (FootstepsDelay < FootstepsSpeedDelay)
+	{
+		return;
+	}
+
+	FootstepsDelay = 0.0f;
+
+	FHitResult HitResult;
+	bool bHit = Character->GroundTrace(HitResult);
+	if (!bHit || !HitResult.PhysMaterial.IsValid())
+	{
+		return;
+	}
+
+	const USurfaceSettings* SurfaceSettings = GetDefault<USurfaceSettings>();
+	if (!SurfaceSettings)
+	{
+		return;
+	}
+
+	const UAkSwitchValue* SurfaceNoise = SurfaceSettings->FindNoise(HitResult.PhysMaterial->SurfaceType);
+	if (SurfaceNoise)
+	{
+		Character->GetFootstepsSoundComp()->SetSwitch(SurfaceNoise);
+	}
+
+	Character->GetFootstepsSoundComp()->PostAkEvent(SpeedEvent);
 }
 
 void UCharacterMoveState::SetNewSpeed(const float NewSpeed)

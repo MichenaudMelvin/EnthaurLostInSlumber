@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UAkComponent;
 class UCameraShakeComponent;
 enum class EAmberType : uint8;
 class UTestViewModel;
@@ -254,6 +255,17 @@ public:
 	FVector GetRespawnPosition() const {return RespawnPosition;}
 
 	void SetRespawnPosition(const FVector& Position) {RespawnPosition = Position;}
+
+#pragma endregion
+
+#pragma region Sounds
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Sounds")
+	TObjectPtr<UAkComponent> FootstepsSounds;
+
+public:
+	TObjectPtr<UAkComponent> GetFootstepsSoundComp() const {return FootstepsSounds;}
 
 #pragma endregion
 
