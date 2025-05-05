@@ -48,6 +48,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FActionUI AnyAction;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
+	FActionUI BackAction;
 
 	UFUNCTION()
 	void OnInputResume();

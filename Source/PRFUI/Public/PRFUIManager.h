@@ -20,6 +20,7 @@ class PRFUI_API UPRFUIManager : public UGameInstanceSubsystem
 
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+	virtual void Deinitialize() override;
 
 	// bIsSubMenu is for confirmation boxes that have to not hide the menu just before
 	// Can also be used for menus with a fixed part and an inner part that changes (options menu)
@@ -43,7 +44,15 @@ public:
 	void SetGameInputMode() const;
 
 protected:
+	void CreateAllWidgets();
 	void CenterCursor() const;
+
+	FDelegateHandle CreateWidgetsDelegate;
+	
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWidgetsCreated);
+	
+	UPROPERTY(BlueprintAssignable)
+	FOnWidgetsCreated OnWidgetsCreated;
 
 	void HandleMenuCollection(UUserWidget* InMenuClass, bool bAddMenu);
 

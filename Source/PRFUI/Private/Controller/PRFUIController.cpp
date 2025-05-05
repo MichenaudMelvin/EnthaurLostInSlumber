@@ -98,6 +98,12 @@ void APRFUIController::OnInputResume()
 		return;
 	}
 
+	if (UIManager->GetMenuState() == EPRFUIState::MainMenu)
+	{
+		UIManager->CloseCurrentMenu();
+		return;
+	}
+
 	UIManager->CloseAllMenus();
 }
 

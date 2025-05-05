@@ -10,20 +10,35 @@
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonController.h"
 
-void UPRFUIManager::Initialize(FSubsystemCollectionBase& Collection)
-{
-	Super::Initialize(Collection);
 
+void UPRFUIManager::CreateAllWidgets()
+{
 	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
 	if (!IsValid(UIManagerSettings))
 	{
 		return;
 	}
+	
+	PressAnyMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->PressAnyMenuClass);
+	MainMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->MainMenuClass);
+	PauseMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->PauseMenuClass);
+	OptionsMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->OptionsMenuClass);
 
-	PressAnyMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->PressAnyMenuClass);
-	MainMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->MainMenuClass);
-	PauseMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->PauseMenuClass);
-	OptionsMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->OptionsMenuClass);
+	OnWidgetsCreated.Broadcast();
+}
+
+void UPRFUIManager::Initialize(FSubsystemCollectionBase& Collection)
+{
+	Super::Initialize(Collection);
+	
+	CreateWidgetsDelegate = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UPRFUIManager::CreateAllWidgets);
+}
+
+void UPRFUIManager::Deinitialize()
+{
+	Super::Deinitialize();
+
+	GetWorld()->OnWorldBeginPlay.Remove(CreateWidgetsDelegate);
 }
 
 void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
@@ -134,6 +149,18 @@ void UPRFUIManager::CloseCurrentMenu()
 
 	Menu->RemoveFromParent();
 	MenuClasses.Remove(MenuKey);
+
+	if (MenuStack.Num() >= 1 && CurrentState == EPRFUIState::MainMenu)
+	{
+		TWeakObjectPtr<UUserWidget> NewTopMenuPtr = MenuStack.Last();
+		if (!TopMenuPtr.IsValid())
+		{
+			return;
+		}
+		
+		UUserWidget* NewMenu = NewTopMenuPtr.Get();
+		NewMenu->AddToViewport();
+	}
 
 	if (MenuStack.Num() == 0)
 	{

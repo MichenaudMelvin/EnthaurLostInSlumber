@@ -15,9 +15,9 @@ void UPRFMainMenu::NativeOnInitialized()
 	{
 		NewGameButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleNewGameMenu);
 	}
-	if (LoadGameButton)
+	if (ContinueButton)
 	{
-		NewGameButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleLoadGameMenu);
+		NewGameButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
 	}
 	if (OptionsButton)
 	{
@@ -41,9 +41,9 @@ void UPRFMainMenu::BeginDestroy()
 	{
 		NewGameButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleNewGameMenu);
 	}
-	if (LoadGameButton)
+	if (ContinueButton)
 	{
-		NewGameButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleLoadGameMenu);
+		NewGameButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
 	}
 	if (OptionsButton)
 	{
@@ -70,15 +70,9 @@ void UPRFMainMenu::HandleNewGameMenu()
 	GetUIManager()->OpenMenu(NewGameMenu, false);
 }
 
-void UPRFMainMenu::HandleLoadGameMenu()
+void UPRFMainMenu::HandleContinueInteraction()
 {
-	if (!IsValid(GetUIManagerSettings()->LoadGameMenuClass))
-	{
-		return;
-	}
 	
-	UUserWidget* LoadGameMenu = CreateWidget<UUserWidget>(GetWorld(), GetUIManagerSettings()->LoadGameMenuClass);
-	GetUIManager()->OpenMenu(LoadGameMenu, false);
 }
 
 void UPRFMainMenu::HandleOptionsMenu()

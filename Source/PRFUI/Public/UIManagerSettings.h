@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Engine/DeveloperSettings.h"
 #include "Menus/Main/PRFCreditsMenu.h"
-#include "Menus/Main/PRFLoadGameMenu.h"
 #include "Menus/Main/PRFMainMenu.h"
 #include "Menus/Main/PRFNewGameMenu.h"
 #include "Menus/Main/PRFPressAny.h"
@@ -36,17 +35,12 @@ public:
 	TSubclassOf<UPRFNewGameMenu> NewGameMenuClass = UPRFNewGameMenu::StaticClass();
 
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI")
-	TSubclassOf<UPRFLoadGameMenu> LoadGameMenuClass = UPRFLoadGameMenu::StaticClass();
+	TSubclassOf<UPRFCreditsMenu> CreditsMenuClass = UPRFCreditsMenu::StaticClass();
 
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI")
-	TSubclassOf<UPRFLoadGameMenu> CreditsMenuClass = UPRFCreditsMenu::StaticClass();
-
-	UPROPERTY(EditDefaultsOnly, Config, Category = "UI")
-	TSubclassOf<UPRFLoadGameMenu> QuitMenuClass = UPRFQuitMenu::StaticClass();
+	TSubclassOf<UPRFQuitMenu> QuitMenuClass = UPRFQuitMenu::StaticClass();
 
 #pragma endregion
-
-	
 
 #pragma region Options Menus
 	

@@ -23,7 +23,7 @@ protected:
 	UButton* NewGameButton;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* LoadGameButton;
+	UButton* ContinueButton;
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* OptionsButton;
@@ -41,7 +41,7 @@ protected:
 	void HandleNewGameMenu();
 
 	UFUNCTION()
-	void HandleLoadGameMenu();
+	void HandleContinueInteraction();
 
 	UFUNCTION()
 	void HandleOptionsMenu();
