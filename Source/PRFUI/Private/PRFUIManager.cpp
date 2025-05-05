@@ -19,7 +19,9 @@ void UPRFUIManager::Initialize(FSubsystemCollectionBase& Collection)
 	{
 		return;
 	}
-	
+
+	PressAnyMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->PressAnyMenuClass);
+	MainMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->MainMenuClass);
 	PauseMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->PauseMenuClass);
 	OptionsMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->OptionsMenuClass);
 }
@@ -36,7 +38,6 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	MenuStack.Add(InMenuClass);
 
 	InMenuClass->AddToViewport();
-	//SetUIInputMode();
 
 	if (MenuStack.Num() >= 2)
 	{
@@ -115,7 +116,7 @@ void UPRFUIManager::CloseCurrentMenu()
 	}
 
 	// If we are in the main menu then we don't want to remove the first UI as we always need the "press any key"
-	if (MenuStack.Num() == 1 && CurrentContext == EPRFUIState::MainMenu)
+	if (MenuStack.Num() == 1 && CurrentState == EPRFUIState::MainMenu)
 	{
 		return;
 	}
@@ -174,6 +175,11 @@ void UPRFUIManager::CloseAllMenus()
 	}
 }
 
+void UPRFUIManager::SetMenuState(EPRFUIState InUIState)
+{
+	CurrentState = InUIState;
+}
+
 void UPRFUIManager::SetUIInputMode() const
 {
 	UWorld* World = GEngine->GetCurrentPlayWorld();
@@ -195,7 +201,7 @@ void UPRFUIManager::SetUIInputMode() const
 	}
 
 	UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PlayerController, MenuStack.Last().Get());
-	UGameplayStatics::SetGamePaused(this, true);
+	//UGameplayStatics::SetGamePaused(this, true);
 	PlayerController->bShowMouseCursor = true;
 }
 
@@ -214,7 +220,7 @@ void UPRFUIManager::SetGameInputMode() const
 	}
 
 	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController);
-	UGameplayStatics::SetGamePaused(this, false);
+	//UGameplayStatics::SetGamePaused(this, false);
 	PlayerController->bShowMouseCursor = false;
 }
 

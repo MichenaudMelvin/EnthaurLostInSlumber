@@ -46,8 +46,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FActionUI ResumeAction;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
+	FActionUI AnyAction;
+
 	UFUNCTION()
-	void OnInputResume(const FInputActionValue& InputActionValue);
+	void OnInputResume();
+
+	UFUNCTION()
+	void OnInputAny();
 
 public:
 	virtual void Tick(float DeltaTime) override;

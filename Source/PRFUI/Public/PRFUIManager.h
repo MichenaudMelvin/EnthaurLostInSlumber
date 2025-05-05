@@ -13,7 +13,7 @@ class AFirstPersonController;
 /**
  * 
  */
-UCLASS(Blueprintable, Abstract)
+UCLASS()
 class PRFUI_API UPRFUIManager : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
@@ -22,30 +22,60 @@ public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 
 	// bIsSubMenu is for confirmation boxes that have to not hide the menu just before
-	// Can also be used for menus with a fixed part and a inner part that changes (options menu) 
+	// Can also be used for menus with a fixed part and an inner part that changes (options menu)
+
+	UFUNCTION(BlueprintCallable)
 	void OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu);
+
+	UFUNCTION(BlueprintCallable)
 	void CloseCurrentMenu();
+	
+	UFUNCTION(BlueprintCallable)
 	void CloseAllMenus();
 
 	UUserWidget* GetPauseMenu() const { return PauseMenu; }
+	UUserWidget* GetMainMenu() const { return MainMenu; }
+	
+	EPRFUIState GetMenuState() const { return CurrentState; }
+	void SetMenuState(EPRFUIState InUIState);
 
-protected:
 	void SetUIInputMode() const;
 	void SetGameInputMode() const;
+
+protected:
 	void CenterCursor() const;
 
 	void HandleMenuCollection(UUserWidget* InMenuClass, bool bAddMenu);
 
 #pragma region UI State
-
-public:
-	UPROPERTY()
-	EPRFUIState CurrentContext = EPRFUIState::Gameplay;
-
-protected:
+	
+	EPRFUIState CurrentState = EPRFUIState::AnyMenu;
+	
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnUIContextChanged, EPRFUIState);
 	FOnUIContextChanged OnUIContextChanged;
 
+#pragma endregion
+
+#pragma region Main Menus
+
+	UPROPERTY(BlueprintReadOnly)
+	UUserWidget* PressAnyMenu = nullptr;
+
+	UPROPERTY()
+	UUserWidget* MainMenu = nullptr;
+
+	UPROPERTY()
+	UUserWidget* NewGameMenu = nullptr;
+
+	UPROPERTY()
+	UUserWidget* LoadGameMenu = nullptr;
+	
+	UPROPERTY()
+	UUserWidget* CreditsMenu = nullptr;
+
+	UPROPERTY()
+	UUserWidget* QuitMenu = nullptr;
+	
 #pragma endregion
 
 #pragma region Pause Menus
@@ -60,5 +90,5 @@ protected:
 	
 private:
 	TArray<TWeakObjectPtr<UUserWidget>> MenuStack;
-	TMap<FString, TWeakObjectPtr<UUserWidget>> MenuClasses;
+	TMap<FString, UUserWidget*> MenuClasses;
 };

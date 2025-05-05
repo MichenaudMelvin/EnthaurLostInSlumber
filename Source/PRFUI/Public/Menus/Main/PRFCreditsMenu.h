@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
-#include "PRFOptionsMenu.generated.h"
+#include "Menus/PRFWidgetBasics.h"
+#include "PRFCreditsMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PRFUI_API UPRFOptionsMenu : public UUserWidget
+class PRFUI_API UPRFCreditsMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
 };

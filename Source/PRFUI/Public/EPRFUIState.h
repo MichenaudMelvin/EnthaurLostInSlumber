@@ -12,5 +12,6 @@ enum class EPRFUIState : uint8
 {
 	Gameplay,
 	PauseMenu,
-	MainMenu
+	MainMenu,
+	AnyMenu
 };

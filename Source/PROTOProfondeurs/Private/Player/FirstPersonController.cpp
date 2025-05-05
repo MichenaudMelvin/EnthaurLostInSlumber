@@ -241,7 +241,7 @@ void AFirstPersonController::OnInputPauseGame()
 		return;
 	}
 
-	UIManager->CurrentContext = EPRFUIState::PauseMenu;
+	UIManager->SetMenuState(EPRFUIState::PauseMenu);
 	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);
 }
 
@@ -275,10 +275,10 @@ void AFirstPersonController::OnInputResume()
 		return;
 	}
 
-	switch (UIManager->CurrentContext)
+	switch (UIManager->GetMenuState())
 	{
 		case EPRFUIState::PauseMenu:
-			UIManager->CurrentContext = EPRFUIState::Gameplay;
+			UIManager->SetMenuState(EPRFUIState::Gameplay);
         	UIManager->CloseAllMenus();
 			break;
 

@@ -83,11 +83,14 @@ void APRFUIController::SetupInputComponent()
 		return;
 	}
 
-	ResumeAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED_OneParam(APRFUIController, OnInputResume, const FInputActionValue&);
+	ResumeAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED(APRFUIController, OnInputResume);
+	AnyAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED(APRFUIController, OnInputAny);
+	
 	ResumeAction.BindActionUI(EnhancedInputComponent, this);
+	AnyAction.BindActionUI(EnhancedInputComponent, this);
 }
 
-void APRFUIController::OnInputResume(const FInputActionValue& InputActionValue)
+void APRFUIController::OnInputResume()
 {
 	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
 	if (!IsValid(UIManager))
@@ -96,6 +99,23 @@ void APRFUIController::OnInputResume(const FInputActionValue& InputActionValue)
 	}
 
 	UIManager->CloseAllMenus();
+}
+
+void APRFUIController::OnInputAny()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	if (UIManager->GetMenuState() != EPRFUIState::AnyMenu)
+	{
+		return;
+	}
+
+	UIManager->OpenMenu(UIManager->GetMainMenu(), false);
+	UIManager->SetMenuState(EPRFUIState::MainMenu);
 }
 
 // Called every frame
