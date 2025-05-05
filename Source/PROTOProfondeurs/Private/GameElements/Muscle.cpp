@@ -367,7 +367,7 @@ void AMuscle::OnExitWeakZone_Implementation()
 
 	if (!Interactable->OnInteract.IsAlreadyBound(this, &AMuscle::Interact))
 	{
-		Interactable->OnInteract.RemoveDynamic(this, &AMuscle::Interact);
+		Interactable->OnInteract.AddDynamic(this, &AMuscle::Interact);
 	}
 }
 
