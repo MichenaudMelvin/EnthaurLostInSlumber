@@ -16,8 +16,6 @@ UCharacterCrouchState::UCharacterCrouchState()
 {
 	StateID = ECharacterStateID::Crouch;
 	MoveSpeed = 200.0f;
-	MaxSteering = 1.0f;
-	SteeringSpeed = 0.75f;
 }
 
 void UCharacterCrouchState::StateInit(UCharacterStateMachine* InStateMachine)

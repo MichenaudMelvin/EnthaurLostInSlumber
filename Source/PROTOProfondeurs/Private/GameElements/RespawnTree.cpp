@@ -5,6 +5,8 @@
 
 #include "FCTween.h"
 #include "Components/InteractableComponent.h"
+#include "Components/LightComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
 
@@ -24,6 +26,9 @@ ARespawnTree::ARespawnTree()
 	RespawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Respawn Point"));
 	RespawnPoint->SetupAttachment(Root);
 
+	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
+	Light->SetupAttachment(Root);
+
 	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 	Interaction->OnInteract.AddDynamic(this, &ARespawnTree::ActivateRespawn);
 }
@@ -40,7 +45,7 @@ void ARespawnTree::BeginPlay()
 	Interaction->AddInteractable(TreeModel);
 }
 
-void ARespawnTree::ActivateRespawn(APlayerController* PlayerController, APawn* Pawn)
+void ARespawnTree::ActivateRespawn(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (bIsActivated)
 		return;
@@ -58,6 +63,37 @@ void ARespawnTree::ActivateRespawn(APlayerController* PlayerController, APawn* P
 			},
 			0.5f,
 			EFCEase::InSine);
+
+	FCTween::Play(
+		0.f,
+		lightLevel,
+		[&](float intensity)
+		{
+			Light->SetIntensity(intensity);
+		},
+		0.5f,
+		EFCEase::InSine
+	);
+}
+
+void ARespawnTree::OnEnterWeakZone_Implementation(bool bIsZoneActive)
+{
+	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
+
+	if (bIsZoneActive && Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::ActivateRespawn))
+	{
+		Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::ActivateRespawn);
+	}
+}
+
+void ARespawnTree::OnExitWeakZone_Implementation()
+{
+	IWeakZoneInterface::OnExitWeakZone_Implementation();
+
+	if (!Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::ActivateRespawn))
+	{
+		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::ActivateRespawn);
+	}
 }
 
 

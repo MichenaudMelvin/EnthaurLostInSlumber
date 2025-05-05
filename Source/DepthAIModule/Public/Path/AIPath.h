@@ -17,9 +17,9 @@ public:
 	AAIPath();
 
 protected:
-	virtual void OnConstruction(const FTransform& Transform) override;
-
 	virtual void BeginPlay() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<USceneComponent> Root;
@@ -28,10 +28,10 @@ protected:
 	TObjectPtr<USplineComponent> Spline;
 
 #if WITH_EDITORONLY_DATA
-	UPROPERTY()
+	UPROPERTY(Transient)
 	TObjectPtr<UBillboardComponent> BillboardComponent;
 
-	UPROPERTY()
+	UPROPERTY(Transient)
 	TArray<TObjectPtr<class UArrowComponent>> Arrows;
 #endif
 
@@ -44,9 +44,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Trace")
 	TArray<TEnumAsByte<EObjectTypeQuery>> GroundObjectTypes;
 
-	UPROPERTY()
-	bool bAutoDirection = false;
-
 	UPROPERTY(EditInstanceOnly, Category = "Direction", meta = (EditCondition = "!bAutoDirection"))
 	TEnumAsByte<EAxis::Type> Direction = EAxis::Z;
 
@@ -55,10 +52,32 @@ protected:
 
 	void UpdatePoints(bool bInConstructionScript);
 
-	FVector GetDirection();
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(VisibleInstanceOnly, Transient, Category = "AI")
+	TObjectPtr<APawn> AttachedAI;
+#endif
 
 public:
-	FVector GetPointLocation(int8 PointIndex) const;
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Direction")
+	FVector GetDirection() const;
+
+	FVector GetPointLocation(int8 PointIndex, float PawnHeight) const;
 
 	USplineComponent* GetSpline() const {return Spline;}
+
+	/**
+	 * @brief Should be used only onConstruction (use GetPointLocation() otherwise)
+	 * @param PointIndex
+	 * @param HitResult 
+	 * @return 
+	 */
+	bool GetTracedPointLocation(int8 PointIndex, FHitResult& HitResult);
+
+	bool IsOnFloor() const;
+
+#if WITH_EDITORONLY_DATA
+	bool AttachAI(APawn* AI);
+
+	void DetachAI(APawn* AI);
+#endif
 };

@@ -4,28 +4,33 @@
 #include "GameElements/NerveReceptacle.h"
 
 #include "Enumerations.h"
+#include "FCTween.h"
+#include "Components/CameraShakeComponent.h"
 #include "Components/InteractableComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "Interface/NerveReactive.h"
 #include "GameElements/Nerve.h"
 #include "Components/PlayerToNervePhysicConstraint.h"
+#include "Components/PostProcessComponent.h"
+#include "Components/SplineComponent.h"
+#include "Gamefeel/ElectricityFeedback.h"
 #include "Kismet/GameplayStatics.h"
+#include "Parameters/BPRefParameters.h"
+#include "Player/FirstPersonCharacter.h"
 
 
-// Sets default values
 ANerveReceptacle::ANerveReceptacle()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
-	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Torus"));
-	
+	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Receptacle"));
+	SetRootComponent(NerveReceptacle);
+
 	Collision = CreateDefaultSubobject<USphereComponent>("Collision");
 	Collision->SetupAttachment(NerveReceptacle);
 }
 
-// Called when the game starts or when spawned
 void ANerveReceptacle::BeginPlay()
 {
 	Super::BeginPlay();
@@ -33,52 +38,98 @@ void ANerveReceptacle::BeginPlay()
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &ANerveReceptacle::TriggerEnter);
 }
 
-// Called every frame
-void ANerveReceptacle::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
 void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                    UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor->IsA(ANerve::StaticClass()))
 	{
 		ANerve* Nerve = Cast<ANerve>(OtherActor);
 		Nerve->SetCurrentReceptacle(this);
 
-		FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, false);
-		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
+		OnNerveConnect();
+
 		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
 
-		Nerve->GetInteractable()->AddInteractable(Nerve->NerveBall);
-
-		TriggerLinkedObjects();
+		PlayElectricityAnimation(Nerve);
 	}
 }
 
-void ANerveReceptacle::TriggerLinkedObjects()
+void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 {
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
 
-	for (AActor* Actor : Actors)
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	Player->GetCameraShake()->MakeBigCameraShake();
+
+	for (auto Actor : Actors)
 	{
-		if (!IsValid(Actor))
-		{
-			continue;
-		}
-		
 		if (Actor->Implements<UNerveReactive>())
 		{
-			if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
+			if (!IsValid(Actor))
 			{
-				INerveReactive::Execute_SetLock(Actor, true);
-			} else
+				continue;
+			}
+			
+			if (Actor->Implements<UNerveReactive>())
 			{
-				INerveReactive::Execute_Trigger(Actor);
+				if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
+				{
+					INerveReactive::Execute_SetLock(Actor, true);
+				} else
+				{
+					INerveReactive::Execute_Trigger(Actor);
+				}
 			}
 		}
 	}
+}
+
+void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
+{
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	Player->GetCameraShake()->MakeSmallCameraShake();
+
+	NerveElectricityFeedback = GetWorld()->SpawnActor<AElectricityFeedback>(GetDefault<UBPRefParameters>()->ElectricityFeedback, Nerve->GetActorTransform());
+	KeepInMemoryNerve = Nerve;
+
+	float Duration = KeepInMemoryNerve->GetCableLength() / 750.f;
+
+	FCTween::Play(0.f, 30.f,
+		[&](const float& F)
+		{
+			NerveElectricityFeedback->Radius = F;
+		},
+		.25f, EFCEase::InCubic);
+
+	FCTween::Play(0.f, 1.f,
+		[&](const float& F)
+		{
+			FVector NewPos = KeepInMemoryNerve->GetCablePosition(F);
+			NerveElectricityFeedback->SetActorLocation(NewPos);
+		},
+		Duration, EFCEase::Linear)->SetOnComplete([&]
+		{
+			TriggerLinkedObjects(KeepInMemoryNerve);
+			
+			FCTween::Play(30.f, 200.f,
+			[&](const float& F)
+			{
+				NerveElectricityFeedback->Radius = F;
+			},
+			1.f);
+
+			FCTween::Play(1.f, 0.f,
+			[&](const float& F)
+			{
+				NerveElectricityFeedback->Material->SetScalarParameterValue("Opacity", F);
+			},
+			2.f)->SetOnComplete([&]
+			{
+				NerveElectricityFeedback->Destroy();
+				NerveElectricityFeedback = nullptr;
+				KeepInMemoryNerve = nullptr;
+			});
+		});
 }
 

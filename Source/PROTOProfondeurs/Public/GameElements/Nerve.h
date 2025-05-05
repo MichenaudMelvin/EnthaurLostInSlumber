@@ -3,71 +3,196 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CableComponent.h"
+#include "WeakZoneInterface.h"
+#include "Components/SplineComponent.h"
+#include "Components/SplineMeshComponent.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
 #include "Nerve.generated.h"
 
+class USplineMeshComponent;
+class USplineComponent;
+class AFirstPersonController;
 class ANerveReceptacle;
 class UPlayerToNervePhysicConstraint;
 class UInteractableComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API ANerve : public AActor
+class PROTOPROFONDEURS_API ANerve : public AActor, public IWeakZoneInterface
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ANerve();
 
-	float GetCableLength() const { return CableLength; }
-	float GetCableMaxExtension() const { return CableMaxExtension; }
-	void SetCurrentReceptacle(ANerveReceptacle* Receptacle) {CurrentAttachedReceptacle = Receptacle; }
-	TObjectPtr<UInteractableComponent> GetInteractable() const { return InteractableComponent; }
-	void DetachNerveBall();
-
-	UFUNCTION()
-	void Interaction(APlayerController* PlayerController, APawn* Pawn);
-
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+
 	virtual void Tick(float DeltaSeconds) override;
-	
-private:
-	UPROPERTY(EditDefaultsOnly)
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<USceneComponent> Root;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UInteractableComponent> InteractableComponent;
+#pragma region Cables
 
-	UPROPERTY()
-	FVector DefaultPosition;
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
+	TObjectPtr<USplineComponent> SplineCable;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
+	TArray<TObjectPtr<USplineMeshComponent>> SplineMeshes;
+
+	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
+	float StartCableLength = 100.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
+	float CableMaxExtension = 1000.0f;
+
+	void AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World, bool bCreateSplineMesh = true);
+
+	void AddSplineMesh(const FVector& StartLocation, const FVector& EndLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World);
+
+	void RemoveLastSplinePoint();
+
+	/**
+	 * @brief 
+	 * @param NewLocation Should be a world location
+	 */
+	void UpdateLastSplinePointLocation(const FVector& NewLocation);
+
+	bool bShouldApplyCablePhysics = false;
+
+	void ApplyCablesPhysics();
+
+	bool CanCurrentCableBeRemoved();
+
+	TArray<FVector> ImpactNormals;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
+	float CableOffset = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables")
+	TArray<TEnumAsByte<EObjectTypeQuery>> CableColliders;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	TObjectPtr<UStaticMesh> CableMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> CableMaterial;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	TEnumAsByte<ESplineMeshAxis::Type> CableForwardAxis = ESplineMeshAxis::Z;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	FVector2D CableScale = FVector2D(0.1f, 0.1f);
+
+	void ResetCables();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Retraction", meta = (ClampMin = 0.0f, Units = "s"))
+	float RetractionDuration = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Retraction")
+	TObjectPtr<UCurveFloat> RetractionCurve;
+
+	int32 RetractionIndex = -1;
+
+	FTimeline RetractTimeline;
+
+	UFUNCTION()
+	void RetractCable(float Alpha);
+
+	UFUNCTION()
+	void FinishRetractCable();
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float CableLength;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float CableMaxExtension;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float DistanceNeededToPropulsion;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	TObjectPtr<UCableComponent> CableComponent;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	FVector GetLastCableLocation(const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World) const;
+
+	float GetCableLength() const;
+
+	float GetCableMaxExtension() const {return CableMaxExtension;}
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
+	FVector GetCableDirection() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
+	FVector GetCablePosition(float Percent, ESplineCoordinateSpace::Type CoordinateSpace = ESplineCoordinateSpace::World) const;
+
+#pragma endregion
+
+#pragma region NerveBall
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
-	FVector2f GetPropulsionForceMinMax() const
-	{
-		return PropulsionForceMinMax;
-	}
+	FVector DefaultNervePosition = FVector::ZeroVector;
 
-private:
-	UPROPERTY(EditAnywhere)
-	FVector2f PropulsionForceMinMax;
+public:
+	void AttachNerveBall(AActor* ActorToAttach);
 
+	void DetachNerveBall();
+
+	UStaticMeshComponent* GetNerveBall() const {return NerveBall;}
+
+	/**
+	 * @brief Is attached to something else
+	 * @return 
+	 */
+	bool IsNerveBallAttached() const;
+
+#pragma endregion
+
+#pragma region Interaction
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<UInteractableComponent> InteractableComponent;
+
+	UFUNCTION()
+	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
+	UPROPERTY()
+	TObjectPtr<AFirstPersonController> PlayerController;
+
+public:
+	TObjectPtr<UInteractableComponent> GetInteractable() const {return InteractableComponent;}
+
+#pragma endregion
+
+#pragma region Physics
+
+protected:
 	UPROPERTY()
 	TObjectPtr<UPlayerToNervePhysicConstraint> PhysicConstraint;
 
+	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, Units = "cm"))
+	float DistanceNeededToPropulsion = 500.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Physics")
+	FFloatRange PropulsionForceRange = FFloatRange(500.0f, 1000.0f);
+
+public:
+	float GetDistanceNeededToPropulsion() const {return DistanceNeededToPropulsion;}
+
+	FFloatRange GetPropulsionForceRange() const {return PropulsionForceRange;}
+
+#pragma endregion
+
+#pragma region WeakZone
+
+private:
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
+
+#pragma endregion
+
+protected:
 	UPROPERTY()
 	TObjectPtr<ANerveReceptacle> CurrentAttachedReceptacle;
+
+public:
+	void SetCurrentReceptacle(ANerveReceptacle* Receptacle);
 };

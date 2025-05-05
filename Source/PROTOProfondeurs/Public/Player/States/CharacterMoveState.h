@@ -25,7 +25,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (ClampMin = 0.0f))
 	float MoveAcceleration = 2048.0f;
 
-	virtual void UpdateCameraSteering(float DeltaTime) override;
+	virtual void ApplyMovement();
+
+	bool bMovementLocked = false;
 
 public:
 	float GetMoveSpeed() const {return MoveSpeed;}
@@ -38,4 +40,9 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void SetNewSpeed(const float NewSpeed);
+
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+	void LockMovement(const bool bLockMovement) {bMovementLocked = bLockMovement;}
+
+	bool MovementLocked() const {return bMovementLocked;}
 };

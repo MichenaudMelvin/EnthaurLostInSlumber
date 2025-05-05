@@ -10,8 +10,6 @@
 UCharacterWalkState::UCharacterWalkState()
 {
 	StateID = ECharacterStateID::Walk;
-	MaxSteering = 2.5f;
-	SteeringSpeed = 1.5f;
 }
 
 void UCharacterWalkState::StateTick_Implementation(float DeltaTime)
@@ -36,11 +34,6 @@ void UCharacterWalkState::StateTick_Implementation(float DeltaTime)
 	else if (GetInputs().bInputCrouch)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Crouch);
-	}
-
-	else if (GetInputs().bInputInteract)
-	{
-		StateMachine->ChangeState(ECharacterStateID::Interact);
 	}
 
 	else if (GetInputs().InputMove.Length() == 0.0f)
