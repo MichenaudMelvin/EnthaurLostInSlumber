@@ -4,7 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DeveloperSettings.h"
-#include "PauseMenus/PRFPauseMenu.h"
+#include "Menus/PRFOptionsMenu.h"
+#include "Menus/PRFPauseMenu.h"
 #include "UIManagerSettings.generated.h"
 
 /**
@@ -18,4 +19,7 @@ class PRFUI_API UUIManagerSettings : public UDeveloperSettings
 public:
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI")
 	TSubclassOf<UPRFPauseMenu> PauseMenuClass = UPRFPauseMenu::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI")
+	TSubclassOf<UPRFOptionsMenu> OptionsMenuClass = UPRFOptionsMenu::StaticClass();
 };

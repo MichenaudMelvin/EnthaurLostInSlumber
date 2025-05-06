@@ -99,3 +99,7 @@ SourceArt/**/*.tga
 !**/*[Pp]lugins/WwiseNiagara/Binaries/*
 !**/*[Pp]lugins/WwiseNiagara/Binaries/Win64/*.dll
 !**/*[Pp]lugins/WwiseNiagara/Binaries/Mac/*.dylib
+
+# Hot Reload and Debug dlls
+**/*[Bb]inaries/Win64/UnrealEditor-*-*.dll
+**/*[Bb]inaries/Win64/*DebugGame.dll

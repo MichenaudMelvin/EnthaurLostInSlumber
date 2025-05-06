@@ -2,11 +2,12 @@
 
 
 #include "Path/AIPath.h"
-#include "Components/ArrowComponent.h"
 #include "Components/SplineComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 #if WITH_EDITORONLY_DATA
+#include "Components/ArrowComponent.h"
 #include "Components/BillboardComponent.h"
 #endif
 
@@ -87,6 +88,7 @@ void AAIPath::UpdatePoints(bool bInConstructionScript)
 
 			ArrowComponent->SetWorldLocation(HitResult.Location);
 			ArrowComponent->SetWorldRotation(HitResult.Normal.Rotation());
+			ArrowComponent->SetArrowColor(FLinearColor(0.0f, 0.2f, 0.8f));
 			Arrows.Add(ArrowComponent);
 		}
 		else
@@ -95,16 +97,40 @@ void AAIPath::UpdatePoints(bool bInConstructionScript)
 			Spline->SetLocationAtSplinePoint(i, HitResult.Location, ESplineCoordinateSpace::World);
 		}
 	}
+
+#if WITH_EDITORONLY_DATA
+	if (!bInConstructionScript)
+	{
+		return;
+	}
+
+	for (int i = 0; i < Spline->GetNumberOfSplineSegments(); i++)
+	{
+		UActorComponent* Comp = AddComponentByClass(UArrowComponent::StaticClass(), true, FTransform::Identity, false);
+		UArrowComponent* ArrowComponent = Cast<UArrowComponent>(Comp);
+		if (!ArrowComponent)
+		{
+			continue;
+		}
+
+		FVector PointA = Spline->GetLocationAtSplinePoint(i, ESplineCoordinateSpace::World);
+		FVector PointB = Spline->GetLocationAtSplinePoint(i + 1, ESplineCoordinateSpace::World);
+
+		FVector SegmentDirection = UKismetMathLibrary::GetDirectionUnitVector(PointA, PointB);
+		FRotator Rotation = FRotationMatrix::MakeFromX(SegmentDirection).Rotator();
+
+		FVector MidPoint = (PointB + PointA) * 0.5f;
+		ArrowComponent->SetWorldLocation(MidPoint);
+		ArrowComponent->SetWorldRotation(Rotation);
+
+		Arrows.Add(ArrowComponent);
+	}
+#endif
 }
 
-FVector AAIPath::GetDirection()
+FVector AAIPath::GetDirection() const
 {
 	FVector VectorDirection;
-
-	if (bAutoDirection)
-	{
-		Direction;
-	}
 
 	switch (Direction)
 	{
@@ -128,9 +154,11 @@ FVector AAIPath::GetDirection()
 	return VectorDirection;
 }
 
-FVector AAIPath::GetPointLocation(int8 PointIndex) const
+FVector AAIPath::GetPointLocation(int8 PointIndex, float PawnHeight) const
 {
-	return Spline->GetLocationAtSplinePoint(PointIndex, ESplineCoordinateSpace::World);
+	FVector PointLocation = Spline->GetLocationAtSplinePoint(PointIndex, ESplineCoordinateSpace::World);
+	PointLocation += (GetDirection() * PawnHeight * -1);
+	return PointLocation;
 }
 
 bool AAIPath::GetTracedPointLocation(int8 PointIndex, FHitResult& HitResult)
@@ -157,7 +185,15 @@ bool AAIPath::IsOnFloor() const
 #if WITH_EDITORONLY_DATA
 bool AAIPath::AttachAI(APawn* AI)
 {
-	if (!AI || AttachedAI)
+	if (!AI)
+	{
+		return false;
+	}
+	else if (AI == AttachedAI)
+	{
+		return true;
+	}
+	else if (AttachedAI)
 	{
 		return false;
 	}

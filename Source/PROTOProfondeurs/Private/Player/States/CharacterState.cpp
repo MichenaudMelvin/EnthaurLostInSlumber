@@ -23,7 +23,6 @@ UCharacterState::UCharacterState()
 void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 {
 	StateMachine = InStateMachine;
-	TargetSteering = MaxSteering;
 
 #if WITH_EDITOR
 	if (!StateMachine)
@@ -72,15 +71,9 @@ void UCharacterState::StateEnter_Implementation(const ECharacterStateID& Previou
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)
 {
-	if (bCheckGround)
-	{
-		CheckGround();
-	}
-
 	CameraMovement(DeltaTime);
 	UpdateCameraFOV(DeltaTime);
 	UpdateViewBobbing(DeltaTime);
-	UpdateCameraSteering(DeltaTime);
 }
 
 void UCharacterState::StateExit_Implementation(const ECharacterStateID& NextStateID){}
@@ -97,36 +90,6 @@ const FPlayerInputs& UCharacterState::GetInputs() const
 bool UCharacterState::IsFalling() const
 {
 	return Character->GetCharacterMovement()->IsFalling();
-}
-
-void UCharacterState::CheckGround()
-{
-	FHitResult HitResult;
-	if (!Character->GroundTrace(HitResult))
-	{
-		return;
-	}
-
-	if (HitResult.PhysMaterial == nullptr)
-	{
-		return;
-	}
-
-	if (HitResult.PhysMaterial->SurfaceType != CurrentSurface)
-	{
-		CurrentSurface = HitResult.PhysMaterial->SurfaceType;
-		OnWalkOnNewSurface(CurrentSurface);
-	}
-}
-
-void UCharacterState::OnWalkOnNewSurface_Implementation(const TEnumAsByte<EPhysicalSurface>& NewSurface)
-{
-	const UTracePhysicsSettings* StateSettings = GetDefault<UTracePhysicsSettings>();
-
-	if (NewSurface == StateSettings->SlipperySurface)
-	{
-		StateMachine->ChangeState(ECharacterStateID::Slide);
-	}
 }
 
 #pragma endregion
@@ -179,33 +142,6 @@ void UCharacterState::UpdateViewBobbing(float DeltaTime)
 	Oscillator.InitialOffsetType = ViewBobbing.InitialOffsetType;
 
 	Character->GetViewBobbingObject()->SetOscillator(Oscillator);
-}
-
-void UCharacterState::UpdateCameraSteering(float DeltaTime)
-{
-	FRotator TargetRotation = Controller->GetControlRotation();
-
-	if (!GetSettings() || !GetSettings()->bCameraSteering)
-	{
-		TargetRotation.Roll = 0;
-		Controller->SetControlRotation(TargetRotation);
-		return;
-	}
-
-	float CurrentRoll = TargetRotation.Roll;
-	while (CurrentRoll > 180.0f)
-	{
-		CurrentRoll -= 360.0f;
-	}
-
-	while(CurrentRoll < -180.0f)
-	{
-		CurrentRoll += 360.0f;
-	}
-
-	float LerpRoll = FMath::Lerp(CurrentRoll, TargetSteering, DeltaTime * SteeringSpeed);
-	TargetRotation.Roll = LerpRoll;
-	Controller->SetControlRotation(TargetRotation);
 }
 
 #pragma endregion

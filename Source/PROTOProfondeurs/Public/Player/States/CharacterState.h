@@ -25,8 +25,7 @@ enum class ECharacterStateID : uint8
 	Jump,
 	Fall,
 	Interact,
-	Slide,
-	TakeAmber,
+	Stop,
 };
 
 /**
@@ -84,18 +83,6 @@ protected:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool IsFalling() const;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character|Ground")
-	bool bCheckGround = false;
-
-	UFUNCTION(BlueprintCallable, Category = "Character|Ground")
-	void CheckGround();
-
-	UPROPERTY(BlueprintReadOnly, Category = "Character|Ground")
-	TEnumAsByte<EPhysicalSurface> CurrentSurface = SurfaceType1;
-
-	UFUNCTION(BlueprintNativeEvent, Category = "Character|Ground")
-	void OnWalkOnNewSurface(const TEnumAsByte<EPhysicalSurface>& NewSurface);
-
 #pragma endregion
 
 #pragma region Camera
@@ -110,12 +97,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Camera", DisplayName = "FOV", meta = (ClampMin = 5.0f, ClampMax = 170.0f, UIMin = 5.0f, UIMax = 170.0f))
 	float TargetFOV = 90.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Camera", meta = (ClampMin = 0.0f, ClampMax = 90.0f, UIMin = 0.0f, UIMax = 90.0f))
-	float MaxSteering = 0.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Camera", meta = (ClampMin = 0.01f, ClampMax = 10.0f, UIMin = 0.01f, UIMax = 10.0f))
-	float SteeringSpeed = 1.0f;
-
 private:
 	void CameraMovement(float DeltaTime);
 
@@ -123,16 +104,14 @@ private:
 
 	void UpdateViewBobbing(float DeltaTime);
 
-protected:
-	float TargetSteering = 0.0f;
-
-	virtual void UpdateCameraSteering(float DeltaTime);
-
 #pragma endregion
 
 #pragma region Noise
 
 protected:
+	/**
+	 * @brief Noise is for AI
+	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise")
 	bool bDoesMakeNoise = false;
 

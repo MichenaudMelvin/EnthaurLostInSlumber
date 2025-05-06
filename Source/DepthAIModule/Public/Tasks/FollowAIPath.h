@@ -7,6 +7,9 @@
 #include "Components/TimelineComponent.h"
 #include "FollowAIPath.generated.h"
 
+/**
+ * @brief If the pawn can walk on the floor it will return a TargetLocation, else it will lerp pawn location
+ */
 UCLASS()
 class DEPTHAIMODULE_API UFollowAIPath : public UBTTaskNode
 {
@@ -31,19 +34,49 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector WalkOnFloor;
 
-	UPROPERTY(EditInstanceOnly, Category = "Path", meta = (ClampMin = 0.0f, Units = "cm"))
-	float Tolerance = 0.1f;
-
-	UPROPERTY(EditInstanceOnly, Category = "Path", meta = (ClampMin = 0.0f, Units = "s"))
-	float LerpSpeed = 1.0f;
-
-	UPROPERTY(EditInstanceOnly, Category = "Path")
-	bool bRotateWithMovement = true;
-
-	UPROPERTY(EditInstanceOnly, Category = "Path")
-	TObjectPtr<UCurveFloat> MovementCurve;
-
 	FVector TargetLocation;
 
+#pragma region WalkOnFloor
+
+protected:
+	UPROPERTY(EditInstanceOnly, Category = "Path|Floor", meta = (DisplayName = "TargetLocation"))
+	FBlackboardKeySelector TargetKeyLocation;
+
+#pragma endregion
+
+#pragma region WalkOnWall
+
+protected:
+	UPROPERTY()
+	TObjectPtr<APawn> CurrentPawn;
+
+	UPROPERTY()
+	TObjectPtr<UBehaviorTreeComponent> CurrentOwnerComp;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path|Wall")
+	TObjectPtr<UCurveFloat> MovementCurve;
+
+	FVector StartLocation;
+
 	FTimeline MovementTimeline;
+
+	UFUNCTION()
+	void MovementUpdate(float Alpha);
+
+	UFUNCTION()
+	void FinishTask();
+#pragma endregion
+
+#pragma region Debug
+
+#if WITH_EDITORONLY_DATA
+protected:
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDebugTask = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "Debug", meta = (ClampMin = 1.0f, Units = "cm"))
+	float DebugPointSize = 15.0f;
+#endif
+
+#pragma endregion
 };

@@ -21,6 +21,7 @@ public class DepthAIModule : ModuleRules
                 "Slate",
                 "SlateCore",
                 "AIModule",
+                "GameplayTasks",
                 "NavigationSystem"
             }
         );

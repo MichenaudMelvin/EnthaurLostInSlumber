@@ -12,7 +12,6 @@
 UCharacterIdleState::UCharacterIdleState()
 {
 	StateID = ECharacterStateID::Idle;
-	bCheckGround = true;
 }
 
 void UCharacterIdleState::StateInit(UCharacterStateMachine* InStateMachine)
@@ -36,16 +35,6 @@ void UCharacterIdleState::StateTick_Implementation(float DeltaTime)
 	else if (GetInputs().bInputCrouch)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Crouch);
-	}
-
-	else if (GetInputs().bInputInteract)
-	{
-		StateMachine->ChangeState(ECharacterStateID::Interact);
-	}
-
-	else if (GetInputs().bInputTakeAmber)
-	{
-		StateMachine->ChangeState(ECharacterStateID::TakeAmber);
 	}
 
 	else if (GetInputs().InputMove.Length() > CharacterSettings->MoveInputThreshold)

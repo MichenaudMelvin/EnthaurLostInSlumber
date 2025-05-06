@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AmberOre.h"
 #include "GameFramework/Actor.h"
 #include "WeakZone.generated.h"
 
@@ -30,6 +31,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
 	TObjectPtr<UBoxComponent> BoxComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeakZone")
+	TObjectPtr<class UPostProcessComponent> BlackAndWhiteShader;
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UMaterialInstanceDynamic> MaterialBlackAndWhite;
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
 	TObjectPtr<UBillboardComponent> BillboardComponent;
@@ -41,8 +48,14 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
 
+	UPROPERTY(EditDefaultsOnly, Category = "WeakZone", meta = (ClampMin = 0.0f, Units = s))
+	float DestroyDuration = 5.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zone")
 	FVector ZoneSize = FVector(100.0f);
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UMaterialInstanceDynamic> DynamicPPMaterial;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Materials")
 	FName ZoneLocationParamName = "ZoneLocation";
@@ -67,6 +80,12 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Interactable", meta = (DisplayName = "InteractionPoints", MakeEditWidget))
 	TArray<FTransform> InteractionTransformPoints;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	EAmberType AmberType = EAmberType::WeakAmber;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber", meta = (ClampMin = 0))
+	int CostByPoint = 1;
+
 	UFUNCTION()
 	void OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
@@ -74,5 +93,5 @@ protected:
 	void OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION()
-	void OnInteract(APlayerController* Controller, APawn* Pawn);
+	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 };

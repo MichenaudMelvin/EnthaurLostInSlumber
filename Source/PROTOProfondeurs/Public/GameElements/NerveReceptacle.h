@@ -16,27 +16,37 @@ class PROTOPROFONDEURS_API ANerveReceptacle : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ANerveReceptacle();
-	void TriggerLinkedObjects();
+	void TriggerLinkedObjects(class ANerve* Nerve);
+
+	// Create Event
+	UFUNCTION(BlueprintImplementableEvent, Category = "BaseCharacter")
+	void OnNerveConnect();
 
 protected:
+	void PlayElectricityAnimation(ANerve* Nerve);
 	UFUNCTION()
 	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	// Called when the game starts or when spawned
+
 	virtual void BeginPlay() override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	TObjectPtr<USphereComponent> Collision;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
 
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> NerveReceptacle;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<USphereComponent> Collision;
-
 	UPROPERTY(EditAnywhere)
-	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
+	FName ConnectedShaderTag;
+
+	UPROPERTY()
+	class AElectricityFeedback* NerveElectricityFeedback;
+
+	UPROPERTY()
+	ANerve* KeepInMemoryNerve;
+	
 };

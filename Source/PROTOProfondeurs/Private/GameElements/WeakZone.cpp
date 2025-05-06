@@ -3,9 +3,11 @@
 
 #include "PROTOProfondeurs/Public/GameElements/WeakZone.h"
 
-#include "MovieSceneTracksComponentTypes.h"
+#include "FCTween.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
+#include "Components/PostProcessComponent.h"
+#include "GameElements/AmberOre.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/FirstPersonCharacter.h"
 
@@ -22,6 +24,9 @@ AWeakZone::AWeakZone()
 
 	BoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("WeakZone"));
 	BoxComponent->SetupAttachment(RootComponent);
+
+	BlackAndWhiteShader = CreateDefaultSubobject<UPostProcessComponent>(TEXT("Black and White Shader"));
+	BlackAndWhiteShader->SetupAttachment(RootComponent);
 
 #if WITH_EDITORONLY_DATA
 	BillboardComponent = CreateDefaultSubobject<UBillboardComponent>(TEXT("Billboard"));
@@ -192,7 +197,7 @@ void AWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	}
 }
 
-void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn)
+void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (Pawn == nullptr)
 	{
@@ -205,12 +210,41 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn)
 		return;
 	}
 
-	if (!Character->IsAmberFilled())
+	if (!Character->HasRequiredQuantity(EAmberType::WeakAmber, CostByPoint))
 	{
 		return;
 	}
 
-	Character->FillAmber(false);
-	Destroy();
+	Character->UseAmber(AmberType, CostByPoint);
+
+	if (!InteractionComponent)
+	{
+		return;
+	}
+
+	UStaticMeshComponent* MeshComp = Cast<UStaticMeshComponent>(InteractionComponent);
+	if (!MeshComp)
+	{
+		return;
+	}
+
+	InteractionPoints.Remove(MeshComp);
+	MeshComp->DestroyComponent();
+
+	if (InteractionPoints.Num() == 0)
+	{
+		FCTween::Play(
+			1.f,
+			0.f,
+			[&](float X)
+			{
+				MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
+			},
+			DestroyDuration,
+			EFCEase::OutCubic)->SetOnComplete([&]
+			{
+				Destroy();
+			});
+	}
 }
 

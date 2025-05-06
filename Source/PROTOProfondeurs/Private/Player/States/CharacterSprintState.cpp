@@ -12,8 +12,6 @@ UCharacterSprintState::UCharacterSprintState()
 {
 	StateID = ECharacterStateID::Sprint;
 	MoveSpeed = 1200.0f;
-	MaxSteering = 5.0f;
-	SteeringSpeed = 2.0f;
 }
 
 void UCharacterSprintState::StateTick_Implementation(float DeltaTime)
@@ -41,11 +39,6 @@ void UCharacterSprintState::StateTick_Implementation(float DeltaTime)
 	else if (GetInputs().bInputCrouch)
 	{
 		StateMachine->ChangeState(ECharacterStateID::Crouch);
-	}
-
-	else if (GetInputs().bInputInteract)
-	{
-		StateMachine->ChangeState(ECharacterStateID::Interact);
 	}
 
 	else if (GetInputs().InputMove.Length() < CharacterSettings->MoveInputThreshold)

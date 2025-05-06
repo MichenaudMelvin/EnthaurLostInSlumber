@@ -28,7 +28,7 @@ public class PROTOProfondeurs : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			"PRFUI",
-			"ModelViewViewModel",
+			"ModelViewViewModel"
 		});
 
 		if (Target.bBuildEditor)
