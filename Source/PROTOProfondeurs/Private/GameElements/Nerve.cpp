@@ -281,14 +281,14 @@ bool ANerve::CanCurrentCableBeRemoved()
 	FVector CurrentPointLocation = SplineCable->GetLocationAtSplinePoint(CurrentPointIndex, ESplineCoordinateSpace::World);
 	FVector LastCableLocation = SplineCable->GetLocationAtSplinePoint(LastPointIndex, ESplineCoordinateSpace::World);
 
-	FVector CableDirection = CurrentPointLocation - LastCableLocation;
-	CableDirection.Normalize();
+	FVector CurrentCableDirection = CurrentPointLocation - LastCableLocation;
+	CurrentCableDirection.Normalize();
 
 	int LastImpactNormalIndex = (ImpactNormals.Num() - 1);
 	FVector LastImpactNormal = ImpactNormals[LastImpactNormalIndex];
-	float DotResult = FVector::DotProduct((LastImpactNormal * -1), CableDirection);
+	float DotResult = FVector::DotProduct((LastImpactNormal * -1), CurrentCableDirection);
 
-	if (DotResult < -0.5f)
+	if (DotResult > 0.0f)
 	{
 		return false;
 	}

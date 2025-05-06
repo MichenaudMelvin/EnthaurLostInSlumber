@@ -2,7 +2,6 @@
 
 
 #include "GameElements/Muscle.h"
-
 #include "AkGameplayStatics.h"
 #include "Components/CameraShakeComponent.h"
 #include "Components/CapsuleComponent.h"
