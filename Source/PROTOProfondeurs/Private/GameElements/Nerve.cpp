@@ -56,7 +56,6 @@ void ANerve::BeginPlay()
 	FinishEvent.BindDynamic(this, &ANerve::FinishRetractCable);
 	RetractTimeline.AddInterpFloat(RetractionCurve, UpdateEvent);
 	RetractTimeline.SetTimelineFinishedFunc(FinishEvent);
-	RetractTimeline.SetPlayRate(1/RetractionDuration);
 }
 
 void ANerve::OnConstruction(const FTransform& Transform)
@@ -450,6 +449,9 @@ void ANerve::DetachNerveBall()
 	SplineCable->SetTangentAtSplinePoint(1, FVector::ZeroVector, ESplineCoordinateSpace::Local);
 
 	RetractionIndex = SplineCable->GetNumberOfSplinePoints() - 2;
+
+	float RetractionDuration = GetCableLength() / RetractionSpeed;
+	RetractTimeline.SetPlayRate(1/RetractionDuration);
 
 	RetractTimeline.ReverseFromEnd();
 }

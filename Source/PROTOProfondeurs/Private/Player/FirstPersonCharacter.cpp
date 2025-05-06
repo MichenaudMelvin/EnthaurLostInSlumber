@@ -50,6 +50,7 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	SpikeMesh->SetupAttachment(CameraComponent);
 
 	FootstepsSounds = CreateDefaultSubobject<UAkComponent>(TEXT("FootstepsSounds"));
+	FootstepsSounds->SetupAttachment(RootComponent);
 
 	AmberInventory.Add(EAmberType::NecroseAmber, 0);
 	AmberInventory.Add(EAmberType::WeakAmber, 0);

@@ -92,7 +92,7 @@ void UCharacterMoveState::PlayFootstepNoise(float DeltaTime)
 		Character->GetFootstepsSoundComp()->SetSwitch(SurfaceNoise);
 	}
 
-	Character->GetFootstepsSoundComp()->PostAkEvent(SpeedEvent);
+	Character->GetFootstepsSoundComp()->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 }
 
 void UCharacterMoveState::SetNewSpeed(const float NewSpeed)
