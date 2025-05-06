@@ -90,8 +90,8 @@ protected:
 
 	void ResetCables();
 
-	UPROPERTY(EditDefaultsOnly, Category = "Cables|Retraction", meta = (ClampMin = 0.0f, Units = "s"))
-	float RetractionDuration = 1.0f;
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Retraction", meta = (ClampMin = 0.0f, ForceUnits = "cm/s"))
+	float RetractionSpeed = 5000.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Retraction")
 	TObjectPtr<UCurveFloat> RetractionCurve;
