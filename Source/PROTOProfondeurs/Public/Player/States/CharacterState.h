@@ -109,6 +109,9 @@ private:
 #pragma region Noise
 
 protected:
+	/**
+	 * @brief Noise is for AI
+	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise")
 	bool bDoesMakeNoise = false;
 

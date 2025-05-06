@@ -7,6 +7,8 @@
 #include "GameFramework/Actor.h"
 #include "RespawnTree.generated.h"
 
+class UAkAudioEvent;
+
 UCLASS()
 class PROTOPROFONDEURS_API ARespawnTree : public AActor, public IWeakZoneInterface
 {
@@ -36,6 +38,9 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> ActivationNoise;
 
 	UPROPERTY()
 	bool bIsActivated;
