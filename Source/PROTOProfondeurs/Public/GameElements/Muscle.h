@@ -10,6 +10,7 @@
 #include "Interface/NerveReactive.h"
 #include "Muscle.generated.h"
 
+class UAkAudioEvent;
 class UInteractableComponent;
 
 UCLASS()
@@ -77,6 +78,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Deformation")
 	TObjectPtr<UCurveFloat> DeformationCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Deformation")
+	TObjectPtr<UAkAudioEvent> DeformationNoise;
 
 	UFUNCTION(CallInEditor, Category = "Deformation")
 	void StartDeformation();
@@ -188,6 +192,9 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, Category = "Interaction")
 	bool bAllowInteraction = true;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> InteractionEvent;
 
 	UFUNCTION()
 	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent);

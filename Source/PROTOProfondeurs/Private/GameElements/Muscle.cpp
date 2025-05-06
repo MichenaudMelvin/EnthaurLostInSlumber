@@ -2,6 +2,8 @@
 
 
 #include "GameElements/Muscle.h"
+
+#include "AkGameplayStatics.h"
 #include "Components/CameraShakeComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
@@ -163,6 +165,7 @@ void AMuscle::StartDeformation()
 {
 	DeformationDirection = 1;
 	bTriggerDeformation = true;
+	UAkGameplayStatics::PostEventAtLocation(DeformationNoise, MuscleMeshComp->GetComponentLocation(), MuscleMeshComp->GetComponentRotation(), this);
 }
 
 void AMuscle::EndDeformation()
@@ -404,6 +407,8 @@ void AMuscle::UpdateMuscleStateTransition(float Alpha)
 void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent)
 {
 	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->GetCameraShake()->MakeSmallCameraShake();
+
+	UAkGameplayStatics::PostEventAtLocation(InteractionEvent, SpikeInteraction->GetComponentLocation(), SpikeInteraction->GetComponentRotation(), this);
 
 	ToggleMuscleSolidity();
 }
