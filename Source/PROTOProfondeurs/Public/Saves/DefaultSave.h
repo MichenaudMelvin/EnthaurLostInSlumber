@@ -27,7 +27,7 @@ protected:
 	uint8 SaveIndex = 0;
 
 public:
-	inline FString GetSlotName() const {return SlotName;}
+	inline virtual FString GetSlotName() const {return SlotName;}
 
 	inline void SetSaveIndex(const uint8 NewSaveIndex) {SaveIndex = NewSaveIndex;}
 

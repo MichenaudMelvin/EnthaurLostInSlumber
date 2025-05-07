@@ -12,6 +12,7 @@ void USettingsSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 
+	LoadSave(0, true);
 	Settings = Cast<USettingsSave>(SaveObject);
 }
 

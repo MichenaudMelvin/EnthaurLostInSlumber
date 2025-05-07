@@ -24,13 +24,23 @@ void UDeathMenuUI::NativeOnInitialized()
 void UDeathMenuUI::RespawnPlayer()
 {
 	auto Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	if (!Player)
+	{
+		return;
+	}
+
 	Player->SetActorLocation(Player->GetRespawnPosition());
 
 	auto PC = UGameplayStatics::GetPlayerController(this, 0);
+	if (!PC)
+	{
+		return;
+	}
+
 	PC->SetPause(false);
 	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC, true);
 	PC->SetShowMouseCursor(false);
-	
+
 	this->RemoveFromParent();
 }
 

@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Saves/WorldSave.h"
+#include "Saves/PlayerSave.h"
 
-UWorldSave::UWorldSave()
+UPlayerSave::UPlayerSave()
 {
-	SlotName = "WorldSave";
+	SlotName = "PlayerSave";
 }

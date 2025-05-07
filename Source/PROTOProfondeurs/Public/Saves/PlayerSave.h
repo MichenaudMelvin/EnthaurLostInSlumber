@@ -4,16 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "DefaultSave.h"
-#include "WorldSave.generated.h"
+#include "PlayerSave.generated.h"
 
 UCLASS()
-class PROTOPROFONDEURS_API UWorldSave : public UDefaultSave
+class PROTOPROFONDEURS_API UPlayerSave : public UDefaultSave
 {
 	GENERATED_BODY()
 
 public:
-	UWorldSave();
+	UPlayerSave();
 
 	UPROPERTY(BlueprintReadWrite, Category = "Player")
 	FTransform PlayerTransform = FTransform::Identity;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Player")
+	FString LastWorldOpened;
 };
