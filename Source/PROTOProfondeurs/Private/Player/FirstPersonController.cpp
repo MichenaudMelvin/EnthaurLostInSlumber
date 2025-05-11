@@ -191,7 +191,7 @@ void AFirstPersonController::SetupInputComponent()
 	InteractPressedAction.BindAction(EnhancedInputComponent, this);
 	InteractTriggerAction.BindAction(EnhancedInputComponent, this);
 	PauseGameAction.BindAction(EnhancedInputComponent, this);
-	
+
 	NavigateAction.BindAction(EnhancedInputComponent, this);
 	SelectAction.BindAction(EnhancedInputComponent, this);
 	BackAction.BindAction(EnhancedInputComponent, this);

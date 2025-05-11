@@ -21,14 +21,18 @@ protected:
 
 	virtual void Deinitialize() override;
 
+public:
+	virtual void CreateSave(const int SaveIndex) override;
+
+	virtual UDefaultSave* SaveToSlot(const int SaveIndex) override;
+
+	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true) override;
+
+protected:
 	FDelegateHandle WorldBeginPlayDelegateHandle;
 
 	UPROPERTY(BlueprintReadOnly, Category = "World")
 	TObjectPtr<UWorldSave> CurrentWorldSave;
-
-	virtual void CreateSave(const int SaveIndex) override;
-
-	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true) override;
 
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
 };

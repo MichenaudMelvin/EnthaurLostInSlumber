@@ -35,7 +35,7 @@ public:
 	 * @return The save object
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saves")
-	UDefaultSave* SaveToSlot(const int SaveIndex);
+	virtual UDefaultSave* SaveToSlot(const int SaveIndex);
 
 	/**
 	 * @brief Load a save

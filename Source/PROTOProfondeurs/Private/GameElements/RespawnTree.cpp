@@ -9,6 +9,11 @@
 #include "Components/PointLightComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Player/States/CharacterStateMachine.h"
+#include "Saves/PlayerSave.h"
+#include "Saves/PlayerSaveSubsystem.h"
+#include "Player/States/CharacterState.h"
+#include "Saves/WorldSaves/WorldSaveSubsystem.h"
 
 
 // Sets default values
@@ -48,9 +53,23 @@ void ARespawnTree::BeginPlay()
 void ARespawnTree::ActivateRespawn(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (bIsActivated)
+	{
 		return;
+	}
 
-	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->SetRespawnPosition(RespawnPoint->GetComponentLocation());
+	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+	if (!Character)
+	{
+		return;
+	}
+
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Character);
+	if (!Player)
+	{
+		return;
+	}
+
+	Player->SetRespawnPosition(RespawnPoint->GetComponentLocation());
 	bIsActivated = true;
 	Interaction->RemoveInteractable(TreeModel);
 
@@ -76,6 +95,19 @@ void ARespawnTree::ActivateRespawn(APlayerController* Controller, APawn* Pawn, U
 		0.5f,
 		EFCEase::InSine
 	);
+
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	UWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UWorldSaveSubsystem>();
+	if (!WorldSaveSubsystem || !PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	PlayerSaveSubsystem->GetPlayerSave()->PlayerTransform = Player->GetTransform();
+	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = Player->GetStateMachine()->GetCurrentStateID();
+
+	WorldSaveSubsystem->SaveToSlot(0);
+	PlayerSaveSubsystem->SaveToSlot(0);
 }
 
 void ARespawnTree::OnEnterWeakZone_Implementation(bool bIsZoneActive)

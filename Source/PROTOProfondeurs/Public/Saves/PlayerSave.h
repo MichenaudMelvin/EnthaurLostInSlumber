@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "DefaultSave.h"
+#include "GameElements/AmberOre.h"
+#include "Player/States/CharacterStateMachine.h"
 #include "PlayerSave.generated.h"
 
 UCLASS()
@@ -19,4 +21,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Player")
 	FString LastWorldOpened;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Player")
+	ECharacterStateID CurrentState;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Amber")
+	TMap<EAmberType, int> AmberInventory;
 };

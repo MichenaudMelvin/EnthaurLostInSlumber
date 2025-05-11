@@ -6,6 +6,10 @@
 #include "Saves/WorldSaves/WorldSave.h"
 #include "Saves/WorldSaves/WorldSaveSettings.h"
 
+#if WITH_EDITOR
+#include "EditorSettings/SavesSettings.h"
+#endif
+
 UWorldSaveSubsystem::UWorldSaveSubsystem()
 {
 	SaveClass = UWorldSave::StaticClass();
@@ -52,6 +56,33 @@ void UWorldSaveSubsystem::CreateSave(const int SaveIndex)
 	SaveObject = SaveToSlot(SaveIndex);
 }
 
+UDefaultSave* UWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
+{
+	if (!CurrentWorldSave)
+	{
+		return nullptr;
+	}
+
+	TArray<AActor*> Actors;
+	UGameplayStatics::GetAllActorsOfClass(this, AActor::StaticClass(), Actors);
+
+	CurrentWorldSave->MuscleData.Empty();
+	CurrentWorldSave->NerveData.Empty();
+	CurrentWorldSave->AmberOreData.Empty();
+	CurrentWorldSave->WeakZoneData.Empty();
+	for (AActor* Actor : Actors)
+	{
+		if (!Actor->Implements<USaveGameElementInterface>())
+		{
+			continue;
+		}
+
+		Cast<ISaveGameElementInterface>(Actor)->SaveGameElement(CurrentWorldSave);
+	}
+
+	return Super::SaveToSlot(SaveIndex);
+}
+
 UDefaultSave* UWorldSaveSubsystem::LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist)
 {
 	const UWorldSaveSettings* Settings = GetDefault<UWorldSaveSettings>();
@@ -94,5 +125,65 @@ UDefaultSave* UWorldSaveSubsystem::LoadSave(const int SaveIndex, const bool bCre
 
 void UWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams)
 {
-	LoadSave(0, true);
+	LoadSave(0, false);
+
+	bool bCannotLoad = !CurrentWorldSave;
+
+#if WITH_EDITOR
+	const USavesSettings* SavesSettings = GetDefault<USavesSettings>();
+
+	if (SavesSettings && !SavesSettings->bLoadLatestWorldSave)
+	{
+		bCannotLoad = true;
+	}
+#endif
+
+	if (bCannotLoad)
+	{
+		return;
+	}
+
+	TArray<AActor*> Actors;
+	UGameplayStatics::GetAllActorsOfClass(this, AActor::StaticClass(), Actors);
+
+	// done before any BeginPlay()
+	for (AActor* Actor : Actors)
+	{
+		if (!Actor->Implements<USaveGameElementInterface>())
+		{
+			continue;
+		}
+
+		// TODO refactor
+		FMuscleData* MuscleDataPtr = CurrentWorldSave->MuscleData.Find(Actor->GetName());
+		if (MuscleDataPtr)
+		{
+			Cast<ISaveGameElementInterface>(Actor)->LoadGameElement(*MuscleDataPtr);
+			continue;
+		}
+
+		FNerveData* NerveDataPtr = CurrentWorldSave->NerveData.Find(Actor->GetName());
+		if (NerveDataPtr)
+		{
+			Cast<ISaveGameElementInterface>(Actor)->LoadGameElement(*NerveDataPtr);
+			continue;
+		}
+
+		FAmberOreData* AmberOreDataPtr = CurrentWorldSave->AmberOreData.Find(Actor->GetName());
+		if (AmberOreDataPtr)
+		{
+			Cast<ISaveGameElementInterface>(Actor)->LoadGameElement(*AmberOreDataPtr);
+			continue;
+		}
+
+		FWeakZoneData* WeakZoneDataPtr = CurrentWorldSave->WeakZoneData.Find(Actor->GetName());
+		if (WeakZoneDataPtr)
+		{
+			Cast<ISaveGameElementInterface>(Actor)->LoadGameElement(*WeakZoneDataPtr);
+			continue;
+		}
+
+		// if nerved found, delete the actor
+		Actor->Destroy();
+	}
 }

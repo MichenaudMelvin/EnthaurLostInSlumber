@@ -15,8 +15,3 @@ void USettingsSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	LoadSave(0, true);
 	Settings = Cast<USettingsSave>(SaveObject);
 }
-
-void USettingsSubsystem::Deinitialize()
-{
-	Super::Deinitialize();
-}

@@ -8,13 +8,23 @@
 #include "GameFramework/Actor.h"
 #include "Interface/GroundAction.h"
 #include "Interface/NerveReactive.h"
+#include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "Muscle.generated.h"
+
+USTRUCT(BlueprintType)
+struct FMuscleData : public FGameElementData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsSolid = false;
+};
 
 class UAkAudioEvent;
 class UInteractableComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API AMuscle : public AActor, public IGroundAction, public INerveReactive, public IWeakZoneInterface
+class PROTOPROFONDEURS_API AMuscle : public AActor, public IGroundAction, public INerveReactive, public IWeakZoneInterface, public ISaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -227,6 +237,15 @@ protected:
 	virtual void Trigger_Implementation() override;
 
 	virtual void SetLock_Implementation(bool state) override;
+
+#pragma endregion
+
+#pragma region Save
+
+public:
+	virtual void SaveGameElement(UWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
 
 #pragma endregion
 };

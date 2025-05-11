@@ -19,10 +19,11 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
-#include "PRFUI/Public/TestMVVM/TestViewModel.h"
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
 #include "Player/States/CharacterFallState.h"
+#include "Saves/PlayerSave.h"
+#include "Saves/PlayerSaveSubsystem.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -117,8 +118,13 @@ void AFirstPersonCharacter::BeginPlay()
 	CreateStates();
 	InitStateMachine();
 
-	ViewModel = NewObject<UTestViewModel>();
-	ensure(ViewModel);
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	PlayerSaveSubsystem->GetPlayerSave()->LastWorldOpened = GetWorld()->GetName();
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)
@@ -384,6 +390,14 @@ void AFirstPersonCharacter::MineAmber(const EAmberType& AmberType, const int Amo
 	*Count = FMath::Clamp(*Count, 0.0f, *MaxCapacity);
 
 	OnAmberUpdate.Broadcast(AmberType, *Count);
+
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory = AmberInventory;
 }
 
 void AFirstPersonCharacter::UseAmber(const EAmberType& AmberType, const int Amount)

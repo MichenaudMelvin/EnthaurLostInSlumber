@@ -109,6 +109,8 @@ public:
 public:
 	const TArray<TObjectPtr<UCharacterState>>& GetStates() const {return States;}
 
+	TObjectPtr<UCharacterStateMachine> GetStateMachine() const {return StateMachine;}
+
 #pragma endregion
 
 #pragma region Interaction
@@ -268,7 +270,4 @@ public:
 	TObjectPtr<UAkComponent> GetFootstepsSoundComp() const {return FootstepsSounds;}
 
 #pragma endregion
-
-protected:
-	TObjectPtr<UTestViewModel> ViewModel;
 };

@@ -10,6 +10,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Saves/WorldSaves/WorldSave.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/ArrowComponent.h"
@@ -461,6 +462,26 @@ void AMuscle::SetLock_Implementation(bool state)
 
 	Trigger();
 	bIsLocked = state;
+}
+
+#pragma endregion
+
+#pragma region Save
+
+void AMuscle::SaveGameElement(UWorldSave* CurrentWorldSave)
+{
+	FMuscleData Data;
+	Data.bIsSolid = bIsSolid;
+
+	CurrentWorldSave->MuscleData.Add(GetName(), Data);
+}
+
+void AMuscle::LoadGameElement(const FGameElementData& GameElementData)
+{
+	const FMuscleData& Data = static_cast<const FMuscleData&>(GameElementData);
+	bIsSolid = Data.bIsSolid;
+
+	UpdateMuscleSolidity();
 }
 
 #pragma endregion
