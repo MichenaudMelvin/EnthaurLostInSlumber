@@ -64,8 +64,6 @@ void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetRespawnPosition(GetActorLocation());
-
 	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
 	SpikeTargetTransform = SpikeRelativeTransform;
 	SpikeParent = SpikeMesh->GetAttachParent();
@@ -117,14 +115,6 @@ void AFirstPersonCharacter::BeginPlay()
 
 	CreateStates();
 	InitStateMachine();
-
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem)
-	{
-		return;
-	}
-
-	PlayerSaveSubsystem->GetPlayerSave()->LastWorldOpened = GetWorld()->GetName();
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)
@@ -540,6 +530,43 @@ void AFirstPersonCharacter::StopCharacter() const
 bool AFirstPersonCharacter::IsStopped() const
 {
 	return StateMachine->GetCurrentStateID() == ECharacterStateID::Stop;
+}
+
+#pragma endregion
+
+#pragma region Saves
+
+void AFirstPersonCharacter::SavePlayerData() const
+{
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	PlayerSaveSubsystem->GetPlayerSave()->LastWorldSaved = GetWorld()->GetFName();
+	PlayerSaveSubsystem->GetPlayerSave()->PlayerTransform = GetTransform();
+	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = StateMachine->GetCurrentStateID();
+	PlayerSaveSubsystem->SaveToSlot(0);
+}
+
+void AFirstPersonCharacter::LoadPlayerData()
+{
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	TObjectPtr<UPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
+	SetActorTransform(SaveData->PlayerTransform);
+	StateMachine->ChangeState(SaveData->CurrentState);
+	AmberInventory = SaveData->AmberInventory;
+
+	for (TTuple<EAmberType, int> Element : AmberInventory)
+	{
+		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
+	}
 }
 
 #pragma endregion

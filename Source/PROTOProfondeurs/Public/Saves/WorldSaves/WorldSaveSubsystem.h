@@ -29,10 +29,17 @@ public:
 	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true) override;
 
 protected:
+	FDelegateHandle WorldInitDelegateHandle;
+
 	FDelegateHandle WorldBeginPlayDelegateHandle;
 
 	UPROPERTY(BlueprintReadOnly, Category = "World")
 	TObjectPtr<UWorldSave> CurrentWorldSave;
 
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
+
+	void OnNewWorldBeginPlay();
+
+public:
+	TObjectPtr<UWorldSave> GetCurrentWorldSave() const {return CurrentWorldSave;}
 };

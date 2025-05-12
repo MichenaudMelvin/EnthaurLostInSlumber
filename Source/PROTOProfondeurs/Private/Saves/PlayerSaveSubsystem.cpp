@@ -16,3 +16,8 @@ void UPlayerSaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	LoadSave(0, true);
 	PlayerSave = Cast<UPlayerSave>(SaveObject);
 }
+
+void UPlayerSaveSubsystem::ContinueGame()
+{
+	UGameplayStatics::OpenLevel(this, PlayerSave->LastWorldSaved);
+}

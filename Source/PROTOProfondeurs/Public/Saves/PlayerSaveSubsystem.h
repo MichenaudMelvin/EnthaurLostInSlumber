@@ -24,4 +24,7 @@ protected:
 
 public:
 	TObjectPtr<UPlayerSave> GetPlayerSave() const {return PlayerSave;}
+
+	UFUNCTION(BlueprintCallable, Category = "Save")
+	void ContinueGame();
 };

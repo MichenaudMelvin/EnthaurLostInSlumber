@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameElements/Muscle.h"
 #include "GameElements/Nerve.h"
+#include "GameElements/RespawnTree.h"
 #include "GameElements/WeakZone.h"
 #include "Saves/DefaultSave.h"
 #include "WorldSave.generated.h"
@@ -33,4 +34,12 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
 	TMap<FString, FWeakZoneData> WeakZoneData;
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
+	TMap<FString, FRespawnTreeData> RespawnTreeData;
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
+	FString LastCheckPointName;
+
+	void ClearMapData();
 };

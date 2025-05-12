@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class ARespawnTree;
 class UAkComponent;
 class UCameraShakeComponent;
 enum class EAmberType : uint8;
@@ -248,15 +249,25 @@ public:
 
 #pragma endregion
 
-#pragma region Respawn
-
-private:
-	FVector RespawnPosition;
+#pragma region Saves
 
 public:
-	FVector GetRespawnPosition() const {return RespawnPosition;}
+	void SavePlayerData() const;
 
-	void SetRespawnPosition(const FVector& Position) {RespawnPosition = Position;}
+	void LoadPlayerData();
+
+#pragma endregion
+
+#pragma region Respawn
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
+	TObjectPtr<ARespawnTree> LastRespawnTree = nullptr;
+
+public:
+	TObjectPtr<ARespawnTree> GetRespawnTree() const {return LastRespawnTree;}
+
+	void SetRespawnTree(ARespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
 
 #pragma endregion
 

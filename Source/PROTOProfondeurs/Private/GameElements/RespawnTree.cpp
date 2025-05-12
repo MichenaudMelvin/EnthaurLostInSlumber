@@ -1,20 +1,17 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PROTOProfondeurs/Public/GameElements/RespawnTree.h"
+#include "GameElements/RespawnTree.h"
 #include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/InteractableComponent.h"
 #include "Components/LightComponent.h"
 #include "Components/PointLightComponent.h"
+#include "GameModes/FirstPersonGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
-#include "Player/States/CharacterStateMachine.h"
-#include "Saves/PlayerSave.h"
-#include "Saves/PlayerSaveSubsystem.h"
-#include "Player/States/CharacterState.h"
+#include "Saves/WorldSaves/WorldSave.h"
 #include "Saves/WorldSaves/WorldSaveSubsystem.h"
-
 
 // Sets default values
 ARespawnTree::ARespawnTree()
@@ -35,7 +32,6 @@ ARespawnTree::ARespawnTree()
 	Light->SetupAttachment(Root);
 
 	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
-	Interaction->OnInteract.AddDynamic(this, &ARespawnTree::ActivateRespawn);
 }
 
 // Called when the game starts or when spawned
@@ -44,46 +40,78 @@ void ARespawnTree::BeginPlay()
 	Super::BeginPlay();
 
 	BulbMaterial = TreeModel->CreateDynamicMaterialInstance(2, TreeModel->GetMaterial(2));
-	TreeModel->SetMaterial(2, BulbMaterial);
-	BulbMaterial->SetScalarParameterValue("State", 2.f);
+	if (bIsActivated)
+	{
+		SetActive();
 
-	Interaction->AddInteractable(TreeModel);
+		if (LastCheckPointName != GetName())
+		{
+			return;
+		}
+
+		ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+		if (!Character)
+		{
+			return;
+		}
+
+		AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Character);
+		if (!Player)
+		{
+			return;
+		}
+
+		SetRespawnPoint(Player, false);
+	}
+	else
+	{
+		TreeModel->SetMaterial(2, BulbMaterial);
+		BulbMaterial->SetScalarParameterValue("State", 2.f);
+		Interaction->AddInteractable(TreeModel);
+		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::Interact);
+	}
 }
 
-void ARespawnTree::ActivateRespawn(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
+void ARespawnTree::Destroyed()
+{
+	Super::Destroyed();
+
+	Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
+}
+
+void ARespawnTree::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
 	if (bIsActivated)
 	{
 		return;
 	}
 
-	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
-	if (!Character)
-	{
-		return;
-	}
-
-	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Character);
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Pawn);
 	if (!Player)
 	{
 		return;
 	}
 
-	Player->SetRespawnPosition(RespawnPoint->GetComponentLocation());
 	bIsActivated = true;
-	Interaction->RemoveInteractable(TreeModel);
+	SetActive();
+	SetRespawnPoint(Player, true);
+}
 
-	UAkGameplayStatics::PostEventAtLocation(ActivationNoise, TreeModel->GetComponentLocation(), TreeModel->GetComponentRotation(), this);
+void ARespawnTree::SetActive()
+{
+	Interaction->RemoveInteractable(TreeModel);
+	Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
 
 	FCTween::Play(
-			2.f,
-			0.f,
-			[&](float x)
-			{
-				BulbMaterial->SetScalarParameterValue("State", x);
-			},
-			0.5f,
-			EFCEase::InSine);
+		2.f,
+		0.f,
+		[&](float x)
+		{
+			BulbMaterial->SetScalarParameterValue("State", x);
+		},
+		0.5f,
+		EFCEase::InSine
+	);
 
 	FCTween::Play(
 		0.f,
@@ -95,28 +123,46 @@ void ARespawnTree::ActivateRespawn(APlayerController* Controller, APawn* Pawn, U
 		0.5f,
 		EFCEase::InSine
 	);
+}
 
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
-	UWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UWorldSaveSubsystem>();
-	if (!WorldSaveSubsystem || !PlayerSaveSubsystem)
+void ARespawnTree::SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave)
+{
+	Player->SetRespawnTree(this);
+	UAkGameplayStatics::PostEventAtLocation(ActivationNoise, TreeModel->GetComponentLocation(), TreeModel->GetComponentRotation(), this);
+
+	if (!bSave)
 	{
 		return;
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->PlayerTransform = Player->GetTransform();
-	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = Player->GetStateMachine()->GetCurrentStateID();
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	if (!GameMode)
+	{
+		return;
+	}
 
-	WorldSaveSubsystem->SaveToSlot(0);
-	PlayerSaveSubsystem->SaveToSlot(0);
+	AFirstPersonGameMode* FirstPersonGameMode = Cast<AFirstPersonGameMode>(GameMode);
+	if (!FirstPersonGameMode)
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("Invalid GameMode, please make sure the current GameMode is %s to save the world"), *FirstPersonGameMode->GetClass()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	FirstPersonGameMode->SaveWorld();
 }
 
 void ARespawnTree::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
 
-	if (bIsZoneActive && Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::ActivateRespawn))
+	if (bIsZoneActive && Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::Interact))
 	{
-		Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::ActivateRespawn);
+		Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
 	}
 }
 
@@ -124,11 +170,30 @@ void ARespawnTree::OnExitWeakZone_Implementation()
 {
 	IWeakZoneInterface::OnExitWeakZone_Implementation();
 
-	if (!Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::ActivateRespawn))
+	if (!Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::Interact))
 	{
-		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::ActivateRespawn);
+		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::Interact);
 	}
 }
 
+void ARespawnTree::SaveGameElement(UWorldSave* CurrentWorldSave)
+{
+	FRespawnTreeData Data;
+	Data.bIsActive = bIsActivated;
 
+	CurrentWorldSave->RespawnTreeData.Add(GetName(), Data);
+}
 
+void ARespawnTree::LoadGameElement(const FGameElementData& GameElementData)
+{
+	const FRespawnTreeData& Data = static_cast<const FRespawnTreeData&>(GameElementData);
+	bIsActivated = Data.bIsActive;
+
+	UWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UWorldSaveSubsystem>();
+	if(!WorldSaveSubsystem)
+	{
+		return;
+	}
+
+	LastCheckPointName = WorldSaveSubsystem->GetCurrentWorldSave()->LastCheckPointName;
+}

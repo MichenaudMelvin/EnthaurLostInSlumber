@@ -2,9 +2,9 @@
 
 
 #include "UI/DeathMenuUI.h"
-
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/Button.h"
+#include "GameElements/RespawnTree.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
 
@@ -29,7 +29,13 @@ void UDeathMenuUI::RespawnPlayer()
 		return;
 	}
 
-	Player->SetActorLocation(Player->GetRespawnPosition());
+	ARespawnTree* RespawnTree = Player->GetRespawnTree();
+	if (!RespawnTree)
+	{
+		return;
+	}
+
+	Player->SetActorLocation(RespawnTree->GetActorLocation());
 
 	auto PC = UGameplayStatics::GetPlayerController(this, 0);
 	if (!PC)

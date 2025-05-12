@@ -3,6 +3,9 @@
 
 #include "Saves/WorldSaves/WorldSaveSubsystem.h"
 #include "GameFramework/GameModeBase.h"
+#include "Player/FirstPersonCharacter.h"
+#include "Saves/PlayerSave.h"
+#include "Saves/PlayerSaveSubsystem.h"
 #include "Saves/WorldSaves/WorldSave.h"
 #include "Saves/WorldSaves/WorldSaveSettings.h"
 
@@ -19,14 +22,14 @@ void UWorldSaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 
-	WorldBeginPlayDelegateHandle = FWorldDelegates::OnWorldInitializedActors.AddUObject(this, &UWorldSaveSubsystem::OnNewWorldStarted);
+	WorldInitDelegateHandle = FWorldDelegates::OnWorldInitializedActors.AddUObject(this, &UWorldSaveSubsystem::OnNewWorldStarted);
 }
 
 void UWorldSaveSubsystem::Deinitialize()
 {
 	Super::Deinitialize();
 
-	FWorldDelegates::OnWorldInitializedActors.Remove(WorldBeginPlayDelegateHandle);
+	FWorldDelegates::OnWorldInitializedActors.Remove(WorldInitDelegateHandle);
 }
 
 void UWorldSaveSubsystem::CreateSave(const int SaveIndex)
@@ -60,16 +63,14 @@ UDefaultSave* UWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 {
 	if (!CurrentWorldSave)
 	{
-		return nullptr;
+		CreateSave(SaveIndex);
 	}
 
 	TArray<AActor*> Actors;
 	UGameplayStatics::GetAllActorsOfClass(this, AActor::StaticClass(), Actors);
 
-	CurrentWorldSave->MuscleData.Empty();
-	CurrentWorldSave->NerveData.Empty();
-	CurrentWorldSave->AmberOreData.Empty();
-	CurrentWorldSave->WeakZoneData.Empty();
+	CurrentWorldSave->ClearMapData();
+
 	for (AActor* Actor : Actors)
 	{
 		if (!Actor->Implements<USaveGameElementInterface>())
@@ -79,6 +80,21 @@ UDefaultSave* UWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 
 		Cast<ISaveGameElementInterface>(Actor)->SaveGameElement(CurrentWorldSave);
 	}
+
+	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+	if (!Character)
+	{
+		return Super::SaveToSlot(SaveIndex);
+	}
+
+	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(Character);
+	if (!FirstPersonCharacter && !FirstPersonCharacter->GetRespawnTree())
+	{
+		return Super::SaveToSlot(SaveIndex);
+	}
+
+	FirstPersonCharacter->SavePlayerData();
+	CurrentWorldSave->LastCheckPointName = FirstPersonCharacter->GetRespawnTree() ? FirstPersonCharacter->GetRespawnTree().GetName() : "";
 
 	return Super::SaveToSlot(SaveIndex);
 }
@@ -143,6 +159,11 @@ void UWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& Acto
 		return;
 	}
 
+	if (GetWorld())
+	{
+		WorldBeginPlayDelegateHandle = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UWorldSaveSubsystem::OnNewWorldBeginPlay);
+	}
+
 	TArray<AActor*> Actors;
 	UGameplayStatics::GetAllActorsOfClass(this, AActor::StaticClass(), Actors);
 
@@ -183,7 +204,33 @@ void UWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& Acto
 			continue;
 		}
 
+		FRespawnTreeData* RespawnTreeData = CurrentWorldSave->RespawnTreeData.Find(Actor->GetName());
+		if (RespawnTreeData)
+		{
+			Cast<ISaveGameElementInterface>(Actor)->LoadGameElement(*RespawnTreeData);
+			continue;
+		}
+
 		// if nerved found, delete the actor
 		Actor->Destroy();
 	}
+}
+
+void UWorldSaveSubsystem::OnNewWorldBeginPlay()
+{
+	GetWorld()->OnWorldBeginPlay.Remove(WorldBeginPlayDelegateHandle);
+
+	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+	if (!Character)
+	{
+		return;
+	}
+
+	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(Character);
+	if (!FirstPersonCharacter)
+	{
+		return;
+	}
+
+	FirstPersonCharacter->LoadPlayerData();
 }

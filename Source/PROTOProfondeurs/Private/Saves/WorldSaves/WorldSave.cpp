@@ -7,3 +7,12 @@ UWorldSave::UWorldSave()
 {
 	SlotName = "WorldSave";
 }
+
+void UWorldSave::ClearMapData()
+{
+	MuscleData.Empty();
+	NerveData.Empty();
+	AmberOreData.Empty();
+	WeakZoneData.Empty();
+	RespawnTreeData.Empty();
+}

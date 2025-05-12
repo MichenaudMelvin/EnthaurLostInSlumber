@@ -20,10 +20,10 @@ public:
 	FTransform PlayerTransform = FTransform::Identity;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Player")
-	FString LastWorldOpened;
+	FName LastWorldSaved = NAME_None;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Player")
-	ECharacterStateID CurrentState;
+	ECharacterStateID CurrentState = ECharacterStateID::None;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Amber")
 	TMap<EAmberType, int> AmberInventory;
