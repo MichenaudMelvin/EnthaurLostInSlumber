@@ -18,6 +18,8 @@ class PROTOPROFONDEURS_API AWeakZone : public AActor
 public:
 	AWeakZone();
 
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCure);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -36,6 +38,9 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<UMaterialInstanceDynamic> MaterialBlackAndWhite;
+
+	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	FOnCure OnCure;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()

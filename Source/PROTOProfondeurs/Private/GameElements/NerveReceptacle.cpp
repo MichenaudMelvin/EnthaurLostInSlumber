@@ -115,7 +115,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 			{
 				NerveElectricityFeedback->Radius = F;
 			},
-			1.f);
+			1.f)->SetOnComplete([&]{OnNerveAnimationFinished.Broadcast();});
 
 			FCTween::Play(1.f, 0.f,
 			[&](const float& F)
