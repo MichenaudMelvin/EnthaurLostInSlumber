@@ -240,7 +240,7 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 			{
 				MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
 			},
-			5.f,
+			DestroyDuration,
 			EFCEase::OutCubic)->SetOnComplete([&]
 			{
 				Destroy();

@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
+
+#include "AkComponent.h"
 #include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CameraShakeComponent.h"
@@ -46,6 +48,9 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 
 	SpikeMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SpikeMesh"));
 	SpikeMesh->SetupAttachment(CameraComponent);
+
+	FootstepsSounds = CreateDefaultSubobject<UAkComponent>(TEXT("FootstepsSounds"));
+	FootstepsSounds->SetupAttachment(RootComponent);
 
 	AmberInventory.Add(EAmberType::NecroseAmber, 0);
 	AmberInventory.Add(EAmberType::WeakAmber, 0);
