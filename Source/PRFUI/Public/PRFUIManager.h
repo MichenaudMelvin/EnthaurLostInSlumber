@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "EPRFUIState.h"
-#include "Controller/PRFUIController.h"
 #include "UObject/Object.h"
 #include "PRFUIManager.generated.h"
 
@@ -36,9 +35,14 @@ public:
 
 	UUserWidget* GetPauseMenu() const { return PauseMenu; }
 	UUserWidget* GetMainMenu() const { return MainMenu; }
+	UUserWidget* GetOptionsMenu() const { return OptionsMenu; }
+	UUserWidget* GetCreditsMenu() const { return CreditsMenu; }
+	UUserWidget* GetQuitMenu() const { return QuitMenu; }
+	UUserWidget* GetNewGameMenu() const { return NewGameMenu; }
 	
 	EPRFUIState GetMenuState() const { return CurrentState; }
 	void SetMenuState(EPRFUIState InUIState);
+	void CheckMenuState();
 
 	void SetUIInputMode() const;
 	void SetGameInputMode() const;
@@ -53,8 +57,6 @@ protected:
 	
 	UPROPERTY(BlueprintAssignable)
 	FOnWidgetsCreated OnWidgetsCreated;
-
-	void HandleMenuCollection(UUserWidget* InMenuClass, bool bAddMenu);
 
 #pragma region UI State
 	

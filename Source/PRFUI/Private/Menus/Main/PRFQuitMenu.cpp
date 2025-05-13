@@ -2,3 +2,38 @@
 
 
 #include "Menus/Main/PRFQuitMenu.h"
+
+#include "Components/Button.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
+
+void UPRFQuitMenu::NativeOnInitialized()
+{
+	Super::NativeOnInitialized();
+
+	if (QuitGameButton)
+	{
+		QuitGameButton->OnClicked.AddDynamic(this, &UPRFQuitMenu::HandleQuitGameInteraction);
+	}
+}
+
+void UPRFQuitMenu::BeginDestroy()
+{
+	Super::BeginDestroy();
+
+	if (QuitGameButton)
+	{
+		QuitGameButton->OnClicked.RemoveDynamic(this, &UPRFQuitMenu::HandleQuitGameInteraction);
+	}
+}
+
+void UPRFQuitMenu::HandleQuitGameInteraction()
+{
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
+	if (!IsValid(PlayerController))
+	{
+		return;
+	}
+	
+	UKismetSystemLibrary::QuitGame(this, PlayerController, EQuitPreference::Quit, false);
+}

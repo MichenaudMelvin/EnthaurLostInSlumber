@@ -13,4 +13,13 @@ UCLASS()
 class PRFUI_API UPRFNewGameMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
+
+	UPROPERTY(meta = (BindWidget))
+	UButton* ContinueButton;
+
+	virtual void NativeOnInitialized() override;
+	virtual void BeginDestroy() override;
+
+	UFUNCTION()
+	void HandleNewGameInteraction();
 };

@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
+#include "Menus/PRFWidgetBasics.h"
 #include "PRFPauseMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PRFUI_API UPRFPauseMenu : public UUserWidget
+class PRFUI_API UPRFPauseMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
 
@@ -32,4 +33,5 @@ protected:
 
 	UPROPERTY(Meta = (BindWidget))
 	UButton* OptionsMenuButton;
+	
 };

@@ -16,6 +16,13 @@ class PRFUI_API UPRFWidgetBasics : public UUserWidget
 {
 	GENERATED_BODY()
 
+protected:
+	virtual void NativeOnInitialized() override;
+	virtual void BeginDestroy() override;
+
 	UPROPERTY(meta = (BindWidget))
-	UButton* TestButton;
+	UButton* BackButton;
+
+	UFUNCTION()
+	void HandleBackAction();
 };

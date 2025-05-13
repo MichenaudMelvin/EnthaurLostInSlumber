@@ -42,6 +42,21 @@ APRFUIController::APRFUIController()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+TObjectPtr<UInputMappingContext> APRFUIController::GetUIMappingContext() const
+{
+	return UIMappingContext;
+}
+
+TObjectPtr<UInputMappingContext> APRFUIController::GetAnyKeyMappingContext() const
+{
+	return AnyKeyMappingContext;
+}
+
+TObjectPtr<UInputMappingContext> APRFUIController::GetDefaultMappingContext() const
+{
+	return UIMappingContext;
+}
+
 void APRFUIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -58,7 +73,7 @@ void APRFUIController::BeginPlay()
 		return;
 	}
 
-	if (!DefaultMappingContext)
+	if (!UIMappingContext)
 	{
 #if WITH_EDITOR
 		const FString Message = FString::Printf(TEXT("Missing DefaultMappingContext in %s"), *GetClass()->GetName());
@@ -69,7 +84,7 @@ void APRFUIController::BeginPlay()
 		return;
 	}
 
-	Subsystem->AddMappingContext(DefaultMappingContext, 0);
+	Subsystem->AddMappingContext(AnyKeyMappingContext, 0);
 }
 
 void APRFUIController::SetupInputComponent()
@@ -78,16 +93,18 @@ void APRFUIController::SetupInputComponent()
 
 	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 
-	if(EnhancedInputComponent == nullptr)
+	if (EnhancedInputComponent == nullptr)
 	{
 		return;
 	}
 
 	ResumeAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED(APRFUIController, OnInputResume);
 	AnyAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED(APRFUIController, OnInputAny);
+	BackAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED(APRFUIController, OnInputBack);
 	
 	ResumeAction.BindActionUI(EnhancedInputComponent, this);
 	AnyAction.BindActionUI(EnhancedInputComponent, this);
+	BackAction.BindActionUI(EnhancedInputComponent, this);
 }
 
 void APRFUIController::OnInputResume()
@@ -121,7 +138,22 @@ void APRFUIController::OnInputAny()
 	}
 
 	UIManager->OpenMenu(UIManager->GetMainMenu(), false);
-	UIManager->SetMenuState(EPRFUIState::MainMenu);
+}
+
+void APRFUIController::OnInputBack()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	/*if (UIManager->GetMenuState() == EPRFUIState::AnyMenu)
+	{
+		return;
+	}*/
+
+	UIManager->CloseCurrentMenu();
 }
 
 // Called every frame

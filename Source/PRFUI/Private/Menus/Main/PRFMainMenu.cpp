@@ -65,14 +65,23 @@ void UPRFMainMenu::HandleNewGameMenu()
 	{
 		return;
 	}
-	
-	UUserWidget* NewGameMenu = CreateWidget<UUserWidget>(GetWorld(), GetUIManagerSettings()->NewGameMenuClass);
-	GetUIManager()->OpenMenu(NewGameMenu, false);
+
+	if (nullptr)
+	{
+		/* Todo Melvin Check s'il y a déjà une savegame qui existe
+		/ Si oui ça envoie en dessous pour ouvrir le menu qui prévient
+		/ Si non, tu lance direct la game
+		*/
+	}
+	else
+	{
+		GetUIManager()->OpenMenu(GetUIManager()->GetNewGameMenu(), false);
+	}
 }
 
 void UPRFMainMenu::HandleContinueInteraction()
 {
-	
+	// Todo Melvin - Load save & continue game
 }
 
 void UPRFMainMenu::HandleOptionsMenu()
@@ -81,9 +90,8 @@ void UPRFMainMenu::HandleOptionsMenu()
 	{
 		return;
 	}
-
-	UUserWidget* OptionsMenu = CreateWidget<UUserWidget>(GetWorld(), GetUIManagerSettings()->OptionsMenuClass);
-	GetUIManager()->OpenMenu(OptionsMenu, false);
+	
+	GetUIManager()->OpenMenu(GetUIManager()->GetOptionsMenu(), false);
 }
 
 void UPRFMainMenu::HandleCreditsMenu()
@@ -92,9 +100,8 @@ void UPRFMainMenu::HandleCreditsMenu()
 	{
 		return;
 	}
-
-	UUserWidget* CreditsMenu = CreateWidget<UUserWidget>(GetWorld(), GetUIManagerSettings()->CreditsMenuClass);
-	GetUIManager()->OpenMenu(CreditsMenu, false);
+	
+	GetUIManager()->OpenMenu(GetUIManager()->GetCreditsMenu(), false);
 }
 
 void UPRFMainMenu::HandleQuitMenu()
@@ -103,9 +110,8 @@ void UPRFMainMenu::HandleQuitMenu()
 	{
 		return;
 	}
-
-	UUserWidget* QuitMenu = CreateWidget<UUserWidget>(GetWorld(), GetUIManagerSettings()->QuitMenuClass);
-	GetUIManager()->OpenMenu(QuitMenu, false);
+	
+	GetUIManager()->OpenMenu(GetUIManager()->GetQuitMenu(), false);
 }
 
 const UUIManagerSettings* UPRFMainMenu::GetUIManagerSettings()

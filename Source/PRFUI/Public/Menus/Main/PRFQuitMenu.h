@@ -13,4 +13,13 @@ UCLASS()
 class PRFUI_API UPRFQuitMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
+
+	UPROPERTY(meta = (BindWidget))
+	UButton* QuitGameButton;
+
+	virtual void NativeOnInitialized() override;
+	virtual void BeginDestroy() override;
+
+	UFUNCTION()
+	void HandleQuitGameInteraction();
 };
