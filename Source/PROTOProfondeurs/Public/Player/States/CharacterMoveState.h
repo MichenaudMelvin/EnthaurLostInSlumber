@@ -36,9 +36,6 @@ protected:
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise|Footsteps")
-	TObjectPtr<UAkAudioEvent> SpeedEvent;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise|Footsteps")
 	TObjectPtr<UAkSwitchValue> FootstepsSpeedNoise;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise|Footsteps", meta = (ClampMin = 0.0f, ClampMax = 10.0f, UIMin = 0.0f, UIMax = 10.0f, Units = "s"))

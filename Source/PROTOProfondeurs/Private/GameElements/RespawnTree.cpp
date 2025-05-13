@@ -2,7 +2,7 @@
 
 
 #include "PROTOProfondeurs/Public/GameElements/RespawnTree.h"
-
+#include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/InteractableComponent.h"
 #include "Components/LightComponent.h"
@@ -49,10 +49,12 @@ void ARespawnTree::ActivateRespawn(APlayerController* Controller, APawn* Pawn, U
 {
 	if (bIsActivated)
 		return;
-	
+
 	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->SetRespawnPosition(RespawnPoint->GetComponentLocation());
 	bIsActivated = true;
 	Interaction->RemoveInteractable(TreeModel);
+
+	UAkGameplayStatics::PostEventAtLocation(ActivationNoise, TreeModel->GetComponentLocation(), TreeModel->GetComponentRotation(), this);
 
 	FCTween::Play(
 			2.f,
