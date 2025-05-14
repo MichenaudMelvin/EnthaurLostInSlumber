@@ -16,5 +16,5 @@ void UPRFPressAny::NativeConstruct()
 	}
 
 	UIManager->SetUIInputMode();
-	UIManager->SetMenuState(EPRFUIState::AnyMenu);
+	//UIManager->SetMenuState(EPRFUIState::AnyMenu);
 }

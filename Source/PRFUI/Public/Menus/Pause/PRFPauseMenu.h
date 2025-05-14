@@ -26,12 +26,17 @@ protected:
 	virtual void NativeDestruct() override;
 
 	UFUNCTION()
+	void HandleMainMenuButton();
+	
+	UFUNCTION()
 	void HandleOptionsMenuButton();
 
-	/*UPROPERTY(Meta = (BindWidget))
-	UTextBlock* TestBlock;*/
-
+	UPROPERTY(Meta = (BindWidget))
+	UButton* MainMenuButton;
+	
 	UPROPERTY(Meta = (BindWidget))
 	UButton* OptionsMenuButton;
-	
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UWorld> MainMenuLevel;
 };

@@ -6,6 +6,7 @@
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
 #include "Components/Button.h"
+#include "Kismet/GameplayStatics.h"
 
 void UPRFMainMenu::NativeOnInitialized()
 {
@@ -17,7 +18,7 @@ void UPRFMainMenu::NativeOnInitialized()
 	}
 	if (ContinueButton)
 	{
-		NewGameButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
+		ContinueButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
 	}
 	if (OptionsButton)
 	{
@@ -43,7 +44,7 @@ void UPRFMainMenu::BeginDestroy()
 	}
 	if (ContinueButton)
 	{
-		NewGameButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
+		ContinueButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
 	}
 	if (OptionsButton)
 	{
@@ -82,6 +83,19 @@ void UPRFMainMenu::HandleNewGameMenu()
 void UPRFMainMenu::HandleContinueInteraction()
 {
 	// Todo Melvin - Load save & continue game
+
+	// TEMPORARY:
+	
+
+	if (!IsValid(GetUIManager()))
+	{
+		return;
+	}
+
+	GetUIManager()->SetMenuState(EPRFUIState::Waiting);
+	GetUIManager()->CloseAllMenus(EPRFUIState::Gameplay);
+
+	UGameplayStatics::OpenLevelBySoftObjectPtr(this, TempGameplayLevel);
 }
 
 void UPRFMainMenu::HandleOptionsMenu()

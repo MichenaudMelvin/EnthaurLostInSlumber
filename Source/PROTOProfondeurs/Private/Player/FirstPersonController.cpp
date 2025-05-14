@@ -300,8 +300,8 @@ void AFirstPersonController::OnInputResume()
 	switch (UIManager->GetMenuState())
 	{
 		case EPRFUIState::PauseMenu:
-			UIManager->SetMenuState(EPRFUIState::Gameplay);
-        	UIManager->CloseAllMenus();
+			//UIManager->SetMenuState(EPRFUIState::Gameplay);
+        	UIManager->CloseAllMenus(EPRFUIState::Gameplay);
 			break;
 
 		case EPRFUIState::MainMenu:

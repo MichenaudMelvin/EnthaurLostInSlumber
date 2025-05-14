@@ -31,7 +31,7 @@ public:
 	void CloseCurrentMenu();
 	
 	UFUNCTION(BlueprintCallable)
-	void CloseAllMenus();
+	void CloseAllMenus(EPRFUIState InState);
 
 	UUserWidget* GetPauseMenu() const { return PauseMenu; }
 	UUserWidget* GetMainMenu() const { return MainMenu; }

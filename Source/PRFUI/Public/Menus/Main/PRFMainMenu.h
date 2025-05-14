@@ -54,4 +54,7 @@ protected:
 
 	const UUIManagerSettings* GetUIManagerSettings();
 	UPRFUIManager* GetUIManager();
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UWorld> TempGameplayLevel;
 };

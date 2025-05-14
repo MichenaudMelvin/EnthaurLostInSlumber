@@ -203,13 +203,15 @@ void UPRFUIManager::CloseCurrentMenu()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);
 }
 
-void UPRFUIManager::CloseAllMenus()
+void UPRFUIManager::CloseAllMenus(EPRFUIState InState)
 {
 	for (int i = 0; i < MenuClasses.Num(); ++i)
 	{
 		CloseCurrentMenu();
 		--i;
 	}
+
+	CurrentState = InState;
 }
 
 void UPRFUIManager::SetMenuState(EPRFUIState InUIState)
@@ -244,6 +246,11 @@ void UPRFUIManager::CheckMenuState()
 	}
 
 	if (!Controller->Implements<UPRFControllerMappingContext>())
+	{
+		return;
+	}
+
+	if (CurrentState == EPRFUIState::Waiting)
 	{
 		return;
 	}

@@ -121,7 +121,7 @@ void APRFUIController::OnInputResume()
 		return;
 	}
 
-	UIManager->CloseAllMenus();
+	UIManager->CloseAllMenus(EPRFUIState::Gameplay);
 }
 
 void APRFUIController::OnInputAny()
