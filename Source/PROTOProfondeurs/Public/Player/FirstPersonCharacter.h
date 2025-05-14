@@ -237,7 +237,7 @@ public:
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Character")
-	void EjectCharacter(const FVector ProjectionVelocity) const;
+	void EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void StopCharacter() const;

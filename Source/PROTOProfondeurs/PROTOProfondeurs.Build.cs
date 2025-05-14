@@ -36,6 +36,7 @@ public class PROTOProfondeurs : ModuleRules
 				new string[]
 				{
 					"PRFEditor",
+					"UnrealEd"
 				}
 			);
 		}

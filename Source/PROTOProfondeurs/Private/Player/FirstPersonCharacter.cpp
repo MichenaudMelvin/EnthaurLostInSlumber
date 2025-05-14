@@ -505,7 +505,7 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	return true;
 }
 
-void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) const
+void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const
 {
 	UCharacterFallState* FallState = FindState<UCharacterFallState>(StateMachine);
 	if (!FallState)
@@ -513,7 +513,7 @@ void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) con
 		return;
 	}
 
-	FallState->SetProjectionVelocity(ProjectionVelocity);
+	FallState->SetProjectionVelocity(ProjectionVelocity, bOverrideCurrentVelocity);
 	StateMachine->ChangeState(ECharacterStateID::Fall);
 }
 
