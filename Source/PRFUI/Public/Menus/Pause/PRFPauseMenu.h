@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
+#include "Menus/PRFWidgetBasics.h"
 #include "PRFPauseMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PRFUI_API UPRFPauseMenu : public UUserWidget
+class PRFUI_API UPRFPauseMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
 
@@ -25,11 +26,17 @@ protected:
 	virtual void NativeDestruct() override;
 
 	UFUNCTION()
+	void HandleMainMenuButton();
+	
+	UFUNCTION()
 	void HandleOptionsMenuButton();
 
-	/*UPROPERTY(Meta = (BindWidget))
-	UTextBlock* TestBlock;*/
-
+	UPROPERTY(Meta = (BindWidget))
+	UButton* MainMenuButton;
+	
 	UPROPERTY(Meta = (BindWidget))
 	UButton* OptionsMenuButton;
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UWorld> MainMenuLevel;
 };
