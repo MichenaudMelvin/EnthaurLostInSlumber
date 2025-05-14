@@ -4,7 +4,7 @@
 #include "PROTOProfondeurs/Public/GameElements/AmberOre.h"
 #include "Components/InteractableComponent.h"
 #include "Player/FirstPersonCharacter.h"
-
+#include "Saves/WorldSaves/WorldSave.h"
 
 AAmberOre::AAmberOre()
 {
@@ -24,8 +24,13 @@ void AAmberOre::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Interactable->AddInteractable(Mesh);
-	Interactable->OnInteract.AddDynamic(this, &AAmberOre::OnInteract);
+	if (OreAmount > 0)
+	{
+		Interactable->AddInteractable(Mesh);
+		Interactable->OnInteract.AddDynamic(this, &AAmberOre::OnInteract);
+	}
+
+	UpdateMaterial(OreAmount == 0);
 }
 
 void AAmberOre::OnConstruction(const FTransform& Transform)
@@ -37,6 +42,11 @@ void AAmberOre::OnConstruction(const FTransform& Transform)
 
 void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
+	if (OreAmount == 0)
+	{
+		return;
+	}
+
 	if (!Pawn)
 	{
 		return;
@@ -54,11 +64,16 @@ void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 	}
 
 	Character->MineAmber(AmberType, OreAmount);
-	Interactable->RemoveInteractable(Mesh);
+	OreAmount--;
+	OreAmount = FMath::Clamp(OreAmount, 0, 255);
 
-	UpdateMaterial(true);
+	if (OreAmount == 0)
+	{
+		UpdateMaterial(OreAmount == 0);
 
-	Interactable->OnInteract.RemoveDynamic(this, &AAmberOre::OnInteract);
+		Interactable->RemoveInteractable(Mesh);
+		Interactable->OnInteract.RemoveDynamic(this, &AAmberOre::OnInteract);
+	}
 }
 
 void AAmberOre::UpdateMaterial(bool bPickedUp) const
@@ -75,4 +90,20 @@ void AAmberOre::UpdateMaterial(bool bPickedUp) const
 	}
 
 	Mesh->SetMaterial(0, TargetMaterial);
+}
+
+void AAmberOre::SaveGameElement(UWorldSave* CurrentWorldSave)
+{
+	FAmberOreData Data;
+	Data.CurrentOreAmount = OreAmount;
+
+	CurrentWorldSave->AmberOreData.Add(GetName(), Data);
+}
+
+void AAmberOre::LoadGameElement(const FGameElementData& GameElementData)
+{
+	const FAmberOreData& Data = static_cast<const FAmberOreData&>(GameElementData);
+	OreAmount = Data.CurrentOreAmount;
+
+	// material update done by the BeginPlay()
 }

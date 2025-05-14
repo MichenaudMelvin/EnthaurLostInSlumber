@@ -6,8 +6,14 @@
 #include "GameFramework/Actor.h"
 #include "NerveReceptacle.generated.h"
 
+UENUM(BlueprintType)
+enum class ENerveReactiveInteractionType : uint8
+{
+	Activate,
+	ForceDefaultState
+};
+
 class UAkAudioEvent;
-enum class ENerveReactiveInteractionType : uint8;
 class INerveReactive;
 class USphereComponent;
 

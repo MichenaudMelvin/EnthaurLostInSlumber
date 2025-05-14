@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class ARespawnTree;
 class UAkComponent;
 class UCameraShakeComponent;
 enum class EAmberType : uint8;
@@ -108,6 +109,8 @@ public:
 
 public:
 	const TArray<TObjectPtr<UCharacterState>>& GetStates() const {return States;}
+
+	TObjectPtr<UCharacterStateMachine> GetStateMachine() const {return StateMachine;}
 
 #pragma endregion
 
@@ -234,7 +237,7 @@ public:
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Character")
-	void EjectCharacter(const FVector ProjectionVelocity) const;
+	void EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void StopCharacter() const;
@@ -246,15 +249,25 @@ public:
 
 #pragma endregion
 
-#pragma region Respawn
-
-private:
-	FVector RespawnPosition;
+#pragma region Saves
 
 public:
-	FVector GetRespawnPosition() const {return RespawnPosition;}
+	void SavePlayerData() const;
 
-	void SetRespawnPosition(const FVector& Position) {RespawnPosition = Position;}
+	void LoadPlayerData();
+
+#pragma endregion
+
+#pragma region Respawn
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
+	TObjectPtr<ARespawnTree> LastRespawnTree = nullptr;
+
+public:
+	TObjectPtr<ARespawnTree> GetRespawnTree() const {return LastRespawnTree;}
+
+	void SetRespawnTree(ARespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
 
 #pragma endregion
 
@@ -268,7 +281,4 @@ public:
 	TObjectPtr<UAkComponent> GetFootstepsSoundComp() const {return FootstepsSounds;}
 
 #pragma endregion
-
-protected:
-	TObjectPtr<UTestViewModel> ViewModel;
 };

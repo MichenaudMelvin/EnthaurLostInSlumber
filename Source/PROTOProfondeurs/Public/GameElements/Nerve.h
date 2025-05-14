@@ -3,12 +3,29 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AmberOre.h"
 #include "WeakZoneInterface.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
 #include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
+#include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "Nerve.generated.h"
+
+USTRUCT(BlueprintType)
+struct FNerveData : public FGameElementData
+{
+	GENERATED_BODY()
+
+	/**
+	 * @brief In local space
+	 */
+	UPROPERTY(BlueprintReadWrite)
+	TArray<FVector> SplinePointsLocations;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<FVector> ImpactNormals;
+};
 
 class USplineMeshComponent;
 class USplineComponent;
@@ -18,7 +35,7 @@ class UPlayerToNervePhysicConstraint;
 class UInteractableComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API ANerve : public AActor, public IWeakZoneInterface
+class PROTOPROFONDEURS_API ANerve : public AActor, public IWeakZoneInterface, public ISaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -50,7 +67,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableMaxExtension = 1000.0f;
 
-	void AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World, bool bCreateSplineMesh = true);
+	void AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World, bool bCreateSplineMesh = true, bool bAutoCorrect = true);
 
 	void AddSplineMesh(const FVector& StartLocation, const FVector& EndLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World);
 
@@ -88,7 +105,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	FVector2D CableScale = FVector2D(0.1f, 0.1f);
 
-	void ResetCables();
+	/**
+	 * @brief 
+	 * @param bHardReset if true, clear all points without recreating the default state
+	 */
+	void ResetCables(bool bHardReset);
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Retraction", meta = (ClampMin = 0.0f, ForceUnits = "cm/s"))
 	float RetractionSpeed = 5000.0f;
@@ -186,6 +207,15 @@ private:
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
+
+#pragma endregion
+
+#pragma region Save
+
+public:
+	virtual void SaveGameElement(UWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
 
 #pragma endregion
 
