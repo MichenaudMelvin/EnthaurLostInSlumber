@@ -2,18 +2,15 @@
 
 
 #include "GameElements/NerveReceptacle.h"
-
+#include "AkGameplayStatics.h"
 #include "Enumerations.h"
 #include "FCTween.h"
 #include "Components/CameraShakeComponent.h"
-#include "Components/InteractableComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "Interface/NerveReactive.h"
 #include "GameElements/Nerve.h"
 #include "Components/PlayerToNervePhysicConstraint.h"
-#include "Components/PostProcessComponent.h"
-#include "Components/SplineComponent.h"
 #include "Gamefeel/ElectricityFeedback.h"
 #include "Kismet/GameplayStatics.h"
 #include "Parameters/BPRefParameters.h"
@@ -51,6 +48,7 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
 
 		PlayElectricityAnimation(Nerve);
+		UAkGameplayStatics::PostEventAtLocation(ReceptacleEnabledNoise, NerveReceptacle->GetComponentLocation(), NerveReceptacle->GetComponentRotation(), this);
 	}
 }
 

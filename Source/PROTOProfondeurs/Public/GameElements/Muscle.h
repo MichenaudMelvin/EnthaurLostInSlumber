@@ -10,12 +10,15 @@
 #include "Interface/NerveReactive.h"
 #include "Muscle.generated.h"
 
+class UAkAudioEvent;
 class UInteractableComponent;
 
 UCLASS()
 class PROTOPROFONDEURS_API AMuscle : public AActor, public IGroundAction, public INerveReactive, public IWeakZoneInterface
 {
 	GENERATED_BODY()
+
+#pragma region Defaults
 
 public:
 	AMuscle();
@@ -29,6 +32,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Componoents")
 	TObjectPtr<USceneComponent> Root;
+
+#pragma endregion
 
 #pragma region Dimensions
 
@@ -73,6 +78,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Deformation")
 	TObjectPtr<UCurveFloat> DeformationCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Deformation")
+	TObjectPtr<UAkAudioEvent> DeformationNoise;
 
 	UFUNCTION(CallInEditor, Category = "Deformation")
 	void StartDeformation();
@@ -182,10 +190,30 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	FText SoftMuscleInteraction;
 
+	UPROPERTY(EditInstanceOnly, Category = "Interaction")
+	bool bAllowInteraction = true;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> InteractionEvent;
+
 	UFUNCTION()
 	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent);
 
 #pragma endregion
+
+#pragma region Debug
+
+#if WITH_EDITORONLY_DATA
+
+protected:
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDebug = false;
+
+#endif
+
+#pragma endregion
+
+#pragma region Interfaces
 
 protected:
 	virtual void OnActorAbove_Implementation(AActor* Actor) override;
@@ -199,4 +227,6 @@ protected:
 	virtual void Trigger_Implementation() override;
 
 	virtual void SetLock_Implementation(bool state) override;
+
+#pragma endregion
 };
