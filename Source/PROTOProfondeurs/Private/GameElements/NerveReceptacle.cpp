@@ -3,7 +3,6 @@
 
 #include "GameElements/NerveReceptacle.h"
 #include "AkGameplayStatics.h"
-#include "Enumerations.h"
 #include "FCTween.h"
 #include "Components/CameraShakeComponent.h"
 #include "Components/SphereComponent.h"
@@ -15,7 +14,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "Parameters/BPRefParameters.h"
 #include "Player/FirstPersonCharacter.h"
-
 
 ANerveReceptacle::ANerveReceptacle()
 {

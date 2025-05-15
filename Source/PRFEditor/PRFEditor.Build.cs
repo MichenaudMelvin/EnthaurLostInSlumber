@@ -22,7 +22,9 @@ public class PRFEditor : ModuleRules
                 "SlateCore",
                 "NavigationSystem",
                 "Blutility",
-                "VREditor"
+                "VREditor",
+                "ToolMenus",
+                "DeveloperSettings"
             }
         );
     }

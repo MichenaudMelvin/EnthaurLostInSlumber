@@ -115,6 +115,14 @@ void AFirstPersonController::BeginPlay()
 	{
 		CurrentInGameUI->AddToViewport();
 	}
+
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	UIManager->SetMenuState(EPRFUIState::Gameplay);
 }
 
 void AFirstPersonController::Tick(float DeltaSeconds)
@@ -191,7 +199,7 @@ void AFirstPersonController::SetupInputComponent()
 	InteractPressedAction.BindAction(EnhancedInputComponent, this);
 	InteractTriggerAction.BindAction(EnhancedInputComponent, this);
 	PauseGameAction.BindAction(EnhancedInputComponent, this);
-	
+
 	NavigateAction.BindAction(EnhancedInputComponent, this);
 	SelectAction.BindAction(EnhancedInputComponent, this);
 	BackAction.BindAction(EnhancedInputComponent, this);
@@ -241,8 +249,23 @@ void AFirstPersonController::OnInputPauseGame()
 		return;
 	}
 
-	UIManager->CurrentContext = EPRFUIState::PauseMenu;
+	//UIManager->SetMenuState(EPRFUIState::PauseMenu);
 	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);
+}
+
+TObjectPtr<UInputMappingContext> AFirstPersonController::GetUIMappingContext() const
+{
+	return UIMappingContext;
+}
+
+TObjectPtr<UInputMappingContext> AFirstPersonController::GetAnyKeyMappingContext() const
+{
+	return AnyKeyMappingContext;
+}
+
+TObjectPtr<UInputMappingContext> AFirstPersonController::GetDefaultMappingContext() const
+{
+	return DefaultMappingContext;
 }
 
 void AFirstPersonController::OnInputNavigate(const FInputActionValue& InputActionValue)
@@ -264,7 +287,6 @@ void AFirstPersonController::OnInputBack()
 	}
 
 	UIManager->CloseCurrentMenu();
-	
 }
 
 void AFirstPersonController::OnInputResume()
@@ -275,11 +297,11 @@ void AFirstPersonController::OnInputResume()
 		return;
 	}
 
-	switch (UIManager->CurrentContext)
+	switch (UIManager->GetMenuState())
 	{
 		case EPRFUIState::PauseMenu:
-			UIManager->CurrentContext = EPRFUIState::Gameplay;
-        	UIManager->CloseAllMenus();
+			//UIManager->SetMenuState(EPRFUIState::Gameplay);
+        	UIManager->CloseAllMenus(EPRFUIState::Gameplay);
 			break;
 
 		case EPRFUIState::MainMenu:

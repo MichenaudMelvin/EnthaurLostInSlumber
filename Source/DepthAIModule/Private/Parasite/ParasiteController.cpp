@@ -5,6 +5,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISense_Hearing.h"
+#include "Saves/WorldSaves/WorldSave.h"
 
 AParasiteController::AParasiteController()
 {
@@ -53,3 +54,30 @@ void AParasiteController::OnHearTarget(AActor* Actor, const FAIStimulus& Stimulu
 	GetBlackboardComponent()->SetValueAsVector(MoveLocationKeyName, HitResult.Location);
 }
 
+void AParasiteController::SaveBlackBoardValues(FParaSiteData& AIData)
+{
+	if (!GetBlackboardComponent())
+	{
+		return;
+	}
+
+	AIData.PathIndex = GetBlackboardComponent()->GetValueAsInt(PathIndexKeyName);
+	AIData.PathDirection = GetBlackboardComponent()->GetValueAsInt(PathDirectionKeyName);
+	AIData.bWalkOnFloor = GetBlackboardComponent()->GetValueAsBool(WalkOnFloorKeyName);
+	AIData.MoveToLocation = GetBlackboardComponent()->GetValueAsVector(MoveLocationKeyName);
+	AIData.bHeardNoise = GetBlackboardComponent()->GetValueAsBool(HeardNoiseKeyName);
+}
+
+void AParasiteController::LoadBlackboardValues(const FParaSiteData& AIData)
+{
+	if (!GetBlackboardComponent())
+	{
+		return;
+	}
+
+	GetBlackboardComponent()->SetValueAsInt(PathIndexKeyName, AIData.PathIndex);
+	GetBlackboardComponent()->SetValueAsInt(PathDirectionKeyName, AIData.PathDirection);
+	GetBlackboardComponent()->SetValueAsBool(WalkOnFloorKeyName, AIData.bWalkOnFloor);
+	GetBlackboardComponent()->SetValueAsVector(MoveLocationKeyName, AIData.MoveToLocation);
+	GetBlackboardComponent()->SetValueAsBool(HeardNoiseKeyName, AIData.bHeardNoise);
+}
