@@ -488,12 +488,12 @@ void AMuscle::SetLock_Implementation(bool state)
 
 #pragma region Save
 
-void AMuscle::SaveGameElement(UWorldSave* CurrentWorldSave)
+FGameElementData& AMuscle::SaveGameElement(UWorldSave* CurrentWorldSave)
 {
 	FMuscleData Data;
 	Data.bIsSolid = bIsSolid;
 
-	CurrentWorldSave->MuscleData.Add(GetName(), Data);
+	return CurrentWorldSave->MuscleData.Add(GetName(), Data);
 }
 
 void AMuscle::LoadGameElement(const FGameElementData& GameElementData)

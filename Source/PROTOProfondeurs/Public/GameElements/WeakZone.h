@@ -106,7 +106,7 @@ protected:
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
 public:
-	virtual void SaveGameElement(UWorldSave* CurrentWorldSave) override;
+	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
 };

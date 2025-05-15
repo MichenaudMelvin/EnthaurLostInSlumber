@@ -211,6 +211,13 @@ void UWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& Acto
 			continue;
 		}
 
+		FParaSiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(Actor->GetName());
+		if (ParaSiteData)
+		{
+			Cast<ISaveGameElementInterface>(Actor)->LoadGameElement(*ParaSiteData);
+			continue;
+		}
+
 		// if nerved found, delete the actor
 		Actor->Destroy();
 	}

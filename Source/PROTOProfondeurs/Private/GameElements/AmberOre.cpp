@@ -92,12 +92,12 @@ void AAmberOre::UpdateMaterial(bool bPickedUp) const
 	Mesh->SetMaterial(0, TargetMaterial);
 }
 
-void AAmberOre::SaveGameElement(UWorldSave* CurrentWorldSave)
+FGameElementData& AAmberOre::SaveGameElement(UWorldSave* CurrentWorldSave)
 {
 	FAmberOreData Data;
 	Data.CurrentOreAmount = OreAmount;
 
-	CurrentWorldSave->AmberOreData.Add(GetName(), Data);
+	return CurrentWorldSave->AmberOreData.Add(GetName(), Data);
 }
 
 void AAmberOre::LoadGameElement(const FGameElementData& GameElementData)

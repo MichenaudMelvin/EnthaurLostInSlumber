@@ -15,4 +15,5 @@ void UWorldSave::ClearMapData()
 	AmberOreData.Empty();
 	WeakZoneData.Empty();
 	RespawnTreeData.Empty();
+	ParasiteData.Empty();
 }

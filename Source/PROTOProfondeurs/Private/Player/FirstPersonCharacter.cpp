@@ -539,7 +539,7 @@ bool AFirstPersonCharacter::IsStopped() const
 void AFirstPersonCharacter::SavePlayerData() const
 {
 	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem)
+	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
 	{
 		return;
 	}

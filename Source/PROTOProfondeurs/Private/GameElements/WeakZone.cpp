@@ -249,7 +249,7 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 	}
 }
 
-void AWeakZone::SaveGameElement(UWorldSave* CurrentWorldSave)
+FGameElementData& AWeakZone::SaveGameElement(UWorldSave* CurrentWorldSave)
 {
 	FWeakZoneData Data = FWeakZoneData();
 	for (TObjectPtr<UStaticMeshComponent> InteractionPoint : InteractionPoints)
@@ -262,7 +262,7 @@ void AWeakZone::SaveGameElement(UWorldSave* CurrentWorldSave)
 		Data.ExistingIndexes.Add(InteractionPoint.GetName());
 	}
 
-	CurrentWorldSave->WeakZoneData.Add(GetName(), Data);
+	return CurrentWorldSave->WeakZoneData.Add(GetName(), Data);
 }
 
 void AWeakZone::LoadGameElement(const FGameElementData& GameElementData)

@@ -176,12 +176,12 @@ void ARespawnTree::OnExitWeakZone_Implementation()
 	}
 }
 
-void ARespawnTree::SaveGameElement(UWorldSave* CurrentWorldSave)
+FGameElementData& ARespawnTree::SaveGameElement(UWorldSave* CurrentWorldSave)
 {
 	FRespawnTreeData Data;
 	Data.bIsActive = bIsActivated;
 
-	CurrentWorldSave->RespawnTreeData.Add(GetName(), Data);
+	return CurrentWorldSave->RespawnTreeData.Add(GetName(), Data);
 }
 
 void ARespawnTree::LoadGameElement(const FGameElementData& GameElementData)

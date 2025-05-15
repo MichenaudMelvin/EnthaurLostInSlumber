@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "DefaultAIController.h"
+#include "ParasitePawn.h"
 #include "Perception/AIPerceptionTypes.h"
 #include "ParasiteController.generated.h"
 
@@ -26,11 +27,25 @@ protected:
 	void OnHearTarget(AActor* Actor, const FAIStimulus& Stimulus);
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
-	FName HeardNoiseKeyName = "HeardNoise";
+	FName PathIndexKeyName = "PathIndex";
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName PathDirectionKeyName = "PathDirection";
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName WalkOnFloorKeyName = "WalkOnFloor";
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName MoveLocationKeyName = "MoveLocation";
 
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName HeardNoiseKeyName = "HeardNoise";
+
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Behavior", meta = (ClampMin = 0.0f, Units = "cm"))
 	float HearingZTolerance = 100.0f;
+
+public:
+	virtual void SaveBlackBoardValues(FParaSiteData& AIData);
+
+	virtual void LoadBlackboardValues(const FParaSiteData& AIData);
 };

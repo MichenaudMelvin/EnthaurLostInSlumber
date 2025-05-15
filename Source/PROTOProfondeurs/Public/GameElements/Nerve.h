@@ -213,7 +213,7 @@ private:
 #pragma region Save
 
 public:
-	virtual void SaveGameElement(UWorldSave* CurrentWorldSave) override;
+	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
 

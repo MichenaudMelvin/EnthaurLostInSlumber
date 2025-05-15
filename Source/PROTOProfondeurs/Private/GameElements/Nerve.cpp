@@ -513,7 +513,7 @@ void ANerve::OnExitWeakZone_Implementation()
 
 #pragma region Save
 
-void ANerve::SaveGameElement(UWorldSave* CurrentWorldSave)
+FGameElementData& ANerve::SaveGameElement(UWorldSave* CurrentWorldSave)
 {
 	FNerveData Data;
 
@@ -525,7 +525,7 @@ void ANerve::SaveGameElement(UWorldSave* CurrentWorldSave)
 	}
 
 	Data.ImpactNormals = ImpactNormals;
-	CurrentWorldSave->NerveData.Add(GetName(), Data);
+	return CurrentWorldSave->NerveData.Add(GetName(), Data);
 }
 
 void ANerve::LoadGameElement(const FGameElementData& GameElementData)

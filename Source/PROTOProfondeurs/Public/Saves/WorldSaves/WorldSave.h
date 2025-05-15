@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Parasite/ParasitePawn.h"
 #include "GameElements/Muscle.h"
 #include "GameElements/Nerve.h"
 #include "GameElements/RespawnTree.h"
@@ -37,6 +38,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
 	TMap<FString, FRespawnTreeData> RespawnTreeData;
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
+	TMap<FString, FParaSiteData> ParasiteData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
 	FString LastCheckPointName;
