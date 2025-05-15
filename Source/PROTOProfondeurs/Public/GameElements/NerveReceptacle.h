@@ -16,6 +16,8 @@ class PROTOPROFONDEURS_API ANerveReceptacle : public AActor
 {
 	GENERATED_BODY()
 
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNerveAnimationFinished);
+
 public:
 	ANerveReceptacle();
 	void TriggerLinkedObjects(class ANerve* Nerve);
@@ -23,6 +25,9 @@ public:
 	// Create Event
 	UFUNCTION(BlueprintImplementableEvent, Category = "BaseCharacter")
 	void OnNerveConnect();
+
+	UPROPERTY(BlueprintAssignable)
+	FOnNerveAnimationFinished OnNerveAnimationFinished;
 
 protected:
 	void PlayElectricityAnimation(ANerve* Nerve);

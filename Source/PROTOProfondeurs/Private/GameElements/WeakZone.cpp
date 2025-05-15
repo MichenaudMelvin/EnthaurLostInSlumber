@@ -233,6 +233,7 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 
 	if (InteractionPoints.Num() == 0)
 	{
+		OnCure.Broadcast();
 		FCTween::Play(
 			1.f,
 			0.f,
@@ -241,10 +242,7 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 				MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
 			},
 			DestroyDuration,
-			EFCEase::OutCubic)->SetOnComplete([&]
-			{
-				Destroy();
-			});
+			EFCEase::OutCubic);
 	}
 }
 
