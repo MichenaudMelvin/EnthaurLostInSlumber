@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Menus/PRFWidgetBasics.h"
-#include "PRFCreditsMenu.generated.h"
+#include "PRFControlsMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PRFUI_API UPRFCreditsMenu : public UPRFWidgetBasics
+class PRFUI_API UPRFControlsMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
 
@@ -18,6 +18,6 @@ protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
 
-	UPROPERTY(meta = (BindWidgetAnim), Transient)
-	TObjectPtr<UWidgetAnimation> NamesAnimation;
+	UPROPERTY(Meta = (BindWidget))
+	UButton* ControlsButton;
 };

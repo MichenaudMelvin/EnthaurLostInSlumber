@@ -1,18 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Menus/Pause/PRFOptionsMenu.h"
+#include "Menus/Options/PRFControlsMenu.h"
 
-void UPRFOptionsMenu::NativeConstruct()
+void UPRFControlsMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
-
-	
 }
 
-void UPRFOptionsMenu::NativeDestruct()
+void UPRFControlsMenu::NativeDestruct()
 {
 	Super::NativeDestruct();
-
-	
 }

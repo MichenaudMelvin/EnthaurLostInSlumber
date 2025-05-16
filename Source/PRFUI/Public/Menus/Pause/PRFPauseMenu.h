@@ -16,26 +16,27 @@ class PRFUI_API UPRFPauseMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
 
-public:
-
-	UFUNCTION()
-	static void TogglePauseMenu();
-
 protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
 
 	UFUNCTION()
 	void HandleMainMenuButton();
-	
+
 	UFUNCTION()
 	void HandleOptionsMenuButton();
+
+	UFUNCTION()
+	void HandleRestartCheckpointButton();
 
 	UPROPERTY(Meta = (BindWidget))
 	UButton* MainMenuButton;
 	
 	UPROPERTY(Meta = (BindWidget))
 	UButton* OptionsMenuButton;
+
+	UPROPERTY(Meta = (BindWidget))
+	UButton* RestartCheckpointButton;
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UWorld> MainMenuLevel;
