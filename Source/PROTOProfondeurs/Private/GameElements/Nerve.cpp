@@ -2,7 +2,6 @@
 
 
 #include "GameElements/Nerve.h"
-#include "FCTween.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/Character.h"
 #include "GameElements/NerveReceptacle.h"
@@ -13,6 +12,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/CharacterSettings.h"
 #include "Player/FirstPersonController.h"
+#include "Saves/WorldSaves/WorldSave.h"
 
 ANerve::ANerve()
 {
@@ -62,7 +62,7 @@ void ANerve::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	ResetCables();
+	ResetCables(false);
 
 	if (StartCableLength > CableMaxExtension)
 	{
@@ -83,7 +83,7 @@ void ANerve::Tick(float DeltaSeconds)
 
 #pragma region Cables
 
-void ANerve::AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace, bool bCreateSplineMesh)
+void ANerve::AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace, bool bCreateSplineMesh, bool bAutoCorrect)
 {
 	int Index = SplineCable->GetNumberOfSplinePoints();
 	SplineCable->AddSplinePoint(SpawnLocation, CoordinateSpace, false);
@@ -91,7 +91,7 @@ void ANerve::AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinat
 
 	// correct the location of the last spline point
 	int LastIndex = Index - 1;
-	if (LastIndex > 0)
+	if (LastIndex > 0 && bAutoCorrect)
 	{
 		SplineCable->SetLocationAtSplinePoint(LastIndex, SpawnLocation, CoordinateSpace, false);
 	}
@@ -310,7 +310,7 @@ bool ANerve::CanCurrentCableBeRemoved()
 	return true;
 }
 
-void ANerve::ResetCables()
+void ANerve::ResetCables(bool bHardReset)
 {
 	SplineCable->ClearSplinePoints(true);
 	for (TObjectPtr<USplineMeshComponent> SplineMesh : SplineMeshes)
@@ -324,6 +324,11 @@ void ANerve::ResetCables()
 	SplineMeshes.Empty();
 
 	ImpactNormals.Empty();
+
+	if (bHardReset)
+	{
+		return;
+	}
 
 	FVector CableEndLocation = FVector(StartCableLength, 0.0f, 0.0f);
 
@@ -386,7 +391,7 @@ void ANerve::FinishRetractCable()
 		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
 	}
 
-	ResetCables();
+	ResetCables(false);
 }
 
 FVector ANerve::GetLastCableLocation(const ESplineCoordinateSpace::Type& CoordinateSpace) const
@@ -484,6 +489,8 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 	InteractableComponent->RemoveInteractable(NerveBall);
 }
 
+#pragma endregion
+
 void ANerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
@@ -504,6 +511,55 @@ void ANerve::OnExitWeakZone_Implementation()
 	}
 }
 
+#pragma region Save
+
+FGameElementData& ANerve::SaveGameElement(UWorldSave* CurrentWorldSave)
+{
+	FNerveData Data;
+
+	for (int32 i = 0; i < SplineCable->GetNumberOfSplinePoints(); i++)
+	{
+		FVector PointLocation = SplineCable->GetLocationAtSplinePoint(i, ESplineCoordinateSpace::Local);
+
+		Data.SplinePointsLocations.Add(PointLocation);
+	}
+
+	Data.ImpactNormals = ImpactNormals;
+	return CurrentWorldSave->NerveData.Add(GetName(), Data);
+}
+
+void ANerve::LoadGameElement(const FGameElementData& GameElementData)
+{
+	const FNerveData& Data = static_cast<const FNerveData&>(GameElementData);
+
+	ResetCables(true);
+
+	for (const FVector& SplinePointLocation : Data.SplinePointsLocations)
+	{
+		AddSplinePoint(SplinePointLocation, ESplineCoordinateSpace::Local, false, false);
+	}
+
+	FVector LastPointLocation = Data.SplinePointsLocations[Data.SplinePointsLocations.Num() - 1];
+	NerveBall->SetRelativeLocation(LastPointLocation);
+
+	for (int i = 0; i < SplineCable->GetNumberOfSplinePoints(); i++)
+	{
+		if ((i + 1) >= SplineCable->GetNumberOfSplinePoints())
+		{
+			break;
+		}
+
+		FVector StartLocation = SplineCable->GetLocationAtSplinePoint(i, ESplineCoordinateSpace::Local);
+		FVector EndLocation = SplineCable->GetLocationAtSplinePoint(i + 1, ESplineCoordinateSpace::Local);
+
+		AddSplineMesh(StartLocation, EndLocation, ESplineCoordinateSpace::Local);
+	}
+
+	ImpactNormals = Data.ImpactNormals;
+}
+
+#pragma endregion
+
 void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 {
 	CurrentAttachedReceptacle = Receptacle;
@@ -521,5 +577,3 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 	UpdateLastSplinePointLocation(Receptacle->GetActorLocation());
 	InteractableComponent->AddInteractable(NerveBall);
 }
-
-#pragma endregion

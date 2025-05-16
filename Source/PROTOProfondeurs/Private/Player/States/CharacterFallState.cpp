@@ -116,16 +116,23 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 	// emit noise on landing
 	EmitNoise();
 
-	SetProjectionVelocity(FVector::ZeroVector);
+	SetProjectionVelocity(FVector::ZeroVector, false);
 	StateMachine->ChangeState(ECharacterStateID::Idle);
 }
 
-void UCharacterFallState::SetProjectionVelocity(const FVector& Velocity)
+void UCharacterFallState::SetProjectionVelocity(const FVector& Velocity, bool bOverrideVelocity)
 {
 	ProjectionVelocity = Velocity;
+	bOverrideCurrentVelocity = bOverrideVelocity;
 }
 
 void UCharacterFallState::LaunchCharacter() const
 {
-	Character->GetCharacterMovement()->Velocity += ProjectionVelocity;
+	FVector TargetVelocity = ProjectionVelocity;
+	if (!bOverrideCurrentVelocity)
+	{
+		TargetVelocity += Character->GetCharacterMovement()->Velocity;
+	}
+
+	Character->GetCharacterMovement()->Velocity = TargetVelocity;
 }
