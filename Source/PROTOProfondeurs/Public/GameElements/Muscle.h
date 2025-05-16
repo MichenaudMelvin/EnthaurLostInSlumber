@@ -128,7 +128,7 @@ protected:
 	TObjectPtr<class UArrowComponent> BounceDirectionBack;
 #endif
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Physics")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics")
 	FVector TraceExtent = FVector(-300.0f, 0.0f, 50.0f);
 
 	UPROPERTY(EditDefaultsOnly, Category = "Physics")
