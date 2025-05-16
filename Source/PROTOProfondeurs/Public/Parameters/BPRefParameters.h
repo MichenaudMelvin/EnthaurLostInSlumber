@@ -6,6 +6,18 @@
 #include "Engine/DeveloperSettings.h"
 #include "BPRefParameters.generated.h"
 
+USTRUCT(Blueprintable)
+struct FDuoText
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	FText AreaZone;
+
+	UPROPERTY(EditAnywhere)
+	FText RegionZone;
+};
+
 /**
  * 
  */
@@ -13,8 +25,11 @@ UCLASS(Config = Game, DefaultConfig, meta = (DisplayName = "Blueprint References
 class PROTOPROFONDEURS_API UBPRefParameters : public UDeveloperSettings
 {
 	GENERATED_BODY()
-
+	
 public:
+	UPROPERTY(Config, EditAnywhere)
+	TMap<TSoftObjectPtr<UWorld>, FDuoText> LevelNames;
+	
 	UPROPERTY(Config, EditAnywhere)
 	TSubclassOf<AActor> ElectricityFeedback;
 };
