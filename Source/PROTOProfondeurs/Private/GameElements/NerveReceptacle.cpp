@@ -19,11 +19,17 @@ ANerveReceptacle::ANerveReceptacle()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
+	RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	SetRootComponent(RootComp);
+	RootComp->SetMobility(EComponentMobility::Static);
+
 	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Receptacle"));
-	SetRootComponent(NerveReceptacle);
+	NerveReceptacle->SetupAttachment(RootComp);
+	NerveReceptacle->SetMobility(EComponentMobility::Static);
 
 	Collision = CreateDefaultSubobject<USphereComponent>("Collision");
 	Collision->SetupAttachment(NerveReceptacle);
+	Collision->SetMobility(EComponentMobility::Static);
 }
 
 void ANerveReceptacle::BeginPlay()
