@@ -32,6 +32,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+#if WITH_EDITORONLY_DATA
+	virtual void OnConstruction(const FTransform& Transform) override;
+#endif
+
 	UPROPERTY(EditDefaultsOnly, Category = "Components")
 	TObjectPtr<USceneComponent> RootComp;
 
@@ -40,6 +44,17 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
 	TObjectPtr<USphereComponent> Collision;
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Set visibility to true if you want to edit it
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "NerveEnd")
+	TObjectPtr<UStaticMeshComponent> NerveEndEditorMesh;
+#endif
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "NerveEnd")
+	FTransform NerveEndTargetTransform;
 
 	void PlayElectricityAnimation(ANerve* Nerve);
 
@@ -68,6 +83,8 @@ public:
 	// Create Event
 	UFUNCTION(BlueprintImplementableEvent, Category = "Nerve")
 	void OnNerveConnect();
+
+	const FTransform& GetAttachTransform() const {return NerveEndTargetTransform;}
 
 	UPROPERTY(BlueprintAssignable, Category = "Nerve")
 	FOnNerveAnimationFinished OnNerveAnimationFinished;

@@ -47,6 +47,12 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+#if WITH_EDITOR
+	virtual void PostInitProperties() override;
+
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+
 	virtual void Tick(float DeltaSeconds) override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -64,14 +70,20 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float StartCableLength = 100.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableMaxExtension = 1000.0f;
 
-	void AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World, bool bCreateSplineMesh = true, bool bAutoCorrect = true);
+	void AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World, bool bAutoCorrect = true) const;
 
-	void AddSplineMesh(const FVector& StartLocation, const FVector& EndLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World);
+	void RemoveLastSplinePoint() const;
 
-	void RemoveLastSplinePoint();
+	void AddSplineMesh();
+
+	void RemoveSplineMesh();
+
+	void UpdateSplineMeshes(bool bUseNerveBallAsEndPoint);
+
+	void BuildSplineMeshes();
 
 	/**
 	 * @brief 
@@ -102,8 +114,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	TEnumAsByte<ESplineMeshAxis::Type> CableForwardAxis = ESplineMeshAxis::Z;
 
+	UPROPERTY(VisibleDefaultsOnly, Category = "Cables|Apperance", meta = (Units = "cm"))
+	float SingleCableLength = 10.0f;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
-	FVector2D CableScale = FVector2D(0.1f, 0.1f);
+	FVector2D CableScale = FVector2D(1.0f);
 
 	/**
 	 * @brief 
@@ -132,6 +147,8 @@ public:
 
 	float GetCableLength() const;
 
+	float GetNerveBallLength() const;
+
 	float GetCableMaxExtension() const {return CableMaxExtension;}
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
@@ -156,6 +173,9 @@ public:
 	void DetachNerveBall();
 
 	UStaticMeshComponent* GetNerveBall() const {return NerveBall;}
+
+	UPROPERTY(EditDefaultsOnly, Category = "NerveBall")
+	FRotator NerveBallRotationDelta = FRotator(0.0f, 90.0f, 0.0f);
 
 	/**
 	 * @brief Is attached to something else

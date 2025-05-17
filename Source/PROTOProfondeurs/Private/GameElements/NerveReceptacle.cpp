@@ -27,7 +27,18 @@ ANerveReceptacle::ANerveReceptacle()
 	NerveReceptacle->SetupAttachment(RootComp);
 	NerveReceptacle->SetMobility(EComponentMobility::Static);
 
-	Collision = CreateDefaultSubobject<USphereComponent>("Collision");
+#if WITH_EDITORONLY_DATA
+	NerveEndEditorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EditorNerveEnd"));
+	NerveEndEditorMesh->SetupAttachment(RootComponent);
+	NerveEndEditorMesh->SetMobility(EComponentMobility::Static);
+	NerveEndEditorMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	NerveEndEditorMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
+	NerveEndEditorMesh->SetVisibility(true, true);
+	NerveEndEditorMesh->bHiddenInGame = true;
+	NerveEndEditorMesh->bIsEditorOnly = true;
+#endif
+
+	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
 	Collision->SetupAttachment(NerveReceptacle);
 	Collision->SetMobility(EComponentMobility::Static);
 }
@@ -37,7 +48,18 @@ void ANerveReceptacle::BeginPlay()
 	Super::BeginPlay();
 
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &ANerveReceptacle::TriggerEnter);
+
+	NerveEndTargetTransform *= GetActorTransform();
 }
+
+#if WITH_EDITORONLY_DATA
+void ANerveReceptacle::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	NerveEndTargetTransform = NerveEndEditorMesh->GetRelativeTransform();
+}
+#endif
 
 void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                     UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -49,7 +71,16 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 
 		OnNerveConnect();
 
-		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
+		ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+		if (Character)
+		{
+			UPlayerToNervePhysicConstraint* Constraint = Character->GetComponentByClass<UPlayerToNervePhysicConstraint>();
+
+			if (Constraint)
+			{
+				Constraint->ReleasePlayer();
+			}
+		}
 
 		PlayElectricityAnimation(Nerve);
 		UAkGameplayStatics::PostEventAtLocation(ReceptacleEnabledNoise, NerveReceptacle->GetComponentLocation(), NerveReceptacle->GetComponentRotation(), this);
@@ -72,7 +103,7 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 			{
 				continue;
 			}
-			
+
 			if (Actor->Implements<UNerveReactive>())
 			{
 				if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
