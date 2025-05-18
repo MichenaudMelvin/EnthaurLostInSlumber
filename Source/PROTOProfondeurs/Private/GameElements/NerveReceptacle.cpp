@@ -33,7 +33,7 @@ ANerveReceptacle::ANerveReceptacle()
 	NerveEndEditorMesh->SetMobility(EComponentMobility::Static);
 	NerveEndEditorMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	NerveEndEditorMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
-	NerveEndEditorMesh->SetVisibility(true, true);
+	NerveEndEditorMesh->SetVisibility(false, true);
 	NerveEndEditorMesh->bHiddenInGame = true;
 	NerveEndEditorMesh->bIsEditorOnly = true;
 #endif

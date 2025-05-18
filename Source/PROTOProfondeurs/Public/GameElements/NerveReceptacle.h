@@ -53,7 +53,7 @@ protected:
 	TObjectPtr<UStaticMeshComponent> NerveEndEditorMesh;
 #endif
 
-	UPROPERTY(VisibleDefaultsOnly, Category = "NerveEnd")
+	UPROPERTY()
 	FTransform NerveEndTargetTransform;
 
 	void PlayElectricityAnimation(ANerve* Nerve);
