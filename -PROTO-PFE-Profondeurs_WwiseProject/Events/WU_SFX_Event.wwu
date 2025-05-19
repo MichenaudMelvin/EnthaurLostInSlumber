@@ -12,21 +12,21 @@
 						<Action Name="" ID="{583FF3C7-98BB-47A5-B39E-518212982973}" ShortID="9748493">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_NerveDoor_Layer_Gore" ID="{69C5574A-0513-4AA1-BD1F-4586EDB6C46A}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_NerveDoor_Layer_Gore" ID="{B432CB6A-E6C2-431C-BF0C-2F92B0B86EC2}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{3C8DC9DB-D057-4058-8FC7-BD8195297DA3}" ShortID="132141864">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_NerveDoor_Layer_Gore_02" ID="{8D16A39B-A219-44DE-A1FB-C094B93C99A3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_NerveDoor_Layer_Gore02" ID="{D37C7DC7-C7FD-4DB6-B0D2-24D275C0C615}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{AB1421AD-BC62-4A96-A951-4ADE165D6EE9}" ShortID="745563349">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_NerveDoor_Layer_Woosh" ID="{A3E04ED4-31B8-42C1-918A-E1935C4D7115}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_NerveDoor_Layer_Woosh" ID="{12E350A0-490D-44DD-AB2A-BF6359C25196}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -37,14 +37,14 @@
 						<Action Name="" ID="{D95B2F27-1E15-439D-98B6-5700072984EB}" ShortID="500971963">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_Nerve_Electricty" ID="{B2F4C51B-6452-4506-8085-F9E4ED6EE8FD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Nerve_Electricty" ID="{54581EB4-1ADB-496A-B5BA-FCCB5A0B8A0C}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{BAD99296-91AF-460E-B7D5-365B0619B33B}" ShortID="915367037">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_Nerve_Electricty_Start" ID="{A2CDDDAF-1F01-4524-92FB-D393BEA50067}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Nerve_Electricity_Start" ID="{D372AD29-7706-4EC5-8A7F-168DF8F3C829}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -55,7 +55,7 @@
 						<Action Name="" ID="{525AF5EE-E453-4337-B2C5-9037D0497C80}" ShortID="236191468">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_Nerve_Electricty_End" ID="{0DB4D706-54E1-4C8A-B15C-444822A4B513}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Nerve_Electricity_End" ID="{51D6799E-DE49-48E7-A465-1C77CD3D2C4A}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -65,7 +65,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_Nerve_Electricty" ID="{B2F4C51B-6452-4506-8085-F9E4ED6EE8FD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Nerve_Electricty" ID="{54581EB4-1ADB-496A-B5BA-FCCB5A0B8A0C}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -76,7 +76,7 @@
 						<Action Name="" ID="{BCEC5AE2-F796-495A-B6E9-E32AF3D17DAF}" ShortID="1066613147">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_RespawnTree_Activate" ID="{AB63227F-819B-407F-B5E5-C9A055895D74}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_RespawnTree_Activate" ID="{438892C4-9AD6-40E2-BCA7-FD3DF22F82ED}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -87,7 +87,7 @@
 						<Action Name="" ID="{480FB628-1C1A-426E-8647-18244DAAE685}" ShortID="780676031">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_NerveReceptacle_Activate" ID="{D0C7DD3F-14E5-44DF-AD73-10B5FA1DCD90}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_NerveReceptacle_Activate" ID="{C0FBFE25-26C8-4E2A-A2EC-F65CEB4361B3}" WorkUnitID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

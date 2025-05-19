@@ -11732,6 +11732,9 @@
 				<PhysicalFolder Path="Metadata">
 					<WorkUnit Name="Metadata" ID="{B6F4A62E-4F9B-45A6-B280-C80685E65296}" PersistMode="Standalone"/>
 				</PhysicalFolder>
+				<PhysicalFolder Path="Metadata\Master-Mixer Hierarchy">
+					<WorkUnit Name="Master-Mixer Hierarchy" ID="{4434BDDF-B75A-42E1-BDF6-C5D6E0ADD477}" PersistMode="Standalone"/>
+				</PhysicalFolder>
 				<PhysicalFolder Path="Mixing Sessions">
 					<WorkUnit Name="Mixing Sessions" ID="{6477AAF7-E365-4990-A392-E59B824B6418}" PersistMode="Standalone"/>
 				</PhysicalFolder>

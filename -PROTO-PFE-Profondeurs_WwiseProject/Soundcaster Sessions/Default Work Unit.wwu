@@ -1,41 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{CA4613EE-58A8-4B0E-A14B-832BBBBA241E}" SchemaVersion="123">
+<WwiseDocument Type="WorkUnit" ID="{AC0C182E-A3AF-445F-905D-D6921674D230}" SchemaVersion="123">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{CA4613EE-58A8-4B0E-A14B-832BBBBA241E}" PersistMode="Standalone">
-			<ChildrenList>
-<<<<<<< Updated upstream
-				<SoundcasterSession Name="New Soundcaster Session" ID="{14DBD87B-1FEE-4408-8889-60CC189B9217}">
-					<ModuleList>
-						<Module>
-							<ObjectRef Name="Play_SFX_NerveReceptacle_Electricty" ID="{5C28218F-535A-43B7-9CD4-681EEC44DF40}" WorkUnitID="{DDFD3F52-B9F3-4C60-80F3-65B6E8F007D7}"/>
-							<Position X="0" Y="0"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="Play_SFX_NerveReceptacle_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}" WorkUnitID="{DDFD3F52-B9F3-4C60-80F3-65B6E8F007D7}"/>
-							<Position X="1" Y="0"/>
-						</Module>
-=======
-				<SoundcasterSession Name="New Soundcaster Session" ID="{8FB111CC-FD1C-4CBB-A428-A510D2FC5E01}">
-					<ModuleList>
-						<Module>
-							<ObjectRef Name="Play_SFX_NerveDoor" ID="{34192086-B087-4B06-AAF6-534C30178714}" WorkUnitID="{15A3786D-AB7C-4A75-90C7-1994BA914320}"/>
-							<Position X="0" Y="0"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="Play_SFX_Nerve_Electricty" ID="{3AE3BCA0-CDF7-45FE-A720-B0F2F55E1973}" WorkUnitID="{15A3786D-AB7C-4A75-90C7-1994BA914320}"/>
-							<Position X="1" Y="0"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="Play_SFX_Nerve_Electricty_End" ID="{083E9740-3D69-4D85-8279-79CD7F061365}" WorkUnitID="{15A3786D-AB7C-4A75-90C7-1994BA914320}"/>
-							<Position X="2" Y="0"/>
-						</Module>
->>>>>>> Stashed changes
-					</ModuleList>
-					<RTPCValueList ShowAll="true"/>
-					<CurrentStateList ShowAll="true"/>
-					<CurrentSwitchList ShowAll="true"/>
-				</SoundcasterSession>
-			</ChildrenList>
-		</WorkUnit>
+		<WorkUnit Name="Default Work Unit" ID="{AC0C182E-A3AF-445F-905D-D6921674D230}" PersistMode="Standalone"/>
 	</SoundcasterSessions>
 </WwiseDocument>

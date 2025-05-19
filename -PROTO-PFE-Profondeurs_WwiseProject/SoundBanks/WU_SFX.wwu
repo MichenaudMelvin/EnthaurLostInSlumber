@@ -1,35 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<WwiseDocument Type="WorkUnit" ID="{C913C2E2-8DEF-458F-BA42-2A93FC6D22BF}" SchemaVersion="123">
+<WwiseDocument Type="WorkUnit" ID="{2ACFAC0E-13DA-4B38-9C6F-44DF6D3CE292}" SchemaVersion="123">
 	<SoundBanks>
-		<WorkUnit Name="WU_SFX" ID="{C913C2E2-8DEF-458F-BA42-2A93FC6D22BF}" PersistMode="Standalone">
+		<WorkUnit Name="WU_SFX" ID="{2ACFAC0E-13DA-4B38-9C6F-44DF6D3CE292}" PersistMode="Standalone">
 			<PropertyList>
 				<Property Name="Color" Type="int16" Value="10"/>
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
 			</PropertyList>
 			<ChildrenList>
-				<SoundBank Name="SB_SFX" ID="{13465604-2D0A-476E-980D-31B04FA1E95E}">
-					<ObjectInclusionList>
-						<ObjectRef Name="WU_Temp_Wil" ID="{DDFD3F52-B9F3-4C60-80F3-65B6E8F007D7}" WorkUnitID="{DDFD3F52-B9F3-4C60-80F3-65B6E8F007D7}" Origin="Manual" Filter="7"/>
-=======
-=======
->>>>>>> Stashed changes
-<WwiseDocument Type="WorkUnit" ID="{A7E406C8-BC55-4ABA-BC0A-B2505FC43716}" SchemaVersion="123">
-	<SoundBanks>
-		<WorkUnit Name="WU_SFX" ID="{A7E406C8-BC55-4ABA-BC0A-B2505FC43716}" PersistMode="Standalone">
-			<PropertyList>
-				<Property Name="Color" Type="int16" Value="9"/>
-				<Property Name="OverrideColor" Type="bool" Value="True"/>
-			</PropertyList>
-			<ChildrenList>
-				<SoundBank Name="SB_SFX" ID="{B2705430-5243-42A9-9989-E54FCB49A52B}">
+				<SoundBank Name="SB_SFX" ID="{66B0B6FC-F871-41C6-9A61-01BBBF487077}">
 					<ObjectInclusionList>
 						<ObjectRef Name="WU_SFX_Event" ID="{15A3786D-AB7C-4A75-90C7-1994BA914320}" WorkUnitID="{15A3786D-AB7C-4A75-90C7-1994BA914320}" Origin="Manual" Filter="7"/>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

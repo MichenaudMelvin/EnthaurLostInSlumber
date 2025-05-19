@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" SchemaVersion="123">
+<WwiseDocument Type="WorkUnit" ID="{B7E05470-6A2D-495E-9B10-9B5F0A2687D8}" SchemaVersion="123">
 	<Events>
-		<WorkUnit Name="WU_MC_Event" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" PersistMode="Standalone">
+		<WorkUnit Name="WU_MC_Event" ID="{B7E05470-6A2D-495E-9B10-9B5F0A2687D8}" PersistMode="Standalone">
 			<PropertyList>
 				<Property Name="Color" Type="int16" Value="13"/>
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
 			</PropertyList>
 			<ChildrenList>
-				<Event Name="Play_SW_MC_FS_Speed" ID="{40C0DABC-E260-4BE7-9895-167ACF357472}">
+				<Event Name="Play_MC_FS_Speed" ID="{C14B0F37-3A60-448F-AEF5-0042A45EBF5F}">
 					<ChildrenList>
-						<Action Name="" ID="{2555F2E3-B5D4-49B3-AFAE-E44102D349B0}" ShortID="1016873512">
+						<Action Name="" ID="{D7C2195A-8BAE-4F71-A6A4-FF9BA8C00D10}" ShortID="1016873513">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SW_MC_FS_Speed" ID="{04A75913-5906-4469-B94A-A2F94F445B6A}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+									<ObjectRef Name="MC_FS_Speed" ID="{0BFFF88A-D2F4-460D-A0C9-DEC3D9C208F5}" WorkUnitID="{26B86829-2CCE-4F52-B6DC-153F8386BB57}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_MC_Land_Material" ID="{27009C7D-31EB-42D4-BEA8-E873A733B256}">
+					<ChildrenList>
+						<Action Name="" ID="{4EE8B4A4-94B4-4312-9697-C32B0138E5B7}" ShortID="810462603">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MC_Land" ID="{7420FA85-A1FD-4E81-8819-2FD98454673B}" WorkUnitID="{26B86829-2CCE-4F52-B6DC-153F8386BB57}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_MC_Jump_Material" ID="{84B16784-5C30-4EFA-A338-4ACE6DA19306}">
+					<ChildrenList>
+						<Action Name="" ID="{9FA0D5B6-DFF7-4196-9070-A44C3C57DFD0}" ShortID="1072651831">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MC_Jump" ID="{B90C533F-5792-4168-8991-CEE99E8CED07}" WorkUnitID="{26B86829-2CCE-4F52-B6DC-153F8386BB57}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
