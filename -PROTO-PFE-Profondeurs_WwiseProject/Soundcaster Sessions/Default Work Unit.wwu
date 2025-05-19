@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{AC0C182E-A3AF-445F-905D-D6921674D230}" SchemaVersion="123">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{AC0C182E-A3AF-445F-905D-D6921674D230}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{AC0C182E-A3AF-445F-905D-D6921674D230}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="New Soundcaster Session" ID="{CA9EC6FD-4248-4EA9-A003-EC11A3CF2A01}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Play_MC_FS_Speed" ID="{C14B0F37-3A60-448F-AEF5-0042A45EBF5F}" WorkUnitID="{B7E05470-6A2D-495E-9B10-9B5F0A2687D8}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_SFX_NerveDoor" ID="{34192086-B087-4B06-AAF6-534C30178714}" WorkUnitID="{15A3786D-AB7C-4A75-90C7-1994BA914320}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+					</CurrentSwitchList>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundcasterSessions>
 </WwiseDocument>

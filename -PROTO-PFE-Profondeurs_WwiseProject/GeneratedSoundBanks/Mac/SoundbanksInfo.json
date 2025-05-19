@@ -1,9 +1,17 @@
 {
  "SoundBanksInfo": {
-  "Platform": "Windows",
-  "BasePlatform": "Windows",
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
   "SchemaVersion": "16",
   "SoundBankVersion": "154",
+  "RootPaths": {
+   "ProjectRoot": "../..",
+   "SourceFilesRoot": "../../.cache",
+   "SoundBanksRoot": ".",
+   "ExternalSourcesInputFile": "",
+   "ExternalSourcesOutputRoot": "."
+  },
+  "DialogueEvents": [],
   "SoundBanks": [
    {
     "Id": "692246605",
@@ -1147,8 +1155,420 @@
       ]
      }
     ]
+   },
+   {
+    "Id": "1006919462",
+    "Type": "User",
+    "GUID": "{66B0B6FC-F871-41C6-9A61-01BBBF487077}",
+    "Color": "10",
+    "Language": "SFX",
+    "Hash": "{BB01623F-3A8D-6027-8E09-607C52409114}",
+    "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
+    "ShortName": "SB_SFX",
+    "Path": "SB_SFX.bnk",
+    "Media": [
+     {
+      "Id": "522983",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Woosh_01.wav",
+      "CachePath": "64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem"
+     },
+     {
+      "Id": "12025278",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty_End_03.wav",
+      "CachePath": "B8/{B87519EA-3233-9404-CC5B-7614FB577829}.wem"
+     },
+     {
+      "Id": "126322021",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty_Start_02.wav",
+      "CachePath": "92/{92367D10-ADE4-87A4-5A9F-84C3FEBDF77B}.wem"
+     },
+     {
+      "Id": "184797821",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore02_01.wav",
+      "CachePath": "0C/{0C4F2FF8-84F9-5292-7664-9D39D5421D77}.wem"
+     },
+     {
+      "Id": "240262798",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty_End_02.wav",
+      "CachePath": "6C/{6CDE759A-F0D5-D1A2-D2D9-8ED54BA405AA}.wem"
+     },
+     {
+      "Id": "265556296",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore_03.wav",
+      "CachePath": "88/{88B8046C-0E94-4C92-730C-BF082D2A0FE6}.wem"
+     },
+     {
+      "Id": "328476057",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Activate_03.wav",
+      "CachePath": "D0/{D0701CA0-7CE7-60C4-767D-7C195B806934}.wem"
+     },
+     {
+      "Id": "342833816",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Woosh_03.wav",
+      "CachePath": "64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem"
+     },
+     {
+      "Id": "356409417",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Activate_02.wav",
+      "CachePath": "49/{497B3F20-4F5B-CB9D-6EDC-1B072F060D09}.wem"
+     },
+     {
+      "Id": "358034565",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore_01.wav",
+      "CachePath": "0D/{0D479D43-B41C-862C-76C2-72501D8A01DA}.wem"
+     },
+     {
+      "Id": "397292227",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty.wav",
+      "CachePath": "A8/{A878E234-6AC9-A8C3-F03D-20A0CCDD176E}.wem"
+     },
+     {
+      "Id": "481171115",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Activate_01.wav",
+      "CachePath": "58/{5830F4CD-0B1F-E53A-6A51-AD070F81430D}.wem"
+     },
+     {
+      "Id": "491565413",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Activate_04.wav",
+      "CachePath": "9F/{9FCF74CF-CB73-5BD6-4578-C99A22AA3F1B}.wem"
+     },
+     {
+      "Id": "540356452",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_RespawnTree_Activate.wav",
+      "CachePath": "00/{000E1002-DACC-DA1B-A8AC-149366E6DC95}.wem"
+     },
+     {
+      "Id": "562674167",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore02_02.wav",
+      "CachePath": "EB/{EB0451B1-D6CB-EDF7-4BFC-D9F6118B8695}.wem"
+     },
+     {
+      "Id": "781147857",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty_Start_04.wav",
+      "CachePath": "B4/{B4554BEB-551A-E09C-08AA-EBB172FD9DFA}.wem"
+     },
+     {
+      "Id": "789850910",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Woosh_02.wav",
+      "CachePath": "32/{324BC753-BD10-14C4-6ED0-6154433A111C}.wem"
+     },
+     {
+      "Id": "829506771",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty_Start_01.wav",
+      "CachePath": "06/{06DC2696-05A3-E883-FA01-C1F75AE07A0A}.wem"
+     },
+     {
+      "Id": "901493228",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty_Start_03.wav",
+      "CachePath": "F8/{F80C3384-112A-6BD2-1FF0-5D567CD683BD}.wem"
+     },
+     {
+      "Id": "932990901",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore_02.wav",
+      "CachePath": "62/{62FB46FA-D514-F090-FBC8-FB54CCAC0928}.wem"
+     },
+     {
+      "Id": "936899185",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty_End_04.wav",
+      "CachePath": "BD/{BDD7D4B7-28A9-6A67-A573-E7C5995B60E0}.wem"
+     },
+     {
+      "Id": "993740584",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore02_03.wav",
+      "CachePath": "05/{05362565-F73F-EC7B-365C-49076F99EAEA}.wem"
+     },
+     {
+      "Id": "1032632636",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Electricty_End_01.wav",
+      "CachePath": "2C/{2C189CB9-C4F9-758E-0B0D-66559615A5A5}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1991849141",
+      "Name": "Play_SFX_Nerve_Electricty",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Nerve_Electricty",
+      "GUID": "{3AE3BCA0-CDF7-45FE-A720-B0F2F55E1973}",
+      "Color": "9",
+      "MaxAttenuation": "15000",
+      "DurationType": "OneShot",
+      "DurationMin": "5.9333334",
+      "DurationMax": "5.9333334",
+      "MediaRefs": [
+       {
+        "Id": "126322021"
+       },
+       {
+        "Id": "397292227"
+       },
+       {
+        "Id": "781147857"
+       },
+       {
+        "Id": "829506771"
+       },
+       {
+        "Id": "901493228"
+       }
+      ]
+     },
+     {
+      "Id": "2878690103",
+      "Name": "Play_SFX_Nerve_Electricty_End",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Nerve_Electricty_End",
+      "GUID": "{083E9740-3D69-4D85-8279-79CD7F061365}",
+      "Color": "9",
+      "MaxAttenuation": "15000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.17814584",
+      "DurationMax": "0.20677084",
+      "MediaRefs": [
+       {
+        "Id": "12025278"
+       },
+       {
+        "Id": "240262798"
+       },
+       {
+        "Id": "936899185"
+       },
+       {
+        "Id": "1032632636"
+       }
+      ]
+     },
+     {
+      "Id": "2772994470",
+      "Name": "Play_SFX_NerveDoor",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveDoor",
+      "GUID": "{34192086-B087-4B06-AAF6-534C30178714}",
+      "Color": "9",
+      "MaxAttenuation": "30000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.73333335",
+      "DurationMax": "0.73333335",
+      "MediaRefs": [
+       {
+        "Id": "522983"
+       },
+       {
+        "Id": "184797821"
+       },
+       {
+        "Id": "265556296"
+       },
+       {
+        "Id": "342833816"
+       },
+       {
+        "Id": "358034565"
+       },
+       {
+        "Id": "562674167"
+       },
+       {
+        "Id": "789850910"
+       },
+       {
+        "Id": "932990901"
+       },
+       {
+        "Id": "993740584"
+       }
+      ]
+     },
+     {
+      "Id": "1373430044",
+      "Name": "Play_SFX_NerveReceptacle_Activate",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Activate",
+      "GUID": "{7809CBBC-678C-4545-82B4-5B16F8BB5942}",
+      "Color": "9",
+      "MaxAttenuation": "15000",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3436875",
+      "DurationMax": "1.4142709",
+      "MediaRefs": [
+       {
+        "Id": "328476057"
+       },
+       {
+        "Id": "356409417"
+       },
+       {
+        "Id": "481171115"
+       },
+       {
+        "Id": "491565413"
+       }
+      ]
+     },
+     {
+      "Id": "3026607058",
+      "Name": "Play_SFX_RespawnTree_Activate",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_RespawnTree_Activate",
+      "GUID": "{BA60E76B-B5DB-4EA7-BB78-7B6CAA46A730}",
+      "Color": "9",
+      "DurationType": "OneShot",
+      "DurationMin": "3.6666667",
+      "DurationMax": "3.6666667",
+      "MediaRefs": [
+       {
+        "Id": "540356452"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "Id": "1355168291",
+    "Type": "User",
+    "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
+    "Language": "SFX",
+    "Hash": "{E44F8F21-3DF4-E3C0-E916-C9E8FBB06FAD}",
+    "ObjectPath": "Init",
+    "ShortName": "Init",
+    "Path": "Init.bnk",
+    "Plugins": {
+     "AudioDevices": [
+      {
+       "Id": "2317455096",
+       "Name": "No_Output",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\No_Output",
+       "GUID": "{DF563AD4-AF16-4B95-87CD-5C1861D07C3E}",
+       "LibName": "No Output",
+       "LibId": "11862023"
+      },
+      {
+       "Id": "3859886410",
+       "Name": "System",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\System",
+       "GUID": "{8EA8FBC0-75CB-480A-AF56-63363062FD17}",
+       "LibName": "System",
+       "LibId": "11403271"
+      }
+     ]
+    },
+    "Busses": [
+     {
+      "Id": "3677413232",
+      "Name": "Master_Bus",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master_Bus",
+      "GUID": "{1BB909D8-3BB9-453F-94DE-CE0C678C81BF}"
+     }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "675352309",
+      "Name": "SWG_MC_FS_Speed",
+      "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Speed",
+      "GUID": "{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}",
+      "Switches": [
+       {
+        "Id": "712161704",
+        "Name": "Run",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Speed\\Run",
+        "GUID": "{37199D4B-2906-4A43-ADE9-1164C8E55247}"
+       },
+       {
+        "Id": "2108779966",
+        "Name": "Walk",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Speed\\Walk",
+        "GUID": "{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"
+       }
+      ]
+     },
+     {
+      "Id": "2206848095",
+      "Name": "SWG_MC_FS_Material",
+      "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Material",
+      "GUID": "{983C266D-D7D3-4883-95CD-0BAE399BC4C5}",
+      "Switches": [
+       {
+        "Id": "1312110196",
+        "Name": "Muscle",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Material\\Muscle",
+        "GUID": "{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"
+       },
+       {
+        "Id": "1744723399",
+        "Name": "Bone",
+        "ObjectPath": "\\Switches\\Default Work Unit\\SWG_MC_FS_Material\\Bone",
+        "GUID": "{181A0A9E-1350-4650-9A67-C81EA9235993}"
+       }
+      ]
+     }
+    ]
    }
   ],
-  "FileHash": "{34E4D2FE-F66A-495D-541D-CF29CE39905D}"
+  "FileHash": "{1F63F3D8-DC48-B967-C202-BECB988F15E7}"
  }
 }

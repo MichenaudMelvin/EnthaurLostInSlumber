@@ -1,7 +1,7 @@
 {
  "SoundBanksInfo": {
-  "Platform": "Windows",
-  "BasePlatform": "Windows",
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
   "SchemaVersion": "16",
   "SoundBankVersion": "154",
   "SoundBanks": [
@@ -11,7 +11,7 @@
     "GUID": "{66B0B6FC-F871-41C6-9A61-01BBBF487077}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{93330970-C695-192D-9301-38B109AE1B40}",
+    "Hash": "{BB01623F-3A8D-6027-8E09-607C52409114}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -338,6 +338,6 @@
     ]
    }
   ],
-  "FileHash": "{881C4DC6-8A89-58B5-4FD9-B17D4D23F620}"
+  "FileHash": "{373E666E-9EE4-98D9-1E04-0B4778838A34}"
  }
 }

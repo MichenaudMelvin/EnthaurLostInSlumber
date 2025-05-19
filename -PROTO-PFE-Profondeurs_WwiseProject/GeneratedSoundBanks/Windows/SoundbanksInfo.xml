@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="154">
+	<RootPaths>
+		<ProjectRoot>../..</ProjectRoot>
+		<SourceFilesRoot>../../.cache</SourceFilesRoot>
+		<SoundBanksRoot>.</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>.</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<SoundBanks>
+		<SoundBank Id="692246605" Type="User" GUID="{27F746C9-36EA-4FFE-9352-1025D3A8A525}" Color="1" Language="SFX" Hash="{4228A830-55E5-2C1F-C4CF-FD1FC677A65E}">
+			<ObjectPath>\SoundBanks\WU_MC\SB_MC</ObjectPath>
+			<ShortName>SB_MC</ShortName>
+			<Path>SB_MC.bnk</Path>
+			<Media>
+				<File Id="865424" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_09.wav</ShortName>
+					<CachePath>4A/{4A868FC8-A597-BA4F-A50E-017960F5ACE8}.wem</CachePath>
+				</File>
+				<File Id="4616660" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_15.wav</ShortName>
+					<CachePath>57/{57F5C810-2AF2-95F3-5B57-AC685F75DAD6}.wem</CachePath>
+				</File>
+				<File Id="18225620" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_09.wav</ShortName>
+					<CachePath>1F/{1F996AB4-4AE2-2FF2-1FE5-E4374F1B7C6E}.wem</CachePath>
+				</File>
+				<File Id="21396945" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_07.wav</ShortName>
+					<CachePath>EE/{EE537AEC-C4D9-9271-744F-2E1DC6318E96}.wem</CachePath>
+				</File>
+				<File Id="26031415" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_14.wav</ShortName>
+					<CachePath>B0/{B09E6C93-78E4-13FD-1F61-8AE26C83DD3A}.wem</CachePath>
+				</File>
+				<File Id="27804146" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Bone_01.wav</ShortName>
+					<CachePath>86/{860565A0-5FED-93C4-4A74-C513FC513AAE}.wem</CachePath>
+				</File>
+				<File Id="39167879" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_10.wav</ShortName>
+					<CachePath>DC/{DCD7D7A5-7723-04C6-E102-C9708DFA9F56}.wem</CachePath>
+				</File>
+				<File Id="44936881" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_10.wav</ShortName>
+					<CachePath>D5/{D5172CF7-B52D-4E1D-C580-1D55EC241585}.wem</CachePath>
+				</File>
+				<File Id="48204044" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_01.wav</ShortName>
+					<CachePath>C9/{C911D27B-C3AE-B2C2-D025-3FC192B31EFC}.wem</CachePath>
+				</File>
+				<File Id="49415613" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_12.wav</ShortName>
+					<CachePath>8A/{8A5665E8-F546-E367-9B22-BFF58FEAC153}.wem</CachePath>
+				</File>
+				<File Id="53819117" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Bone_04.wav</ShortName>
+					<CachePath>C6/{C66FE921-B890-5286-F07F-449AB7425D64}.wem</CachePath>
+				</File>
+				<File Id="64797156" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_07.wav</ShortName>
+					<CachePath>2A/{2A708357-3DA4-9BA6-281D-63C5D7DC4D70}.wem</CachePath>
+				</File>
+				<File Id="75031681" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_05.wav</ShortName>
+					<CachePath>48/{48565B36-A0B2-BCE5-E68F-0EB2EC03FED9}.wem</CachePath>
+				</File>
+				<File Id="85836563" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_08.wav</ShortName>
+					<CachePath>C5/{C5AEB004-B67E-3EAE-3212-5288FDED62D1}.wem</CachePath>
+				</File>
+				<File Id="90042063" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_11.wav</ShortName>
+					<CachePath>D9/{D92D4F56-B731-C3CD-76F0-5C460193D924}.wem</CachePath>
+				</File>
+				<File Id="113098399" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_02.wav</ShortName>
+					<CachePath>BA/{BA16C7BC-6DB7-0442-D9DD-A8D4EA4E1D11}.wem</CachePath>
+				</File>
+				<File Id="126923168" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_01.wav</ShortName>
+					<CachePath>74/{746B96AC-1A4B-1E47-4FF8-64FFE7696538}.wem</CachePath>
+				</File>
+				<File Id="134143440" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Bone_01.wav</ShortName>
+					<CachePath>8B/{8B1672B3-8E1B-48A8-BC58-0718C87D5B19}.wem</CachePath>
+				</File>
+				<File Id="139895030" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_07.wav</ShortName>
+					<CachePath>C8/{C870E6AD-8786-05E2-0596-91DAF6D5525D}.wem</CachePath>
+				</File>
+				<File Id="141269047" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_01.wav</ShortName>
+					<CachePath>B1/{B114A58E-84E5-1A56-FE39-827F62049B1D}.wem</CachePath>
+				</File>
+				<File Id="158240972" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_12.wav</ShortName>
+					<CachePath>21/{214182C5-87EE-000F-3E01-77934A0E57D5}.wem</CachePath>
+				</File>
+				<File Id="169242833" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Bone_04.wav</ShortName>
+					<CachePath>7B/{7BB4014E-6216-0D17-CF85-620817C9A899}.wem</CachePath>
+				</File>
+				<File Id="170780132" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_12.wav</ShortName>
+					<CachePath>01/{01D80878-B128-A77B-2C96-184532EC48B8}.wem</CachePath>
+				</File>
+				<File Id="191768092" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_04.wav</ShortName>
+					<CachePath>12/{12F8FF9D-9A5C-968D-E864-59CCB4839F28}.wem</CachePath>
+				</File>
+				<File Id="209613214" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_10.wav</ShortName>
+					<CachePath>4B/{4B81A79B-5A52-84D6-DFC5-CDF62470CC7C}.wem</CachePath>
+				</File>
+				<File Id="219203467" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_02.wav</ShortName>
+					<CachePath>D7/{D70E1B12-EF74-03BA-51B6-25DB765BDA5C}.wem</CachePath>
+				</File>
+				<File Id="249922759" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_05.wav</ShortName>
+					<CachePath>84/{84643AE2-B7B0-1378-AAEB-B019504B868F}.wem</CachePath>
+				</File>
+				<File Id="289676508" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_03.wav</ShortName>
+					<CachePath>76/{76175A43-C381-A6FC-4F76-61CA8E73B145}.wem</CachePath>
+				</File>
+				<File Id="306494217" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Bone_02.wav</ShortName>
+					<CachePath>F8/{F883E809-0A45-DA91-400B-4051C318B082}.wem</CachePath>
+				</File>
+				<File Id="326341713" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_03.wav</ShortName>
+					<CachePath>6B/{6B3DEE4E-8648-0A4D-31C5-CE278D4347BB}.wem</CachePath>
+				</File>
+				<File Id="326609154" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_06.wav</ShortName>
+					<CachePath>F9/{F998E2A9-6E52-0E72-40A1-D301D3B1EB73}.wem</CachePath>
+				</File>
+				<File Id="335437524" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_01.wav</ShortName>
+					<CachePath>02/{02976D9F-A0EA-ED15-E0B7-697C35835CF9}.wem</CachePath>
+				</File>
+				<File Id="351157654" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_08.wav</ShortName>
+					<CachePath>E8/{E8154524-1160-C996-2220-52136CE342D3}.wem</CachePath>
+				</File>
+				<File Id="368497690" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_16.wav</ShortName>
+					<CachePath>AF/{AF09738F-9155-E0C8-561C-276A042FB87C}.wem</CachePath>
+				</File>
+				<File Id="372156198" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_11.wav</ShortName>
+					<CachePath>A0/{A0911792-D4D1-6666-C769-B3DE70B60F84}.wem</CachePath>
+				</File>
+				<File Id="381322851" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_04.wav</ShortName>
+					<CachePath>A6/{A6294FF7-5AB4-B1DD-D89E-00F2BA62954C}.wem</CachePath>
+				</File>
+				<File Id="409704508" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_07.wav</ShortName>
+					<CachePath>AC/{ACF6E869-A9BB-DF0D-3FE4-3B7C1B8BAA22}.wem</CachePath>
+				</File>
+				<File Id="426014558" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_08.wav</ShortName>
+					<CachePath>39/{393E8296-0604-BD08-621A-B3125B4A7B11}.wem</CachePath>
+				</File>
+				<File Id="445832861" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_13.wav</ShortName>
+					<CachePath>79/{798D4195-47DF-E54D-5954-DAC8B3F5BBF0}.wem</CachePath>
+				</File>
+				<File Id="455758033" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_02.wav</ShortName>
+					<CachePath>5B/{5B7111E4-FE76-179F-0C1B-97B2A719B9D5}.wem</CachePath>
+				</File>
+				<File Id="465936000" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Bone_02.wav</ShortName>
+					<CachePath>8F/{8F264F06-23FA-A412-6D74-677C97258AF7}.wem</CachePath>
+				</File>
+				<File Id="499394245" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_03.wav</ShortName>
+					<CachePath>93/{931F6C55-3803-288B-2FAC-D392CFB59DFB}.wem</CachePath>
+				</File>
+				<File Id="499478128" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Bone_05.wav</ShortName>
+					<CachePath>9D/{9D5F95AA-CC5A-0D64-456B-DBC742D7E838}.wem</CachePath>
+				</File>
+				<File Id="507062374" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Muscle_02.wav</ShortName>
+					<CachePath>95/{95884507-24CE-44C9-9E6B-2F33181F835E}.wem</CachePath>
+				</File>
+				<File Id="527433698" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_05.wav</ShortName>
+					<CachePath>5A/{5AC43E43-B24B-565D-03FC-D0A8D2D74DF7}.wem</CachePath>
+				</File>
+				<File Id="554230931" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Bone_03.wav</ShortName>
+					<CachePath>75/{751BF746-4991-5422-4BD1-7EAC39833416}.wem</CachePath>
+				</File>
+				<File Id="557399492" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_16.wav</ShortName>
+					<CachePath>A5/{A5C48996-C152-049A-7264-CC26E69CB694}.wem</CachePath>
+				</File>
+				<File Id="568458947" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Muscle_01.wav</ShortName>
+					<CachePath>7D/{7D0D756E-7831-2FFD-8B60-1CC0FB115D21}.wem</CachePath>
+				</File>
+				<File Id="584912307" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_15.wav</ShortName>
+					<CachePath>13/{137D6DEA-2722-EB57-3BD5-F84F78152F11}.wem</CachePath>
+				</File>
+				<File Id="594984793" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Muscle_04.wav</ShortName>
+					<CachePath>18/{187FFAEC-831A-F352-FDB5-ABB73806203F}.wem</CachePath>
+				</File>
+				<File Id="595159572" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_10.wav</ShortName>
+					<CachePath>26/{26E524C4-4305-4670-EE5D-F0037F913DDD}.wem</CachePath>
+				</File>
+				<File Id="606610821" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_04.wav</ShortName>
+					<CachePath>23/{23972B2C-C3BA-D228-25E5-F1C9EB006F41}.wem</CachePath>
+				</File>
+				<File Id="608072571" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_11.wav</ShortName>
+					<CachePath>10/{10F7A1EA-A109-89F1-A80C-ED80DACFF183}.wem</CachePath>
+				</File>
+				<File Id="618550872" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_06.wav</ShortName>
+					<CachePath>02/{02ED00FB-0B52-C759-E35D-F6B4FEC90AB0}.wem</CachePath>
+				</File>
+				<File Id="644603906" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_05.wav</ShortName>
+					<CachePath>BF/{BF8018F3-852E-D811-D002-B9EB2ADB34A7}.wem</CachePath>
+				</File>
+				<File Id="675205785" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_13.wav</ShortName>
+					<CachePath>09/{09981472-5BC6-3B2D-0508-BFB801EEE4BA}.wem</CachePath>
+				</File>
+				<File Id="679122207" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_14.wav</ShortName>
+					<CachePath>54/{54698A8E-7236-64B4-C034-649D6A775CE4}.wem</CachePath>
+				</File>
+				<File Id="696431518" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_14.wav</ShortName>
+					<CachePath>46/{46E8D283-DE88-CA31-A492-82A72DF1196C}.wem</CachePath>
+				</File>
+				<File Id="710832951" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_13.wav</ShortName>
+					<CachePath>09/{0982BA11-2923-679D-08E0-769F0319E43F}.wem</CachePath>
+				</File>
+				<File Id="716845234" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_13.wav</ShortName>
+					<CachePath>9E/{9EC7A0DE-AAE7-5FD0-B4B8-C6921FD50D7B}.wem</CachePath>
+				</File>
+				<File Id="718031896" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Bone_03.wav</ShortName>
+					<CachePath>AC/{AC9408D9-435A-2E7F-8A0B-4F2C6375FBBE}.wem</CachePath>
+				</File>
+				<File Id="719233919" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_06.wav</ShortName>
+					<CachePath>94/{9478F1FD-9CC4-B8C4-3474-6CBB8F005F01}.wem</CachePath>
+				</File>
+				<File Id="758644403" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_04.wav</ShortName>
+					<CachePath>3D/{3D90B064-46AD-3A68-6CEC-A3A8ADF40200}.wem</CachePath>
+				</File>
+				<File Id="766447555" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_04.wav</ShortName>
+					<CachePath>7D/{7DF60628-796F-B6B9-A66C-75F040800D15}.wem</CachePath>
+				</File>
+				<File Id="775988769" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_06.wav</ShortName>
+					<CachePath>4D/{4D7D06E3-AD35-A6B9-5879-24ABFBC88336}.wem</CachePath>
+				</File>
+				<File Id="790365557" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_15.wav</ShortName>
+					<CachePath>0D/{0DF316C8-3FC1-8007-7C74-507F3681C3E2}.wem</CachePath>
+				</File>
+				<File Id="827268574" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_14.wav</ShortName>
+					<CachePath>23/{2375A2B9-F5BC-F713-704E-35ECDDE0353C}.wem</CachePath>
+				</File>
+				<File Id="852774367" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_03.wav</ShortName>
+					<CachePath>84/{84D4D61E-44AB-5C89-F189-20BE0921FEFB}.wem</CachePath>
+				</File>
+				<File Id="855213530" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_03.wav</ShortName>
+					<CachePath>12/{127E52AD-E861-F73D-3ACD-12822CD13784}.wem</CachePath>
+				</File>
+				<File Id="866489966" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_09.wav</ShortName>
+					<CachePath>F2/{F270654B-31EC-8E20-27B1-8A593AB2503F}.wem</CachePath>
+				</File>
+				<File Id="882137770" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_05.wav</ShortName>
+					<CachePath>C8/{C8D00F5A-85BB-0F2A-309B-BDD47BA1C011}.wem</CachePath>
+				</File>
+				<File Id="883600696" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Muscle_12.wav</ShortName>
+					<CachePath>17/{17F792DF-8204-5FBF-F171-164CA3862F7B}.wem</CachePath>
+				</File>
+				<File Id="899537733" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_16.wav</ShortName>
+					<CachePath>B9/{B95733CF-B9CD-8B57-4FCE-935A13BF7DAC}.wem</CachePath>
+				</File>
+				<File Id="903693353" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_16.wav</ShortName>
+					<CachePath>5B/{5B9A3EF1-4276-AE88-9280-FE321E937370}.wem</CachePath>
+				</File>
+				<File Id="912551876" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Muscle_15.wav</ShortName>
+					<CachePath>52/{52FD8705-4F86-8F14-A80D-D08F372AAF2B}.wem</CachePath>
+				</File>
+				<File Id="940728896" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_02.wav</ShortName>
+					<CachePath>CE/{CE079F5E-1085-60DA-2056-AFCA0860371B}.wem</CachePath>
+				</File>
+				<File Id="955334714" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_08.wav</ShortName>
+					<CachePath>10/{10C7784B-D6EA-FCFC-8641-ED1FE2353934}.wem</CachePath>
+				</File>
+				<File Id="1002591678" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_01.wav</ShortName>
+					<CachePath>02/{02DADEB0-0FA6-43D0-D03E-F9337EE96A58}.wem</CachePath>
+				</File>
+				<File Id="1004957450" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_02.wav</ShortName>
+					<CachePath>8E/{8EACA651-8F61-C200-6B74-A678CDC2B6D8}.wem</CachePath>
+				</File>
+				<File Id="1018615854" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Muscle_03.wav</ShortName>
+					<CachePath>C5/{C5C5CEB7-8E6F-671E-56F2-0F32E611EEA3}.wem</CachePath>
+				</File>
+				<File Id="1020832499" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Walk_Bone_11.wav</ShortName>
+					<CachePath>47/{47476B0C-DF58-B614-884E-AA22C66607F4}.wem</CachePath>
+				</File>
+				<File Id="1071500613" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_FS_Run_Bone_09.wav</ShortName>
+					<CachePath>1F/{1F2E6F83-DA0F-E12B-419D-5524E070384E}.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="3376929836" Name="Play_MC_FS_Speed" ObjectPath="\Events\WU_MC_Event\Play_MC_FS_Speed" GUID="{C14B0F37-3A60-448F-AEF5-0042A45EBF5F}" Color="13" DurationType="OneShot" DurationMin="0.06710417" DurationMax="0.33397916">
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="675352309" Id="712161704" GUID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+							<Children>
+								<SwitchContainer>
+									<SwitchValue GroupType="Switch" GroupId="2206848095" Id="1312110196" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+									<MediaRefs>
+										<MediaRef Id="865424"/>
+										<MediaRef Id="44936881"/>
+										<MediaRef Id="64797156"/>
+										<MediaRef Id="90042063"/>
+										<MediaRef Id="158240972"/>
+										<MediaRef Id="219203467"/>
+										<MediaRef Id="335437524"/>
+										<MediaRef Id="426014558"/>
+										<MediaRef Id="675205785"/>
+										<MediaRef Id="679122207"/>
+										<MediaRef Id="766447555"/>
+										<MediaRef Id="775988769"/>
+										<MediaRef Id="855213530"/>
+										<MediaRef Id="882137770"/>
+										<MediaRef Id="903693353"/>
+										<MediaRef Id="912551876"/>
+									</MediaRefs>
+								</SwitchContainer>
+								<SwitchContainer>
+									<SwitchValue GroupType="Switch" GroupId="2206848095" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+									<MediaRefs>
+										<MediaRef Id="49415613"/>
+										<MediaRef Id="139895030"/>
+										<MediaRef Id="141269047"/>
+										<MediaRef Id="249922759"/>
+										<MediaRef Id="326609154"/>
+										<MediaRef Id="351157654"/>
+										<MediaRef Id="368497690"/>
+										<MediaRef Id="372156198"/>
+										<MediaRef Id="499394245"/>
+										<MediaRef Id="584912307"/>
+										<MediaRef Id="595159572"/>
+										<MediaRef Id="606610821"/>
+										<MediaRef Id="696431518"/>
+										<MediaRef Id="710832951"/>
+										<MediaRef Id="940728896"/>
+										<MediaRef Id="1071500613"/>
+									</MediaRefs>
+								</SwitchContainer>
+							</Children>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="675352309" Id="2108779966" GUID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"/>
+							<Children>
+								<SwitchContainer>
+									<SwitchValue GroupType="Switch" GroupId="2206848095" Id="1312110196" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+									<MediaRefs>
+										<MediaRef Id="4616660"/>
+										<MediaRef Id="18225620"/>
+										<MediaRef Id="21396945"/>
+										<MediaRef Id="26031415"/>
+										<MediaRef Id="39167879"/>
+										<MediaRef Id="48204044"/>
+										<MediaRef Id="75031681"/>
+										<MediaRef Id="85836563"/>
+										<MediaRef Id="113098399"/>
+										<MediaRef Id="126923168"/>
+										<MediaRef Id="170780132"/>
+										<MediaRef Id="191768092"/>
+										<MediaRef Id="209613214"/>
+										<MediaRef Id="289676508"/>
+										<MediaRef Id="409704508"/>
+										<MediaRef Id="445832861"/>
+										<MediaRef Id="455758033"/>
+										<MediaRef Id="527433698"/>
+										<MediaRef Id="557399492"/>
+										<MediaRef Id="608072571"/>
+										<MediaRef Id="618550872"/>
+										<MediaRef Id="716845234"/>
+										<MediaRef Id="719233919"/>
+										<MediaRef Id="758644403"/>
+										<MediaRef Id="790365557"/>
+										<MediaRef Id="827268574"/>
+										<MediaRef Id="852774367"/>
+										<MediaRef Id="866489966"/>
+										<MediaRef Id="883600696"/>
+										<MediaRef Id="899537733"/>
+										<MediaRef Id="955334714"/>
+										<MediaRef Id="1020832499"/>
+									</MediaRefs>
+								</SwitchContainer>
+								<SwitchContainer>
+									<SwitchValue GroupType="Switch" GroupId="2206848095" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+									<MediaRefs>
+										<MediaRef Id="21396945"/>
+										<MediaRef Id="26031415"/>
+										<MediaRef Id="126923168"/>
+										<MediaRef Id="170780132"/>
+										<MediaRef Id="191768092"/>
+										<MediaRef Id="209613214"/>
+										<MediaRef Id="455758033"/>
+										<MediaRef Id="527433698"/>
+										<MediaRef Id="618550872"/>
+										<MediaRef Id="716845234"/>
+										<MediaRef Id="790365557"/>
+										<MediaRef Id="852774367"/>
+										<MediaRef Id="866489966"/>
+										<MediaRef Id="899537733"/>
+										<MediaRef Id="955334714"/>
+										<MediaRef Id="1020832499"/>
+									</MediaRefs>
+								</SwitchContainer>
+							</Children>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="3573156123" Name="Play_MC_Jump_Material" ObjectPath="\Events\WU_MC_Event\Play_MC_Jump_Material" GUID="{84B16784-5C30-4EFA-A338-4ACE6DA19306}" Color="13" DurationType="OneShot" DurationMin="0.2" DurationMax="0.4">
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2206848095" Id="1312110196" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+							<MediaRefs>
+								<MediaRef Id="507062374"/>
+								<MediaRef Id="568458947"/>
+								<MediaRef Id="594984793"/>
+								<MediaRef Id="1018615854"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2206848095" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+							<MediaRefs>
+								<MediaRef Id="53819117"/>
+								<MediaRef Id="134143440"/>
+								<MediaRef Id="465936000"/>
+								<MediaRef Id="499478128"/>
+								<MediaRef Id="554230931"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="2361045894" Name="Play_MC_Land_Material" ObjectPath="\Events\WU_MC_Event\Play_MC_Land_Material" GUID="{27009C7D-31EB-42D4-BEA8-E873A733B256}" Color="13" DurationType="OneShot" DurationMin="0.16120833" DurationMax="0.29941666">
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2206848095" Id="1312110196" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+							<MediaRefs>
+								<MediaRef Id="326341713"/>
+								<MediaRef Id="381322851"/>
+								<MediaRef Id="644603906"/>
+								<MediaRef Id="1002591678"/>
+								<MediaRef Id="1004957450"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2206848095" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+							<MediaRefs>
+								<MediaRef Id="27804146"/>
+								<MediaRef Id="169242833"/>
+								<MediaRef Id="306494217"/>
+								<MediaRef Id="718031896"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+			</Events>
+			<SwitchGroups>
+				<SwitchGroup Id="675352309" Name="SWG_MC_FS_Speed" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Speed" GUID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}">
+					<Switches>
+						<Switch Id="712161704" Name="Run" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Speed\Run" GUID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<Switch Id="2108779966" Name="Walk" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Speed\Walk" GUID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="2206848095" Name="SWG_MC_FS_Material" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Material" GUID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}">
+					<Switches>
+						<Switch Id="1312110196" Name="Muscle" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Material\Muscle" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+						<Switch Id="1744723399" Name="Bone" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Material\Bone" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+		<SoundBank Id="1006919462" Type="User" GUID="{66B0B6FC-F871-41C6-9A61-01BBBF487077}" Color="10" Language="SFX" Hash="{93330970-C695-192D-9301-38B109AE1B40}">
+			<ObjectPath>\SoundBanks\WU_SFX\SB_SFX</ObjectPath>
+			<ShortName>SB_SFX</ShortName>
+			<Path>SB_SFX.bnk</Path>
+			<Media>
+				<File Id="522983" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Woosh_01.wav</ShortName>
+					<CachePath>64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem</CachePath>
+				</File>
+				<File Id="12025278" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty_End_03.wav</ShortName>
+					<CachePath>B8/{B87519EA-3233-9404-CC5B-7614FB577829}.wem</CachePath>
+				</File>
+				<File Id="126322021" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty_Start_02.wav</ShortName>
+					<CachePath>92/{92367D10-ADE4-87A4-5A9F-84C3FEBDF77B}.wem</CachePath>
+				</File>
+				<File Id="184797821" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore02_01.wav</ShortName>
+					<CachePath>0C/{0C4F2FF8-84F9-5292-7664-9D39D5421D77}.wem</CachePath>
+				</File>
+				<File Id="240262798" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty_End_02.wav</ShortName>
+					<CachePath>6C/{6CDE759A-F0D5-D1A2-D2D9-8ED54BA405AA}.wem</CachePath>
+				</File>
+				<File Id="265556296" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore_03.wav</ShortName>
+					<CachePath>88/{88B8046C-0E94-4C92-730C-BF082D2A0FE6}.wem</CachePath>
+				</File>
+				<File Id="328476057" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Activate_03.wav</ShortName>
+					<CachePath>D0/{D0701CA0-7CE7-60C4-767D-7C195B806934}.wem</CachePath>
+				</File>
+				<File Id="342833816" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Woosh_03.wav</ShortName>
+					<CachePath>64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem</CachePath>
+				</File>
+				<File Id="356409417" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Activate_02.wav</ShortName>
+					<CachePath>49/{497B3F20-4F5B-CB9D-6EDC-1B072F060D09}.wem</CachePath>
+				</File>
+				<File Id="358034565" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore_01.wav</ShortName>
+					<CachePath>0D/{0D479D43-B41C-862C-76C2-72501D8A01DA}.wem</CachePath>
+				</File>
+				<File Id="397292227" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty.wav</ShortName>
+					<CachePath>A8/{A878E234-6AC9-A8C3-F03D-20A0CCDD176E}.wem</CachePath>
+				</File>
+				<File Id="481171115" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Activate_01.wav</ShortName>
+					<CachePath>58/{5830F4CD-0B1F-E53A-6A51-AD070F81430D}.wem</CachePath>
+				</File>
+				<File Id="491565413" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Activate_04.wav</ShortName>
+					<CachePath>9F/{9FCF74CF-CB73-5BD6-4578-C99A22AA3F1B}.wem</CachePath>
+				</File>
+				<File Id="540356452" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_RespawnTree_Activate.wav</ShortName>
+					<CachePath>00/{000E1002-DACC-DA1B-A8AC-149366E6DC95}.wem</CachePath>
+				</File>
+				<File Id="562674167" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore02_02.wav</ShortName>
+					<CachePath>EB/{EB0451B1-D6CB-EDF7-4BFC-D9F6118B8695}.wem</CachePath>
+				</File>
+				<File Id="781147857" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty_Start_04.wav</ShortName>
+					<CachePath>B4/{B4554BEB-551A-E09C-08AA-EBB172FD9DFA}.wem</CachePath>
+				</File>
+				<File Id="789850910" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Woosh_02.wav</ShortName>
+					<CachePath>32/{324BC753-BD10-14C4-6ED0-6154433A111C}.wem</CachePath>
+				</File>
+				<File Id="829506771" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty_Start_01.wav</ShortName>
+					<CachePath>06/{06DC2696-05A3-E883-FA01-C1F75AE07A0A}.wem</CachePath>
+				</File>
+				<File Id="901493228" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty_Start_03.wav</ShortName>
+					<CachePath>F8/{F80C3384-112A-6BD2-1FF0-5D567CD683BD}.wem</CachePath>
+				</File>
+				<File Id="932990901" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore_02.wav</ShortName>
+					<CachePath>62/{62FB46FA-D514-F090-FBC8-FB54CCAC0928}.wem</CachePath>
+				</File>
+				<File Id="936899185" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty_End_04.wav</ShortName>
+					<CachePath>BD/{BDD7D4B7-28A9-6A67-A573-E7C5995B60E0}.wem</CachePath>
+				</File>
+				<File Id="993740584" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore02_03.wav</ShortName>
+					<CachePath>05/{05362565-F73F-EC7B-365C-49076F99EAEA}.wem</CachePath>
+				</File>
+				<File Id="1032632636" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Nerve_Electricty_End_01.wav</ShortName>
+					<CachePath>2C/{2C189CB9-C4F9-758E-0B0D-66559615A5A5}.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="1991849141" Name="Play_SFX_Nerve_Electricty" ObjectPath="\Events\WU_SFX_Event\Play_SFX_Nerve_Electricty" GUID="{3AE3BCA0-CDF7-45FE-A720-B0F2F55E1973}" Color="9" MaxAttenuation="15000" DurationType="OneShot" DurationMin="5.9333334" DurationMax="5.9333334">
+					<MediaRefs>
+						<MediaRef Id="126322021"/>
+						<MediaRef Id="397292227"/>
+						<MediaRef Id="781147857"/>
+						<MediaRef Id="829506771"/>
+						<MediaRef Id="901493228"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2878690103" Name="Play_SFX_Nerve_Electricty_End" ObjectPath="\Events\WU_SFX_Event\Play_SFX_Nerve_Electricty_End" GUID="{083E9740-3D69-4D85-8279-79CD7F061365}" Color="9" MaxAttenuation="15000" DurationType="OneShot" DurationMin="0.17814584" DurationMax="0.20677084">
+					<MediaRefs>
+						<MediaRef Id="12025278"/>
+						<MediaRef Id="240262798"/>
+						<MediaRef Id="936899185"/>
+						<MediaRef Id="1032632636"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2772994470" Name="Play_SFX_NerveDoor" ObjectPath="\Events\WU_SFX_Event\Play_SFX_NerveDoor" GUID="{34192086-B087-4B06-AAF6-534C30178714}" Color="9" MaxAttenuation="30000" DurationType="OneShot" DurationMin="0.73333335" DurationMax="0.73333335">
+					<MediaRefs>
+						<MediaRef Id="522983"/>
+						<MediaRef Id="184797821"/>
+						<MediaRef Id="265556296"/>
+						<MediaRef Id="342833816"/>
+						<MediaRef Id="358034565"/>
+						<MediaRef Id="562674167"/>
+						<MediaRef Id="789850910"/>
+						<MediaRef Id="932990901"/>
+						<MediaRef Id="993740584"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1373430044" Name="Play_SFX_NerveReceptacle_Activate" ObjectPath="\Events\WU_SFX_Event\Play_SFX_NerveReceptacle_Activate" GUID="{7809CBBC-678C-4545-82B4-5B16F8BB5942}" Color="9" MaxAttenuation="15000" DurationType="OneShot" DurationMin="1.3436875" DurationMax="1.4142709">
+					<MediaRefs>
+						<MediaRef Id="328476057"/>
+						<MediaRef Id="356409417"/>
+						<MediaRef Id="481171115"/>
+						<MediaRef Id="491565413"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3026607058" Name="Play_SFX_RespawnTree_Activate" ObjectPath="\Events\WU_SFX_Event\Play_SFX_RespawnTree_Activate" GUID="{BA60E76B-B5DB-4EA7-BB78-7B6CAA46A730}" Color="9" DurationType="OneShot" DurationMin="3.6666667" DurationMax="3.6666667">
+					<MediaRefs>
+						<MediaRef Id="540356452"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+		<SoundBank Id="1355168291" Type="User" GUID="{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}" Language="SFX" Hash="{D37703DF-5347-8AF5-E5AE-47BCAC9B3931}">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" ObjectPath="\Audio Devices\Default Work Unit\No_Output" GUID="{DF563AD4-AF16-4B95-87CD-5C1861D07C3E}" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" ObjectPath="\Audio Devices\Default Work Unit\System" GUID="{8EA8FBC0-75CB-480A-AF56-63363062FD17}" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3677413232" Name="Master_Bus" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master_Bus" GUID="{1BB909D8-3BB9-453F-94DE-CE0C678C81BF}"/>
+			</Busses>
+			<SwitchGroups>
+				<SwitchGroup Id="675352309" Name="SWG_MC_FS_Speed" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Speed" GUID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}">
+					<Switches>
+						<Switch Id="712161704" Name="Run" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Speed\Run" GUID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<Switch Id="2108779966" Name="Walk" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Speed\Walk" GUID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="2206848095" Name="SWG_MC_FS_Material" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Material" GUID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}">
+					<Switches>
+						<Switch Id="1312110196" Name="Muscle" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Material\Muscle" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+						<Switch Id="1744723399" Name="Bone" ObjectPath="\Switches\Default Work Unit\SWG_MC_FS_Material\Bone" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{A8AFDDC7-4601-E1E1-25D4-B0F2768B5EED}</FileHash>
+</SoundBanksInfo>
