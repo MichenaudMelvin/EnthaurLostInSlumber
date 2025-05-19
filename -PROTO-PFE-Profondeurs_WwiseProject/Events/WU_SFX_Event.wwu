@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{15A3786D-AB7C-4A75-90C7-1994BA914320}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="WU_SFX_Event" ID="{15A3786D-AB7C-4A75-90C7-1994BA914320}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="9"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<Event Name="Play_SFX_NerveDoor" ID="{34192086-B087-4B06-AAF6-534C30178714}">
+					<ChildrenList>
+						<Action Name="" ID="{583FF3C7-98BB-47A5-B39E-518212982973}" ShortID="9748493">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_NerveDoor_Layer_Gore" ID="{69C5574A-0513-4AA1-BD1F-4586EDB6C46A}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{3C8DC9DB-D057-4058-8FC7-BD8195297DA3}" ShortID="132141864">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_NerveDoor_Layer_Gore_02" ID="{8D16A39B-A219-44DE-A1FB-C094B93C99A3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{AB1421AD-BC62-4A96-A951-4ADE165D6EE9}" ShortID="745563349">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_NerveDoor_Layer_Woosh" ID="{A3E04ED4-31B8-42C1-918A-E1935C4D7115}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Nerve_Electricty" ID="{3AE3BCA0-CDF7-45FE-A720-B0F2F55E1973}">
+					<ChildrenList>
+						<Action Name="" ID="{D95B2F27-1E15-439D-98B6-5700072984EB}" ShortID="500971963">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Nerve_Electricty" ID="{B2F4C51B-6452-4506-8085-F9E4ED6EE8FD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{BAD99296-91AF-460E-B7D5-365B0619B33B}" ShortID="915367037">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Nerve_Electricty_Start" ID="{A2CDDDAF-1F01-4524-92FB-D393BEA50067}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Nerve_Electricty_End" ID="{083E9740-3D69-4D85-8279-79CD7F061365}">
+					<ChildrenList>
+						<Action Name="" ID="{525AF5EE-E453-4337-B2C5-9037D0497C80}" ShortID="236191468">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Nerve_Electricty_End" ID="{0DB4D706-54E1-4C8A-B15C-444822A4B513}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{CF430069-BE26-4B6B-A699-77B8B8CCEA9B}" ShortID="469307018">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Nerve_Electricty" ID="{B2F4C51B-6452-4506-8085-F9E4ED6EE8FD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_RespawnTree_Activate" ID="{BA60E76B-B5DB-4EA7-BB78-7B6CAA46A730}">
+					<ChildrenList>
+						<Action Name="" ID="{BCEC5AE2-F796-495A-B6E9-E32AF3D17DAF}" ShortID="1066613147">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_RespawnTree_Activate" ID="{AB63227F-819B-407F-B5E5-C9A055895D74}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_NerveReceptacle_Activate" ID="{7809CBBC-678C-4545-82B4-5B16F8BB5942}">
+					<ChildrenList>
+						<Action Name="" ID="{480FB628-1C1A-426E-8647-18244DAAE685}" ShortID="780676031">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_NerveReceptacle_Activate" ID="{D0C7DD3F-14E5-44DF-AD73-10B5FA1DCD90}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
