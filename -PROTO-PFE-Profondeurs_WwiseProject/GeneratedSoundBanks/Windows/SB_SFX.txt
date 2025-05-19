@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+<<<<<<< Updated upstream
 	1373430044	Play_SFX_NerveReceptacle_Activate			\WU_Temp_Wil\Play_SFX_NerveReceptacle_Activate	
 	1717915789	Play_SFX_NerveReceptacle_Electricty_End			\WU_Temp_Wil\Play_SFX_NerveReceptacle_Electricty_End	
 	1918553675	Play_SFX_NerveReceptacle_Electricty			\WU_Temp_Wil\Play_SFX_NerveReceptacle_Electricty	
@@ -29,4 +30,36 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	954112915	SFX_NerveReceptacle_Electricty_End_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\2C\{2C189CB9-C4F9-758E-0B0D-66559615A5A5}.wem		\Actor-Mixer Hierarchy\Temp_Wil\AM_SFX_NerveReceptacle\SFX_NerveReceptacle_Electricty_End\SFX_NerveReceptacle_Electricty_End_01		17198
 	992978286	SFX_NerveReceptacle_Activate_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\D0\{D0701CA0-7CE7-60C4-767D-7C195B806934}.wem		\Actor-Mixer Hierarchy\Temp_Wil\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_03		258084
 	1040785902	SFX_NerveDoor_Layer_Woosh_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\32\{324BC753-BD10-14C4-6ED0-6154433A111C}.wem		\Actor-Mixer Hierarchy\Temp_Wil\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Woosh\SFX_NerveDoor_Layer_Woosh_02		70496
+=======
+	1373430044	Play_SFX_NerveReceptacle_Activate			\WU_SFX_Event\Play_SFX_NerveReceptacle_Activate	
+	1991849141	Play_SFX_Nerve_Electricty			\WU_SFX_Event\Play_SFX_Nerve_Electricty	
+	2772994470	Play_SFX_NerveDoor			\WU_SFX_Event\Play_SFX_NerveDoor	
+	2878690103	Play_SFX_Nerve_Electricty_End			\WU_SFX_Event\Play_SFX_Nerve_Electricty_End	
+	3026607058	Play_SFX_RespawnTree_Activate			\WU_SFX_Event\Play_SFX_RespawnTree_Activate	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	8053028	SFX_Nerve_Electricty_Start_04	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\B4\{B4554BEB-551A-E09C-08AA-EBB172FD9DFA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty_Start\SFX_Nerve_Electricty_Start_04		9696
+	60451496	SFX_NerveDoor_Layer_Woosh_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\32\{324BC753-BD10-14C4-6ED0-6154433A111C}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Woosh\SFX_NerveDoor_Layer_Woosh_02		70496
+	87232389	SFX_NerveDoor_Layer_Gore02_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\0C\{0C4F2FF8-84F9-5292-7664-9D39D5421D77}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore_02\SFX_NerveDoor_Layer_Gore02_01		70496
+	129895251	SFX_NerveReceptacle_Activate_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\49\{497B3F20-4F5B-CB9D-6EDC-1B072F060D09}.wem		\Actor-Mixer Hierarchy\WU_SFX\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_02		265788
+	142775868	SFX_NerveDoor_Layer_Gore_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\62\{62FB46FA-D514-F090-FBC8-FB54CCAC0928}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore\SFX_NerveDoor_Layer_Gore_02		70496
+	207567377	SFX_NerveReceptacle_Activate_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\58\{5830F4CD-0B1F-E53A-6A51-AD070F81430D}.wem		\Actor-Mixer Hierarchy\WU_SFX\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_01		261544
+	241117750	SFX_NerveDoor_Layer_Woosh_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\64\{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Woosh\SFX_NerveDoor_Layer_Woosh_01		70496
+	287634950	SFX_Nerve_Electricty	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\A8\{A878E234-6AC9-A8C3-F03D-20A0CCDD176E}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty		569696
+	300752076	SFX_NerveReceptacle_Activate_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\D0\{D0701CA0-7CE7-60C4-767D-7C195B806934}.wem		\Actor-Mixer Hierarchy\WU_SFX\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_03		258084
+	319734423	SFX_Nerve_Electricty_End_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\2C\{2C189CB9-C4F9-758E-0B0D-66559615A5A5}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty_End\SFX_Nerve_Electricty_End_01		17198
+	352191117	SFX_Nerve_Electricty_End_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\B8\{B87519EA-3233-9404-CC5B-7614FB577829}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty_End\SFX_Nerve_Electricty_End_03		18772
+	446121061	SFX_NerveDoor_Layer_Gore_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\88\{88B8046C-0E94-4C92-730C-BF082D2A0FE6}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore\SFX_NerveDoor_Layer_Gore_03		70496
+	546618601	SFX_NerveDoor_Layer_Gore_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\0D\{0D479D43-B41C-862C-76C2-72501D8A01DA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore\SFX_NerveDoor_Layer_Gore_01		70496
+	549968668	SFX_NerveDoor_Layer_Gore02_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\05\{05362565-F73F-EC7B-365C-49076F99EAEA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore_02\SFX_NerveDoor_Layer_Gore02_03		70496
+	567068718	SFX_Nerve_Electricty_Start_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\92\{92367D10-ADE4-87A4-5A9F-84C3FEBDF77B}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty_Start\SFX_Nerve_Electricty_Start_02		12896
+	580694994	SFX_RespawnTree_Activate	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\00\{000E1002-DACC-DA1B-A8AC-149366E6DC95}.wem		\Actor-Mixer Hierarchy\WU_SFX\SFX_RespawnTree_Activate		352096
+	585917805	SFX_Nerve_Electricty_End_04	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\BD\{BDD7D4B7-28A9-6A67-A573-E7C5995B60E0}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty_End\SFX_Nerve_Electricty_End_04		19882
+	729454138	SFX_NerveDoor_Layer_Gore02_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\EB\{EB0451B1-D6CB-EDF7-4BFC-D9F6118B8695}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore_02\SFX_NerveDoor_Layer_Gore02_02		70496
+	913084411	SFX_NerveReceptacle_Activate_04	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\9F\{9FCF74CF-CB73-5BD6-4578-C99A22AA3F1B}.wem		\Actor-Mixer Hierarchy\WU_SFX\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_04		271636
+	944718811	SFX_Nerve_Electricty_End_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\6C\{6CDE759A-F0D5-D1A2-D2D9-8ED54BA405AA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty_End\SFX_Nerve_Electricty_End_02		19946
+	968028813	SFX_NerveDoor_Layer_Woosh_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\64\{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Woosh\SFX_NerveDoor_Layer_Woosh_03		70496
+	1017122687	SFX_Nerve_Electricty_Start_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\F8\{F80C3384-112A-6BD2-1FF0-5D567CD683BD}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty_Start\SFX_Nerve_Electricty_Start_03		8742
+	1027909777	SFX_Nerve_Electricty_Start_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\06\{06DC2696-05A3-E883-FA01-C1F75AE07A0A}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricty_Start\SFX_Nerve_Electricty_Start_01		9696
+>>>>>>> Stashed changes
 

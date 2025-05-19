@@ -9,7 +9,15 @@
 			<ChildrenList>
 				<SoundBank Name="SB_MC" ID="{41F7B312-D5F8-4A85-B3D3-117556F8AED5}">
 					<ObjectInclusionList>
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 						<ObjectRef Name="WU_MC_Event_01" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" WorkUnitID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" Origin="Manual" Filter="7"/>
+=======
+						<ObjectRef Name="WU_MC_Event" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" WorkUnitID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" Origin="Manual" Filter="7"/>
+>>>>>>> Stashed changes
+=======
+						<ObjectRef Name="WU_MC_Event" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" WorkUnitID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" Origin="Manual" Filter="7"/>
+>>>>>>> Stashed changes
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
