@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <WwiseDocument Type="WorkUnit" ID="{C913C2E2-8DEF-458F-BA42-2A93FC6D22BF}" SchemaVersion="123">
 	<SoundBanks>
 		<WorkUnit Name="WU_SFX" ID="{C913C2E2-8DEF-458F-BA42-2A93FC6D22BF}" PersistMode="Standalone">
@@ -12,6 +13,8 @@
 					<ObjectInclusionList>
 						<ObjectRef Name="WU_Temp_Wil" ID="{DDFD3F52-B9F3-4C60-80F3-65B6E8F007D7}" WorkUnitID="{DDFD3F52-B9F3-4C60-80F3-65B6E8F007D7}" Origin="Manual" Filter="7"/>
 =======
+=======
+>>>>>>> Stashed changes
 <WwiseDocument Type="WorkUnit" ID="{A7E406C8-BC55-4ABA-BC0A-B2505FC43716}" SchemaVersion="123">
 	<SoundBanks>
 		<WorkUnit Name="WU_SFX" ID="{A7E406C8-BC55-4ABA-BC0A-B2505FC43716}" PersistMode="Standalone">
@@ -23,6 +26,9 @@
 				<SoundBank Name="SB_SFX" ID="{B2705430-5243-42A9-9989-E54FCB49A52B}">
 					<ObjectInclusionList>
 						<ObjectRef Name="WU_SFX_Event" ID="{15A3786D-AB7C-4A75-90C7-1994BA914320}" WorkUnitID="{15A3786D-AB7C-4A75-90C7-1994BA914320}" Origin="Manual" Filter="7"/>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
