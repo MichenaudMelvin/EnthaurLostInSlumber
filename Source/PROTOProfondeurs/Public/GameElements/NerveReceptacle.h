@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "NerveReceptacle.generated.h"
 
+class UAkComponent;
+
 UENUM(BlueprintType)
 enum class ENerveReactiveInteractionType : uint8
 {
@@ -44,6 +46,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
 	TObjectPtr<USphereComponent> Collision;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Components")
+	TObjectPtr<UAkComponent> NerveReceptaclesNoises;
 
 #if WITH_EDITORONLY_DATA
 	/**

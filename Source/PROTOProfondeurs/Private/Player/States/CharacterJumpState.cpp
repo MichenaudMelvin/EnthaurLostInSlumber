@@ -2,6 +2,7 @@
 
 
 #include "Player/States/CharacterJumpState.h"
+#include "AkComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
@@ -33,6 +34,8 @@ void UCharacterJumpState::StateEnter_Implementation(const ECharacterStateID& Pre
 
 	Character->GetCharacterMovement()->Velocity.Z = JumpVelocity;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
+
+	Character->GetFootstepsSoundComp()->PostAkEvent(JumpNoise, 0, FOnAkPostEventCallback());
 }
 
 void UCharacterJumpState::StateTick_Implementation(float DeltaTime)

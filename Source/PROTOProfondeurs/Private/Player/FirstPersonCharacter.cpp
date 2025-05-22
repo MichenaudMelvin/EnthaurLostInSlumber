@@ -21,6 +21,7 @@
 #include "Player/CharacterSettings.h"
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
+#include "Physics/SurfaceSettings.h"
 #include "Player/States/CharacterFallState.h"
 #include "Saves/PlayerSave.h"
 #include "Saves/PlayerSaveSubsystem.h"
@@ -113,6 +114,8 @@ void AFirstPersonCharacter::BeginPlay()
 //
 // 	ViewBobbing = CastedCameraShake;
 
+	DefaultFootStepEvent = FootstepsSounds->AkAudioEvent;
+
 	CreateStates();
 	InitStateMachine();
 }
@@ -130,6 +133,7 @@ void AFirstPersonCharacter::Tick(float DeltaSeconds)
 	{
 		CurrentInteractable->Interact(GetPlayerController(), this);
 	}
+	
 }
 
 #pragma region StateMachine
@@ -296,6 +300,29 @@ void AFirstPersonCharacter::Landed(const FHitResult& Hit)
 	Super::Landed(Hit);
 
 	AboveActor(Hit.GetActor());
+
+	FHitResult HitResult;
+	bool bHit = GroundTrace(HitResult);
+
+	if (!bHit || !HitResult.PhysMaterial.IsValid())
+	{
+		return;
+	}
+
+	const USurfaceSettings* SurfaceSettings = GetDefault<USurfaceSettings>();
+	if (!SurfaceSettings)
+	{
+		return;
+	}
+
+	const UAkSwitchValue* SurfaceNoise = SurfaceSettings->FindNoise(HitResult.PhysMaterial->SurfaceType);
+	if (SurfaceNoise)
+	{
+		FootstepsSounds->SetSwitch(SurfaceNoise);
+	}
+
+	FootstepsSounds->PostAkEvent(LandedEvent);
+	ResetFootStepsEvent();
 }
 
 bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
@@ -567,6 +594,11 @@ void AFirstPersonCharacter::LoadPlayerData()
 	{
 		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
 	}
+}
+
+void AFirstPersonCharacter::ResetFootStepsEvent() const
+{
+	FootstepsSounds->AkAudioEvent = DefaultFootStepEvent;
 }
 
 #pragma endregion

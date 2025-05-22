@@ -2,6 +2,8 @@
 
 
 #include "GameElements/RespawnTree.h"
+
+#include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/InteractableComponent.h"
@@ -19,17 +21,20 @@ ARespawnTree::ARespawnTree()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	auto Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	SetRootComponent(Root);
+	RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	SetRootComponent(RootComp);
 
 	TreeModel = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TreeModel"));
-	TreeModel->SetupAttachment(Root);
+	TreeModel->SetupAttachment(RootComp);
 
 	RespawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Respawn Point"));
-	RespawnPoint->SetupAttachment(Root);
+	RespawnPoint->SetupAttachment(RootComp);
 
 	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
-	Light->SetupAttachment(Root);
+	Light->SetupAttachment(RootComp);
+
+	RespawnTreeNoises = CreateDefaultSubobject<UAkComponent>(TEXT("RespawnTreeNoises"));
+	RespawnTreeNoises->SetupAttachment(RootComp);
 
 	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 }
@@ -128,7 +133,7 @@ void ARespawnTree::SetActive()
 void ARespawnTree::SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave)
 {
 	Player->SetRespawnTree(this);
-	UAkGameplayStatics::PostEventAtLocation(ActivationNoise, TreeModel->GetComponentLocation(), TreeModel->GetComponentRotation(), this);
+	RespawnTreeNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 
 	if (!bSave)
 	{

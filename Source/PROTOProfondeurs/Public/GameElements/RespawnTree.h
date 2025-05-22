@@ -8,6 +8,7 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "RespawnTree.generated.h"
 
+class UAkComponent;
 class AFirstPersonCharacter;
 class UAkAudioEvent;
 
@@ -41,6 +42,9 @@ private:
 
 	void SetActive();
 
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
+	TObjectPtr<USceneComponent> RootComp;
+
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> TreeModel;
 
@@ -53,11 +57,11 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<class UPointLightComponent> Light;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkComponent> RespawnTreeNoises;
+
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Noise")
-	TObjectPtr<UAkAudioEvent> ActivationNoise;
 
 	FString LastCheckPointName;
 
