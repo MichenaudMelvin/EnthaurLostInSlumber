@@ -5,10 +5,23 @@
 #include "CoreMinimal.h"
 #include "WeakZoneInterface.h"
 #include "GameFramework/Actor.h"
+#include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "RespawnTree.generated.h"
 
+class AFirstPersonCharacter;
+class UAkAudioEvent;
+
+USTRUCT(BlueprintType)
+struct FRespawnTreeData : public FGameElementData
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	bool bIsActive = false;
+};
+
 UCLASS()
-class PROTOPROFONDEURS_API ARespawnTree : public AActor, public IWeakZoneInterface
+class PROTOPROFONDEURS_API ARespawnTree : public AActor, public IWeakZoneInterface, public ISaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -18,9 +31,15 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void Destroyed() override;
+
 private:
 	UFUNCTION()
-	void ActivateRespawn(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
+	void SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave);
+
+	void SetActive();
 
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> TreeModel;
@@ -37,8 +56,12 @@ private:
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
 
-	UPROPERTY()
-	bool bIsActivated;
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> ActivationNoise;
+
+	FString LastCheckPointName;
+
+	bool bIsActivated = false;
 
 	UPROPERTY(EditAnywhere)
 	float lightLevel;
@@ -46,4 +69,9 @@ private:
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
+
+public:
+	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
 };

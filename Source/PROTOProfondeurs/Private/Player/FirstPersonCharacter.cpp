@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
+
+#include "AkComponent.h"
 #include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CameraShakeComponent.h"
@@ -17,10 +19,11 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
-#include "PRFUI/Public/TestMVVM/TestViewModel.h"
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
 #include "Player/States/CharacterFallState.h"
+#include "Saves/PlayerSave.h"
+#include "Saves/PlayerSaveSubsystem.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -47,6 +50,9 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	SpikeMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SpikeMesh"));
 	SpikeMesh->SetupAttachment(CameraComponent);
 
+	FootstepsSounds = CreateDefaultSubobject<UAkComponent>(TEXT("FootstepsSounds"));
+	FootstepsSounds->SetupAttachment(RootComponent);
+
 	AmberInventory.Add(EAmberType::NecroseAmber, 0);
 	AmberInventory.Add(EAmberType::WeakAmber, 0);
 
@@ -57,8 +63,6 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	SetRespawnPosition(GetActorLocation());
 
 	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
 	SpikeTargetTransform = SpikeRelativeTransform;
@@ -111,9 +115,6 @@ void AFirstPersonCharacter::BeginPlay()
 
 	CreateStates();
 	InitStateMachine();
-
-	ViewModel = NewObject<UTestViewModel>();
-	ensure(ViewModel);
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)
@@ -379,6 +380,14 @@ void AFirstPersonCharacter::MineAmber(const EAmberType& AmberType, const int Amo
 	*Count = FMath::Clamp(*Count, 0.0f, *MaxCapacity);
 
 	OnAmberUpdate.Broadcast(AmberType, *Count);
+
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory = AmberInventory;
 }
 
 void AFirstPersonCharacter::UseAmber(const EAmberType& AmberType, const int Amount)
@@ -496,7 +505,7 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	return true;
 }
 
-void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) const
+void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const
 {
 	UCharacterFallState* FallState = FindState<UCharacterFallState>(StateMachine);
 	if (!FallState)
@@ -504,7 +513,7 @@ void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) con
 		return;
 	}
 
-	FallState->SetProjectionVelocity(ProjectionVelocity);
+	FallState->SetProjectionVelocity(ProjectionVelocity, bOverrideCurrentVelocity);
 	StateMachine->ChangeState(ECharacterStateID::Fall);
 }
 
@@ -521,6 +530,43 @@ void AFirstPersonCharacter::StopCharacter() const
 bool AFirstPersonCharacter::IsStopped() const
 {
 	return StateMachine->GetCurrentStateID() == ECharacterStateID::Stop;
+}
+
+#pragma endregion
+
+#pragma region Saves
+
+void AFirstPersonCharacter::SavePlayerData() const
+{
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
+	{
+		return;
+	}
+
+	PlayerSaveSubsystem->GetPlayerSave()->LastWorldSaved = GetWorld()->GetFName();
+	PlayerSaveSubsystem->GetPlayerSave()->PlayerTransform = GetTransform();
+	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = StateMachine->GetCurrentStateID();
+	PlayerSaveSubsystem->SaveToSlot(0);
+}
+
+void AFirstPersonCharacter::LoadPlayerData()
+{
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	TObjectPtr<UPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
+	SetActorTransform(SaveData->PlayerTransform);
+	StateMachine->ChangeState(SaveData->CurrentState);
+	AmberInventory = SaveData->AmberInventory;
+
+	for (TTuple<EAmberType, int> Element : AmberInventory)
+	{
+		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
+	}
 }
 
 #pragma endregion

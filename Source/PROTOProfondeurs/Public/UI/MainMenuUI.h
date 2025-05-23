@@ -14,20 +14,9 @@ class PROTOPROFONDEURS_API UMainMenuUI : public UUserWidget
 {
 	GENERATED_BODY()
 
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<class UButton> PlayButton;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> QuitButton;
-
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UWorld> LevelToLoad;
 
 	virtual void NativeConstruct() override;
 	virtual void NativeOnInitialized() override;
-	
-	UFUNCTION()
-	void StartGame();
-	UFUNCTION()
-	void QuitGame();
 };

@@ -15,24 +15,5 @@ void UMainMenuUI::NativeConstruct()
 void UMainMenuUI::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
-	
-	PlayButton->OnClicked.AddDynamic(this, &UMainMenuUI::StartGame);
-	QuitButton->OnClicked.AddDynamic(this, &UMainMenuUI::QuitGame);
-}
-
-void UMainMenuUI::StartGame()
-{
-	UGameplayStatics::OpenLevelBySoftObjectPtr(
-		this,
-		LevelToLoad);
-}
-
-void UMainMenuUI::QuitGame()
-{
-	UKismetSystemLibrary::QuitGame(
-		this,
-		UGameplayStatics::GetPlayerController(this, 0),
-		EQuitPreference::Quit,
-		true);
 }
 
