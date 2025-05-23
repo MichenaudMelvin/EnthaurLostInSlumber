@@ -9,11 +9,7 @@
 void UPRFPauseMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
-	
-	if (MainMenuButton)
-	{
-		MainMenuButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
-	}
+
 	if (OptionsMenuButton)
 	{
 		OptionsMenuButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
@@ -22,16 +18,20 @@ void UPRFPauseMenu::NativeConstruct()
 	{
 		RestartCheckpointButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleRestartCheckpointButton);
 	}
+	if (MainMenuButton)
+	{
+		MainMenuButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
+	}
+	if (QuitButton)
+	{
+		QuitButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleQuitButton);
+	}
 }
 
 void UPRFPauseMenu::NativeDestruct()
 {
 	Super::NativeDestruct();
 
-	if (MainMenuButton)
-	{
-		MainMenuButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
-	}
 	if (OptionsMenuButton)
 	{
 		OptionsMenuButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
@@ -39,6 +39,14 @@ void UPRFPauseMenu::NativeDestruct()
 	if (RestartCheckpointButton)
 	{
 		RestartCheckpointButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleRestartCheckpointButton);
+	}
+	if (MainMenuButton)
+	{
+		MainMenuButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
+	}
+	if (QuitButton)
+	{
+		QuitButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleQuitButton);
 	}
 }
 
@@ -52,6 +60,24 @@ void UPRFPauseMenu::HandleMainMenuButton()
 
 	UIManager->CloseAllMenus(EPRFUIState::AnyMenu);
 	UGameplayStatics::OpenLevelBySoftObjectPtr(this, MainMenuLevel);
+}
+
+void UPRFPauseMenu::HandleQuitButton()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	if (!IsValid(UIManagerSettings))
+	{
+		return;
+	}
+
+	UUserWidget* QuitMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->QuitMenuClass);
+	UIManager->OpenMenu(QuitMenu, false);
 }
 
 void UPRFPauseMenu::HandleOptionsMenuButton()
