@@ -61,13 +61,6 @@ UDefaultSave* USaveSubsystem::LoadSave(const int SaveIndex, const bool bCreateNe
 	return nullptr;
 }
 
-void USaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
-{
-	Super::Initialize(Collection);
-
-	LoadSave(0, true);
-}
-
 void USaveSubsystem::ResetSaveToDefault(const int SaveIndex)
 {
 	if (!SaveObject)

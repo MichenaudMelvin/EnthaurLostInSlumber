@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "WeakZoneInterface.h"
 #include "GameFramework/Actor.h"
 #include "VeinTeleportation.generated.h"
 
 UCLASS()
-class PROTOPROFONDEURS_API AVeinTeleportation : public AActor
+class PROTOPROFONDEURS_API AVeinTeleportation : public AActor, public IWeakZoneInterface
 {
 	GENERATED_BODY()
 
@@ -35,4 +36,13 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSoftObjectPtr<UWorld> MapToLoad;
+
+#pragma region WeakZone
+
+private:
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
+
+#pragma endregion
 };

@@ -34,7 +34,7 @@ void UCharacterStopState::StateTick_Implementation(float DeltaTime)
 	if (Controller->GetPlayerInputs().bInputInteractPressed)
 	{
 		Character->ReGrabSpike();
-		Character->EjectCharacter(Character->GetActorForwardVector() * ImpulsionForce);
+		Character->EjectCharacter(Character->GetActorForwardVector() * ImpulsionForce, true);
 	}
 }
 

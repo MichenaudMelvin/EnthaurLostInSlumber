@@ -2,32 +2,45 @@
 
 
 #include "GameElements/NerveReceptacle.h"
-
-#include "Enumerations.h"
+#include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/CameraShakeComponent.h"
-#include "Components/InteractableComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "Interface/NerveReactive.h"
 #include "GameElements/Nerve.h"
 #include "Components/PlayerToNervePhysicConstraint.h"
-#include "Components/PostProcessComponent.h"
-#include "Components/SplineComponent.h"
 #include "Gamefeel/ElectricityFeedback.h"
 #include "Kismet/GameplayStatics.h"
 #include "Parameters/BPRefParameters.h"
 #include "Player/FirstPersonCharacter.h"
 
-
 ANerveReceptacle::ANerveReceptacle()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Torus"));
+	RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	SetRootComponent(RootComp);
+	RootComp->SetMobility(EComponentMobility::Static);
 
-	Collision = CreateDefaultSubobject<USphereComponent>("Collision");
+	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Receptacle"));
+	NerveReceptacle->SetupAttachment(RootComp);
+	NerveReceptacle->SetMobility(EComponentMobility::Static);
+
+#if WITH_EDITORONLY_DATA
+	NerveEndEditorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EditorNerveEnd"));
+	NerveEndEditorMesh->SetupAttachment(RootComponent);
+	NerveEndEditorMesh->SetMobility(EComponentMobility::Static);
+	NerveEndEditorMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	NerveEndEditorMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
+	NerveEndEditorMesh->SetVisibility(false, true);
+	NerveEndEditorMesh->bHiddenInGame = true;
+	NerveEndEditorMesh->bIsEditorOnly = true;
+#endif
+
+	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
 	Collision->SetupAttachment(NerveReceptacle);
+	Collision->SetMobility(EComponentMobility::Static);
 }
 
 void ANerveReceptacle::BeginPlay()
@@ -35,7 +48,18 @@ void ANerveReceptacle::BeginPlay()
 	Super::BeginPlay();
 
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &ANerveReceptacle::TriggerEnter);
+
+	NerveEndTargetTransform *= GetActorTransform();
 }
+
+#if WITH_EDITORONLY_DATA
+void ANerveReceptacle::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	NerveEndTargetTransform = NerveEndEditorMesh->GetRelativeTransform();
+}
+#endif
 
 void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                     UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -47,13 +71,19 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 
 		OnNerveConnect();
 
-		FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, false);
-		Nerve->GetComponentByClass<UStaticMeshComponent>()->AttachToComponent(GetRootComponent(), Rules);
-		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
+		ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+		if (Character)
+		{
+			UPlayerToNervePhysicConstraint* Constraint = Character->GetComponentByClass<UPlayerToNervePhysicConstraint>();
 
-		Nerve->GetInteractable()->AddInteractable(Nerve->GetNerveBall());
+			if (Constraint)
+			{
+				Constraint->ReleasePlayer();
+			}
+		}
 
 		PlayElectricityAnimation(Nerve);
+		UAkGameplayStatics::PostEventAtLocation(ReceptacleEnabledNoise, NerveReceptacle->GetComponentLocation(), NerveReceptacle->GetComponentRotation(), this);
 	}
 }
 
@@ -64,7 +94,6 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	Player->GetCameraShake()->MakeBigCameraShake();
-	
 
 	for (auto Actor : Actors)
 	{
@@ -74,7 +103,7 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 			{
 				continue;
 			}
-			
+
 			if (Actor->Implements<UNerveReactive>())
 			{
 				if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
@@ -93,19 +122,19 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 {
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	Player->GetCameraShake()->MakeSmallCameraShake();
-	
+
 	NerveElectricityFeedback = GetWorld()->SpawnActor<AElectricityFeedback>(GetDefault<UBPRefParameters>()->ElectricityFeedback, Nerve->GetActorTransform());
 	KeepInMemoryNerve = Nerve;
 
 	float Duration = KeepInMemoryNerve->GetCableLength() / 750.f;
-	
+
 	FCTween::Play(0.f, 30.f,
 		[&](const float& F)
 		{
 			NerveElectricityFeedback->Radius = F;
 		},
 		.25f, EFCEase::InCubic);
-	
+
 	FCTween::Play(0.f, 1.f,
 		[&](const float& F)
 		{
@@ -121,8 +150,8 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 			{
 				NerveElectricityFeedback->Radius = F;
 			},
-			1.f);
-			
+			1.f)->SetOnComplete([&]{OnNerveAnimationFinished.Broadcast();});
+
 			FCTween::Play(1.f, 0.f,
 			[&](const float& F)
 			{
