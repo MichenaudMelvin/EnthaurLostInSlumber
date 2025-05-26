@@ -23,6 +23,6 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	UButton* BackButton;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void HandleBackAction();
 };

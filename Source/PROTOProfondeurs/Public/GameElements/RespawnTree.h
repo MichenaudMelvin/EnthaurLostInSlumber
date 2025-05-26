@@ -49,11 +49,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Respawn")
 	TObjectPtr<USceneComponent> RespawnPoint;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Respawn")
-	TObjectPtr<class UPointLightComponent> Light;
-
 	UPROPERTY()
-	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
+	TObjectPtr<UMaterialInstanceDynamic> Material;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkAudioEvent> ActivationNoise;
@@ -64,9 +61,6 @@ protected:
 	FString LastCheckPointName;
 
 	bool bIsActivated = false;
-
-	UPROPERTY(EditAnywhere)
-	float lightLevel;
 
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 

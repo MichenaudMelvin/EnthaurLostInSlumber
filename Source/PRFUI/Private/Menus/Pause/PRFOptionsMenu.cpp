@@ -2,3 +2,17 @@
 
 
 #include "Menus/Pause/PRFOptionsMenu.h"
+
+void UPRFOptionsMenu::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	
+}
+
+void UPRFOptionsMenu::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+	
+}

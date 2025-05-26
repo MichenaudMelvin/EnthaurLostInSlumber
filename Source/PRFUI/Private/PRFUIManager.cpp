@@ -92,7 +92,7 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 
 	CheckMenuState();
 	
-	if (GEngine)
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::FromInt(MenuStack.Num()));
 		
@@ -117,7 +117,7 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	}
 
 	FString test = FString::Printf(TEXT("%d"), CurrentState);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);*/
 }
 
 void UPRFUIManager::CloseCurrentMenu()
@@ -161,39 +161,8 @@ void UPRFUIManager::CloseCurrentMenu()
 		UUserWidget* NewMenu = NewTopMenuPtr.Get();
 		NewMenu->AddToViewport();
 	}
-
-	/*if (MenuStack.Num() == 0)
-	{
-		UWorld* World = GEngine->GetCurrentPlayWorld();
-		if (!IsValid(World))
-		{
-			return;
-		}
-		
-		ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
-		if (!IsValid(LocalPlayer))
-		{
-			return;
-		}
-		
-		UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
-		if (!IsValid(InputSubsystem))
-		{
-			return;
-		}
-
-		AFirstPersonController* FirstPersonController = Cast<AFirstPersonController>(UGameplayStatics::GetPlayerController(this, 0));
-		if (!IsValid(FirstPersonController))
-		{
-			return;
-		}
-
-		InputSubsystem->ClearAllMappings();
-		InputSubsystem->AddMappingContext(FirstPersonController->GetDefaultMappingContext(), 0);
-		SetGameInputMode();
-	}*/
 	
-	if (GEngine)
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::FromInt(MenuStack.Num()));
 		
@@ -218,7 +187,7 @@ void UPRFUIManager::CloseCurrentMenu()
 	}
 
 	FString test = FString::Printf(TEXT("%d"), CurrentState);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);*/
 }
 
 void UPRFUIManager::CloseAllMenus(EPRFUIState InState)

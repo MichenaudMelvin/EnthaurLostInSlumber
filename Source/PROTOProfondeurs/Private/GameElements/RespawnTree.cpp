@@ -5,8 +5,6 @@
 #include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/InteractableComponent.h"
-#include "Components/LightComponent.h"
-#include "Components/PointLightComponent.h"
 #include "GameModes/FirstPersonGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
@@ -28,9 +26,6 @@ ARespawnTree::ARespawnTree()
 	RespawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Respawn Point"));
 	RespawnPoint->SetupAttachment(Root);
 
-	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
-	Light->SetupAttachment(Root);
-
 	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 }
 
@@ -41,7 +36,7 @@ void ARespawnTree::BeginPlay()
 
 	RespawnTransform *= GetActorTransform();
 
-	BulbMaterial = TreeModel->CreateDynamicMaterialInstance(2, TreeModel->GetMaterial(2));
+	Material = TreeModel->CreateDynamicMaterialInstance(0, TreeModel->GetMaterial(0));
 	if (bIsActivated)
 	{
 		SetActive();
@@ -67,8 +62,8 @@ void ARespawnTree::BeginPlay()
 	}
 	else
 	{
-		TreeModel->SetMaterial(2, BulbMaterial);
-		BulbMaterial->SetScalarParameterValue("State", 2.f);
+		TreeModel->SetMaterial(0, Material);
+		Material->SetScalarParameterValue("Emissive", 0.f);
 		Interaction->AddInteractable(TreeModel);
 		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::Interact);
 	}
@@ -105,24 +100,13 @@ void ARespawnTree::SetActive()
 	Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
 
 	FCTween::Play(
-		2.f,
 		0.f,
+		100.f,
 		[&](float x)
 		{
-			BulbMaterial->SetScalarParameterValue("State", x);
+			Material->SetScalarParameterValue("Emissive", x);
 		},
-		0.5f,
-		EFCEase::InSine
-	);
-
-	FCTween::Play(
-		0.f,
-		lightLevel,
-		[&](float intensity)
-		{
-			Light->SetIntensity(intensity);
-		},
-		0.5f,
+		2.f,
 		EFCEase::InSine
 	);
 }

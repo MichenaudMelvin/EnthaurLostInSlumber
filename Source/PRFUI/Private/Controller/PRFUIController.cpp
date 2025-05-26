@@ -147,12 +147,7 @@ void APRFUIController::OnInputBack()
 	{
 		return;
 	}
-
-	/*if (UIManager->GetMenuState() == EPRFUIState::AnyMenu)
-	{
-		return;
-	}*/
-
+	
 	UIManager->CloseCurrentMenu();
 }
 
