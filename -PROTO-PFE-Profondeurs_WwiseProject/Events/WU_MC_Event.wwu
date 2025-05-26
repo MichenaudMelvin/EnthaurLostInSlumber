@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" SchemaVersion="123">
 	<Events>
-		<WorkUnit Name="WU_MC_Event_01" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" PersistMode="Standalone">
+		<WorkUnit Name="WU_MC_Event" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" PersistMode="Standalone">
 			<PropertyList>
 				<Property Name="Color" Type="int16" Value="13"/>
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
