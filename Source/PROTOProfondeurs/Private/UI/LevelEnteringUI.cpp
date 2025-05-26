@@ -8,7 +8,12 @@ void ULevelEnteringUI::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	auto Subsystem = UGameplayStatics::GetGameInstance(this)->GetSubsystem<ULevelNameSubsystem>();
-	AreaName->SetText(Subsystem->GetLevelName().AreaZone);
-	RegionName->SetText(Subsystem->GetLevelName().RegionZone);
+	ULevelNameSubsystem* Subsystem = UGameplayStatics::GetGameInstance(this)->GetSubsystem<ULevelNameSubsystem>();
+	if (!IsValid(Subsystem))
+	{
+		return;
+	}
+	
+	AreaNameCPP->SetText(Subsystem->GetLevelName().AreaZone);
+	RegionNameCPP->SetText(Subsystem->GetLevelName().RegionZone);
 }

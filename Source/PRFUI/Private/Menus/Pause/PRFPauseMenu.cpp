@@ -5,6 +5,7 @@
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
 #include "Kismet/GameplayStatics.h"
+#include "Subsystems/LevelNameSubsystem.h"
 
 void UPRFPauseMenu::NativeConstruct()
 {
@@ -26,6 +27,16 @@ void UPRFPauseMenu::NativeConstruct()
 	{
 		QuitButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleQuitButton);
 	}
+
+	
+	ULevelNameSubsystem* LevelNameSubsystem = GetGameInstance()->GetSubsystem<ULevelNameSubsystem>();
+	if (!IsValid(LevelNameSubsystem))
+	{
+		return;
+	}
+
+	AreaName->SetText(LevelNameSubsystem->GetLevelName().AreaZone);
+	RegionName->SetText(LevelNameSubsystem->GetLevelName().RegionZone);
 }
 
 void UPRFPauseMenu::NativeDestruct()

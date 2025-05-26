@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/TextBlock.h"
 #include "Menus/PRFWidgetBasics.h"
 #include "PRFOptionsMenu.generated.h"
 
@@ -16,7 +17,7 @@ class PRFUI_API UPRFOptionsMenu : public UPRFWidgetBasics
 
 protected:
 	virtual void NativeConstruct() override;
-	virtual void NativeDestruct() override;
+	virtual void BeginDestroy() override;
 
 	UPROPERTY(Meta = (BindWidget))
 	UButton* ControlsButton;

@@ -17,7 +17,4 @@ class PRFUI_API UPRFControlsMenu : public UPRFWidgetBasics
 protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
-
-	UPROPERTY(Meta = (BindWidget))
-	UButton* ControlsButton;
 };
