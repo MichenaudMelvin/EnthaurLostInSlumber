@@ -27,9 +27,14 @@ class PROTOPROFONDEURS_API UBPRefParameters : public UDeveloperSettings
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(Config, EditAnywhere)
-	TMap<TSoftObjectPtr<UWorld>, FDuoText> LevelNames;
+	UPROPERTY(EditAnywhere)
+	TMap<TSoftObjectPtr<UWorld>, FDuoText> WorldMap;
+
+	UPROPERTY(VisibleAnywhere, Config)
+	TMap<FString, FDuoText> LevelNames;
 	
 	UPROPERTY(Config, EditAnywhere)
 	TSubclassOf<AActor> ElectricityFeedback;
+
+	void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
 };

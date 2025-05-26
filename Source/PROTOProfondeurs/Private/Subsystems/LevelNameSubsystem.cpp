@@ -21,11 +21,12 @@ void ULevelNameSubsystem::Deinitialize()
 void ULevelNameSubsystem::SetupWorldName(const FActorsInitializedParams& ActorsInitializedParams)
 {
 	auto LevelNames = GetDefault<UBPRefParameters>()->LevelNames;
-	FDuoText* LevelName = LevelNames.Find(ActorsInitializedParams.World);
+	auto PathName = ActorsInitializedParams.World->GetName();
+	FDuoText* LevelName = LevelNames.Find(PathName);
 	if (!LevelName)
 	{
 		return;
 	}
 
-	CurrentLevelNames = *LevelName;
+	CurrentLevelName = *LevelName;
 }

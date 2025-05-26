@@ -24,6 +24,9 @@ class PROTOPROFONDEURS_API ULevelNameSubsystem : public UGameInstanceSubsystem
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
-	FDuoText CurrentLevelNames;
+	FDuoText CurrentLevelName;
+
+public:
+	FDuoText GetLevelName() { return CurrentLevelName; }
 	
 };
