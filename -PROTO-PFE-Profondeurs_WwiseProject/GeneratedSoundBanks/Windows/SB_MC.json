@@ -677,7 +677,11 @@
      {
       "Id": "4277858155",
       "Name": "Play_SW_MC_FS_Speed",
+<<<<<<< Updated upstream
       "ObjectPath": "\\Events\\WU_MC_Event_01\\Play_SW_MC_FS_Speed",
+=======
+      "ObjectPath": "\\Events\\WU_MC_Event\\Play_SW_MC_FS_Speed",
+>>>>>>> Stashed changes
       "GUID": "{40C0DABC-E260-4BE7-9895-167ACF357472}",
       "Color": "13",
       "DurationType": "OneShot",
@@ -1104,6 +1108,10 @@
     ]
    }
   ],
+<<<<<<< Updated upstream
   "FileHash": "{F82C6147-054A-6B1B-A6E8-E6A3420AFE5B}"
+=======
+  "FileHash": "{829AEA9F-F97E-00E8-F662-1CCA4185D80B}"
+>>>>>>> Stashed changes
  }
 }

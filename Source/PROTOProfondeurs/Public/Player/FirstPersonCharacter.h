@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UAkAudioEvent;
 class ARespawnTree;
 class UAkComponent;
 class UCameraShakeComponent;
@@ -283,8 +284,16 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Sounds")
 	TObjectPtr<UAkComponent> FootstepsSounds;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Sounds")
+	TObjectPtr<UAkAudioEvent> LandedEvent;
+
+	UPROPERTY()
+	TObjectPtr<UAkAudioEvent> DefaultFootStepEvent;
+
 public:
 	TObjectPtr<UAkComponent> GetFootstepsSoundComp() const {return FootstepsSounds;}
+
+	void ResetFootStepsEvent() const;
 
 #pragma endregion
 };

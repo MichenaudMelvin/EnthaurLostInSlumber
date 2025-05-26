@@ -2,6 +2,8 @@
 
 
 #include "GameElements/NerveInteractable/NerveDoor.h"
+
+#include "AkComponent.h"
 #include "FCTween.h"
 
 
@@ -16,6 +18,9 @@ ANerveDoor::ANerveDoor()
 
 	MeshDoor = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Door"));
 	MeshDoor->SetupAttachment(Root);
+
+	NerveDoorNoises = CreateDefaultSubobject<UAkComponent>(TEXT("NerveDoorNoises"));
+	NerveDoorNoises->SetupAttachment(Root);
 }
 
 // Called when the game starts or when spawned
@@ -47,10 +52,13 @@ void ANerveDoor::Trigger_Implementation()
 		IsOpened = !IsOpened;
 		return;
 	}
-	
+
+	NerveDoorNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+
 	if (IsOpened)
 	{
 		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+
 		FCTween::Play(
 			2.f,
 			0.f,
@@ -73,6 +81,7 @@ void ANerveDoor::Trigger_Implementation()
 			1.5f,
 			EFCEase::OutSine);
 	}
+
 	IsOpened = !IsOpened;
 }
 
