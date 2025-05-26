@@ -48,6 +48,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
 
+	UPROPERTY(EditDefaultsOnly, Category = "WeakZone", meta = (ClampMin = 0.0f, Units = s))
+	float DestroyDuration = 5.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zone")
 	FVector ZoneSize = FVector(100.0f);
 

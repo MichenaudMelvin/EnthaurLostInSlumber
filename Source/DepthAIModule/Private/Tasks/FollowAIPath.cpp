@@ -8,12 +8,13 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
-#include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "GameplayTask.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
+#include "Components/BoxComponent.h"
+#include "Parasite/ParasitePawn.h"
 #include "Path/AIPath.h"
 #include "Tasks/AITask_MoveTo.h"
 
@@ -89,8 +90,15 @@ EBTNodeResult::Type UFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 		return NodeResult;
 	}
 
+	float PawnHeight = 0.0f;
+	AParasitePawn* ParasitePawn = Cast<AParasitePawn>(CurrentPawn);
+	if (ParasitePawn)
+	{
+		PawnHeight = ParasitePawn->GetCollisionComp()->GetUnscaledBoxExtent().Z;
+	}
+
 	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
-	TargetLocation = Path->GetPointLocation(Index, 0.0f);
+	TargetLocation = Path->GetPointLocation(Index, PawnHeight);
 
 	bool bWalkOnFloor = BlackboardComponent->GetValue<UBlackboardKeyType_Bool>(WalkOnFloor.GetSelectedKeyID());
 

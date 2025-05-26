@@ -2,8 +2,9 @@
 
 
 #include "GameElements/Muscle.h"
-
+#include "AkGameplayStatics.h"
 #include "Components/CameraShakeComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -14,6 +15,8 @@
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
 #endif
+
+#pragma region Defaults
 
 AMuscle::AMuscle()
 {
@@ -40,7 +43,7 @@ AMuscle::AMuscle()
 	TraceExtentVisibility->SetupAttachment(MuscleMeshComp);
 	TraceExtentVisibility->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	TraceExtentVisibility->SetCollisionResponseToAllChannels(ECR_Ignore);
-	TraceExtentVisibility->SetMobility(EComponentMobility::Static);
+	TraceExtentVisibility->SetMobility(EComponentMobility::Stationary);
 	TraceExtentVisibility->bIsEditorOnly = true;
 
 	BounceDirectionTop = CreateDefaultSubobject<UArrowComponent>(TEXT("BounceDirectionTop"));
@@ -77,8 +80,23 @@ void AMuscle::BeginPlay()
 	DeformationSpeed = 1 / DeformationSpeed;
 
 	bTriggerDeformation = false;
-	Interactable->AddInteractable(SpikeInteraction);
-	Interactable->OnInteract.AddDynamic(this, &AMuscle::Interact);
+
+	if (bAllowInteraction)
+	{
+		Interactable->AddInteractable(SpikeInteraction);
+		Interactable->OnInteract.AddDynamic(this, &AMuscle::Interact);
+	}
+	else
+	{
+		TArray<USceneComponent*> ChildrenComps;
+		SpikeInteraction->GetChildrenComponents(true, ChildrenComps);
+		for (USceneComponent* Child : ChildrenComps)
+		{
+			Child->DestroyComponent(false);
+		}
+
+		SpikeInteraction->DestroyComponent(false);
+	}
 
 	if (MuscleStateTransitionCurve)
 	{
@@ -110,6 +128,8 @@ void AMuscle::OnConstruction(const FTransform& Transform)
 	bDefaultSolidity = bIsSolid;
 	CurrentZScale = MuscleHeight.GetUpperBoundValue();
 
+	SpikeInteraction->SetVisibility(bAllowInteraction, true);
+
 	if (!MuscleMeshComp)
 	{
 		return;
@@ -136,26 +156,15 @@ void AMuscle::Tick(float DeltaTime)
 	DeformMesh(DeltaTime);
 }
 
-void AMuscle::ToggleMuscleSolidity()
-{
-	if (bIsLocked)
-	{
-		return;
-	}
+#pragma endregion
 
-	bIsSolid = !bIsSolid;
-	UpdateMuscleSolidity();
-}
-
-void AMuscle::HitMuscleMesh(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
-	HitMuscle(OtherActor, OtherComp);
-}
+#pragma region Deformation
 
 void AMuscle::StartDeformation()
 {
 	DeformationDirection = 1;
 	bTriggerDeformation = true;
+	UAkGameplayStatics::PostEventAtLocation(DeformationNoise, MuscleMeshComp->GetComponentLocation(), MuscleMeshComp->GetComponentRotation(), this);
 }
 
 void AMuscle::EndDeformation()
@@ -217,11 +226,12 @@ void AMuscle::RebuildMuscleMesh() const
 #if WITH_EDITORONLY_DATA
 	FBox BoundingBox = MuscleMeshComp->GetStaticMesh()->GetBoundingBox();
 	FVector MeshSize = (BoundingBox.Max - BoundingBox.Min) * MuscleMeshComp->GetRelativeScale3D();
-	MeshSize *= 0.5;
+	MeshSize *= 0.5f;
 
 	BounceDirectionTop->SetRelativeLocation(FVector(0.0f, 0.0f, (MeshSize.Z / CurrentZScale)));
 	BounceDirectionBack->SetRelativeLocation(FVector(0.0f, 0.0f, -(MeshSize.Z / CurrentZScale)));
 
+	TraceExtentVisibility->SetWorldScale3D(FVector::OneVector);
 	TraceExtentVisibility->SetBoxExtent(MeshSize + (TraceExtent * MuscleMeshComp->GetRelativeScale3D() * 0.5f));
 #endif
 }
@@ -242,6 +252,26 @@ void AMuscle::UpdateMuscleSolidity()
 	}
 }
 
+#pragma endregion
+
+#pragma region Physics
+
+void AMuscle::ToggleMuscleSolidity()
+{
+	if (bIsLocked)
+	{
+		return;
+	}
+
+	bIsSolid = !bIsSolid;
+	UpdateMuscleSolidity();
+}
+
+void AMuscle::HitMuscleMesh(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	HitMuscle(OtherActor, OtherComp);
+}
+
 void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 {
 	if (!HitActor)
@@ -255,6 +285,15 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 		return;
 	}
 
+#if WITH_EDITORONLY_DATA
+	if (bDebug && HitActor->IsA(ACharacter::StaticClass()))
+	{
+		ACharacter* Character = Cast<ACharacter>(HitActor);
+		UCapsuleComponent* CapsuleComponent = Character->GetCapsuleComponent();
+		UKismetSystemLibrary::DrawDebugCapsule(this, Character->GetActorLocation(), CapsuleComponent->GetScaledCapsuleHalfHeight(), CapsuleComponent->GetScaledCapsuleRadius(), FRotator::ZeroRotator, FLinearColor::Red, 15.0f, 5.0f);
+	}
+#endif
+
 	if (!IsActorInRange(HitActor))
 	{
 		return;
@@ -263,6 +302,16 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 	UpdateMuscleSolidity();
 
 	float ActorVelocityLength = OtherComp ? OtherComp->GetComponentVelocity().Size() : HitActor->GetVelocity().Size();
+
+#if WITH_EDITORONLY_DATA
+	if (bDebug)
+	{
+		const FString Message = FString::Printf(TEXT("ActorVelocity: %f, MinVelocity: %f"), ActorVelocityLength, MinTriggerVelocity);
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, Message);
+		FMessageLog("BlueprintLog").Message(EMessageSeverity::Info, FText::FromString(Message));
+	}
+#endif
 
 	if (ActorVelocityLength < MinTriggerVelocity)
 	{
@@ -309,7 +358,16 @@ bool AMuscle::IsActorInRange(AActor* Actor)
 
 	FVector TraceSize = MeshSize + (TraceExtent * MuscleMeshComp->GetRelativeScale3D() * 0.5f);
 
-	bool bHit = UKismetSystemLibrary::BoxTraceMultiForObjects(this, MuscleLocation, MuscleLocation, TraceSize, FRotator::ZeroRotator, ObjectsToCheck, false, ActorsToIgnore, EDrawDebugTrace::None, HitResults, true);
+	EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
+
+#if WITH_EDITORONLY_DATA
+	if (bDebug)
+	{
+		DrawDebugTrace = EDrawDebugTrace::ForDuration;
+	}
+#endif
+
+	bool bHit = UKismetSystemLibrary::BoxTraceMultiForObjects(this, MuscleLocation, MuscleLocation, TraceSize, MuscleMeshComp->GetComponentRotation(), ObjectsToCheck, false, ActorsToIgnore, DrawDebugTrace, HitResults, true, FLinearColor::Red, FLinearColor::Green, 15.0f);
 
 	if (!bHit)
 	{
@@ -327,6 +385,10 @@ bool AMuscle::IsActorInRange(AActor* Actor)
 	return false;
 }
 
+#pragma endregion
+
+#pragma region Appearance
+
 void AMuscle::UpdateMuscleStateTransition(float Alpha)
 {
 	if (!DynamicMaterial)
@@ -337,12 +399,22 @@ void AMuscle::UpdateMuscleStateTransition(float Alpha)
 	DynamicMaterial->SetScalarParameterValue(MuscleStateTransitionParam, Alpha);
 }
 
+#pragma endregion
+
+#pragma region Interaction
+
 void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent)
 {
 	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->GetCameraShake()->MakeSmallCameraShake();
-	
+
+	UAkGameplayStatics::PostEventAtLocation(InteractionEvent, SpikeInteraction->GetComponentLocation(), SpikeInteraction->GetComponentRotation(), this);
+
 	ToggleMuscleSolidity();
 }
+
+#pragma endregion
+
+#pragma region Interfaces
 
 void AMuscle::OnActorAbove_Implementation(AActor* Actor)
 {
@@ -367,7 +439,7 @@ void AMuscle::OnExitWeakZone_Implementation()
 
 	if (!Interactable->OnInteract.IsAlreadyBound(this, &AMuscle::Interact))
 	{
-		Interactable->OnInteract.RemoveDynamic(this, &AMuscle::Interact);
+		Interactable->OnInteract.AddDynamic(this, &AMuscle::Interact);
 	}
 }
 
@@ -390,3 +462,5 @@ void AMuscle::SetLock_Implementation(bool state)
 	Trigger();
 	bIsLocked = state;
 }
+
+#pragma endregion
