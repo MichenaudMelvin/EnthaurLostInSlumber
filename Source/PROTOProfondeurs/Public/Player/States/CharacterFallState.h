@@ -34,6 +34,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Movement|Projection")
 	FVector ProjectionVelocity = FVector::ZeroVector;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Movement|Projection")
+	bool bOverrideCurrentVelocity = false;
+
 	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "s"))
 	float SpikeBrakeDuration = 0.75f;
 
@@ -54,8 +57,16 @@ private:
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
-	void SetProjectionVelocity(const FVector& Velocity);
+	void SetProjectionVelocity(const FVector& Velocity, bool bOverrideVelocity);
 
 	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")
 	void LaunchCharacter() const;
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Because reflection isn't working
+	 * @return 
+	 */
+	float GetGravityScale() const {return GravityScale;}
+#endif
 };

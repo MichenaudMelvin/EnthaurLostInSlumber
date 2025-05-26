@@ -5,18 +5,30 @@
 #include "CoreMinimal.h"
 #include "AmberOre.h"
 #include "GameFramework/Actor.h"
+#include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "WeakZone.generated.h"
+
+USTRUCT(BlueprintType)
+struct FWeakZoneData : public FGameElementData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "WeakZone")
+	TArray<FString> ExistingIndexes;
+};
 
 class UInteractableComponent;
 class UBoxComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API AWeakZone : public AActor
+class PROTOPROFONDEURS_API AWeakZone : public AActor, public ISaveGameElementInterface
 {
 	GENERATED_BODY()
 
 public:
 	AWeakZone();
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCure);
 
 protected:
 	virtual void BeginPlay() override;
@@ -36,6 +48,9 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<UMaterialInstanceDynamic> MaterialBlackAndWhite;
+
+	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	FOnCure OnCure;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
@@ -94,4 +109,9 @@ protected:
 
 	UFUNCTION()
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
+public:
+	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
 };

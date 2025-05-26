@@ -4,7 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "AmberOre.generated.h"
+
+USTRUCT(BlueprintType)
+struct FAmberOreData : public FGameElementData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "AmberOre")
+	uint8 CurrentOreAmount = 0;
+};
 
 class UInteractableComponent;
 
@@ -16,7 +26,7 @@ enum class EAmberType : uint8
 };
 
 UCLASS()
-class PROTOPROFONDEURS_API AAmberOre : public AActor
+class PROTOPROFONDEURS_API AAmberOre : public AActor, public ISaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -53,10 +63,15 @@ protected:
 	EAmberType AmberType = EAmberType::NecroseAmber;
 
 	UPROPERTY(EditInstanceOnly, Category = "Amber", meta = (ClampMin = 1))
-	int OreAmount = 1;
+	uint8 OreAmount = 1;
 
 	UFUNCTION()
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
 	void UpdateMaterial(bool bPickedUp) const;
+
+public:
+	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
 };

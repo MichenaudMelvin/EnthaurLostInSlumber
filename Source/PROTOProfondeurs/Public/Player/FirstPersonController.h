@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "InputMappingContext.h"
+#include "Controller/PRFControllerMappingContext.h"
 #include "GameFramework/PlayerController.h"
 #include "FirstPersonController.generated.h"
 
@@ -72,7 +73,7 @@ struct FPlayerInputs
 };
 
 UCLASS()
-class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController
+class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController, public IPRFControllerMappingContext
 {
 	GENERATED_BODY()
 
@@ -184,11 +185,16 @@ protected:
 #pragma region IMC_UI
 
 public:
-	TObjectPtr<UInputMappingContext> GetUIMappingContext() { return UIMappingContext; }
+	virtual TObjectPtr<UInputMappingContext> GetUIMappingContext() const override;
+	virtual TObjectPtr<UInputMappingContext> GetAnyKeyMappingContext() const override;
+	virtual TObjectPtr<UInputMappingContext> GetDefaultMappingContext() const override;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
 	TObjectPtr<UInputMappingContext> UIMappingContext;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
+	TObjectPtr<UInputMappingContext> AnyKeyMappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
 	FAction NavigateAction;
@@ -218,6 +224,7 @@ protected:
 
 public:
 	const FPlayerInputs& GetPlayerInputs() const {return PlayerInputs;}
+	void ClearPlayerInputs() { PlayerInputs = FPlayerInputs(); }
 
 #if WITH_EDITORONLY_DATA
 private:

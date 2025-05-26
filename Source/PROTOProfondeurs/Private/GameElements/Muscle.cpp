@@ -10,10 +10,12 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Saves/WorldSaves/WorldSave.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
+#include "Selection.h"
 #endif
 
 #pragma region Defaults
@@ -68,6 +70,11 @@ AMuscle::AMuscle()
 
 	SolidMuscleInteraction = NSLOCTEXT("Interactions", "SolidMuscleInteraction", "Make soft");
 	SoftMuscleInteraction = NSLOCTEXT("Interactions", "SoftMuscleInteraction", "Make solid");
+
+#if WITH_EDITORONLY_DATA
+	USelection::SelectObjectEvent.AddUObject(this, &AMuscle::OnSelectionUpdate);
+	USelection::SelectionChangedEvent.AddUObject(this, &AMuscle::OnSelectionUpdate);
+#endif
 }
 
 void AMuscle::BeginPlay()
@@ -119,6 +126,13 @@ void AMuscle::BeginPlay()
 	MuscleMeshComp->OnComponentHit.AddDynamic(this, &AMuscle::HitMuscleMesh);
 
 	UpdateMuscleSolidity();
+
+#if WITH_EDITORONLY_DATA
+	if (bDrawInRunTime)
+	{
+		DrawProjections();
+	}
+#endif
 }
 
 void AMuscle::OnConstruction(const FTransform& Transform)
@@ -146,6 +160,13 @@ void AMuscle::OnConstruction(const FTransform& Transform)
 	}
 
 	UpdateMuscleStateTransition(bIsSolid ? 0.0f : 1.0f);
+
+#if WITH_EDITORONLY_DATA
+	if (SelectedInEditor)
+	{
+		DrawProjections();
+	}
+#endif
 }
 
 void AMuscle::Tick(float DeltaTime)
@@ -228,11 +249,21 @@ void AMuscle::RebuildMuscleMesh() const
 	FVector MeshSize = (BoundingBox.Max - BoundingBox.Min) * MuscleMeshComp->GetRelativeScale3D();
 	MeshSize *= 0.5f;
 
-	BounceDirectionTop->SetRelativeLocation(FVector(0.0f, 0.0f, (MeshSize.Z / CurrentZScale)));
-	BounceDirectionBack->SetRelativeLocation(FVector(0.0f, 0.0f, -(MeshSize.Z / CurrentZScale)));
+	if (BounceDirectionTop)
+	{
+		BounceDirectionTop->SetRelativeLocation(FVector(0.0f, 0.0f, (MeshSize.Z / CurrentZScale)));
+	}
 
-	TraceExtentVisibility->SetWorldScale3D(FVector::OneVector);
-	TraceExtentVisibility->SetBoxExtent(MeshSize + (TraceExtent * MuscleMeshComp->GetRelativeScale3D() * 0.5f));
+	if (BounceDirectionBack)
+	{
+		BounceDirectionBack->SetRelativeLocation(FVector(0.0f, 0.0f, -(MeshSize.Z / CurrentZScale)));
+	}
+
+	if (TraceExtentVisibility)
+	{
+		TraceExtentVisibility->SetWorldScale3D(FVector::OneVector);
+		TraceExtentVisibility->SetBoxExtent(MeshSize + (TraceExtent * MuscleMeshComp->GetRelativeScale3D() * 0.5f));
+	}
 #endif
 }
 
@@ -286,7 +317,7 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 	}
 
 #if WITH_EDITORONLY_DATA
-	if (bDebug && HitActor->IsA(ACharacter::StaticClass()))
+	if (bDrawHitCapsule && HitActor->IsA(ACharacter::StaticClass()))
 	{
 		ACharacter* Character = Cast<ACharacter>(HitActor);
 		UCapsuleComponent* CapsuleComponent = Character->GetCapsuleComponent();
@@ -304,7 +335,7 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 	float ActorVelocityLength = OtherComp ? OtherComp->GetComponentVelocity().Size() : HitActor->GetVelocity().Size();
 
 #if WITH_EDITORONLY_DATA
-	if (bDebug)
+	if (bDrawHitCapsule)
 	{
 		const FString Message = FString::Printf(TEXT("ActorVelocity: %f, MinVelocity: %f"), ActorVelocityLength, MinTriggerVelocity);
 
@@ -327,7 +358,7 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(HitActor);
 	if (Player)
 	{
-		Player->EjectCharacter(LaunchVelocity);
+		Player->EjectCharacter(LaunchVelocity, true);
 	}
 	else
 	{
@@ -361,7 +392,7 @@ bool AMuscle::IsActorInRange(AActor* Actor)
 	EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
 
 #if WITH_EDITORONLY_DATA
-	if (bDebug)
+	if (bDrawHitCapsule)
 	{
 		DrawDebugTrace = EDrawDebugTrace::ForDuration;
 	}
@@ -462,5 +493,167 @@ void AMuscle::SetLock_Implementation(bool state)
 	Trigger();
 	bIsLocked = state;
 }
+
+#pragma endregion
+
+#pragma region Save
+
+FGameElementData& AMuscle::SaveGameElement(UWorldSave* CurrentWorldSave)
+{
+	FMuscleData Data;
+	Data.bIsSolid = bIsSolid;
+
+	return CurrentWorldSave->MuscleData.Add(GetName(), Data);
+}
+
+void AMuscle::LoadGameElement(const FGameElementData& GameElementData)
+{
+	const FMuscleData& Data = static_cast<const FMuscleData&>(GameElementData);
+	bIsSolid = Data.bIsSolid;
+
+	UpdateMuscleSolidity();
+}
+
+#pragma endregion
+
+#pragma region Debug
+
+#if WITH_EDITORONLY_DATA
+
+void AMuscle::OnSelectionUpdate(UObject* Object)
+{
+	if (Object == this && !SelectedInEditor)
+	{
+		SelectedInEditor = true;
+		DrawProjections();
+	}
+	else if (SelectedInEditor && !IsSelected())
+	{
+		SelectedInEditor = false;
+		ClearProjectionDraw();
+	}
+}
+
+void AMuscle::DrawProjections()
+{
+	ClearProjectionDraw();
+
+	UCharacterFallState* FallStateObject = CharacterFallStateClass->GetDefaultObject<UCharacterFallState>();
+	if (!FallStateObject)
+	{
+		return;
+	}
+
+	float PlayerGravity = GetWorld()->GetGravityZ() * FallStateObject->GetGravityScale();
+
+	FPredictProjectilePathParams DefaultParams;
+	DefaultParams.bTraceWithCollision = true;
+	DefaultParams.bTraceComplex = false;
+	DefaultParams.ActorsToIgnore.Add(this);
+	DefaultParams.DrawDebugType = EDrawDebugTrace::None;
+	DefaultParams.MaxSimTime = MaxSimTime;
+	DefaultParams.SimFrequency = SimFrequency;
+	DefaultParams.OverrideGravityZ = PlayerGravity;
+	DefaultParams.ObjectTypes.Add(ObjectTypeQuery1);
+	DefaultParams.ObjectTypes.Add(ObjectTypeQuery2);
+
+	FVector Center = TraceExtentVisibility->GetComponentLocation();
+	FVector Extent = TraceExtentVisibility->GetScaledBoxExtent();
+
+	FVector UpperPointLeft = Center;
+	UpperPointLeft -= Extent.Y * MuscleMeshComp->GetRightVector();
+	UpperPointLeft += Extent.X * MuscleMeshComp->GetForwardVector();
+
+	FVector UpperPointRight = Center;
+	UpperPointRight += Extent.Y * MuscleMeshComp->GetRightVector();
+	UpperPointRight += Extent.X * MuscleMeshComp->GetForwardVector();
+
+	FVector LowerPointLeft = Center;
+	LowerPointLeft -= Extent.Y * MuscleMeshComp->GetRightVector();
+	LowerPointLeft -= Extent.X * MuscleMeshComp->GetForwardVector();
+
+	FVector LowerPointRight = Center;
+	LowerPointRight += Extent.Y * MuscleMeshComp->GetRightVector();
+	LowerPointRight -= Extent.X * MuscleMeshComp->GetForwardVector();
+
+	if (bUseFixedVelocity)
+	{
+		FVector ForwardVelocity = (MuscleMeshComp->GetUpVector() * FixedVelocity);
+		FVector BackwardVelocity = ForwardVelocity * -1;
+
+		DrawSingleProjection(DefaultParams, UpperPointLeft, ForwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, UpperPointRight, ForwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointLeft, ForwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointRight, ForwardVelocity, MinVelocityColor);
+
+		DrawSingleProjection(DefaultParams, UpperPointLeft, BackwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, UpperPointRight, BackwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointLeft, BackwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointRight, BackwardVelocity, MinVelocityColor);
+	}
+	else
+	{
+		FVector MinForwardVelocity = (MuscleMeshComp->GetUpVector() * MinTriggerVelocity * VelocityMultiplier);
+		FVector MaxForwardVelocity = (MuscleMeshComp->GetUpVector() * MaxLaunchVelocity);
+
+		FVector MinBackwardVelocity = MinForwardVelocity * -1;
+		FVector MaxBackwardVelocity = MaxForwardVelocity * -1;
+
+		DrawSingleProjection(DefaultParams, UpperPointLeft, MinForwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, UpperPointRight, MinForwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointLeft, MinForwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointRight, MinForwardVelocity, MinVelocityColor);
+
+		DrawSingleProjection(DefaultParams, UpperPointLeft, MaxForwardVelocity, MaxVelocityColor);
+		DrawSingleProjection(DefaultParams, UpperPointRight, MaxForwardVelocity, MaxVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointLeft, MaxForwardVelocity, MaxVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointRight, MaxForwardVelocity, MaxVelocityColor);
+
+		DrawSingleProjection(DefaultParams, UpperPointLeft, MinBackwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, UpperPointRight, MinBackwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointLeft, MinBackwardVelocity, MinVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointRight, MinBackwardVelocity, MinVelocityColor);
+
+		DrawSingleProjection(DefaultParams, UpperPointLeft, MaxBackwardVelocity, MaxVelocityColor);
+		DrawSingleProjection(DefaultParams, UpperPointRight, MaxBackwardVelocity, MaxVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointLeft, MaxBackwardVelocity, MaxVelocityColor);
+		DrawSingleProjection(DefaultParams, LowerPointRight, MaxBackwardVelocity, MaxVelocityColor);
+	}
+}
+
+void AMuscle::ClearProjectionDraw() const
+{
+	UKismetSystemLibrary::FlushPersistentDebugLines(this);
+}
+
+void AMuscle::DrawSingleProjection(const FPredictProjectilePathParams& Params, const FVector& StartPoint, const FVector& Velocity, const FColor& DrawColor) const
+{
+	FPredictProjectilePathParams TargetParams(Params);
+	TargetParams.StartLocation = StartPoint;
+	TargetParams.LaunchVelocity = Velocity;
+
+	FPredictProjectilePathResult PredictResult;
+	bool bHit = UGameplayStatics::PredictProjectilePath(this, TargetParams, PredictResult);
+
+	AFirstPersonCharacter* PlayerObject = FirstPersonCharacterClass->GetDefaultObject<AFirstPersonCharacter>();
+	if (!PlayerObject)
+	{
+		return;
+	}
+
+	float DrawRadius = PlayerObject->GetCapsuleComponent()->GetScaledCapsuleRadius();
+
+	for (const FPredictProjectilePathPointData& PathPt : PredictResult.PathData)
+	{
+		UKismetSystemLibrary::DrawDebugSphere(this, PathPt.Location, DrawRadius, 12, DrawColor, INFINITY);
+	}
+
+	if (bHit)
+	{
+		UKismetSystemLibrary::DrawDebugSphere(this, PredictResult.HitResult.Location, DrawRadius + 1.0f, 12, HitColor, INFINITY);
+	}
+}
+
+#endif
 
 #pragma endregion
