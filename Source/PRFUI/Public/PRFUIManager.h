@@ -39,7 +39,7 @@ public:
 	UUserWidget* GetCreditsMenu() const { return CreditsMenu; }
 	UUserWidget* GetQuitMenu() const { return QuitMenu; }
 	UUserWidget* GetNewGameMenu() const { return NewGameMenu; }
-	
+
 	EPRFUIState GetMenuState() const { return CurrentState; }
 	void SetMenuState(EPRFUIState InUIState);
 	void CheckMenuState();
@@ -51,17 +51,21 @@ protected:
 	void CreateAllWidgets();
 	void CenterCursor() const;
 
+	void OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues);
+
 	FDelegateHandle CreateWidgetsDelegate;
-	
+
+	FDelegateHandle PostWorldInitDelegateHandle;
+
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWidgetsCreated);
-	
+
 	UPROPERTY(BlueprintAssignable)
 	FOnWidgetsCreated OnWidgetsCreated;
 
 #pragma region UI State
-	
+
 	EPRFUIState CurrentState = EPRFUIState::AnyMenu;
-	
+
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnUIContextChanged, EPRFUIState);
 	FOnUIContextChanged OnUIContextChanged;
 

@@ -249,11 +249,21 @@ void AMuscle::RebuildMuscleMesh() const
 	FVector MeshSize = (BoundingBox.Max - BoundingBox.Min) * MuscleMeshComp->GetRelativeScale3D();
 	MeshSize *= 0.5f;
 
-	BounceDirectionTop->SetRelativeLocation(FVector(0.0f, 0.0f, (MeshSize.Z / CurrentZScale)));
-	BounceDirectionBack->SetRelativeLocation(FVector(0.0f, 0.0f, -(MeshSize.Z / CurrentZScale)));
+	if (BounceDirectionTop)
+	{
+		BounceDirectionTop->SetRelativeLocation(FVector(0.0f, 0.0f, (MeshSize.Z / CurrentZScale)));
+	}
 
-	TraceExtentVisibility->SetWorldScale3D(FVector::OneVector);
-	TraceExtentVisibility->SetBoxExtent(MeshSize + (TraceExtent * MuscleMeshComp->GetRelativeScale3D() * 0.5f));
+	if (BounceDirectionBack)
+	{
+		BounceDirectionBack->SetRelativeLocation(FVector(0.0f, 0.0f, -(MeshSize.Z / CurrentZScale)));
+	}
+
+	if (TraceExtentVisibility)
+	{
+		TraceExtentVisibility->SetWorldScale3D(FVector::OneVector);
+		TraceExtentVisibility->SetBoxExtent(MeshSize + (TraceExtent * MuscleMeshComp->GetRelativeScale3D() * 0.5f));
+	}
 #endif
 }
 
