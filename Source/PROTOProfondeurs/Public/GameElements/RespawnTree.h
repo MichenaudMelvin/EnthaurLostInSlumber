@@ -33,7 +33,6 @@ protected:
 
 	virtual void Destroyed() override;
 
-private:
 	UFUNCTION()
 	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
@@ -41,16 +40,16 @@ private:
 
 	void SetActive();
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Respawn")
 	TObjectPtr<UStaticMeshComponent> TreeModel;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Respawn")
 	TObjectPtr<class UInteractableComponent> Interaction;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Respawn")
 	TObjectPtr<USceneComponent> RespawnPoint;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Respawn")
 	TObjectPtr<class UPointLightComponent> Light;
 
 	UPROPERTY()
@@ -58,6 +57,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkAudioEvent> ActivationNoise;
+
+	UPROPERTY(EditAnywhere, Category = "Respawn", meta = (MakeEditWidget))
+	FTransform RespawnTransform = FTransform(FVector(0.0f, 150.0f, 100.0f));
 
 	FString LastCheckPointName;
 
@@ -74,4 +76,6 @@ public:
 	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+
+	const FTransform& GetRespawnTransform() const {return RespawnTransform;}
 };

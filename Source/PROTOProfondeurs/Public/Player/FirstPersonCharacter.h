@@ -22,6 +22,7 @@ enum class ECharacterStateID : uint8;
 class UCameraComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberType, int, AmberAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKOnRespawn);
 
 UCLASS()
 class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface
@@ -265,9 +266,14 @@ protected:
 	TObjectPtr<ARespawnTree> LastRespawnTree = nullptr;
 
 public:
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
+	FKOnRespawn OnRespawn;
+
 	TObjectPtr<ARespawnTree> GetRespawnTree() const {return LastRespawnTree;}
 
 	void SetRespawnTree(ARespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
+
+	void Respawn(const FTransform& RespawnTransform);
 
 #pragma endregion
 

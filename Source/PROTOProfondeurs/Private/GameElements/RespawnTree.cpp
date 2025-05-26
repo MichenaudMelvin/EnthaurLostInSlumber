@@ -39,6 +39,8 @@ void ARespawnTree::BeginPlay()
 {
 	Super::BeginPlay();
 
+	RespawnTransform *= GetActorTransform();
+
 	BulbMaterial = TreeModel->CreateDynamicMaterialInstance(2, TreeModel->GetMaterial(2));
 	if (bIsActivated)
 	{
