@@ -18,9 +18,6 @@ class PROTOPROFONDEURS_API USaveSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
-protected:
-	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
-
 #pragma region SaveFunctions
 
 public:
@@ -30,7 +27,7 @@ public:
 	 * @return The created save
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saves", meta = (DisplayName = "CreateSave"))
-	void CreateSave(const int SaveIndex);
+	virtual void CreateSave(const int SaveIndex);
 
 	/**
 	 * @brief Save to a slot
@@ -38,7 +35,7 @@ public:
 	 * @return The save object
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saves")
-	UDefaultSave* SaveToSlot(const int SaveIndex);
+	virtual UDefaultSave* SaveToSlot(const int SaveIndex);
 
 	/**
 	 * @brief Load a save
@@ -47,7 +44,7 @@ public:
 	 * @return The save object
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Saves", meta = (DisplayName = "LoadSave"))
-	UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true);
+	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true);
 
 	/**
 	 * @brief Reset a save to defaults parameters

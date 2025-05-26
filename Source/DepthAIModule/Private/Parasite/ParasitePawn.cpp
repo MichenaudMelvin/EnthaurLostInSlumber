@@ -9,6 +9,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ParasiteController.h"
 #include "Path/AIPath.h"
+#include "Saves/WorldSaves/WorldSave.h"
 
 AParasitePawn::AParasitePawn()
 {
@@ -35,16 +36,8 @@ void AParasitePawn::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AParasiteController* ParasiteController = Cast<AParasiteController>(Controller);
-
 	if (!ParasiteController)
 	{
-#if WITH_EDITOR
-		const FString Message = FString::Printf(TEXT("%s has wrong AIController, must be %s"), *GetClass()->GetName(), *AParasiteController::StaticClass()->GetName());
-
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
-		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-#endif
 		return;
 	}
 
@@ -57,6 +50,11 @@ void AParasitePawn::BeginPlay()
 		{
 			MovementComponent->SetGravityScale(0.0f);
 		}
+	}
+
+	if (bLoadBlackboardData)
+	{
+		ParasiteController->LoadBlackboardValues(BlackboardData);
 	}
 }
 
@@ -138,3 +136,47 @@ void AParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyChange
 	}
 }
 #endif
+
+#pragma region Save
+
+void AParasitePawn::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	ParasiteController = Cast<AParasiteController>(NewController);
+
+#if WITH_EDITOR
+	if (!ParasiteController)
+	{
+		const FString Message = FString::Printf(TEXT("%s has wrong AIController, must be %s"), *GetClass()->GetName(), *AParasiteController::StaticClass()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+	}
+#endif
+}
+
+FGameElementData& AParasitePawn::SaveGameElement(UWorldSave* CurrentWorldSave)
+{
+	FParaSiteData Data;
+	Data.PawnTransform = GetActorTransform();
+
+	if (ParasiteController)
+	{
+		ParasiteController->SaveBlackBoardValues(Data);
+	}
+
+	return CurrentWorldSave->ParasiteData.Add(GetName(), Data);
+}
+
+void AParasitePawn::LoadGameElement(const FGameElementData& GameElementData)
+{
+	const FParaSiteData& Data = static_cast<const FParaSiteData&>(GameElementData);
+
+	SetActorTransform(Data.PawnTransform);
+
+	bLoadBlackboardData = true;
+	BlackboardData = Data;
+}
+
+#pragma endregion

@@ -8,13 +8,29 @@
 #include "GameFramework/Actor.h"
 #include "Interface/GroundAction.h"
 #include "Interface/NerveReactive.h"
+#include "Saves/WorldSaves/SaveGameElementInterface.h"
+
+#if WITH_EDITORONLY_DATA
+#include "Player/FirstPersonCharacter.h"
+#include "Player/States/CharacterFallState.h"
+#endif
+
 #include "Muscle.generated.h"
+
+USTRUCT(BlueprintType)
+struct FMuscleData : public FGameElementData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsSolid = false;
+};
 
 class UAkAudioEvent;
 class UInteractableComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API AMuscle : public AActor, public IGroundAction, public INerveReactive, public IWeakZoneInterface
+class PROTOPROFONDEURS_API AMuscle : public AActor, public IGroundAction, public INerveReactive, public IWeakZoneInterface, public ISaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -41,12 +57,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UStaticMeshComponent> MuscleMeshComp;
 
-	UPROPERTY(EditAnywhere, Category = "Dimensions")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dimensions")
 	FVector2D MuscleSize = FVector2D(5.0f);
 
-	UPROPERTY(EditAnywhere, Category = "Dimensions")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dimensions")
 	FFloatRange MuscleHeight = FFloatRange(5.0f, 10.0f);
 
+	UPROPERTY(BlueprintReadOnly, Category = "Dimensions")
 	float CurrentZScale = 0.0f;
 
 	float MuscleZUnit = 0.0f;
@@ -61,17 +78,17 @@ protected:
 
 	bool bDefaultSolidity = true;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Deformation", meta = (Units = "s"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Deformation", meta = (Units = "s"))
 	float DeformationSpeed = 0.5f;
 
 	float DeformationAlpha = 0.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Deformation", meta = (Units = "s"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Deformation", meta = (Units = "s"))
 	float DeformationDuration = 1.0f;
 
 	int8 DeformationDirection = 1;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Deformation")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Deformation")
 	float MinPossibleScale = 0.01f;
 
 	bool bTriggerDeformation = false;
@@ -101,38 +118,38 @@ protected:
 
 protected:
 #if WITH_EDITORONLY_DATA
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Physics|Debug")
 	TObjectPtr<class UBoxComponent> TraceExtentVisibility;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "Physics|Debug")
 	TObjectPtr<class UArrowComponent> BounceDirectionTop;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "Physics|Debug")
 	TObjectPtr<class UArrowComponent> BounceDirectionBack;
 #endif
 
-	UPROPERTY(EditDefaultsOnly, Category = "Physics")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics")
 	FVector TraceExtent = FVector(-300.0f, 0.0f, 50.0f);
 
 	UPROPERTY(EditDefaultsOnly, Category = "Physics")
 	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectsToCheck;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Physics")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Physics")
 	float TraceHeight = 50.0f;
 
 	UPROPERTY()
 	bool bUseFixedVelocity = false;
 
-	UPROPERTY(EditInstanceOnly, Category = "Physics", meta = (ClampMin = 0.0f, ClampMax = 10.0f, UIMin = 0.0f, UIMax = 10.0f, EditCondition = "!bUseFixedVelocity"))
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Physics", meta = (ClampMin = 0.0f, ClampMax = 10.0f, UIMin = 0.0f, UIMax = 10.0f, EditCondition = "!bUseFixedVelocity"))
 	float VelocityMultiplier = 1.0f;
 
-	UPROPERTY(EditInstanceOnly, Category = "Physics", meta = (ClampMin = 0.0f, EditCondition = bUseFixedVelocity))
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Physics", meta = (ClampMin = 0.0f, EditCondition = bUseFixedVelocity))
 	float FixedVelocity = 5000.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, ClampMax = 2500.0f, UIMin = 0.0f, UIMax = 2500.0f))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics", meta = (ClampMin = 0.0f, ClampMax = 2500.0f, UIMin = 0.0f, UIMax = 2500.0f))
 	float MinTriggerVelocity = 1000.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, UIMin = 0.0f))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics", meta = (ClampMin = 0.0f, UIMin = 0.0f))
 	float MaxLaunchVelocity = 3500.0f;
 
 	UFUNCTION(CallInEditor, Category = "Physics")
@@ -167,7 +184,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Appearance")
 	FName MuscleStateTransitionParam = FName("MuscleStateTransition");
 
-	UPROPERTY(EditDefaultsOnly, Category = "Appearance", meta = (Units = "s"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Appearance", meta = (Units = "s"))
 	float MuscleStateTransitionDuration = 0.5f;
 
 	UFUNCTION()
@@ -201,18 +218,6 @@ protected:
 
 #pragma endregion
 
-#pragma region Debug
-
-#if WITH_EDITORONLY_DATA
-
-protected:
-	UPROPERTY(EditInstanceOnly, Category = "Debug")
-	bool bDebug = false;
-
-#endif
-
-#pragma endregion
-
 #pragma region Interfaces
 
 protected:
@@ -227,6 +232,59 @@ protected:
 	virtual void Trigger_Implementation() override;
 
 	virtual void SetLock_Implementation(bool state) override;
+
+#pragma endregion
+
+#pragma region Save
+
+public:
+	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+
+#pragma endregion
+
+#pragma region Debug
+
+#if WITH_EDITORONLY_DATA
+protected:
+	void OnSelectionUpdate(UObject* Object);
+
+	void DrawProjections();
+
+	void ClearProjectionDraw() const;
+
+	bool SelectedInEditor = false;
+
+	void DrawSingleProjection(const struct FPredictProjectilePathParams& Params, const FVector& StartPoint, const FVector& Velocity, const FColor& DrawColor) const;
+
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDrawInRunTime = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDrawHitCapsule = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	float MaxSimTime = 2.0f;
+
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	float SimFrequency = 5.0f;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "Debug")
+	FColor MinVelocityColor = FColor::Green;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "Debug")
+	FColor MaxVelocityColor = FColor::Blue;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "Debug")
+	FColor HitColor = FColor::Red;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Debug")
+	TSubclassOf<AFirstPersonCharacter> FirstPersonCharacterClass = AFirstPersonCharacter::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Debug")
+	TSubclassOf<UCharacterFallState> CharacterFallStateClass = UCharacterFallState::StaticClass();
+#endif
 
 #pragma endregion
 };

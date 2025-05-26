@@ -22,7 +22,8 @@ public class DepthAIModule : ModuleRules
                 "SlateCore",
                 "AIModule",
                 "GameplayTasks",
-                "NavigationSystem"
+                "NavigationSystem",
+                "PROTOProfondeurs"
             }
         );
     }
