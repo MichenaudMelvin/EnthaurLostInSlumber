@@ -50,11 +50,8 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USceneComponent> RespawnPoint;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<class UPointLightComponent> Light;
-
 	UPROPERTY()
-	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
+	TObjectPtr<UMaterialInstanceDynamic> Material;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkAudioEvent> ActivationNoise;
