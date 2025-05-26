@@ -57,6 +57,11 @@ void ANerveReceptacle::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
+	if (!NerveEndEditorMesh)
+	{
+		return;
+	}
+
 	NerveEndTargetTransform = NerveEndEditorMesh->GetRelativeTransform();
 }
 #endif

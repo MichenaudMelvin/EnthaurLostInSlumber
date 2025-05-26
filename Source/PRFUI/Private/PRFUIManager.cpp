@@ -15,36 +15,54 @@
 
 void UPRFUIManager::CreateAllWidgets()
 {
+	GetWorld()->OnWorldBeginPlay.Remove(CreateWidgetsDelegate);
+
 	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
 	if (!IsValid(UIManagerSettings))
 	{
 		return;
 	}
-	
-	PressAnyMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->PressAnyMenuClass);
-	MainMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->MainMenuClass);
-	NewGameMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->NewGameMenuClass);
-	OptionsMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->OptionsMenuClass);
-	CreditsMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->CreditsMenuClass);
-	QuitMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->QuitMenuClass);
 
-	PauseMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->PauseMenuClass);
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (!PlayerController)
+	{
+		return;
+	}
+
+	PressAnyMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PressAnyMenuClass);
+	MainMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->MainMenuClass);
+	NewGameMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->NewGameMenuClass);
+	OptionsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->OptionsMenuClass);
+	CreditsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->CreditsMenuClass);
+	QuitMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->QuitMenuClass);
+	PauseMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PauseMenuClass);
 
 	OnWidgetsCreated.Broadcast();
+}
+
+void UPRFUIManager::OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues)
+{
+	if (!World)
+	{
+		return;
+	}
+
+	CreateWidgetsDelegate = World->OnWorldBeginPlay.AddUObject(this, &UPRFUIManager::CreateAllWidgets);
 }
 
 void UPRFUIManager::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
-	
-	CreateWidgetsDelegate = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UPRFUIManager::CreateAllWidgets);
+
+	// OnWorldBeginPlay isn't called properly in packaged games at Initialize()
+	PostWorldInitDelegateHandle = FWorldDelegates::OnPostWorldInitialization.AddUObject(this, &UPRFUIManager::OnNewWorldStarted);
 }
 
 void UPRFUIManager::Deinitialize()
 {
 	Super::Deinitialize();
 
-	GetWorld()->OnWorldBeginPlay.Remove(CreateWidgetsDelegate);
+	FWorldDelegates::OnPostWorldInitialization.Remove(PostWorldInitDelegateHandle);
 }
 
 void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
