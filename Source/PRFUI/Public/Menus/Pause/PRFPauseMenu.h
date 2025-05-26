@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
+#include "Components/TextBlock.h"
 #include "Menus/PRFWidgetBasics.h"
 #include "PRFPauseMenu.generated.h"
 
@@ -46,4 +47,10 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UWorld> MainMenuLevel;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UTextBlock> AreaName;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UTextBlock> RegionName;
 };

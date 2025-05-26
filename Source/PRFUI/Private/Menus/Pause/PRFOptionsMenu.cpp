@@ -3,6 +3,8 @@
 
 #include "Menus/Pause/PRFOptionsMenu.h"
 
+#include "Subsystems/LevelNameSubsystem.h"
+
 void UPRFOptionsMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
@@ -10,9 +12,9 @@ void UPRFOptionsMenu::NativeConstruct()
 	
 }
 
-void UPRFOptionsMenu::NativeDestruct()
+void UPRFOptionsMenu::BeginDestroy()
 {
-	Super::NativeDestruct();
+	Super::BeginDestroy();
 
 	
 }
