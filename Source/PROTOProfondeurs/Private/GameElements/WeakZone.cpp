@@ -10,6 +10,7 @@
 #include "GameElements/AmberOre.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Saves/WorldSaves/WorldSave.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/BillboardComponent.h"
@@ -233,6 +234,7 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 
 	if (InteractionPoints.Num() == 0)
 	{
+		OnCure.Broadcast();
 		FCTween::Play(
 			1.f,
 			0.f,
@@ -241,10 +243,45 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 				MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
 			},
 			DestroyDuration,
-			EFCEase::OutCubic)->SetOnComplete([&]
-			{
-				Destroy();
-			});
+			EFCEase::OutCubic);
+	}
+}
+
+FGameElementData& AWeakZone::SaveGameElement(UWorldSave* CurrentWorldSave)
+{
+	FWeakZoneData Data = FWeakZoneData();
+	for (TObjectPtr<UStaticMeshComponent> InteractionPoint : InteractionPoints)
+	{
+		if (!InteractionPoint)
+		{
+			continue;
+		}
+
+		Data.ExistingIndexes.Add(InteractionPoint.GetName());
+	}
+
+	return CurrentWorldSave->WeakZoneData.Add(GetName(), Data);
+}
+
+void AWeakZone::LoadGameElement(const FGameElementData& GameElementData)
+{
+	const FWeakZoneData& Data = static_cast<const FWeakZoneData&>(GameElementData);
+
+	for (int i = 0; i < InteractionPoints.Num(); ++i)
+	{
+		if (!InteractionPoints[i])
+		{
+			continue;
+		}
+
+		if(Data.ExistingIndexes.Contains(InteractionPoints[i].GetName()))
+		{
+			continue;
+		}
+
+		InteractionPoints[i]->DestroyComponent();
+		InteractionPoints.RemoveAt(i);
+		i--;
 	}
 }
 

@@ -1,14 +1,15 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Player/FirstPersonCharacter.h"
-
 #include "AkComponent.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CameraShakeComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
+#include "EditorSettings/PlayerEditorSettings.h"
 #include "GameElements/AmberOre.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -19,10 +20,12 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/CharacterSettings.h"
-#include "PRFUI/Public/TestMVVM/TestViewModel.h"
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
+#include "Physics/SurfaceSettings.h"
 #include "Player/States/CharacterFallState.h"
+#include "Saves/PlayerSave.h"
+#include "Saves/PlayerSaveSubsystem.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -62,8 +65,6 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	SetRespawnPosition(GetActorLocation());
 
 	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
 	SpikeTargetTransform = SpikeRelativeTransform;
@@ -114,11 +115,30 @@ void AFirstPersonCharacter::BeginPlay()
 //
 // 	ViewBobbing = CastedCameraShake;
 
+	DefaultFootStepEvent = FootstepsSounds->AkAudioEvent;
+
 	CreateStates();
 	InitStateMachine();
 
-	ViewModel = NewObject<UTestViewModel>();
-	ensure(ViewModel);
+	if (!StartWidgetClass)
+	{
+		return;
+	}
+
+#if WITH_EDITORONLY_DATA
+	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
+
+	if (!PlayerEditorSettings || !PlayerEditorSettings->bDisplayStartWidget)
+	{
+		return;
+	}
+#endif
+
+	StartWidget = CreateWidget(FirstPersonController, StartWidgetClass);
+
+	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(FirstPersonController, StartWidget);
+
+	StartWidget->AddToViewport();
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)
@@ -300,6 +320,29 @@ void AFirstPersonCharacter::Landed(const FHitResult& Hit)
 	Super::Landed(Hit);
 
 	AboveActor(Hit.GetActor());
+
+	FHitResult HitResult;
+	bool bHit = GroundTrace(HitResult);
+
+	if (!bHit || !HitResult.PhysMaterial.IsValid())
+	{
+		return;
+	}
+
+	const USurfaceSettings* SurfaceSettings = GetDefault<USurfaceSettings>();
+	if (!SurfaceSettings)
+	{
+		return;
+	}
+
+	const UAkSwitchValue* SurfaceNoise = SurfaceSettings->FindNoise(HitResult.PhysMaterial->SurfaceType);
+	if (SurfaceNoise)
+	{
+		FootstepsSounds->SetSwitch(SurfaceNoise);
+	}
+
+	FootstepsSounds->PostAkEvent(LandedEvent);
+	ResetFootStepsEvent();
 }
 
 bool AFirstPersonCharacter::GroundTrace(FHitResult& HitResult) const
@@ -384,6 +427,14 @@ void AFirstPersonCharacter::MineAmber(const EAmberType& AmberType, const int Amo
 	*Count = FMath::Clamp(*Count, 0.0f, *MaxCapacity);
 
 	OnAmberUpdate.Broadcast(AmberType, *Count);
+
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory = AmberInventory;
 }
 
 void AFirstPersonCharacter::UseAmber(const EAmberType& AmberType, const int Amount)
@@ -501,7 +552,7 @@ bool AFirstPersonCharacter::GetSlopeProperties(float& SlopeAngle, FVector& Slope
 	return true;
 }
 
-void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) const
+void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const
 {
 	UCharacterFallState* FallState = FindState<UCharacterFallState>(StateMachine);
 	if (!FallState)
@@ -509,7 +560,7 @@ void AFirstPersonCharacter::EjectCharacter(const FVector ProjectionVelocity) con
 		return;
 	}
 
-	FallState->SetProjectionVelocity(ProjectionVelocity);
+	FallState->SetProjectionVelocity(ProjectionVelocity, bOverrideCurrentVelocity);
 	StateMachine->ChangeState(ECharacterStateID::Fall);
 }
 
@@ -526,6 +577,63 @@ void AFirstPersonCharacter::StopCharacter() const
 bool AFirstPersonCharacter::IsStopped() const
 {
 	return StateMachine->GetCurrentStateID() == ECharacterStateID::Stop;
+}
+
+#pragma endregion
+
+#pragma region Saves
+
+void AFirstPersonCharacter::SavePlayerData() const
+{
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
+	{
+		return;
+	}
+
+	PlayerSaveSubsystem->GetPlayerSave()->LastWorldSaved = GetWorld()->GetFName();
+	PlayerSaveSubsystem->GetPlayerSave()->PlayerTransform = GetTransform();
+	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = StateMachine->GetCurrentStateID();
+	PlayerSaveSubsystem->SaveToSlot(0);
+}
+
+void AFirstPersonCharacter::LoadPlayerData()
+{
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	TObjectPtr<UPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
+	SetActorTransform(SaveData->PlayerTransform);
+	StateMachine->ChangeState(SaveData->CurrentState);
+	AmberInventory = SaveData->AmberInventory;
+
+	for (TTuple<EAmberType, int> Element : AmberInventory)
+	{
+		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
+	}
+}
+#pragma endregion
+
+#pragma region Respawn
+
+void AFirstPersonCharacter::Respawn(const FTransform& RespawnTransform)
+{
+	SetActorTransform(RespawnTransform);
+	GetCharacterMovement()->Velocity = FVector::ZeroVector;
+
+	OnRespawn.Broadcast();
+}
+
+#pragma endregion
+
+#pragma region Sounds
+
+void AFirstPersonCharacter::ResetFootStepsEvent() const
+{
+	FootstepsSounds->AkAudioEvent = DefaultFootStepEvent;
 }
 
 #pragma endregion

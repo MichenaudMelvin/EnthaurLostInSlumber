@@ -78,7 +78,7 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 
 			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceRange().GetLowerBoundValue(), LinkedNerve->GetPropulsionForceRange().GetUpperBoundValue(), Lerp);
 
-			PlayerCharacter->EjectCharacter(CableDirection * Force);
+			PlayerCharacter->EjectCharacter(CableDirection * Force, false);
 
 			ReleasePlayer(true);
 		}
@@ -121,7 +121,7 @@ void UPlayerToNervePhysicConstraint::ReleasePlayer(const bool DetachFromPlayer)
 
 	if (DetachFromPlayer && LinkedNerve)
 	{
-		LinkedNerve->DetachNerveBall();
+		LinkedNerve->DetachNerveBall(false);
 	}
 
 	DestroyComponent();

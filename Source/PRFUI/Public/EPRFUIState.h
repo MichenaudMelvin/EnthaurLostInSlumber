@@ -10,7 +10,9 @@
 UENUM(BlueprintType)
 enum class EPRFUIState : uint8
 {
+	AnyMenu,
+	MainMenu,
 	Gameplay,
 	PauseMenu,
-	MainMenu
+	Waiting
 };

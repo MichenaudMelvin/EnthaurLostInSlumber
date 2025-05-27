@@ -7,6 +7,8 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UAkAudioEvent;
+class ARespawnTree;
 class UAkComponent;
 class UCameraShakeComponent;
 enum class EAmberType : uint8;
@@ -21,6 +23,7 @@ enum class ECharacterStateID : uint8;
 class UCameraComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberType, int, AmberAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKOnRespawn);
 
 UCLASS()
 class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface
@@ -108,6 +111,8 @@ public:
 
 public:
 	const TArray<TObjectPtr<UCharacterState>>& GetStates() const {return States;}
+
+	TObjectPtr<UCharacterStateMachine> GetStateMachine() const {return StateMachine;}
 
 #pragma endregion
 
@@ -234,7 +239,7 @@ public:
 	bool GetSlopeProperties(float& SlopeAngle, FVector& SlopeNormal) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Character")
-	void EjectCharacter(const FVector ProjectionVelocity) const;
+	void EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void StopCharacter() const;
@@ -246,15 +251,30 @@ public:
 
 #pragma endregion
 
-#pragma region Respawn
-
-private:
-	FVector RespawnPosition;
+#pragma region Saves
 
 public:
-	FVector GetRespawnPosition() const {return RespawnPosition;}
+	void SavePlayerData() const;
 
-	void SetRespawnPosition(const FVector& Position) {RespawnPosition = Position;}
+	void LoadPlayerData();
+
+#pragma endregion
+
+#pragma region Respawn
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
+	TObjectPtr<ARespawnTree> LastRespawnTree = nullptr;
+
+public:
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
+	FKOnRespawn OnRespawn;
+
+	TObjectPtr<ARespawnTree> GetRespawnTree() const {return LastRespawnTree;}
+
+	void SetRespawnTree(ARespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
+
+	void Respawn(const FTransform& RespawnTransform);
 
 #pragma endregion
 
@@ -264,11 +284,26 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Sounds")
 	TObjectPtr<UAkComponent> FootstepsSounds;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Sounds")
+	TObjectPtr<UAkAudioEvent> LandedEvent;
+
+	UPROPERTY()
+	TObjectPtr<UAkAudioEvent> DefaultFootStepEvent;
+
 public:
 	TObjectPtr<UAkComponent> GetFootstepsSoundComp() const {return FootstepsSounds;}
+
+	void ResetFootStepsEvent() const;
 
 #pragma endregion
 
 protected:
-	TObjectPtr<UTestViewModel> ViewModel;
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UUserWidget> StartWidgetClass;
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI")
+	TObjectPtr<UUserWidget> StartWidget;
+
+public:
+	TObjectPtr<UUserWidget> GetStartWidget() { return StartWidget; }
 };

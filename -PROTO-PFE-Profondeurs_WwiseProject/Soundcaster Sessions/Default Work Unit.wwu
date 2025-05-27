@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{CA4613EE-58A8-4B0E-A14B-832BBBBA241E}" SchemaVersion="123">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{CA4613EE-58A8-4B0E-A14B-832BBBBA241E}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{CA4613EE-58A8-4B0E-A14B-832BBBBA241E}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="New Soundcaster Session" ID="{14DBD87B-1FEE-4408-8889-60CC189B9217}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Play_SFX_NerveReceptacle_Electricty" ID="{5C28218F-535A-43B7-9CD4-681EEC44DF40}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_SFX_NerveReceptacle_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundcasterSessions>
 </WwiseDocument>

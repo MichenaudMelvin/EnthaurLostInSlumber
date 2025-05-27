@@ -5,12 +5,24 @@
 #include "CoreMinimal.h"
 #include "WeakZoneInterface.h"
 #include "GameFramework/Actor.h"
+#include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "RespawnTree.generated.h"
 
+class UAkComponent;
+class AFirstPersonCharacter;
 class UAkAudioEvent;
 
+USTRUCT(BlueprintType)
+struct FRespawnTreeData : public FGameElementData
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	bool bIsActive = false;
+};
+
 UCLASS()
-class PROTOPROFONDEURS_API ARespawnTree : public AActor, public IWeakZoneInterface
+class PROTOPROFONDEURS_API ARespawnTree : public AActor, public IWeakZoneInterface, public ISaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -20,35 +32,48 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-private:
-	UFUNCTION()
-	void ActivateRespawn(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+	virtual void Destroyed() override;
 
-	UPROPERTY(EditDefaultsOnly)
+	UFUNCTION()
+	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
+	void SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave);
+
+	void SetActive();
+
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
+	TObjectPtr<USceneComponent> RootComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<UStaticMeshComponent> TreeModel;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<class UInteractableComponent> Interaction;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<USceneComponent> RespawnPoint;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<class UPointLightComponent> Light;
-
 	UPROPERTY()
-	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
+	TObjectPtr<UMaterialInstanceDynamic> Material;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
-	TObjectPtr<UAkAudioEvent> ActivationNoise;
+	TObjectPtr<UAkComponent> RespawnTreeNoises;
 
-	UPROPERTY()
-	bool bIsActivated;
+	UPROPERTY(EditAnywhere, Category = "Respawn", meta = (MakeEditWidget))
+	FTransform RespawnTransform = FTransform(FVector(0.0f, 150.0f, 100.0f));
 
-	UPROPERTY(EditAnywhere)
-	float lightLevel;
+	FString LastCheckPointName;
+
+	bool bIsActivated = false;
 
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
+
+public:
+	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+
+	const FTransform& GetRespawnTransform() const {return RespawnTransform;}
 };

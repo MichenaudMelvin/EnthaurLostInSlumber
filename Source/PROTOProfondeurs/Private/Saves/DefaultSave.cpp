@@ -6,6 +6,6 @@
 #if WITH_EDITOR
 void UDefaultSave::PrintVariables() const
 {
-	UE_LOG(LogBlueprint, Warning, TEXT("Variables of %s%d"), *SlotName, SaveIndex);
+	UE_LOG(LogBlueprint, Warning, TEXT("Variables of %s%d"), *GetSlotName(), SaveIndex);
 }
 #endif

@@ -27,15 +27,5 @@ public class PRFUI : ModuleRules
                 "UMG",
             }
         );
-
-        if (Target.bBuildEditor)
-        {
-            PrivateDependencyModuleNames.AddRange(
-                new string[]
-                {
-                    "ModelViewViewModelBlueprint",
-                }
-            );
-        }
     }
 }

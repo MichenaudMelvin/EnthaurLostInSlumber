@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SaveAIData.h"
 #include "Interfaces/AIInterface.h"
 #include "Runtime/AIModule/Classes/AIController.h"
 #include "DefaultAIController.generated.h"

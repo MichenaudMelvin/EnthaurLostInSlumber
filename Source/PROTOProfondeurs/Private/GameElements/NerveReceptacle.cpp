@@ -2,8 +2,8 @@
 
 
 #include "GameElements/NerveReceptacle.h"
+#include "AkComponent.h"
 #include "AkGameplayStatics.h"
-#include "Enumerations.h"
 #include "FCTween.h"
 #include "Components/CameraShakeComponent.h"
 #include "Components/SphereComponent.h"
@@ -16,16 +16,35 @@
 #include "Parameters/BPRefParameters.h"
 #include "Player/FirstPersonCharacter.h"
 
-
 ANerveReceptacle::ANerveReceptacle()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Receptacle"));
-	SetRootComponent(NerveReceptacle);
+	RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	SetRootComponent(RootComp);
+	RootComp->SetMobility(EComponentMobility::Static);
 
-	Collision = CreateDefaultSubobject<USphereComponent>("Collision");
+	NerveReceptacle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Receptacle"));
+	NerveReceptacle->SetupAttachment(RootComp);
+	NerveReceptacle->SetMobility(EComponentMobility::Static);
+
+#if WITH_EDITORONLY_DATA
+	NerveEndEditorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EditorNerveEnd"));
+	NerveEndEditorMesh->SetupAttachment(RootComponent);
+	NerveEndEditorMesh->SetMobility(EComponentMobility::Static);
+	NerveEndEditorMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	NerveEndEditorMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
+	NerveEndEditorMesh->SetVisibility(false, true);
+	NerveEndEditorMesh->bHiddenInGame = true;
+	NerveEndEditorMesh->bIsEditorOnly = true;
+#endif
+
+	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
 	Collision->SetupAttachment(NerveReceptacle);
+	Collision->SetMobility(EComponentMobility::Static);
+
+	NerveReceptaclesNoises = CreateDefaultSubobject<UAkComponent>(TEXT("NerveReceptaclesNoises"));
+	NerveReceptaclesNoises->SetupAttachment(NerveReceptacle);
 }
 
 void ANerveReceptacle::BeginPlay()
@@ -33,7 +52,23 @@ void ANerveReceptacle::BeginPlay()
 	Super::BeginPlay();
 
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &ANerveReceptacle::TriggerEnter);
+
+	NerveEndTargetTransform *= GetActorTransform();
 }
+
+#if WITH_EDITORONLY_DATA
+void ANerveReceptacle::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	if (!NerveEndEditorMesh)
+	{
+		return;
+	}
+
+	NerveEndTargetTransform = NerveEndEditorMesh->GetRelativeTransform();
+}
+#endif
 
 void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                     UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -45,10 +80,19 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 
 		OnNerveConnect();
 
-		UGameplayStatics::GetPlayerCharacter(this, 0)->GetComponentByClass<UPlayerToNervePhysicConstraint>()->ReleasePlayer();
+		ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+		if (Character)
+		{
+			UPlayerToNervePhysicConstraint* Constraint = Character->GetComponentByClass<UPlayerToNervePhysicConstraint>();
 
+			if (Constraint)
+			{
+				Constraint->ReleasePlayer();
+			}
+		}
+
+		NerveReceptaclesNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 		PlayElectricityAnimation(Nerve);
-		UAkGameplayStatics::PostEventAtLocation(ReceptacleEnabledNoise, NerveReceptacle->GetComponentLocation(), NerveReceptacle->GetComponentRotation(), this);
 	}
 }
 
@@ -68,7 +112,7 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 			{
 				continue;
 			}
-			
+
 			if (Actor->Implements<UNerveReactive>())
 			{
 				if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
@@ -96,7 +140,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 	FCTween::Play(0.f, 30.f,
 		[&](const float& F)
 		{
-			NerveElectricityFeedback->Radius = F;
+			NerveElectricityFeedback->SetRadius(F);
 		},
 		.25f, EFCEase::InCubic);
 
@@ -113,14 +157,14 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 			FCTween::Play(30.f, 200.f,
 			[&](const float& F)
 			{
-				NerveElectricityFeedback->Radius = F;
+				NerveElectricityFeedback->SetRadius(F);
 			},
-			1.f);
+			1.f)->SetOnComplete([&]{OnNerveAnimationFinished.Broadcast();});
 
 			FCTween::Play(1.f, 0.f,
 			[&](const float& F)
 			{
-				NerveElectricityFeedback->Material->SetScalarParameterValue("Opacity", F);
+				NerveElectricityFeedback->GetMaterial()->SetScalarParameterValue("Opacity", F);
 			},
 			2.f)->SetOnComplete([&]
 			{

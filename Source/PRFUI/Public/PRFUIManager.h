@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "EPRFUIState.h"
-#include "Controller/PRFUIController.h"
 #include "UObject/Object.h"
 #include "PRFUIManager.generated.h"
 
@@ -13,39 +12,85 @@ class AFirstPersonController;
 /**
  * 
  */
-UCLASS(Blueprintable, Abstract)
+UCLASS()
 class PRFUI_API UPRFUIManager : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+	virtual void Deinitialize() override;
 
 	// bIsSubMenu is for confirmation boxes that have to not hide the menu just before
-	// Can also be used for menus with a fixed part and a inner part that changes (options menu) 
+	// Can also be used for menus with a fixed part and an inner part that changes (options menu)
+
+	UFUNCTION(BlueprintCallable)
 	void OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu);
+
+	UFUNCTION(BlueprintCallable)
 	void CloseCurrentMenu();
-	void CloseAllMenus();
+	
+	UFUNCTION(BlueprintCallable)
+	void CloseAllMenus(EPRFUIState InState);
 
 	UUserWidget* GetPauseMenu() const { return PauseMenu; }
+	UUserWidget* GetMainMenu() const { return MainMenu; }
+	UUserWidget* GetOptionsMenu() const { return OptionsMenu; }
+	UUserWidget* GetCreditsMenu() const { return CreditsMenu; }
+	UUserWidget* GetQuitMenu() const { return QuitMenu; }
+	UUserWidget* GetNewGameMenu() const { return NewGameMenu; }
 
-protected:
+	EPRFUIState GetMenuState() const { return CurrentState; }
+	void SetMenuState(EPRFUIState InUIState);
+	void CheckMenuState();
+
 	void SetUIInputMode() const;
 	void SetGameInputMode() const;
+
+protected:
+	void CreateAllWidgets();
 	void CenterCursor() const;
 
-	void HandleMenuCollection(UUserWidget* InMenuClass, bool bAddMenu);
+	void OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues);
+
+	FDelegateHandle CreateWidgetsDelegate;
+
+	FDelegateHandle PostWorldInitDelegateHandle;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWidgetsCreated);
+
+	UPROPERTY(BlueprintAssignable)
+	FOnWidgetsCreated OnWidgetsCreated;
 
 #pragma region UI State
 
-public:
-	UPROPERTY()
-	EPRFUIState CurrentContext = EPRFUIState::Gameplay;
+	EPRFUIState CurrentState = EPRFUIState::AnyMenu;
 
-protected:
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnUIContextChanged, EPRFUIState);
 	FOnUIContextChanged OnUIContextChanged;
 
+#pragma endregion
+
+#pragma region Main Menus
+
+	UPROPERTY(BlueprintReadOnly)
+	UUserWidget* PressAnyMenu = nullptr;
+
+	UPROPERTY()
+	UUserWidget* MainMenu = nullptr;
+
+	UPROPERTY()
+	UUserWidget* NewGameMenu = nullptr;
+
+	UPROPERTY()
+	UUserWidget* LoadGameMenu = nullptr;
+	
+	UPROPERTY()
+	UUserWidget* CreditsMenu = nullptr;
+
+	UPROPERTY()
+	UUserWidget* QuitMenu = nullptr;
+	
 #pragma endregion
 
 #pragma region Pause Menus
@@ -60,5 +105,5 @@ protected:
 	
 private:
 	TArray<TWeakObjectPtr<UUserWidget>> MenuStack;
-	TMap<FString, TWeakObjectPtr<UUserWidget>> MenuClasses;
+	TMap<FString, UUserWidget*> MenuClasses;
 };
