@@ -1,679 +1,614 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{910CCB93-C5C5-47FC-9035-970CDDB13072}" SchemaVersion="123">
+<WwiseDocument Type="WorkUnit" ID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}" SchemaVersion="123">
 	<AudioObjects>
-		<WorkUnit Name="WU_SFX" ID="{910CCB93-C5C5-47FC-9035-970CDDB13072}" PersistMode="Standalone">
+		<WorkUnit Name="WU_SFX" ID="{DDFD9435-DEE7-4570-B9F7-3A2B9D793E7C}" PersistMode="Standalone">
 			<PropertyList>
 				<Property Name="Color" Type="int16" Value="10"/>
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
 			</PropertyList>
 			<ChildrenList>
-				<RandomSequenceContainer Name="LPX_Pull_Nerve" ID="{B12AE256-7D25-4A49-95B1-E6D9F2FA6258}" ShortID="3004689">
-					<PropertyList>
-						<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-						<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-						<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-						<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="4"/>
-						<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="3"/>
-						<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-					</PropertyList>
+				<ActorMixer Name="AM_SFX_NerveDoor" ID="{D62D006B-2DD3-41F8-BA30-AD6D0D3D1DD9}" ShortID="57336680">
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-						</Reference>
-					</ReferenceList>
-				</RandomSequenceContainer>
-				<ActorMixer Name="AM_SFX_NerveDoor" ID="{3914E855-8963-443D-96CD-F3044C272D74}" ShortID="532180367">
-					<PropertyList>
-						<Property Name="3DSpatialization" Type="int16" Value="2"/>
-						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
-					</PropertyList>
-					<ReferenceList>
-						<Reference Name="Attenuation">
-							<ObjectRef Name="ATT_60m" ID="{3531EC2F-BC90-4D75-8AF0-D7C4186A3AA9}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
-						</Reference>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<RandomSequenceContainer Name="SFX_NerveDoor_Layer_Gore02" ID="{CB581F83-DA63-46ED-8007-23DA1E7C57BD}" ShortID="822626322">
+						<RandomSequenceContainer Name="SFX_NerveDoor_Layer_Gore" ID="{B432CB6A-E6C2-431C-BF0C-2F92B0B86EC2}" ShortID="1043702386">
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="SFX_NerveDoor_Layer_Gore02_01" ID="{BB75413E-94C4-4A20-AF79-73118EA77372}" ShortID="1002915153">
+								<Sound Name="SFX_NerveDoor_Layer_Gore_01" ID="{C89D645B-87B9-42DF-A2E2-0D65CACAA249}" ShortID="562112775">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 										</Reference>
 										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore02_01" ID="{38EEC4F8-FF79-4927-897C-D861E33969AE}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveDoor_Layer_Gore02_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="708400597"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Gore02_01" ID="{38EEC4F8-FF79-4927-897C-D861E33969AE}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveDoor_Layer_Gore02_02" ID="{8AF72A50-95D7-4E6A-B01D-26C529A50BBF}" ShortID="144089476">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore02_02" ID="{0D377E3E-95FE-4989-A391-C31129B1A875}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveDoor_Layer_Gore02_02.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="303207830"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Gore02_02" ID="{0D377E3E-95FE-4989-A391-C31129B1A875}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveDoor_Layer_Gore02_03" ID="{4173C9F5-8207-4E38-A153-9E638E88CE54}" ShortID="267299220">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore02_03" ID="{27E2B93D-42AF-485F-8489-62938FCFA6FD}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveDoor_Layer_Gore02_03.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="861837351"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Gore02_03" ID="{27E2B93D-42AF-485F-8489-62938FCFA6FD}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-						</RandomSequenceContainer>
-						<RandomSequenceContainer Name="SFX_NerveDoor_Layer_Woosh" ID="{91722D8D-D4DD-49E4-B958-108615EA18FE}" ShortID="349984175">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<Sound Name="SFX_NerveDoor_Layer_Woosh_01" ID="{397DC284-8E56-431F-8831-AE91BEDDE7B3}" ShortID="551906193">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Woosh_01" ID="{4192E63B-9C32-465C-B61E-EDF8C6FE6F73}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveDoor_Layer_Woosh_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="150421772"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Woosh_01" ID="{4192E63B-9C32-465C-B61E-EDF8C6FE6F73}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveDoor_Layer_Woosh_02" ID="{F76CD1F6-0E07-410E-AD9B-1E280C7DD59A}" ShortID="484042494">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Woosh_02" ID="{EB0FB80F-E6C2-4294-81C9-94E6F79B70D3}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveDoor_Layer_Woosh_02.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="1040785902"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Woosh_02" ID="{EB0FB80F-E6C2-4294-81C9-94E6F79B70D3}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveDoor_Layer_Woosh_03" ID="{D77D6D86-92CF-4988-B8EF-2B26E6A45AAD}" ShortID="295408240">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Woosh_03" ID="{F9CB90A2-BD53-44CB-9DC0-EE9B896CF924}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveDoor_Layer_Woosh_03.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="515272845"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Woosh_03" ID="{F9CB90A2-BD53-44CB-9DC0-EE9B896CF924}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-						</RandomSequenceContainer>
-						<RandomSequenceContainer Name="SFX_NerveDoor_Layer_Gore" ID="{BC65F784-57F9-48AE-84CA-6531706B8A45}" ShortID="112318058">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<Sound Name="SFX_NerveDoor_Layer_Gore_01" ID="{03B3DF04-3660-464D-B5A9-67DF0FAF1F4B}" ShortID="157835477">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore_01" ID="{508F37D4-4F97-47B8-A824-57EB9A9B26F0}">
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore_01" ID="{2B569DF3-3E4C-42CE-AAF7-C79198753F94}">
 											<Language>SFX</Language>
 											<AudioFile>SFX_NerveDoor_Layer_Gore_01.wav</AudioFile>
 											<MediaIDList>
-												<MediaID ID="251580194"/>
+												<MediaID ID="358034565"/>
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Gore_01" ID="{508F37D4-4F97-47B8-A824-57EB9A9B26F0}" Platform="Linked"/>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Gore_01" ID="{2B569DF3-3E4C-42CE-AAF7-C79198753F94}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="SFX_NerveDoor_Layer_Gore_02" ID="{F8226C96-63C6-4511-A419-C58450C4BF99}" ShortID="70013880">
+								<Sound Name="SFX_NerveDoor_Layer_Gore_02" ID="{41711CBE-3B40-4E80-90CD-58B18EC8A05A}" ShortID="963546468">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 										</Reference>
 										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore_02" ID="{76B654BB-DD8B-472E-B7EA-D73CBB05D8A9}">
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore_02" ID="{968D5814-3A92-4451-8EBE-13A46FA9D315}">
 											<Language>SFX</Language>
 											<AudioFile>SFX_NerveDoor_Layer_Gore_02.wav</AudioFile>
 											<MediaIDList>
-												<MediaID ID="58099252"/>
+												<MediaID ID="932990901"/>
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Gore_02" ID="{76B654BB-DD8B-472E-B7EA-D73CBB05D8A9}" Platform="Linked"/>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Gore_02" ID="{968D5814-3A92-4451-8EBE-13A46FA9D315}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="SFX_NerveDoor_Layer_Gore_03" ID="{F395988A-6EEC-4381-A0A8-4C7AF02EC323}" ShortID="125089959">
+								<Sound Name="SFX_NerveDoor_Layer_Gore_03" ID="{2D8756CC-33AA-42C4-90A9-EED092A11AEB}" ShortID="926547860">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 										</Reference>
 										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore_03" ID="{9BC819CC-A855-4067-B18A-75F20EDAD128}">
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore_03" ID="{84825057-18EC-41B2-BBC9-C81729A855BA}">
 											<Language>SFX</Language>
 											<AudioFile>SFX_NerveDoor_Layer_Gore_03.wav</AudioFile>
 											<MediaIDList>
-												<MediaID ID="821434401"/>
+												<MediaID ID="265556296"/>
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveDoor_Layer_Gore_03" ID="{9BC819CC-A855-4067-B18A-75F20EDAD128}" Platform="Linked"/>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Gore_03" ID="{84825057-18EC-41B2-BBC9-C81729A855BA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="SFX_NerveDoor_Layer_Gore02" ID="{D37C7DC7-C7FD-4DB6-B0D2-24D275C0C615}" ShortID="435464275">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_NerveDoor_Layer_Gore02_01" ID="{FC2BB3CD-A704-419F-BE4F-3060857B3255}" ShortID="645398107">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore02_01" ID="{EBEAA59A-9E1C-4399-A620-0B7918C1ABF2}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_NerveDoor_Layer_Gore02_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="184797821"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Gore02_01" ID="{EBEAA59A-9E1C-4399-A620-0B7918C1ABF2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_NerveDoor_Layer_Gore02_02" ID="{745CCDD3-F168-4C4D-9430-7098D9B9CA23}" ShortID="660038781">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore02_02" ID="{F3FCE40F-FB92-4442-B4A2-809E90072BBF}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_NerveDoor_Layer_Gore02_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="562674167"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Gore02_02" ID="{F3FCE40F-FB92-4442-B4A2-809E90072BBF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_NerveDoor_Layer_Gore02_03" ID="{F6BA1189-3DA8-48BD-A737-DAA501F0D792}" ShortID="263620846">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Gore02_03" ID="{A5EEAB75-675C-42BB-9D2D-F9E967A5341B}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_NerveDoor_Layer_Gore02_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="993740584"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Gore02_03" ID="{A5EEAB75-675C-42BB-9D2D-F9E967A5341B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="SFX_NerveDoor_Layer_Woosh" ID="{12E350A0-490D-44DD-AB2A-BF6359C25196}" ShortID="159789247">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_NerveDoor_Layer_Woosh_01" ID="{F183A13B-8301-4DD4-BDCC-D6AE72754D95}" ShortID="632077220">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Woosh_01" ID="{5E11D765-271F-49D1-8BD5-9CF4A6137A6E}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_NerveDoor_Layer_Woosh_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="522983"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Woosh_01" ID="{5E11D765-271F-49D1-8BD5-9CF4A6137A6E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_NerveDoor_Layer_Woosh_02" ID="{F265A40A-C0F4-4A73-A3AE-E7691B6ADC66}" ShortID="189042287">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Woosh_02" ID="{3D7BC302-AADA-4EBB-9650-23F535B8B596}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_NerveDoor_Layer_Woosh_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="789850910"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Woosh_02" ID="{3D7BC302-AADA-4EBB-9650-23F535B8B596}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_NerveDoor_Layer_Woosh_03" ID="{44FC7863-91C4-48CF-A943-12BD1CC5A68D}" ShortID="527891882">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_NerveDoor_Layer_Woosh_03" ID="{262EE18A-5C09-47A0-9922-09871D21F7FD}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_NerveDoor_Layer_Woosh_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="342833816"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_NerveDoor_Layer_Woosh_03" ID="{262EE18A-5C09-47A0-9922-09871D21F7FD}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
 						</RandomSequenceContainer>
 					</ChildrenList>
 				</ActorMixer>
-				<ActorMixer Name="AM_SFX_NerveReceptacle" ID="{316EB308-45A5-426C-B05E-D5A96A591F15}" ShortID="242937386">
-					<PropertyList>
-						<Property Name="3DSpatialization" Type="int16" Value="2"/>
-						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
-					</PropertyList>
+				<RandomSequenceContainer Name="SFX_NerveReceptacle_Activate" ID="{C0FBFE25-26C8-4E2A-A2EC-F65CEB4361B3}" ShortID="802200484">
 					<ReferenceList>
-						<Reference Name="Attenuation">
-							<ObjectRef Name="ATT_15m" ID="{90A2CBF6-B897-48C3-8393-E24AC51368F1}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
-						</Reference>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<RandomSequenceContainer Name="SFX_NerveReceptacle_Electricty" ID="{09B80DEB-1198-47CC-A718-406B7FDC5349}" ShortID="572218809">
+						<Sound Name="SFX_NerveReceptacle_Activate_01" ID="{9722DC36-057C-4E6F-AD83-58812CAF5332}" ShortID="11047815">
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="SFX_NerveReceptacle_Electricty" ID="{C79B1D69-36CC-4D9E-AF4B-DE9C8E8BA573}" ShortID="386041093">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty" ID="{C21DB1D6-8540-41BE-A976-FA160856D0A6}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="753932510"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty" ID="{C21DB1D6-8540-41BE-A976-FA160856D0A6}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-						</RandomSequenceContainer>
-						<RandomSequenceContainer Name="SFX_NerveReceptacle_Electricty_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" ShortID="92091806">
-							<PropertyList>
-								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<Sound Name="SFX_NerveReceptacle_Electricty_Start_01" ID="{5130F6D1-4DE6-4BA2-8F9D-B0F295CB8795}" ShortID="257234975">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty_Start_01" ID="{74C3FF1C-24F9-40B6-9A13-6142159123DF}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty_Start_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="290163593"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty_Start_01" ID="{74C3FF1C-24F9-40B6-9A13-6142159123DF}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveReceptacle_Electricty_Start_02" ID="{F7740365-3A51-4760-81DE-B333EA71DD89}" ShortID="951843677">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty_Start_02" ID="{0BD0F040-4EDC-4976-A119-87E73CB32C72}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty_Start_02.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="939918079"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty_Start_02" ID="{0BD0F040-4EDC-4976-A119-87E73CB32C72}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveReceptacle_Electricty_Start_03" ID="{5C83621B-CDF5-45FF-A1F1-9CF91105ECC8}" ShortID="939553763">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty_Start_03" ID="{7AD28027-123D-48FE-9F32-E655A7B32471}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty_Start_03.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="909338791"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty_Start_03" ID="{7AD28027-123D-48FE-9F32-E655A7B32471}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveReceptacle_Electricty_Start_04" ID="{7F610734-FB0D-4695-9D77-BEECFBCC07E0}" ShortID="62986257">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty_Start_04" ID="{9EE7E7FD-50FD-4F2D-8563-281F9AAF9F1C}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty_Start_04.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="897057365"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty_Start_04" ID="{9EE7E7FD-50FD-4F2D-8563-281F9AAF9F1C}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-						</RandomSequenceContainer>
-						<RandomSequenceContainer Name="SFX_NerveReceptacle_Electricty_End" ID="{DE93B8AC-F7EA-4037-B3E2-E500A95A6F93}" ShortID="241023519">
-							<PropertyList>
-								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<Sound Name="SFX_NerveReceptacle_Electricty_End_01" ID="{7054170F-7295-410A-80E3-E77BB60DD961}" ShortID="909169669">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty_End_01" ID="{EDA547AF-B9E7-4DF4-885A-F73EA660DA8B}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty_End_01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="954112915"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty_End_01" ID="{EDA547AF-B9E7-4DF4-885A-F73EA660DA8B}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveReceptacle_Electricty_End_02" ID="{CE5B0BDA-3427-41B4-BB2C-C75E0CEC5249}" ShortID="605294719">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty_End_02" ID="{1E28A335-CD5F-4D6C-A12B-71F9596DFD4F}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty_End_02.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="763356268"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty_End_02" ID="{1E28A335-CD5F-4D6C-A12B-71F9596DFD4F}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveReceptacle_Electricty_End_03" ID="{CB907D5A-EC16-42AC-8472-82D6BD98D15D}" ShortID="281731342">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty_End_03" ID="{4F8087E9-000B-40CC-94AD-B007AFC73983}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty_End_03.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="391363525"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty_End_03" ID="{4F8087E9-000B-40CC-94AD-B007AFC73983}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="SFX_NerveReceptacle_Electricty_End_04" ID="{5AE09F59-D947-4D9E-8015-9ED8EEFA820B}" ShortID="642427603">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty_End_04" ID="{48D0213B-0408-461F-8B82-321C91157763}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty_End_04.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="733450515"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty_End_04" ID="{48D0213B-0408-461F-8B82-321C91157763}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-						</RandomSequenceContainer>
-					</ChildrenList>
-				</ActorMixer>
-				<RandomSequenceContainer Name="SFX_NerveReceptacle_Activate" ID="{6D409423-B1F9-4103-8241-B07692B2A8A1}" ShortID="533002182">
-					<PropertyList>
-						<Property Name="3DSpatialization" Type="int16" Value="2"/>
-						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
-						<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-					</PropertyList>
-					<ReferenceList>
-						<Reference Name="Attenuation">
-							<ObjectRef Name="ATT_15m" ID="{90A2CBF6-B897-48C3-8393-E24AC51368F1}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
-						</Reference>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-						</Reference>
-					</ReferenceList>
-					<ChildrenList>
-						<Sound Name="SFX_NerveReceptacle_Activate_01" ID="{4341B5D9-CF26-4FF4-9836-23549AE34295}" ShortID="496123435">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="SFX_NerveReceptacle_Activate_01" ID="{4B55B522-1F4F-4B65-9856-FD9316774C6A}">
+								<AudioFileSource Name="SFX_NerveReceptacle_Activate_01" ID="{68DF0FF6-3D21-4B6E-9BB5-FB7BA197FA51}">
 									<Language>SFX</Language>
 									<AudioFile>SFX_NerveReceptacle_Activate_01.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="16378350"/>
+										<MediaID ID="481171115"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="SFX_NerveReceptacle_Activate_01" ID="{4B55B522-1F4F-4B65-9856-FD9316774C6A}" Platform="Linked"/>
+								<ActiveSource Name="SFX_NerveReceptacle_Activate_01" ID="{68DF0FF6-3D21-4B6E-9BB5-FB7BA197FA51}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="SFX_NerveReceptacle_Activate_02" ID="{D63932AD-54EC-4AEA-AE60-18D9E9D50ABB}" ShortID="484235443">
+						<Sound Name="SFX_NerveReceptacle_Activate_02" ID="{E3E98FF2-FB69-49A9-960B-C06219AACD82}" ShortID="141350866">
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="SFX_NerveReceptacle_Activate_02" ID="{CF3EB207-CA4D-43BD-BAD3-DD9994FFE920}">
+								<AudioFileSource Name="SFX_NerveReceptacle_Activate_02" ID="{7527B077-37F7-4E0A-AB41-4FFEADC1823A}">
 									<Language>SFX</Language>
 									<AudioFile>SFX_NerveReceptacle_Activate_02.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="22528093"/>
+										<MediaID ID="356409417"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="SFX_NerveReceptacle_Activate_02" ID="{CF3EB207-CA4D-43BD-BAD3-DD9994FFE920}" Platform="Linked"/>
+								<ActiveSource Name="SFX_NerveReceptacle_Activate_02" ID="{7527B077-37F7-4E0A-AB41-4FFEADC1823A}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="SFX_NerveReceptacle_Activate_03" ID="{FFDFD546-9759-4A07-A0E8-602E212AD22C}" ShortID="126886697">
+						<Sound Name="SFX_NerveReceptacle_Activate_03" ID="{A135EF57-CF10-4C31-8FC1-73ECCCC89F0F}" ShortID="946976513">
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="SFX_NerveReceptacle_Activate_03" ID="{610A1F94-899D-4321-8144-0A372BA39038}">
+								<AudioFileSource Name="SFX_NerveReceptacle_Activate_03" ID="{02D1361C-B98D-49E2-B2EC-D9BE671063D9}">
 									<Language>SFX</Language>
 									<AudioFile>SFX_NerveReceptacle_Activate_03.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="992978286"/>
+										<MediaID ID="328476057"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="SFX_NerveReceptacle_Activate_03" ID="{610A1F94-899D-4321-8144-0A372BA39038}" Platform="Linked"/>
+								<ActiveSource Name="SFX_NerveReceptacle_Activate_03" ID="{02D1361C-B98D-49E2-B2EC-D9BE671063D9}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="SFX_NerveReceptacle_Activate_04" ID="{C03EC784-634D-449C-8E73-D93D556C4B09}" ShortID="665645705">
+						<Sound Name="SFX_NerveReceptacle_Activate_04" ID="{4D62593A-1AC9-45BA-B312-6EF0E43D60D3}" ShortID="69214679">
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="SFX_NerveReceptacle_Activate_04" ID="{29E8E17E-90D9-4A8D-B070-CB2B8CB2056B}">
+								<AudioFileSource Name="SFX_NerveReceptacle_Activate_04" ID="{F9EB1C6F-300C-4FE0-92C1-24FF90F33000}">
 									<Language>SFX</Language>
 									<AudioFile>SFX_NerveReceptacle_Activate_04.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="595981696"/>
+										<MediaID ID="491565413"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="SFX_NerveReceptacle_Activate_04" ID="{29E8E17E-90D9-4A8D-B070-CB2B8CB2056B}" Platform="Linked"/>
+								<ActiveSource Name="SFX_NerveReceptacle_Activate_04" ID="{F9EB1C6F-300C-4FE0-92C1-24FF90F33000}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
 				</RandomSequenceContainer>
-				<Sound Name="SFX_RespawnTree_Activate" ID="{C10129E7-0C73-43C5-8343-AA601F1F0A67}" ShortID="146296546">
-					<PropertyList>
-						<Property Name="3DSpatialization" Type="int16" Value="2"/>
-						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
-					</PropertyList>
+				<Sound Name="SFX_RespawnTree_Activate" ID="{438892C4-9AD6-40E2-BCA7-FD3DF22F82ED}" ShortID="1011015741">
 					<ReferenceList>
-						<Reference Name="Attenuation">
-							<ObjectRef Name="ATT_15m" ID="{90A2CBF6-B897-48C3-8393-E24AC51368F1}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
-						</Reference>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<AudioFileSource Name="SFX_RespawnTree_Activate" ID="{A7C4422D-0030-4F13-AE76-79264100A0BD}">
+						<AudioFileSource Name="SFX_RespawnTree_Activate" ID="{817D3D7B-259F-4010-9333-826957BD0FA0}">
 							<Language>SFX</Language>
 							<AudioFile>SFX_RespawnTree_Activate.wav</AudioFile>
 							<MediaIDList>
-								<MediaID ID="592723353"/>
+								<MediaID ID="540356452"/>
 							</MediaIDList>
 						</AudioFileSource>
 					</ChildrenList>
 					<ActiveSourceList>
-						<ActiveSource Name="SFX_RespawnTree_Activate" ID="{A7C4422D-0030-4F13-AE76-79264100A0BD}" Platform="Linked"/>
+						<ActiveSource Name="SFX_RespawnTree_Activate" ID="{817D3D7B-259F-4010-9333-826957BD0FA0}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
+				<ActorMixer Name="SFX_Nerve_Electricity" ID="{D212807C-0FA8-4EDB-A079-7CD69E1FA26D}" ShortID="767908389">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<RandomSequenceContainer Name="SFX_Nerve_Electricity_End" ID="{51D6799E-DE49-48E7-A465-1C77CD3D2C4A}" ShortID="754160816">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_Nerve_Electricty_End_01" ID="{A2FEB612-A46F-4D8E-8AE1-EAFBBFE36436}" ShortID="894899025">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Nerve_Electricty_End_01" ID="{609598CF-FB91-4FBC-A53B-C1DF06D0C91F}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Nerve_Electricty_End_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1032632636"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Nerve_Electricty_End_01" ID="{609598CF-FB91-4FBC-A53B-C1DF06D0C91F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Nerve_Electricty_End_03" ID="{454B4F38-8E97-4ACA-AF31-EF99A9D457EA}" ShortID="108543980">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Nerve_Electricty_End_03" ID="{F7DBEEBA-6CCB-48A9-9F23-795AB55A84DF}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Nerve_Electricty_End_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="12025278"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Nerve_Electricty_End_03" ID="{F7DBEEBA-6CCB-48A9-9F23-795AB55A84DF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Nerve_Electricty_End_04" ID="{F7180793-5723-4B57-8DE6-B76D93F22BEE}" ShortID="895524986">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Nerve_Electricty_End_04" ID="{E0DEF44D-897A-442B-978F-3F9BA380B059}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Nerve_Electricty_End_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="936899185"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Nerve_Electricty_End_04" ID="{E0DEF44D-897A-442B-978F-3F9BA380B059}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Nerve_Electricty_End_02" ID="{F8051805-2495-4CB0-972D-DFF2599B6DBE}" ShortID="796496408">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Nerve_Electricty_End_02" ID="{E76D74A8-4069-47D9-881F-4292BC9073A7}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Nerve_Electricty_End_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="240262798"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Nerve_Electricty_End_02" ID="{E76D74A8-4069-47D9-881F-4292BC9073A7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<Sound Name="SFX_Nerve_Electricty" ID="{54581EB4-1ADB-496A-B5BA-FCCB5A0B8A0C}" ShortID="388717809">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Nerve_Electricty" ID="{A7032D80-4768-4B21-95D5-0BAF60E96AE5}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Nerve_Electricty.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="397292227"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Nerve_Electricty" ID="{A7032D80-4768-4B21-95D5-0BAF60E96AE5}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<RandomSequenceContainer Name="SFX_Nerve_Electricity_Start" ID="{D372AD29-7706-4EC5-8A7F-168DF8F3C829}" ShortID="900397843">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_Nerve_Electricty_Start_01" ID="{0D8CE077-C9E2-477F-88CD-75C8F291BFAB}" ShortID="103652474">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Nerve_Electricty_Start_01" ID="{A559362A-D5DE-475F-B98B-0FD8C4555E87}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Nerve_Electricty_Start_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="829506771"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Nerve_Electricty_Start_01" ID="{A559362A-D5DE-475F-B98B-0FD8C4555E87}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Nerve_Electricty_Start_02" ID="{436D0B39-1B76-4C0D-A92A-3A8CFD4872E7}" ShortID="1038707727">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Nerve_Electricty_Start_02" ID="{872C45C2-C9CC-4145-ADB9-61D5B709704B}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Nerve_Electricty_Start_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="126322021"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Nerve_Electricty_Start_02" ID="{872C45C2-C9CC-4145-ADB9-61D5B709704B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Nerve_Electricty_Start_03" ID="{AF3A06A3-2D5E-4BDB-BDBD-E41C0BD34D0F}" ShortID="115199907">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Nerve_Electricty_Start_03" ID="{1022CDDA-C8D1-48AD-8238-7FF779FD95D1}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Nerve_Electricty_Start_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="901493228"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Nerve_Electricty_Start_03" ID="{1022CDDA-C8D1-48AD-8238-7FF779FD95D1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Nerve_Electricty_Start_04" ID="{E5427945-411B-46DD-AF68-267BDB7D9E68}" ShortID="82073636">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Nerve_Electricty_Start_04" ID="{5808DE77-4184-4F1C-92D5-FCC0753A5819}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Nerve_Electricty_Start_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="781147857"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Nerve_Electricty_Start_04" ID="{5808DE77-4184-4F1C-92D5-FCC0753A5819}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
+				</ActorMixer>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

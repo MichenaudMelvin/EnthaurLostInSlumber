@@ -8,6 +8,7 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "RespawnTree.generated.h"
 
+class UAkComponent;
 class AFirstPersonCharacter;
 class UAkAudioEvent;
 
@@ -33,7 +34,6 @@ protected:
 
 	virtual void Destroyed() override;
 
-private:
 	UFUNCTION()
 	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
@@ -41,30 +41,33 @@ private:
 
 	void SetActive();
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
+	TObjectPtr<USceneComponent> RootComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<UStaticMeshComponent> TreeModel;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<class UInteractableComponent> Interaction;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<USceneComponent> RespawnPoint;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<class UPointLightComponent> Light;
-
 	UPROPERTY()
-	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;
+	TObjectPtr<UMaterialInstanceDynamic> Material;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkComponent> RespawnTreeNoises;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkAudioEvent> ActivationNoise;
 
+	UPROPERTY(EditAnywhere, Category = "Respawn", meta = (MakeEditWidget))
+	FTransform RespawnTransform = FTransform(FVector(0.0f, 150.0f, 100.0f));
+
 	FString LastCheckPointName;
 
 	bool bIsActivated = false;
-
-	UPROPERTY(EditAnywhere)
-	float lightLevel;
 
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
@@ -74,4 +77,6 @@ public:
 	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+
+	const FTransform& GetRespawnTransform() const {return RespawnTransform;}
 };

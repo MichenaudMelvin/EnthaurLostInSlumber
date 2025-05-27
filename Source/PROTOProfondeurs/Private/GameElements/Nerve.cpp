@@ -492,6 +492,24 @@ FVector ANerve::GetCablePosition(float Percent, ESplineCoordinateSpace::Type Coo
 	return SplineCable->GetLocationAtDistanceAlongSpline(Distance, CoordinateSpace);
 }
 
+void ANerve::ForceDetachNerveBallFromPlayer()
+{
+	if (!PlayerCharacter)
+	{
+		return;
+	}
+
+	UPlayerToNervePhysicConstraint* Constraint = PlayerCharacter->GetComponentByClass<UPlayerToNervePhysicConstraint>();
+	if (Constraint)
+	{
+		Constraint->ReleasePlayer(true);
+	}
+	else
+	{
+		DetachNerveBall(true);
+	}
+}
+
 #pragma endregion
 
 #pragma region NerveBall
@@ -507,8 +525,14 @@ void ANerve::AttachNerveBall(AActor* ActorToAttach)
 	NerveBall->SetRelativeLocation(GetDefault<UCharacterSettings>()->PawnGrabObjectOffset);
 }
 
-void ANerve::DetachNerveBall()
+void ANerve::DetachNerveBall(bool bForceDetachment)
 {
+	if (PlayerCharacter && PlayerCharacter->OnRespawn.IsAlreadyBound(this, &ANerve::ForceDetachNerveBallFromPlayer))
+	{
+		PlayerCharacter->OnRespawn.RemoveDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
+	}
+
+	PlayerCharacter = nullptr;
 	PlayerController = nullptr;
 	bShouldApplyCablePhysics = false;
 
@@ -521,10 +545,17 @@ void ANerve::DetachNerveBall()
 
 	RetractionIndex = SplineCable->GetNumberOfSplinePoints() - 2;
 
-	float RetractionDuration = GetCableLength() / RetractionSpeed;
-	RetractTimeline.SetPlayRate(1/RetractionDuration);
+	if (bForceDetachment)
+	{
+		FinishRetractCable();
+	}
+	else
+	{
+		float RetractionDuration = GetCableLength() / RetractionSpeed;
+		RetractTimeline.SetPlayRate(1/RetractionDuration);
 
-	RetractTimeline.ReverseFromEnd();
+		RetractTimeline.ReverseFromEnd();
+	}
 }
 
 bool ANerve::IsNerveBallAttached() const
@@ -553,6 +584,15 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 
 	PhysicConstraint->Init(this, Cast<ACharacter>(Pawn));
 	InteractableComponent->RemoveInteractable(NerveBall);
+
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Pawn);
+	if (!Player)
+	{
+		return;
+	}
+
+	PlayerCharacter = Player;
+	PlayerCharacter->OnRespawn.AddDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
 }
 
 #pragma endregion

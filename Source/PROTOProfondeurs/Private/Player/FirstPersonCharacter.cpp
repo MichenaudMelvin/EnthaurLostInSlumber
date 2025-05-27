@@ -569,4 +569,12 @@ void AFirstPersonCharacter::LoadPlayerData()
 	}
 }
 
+void AFirstPersonCharacter::Respawn(const FTransform& RespawnTransform)
+{
+	SetActorTransform(RespawnTransform);
+	GetCharacterMovement()->Velocity = FVector::ZeroVector;
+
+	OnRespawn.Broadcast();
+}
+
 #pragma endregion

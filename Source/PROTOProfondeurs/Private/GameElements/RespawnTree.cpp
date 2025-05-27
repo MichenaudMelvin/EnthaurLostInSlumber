@@ -2,11 +2,11 @@
 
 
 #include "GameElements/RespawnTree.h"
+
+#include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/InteractableComponent.h"
-#include "Components/LightComponent.h"
-#include "Components/PointLightComponent.h"
 #include "GameModes/FirstPersonGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
@@ -19,17 +19,17 @@ ARespawnTree::ARespawnTree()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	auto Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	SetRootComponent(Root);
+	RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	SetRootComponent(RootComp);
 
 	TreeModel = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TreeModel"));
-	TreeModel->SetupAttachment(Root);
+	TreeModel->SetupAttachment(RootComp);
 
 	RespawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Respawn Point"));
-	RespawnPoint->SetupAttachment(Root);
+	RespawnPoint->SetupAttachment(RootComp);
 
-	Light = CreateDefaultSubobject<UPointLightComponent>(TEXT("Light"));
-	Light->SetupAttachment(Root);
+	RespawnTreeNoises = CreateDefaultSubobject<UAkComponent>(TEXT("RespawnTreeNoises"));
+	RespawnTreeNoises->SetupAttachment(RootComp);
 
 	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 }
@@ -39,7 +39,9 @@ void ARespawnTree::BeginPlay()
 {
 	Super::BeginPlay();
 
-	BulbMaterial = TreeModel->CreateDynamicMaterialInstance(2, TreeModel->GetMaterial(2));
+	RespawnTransform *= GetActorTransform();
+
+	Material = TreeModel->CreateDynamicMaterialInstance(0, TreeModel->GetMaterial(0));
 	if (bIsActivated)
 	{
 		SetActive();
@@ -65,8 +67,8 @@ void ARespawnTree::BeginPlay()
 	}
 	else
 	{
-		TreeModel->SetMaterial(2, BulbMaterial);
-		BulbMaterial->SetScalarParameterValue("State", 2.f);
+		TreeModel->SetMaterial(0, Material);
+		Material->SetScalarParameterValue("Emissive", 0.f);
 		Interaction->AddInteractable(TreeModel);
 		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::Interact);
 	}
@@ -103,24 +105,13 @@ void ARespawnTree::SetActive()
 	Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
 
 	FCTween::Play(
-		2.f,
 		0.f,
+		100.f,
 		[&](float x)
 		{
-			BulbMaterial->SetScalarParameterValue("State", x);
+			Material->SetScalarParameterValue("Emissive", x);
 		},
-		0.5f,
-		EFCEase::InSine
-	);
-
-	FCTween::Play(
-		0.f,
-		lightLevel,
-		[&](float intensity)
-		{
-			Light->SetIntensity(intensity);
-		},
-		0.5f,
+		2.f,
 		EFCEase::InSine
 	);
 }
@@ -128,7 +119,7 @@ void ARespawnTree::SetActive()
 void ARespawnTree::SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave)
 {
 	Player->SetRespawnTree(this);
-	UAkGameplayStatics::PostEventAtLocation(ActivationNoise, TreeModel->GetComponentLocation(), TreeModel->GetComponentRotation(), this);
+	RespawnTreeNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 
 	if (!bSave)
 	{

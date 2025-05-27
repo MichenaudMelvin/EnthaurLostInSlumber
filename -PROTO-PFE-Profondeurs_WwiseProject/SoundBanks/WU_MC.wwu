@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{4027B728-EE77-4B01-B635-6FBAD4750371}" SchemaVersion="123">
+<WwiseDocument Type="WorkUnit" ID="{A8BB4DBF-F394-453D-BF2A-7EC9499F6A6E}" SchemaVersion="123">
 	<SoundBanks>
-		<WorkUnit Name="WU_MC" ID="{4027B728-EE77-4B01-B635-6FBAD4750371}" PersistMode="Standalone">
+		<WorkUnit Name="WU_MC" ID="{A8BB4DBF-F394-453D-BF2A-7EC9499F6A6E}" PersistMode="Standalone">
 			<PropertyList>
-				<Property Name="Color" Type="int16" Value="13"/>
+				<Property Name="Color" Type="int16" Value="1"/>
 				<Property Name="OverrideColor" Type="bool" Value="True"/>
 			</PropertyList>
 			<ChildrenList>
-				<SoundBank Name="SB_MC" ID="{41F7B312-D5F8-4A85-B3D3-117556F8AED5}">
+				<SoundBank Name="SB_MC" ID="{27F746C9-36EA-4FFE-9352-1025D3A8A525}">
 					<ObjectInclusionList>
-						<ObjectRef Name="WU_MC_Event_01" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" WorkUnitID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="WU_MC_Event" ID="{B7E05470-6A2D-495E-9B10-9B5F0A2687D8}" WorkUnitID="{B7E05470-6A2D-495E-9B10-9B5F0A2687D8}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

@@ -3,8 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AkGameplayTypes.h"
 #include "GameFramework/Actor.h"
 #include "ElectricityFeedback.generated.h"
+
+class UAkComponent;
 
 UCLASS()
 class PROTOPROFONDEURS_API AElectricityFeedback : public AActor
@@ -16,19 +19,32 @@ public:
 	AElectricityFeedback();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void Destroyed() override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UPostProcessComponent> Electricity;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditDefaultsOnly, Category = "Noises")
+	TObjectPtr<UAkAudioEvent> DestroyedEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noises")
+	TObjectPtr<UAkComponent> ElectricityNoises;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Radius;
-	
+
 	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<UMaterialInstanceDynamic> Material;
+
+	UFUNCTION()
+	void PlayNoise(EAkCallbackType CallbackType, UAkCallbackInfo* CallbackInfo);
+
+public:
+	float GetRadius() const {return Radius;}
+
+	void SetRadius(float InRadius) {Radius = InRadius;}
+
+	TObjectPtr<UMaterialInstanceDynamic> GetMaterial() const {return Material;}
 };
