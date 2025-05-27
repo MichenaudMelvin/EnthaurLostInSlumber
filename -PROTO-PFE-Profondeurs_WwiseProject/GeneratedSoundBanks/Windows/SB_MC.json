@@ -11,7 +11,7 @@
     "GUID": "{41F7B312-D5F8-4A85-B3D3-117556F8AED5}",
     "Color": "13",
     "Language": "SFX",
-    "Hash": "{9EE82CBE-A4E3-7D96-E6EB-BB9CEB65CA9E}",
+    "Hash": "{E8820A89-AC08-FC9D-7ECD-E2494CC6871E}",
     "ObjectPath": "\\SoundBanks\\WU_MC\\SB_MC",
     "ShortName": "SB_MC",
     "Path": "SB_MC.bnk",
@@ -1104,6 +1104,6 @@
     ]
    }
   ],
-  "FileHash": "{65D34F20-A293-A0BE-6358-10B0761F31B5}"
+  "FileHash": "{0DC1BE92-51C6-D7ED-2A6B-E8EDA8A95FC8}"
  }
 }

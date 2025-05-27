@@ -1,7 +1,7 @@
 {
  "SoundBanksInfo": {
-  "Platform": "Windows",
-  "BasePlatform": "Windows",
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
   "SchemaVersion": "16",
   "SoundBankVersion": "154",
   "SoundBanks": [
@@ -502,6 +502,6 @@
     ]
    }
   ],
-  "FileHash": "{4A79B010-02EE-50E9-CB69-2BB2189B5605}"
+  "FileHash": "{E8683AED-A4AC-6671-D1A7-BD49167308BD}"
  }
 }
