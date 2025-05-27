@@ -37,6 +37,8 @@ void UPRFUIManager::CreateAllWidgets()
 	CreditsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->CreditsMenuClass);
 	QuitMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->QuitMenuClass);
 	PauseMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PauseMenuClass);
+	ControlsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->ControlsMenuClass);
+	MainMenuConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->MainMenuConfirmationMenuClass);
 
 	OnWidgetsCreated.Broadcast();
 }
