@@ -59,9 +59,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkComponent> RespawnTreeNoises;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Noise")
-	TObjectPtr<UAkAudioEvent> ActivationNoise;
-
 	UPROPERTY(EditAnywhere, Category = "Respawn", meta = (MakeEditWidget))
 	FTransform RespawnTransform = FTransform(FVector(0.0f, 150.0f, 100.0f));
 

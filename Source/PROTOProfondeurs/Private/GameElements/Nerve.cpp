@@ -592,6 +592,18 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 	}
 
 	PlayerCharacter = Player;
+
+#if WITH_EDITOR
+	if (PlayerCharacter->OnRespawn.IsAlreadyBound(this, &ANerve::ForceDetachNerveBallFromPlayer))
+	{
+		const FString Message = FString::Printf(TEXT("PlayerCharacter->OnRespawn is already bound, this will cause a freeze in a packaged game, please fix it"));
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+		return;
+	}
+#endif
+
 	PlayerCharacter->OnRespawn.AddDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
 }
 
@@ -664,7 +676,15 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 		return;
 	}
 
+	if (PlayerCharacter && PlayerCharacter->OnRespawn.IsAlreadyBound(this, &ANerve::ForceDetachNerveBallFromPlayer))
+	{
+		PlayerCharacter->OnRespawn.RemoveDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
+	}
+
+	PlayerCharacter = nullptr;
+	PlayerController = nullptr;
 	bShouldApplyCablePhysics = false;
+
 	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
 	NerveBall->AttachToComponent(RootComponent, Rules);
 
