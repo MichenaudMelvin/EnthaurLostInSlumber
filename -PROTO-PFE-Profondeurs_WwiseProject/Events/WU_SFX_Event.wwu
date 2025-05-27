@@ -96,6 +96,46 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_SFX_Muscle_Soft" ID="{F84BABDD-28BD-412A-95A6-5FDDB1D95432}">
+					<ChildrenList>
+						<Action Name="" ID="{C3B2020C-A553-45E8-AEC4-884A9D243875}" ShortID="291631587">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Muscle_Soft" ID="{EE69607D-A99D-4D19-8790-31D6F8AD3C21}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Muscle_Hard" ID="{704DF249-C842-4399-A326-E93C5BDA66B8}">
+					<ChildrenList>
+						<Action Name="" ID="{F8568B00-33C8-4434-B975-B497340850B6}" ShortID="44651939">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Muscle_Hard" ID="{CB26BA98-0C82-4458-A5A3-492A44A6937C}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Muscle_Bounce" ID="{7E7C5F33-63F9-44F5-A0D3-1B6490437C3C}">
+					<ChildrenList>
+						<Action Name="" ID="{B74DD669-09BF-40DD-809D-01A5F050F4EE}" ShortID="117871265">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Muscle_Bounce" ID="{E6BC09BF-2223-4A72-8D00-7165D79DFC4A}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{3AADA5BA-D228-4307-9BDF-2FAC31E4971D}" ShortID="955571925">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Muscle_Bounce_Woosh" ID="{ED9A4C5C-DEDC-4F27-ADEC-0020597A6D2B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
