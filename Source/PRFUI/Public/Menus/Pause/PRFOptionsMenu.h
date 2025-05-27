@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/TextBlock.h"
+#include "Components/VerticalBox.h"
 #include "Menus/PRFWidgetBasics.h"
 #include "PRFOptionsMenu.generated.h"
 
@@ -20,17 +21,43 @@ protected:
 	virtual void BeginDestroy() override;
 
 	UPROPERTY(Meta = (BindWidget))
-	UButton* ControlsButton;
+	TObjectPtr<UButton> OverallVolumeButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	UButton* DisplayButton;
+	TObjectPtr<UButton> MouseSensitivityButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	UButton* GraphicsButton;
+	TObjectPtr<UButton> InvertMouseAxisButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	UButton* AudioButton;
+	TObjectPtr<UButton> ViewBobbingButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	UButton* AccessibilityButton;
+	TObjectPtr<UButton> ViewControlsButton;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UVerticalBox> InformationVerticalBox;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UTextBlock> OptionTitle;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UTextBlock> OptionDescription;
+
+	UFUNCTION()
+	void OnOverallButtonHovered();
+	
+	UFUNCTION()
+	void OnMouseSensButtonHovered();
+
+	UFUNCTION()
+	void OnMouseInvertButtonHovered();
+
+	UFUNCTION()
+	void OnViewBobbingButtonHovered();
+
+	UFUNCTION()
+	void OnViewControlsButton();
+
+	bool bTemp = false;
 };
