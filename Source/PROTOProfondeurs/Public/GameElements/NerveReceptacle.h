@@ -13,9 +13,11 @@ enum class ENerveReactiveInteractionType : uint8
 	ForceDefaultState
 };
 
+class ANerve;
 class UAkAudioEvent;
 class INerveReactive;
 class USphereComponent;
+class AElectricityFeedback;
 
 UCLASS()
 class PROTOPROFONDEURS_API ANerveReceptacle : public AActor
@@ -26,42 +28,64 @@ class PROTOPROFONDEURS_API ANerveReceptacle : public AActor
 
 public:
 	ANerveReceptacle();
-	void TriggerLinkedObjects(class ANerve* Nerve);
-
-	// Create Event
-	UFUNCTION(BlueprintImplementableEvent, Category = "BaseCharacter")
-	void OnNerveConnect();
-
-	UPROPERTY(BlueprintAssignable)
-	FOnNerveAnimationFinished OnNerveAnimationFinished;
 
 protected:
+	virtual void BeginPlay() override;
+
+#if WITH_EDITORONLY_DATA
+	virtual void OnConstruction(const FTransform& Transform) override;
+#endif
+
+	UPROPERTY(EditDefaultsOnly, Category = "Components")
+	TObjectPtr<USceneComponent> RootComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Components")
+	TObjectPtr<UStaticMeshComponent> NerveReceptacle;
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
+	TObjectPtr<USphereComponent> Collision;
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Set visibility to true if you want to edit it
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "NerveEnd")
+	TObjectPtr<UStaticMeshComponent> NerveEndEditorMesh;
+#endif
+
+	UPROPERTY()
+	FTransform NerveEndTargetTransform;
+
 	void PlayElectricityAnimation(ANerve* Nerve);
 
 	UFUNCTION()
 	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	virtual void BeginPlay() override;
-
-	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-	TObjectPtr<USphereComponent> Collision;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Nerve")
 	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkAudioEvent> ReceptacleEnabledNoise;
 
 private:
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UStaticMeshComponent> NerveReceptacle;
-
 	UPROPERTY(EditAnywhere)
 	FName ConnectedShaderTag;
 
 	UPROPERTY()
-	class AElectricityFeedback* NerveElectricityFeedback;
+	TObjectPtr<AElectricityFeedback> NerveElectricityFeedback;
 
 	UPROPERTY()
-	ANerve* KeepInMemoryNerve;
+	TObjectPtr<ANerve> KeepInMemoryNerve;
+
+public:
+	void TriggerLinkedObjects(class ANerve* Nerve);
+
+	// Create Event
+	UFUNCTION(BlueprintImplementableEvent, Category = "Nerve")
+	void OnNerveConnect();
+
+	const FTransform& GetAttachTransform() const {return NerveEndTargetTransform;}
+
+	UPROPERTY(BlueprintAssignable, Category = "Nerve")
+	FOnNerveAnimationFinished OnNerveAnimationFinished;
 };

@@ -1619,6 +1619,9 @@
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="SWG_MC_FS_Material" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+								</Reference>
 							</ReferenceList>
 							<ChildrenList>
 								<RandomSequenceContainer Name="MC_Jump_Bone" ID="{ED5B6AA3-EB2F-40F9-A0B9-0DDEBA0B3E6E}" ShortID="921616285">
@@ -1853,6 +1856,20 @@
 										<ItemRef Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}"/>
 									</GroupingBehavior>
 								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+										<ItemList>
+											<ItemRef Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+										<ItemList>
+											<ItemRef Name="MC_Jump_Bone" ID="{ED5B6AA3-EB2F-40F9-A0B9-0DDEBA0B3E6E}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
 							</GroupingInfo>
 						</SwitchContainer>
 						<SwitchContainer Name="SW_MC_Land_Material" ID="{DB871AA9-6A46-4727-B3CC-EE5984C3784C}" ShortID="448081641">
@@ -1862,6 +1879,9 @@
 								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="SWG_MC_FS_Material" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -2097,6 +2117,20 @@
 										<ItemRef Name="MC_Land_Bone" ID="{79C89DC9-5BD9-4A50-887C-C5C10741E876}"/>
 									</GroupingBehavior>
 								</GroupingBehaviorList>
+								<GroupingList>
+									<Grouping>
+										<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+										<ItemList>
+											<ItemRef Name="MC_Land_Muscle" ID="{6E291A9C-8B51-462C-8962-9896B67504DC}"/>
+										</ItemList>
+									</Grouping>
+									<Grouping>
+										<SwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+										<ItemList>
+											<ItemRef Name="MC_Land_Bone" ID="{79C89DC9-5BD9-4A50-887C-C5C10741E876}"/>
+										</ItemList>
+									</Grouping>
+								</GroupingList>
 							</GroupingInfo>
 						</SwitchContainer>
 					</ChildrenList>
