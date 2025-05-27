@@ -2,12 +2,14 @@
 
 #include "Player/FirstPersonCharacter.h"
 #include "AkComponent.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CameraShakeComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
+#include "EditorSettings/PlayerEditorSettings.h"
 #include "GameElements/AmberOre.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -117,6 +119,26 @@ void AFirstPersonCharacter::BeginPlay()
 
 	CreateStates();
 	InitStateMachine();
+
+	if (!StartWidgetClass)
+	{
+		return;
+	}
+
+#if WITH_EDITORONLY_DATA
+	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
+
+	if (!PlayerEditorSettings || !PlayerEditorSettings->bDisplayStartWidget)
+	{
+		return;
+	}
+#endif
+
+	StartWidget = CreateWidget(FirstPersonController, StartWidgetClass);
+
+	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(FirstPersonController, StartWidget);
+
+	StartWidget->AddToViewport();
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)

@@ -296,4 +296,11 @@ public:
 	void ResetFootStepsEvent() const;
 
 #pragma endregion
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UUserWidget> StartWidgetClass;
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI")
+	TObjectPtr<UUserWidget> StartWidget;
 };
