@@ -570,10 +570,6 @@
 			"Type": "RequiredResource"
 		},
 		{
-			"Path": "$(EngineDir)/Binaries/Win64/EOSSDK-Win64-Shipping.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
 			"Path": "$(EngineDir)/Binaries/Win64/NNEEditorOnnxTools.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -5438,18 +5434,6 @@
 			"Type": "RequiredResource"
 		},
 		{
-			"Path": "$(EngineDir)/Plugins/Editor/ModelViewViewModelPreview/Binaries/Win64/UnrealEditor-ModelViewViewModelPreview.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Editor/ModelViewViewModelPreview/Binaries/Win64/UnrealEditor-ModelViewViewModelPreview.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Editor/ModelViewViewModelPreview/Binaries/Win64/UnrealEditor.modules",
-			"Type": "RequiredResource"
-		},
-		{
 			"Path": "$(EngineDir)/Plugins/Editor/ModelingToolsEditorMode/Binaries/Win64/UnrealEditor-ModelingToolsEditorMode.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -6354,18 +6338,6 @@
 			"Type": "RequiredResource"
 		},
 		{
-			"Path": "$(EngineDir)/Plugins/Fab/Binaries/Win64/UnrealEditor-Fab.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Fab/Binaries/Win64/UnrealEditor-Fab.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Fab/Binaries/Win64/UnrealEditor.modules",
-			"Type": "RequiredResource"
-		},
-		{
 			"Path": "$(EngineDir)/Plugins/FastBuildController/Binaries/Win64/UnrealEditor-FastBuildController.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -6931,18 +6903,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/NNE/NNERuntimeORT/Binaries/Win64/UnrealEditor.modules",
-			"Type": "RequiredResource"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Online/EOSShared/Binaries/Win64/UnrealEditor-EOSShared.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Online/EOSShared/Binaries/Win64/UnrealEditor-EOSShared.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Online/EOSShared/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
 		{
@@ -7695,38 +7655,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModel.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModelBlueprint.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModelBlueprint.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModelDebugger.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModelDebugger.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModelDebuggerEditor.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModelDebuggerEditor.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModelEditor.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/Binaries/Win64/UnrealEditor-ModelViewViewModelEditor.pdb",
 			"Type": "SymbolFile"
 		},
 		{
@@ -30124,10 +30052,6 @@
 			"Type": "DebugNonUFS"
 		},
 		{
-			"Path": "$(EngineDir)/Binaries/Win64/EOSSDK-Win64-Shipping.dll",
-			"Type": "NonUFS"
-		},
-		{
 			"Path": "$(EngineDir)/Binaries/Win64/EpicWebHelper.exe",
 			"Type": "NonUFS"
 		},
@@ -33628,10 +33552,6 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(EngineDir)/Plugins/Editor/ModelViewViewModelPreview/ModelViewViewModelPreview.uplugin",
-			"Type": "UFS"
-		},
-		{
 			"Path": "$(EngineDir)/Plugins/Editor/ModelingToolsEditorMode/ModelingToolsEditorMode.uplugin",
 			"Type": "UFS"
 		},
@@ -33824,10 +33744,6 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(EngineDir)/Plugins/Fab/Fab.uplugin",
-			"Type": "UFS"
-		},
-		{
 			"Path": "$(EngineDir)/Plugins/FastBuildController/FastBuildController.uplugin",
 			"Type": "UFS"
 		},
@@ -33925,10 +33841,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Online/Android/OnlineSubsystemGooglePlay/OnlineSubsystemGooglePlay.uplugin",
-			"Type": "UFS"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Online/EOSShared/EOSShared.uplugin",
 			"Type": "UFS"
 		},
 		{
@@ -34077,10 +33989,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Runtime/MobilePatchingUtils/MobilePatchingUtils.uplugin",
-			"Type": "UFS"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Runtime/ModelViewViewModel/ModelViewViewModel.uplugin",
 			"Type": "UFS"
 		},
 		{
@@ -34368,7 +34276,6 @@
 		"DatasmithContent",
 		"DeformerGraph",
 		"DumpGPUServices",
-		"EOSShared",
 		"EditorDataStorage",
 		"EditorDebugTools",
 		"EditorPerformance",
@@ -34380,7 +34287,6 @@
 		"EnvironmentQueryEditor",
 		"ExampleDeviceProfileSelector",
 		"FCTween",
-		"Fab",
 		"FacialAnimation",
 		"FastBuildController",
 		"Fracture",
@@ -34428,8 +34334,6 @@
 		"Metasound",
 		"MobileLauncherProfileWizard",
 		"MobilePatchingUtils",
-		"ModelViewViewModel",
-		"ModelViewViewModelPreview",
 		"ModelingToolsEditorMode",
 		"MsQuic",
 		"N10XSourceCodeAccess",

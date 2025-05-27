@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "FirstPersonCharacter.generated.h"
 
+class UAkAudioEvent;
 class ARespawnTree;
 class UAkComponent;
 class UCameraShakeComponent;
@@ -22,6 +23,7 @@ enum class ECharacterStateID : uint8;
 class UCameraComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberType, int, AmberAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKOnRespawn);
 
 UCLASS()
 class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface
@@ -265,9 +267,14 @@ protected:
 	TObjectPtr<ARespawnTree> LastRespawnTree = nullptr;
 
 public:
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
+	FKOnRespawn OnRespawn;
+
 	TObjectPtr<ARespawnTree> GetRespawnTree() const {return LastRespawnTree;}
 
 	void SetRespawnTree(ARespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
+
+	void Respawn(const FTransform& RespawnTransform);
 
 #pragma endregion
 
@@ -277,8 +284,26 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Sounds")
 	TObjectPtr<UAkComponent> FootstepsSounds;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Sounds")
+	TObjectPtr<UAkAudioEvent> LandedEvent;
+
+	UPROPERTY()
+	TObjectPtr<UAkAudioEvent> DefaultFootStepEvent;
+
 public:
 	TObjectPtr<UAkComponent> GetFootstepsSoundComp() const {return FootstepsSounds;}
 
+	void ResetFootStepsEvent() const;
+
 #pragma endregion
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UUserWidget> StartWidgetClass;
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI")
+	TObjectPtr<UUserWidget> StartWidget;
+
+public:
+	TObjectPtr<UUserWidget> GetStartWidget() { return StartWidget; }
 };

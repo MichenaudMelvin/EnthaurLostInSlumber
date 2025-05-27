@@ -205,8 +205,9 @@
      {
       "Id": "2772994470",
       "Name": "Play_SFX_NerveDoor",
-      "ObjectPath": "\\Events\\WU_Temp_Wil\\Play_SFX_NerveDoor",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveDoor",
       "GUID": "{058ED576-C9DC-436F-BC80-C460F36A2F0B}",
+      "Color": "10",
       "MaxAttenuation": "60000",
       "DurationType": "OneShot",
       "DurationMin": "0.73333335",
@@ -244,8 +245,9 @@
      {
       "Id": "1373430044",
       "Name": "Play_SFX_NerveReceptacle_Activate",
-      "ObjectPath": "\\Events\\WU_Temp_Wil\\Play_SFX_NerveReceptacle_Activate",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Activate",
       "GUID": "{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}",
+      "Color": "10",
       "MaxAttenuation": "15000",
       "DurationType": "OneShot",
       "DurationMin": "1.3436875",
@@ -268,8 +270,9 @@
      {
       "Id": "1918553675",
       "Name": "Play_SFX_NerveReceptacle_Electricty",
-      "ObjectPath": "\\Events\\WU_Temp_Wil\\Play_SFX_NerveReceptacle_Electricty",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Electricty",
       "GUID": "{5C28218F-535A-43B7-9CD4-681EEC44DF40}",
+      "Color": "10",
       "MaxAttenuation": "15000",
       "DurationType": "OneShot",
       "DurationMin": "6.0333333",
@@ -295,8 +298,9 @@
      {
       "Id": "1717915789",
       "Name": "Play_SFX_NerveReceptacle_Electricty_End",
-      "ObjectPath": "\\Events\\WU_Temp_Wil\\Play_SFX_NerveReceptacle_Electricty_End",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Electricty_End",
       "GUID": "{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}",
+      "Color": "10",
       "MaxAttenuation": "15000",
       "DurationType": "OneShot",
       "DurationMin": "0.17814584",
@@ -319,8 +323,9 @@
      {
       "Id": "3026607058",
       "Name": "Play_SFX_RespawnTree_Activate",
-      "ObjectPath": "\\Events\\WU_Temp_Wil\\Play_SFX_RespawnTree_Activate",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_RespawnTree_Activate",
       "GUID": "{99E1A8F0-FB47-4839-860B-4D205E6B0F5D}",
+      "Color": "10",
       "MaxAttenuation": "15000",
       "DurationType": "OneShot",
       "DurationMin": "3.6666667",
@@ -334,6 +339,6 @@
     ]
    }
   ],
-  "FileHash": "{D5C4A7BE-74BE-7DFA-35BF-572BAD87EA8F}"
+  "FileHash": "{9A613F7A-7D91-7DFC-DBFF-ED232ACFCFB1}"
  }
 }

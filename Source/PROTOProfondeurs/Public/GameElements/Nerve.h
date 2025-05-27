@@ -12,6 +12,8 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "Nerve.generated.h"
 
+class AFirstPersonCharacter;
+
 USTRUCT(BlueprintType)
 struct FNerveData : public FGameElementData
 {
@@ -162,6 +164,9 @@ public:
 #pragma region NerveBall
 
 protected:
+	UFUNCTION()
+	void ForceDetachNerveBallFromPlayer();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
@@ -170,7 +175,7 @@ protected:
 public:
 	void AttachNerveBall(AActor* ActorToAttach);
 
-	void DetachNerveBall();
+	void DetachNerveBall(bool bForceDetachment);
 
 	UStaticMeshComponent* GetNerveBall() const {return NerveBall;}
 
@@ -196,6 +201,9 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<AFirstPersonController> PlayerController;
+
+	UPROPERTY()
+	TObjectPtr<AFirstPersonCharacter> PlayerCharacter;
 
 public:
 	TObjectPtr<UInteractableComponent> GetInteractable() const {return InteractableComponent;}

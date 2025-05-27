@@ -7,6 +7,8 @@
 #include "Interface/NerveReactive.h"
 #include "NerveDoor.generated.h"
 
+class UAkComponent;
+
 UCLASS()
 class PROTOPROFONDEURS_API ANerveDoor : public AActor, public INerveReactive
 {
@@ -16,6 +18,7 @@ public:
 	// Sets default values for this actor's properties
 	ANerveDoor();
 
+protected:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USceneComponent> Root;
 
@@ -25,7 +28,9 @@ public:
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> DoorMaterial;
 
-private:
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkComponent> NerveDoorNoises;
+
 	UPROPERTY(EditAnywhere)
 	bool IsActiveAtStart;
 
@@ -35,7 +40,6 @@ private:
 	UPROPERTY()
 	bool IsLocked;
 
-protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

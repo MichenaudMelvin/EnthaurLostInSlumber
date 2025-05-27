@@ -2,6 +2,7 @@
 
 
 #include "Toolbar/ToolbarModule.h"
+#include "EditorSettings/PlayerEditorSettings.h"
 #include "EditorSettings/SavesSettings.h"
 
 IMPLEMENT_MODULE(UToolbarModule, ToolbarModule)
@@ -31,6 +32,7 @@ void UToolbarModule::RegisterMenuExtensions()
 	FToolMenuSection& ToolbarSection = ToolbarMenu->FindOrAddSection("Play");
 
 	InitLoadLatestSaveCheckBox(ToolbarSection);
+	InitPlayerEditorSettingsCheckBoxes(ToolbarSection);
 }
 
 void UToolbarModule::InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection)
@@ -43,13 +45,34 @@ void UToolbarModule::InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection
 	const TSharedRef<STextBlock> TextBlock = SNew(STextBlock);
 	TextBlock->SetText(FText::FromName("Load Latest Save"));
 
-	ToolbarSection.AddSeparator("Separator");
+	ToolbarSection.AddSeparator("SaveSettingsSeparator");
 
-	FString CheckBoxString = FString::Printf(TEXT("CheckBox"));
+	FString CheckBoxString = FString::Printf(TEXT("LoadLatestSaveCheckBox"));
 	FName CheckBoxName = FName(*CheckBoxString);
 	ToolbarSection.AddEntry(FToolMenuEntry::InitWidget(CheckBoxName, CheckBox, FText::FromString(CheckBoxString)));
 
-	FString TextBlockString = FString::Printf(TEXT("TextBlock"));
+	FString TextBlockString = FString::Printf(TEXT("LoadLatestSaveTextBlock"));
+	FName TextBlockName = FName(*TextBlockString);
+	ToolbarSection.AddEntry(FToolMenuEntry::InitWidget(TextBlockName, TextBlock, FText::FromString(TextBlockString)));
+}
+
+void UToolbarModule::InitPlayerEditorSettingsCheckBoxes(FToolMenuSection& ToolbarSection)
+{
+	const TSharedRef<SCheckBox> CheckBox = SNew(SCheckBox).OnCheckStateChanged_Raw(this, &UToolbarModule::UpdateDisplayStartWidgetSetting);
+
+	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
+	CheckBox->SetIsChecked(PlayerEditorSettings->bDisplayStartWidget ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+
+	const TSharedRef<STextBlock> TextBlock = SNew(STextBlock);
+	TextBlock->SetText(FText::FromName("Display Start Widget"));
+
+	ToolbarSection.AddSeparator("PlayerSettingsSeparator");
+
+	FString CheckBoxString = FString::Printf(TEXT("DisplayStartWidgetCheckBox"));
+	FName CheckBoxName = FName(*CheckBoxString);
+	ToolbarSection.AddEntry(FToolMenuEntry::InitWidget(CheckBoxName, CheckBox, FText::FromString(CheckBoxString)));
+
+	FString TextBlockString = FString::Printf(TEXT("DisplayStartWidgetTextBlock"));
 	FName TextBlockName = FName(*TextBlockString);
 	ToolbarSection.AddEntry(FToolMenuEntry::InitWidget(TextBlockName, TextBlock, FText::FromString(TextBlockString)));
 }
@@ -69,6 +92,23 @@ void UToolbarModule::UpdateSaveSettings(ECheckBoxState CheckBoxState)
 	}
 
 	SavesSettings->SaveConfig();
+}
+
+void UToolbarModule::UpdateDisplayStartWidgetSetting(ECheckBoxState CheckBoxState)
+{
+	UPlayerEditorSettings* PlayerEditorSettings = GetMutableDefault<UPlayerEditorSettings>();
+
+	switch (CheckBoxState) {
+	case ECheckBoxState::Unchecked:
+	case ECheckBoxState::Undetermined:
+		PlayerEditorSettings->bDisplayStartWidget = false;
+		break;
+	case ECheckBoxState::Checked:
+		PlayerEditorSettings->bDisplayStartWidget = true;
+		break;
+	}
+
+	PlayerEditorSettings->SaveConfig();
 }
 
 #undef LOCTEXT_NAMESPACE
