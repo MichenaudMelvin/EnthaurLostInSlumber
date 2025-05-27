@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{DC2F6035-52DA-2F4D-429F-65D1D1B5695A}",
+    "Hash": "{0B155DFC-0526-2445-21E6-6C1D4DAC16A8}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -69,6 +69,12 @@
       "Name": "Bus_Music",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\Bus_Music",
       "GUID": "{64D3E862-4D56-4AAF-8073-8D3F36C42250}"
+     },
+     {
+      "Id": "3076470155",
+      "Name": "RTPC_Nerve_Stretch",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\RTPC_Nerve_Stretch",
+      "GUID": "{31886D5C-1267-426C-A7AA-FC467CBBF581}"
      },
      {
       "Id": "3895923845",
@@ -133,6 +139,6 @@
     ]
    }
   ],
-  "FileHash": "{4FE416E9-C443-78B6-291B-CCF1EF939C31}"
+  "FileHash": "{E04F166B-6DE9-D371-3B35-ED2F5A3DC134}"
  }
 }
