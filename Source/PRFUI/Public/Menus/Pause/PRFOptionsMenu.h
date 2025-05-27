@@ -17,6 +17,7 @@ class PRFUI_API UPRFOptionsMenu : public UPRFWidgetBasics
 	GENERATED_BODY()
 
 protected:
+	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
 	virtual void BeginDestroy() override;
 
@@ -58,6 +59,4 @@ protected:
 
 	UFUNCTION()
 	void OnViewControlsButton();
-
-	bool bTemp = false;
 };

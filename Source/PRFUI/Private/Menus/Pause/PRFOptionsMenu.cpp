@@ -5,19 +5,10 @@
 
 #include "Components/Button.h"
 
-void UPRFOptionsMenu::NativeConstruct()
+void UPRFOptionsMenu::NativeOnInitialized()
 {
-	Super::NativeConstruct();
+	Super::NativeOnInitialized();
 
-	OnOverallButtonHovered();
-
-	if (bTemp)
-	{
-		return;
-	}
-
-	bTemp = true;
-	
 	if (OverallVolumeButton)
 	{
 		OverallVolumeButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnOverallButtonHovered);
@@ -38,6 +29,13 @@ void UPRFOptionsMenu::NativeConstruct()
 	{
 		ViewControlsButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButton);
 	}
+}
+
+void UPRFOptionsMenu::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	OnOverallButtonHovered();
 }
 
 void UPRFOptionsMenu::BeginDestroy()
@@ -80,7 +78,7 @@ void UPRFOptionsMenu::OnMouseSensButtonHovered()
 	if (OptionTitle && OptionDescription)
 	{
 		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Mouse Sensitivity"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Mouse Sens Desc."));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the aiming speed of the camera."));
 	}
 }
 
@@ -89,7 +87,7 @@ void UPRFOptionsMenu::OnMouseInvertButtonHovered()
 	if (OptionTitle && OptionDescription)
 	{
 		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Invert Mouse Y Axis"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Mouse Invert Y Axis Desc."));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Invert the vertical rotation direction of the camera."));
 	}
 }
 
@@ -107,6 +105,6 @@ void UPRFOptionsMenu::OnViewControlsButton()
 	if (OptionTitle && OptionDescription)
 	{
 		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "View Controls"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Mouse Invert Y Axis Desc."));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "View the available control schemes."));
 	}
 }
