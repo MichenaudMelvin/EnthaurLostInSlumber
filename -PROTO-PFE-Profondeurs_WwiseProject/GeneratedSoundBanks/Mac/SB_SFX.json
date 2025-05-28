@@ -1,0 +1,507 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "1006919462",
+    "Type": "User",
+    "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
+    "Color": "10",
+    "Language": "SFX",
+    "Hash": "{BC1CBF65-D5B1-EF28-FC85-063B8061D8A1}",
+    "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
+    "ShortName": "SB_SFX",
+    "Path": "SB_SFX.bnk",
+    "Media": [
+     {
+      "Id": "16378350",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Activate_01.wav",
+      "CachePath": "58/{5830F4CD-0B1F-E53A-6A51-AD070F81430D}.wem"
+     },
+     {
+      "Id": "22528093",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Activate_02.wav",
+      "CachePath": "49/{497B3F20-4F5B-CB9D-6EDC-1B072F060D09}.wem"
+     },
+     {
+      "Id": "50412123",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Hard_01.wav",
+      "CachePath": "DB/{DBBC9234-0A6E-D592-2DE9-2FBF8F8069B7}.wem"
+     },
+     {
+      "Id": "51512841",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Hard_02.wav",
+      "CachePath": "67/{67DF897B-9345-6289-747C-E757B8F3C2FC}.wem"
+     },
+     {
+      "Id": "58099252",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore_02.wav",
+      "CachePath": "62/{62FB46FA-D514-F090-FBC8-FB54CCAC0928}.wem"
+     },
+     {
+      "Id": "136221896",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Soft_02.wav",
+      "CachePath": "88/{88B4A743-871C-F928-8009-8443BA0F0CCB}.wem"
+     },
+     {
+      "Id": "150421772",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Woosh_01.wav",
+      "CachePath": "64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem"
+     },
+     {
+      "Id": "166183347",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Bounce_Woosh_02.wav",
+      "CachePath": "97/{97B10320-423B-1DCA-A447-D4F71F2770B0}.wem"
+     },
+     {
+      "Id": "221647164",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Bounce_03.wav",
+      "CachePath": "45/{4509A923-9BCC-7561-FE11-F6B9707D816C}.wem"
+     },
+     {
+      "Id": "251580194",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore_01.wav",
+      "CachePath": "0D/{0D479D43-B41C-862C-76C2-72501D8A01DA}.wem"
+     },
+     {
+      "Id": "268704886",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Bounce_Woosh_01.wav",
+      "CachePath": "9E/{9E4D5438-2FCA-B887-AE69-98989D0DA14D}.wem"
+     },
+     {
+      "Id": "290163593",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty_Start_01.wav",
+      "CachePath": "06/{06DC2696-05A3-E883-FA01-C1F75AE07A0A}.wem"
+     },
+     {
+      "Id": "303207830",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore02_02.wav",
+      "CachePath": "EB/{EB0451B1-D6CB-EDF7-4BFC-D9F6118B8695}.wem"
+     },
+     {
+      "Id": "361492888",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Bounce_01.wav",
+      "CachePath": "D8/{D8A67476-91B9-56B7-FEA1-E5DFB29094A3}.wem"
+     },
+     {
+      "Id": "391363525",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty_End_03.wav",
+      "CachePath": "B8/{B87519EA-3233-9404-CC5B-7614FB577829}.wem"
+     },
+     {
+      "Id": "398385957",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Bounce_Woosh_03.wav",
+      "CachePath": "DB/{DBC07BDB-FA25-1086-D880-415D7151BAED}.wem"
+     },
+     {
+      "Id": "515272845",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Woosh_03.wav",
+      "CachePath": "64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem"
+     },
+     {
+      "Id": "518928300",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Bounce_02.wav",
+      "CachePath": "86/{863C2335-BBA5-0250-A740-52464A860A41}.wem"
+     },
+     {
+      "Id": "531951533",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Hard_03.wav",
+      "CachePath": "6B/{6BF025F1-DCF1-7702-547C-628FF97E6CEB}.wem"
+     },
+     {
+      "Id": "592723353",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_RespawnTree_Activate.wav",
+      "CachePath": "00/{000E1002-DACC-DA1B-A8AC-149366E6DC95}.wem"
+     },
+     {
+      "Id": "595981696",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Activate_04.wav",
+      "CachePath": "9F/{9FCF74CF-CB73-5BD6-4578-C99A22AA3F1B}.wem"
+     },
+     {
+      "Id": "603635966",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Soft_01.wav",
+      "CachePath": "29/{2981B365-5BCE-1E9B-CF79-D594D47EA28C}.wem"
+     },
+     {
+      "Id": "708400597",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore02_01.wav",
+      "CachePath": "0C/{0C4F2FF8-84F9-5292-7664-9D39D5421D77}.wem"
+     },
+     {
+      "Id": "714298177",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Muscle_Soft_03.wav",
+      "CachePath": "5D/{5D4502C9-728B-1CC3-DD2A-C3CCE4969590}.wem"
+     },
+     {
+      "Id": "733450515",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty_End_04.wav",
+      "CachePath": "BD/{BDD7D4B7-28A9-6A67-A573-E7C5995B60E0}.wem"
+     },
+     {
+      "Id": "753932510",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty.wav",
+      "CachePath": "A8/{A878E234-6AC9-A8C3-F03D-20A0CCDD176E}.wem"
+     },
+     {
+      "Id": "763356268",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty_End_02.wav",
+      "CachePath": "6C/{6CDE759A-F0D5-D1A2-D2D9-8ED54BA405AA}.wem"
+     },
+     {
+      "Id": "821434401",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore_03.wav",
+      "CachePath": "88/{88B8046C-0E94-4C92-730C-BF082D2A0FE6}.wem"
+     },
+     {
+      "Id": "861837351",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Gore02_03.wav",
+      "CachePath": "05/{05362565-F73F-EC7B-365C-49076F99EAEA}.wem"
+     },
+     {
+      "Id": "897057365",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty_Start_04.wav",
+      "CachePath": "B4/{B4554BEB-551A-E09C-08AA-EBB172FD9DFA}.wem"
+     },
+     {
+      "Id": "909338791",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty_Start_03.wav",
+      "CachePath": "F8/{F80C3384-112A-6BD2-1FF0-5D567CD683BD}.wem"
+     },
+     {
+      "Id": "939918079",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty_Start_02.wav",
+      "CachePath": "92/{92367D10-ADE4-87A4-5A9F-84C3FEBDF77B}.wem"
+     },
+     {
+      "Id": "954112915",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Electricty_End_01.wav",
+      "CachePath": "2C/{2C189CB9-C4F9-758E-0B0D-66559615A5A5}.wem"
+     },
+     {
+      "Id": "992978286",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Activate_03.wav",
+      "CachePath": "D0/{D0701CA0-7CE7-60C4-767D-7C195B806934}.wem"
+     },
+     {
+      "Id": "1040785902",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveDoor_Layer_Woosh_02.wav",
+      "CachePath": "32/{324BC753-BD10-14C4-6ED0-6154433A111C}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "4148931070",
+      "Name": "Play_SFX_Muscle_Bounce",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Muscle_Bounce",
+      "GUID": "{7E7C5F33-63F9-44F5-A0D3-1B6490437C3C}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6666667",
+      "DurationMax": "0.6932117",
+      "MediaRefs": [
+       {
+        "Id": "166183347"
+       },
+       {
+        "Id": "221647164"
+       },
+       {
+        "Id": "268704886"
+       },
+       {
+        "Id": "361492888"
+       },
+       {
+        "Id": "398385957"
+       },
+       {
+        "Id": "518928300"
+       }
+      ]
+     },
+     {
+      "Id": "4018880897",
+      "Name": "Play_SFX_Muscle_Hard",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Muscle_Hard",
+      "GUID": "{704DF249-C842-4399-A326-E93C5BDA66B8}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6666667",
+      "DurationMax": "0.6666667",
+      "MediaRefs": [
+       {
+        "Id": "50412123"
+       },
+       {
+        "Id": "51512841"
+       },
+       {
+        "Id": "531951533"
+       }
+      ]
+     },
+     {
+      "Id": "327116138",
+      "Name": "Play_SFX_Muscle_Soft",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Muscle_Soft",
+      "GUID": "{F84BABDD-28BD-412A-95A6-5FDDB1D95432}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.8666667",
+      "DurationMax": "0.8666667",
+      "MediaRefs": [
+       {
+        "Id": "136221896"
+       },
+       {
+        "Id": "603635966"
+       },
+       {
+        "Id": "714298177"
+       }
+      ]
+     },
+     {
+      "Id": "2772994470",
+      "Name": "Play_SFX_NerveDoor",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveDoor",
+      "GUID": "{058ED576-C9DC-436F-BC80-C460F36A2F0B}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.73333335",
+      "DurationMax": "0.73333335",
+      "MediaRefs": [
+       {
+        "Id": "58099252"
+       },
+       {
+        "Id": "150421772"
+       },
+       {
+        "Id": "251580194"
+       },
+       {
+        "Id": "303207830"
+       },
+       {
+        "Id": "515272845"
+       },
+       {
+        "Id": "708400597"
+       },
+       {
+        "Id": "821434401"
+       },
+       {
+        "Id": "861837351"
+       },
+       {
+        "Id": "1040785902"
+       }
+      ]
+     },
+     {
+      "Id": "1373430044",
+      "Name": "Play_SFX_NerveReceptacle_Activate",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Activate",
+      "GUID": "{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3436875",
+      "DurationMax": "1.4142709",
+      "MediaRefs": [
+       {
+        "Id": "16378350"
+       },
+       {
+        "Id": "22528093"
+       },
+       {
+        "Id": "595981696"
+       },
+       {
+        "Id": "992978286"
+       }
+      ]
+     },
+     {
+      "Id": "1918553675",
+      "Name": "Play_SFX_NerveReceptacle_Electricty",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Electricty",
+      "GUID": "{5C28218F-535A-43B7-9CD4-681EEC44DF40}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "6.0333333",
+      "DurationMax": "6.0333333",
+      "MediaRefs": [
+       {
+        "Id": "290163593"
+       },
+       {
+        "Id": "753932510"
+       },
+       {
+        "Id": "897057365"
+       },
+       {
+        "Id": "909338791"
+       },
+       {
+        "Id": "939918079"
+       }
+      ]
+     },
+     {
+      "Id": "1717915789",
+      "Name": "Play_SFX_NerveReceptacle_Electricty_End",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Electricty_End",
+      "GUID": "{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.17814584",
+      "DurationMax": "0.20677084",
+      "MediaRefs": [
+       {
+        "Id": "391363525"
+       },
+       {
+        "Id": "733450515"
+       },
+       {
+        "Id": "763356268"
+       },
+       {
+        "Id": "954112915"
+       }
+      ]
+     },
+     {
+      "Id": "3026607058",
+      "Name": "Play_SFX_RespawnTree_Activate",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_RespawnTree_Activate",
+      "GUID": "{99E1A8F0-FB47-4839-860B-4D205E6B0F5D}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "3.6666667",
+      "DurationMax": "3.6666667",
+      "MediaRefs": [
+       {
+        "Id": "592723353"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{E8683AED-A4AC-6671-D1A7-BD49167308BD}"
+ }
+}

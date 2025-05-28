@@ -14,7 +14,7 @@ class PROTOPROFONDEURS_API UDeathMenuUI : public UUserWidget
 {
 	GENERATED_BODY()
 
-	virtual void NativeConstruct() override;
+protected:
 	virtual void NativeOnInitialized() override;
 
 	UFUNCTION()

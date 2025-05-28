@@ -17,5 +17,9 @@ protected:
 
 	void InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection);
 
+	void InitPlayerEditorSettingsCheckBoxes(FToolMenuSection& ToolbarSection);
+
 	void UpdateSaveSettings(ECheckBoxState CheckBoxState);
+
+	void UpdateDisplayStartWidgetSetting(ECheckBoxState CheckBoxState);
 };

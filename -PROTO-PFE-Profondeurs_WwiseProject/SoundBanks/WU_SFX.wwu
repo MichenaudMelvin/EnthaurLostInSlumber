@@ -10,6 +10,7 @@
 				<SoundBank Name="SB_SFX" ID="{13465604-2D0A-476E-980D-31B04FA1E95E}">
 					<ObjectInclusionList>
 						<ObjectRef Name="WU_Temp_Wil" ID="{DDFD3F52-B9F3-4C60-80F3-65B6E8F007D7}" WorkUnitID="{DDFD3F52-B9F3-4C60-80F3-65B6E8F007D7}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="WU_SFX_Event" ID="{4933FB35-1CD7-4E23-8369-62825115CCB8}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

@@ -21,10 +21,14 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 	UFUNCTION()
 	void OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
 
 	void OnHearTarget(AActor* Actor, const FAIStimulus& Stimulus);
+
+	void OnUnheardTarget(AActor* Actor);
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName PathIndexKeyName = "PathIndex";
@@ -40,6 +44,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName HeardNoiseKeyName = "HeardNoise";
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName NoiseInvestigatorKeyName = "NoiseInvestigator";
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Behavior", meta = (ClampMin = 0.0f, Units = "cm"))
 	float HearingZTolerance = 100.0f;

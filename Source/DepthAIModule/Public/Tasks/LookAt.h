@@ -7,7 +7,8 @@
 #include "LookAt.generated.h"
 
 UCLASS()
-class DEPTHAIMODULE_API ULookAt : public UBTTaskNode{
+class DEPTHAIMODULE_API ULookAt : public UBTTaskNode
+{
 	GENERATED_BODY()
 
 public:

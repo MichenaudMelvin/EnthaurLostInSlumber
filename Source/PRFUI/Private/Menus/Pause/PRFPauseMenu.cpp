@@ -5,37 +5,59 @@
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
 #include "Kismet/GameplayStatics.h"
-
-void UPRFPauseMenu::TogglePauseMenu()
-{
-	
-}
+#include "Subsystems/LevelNameSubsystem.h"
 
 void UPRFPauseMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
-	
-	if (MainMenuButton)
-	{
-		MainMenuButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
-	}
+
 	if (OptionsMenuButton)
 	{
 		OptionsMenuButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
 	}
+	if (RestartCheckpointButton)
+	{
+		RestartCheckpointButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleRestartCheckpointButton);
+	}
+	if (MainMenuButton)
+	{
+		MainMenuButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
+	}
+	if (QuitButton)
+	{
+		QuitButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleQuitButton);
+	}
+
+	
+	ULevelNameSubsystem* LevelNameSubsystem = GetGameInstance()->GetSubsystem<ULevelNameSubsystem>();
+	if (!IsValid(LevelNameSubsystem))
+	{
+		return;
+	}
+
+	AreaName->SetText(LevelNameSubsystem->GetLevelName().AreaZone);
+	RegionName->SetText(LevelNameSubsystem->GetLevelName().RegionZone);
 }
 
 void UPRFPauseMenu::NativeDestruct()
 {
 	Super::NativeDestruct();
 
+	if (OptionsMenuButton)
+	{
+		OptionsMenuButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
+	}
+	if (RestartCheckpointButton)
+	{
+		RestartCheckpointButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleRestartCheckpointButton);
+	}
 	if (MainMenuButton)
 	{
 		MainMenuButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
 	}
-	if (OptionsMenuButton)
+	if (QuitButton)
 	{
-		OptionsMenuButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
+		QuitButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleQuitButton);
 	}
 }
 
@@ -47,10 +69,32 @@ void UPRFPauseMenu::HandleMainMenuButton()
 		return;
 	}
 
-	UIManager->CloseAllMenus(EPRFUIState::AnyMenu);
+	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	if (!IsValid(UIManagerSettings))
+	{
+		return;
+	}
 
-	//UIManager->SetMenuState(EPRFUIState::AnyMenu);
-	UGameplayStatics::OpenLevelBySoftObjectPtr(this, MainMenuLevel);
+	UUserWidget* MainMenuConfirmationMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->MainMenuConfirmationMenuClass);
+	UIManager->OpenMenu(MainMenuConfirmationMenu, false);
+}
+
+void UPRFPauseMenu::HandleQuitButton()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	if (!IsValid(UIManagerSettings))
+	{
+		return;
+	}
+
+	UUserWidget* QuitMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->QuitMenuClass);
+	UIManager->OpenMenu(QuitMenu, false);
 }
 
 void UPRFPauseMenu::HandleOptionsMenuButton()
@@ -74,4 +118,9 @@ void UPRFPauseMenu::HandleOptionsMenuButton()
 
 	UUserWidget* OptionsMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->OptionsMenuClass);
 	UIManager->OpenMenu(OptionsMenu, false);
+}
+
+void UPRFPauseMenu::HandleRestartCheckpointButton()
+{
+	// Todo Melvin
 }

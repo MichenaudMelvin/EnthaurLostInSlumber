@@ -11,6 +11,7 @@
 class AFirstPersonSpectator;
 class AFirstPersonCharacter;
 class UInGameUI;
+class UDeathMenuUI;
 struct FInputActionValue;
 class UInputAction;
 enum class ETriggerEvent : uint8;
@@ -77,19 +78,6 @@ class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController, pu
 {
 	GENERATED_BODY()
 
-private:
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UUserWidget> InGameWidgetClass;
-
-	UPROPERTY()
-	TObjectPtr<UInGameUI> CurrentInGameUI;
-
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UUserWidget> DeathWidgetClass;
-
-	UPROPERTY()
-	TObjectPtr<class UDeathMenuUI> CurrentDeathUI;
-
 protected:
 	virtual void BeginPlay() override;
 
@@ -112,8 +100,27 @@ protected:
 	void UnPossessSpectator(bool bTeleport = true);
 // #endif
 
+#pragma region UI
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UInGameUI> InGameWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UInGameUI> CurrentInGameUI;
+
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UDeathMenuUI> DeathWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UDeathMenuUI> CurrentDeathUI;
+
 public:
-	UInGameUI* GetCurrentInGameUI() { return CurrentInGameUI; }
+	TObjectPtr<UInGameUI> GetCurrentInGameUI() {return CurrentInGameUI;}
+
+	TObjectPtr<UDeathMenuUI> GetDeathMenuUI() {return CurrentDeathUI;}
+
+#pragma endregion
 
 #pragma region Inputs
 
@@ -238,18 +245,4 @@ private:
 #endif
 
 #pragma endregion
-
-#pragma region UI Menus
-
-#pragma endregion
-
-#pragma region Respawn
-
-	UFUNCTION(BlueprintCallable)
-	void KillPlayer();
-
-	UFUNCTION(BlueprintCallable)
-	void RespawnPlayer(FVector RespawnPosition);
-
-#pragma endregion 
 };

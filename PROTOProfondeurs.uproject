@@ -38,14 +38,6 @@
 			"Enabled": true
 		},
 		{
-			"Name": "ModelViewViewModel",
-			"Enabled": true
-		},
-		{
-			"Name": "ModelViewViewModelPreview",
-			"Enabled": true
-		},
-		{
 			"Name": "PCGGeometryScriptInterop",
 			"Enabled": true
 		},
@@ -55,6 +47,10 @@
 		},
 		{
 			"Name": "BUITween",
+			"Enabled": false
+		},
+		{
+			"Name": "Fab",
 			"Enabled": false
 		}
 	],

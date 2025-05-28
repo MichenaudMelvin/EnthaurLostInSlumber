@@ -1,7 +1,7 @@
 Event	ID	Name			Wwise Object Path	Notes
-	1913733562	Play_SW_MC_Jump_Material			\Wu_MC_Event\Play_SW_MC_Jump_Material	
-	3117572079	Play_SW_MC_Land_Material			\Wu_MC_Event\Play_SW_MC_Land_Material	
-	4277858155	Play_SW_MC_FS_Speed			\Wu_MC_Event\Play_SW_MC_FS_Speed	
+	1913733562	Play_SW_MC_Jump_Material			\WU_MC_Event\Play_SW_MC_Jump_Material	
+	3117572079	Play_SW_MC_Land_Material			\WU_MC_Event\Play_SW_MC_Land_Material	
+	4277858155	Play_SW_MC_FS_Speed			\WU_MC_Event\Play_SW_MC_FS_Speed	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
 	675352309	SWG_MC_FS_Speed			\Default Work Unit\SWG_MC_FS_Speed	
