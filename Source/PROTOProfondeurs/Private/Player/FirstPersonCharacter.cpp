@@ -26,6 +26,7 @@
 #include "Player/States/CharacterFallState.h"
 #include "Saves/PlayerSave.h"
 #include "Saves/PlayerSaveSubsystem.h"
+#include "UI/DeathMenuUI.h"
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -625,6 +626,17 @@ void AFirstPersonCharacter::Respawn(const FTransform& RespawnTransform)
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	OnRespawn.Broadcast();
+}
+
+void AFirstPersonCharacter::KillPlayer()
+{
+	if (!FirstPersonController || !FirstPersonController->GetDeathMenuUI())
+	{
+		return;
+	}
+
+	FirstPersonController->SetPause(true);
+	FirstPersonController->GetDeathMenuUI()->AddToViewport();
 }
 
 #pragma endregion

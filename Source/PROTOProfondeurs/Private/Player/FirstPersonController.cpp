@@ -116,6 +116,8 @@ void AFirstPersonController::BeginPlay()
 		CurrentInGameUI->AddToViewport();
 	}
 
+	CurrentDeathUI = CreateWidget<UDeathMenuUI>(this, DeathWidgetClass);
+
 	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
 	if (!IsValid(UIManager))
 	{
@@ -321,17 +323,3 @@ void AFirstPersonController::DisplayInputs(bool bDisplay)
 #endif
 
 #pragma endregion
-
-void AFirstPersonController::KillPlayer()
-{
-	SetPause(true);
-	CurrentDeathUI = CreateWidget<UDeathMenuUI>(this, DeathWidgetClass);
-	if (CurrentDeathUI)
-	{
-		CurrentDeathUI->AddToViewport();
-	}
-}
-
-void AFirstPersonController::RespawnPlayer(FVector RespawnPosition)
-{
-}

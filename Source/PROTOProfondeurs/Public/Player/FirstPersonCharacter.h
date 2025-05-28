@@ -276,6 +276,9 @@ public:
 
 	void Respawn(const FTransform& RespawnTransform);
 
+	UFUNCTION(BlueprintCallable, Category = "Respawn")
+	void KillPlayer();
+
 #pragma endregion
 
 #pragma region Sounds

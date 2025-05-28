@@ -38,7 +38,8 @@ void UToolbarModule::RegisterMenuExtensions()
 void UToolbarModule::InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection)
 {
 	const TSharedRef<SCheckBox> CheckBox = SNew(SCheckBox).OnCheckStateChanged_Raw(this, &UToolbarModule::UpdateSaveSettings);
-
+	CheckBox->SetToolTipText(FText::AsCultureInvariant("Load latest save in the current world if exist"));
+	
 	const USavesSettings* SavesSettings = GetDefault<USavesSettings>();
 	CheckBox->SetIsChecked(SavesSettings->bLoadLatestWorldSave ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
 
@@ -59,6 +60,7 @@ void UToolbarModule::InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection
 void UToolbarModule::InitPlayerEditorSettingsCheckBoxes(FToolMenuSection& ToolbarSection)
 {
 	const TSharedRef<SCheckBox> CheckBox = SNew(SCheckBox).OnCheckStateChanged_Raw(this, &UToolbarModule::UpdateDisplayStartWidgetSetting);
+	CheckBox->SetToolTipText(FText::AsCultureInvariant("Will display the start widget and lock controls or not, In packaged game it will be always true"));
 
 	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
 	CheckBox->SetIsChecked(PlayerEditorSettings->bDisplayStartWidget ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
