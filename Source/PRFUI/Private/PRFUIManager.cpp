@@ -10,6 +10,7 @@
 #include "Controller/PRFControllerMappingContext.h"
 #include "Controller/PRFUIController.h"
 #include "Kismet/GameplayStatics.h"
+#include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 
 
@@ -199,6 +200,25 @@ void UPRFUIManager::CloseAllMenus(EPRFUIState InState)
 	}
 
 	CurrentState = InState;
+
+	if (CurrentState != EPRFUIState::Gameplay)
+	{
+		return;
+	}
+
+	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if (!IsValid(FirstPersonCharacter))
+	{
+		return;
+	}
+
+	UUserWidget* StartWidget =  FirstPersonCharacter->GetStartWidget();
+	if (!IsValid(StartWidget))
+	{
+		return;
+	}
+
+	StartWidget->SetVisibility(ESlateVisibility::Visible);
 }
 
 void UPRFUIManager::SetMenuState(EPRFUIState InUIState)

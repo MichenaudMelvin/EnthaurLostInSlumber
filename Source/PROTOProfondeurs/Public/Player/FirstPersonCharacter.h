@@ -306,4 +306,7 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "UI")
 	TObjectPtr<UUserWidget> StartWidget;
+
+public:
+	TObjectPtr<UUserWidget> GetStartWidget() { return StartWidget; }
 };

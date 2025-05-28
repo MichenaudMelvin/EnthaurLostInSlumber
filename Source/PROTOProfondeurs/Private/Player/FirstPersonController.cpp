@@ -250,6 +250,25 @@ void AFirstPersonController::OnInputPauseGame()
 	{
 		return;
 	}
+	
+	if (UIManager->GetMenuState() != EPRFUIState::Gameplay)
+	{
+		return;
+	}
+	
+	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(GetCharacter());
+	if (!IsValid(FirstPersonCharacter))
+	{
+		return;
+	}
+
+	UUserWidget* StartWidget =  FirstPersonCharacter->GetStartWidget();
+	if (!IsValid(StartWidget))
+	{
+		return;
+	}
+
+	StartWidget->SetVisibility(ESlateVisibility::Collapsed);
 
 	//UIManager->SetMenuState(EPRFUIState::PauseMenu);
 	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);

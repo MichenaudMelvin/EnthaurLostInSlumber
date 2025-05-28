@@ -6,6 +6,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "PRFUIManager.h"
+#include "Blueprint/UserWidget.h"
+#include "Player/FirstPersonCharacter.h"
 
 void FActionUI::BindActionUI(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object)
 {
