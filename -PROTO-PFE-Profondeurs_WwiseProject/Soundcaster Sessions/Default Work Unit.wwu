@@ -13,10 +13,25 @@
 							<ObjectRef Name="Play_SFX_NerveReceptacle_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
 							<Position X="1" Y="0"/>
 						</Module>
+						<Module>
+							<ObjectRef Name="Play_SFX_Muscle_Soft" ID="{F84BABDD-28BD-412A-95A6-5FDDB1D95432}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_SFX_Muscle_Hard" ID="{704DF249-C842-4399-A326-E93C5BDA66B8}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<Position X="3" Y="0"/>
+						</Module>
 					</ModuleList>
-					<RTPCValueList ShowAll="true"/>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="RTPC_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
+							<Value>0</Value>
+						</RTPCValue>
+					</RTPCValueList>
 					<CurrentStateList ShowAll="true"/>
-					<CurrentSwitchList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+					</CurrentSwitchList>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>
