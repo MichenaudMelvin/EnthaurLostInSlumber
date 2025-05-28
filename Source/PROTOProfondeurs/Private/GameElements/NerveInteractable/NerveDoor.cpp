@@ -32,7 +32,7 @@ void ANerveDoor::BeginPlay()
 
 	if (IsActiveAtStart)
 	{
-		DoorMaterial->SetScalarParameterValue("State", 2.f);
+		DoorMaterial->SetScalarParameterValue("State", -1.f);
 		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	}
 }
@@ -60,8 +60,8 @@ void ANerveDoor::Trigger_Implementation()
 		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 
 		FCTween::Play(
-			2.f,
-			0.f,
+			-1.f,
+			1.f,
 			[&](float x)
 			{
 				DoorMaterial->SetScalarParameterValue("State", x);
@@ -72,8 +72,8 @@ void ANerveDoor::Trigger_Implementation()
 	{
 		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 		FCTween::Play(
-			0.f,
-			2.f,
+			1.f,
+			-1.f,
 			[&](float x)
 			{
 				DoorMaterial->SetScalarParameterValue("State", x);
