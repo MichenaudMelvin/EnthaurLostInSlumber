@@ -34,16 +34,16 @@ protected:
 	void HandleQuitButton();
 
 	UPROPERTY(Meta = (BindWidget))
-	UButton* OptionsMenuButton;
+	TObjectPtr<UPRFCustomButton> OptionsMenuButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	UButton* RestartCheckpointButton;
+	TObjectPtr<UPRFCustomButton> RestartCheckpointButton;
 	
 	UPROPERTY(Meta = (BindWidget))
-	UButton* MainMenuButton;
+	TObjectPtr<UPRFCustomButton> MainMenuButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	UButton* QuitButton;
+	TObjectPtr<UPRFCustomButton> QuitButton;
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UWorld> MainMenuLevel;

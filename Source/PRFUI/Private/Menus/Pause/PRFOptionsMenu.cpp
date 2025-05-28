@@ -12,38 +12,38 @@ void UPRFOptionsMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	if (OverallVolumeButton)
+	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
 	{
-		OverallVolumeButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnOverallButtonHovered);
+		OverallVolumeButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnOverallButtonHovered);
 	}
-	if (MouseSensitivityButton)
+	if (MouseSensitivityButton && MouseSensitivityButton->GetCustomButton())
 	{
-		MouseSensitivityButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnMouseSensButtonHovered);
+		MouseSensitivityButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnMouseSensButtonHovered);
 	}
 	if (MouseSensitivitySlider)
 	{
 		MouseSensitivitySlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
 	}
-	if (InvertMouseAxisButton)
+	if (InvertMouseAxisButton && InvertMouseAxisButton->GetCustomButton())
 	{
-		InvertMouseAxisButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnMouseInvertButtonHovered);
+		InvertMouseAxisButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnMouseInvertButtonHovered);
 	}
 	if (InvertMouseAxisCheckBox)
 	{
 		InvertMouseAxisCheckBox->OnCheckStateChanged.AddDynamic(this, &UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked);
 	}
-	if (ViewBobbingButton)
+	if (ViewBobbingButton && ViewBobbingButton->GetCustomButton())
 	{
-		ViewBobbingButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewBobbingButtonHovered);
+		ViewBobbingButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewBobbingButtonHovered);
 	}
 	if (ViewBobbingCheckbox)
 	{
 		ViewBobbingCheckbox->OnCheckStateChanged.AddDynamic(this, &UPRFOptionsMenu::OnViewBobbingCheckBoxClicked);
 	}
-	if (ViewControlsButton)
+	if (ViewControlsButton && ViewControlsButton->GetCustomButton())
 	{
-		ViewControlsButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
-		ViewControlsButton->OnClicked.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
+		ViewControlsButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
+		ViewControlsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
 }
 
@@ -58,38 +58,38 @@ void UPRFOptionsMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (OverallVolumeButton)
+	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
 	{
-		OverallVolumeButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnOverallButtonHovered);
+		OverallVolumeButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnOverallButtonHovered);
 	}
-	if (MouseSensitivityButton)
+	if (MouseSensitivityButton && MouseSensitivityButton->GetCustomButton())
 	{
-		MouseSensitivityButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseSensButtonHovered);
+		MouseSensitivityButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseSensButtonHovered);
 	}
 	if (MouseSensitivitySlider)
 	{
 		MouseSensitivitySlider->OnValueChanged.RemoveDynamic(this, &UPRFOptionsMenu::UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
 	}
-	if (InvertMouseAxisButton)
+	if (InvertMouseAxisButton && InvertMouseAxisButton->GetCustomButton())
 	{
-		InvertMouseAxisButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseInvertButtonHovered);
+		InvertMouseAxisButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseInvertButtonHovered);
 	}
 	if (InvertMouseAxisCheckBox)
 	{
 		InvertMouseAxisCheckBox->OnCheckStateChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked);
 	}
-	if (ViewBobbingButton)
+	if (ViewBobbingButton && ViewBobbingButton->GetCustomButton())
 	{
-		ViewBobbingButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewBobbingButtonHovered);
+		ViewBobbingButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewBobbingButtonHovered);
 	}
 	if (ViewBobbingCheckbox)
 	{
 		ViewBobbingCheckbox->OnCheckStateChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnViewBobbingCheckBoxClicked);
 	}
-	if (ViewControlsButton)
+	if (ViewControlsButton && ViewControlsButton->GetCustomButton())
 	{
-		ViewControlsButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
-		ViewControlsButton->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
+		ViewControlsButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
+		ViewControlsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
 }
 

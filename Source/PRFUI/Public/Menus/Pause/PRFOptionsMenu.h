@@ -24,28 +24,28 @@ protected:
 	virtual void BeginDestroy() override;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<UButton> OverallVolumeButton;
+	TObjectPtr<UPRFCustomButton> OverallVolumeButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<UButton> MouseSensitivityButton;
+	TObjectPtr<UPRFCustomButton> MouseSensitivityButton;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<USlider> MouseSensitivitySlider;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<UButton> InvertMouseAxisButton;
+	TObjectPtr<UPRFCustomButton> InvertMouseAxisButton;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UCheckBox> InvertMouseAxisCheckBox;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<UButton> ViewBobbingButton;
+	TObjectPtr<UPRFCustomButton> ViewBobbingButton;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UCheckBox> ViewBobbingCheckbox;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<UButton> ViewControlsButton;
+	TObjectPtr<UPRFCustomButton> ViewControlsButton;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UVerticalBox> InformationVerticalBox;
