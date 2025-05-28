@@ -69,8 +69,14 @@ void UPRFPauseMenu::HandleMainMenuButton()
 		return;
 	}
 
-	UIManager->CloseAllMenus(EPRFUIState::AnyMenu);
-	UGameplayStatics::OpenLevelBySoftObjectPtr(this, MainMenuLevel);
+	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	if (!IsValid(UIManagerSettings))
+	{
+		return;
+	}
+
+	UUserWidget* MainMenuConfirmationMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->MainMenuConfirmationMenuClass);
+	UIManager->OpenMenu(MainMenuConfirmationMenu, false);
 }
 
 void UPRFPauseMenu::HandleQuitButton()

@@ -3,7 +3,10 @@
 
 #include "Menus/Pause/PRFOptionsMenu.h"
 
+#include "PRFUIManager.h"
+#include "UIManagerSettings.h"
 #include "Components/Button.h"
+#include "Saves/SettingsSubsystem.h"
 
 void UPRFOptionsMenu::NativeOnInitialized()
 {
@@ -17,17 +20,30 @@ void UPRFOptionsMenu::NativeOnInitialized()
 	{
 		MouseSensitivityButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnMouseSensButtonHovered);
 	}
+	if (MouseSensitivitySlider)
+	{
+		MouseSensitivitySlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
+	}
 	if (InvertMouseAxisButton)
 	{
 		InvertMouseAxisButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnMouseInvertButtonHovered);
+	}
+	if (InvertMouseAxisCheckBox)
+	{
+		InvertMouseAxisCheckBox->OnCheckStateChanged.AddDynamic(this, &UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked);
 	}
 	if (ViewBobbingButton)
 	{
 		ViewBobbingButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewBobbingButtonHovered);
 	}
+	if (ViewBobbingCheckbox)
+	{
+		ViewBobbingCheckbox->OnCheckStateChanged.AddDynamic(this, &UPRFOptionsMenu::OnViewBobbingCheckBoxClicked);
+	}
 	if (ViewControlsButton)
 	{
-		ViewControlsButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButton);
+		ViewControlsButton->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
+		ViewControlsButton->OnClicked.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
 }
 
@@ -50,17 +66,30 @@ void UPRFOptionsMenu::BeginDestroy()
 	{
 		MouseSensitivityButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseSensButtonHovered);
 	}
+	if (MouseSensitivitySlider)
+	{
+		MouseSensitivitySlider->OnValueChanged.RemoveDynamic(this, &UPRFOptionsMenu::UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
+	}
 	if (InvertMouseAxisButton)
 	{
 		InvertMouseAxisButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseInvertButtonHovered);
+	}
+	if (InvertMouseAxisCheckBox)
+	{
+		InvertMouseAxisCheckBox->OnCheckStateChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked);
 	}
 	if (ViewBobbingButton)
 	{
 		ViewBobbingButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewBobbingButtonHovered);
 	}
+	if (ViewBobbingCheckbox)
+	{
+		ViewBobbingCheckbox->OnCheckStateChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnViewBobbingCheckBoxClicked);
+	}
 	if (ViewControlsButton)
 	{
-		ViewControlsButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButton);
+		ViewControlsButton->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
+		ViewControlsButton->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
 }
 
@@ -100,11 +129,72 @@ void UPRFOptionsMenu::OnViewBobbingButtonHovered()
 	}
 }
 
-void UPRFOptionsMenu::OnViewControlsButton()
+void UPRFOptionsMenu::OnViewControlsButtonHovered()
 {
 	if (OptionTitle && OptionDescription)
 	{
 		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "View Controls"));
 		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "View the available control schemes."));
 	}
+}
+
+void UPRFOptionsMenu::OnViewControlsButtonClicked()
+{
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+	
+	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	if (!IsValid(UIManagerSettings))
+	{
+		return;
+	}
+
+	UUserWidget* ControlsMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->ControlsMenuClass);
+	UIManager->OpenMenu(ControlsMenu, false);
+}
+
+void UPRFOptionsMenu::OnOverallSliderChanged()
+{
+
+}
+
+void UPRFOptionsMenu::OnMouseSensSliderChanged()
+{
+	
+}
+
+void UPRFOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked)
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->GetSettings()->bViewBobbing = bIsChecked;
+}
+
+void UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked(bool bIsChecked)
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->GetSettings()->bInvertYAxis = bIsChecked;
+}
+
+void UPRFOptionsMenu::OnMouseSensitivitySliderChanged(float InValue)
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->GetSettings()->MouseSensitivity = InValue;
 }

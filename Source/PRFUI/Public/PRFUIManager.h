@@ -33,12 +33,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CloseAllMenus(EPRFUIState InState);
 
-	UUserWidget* GetPauseMenu() const { return PauseMenu; }
-	UUserWidget* GetMainMenu() const { return MainMenu; }
-	UUserWidget* GetOptionsMenu() const { return OptionsMenu; }
-	UUserWidget* GetCreditsMenu() const { return CreditsMenu; }
-	UUserWidget* GetQuitMenu() const { return QuitMenu; }
-	UUserWidget* GetNewGameMenu() const { return NewGameMenu; }
+	TObjectPtr<UUserWidget> GetPauseMenu() const { return PauseMenu; }
+	TObjectPtr<UUserWidget> GetMainMenu() const { return MainMenu; }
+	TObjectPtr<UUserWidget> GetOptionsMenu() const { return OptionsMenu; }
+	TObjectPtr<UUserWidget> GetCreditsMenu() const { return CreditsMenu; }
+	TObjectPtr<UUserWidget> GetQuitMenu() const { return QuitMenu; }
+	TObjectPtr<UUserWidget> GetNewGameMenu() const { return NewGameMenu; }
+	TObjectPtr<UUserWidget> GetControlsMenu() const { return ControlsMenu; }
+	TObjectPtr<UUserWidget> GetMainMenuConfirmationMenu() const { return MainMenuConfirmationMenu; }
 
 	EPRFUIState GetMenuState() const { return CurrentState; }
 	void SetMenuState(EPRFUIState InUIState);
@@ -74,33 +76,42 @@ protected:
 #pragma region Main Menus
 
 	UPROPERTY(BlueprintReadOnly)
-	UUserWidget* PressAnyMenu = nullptr;
+	TObjectPtr<UUserWidget> PressAnyMenu = nullptr;
 
 	UPROPERTY()
-	UUserWidget* MainMenu = nullptr;
+	TObjectPtr<UUserWidget> MainMenu = nullptr;
 
 	UPROPERTY()
-	UUserWidget* NewGameMenu = nullptr;
+	TObjectPtr<UUserWidget> NewGameMenu = nullptr;
 
 	UPROPERTY()
-	UUserWidget* LoadGameMenu = nullptr;
+	TObjectPtr<UUserWidget> LoadGameMenu = nullptr;
 	
 	UPROPERTY()
-	UUserWidget* CreditsMenu = nullptr;
+	TObjectPtr<UUserWidget> CreditsMenu = nullptr;
 
 	UPROPERTY()
-	UUserWidget* QuitMenu = nullptr;
+	TObjectPtr<UUserWidget> QuitMenu = nullptr;
 	
 #pragma endregion
 
 #pragma region Pause Menus
 	
 	UPROPERTY()
-	UUserWidget* PauseMenu = nullptr;
+	TObjectPtr<UUserWidget> PauseMenu = nullptr;
 
 	UPROPERTY()
-	UUserWidget* OptionsMenu = nullptr;
+	TObjectPtr<UUserWidget> OptionsMenu = nullptr;
 
+	UPROPERTY()
+	TObjectPtr<UUserWidget> MainMenuConfirmationMenu = nullptr;
+
+#pragma endregion
+
+#pragma region Option Menus
+
+	UPROPERTY()
+	TObjectPtr<UUserWidget> ControlsMenu = nullptr;
 #pragma endregion
 	
 private:

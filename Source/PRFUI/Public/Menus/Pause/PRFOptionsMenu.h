@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/CheckBox.h"
+#include "Components/Slider.h"
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Menus/PRFWidgetBasics.h"
@@ -28,10 +30,19 @@ protected:
 	TObjectPtr<UButton> MouseSensitivityButton;
 
 	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<USlider> MouseSensitivitySlider;
+
+	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UButton> InvertMouseAxisButton;
 
 	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UCheckBox> InvertMouseAxisCheckBox;
+
+	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UButton> ViewBobbingButton;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UCheckBox> ViewBobbingCheckbox;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UButton> ViewControlsButton;
@@ -58,5 +69,24 @@ protected:
 	void OnViewBobbingButtonHovered();
 
 	UFUNCTION()
-	void OnViewControlsButton();
+	void OnViewControlsButtonHovered();
+
+	UFUNCTION()
+	void OnViewControlsButtonClicked();
+
+	UFUNCTION()
+	void OnOverallSliderChanged();
+
+	UFUNCTION()
+	void OnMouseSensSliderChanged();
+
+	UFUNCTION()
+	void OnViewBobbingCheckBoxClicked(bool bIsChecked);
+
+	UFUNCTION()
+	void OnMouseYAxisCheckBoxClicked(bool bIsChecked);
+
+	UFUNCTION()
+
+	void OnMouseSensitivitySliderChanged(float InValue);
 };
