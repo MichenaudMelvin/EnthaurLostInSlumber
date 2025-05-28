@@ -295,6 +295,7 @@ void AMuscle::ToggleMuscleSolidity()
 	}
 
 	bIsSolid = !bIsSolid;
+	OnMuscleStateChange.Broadcast(bIsSolid);
 	UpdateMuscleSolidity();
 }
 

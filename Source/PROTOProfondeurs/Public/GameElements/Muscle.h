@@ -29,6 +29,12 @@ struct FMuscleData : public FGameElementData
 class UAkAudioEvent;
 class UInteractableComponent;
 
+#pragma region Delegates
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKOnMuscleStateChange, bool, isSolid);
+
+#pragma endregion
+
 UCLASS()
 class PROTOPROFONDEURS_API AMuscle : public AActor, public IGroundAction, public INerveReactive, public IWeakZoneInterface, public ISaveGameElementInterface
 {
@@ -215,6 +221,10 @@ protected:
 
 	UFUNCTION()
 	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent);
+
+public:
+	UPROPERTY(BlueprintAssignable, Category = "Interaction")
+	FKOnMuscleStateChange OnMuscleStateChange;
 
 #pragma endregion
 
