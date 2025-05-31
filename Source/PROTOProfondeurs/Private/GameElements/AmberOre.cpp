@@ -2,6 +2,7 @@
 
 
 #include "PROTOProfondeurs/Public/GameElements/AmberOre.h"
+#include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Saves/WorldSaves/WorldSave.h"
@@ -12,9 +13,22 @@ AAmberOre::AAmberOre()
 
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(Root);
+	Root->SetMobility(EComponentMobility::Static);
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(Root);
+	Mesh->SetMobility(EComponentMobility::Static);
+	Mesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+
+	MeshInteraction = CreateDefaultSubobject<UBoxComponent>(TEXT("MeshInteraction"));
+	MeshInteraction->SetupAttachment(Mesh);
+	MeshInteraction->SetMobility(EComponentMobility::Static);
+	MeshInteraction->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+
+	AmberMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("AmberMesh"));
+	AmberMesh->SetupAttachment(Mesh);
+	AmberMesh->SetMobility(EComponentMobility::Movable);
+	AmberMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	Interactable = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interactable"));
 	Interactable->SetInteractionName(NSLOCTEXT("Actions", "PickAmber", "Pick Amber"));
@@ -26,18 +40,16 @@ void AAmberOre::BeginPlay()
 
 	if (OreAmount > 0)
 	{
-		Interactable->AddInteractable(Mesh);
+		Interactable->AddInteractable(MeshInteraction);
 		Interactable->OnInteract.AddDynamic(this, &AAmberOre::OnInteract);
 	}
-
-	UpdateMaterial(OreAmount == 0);
 }
 
 void AAmberOre::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	UpdateMaterial(false);
+	Mesh->SetStaticMesh(SourceMesh);
 }
 
 void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
@@ -69,27 +81,9 @@ void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 
 	if (OreAmount == 0)
 	{
-		UpdateMaterial(OreAmount == 0);
-
-		Interactable->RemoveInteractable(Mesh);
+		Interactable->RemoveInteractable(MeshInteraction);
 		Interactable->OnInteract.RemoveDynamic(this, &AAmberOre::OnInteract);
 	}
-}
-
-void AAmberOre::UpdateMaterial(bool bPickedUp) const
-{
-	TObjectPtr<UMaterialInterface> TargetMaterial = nullptr;
-	switch (AmberType)
-	{
-	case EAmberType::NecroseAmber:
-		TargetMaterial = bPickedUp ? NecroseMaterialPickUp : NecroseMaterial;
-		break;
-	case EAmberType::WeakAmber:
-		TargetMaterial = bPickedUp ? WeakMaterialPickUp : WeakMaterial;
-		break;
-	}
-
-	Mesh->SetMaterial(0, TargetMaterial);
 }
 
 FGameElementData& AAmberOre::SaveGameElement(UWorldSave* CurrentWorldSave)

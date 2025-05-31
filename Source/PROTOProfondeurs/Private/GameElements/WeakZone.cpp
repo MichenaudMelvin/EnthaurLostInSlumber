@@ -52,10 +52,11 @@ void AWeakZone::BeginPlay()
 	BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AWeakZone::OnZoneBeginOverlap);
 	BoxComponent->OnComponentEndOverlap.AddDynamic(this, &AWeakZone::OnZoneEndOverlap);
 
-	for (UStaticMeshComponent* Mesh : InteractionPoints)
+	for (const FInteractionPoints& InteractionPoint : InteractionPoints)
 	{
-		Mesh->SetCollisionResponseToChannel(TraceSettings->InteractionTraceChannel, ECR_Block);
-		Interactable->AddInteractable(Mesh);
+		InteractionPoint.MeshComp->SetCollisionResponseToChannel(TraceSettings->InteractionTraceChannel, ECR_Block);
+		InteractionPoint.AmberMeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Interactable->AddInteractable(InteractionPoint.MeshComp);
 	}
 
 	Interactable->OnInteract.AddDynamic(this, &AWeakZone::OnInteract);
@@ -71,40 +72,38 @@ void AWeakZone::OnConstruction(const FTransform& Transform)
 
 	BoxComponent->SetBoxExtent(ZoneSize);
 
-	InteractionPoints.Empty();
-
-	if (InteractionMesh == nullptr)
+	for (FInteractionPoints& InteractionPoint : InteractionPoints)
 	{
-		return;
-	}
+		if (!InteractionPoint.Mesh)
+		{
+			InteractionPoint.Mesh = DefaultInteractionPointMesh;
+		}
 
-	for (const FTransform& TransformPoint : InteractionTransformPoints)
-	{
-		UActorComponent* Comp = AddComponentByClass(UStaticMeshComponent::StaticClass(), false, TransformPoint, false);
-
-		if (Comp == nullptr)
+		UActorComponent* DefaultComp = AddComponentByClass(UStaticMeshComponent::StaticClass(), true, InteractionPoint.Transform, false);
+		UActorComponent* AmberComp = AddComponentByClass(UStaticMeshComponent::StaticClass(), true, FTransform::Identity, false);
+		if (!DefaultComp || !AmberComp)
 		{
 			continue;
 		}
 
-		UStaticMeshComponent* StaticMeshComponent = Cast<UStaticMeshComponent>(Comp); 
-		if (StaticMeshComponent == nullptr)
+		UStaticMeshComponent* DefaultMeshComp = Cast<UStaticMeshComponent>(DefaultComp);
+		UStaticMeshComponent* AmberMeshComp = Cast<UStaticMeshComponent>(AmberComp);
+		if (!DefaultMeshComp || !AmberMeshComp)
 		{
 			continue;
 		}
+
+		InteractionPoint.MeshComp = DefaultMeshComp;
+		InteractionPoint.AmberMeshComp = AmberMeshComp;
 
 		FAttachmentTransformRules AttachmentRules(EAttachmentRule::KeepRelative, false);
-		StaticMeshComponent->AttachToComponent(RootComponent, AttachmentRules);
-		StaticMeshComponent->SetStaticMesh(InteractionMesh);
-		InteractionPoints.Add(StaticMeshComponent);
+		InteractionPoint.MeshComp->AttachToComponent(RootComponent, AttachmentRules);
+		InteractionPoint.AmberMeshComp->AttachToComponent(InteractionPoint.MeshComp, AttachmentRules);
+
+		InteractionPoint.MeshComp->SetStaticMesh(InteractionPoint.Mesh);
+		InteractionPoint.AmberMeshComp->SetStaticMesh(AmberMesh);
+		InteractionPoint.AmberMeshComp->SetVisibility(false);
 	}
-}
-
-void AWeakZone::Destroyed()
-{
-	Super::Destroyed();
-
-	DestroyZone();
 }
 
 void AWeakZone::InitZone()
@@ -122,30 +121,6 @@ void AWeakZone::InitZone()
 		if(OverlappingActor->Implements<UWeakZoneInterface>())
 		{
 			IWeakZoneInterface::Execute_OnEnterWeakZone(OverlappingActor, bIsZoneActive);
-		}
-	}
-
-	TArray<UPrimitiveComponent*> Components;
-	BoxComponent->GetOverlappingComponents(Components);
-
-	AllMaterialInstances.Empty();
-
-	for (UPrimitiveComponent* Component : Components)
-	{
-		for (int i = 0; i < Component->GetNumMaterials(); i++)
-		{
-			UMaterialInterface* Material = Component->GetMaterial(i);
-			UMaterialInstanceDynamic* DynamicMaterial = Component->CreateDynamicMaterialInstance(i, Material);
-
-			if (DynamicMaterial == nullptr)
-			{
-				continue;
-			}
-
-			DynamicMaterial->SetVectorParameterValue(ZoneLocationParamName, BoxComponent->GetComponentLocation());
-			DynamicMaterial->SetVectorParameterValue(ZoneExtentParamName, BoxComponent->GetScaledBoxExtent() * 2.0f);
-
-			AllMaterialInstances.Add(DynamicMaterial);
 		}
 	}
 }
@@ -168,18 +143,8 @@ void AWeakZone::DestroyZone()
 		}
 	}
 
-	for (UMaterialInstanceDynamic* Instance : AllMaterialInstances)
-	{
-		if (Instance == nullptr)
-		{
-			continue;
-		}
-
-		Instance->SetVectorParameterValue(ZoneLocationParamName, FVector::ZeroVector);
-		Instance->SetVectorParameterValue(ZoneExtentParamName, FVector::ZeroVector);
-	}
-
-	AllMaterialInstances.Empty();
+	bIsZoneActive = false;
+	BoxComponent->DestroyComponent();
 }
 
 void AWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -200,13 +165,13 @@ void AWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 
 void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
-	if (Pawn == nullptr)
+	if (!Pawn)
 	{
 		return;
 	}
 
 	AFirstPersonCharacter* Character = Cast<AFirstPersonCharacter>(Pawn);
-	if (Character == nullptr)
+	if (!Character)
 	{
 		return;
 	}
@@ -218,47 +183,71 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 
 	Character->UseAmber(AmberType, CostByPoint);
 
-	if (!InteractionComponent)
+	FInteractionPoints* InteractionPoint = FindInteractionPoint(InteractionComponent);
+	if (!InteractionPoint)
 	{
 		return;
 	}
 
-	UStaticMeshComponent* MeshComp = Cast<UStaticMeshComponent>(InteractionComponent);
-	if (!MeshComp)
+	InteractionPoint->bIsActive = true;
+	InteractionPoint->AmberMeshComp->SetVisibility(true); // anim todo
+
+	if (!IsEveryInteractionPointsActive())
 	{
 		return;
 	}
 
-	InteractionPoints.Remove(MeshComp);
-	MeshComp->DestroyComponent();
+	OnCure.Broadcast();
+	FCTween::Play(
+		1.f,
+		0.f,
+		[&](float X)
+		{
+			MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
+		},
+		CureDuration,
+		EFCEase::OutCubic
+	);
+}
 
-	if (InteractionPoints.Num() == 0)
+FInteractionPoints* AWeakZone::FindInteractionPoint(TObjectPtr<UPrimitiveComponent> Comp)
+{
+	for (FInteractionPoints& InteractionPoint : InteractionPoints)
 	{
-		OnCure.Broadcast();
-		FCTween::Play(
-			1.f,
-			0.f,
-			[&](float X)
-			{
-				MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
-			},
-			DestroyDuration,
-			EFCEase::OutCubic);
+		if (InteractionPoint.MeshComp == Comp)
+		{
+			return &InteractionPoint;
+		}
 	}
+
+	return nullptr;
+}
+
+bool AWeakZone::IsEveryInteractionPointsActive() const
+{
+	for (const FInteractionPoints& InteractionPoint : InteractionPoints)
+	{
+		if (!InteractionPoint.bIsActive)
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 FGameElementData& AWeakZone::SaveGameElement(UWorldSave* CurrentWorldSave)
 {
 	FWeakZoneData Data = FWeakZoneData();
-	for (TObjectPtr<UStaticMeshComponent> InteractionPoint : InteractionPoints)
-	{
-		if (!InteractionPoint)
-		{
-			continue;
-		}
-
-		Data.ExistingIndexes.Add(InteractionPoint.GetName());
-	}
+	// for (TObjectPtr<UStaticMeshComponent> InteractionPoint : InteractionPoints)
+	// {
+	// 	if (!InteractionPoint)
+	// 	{
+	// 		continue;
+	// 	}
+	//
+	// 	Data.ExistingIndexes.Add(InteractionPoint.GetName());
+	// }
 
 	return CurrentWorldSave->WeakZoneData.Add(GetName(), Data);
 }
@@ -267,21 +256,22 @@ void AWeakZone::LoadGameElement(const FGameElementData& GameElementData)
 {
 	const FWeakZoneData& Data = static_cast<const FWeakZoneData&>(GameElementData);
 
-	for (int i = 0; i < InteractionPoints.Num(); ++i)
-	{
-		if (!InteractionPoints[i])
-		{
-			continue;
-		}
-
-		if(Data.ExistingIndexes.Contains(InteractionPoints[i].GetName()))
-		{
-			continue;
-		}
-
-		InteractionPoints[i]->DestroyComponent();
-		InteractionPoints.RemoveAt(i);
-		i--;
-	}
+	// todo fix
+	// for (int i = 0; i < InteractionPoints.Num(); ++i)
+	// {
+	// 	if (!InteractionPoints[i])
+	// 	{
+	// 		continue;
+	// 	}
+	//
+	// 	if(Data.ExistingIndexes.Contains(InteractionPoints[i].GetName()))
+	// 	{
+	// 		continue;
+	// 	}
+	//
+	// 	InteractionPoints[i]->DestroyComponent();
+	// 	InteractionPoints.RemoveAt(i);
+	// 	i--;
+	// }
 }
 

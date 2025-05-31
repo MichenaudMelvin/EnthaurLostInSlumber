@@ -126,6 +126,8 @@ void AFirstPersonCharacter::BeginPlay()
 		return;
 	}
 
+	StartWidget = CreateWidget(FirstPersonController, StartWidgetClass);
+
 #if WITH_EDITORONLY_DATA
 	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
 
@@ -134,8 +136,6 @@ void AFirstPersonCharacter::BeginPlay()
 		return;
 	}
 #endif
-
-	StartWidget = CreateWidget(FirstPersonController, StartWidgetClass);
 
 	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(FirstPersonController, StartWidget);
 

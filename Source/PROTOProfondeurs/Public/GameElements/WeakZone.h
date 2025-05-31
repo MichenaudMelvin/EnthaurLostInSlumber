@@ -17,6 +17,26 @@ struct FWeakZoneData : public FGameElementData
 	TArray<FString> ExistingIndexes;
 };
 
+USTRUCT(BlueprintType)
+struct FInteractionPoints
+{
+	GENERATED_BODY()
+
+	UPROPERTY(VisibleInstanceOnly, Category = "InteractionsPoints")
+	TObjectPtr<UStaticMeshComponent> MeshComp;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "InteractionsPoints")
+	TObjectPtr<UStaticMeshComponent> AmberMeshComp;
+
+	UPROPERTY(EditAnywhere, Category = "InteractionsPoints")
+	TObjectPtr<UStaticMesh> Mesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "InteractionsPoints", meta = (MakeEditWidget))
+	FTransform Transform;
+
+	bool bIsActive = false;
+};
+
 class UInteractableComponent;
 class UBoxComponent;
 
@@ -35,15 +55,13 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
-	virtual void Destroyed() override;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
 	TObjectPtr<USceneComponent> Root;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
 	TObjectPtr<UBoxComponent> BoxComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeakZone")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
 	TObjectPtr<class UPostProcessComponent> BlackAndWhiteShader;
 
 	UPROPERTY(BlueprintReadWrite)
@@ -64,7 +82,7 @@ protected:
 	void DestroyZone();
 
 	UPROPERTY(EditDefaultsOnly, Category = "WeakZone", meta = (ClampMin = 0.0f, Units = s))
-	float DestroyDuration = 5.0f;
+	float CureDuration = 5.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zone")
 	FVector ZoneSize = FVector(100.0f);
@@ -72,28 +90,19 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<UMaterialInstanceDynamic> DynamicPPMaterial;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Materials")
-	FName ZoneLocationParamName = "ZoneLocation";
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Materials")
-	FName ZoneExtentParamName = "ZoneExtent";
-
-	UPROPERTY(BlueprintReadOnly, Category = "Materials")
-	TArray<TObjectPtr<UMaterialInstanceDynamic>> AllMaterialInstances;
-
 	bool bIsZoneActive = true;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interactable")
 	TObjectPtr<UInteractableComponent> Interactable;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
-	TObjectPtr<UStaticMesh> InteractionMesh;
+	TObjectPtr<UStaticMesh> DefaultInteractionPointMesh;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interactable")
-	TArray<TObjectPtr<UStaticMeshComponent>> InteractionPoints;
+	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
+	TObjectPtr<UStaticMesh> AmberMesh;
 
-	UPROPERTY(EditInstanceOnly, Category = "Interactable", meta = (DisplayName = "InteractionPoints", MakeEditWidget))
-	TArray<FTransform> InteractionTransformPoints;
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Interactable")
+	TArray<FInteractionPoints> InteractionPoints;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	EAmberType AmberType = EAmberType::WeakAmber;
@@ -109,6 +118,10 @@ protected:
 
 	UFUNCTION()
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
+	FInteractionPoints* FindInteractionPoint(TObjectPtr<UPrimitiveComponent> StaticMeshComponent);
+
+	bool IsEveryInteractionPointsActive() const;
 
 public:
 	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
