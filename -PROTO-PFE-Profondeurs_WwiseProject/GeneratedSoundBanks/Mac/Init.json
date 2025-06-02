@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{C0A9D0F2-94DA-2A17-0F43-907106F76829}",
+    "Hash": "{5542EF37-AFA8-E8D6-FBA6-DA29F7D2F1E7}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -38,27 +38,27 @@
      {
       "Id": "1162281553",
       "Name": "Bus_Music",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Music",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_Music",
       "GUID": "{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}",
       "Color": "19"
      },
      {
       "Id": "2930365547",
       "Name": "Bus_SFX_Amb_MC",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_SFX_Amb_MC",
       "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
       "Color": "9"
      },
      {
-      "Id": "4267419003",
-      "Name": "Master Audio Bus_01",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01",
+      "Id": "3803692087",
+      "Name": "Master Audio Bus",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
      },
      {
       "Id": "4277214558",
       "Name": "Bus_Voice",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Voice",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_Voice",
       "GUID": "{CD73F8A7-017F-4EA3-8D48-0308F27769B2}",
       "Color": "12"
      }
@@ -139,6 +139,6 @@
     ]
    }
   ],
-  "FileHash": "{5AEA9548-9F24-957E-E9F3-581CAB934175}"
+  "FileHash": "{BF68235B-7BE6-2EA2-FE79-72E93BA83EE3}"
  }
 }

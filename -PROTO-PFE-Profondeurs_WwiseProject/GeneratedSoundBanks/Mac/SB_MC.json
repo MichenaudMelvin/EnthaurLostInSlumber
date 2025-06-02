@@ -677,7 +677,7 @@
      {
       "Id": "4277858155",
       "Name": "Play_SW_MC_FS_Speed",
-      "ObjectPath": "\\Events\\Wu_MC_Event\\Play_SW_MC_FS_Speed",
+      "ObjectPath": "\\Events\\WU_MC_Event\\Play_SW_MC_FS_Speed",
       "GUID": "{40C0DABC-E260-4BE7-9895-167ACF357472}",
       "Color": "13",
       "DurationType": "OneShot",
@@ -944,7 +944,7 @@
      {
       "Id": "1913733562",
       "Name": "Play_SW_MC_Jump_Material",
-      "ObjectPath": "\\Events\\Wu_MC_Event\\Play_SW_MC_Jump_Material",
+      "ObjectPath": "\\Events\\WU_MC_Event\\Play_SW_MC_Jump_Material",
       "GUID": "{84B16784-5C30-4EFA-A338-4ACE6DA19306}",
       "Color": "13",
       "DurationType": "OneShot",
@@ -1003,7 +1003,7 @@
      {
       "Id": "3117572079",
       "Name": "Play_SW_MC_Land_Material",
-      "ObjectPath": "\\Events\\Wu_MC_Event\\Play_SW_MC_Land_Material",
+      "ObjectPath": "\\Events\\WU_MC_Event\\Play_SW_MC_Land_Material",
       "GUID": "{27009C7D-31EB-42D4-BEA8-E873A733B256}",
       "Color": "13",
       "DurationType": "OneShot",
@@ -1104,6 +1104,6 @@
     ]
    }
   ],
-  "FileHash": "{611A28C1-B557-CBF8-B6A9-4486DA4133AC}"
+  "FileHash": "{C9729B6A-9871-D34C-B7A6-EA51BA8B6871}"
  }
 }
