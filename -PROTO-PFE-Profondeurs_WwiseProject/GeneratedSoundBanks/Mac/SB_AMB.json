@@ -11,26 +11,138 @@
     "GUID": "{EE92B861-4D84-4707-9C17-9DF23002C642}",
     "Color": "4",
     "Language": "SFX",
-    "Hash": "{4B59292B-2D3C-826C-452A-4C3A73EECA11}",
+    "Hash": "{BC95C614-4E18-E529-BAEC-90D998BC5B6B}",
     "ObjectPath": "\\SoundBanks\\WU_AMB\\SB_AMB",
     "ShortName": "SB_AMB",
     "Path": "SB_AMB.bnk",
     "Media": [
      {
-      "Id": "391994859",
+      "Id": "40028711",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "AMB_PAD_Rfx_LP.wav",
-      "CachePath": "10/{10A74F29-1246-0C83-0961-EE0D991A62E0}.wem"
+      "ShortName": "AMB_Pad_Rfx_DistantScream_12.wav",
+      "CachePath": "89/{8942449A-973B-9A85-1F1B-EF054CC357C3}.wem"
      },
      {
-      "Id": "605536871",
+      "Id": "84916266",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "AMB_Pad_LP.wav",
-      "CachePath": "23/{23F77C6F-E5E7-7CD8-0228-9E865D1ED03B}.wem"
+      "ShortName": "AMB_Pad_Rfx_DistantScream_01.wav",
+      "CachePath": "B4/{B4DC8F89-6B44-AF89-FC0C-101CC60FADD3}.wem"
+     },
+     {
+      "Id": "113684722",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_02.wav",
+      "CachePath": "BC/{BC4198B8-0F85-2E53-979E-A4D28B8799F6}.wem"
+     },
+     {
+      "Id": "118041272",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_07.wav",
+      "CachePath": "3D/{3DF201E4-B1AF-6709-60D2-14B4BCC868C4}.wem"
+     },
+     {
+      "Id": "427151800",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_06.wav",
+      "CachePath": "37/{37E95FD6-0EB7-FB66-429C-1217CB7D8EF3}.wem"
+     },
+     {
+      "Id": "452759638",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_01_LP.wav",
+      "CachePath": "C7/{C75BEDBD-9EEB-4B10-6192-A81EFE78DAD4}.wem"
+     },
+     {
+      "Id": "630202445",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_04_LP.wav",
+      "CachePath": "4C/{4C088803-B6C9-A382-8C2C-6EC6934FD4F3}.wem"
+     },
+     {
+      "Id": "678510795",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_04.wav",
+      "CachePath": "AE/{AE25B41D-9EF0-33DF-FC53-8ECC1A0B07D2}.wem"
+     },
+     {
+      "Id": "726580023",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_11.wav",
+      "CachePath": "A4/{A4C4287F-9D0E-7F5C-3E8C-C5B7F9140660}.wem"
+     },
+     {
+      "Id": "743489974",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_03_LP-glued.wav",
+      "CachePath": "A9/{A9B688B7-13BA-2E9E-A37B-BD17ED64953E}.wem"
+     },
+     {
+      "Id": "745301015",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_03.wav",
+      "CachePath": "1C/{1CFF8B7F-A2B7-8A98-C065-1359BC2E111D}.wem"
+     },
+     {
+      "Id": "798986114",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_09.wav",
+      "CachePath": "F7/{F7D9C20F-B9C2-E59A-AE40-615105B2CE91}.wem"
+     },
+     {
+      "Id": "863142678",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_08.wav",
+      "CachePath": "9B/{9B314D01-49F1-3FA9-6ABD-B0D0E9410A46}.wem"
+     },
+     {
+      "Id": "879024324",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_02_LP.wav",
+      "CachePath": "97/{97D10EEB-9667-A63A-9934-16A5FFE8B640}.wem"
+     },
+     {
+      "Id": "964612303",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_10.wav",
+      "CachePath": "00/{0065A589-7D0D-1AD7-EE1F-4567FDA71B67}.wem"
+     },
+     {
+      "Id": "1059098210",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_05.wav",
+      "CachePath": "96/{96229D84-843E-D15C-6734-E79516AADD1B}.wem"
      }
     ],
     "Events": [
@@ -42,16 +154,58 @@
       "DurationType": "Infinite",
       "MediaRefs": [
        {
-        "Id": "391994859"
+        "Id": "40028711"
        },
        {
-        "Id": "605536871"
+        "Id": "84916266"
+       },
+       {
+        "Id": "113684722"
+       },
+       {
+        "Id": "118041272"
+       },
+       {
+        "Id": "427151800"
+       },
+       {
+        "Id": "452759638"
+       },
+       {
+        "Id": "630202445"
+       },
+       {
+        "Id": "678510795"
+       },
+       {
+        "Id": "726580023"
+       },
+       {
+        "Id": "743489974"
+       },
+       {
+        "Id": "745301015"
+       },
+       {
+        "Id": "798986114"
+       },
+       {
+        "Id": "863142678"
+       },
+       {
+        "Id": "879024324"
+       },
+       {
+        "Id": "964612303"
+       },
+       {
+        "Id": "1059098210"
        }
       ]
      }
     ]
    }
   ],
-  "FileHash": "{D23AF644-214A-E1AF-7AA3-FA0E94148AAB}"
+  "FileHash": "{A7ADF734-C1E1-869E-62EB-A859E187DD98}"
  }
 }

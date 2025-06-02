@@ -8,14 +8,7 @@
 						<Action Name="" ID="{B42B1494-9327-4B5E-A4C8-EE664BABD715}" ShortID="1049382876">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="AMB_Pad" ID="{BBA1EA69-7281-4B05-8E65-C3C813C0807F}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{2DDFF9FA-FAA6-4D8B-AE40-9AFB9BEEF6DA}" ShortID="563351096">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="AMB_Pad_Rfx" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+									<ObjectRef Name="AMB_General" ID="{D66404B2-7846-4FD1-B9E3-0BC5873B0900}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
