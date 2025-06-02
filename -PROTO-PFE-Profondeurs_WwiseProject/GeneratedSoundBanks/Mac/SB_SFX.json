@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{BC1CBF65-D5B1-EF28-FC85-063B8061D8A1}",
+    "Hash": "{8E642E63-4D39-6290-1EB2-2D0AADC4F93C}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -31,6 +31,22 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveReceptacle_Activate_02.wav",
       "CachePath": "49/{497B3F20-4F5B-CB9D-6EDC-1B072F060D09}.wem"
+     },
+     {
+      "Id": "36113522",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Growth_04.wav",
+      "CachePath": "DC/{DC204E6B-C136-7344-9C70-68AD6B7A7FD3}.wem"
+     },
+     {
+      "Id": "43894004",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_Gore_01.wav",
+      "CachePath": "E3/{E3339A71-B018-DC4B-E60C-B913810188BE}.wem"
      },
      {
       "Id": "50412123",
@@ -57,6 +73,22 @@
       "CachePath": "62/{62FB46FA-D514-F090-FBC8-FB54CCAC0928}.wem"
      },
      {
+      "Id": "119173871",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Grab_Nerve_02.wav",
+      "CachePath": "C9/{C9A37799-ABFC-8D16-1E95-3E4EECBCF240}.wem"
+     },
+     {
+      "Id": "122346683",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_03.wav",
+      "CachePath": "EF/{EFCBD7B5-1FC7-4CB9-6B69-2EE485144E8A}.wem"
+     },
+     {
       "Id": "136221896",
       "Language": "SFX",
       "Streaming": "false",
@@ -73,6 +105,22 @@
       "CachePath": "64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem"
      },
      {
+      "Id": "151884214",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_Gore_05.wav",
+      "CachePath": "7D/{7D5A6079-3F85-2B96-84B0-92160236F58A}.wem"
+     },
+     {
+      "Id": "161762302",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Growth_03.wav",
+      "CachePath": "99/{9976ED3E-5850-E076-7A76-CD0A5E1A2816}.wem"
+     },
+     {
       "Id": "166183347",
       "Language": "SFX",
       "Streaming": "false",
@@ -81,12 +129,28 @@
       "CachePath": "97/{97B10320-423B-1DCA-A447-D4F71F2770B0}.wem"
      },
      {
+      "Id": "197068285",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_01.wav",
+      "CachePath": "7D/{7DB56DDB-9C5A-C159-4C17-48C1F58C94ED}.wem"
+     },
+     {
       "Id": "221647164",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Muscle_Bounce_03.wav",
       "CachePath": "45/{4509A923-9BCC-7561-FE11-F6B9707D816C}.wem"
+     },
+     {
+      "Id": "234334743",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Growth_01.wav",
+      "CachePath": "D2/{D26AB906-2B3F-B27C-D3B7-AD56BF5D1052}.wem"
      },
      {
       "Id": "251580194",
@@ -143,6 +207,22 @@
       "Location": "Memory",
       "ShortName": "SFX_Muscle_Bounce_Woosh_03.wav",
       "CachePath": "DB/{DBC07BDB-FA25-1086-D880-415D7151BAED}.wem"
+     },
+     {
+      "Id": "399813874",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Grab_Nerve_01.wav",
+      "CachePath": "CA/{CA05ED8B-6924-9ECC-896B-6CFF1C247596}.wem"
+     },
+     {
+      "Id": "429011309",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_Gore_04.wav",
+      "CachePath": "90/{90C4B611-1886-03D6-C5F3-24AAA89377CC}.wem"
      },
      {
       "Id": "515272845",
@@ -209,6 +289,14 @@
       "CachePath": "5D/{5D4502C9-728B-1CC3-DD2A-C3CCE4969590}.wem"
      },
      {
+      "Id": "725331003",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_Gore_03.wav",
+      "CachePath": "97/{979F5FE9-078B-FAD9-2EFB-922BEFFE2D21}.wem"
+     },
+     {
       "Id": "733450515",
       "Language": "SFX",
       "Streaming": "false",
@@ -233,6 +321,22 @@
       "CachePath": "6C/{6CDE759A-F0D5-D1A2-D2D9-8ED54BA405AA}.wem"
      },
      {
+      "Id": "801782534",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_02.wav",
+      "CachePath": "6C/{6C7F2423-BD2B-F3FE-A9BF-5284B3757FDA}.wem"
+     },
+     {
+      "Id": "804146141",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_Gore_02.wav",
+      "CachePath": "36/{36BE6117-2108-2C81-F38F-778E63176D97}.wem"
+     },
+     {
       "Id": "821434401",
       "Language": "SFX",
       "Streaming": "false",
@@ -247,6 +351,14 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveDoor_Layer_Gore02_03.wav",
       "CachePath": "05/{05362565-F73F-EC7B-365C-49076F99EAEA}.wem"
+     },
+     {
+      "Id": "889954801",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_04.wav",
+      "CachePath": "F7/{F7D24825-AEF2-A6CD-0485-3934B48E028E}.wem"
      },
      {
       "Id": "897057365",
@@ -289,6 +401,22 @@
       "CachePath": "D0/{D0701CA0-7CE7-60C4-767D-7C195B806934}.wem"
      },
      {
+      "Id": "1018784665",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Growth_02.wav",
+      "CachePath": "32/{32E47689-6149-FB11-DBCE-27B8869C5DCA}.wem"
+     },
+     {
+      "Id": "1021487410",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LPX_Nerve_Stretch_05.wav",
+      "CachePath": "C6/{C670B7C1-D2A2-C6C0-AC3C-856F0981C6BB}.wem"
+     },
+     {
       "Id": "1040785902",
       "Language": "SFX",
       "Streaming": "false",
@@ -298,6 +426,64 @@
      }
     ],
     "Events": [
+     {
+      "Id": "3956346405",
+      "Name": "Play_LPX_Nerve_Stretch",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_LPX_Nerve_Stretch",
+      "GUID": "{86D55011-33D5-488E-A299-439AE1860B89}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "43894004"
+       },
+       {
+        "Id": "122346683"
+       },
+       {
+        "Id": "151884214"
+       },
+       {
+        "Id": "197068285"
+       },
+       {
+        "Id": "429011309"
+       },
+       {
+        "Id": "725331003"
+       },
+       {
+        "Id": "801782534"
+       },
+       {
+        "Id": "804146141"
+       },
+       {
+        "Id": "889954801"
+       },
+       {
+        "Id": "1021487410"
+       }
+      ]
+     },
+     {
+      "Id": "688124889",
+      "Name": "Play_SFX_Grab_Nerve",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Grab_Nerve",
+      "GUID": "{B94FCB08-373F-4AB1-ACD3-52ECCEDF635F}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.15731238",
+      "DurationMax": "0.24720807",
+      "MediaRefs": [
+       {
+        "Id": "119173871"
+       },
+       {
+        "Id": "399813874"
+       }
+      ]
+     },
      {
       "Id": "4148931070",
       "Name": "Play_SFX_Muscle_Bounce",
@@ -367,6 +553,30 @@
        },
        {
         "Id": "714298177"
+       }
+      ]
+     },
+     {
+      "Id": "81678220",
+      "Name": "Play_SFX_Nerve_Growth",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Nerve_Growth",
+      "GUID": "{28718967-02E7-48AE-8783-3878B7F1CF4F}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.09330331",
+      "DurationMax": "0.14290313",
+      "MediaRefs": [
+       {
+        "Id": "36113522"
+       },
+       {
+        "Id": "161762302"
+       },
+       {
+        "Id": "234334743"
+       },
+       {
+        "Id": "1018784665"
        }
       ]
      },
@@ -499,9 +709,17 @@
        }
       ]
      }
+    ],
+    "GameParameters": [
+     {
+      "Id": "3076470155",
+      "Name": "RTPC_Nerve_Stretch",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\RTPC_Nerve_Stretch",
+      "GUID": "{31886D5C-1267-426C-A7AA-FC467CBBF581}"
+     }
     ]
    }
   ],
-  "FileHash": "{E8683AED-A4AC-6671-D1A7-BD49167308BD}"
+  "FileHash": "{BA8BBA6E-CF14-1E85-7B89-D0B09927BCE3}"
  }
 }
