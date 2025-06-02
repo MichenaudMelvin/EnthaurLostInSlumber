@@ -1,0 +1,57 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "925885567",
+    "Type": "User",
+    "GUID": "{EE92B861-4D84-4707-9C17-9DF23002C642}",
+    "Color": "4",
+    "Language": "SFX",
+    "Hash": "{4B59292B-2D3C-826C-452A-4C3A73EECA11}",
+    "ObjectPath": "\\SoundBanks\\WU_AMB\\SB_AMB",
+    "ShortName": "SB_AMB",
+    "Path": "SB_AMB.bnk",
+    "Media": [
+     {
+      "Id": "391994859",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_PAD_Rfx_LP.wav",
+      "CachePath": "10/{10A74F29-1246-0C83-0961-EE0D991A62E0}.wem"
+     },
+     {
+      "Id": "605536871",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_LP.wav",
+      "CachePath": "23/{23F77C6F-E5E7-7CD8-0228-9E865D1ED03B}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "2123200850",
+      "Name": "AMB_General",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_General",
+      "GUID": "{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "391994859"
+       },
+       {
+        "Id": "605536871"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{D23AF644-214A-E1AF-7AA3-FA0E94148AAB}"
+ }
+}
