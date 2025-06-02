@@ -46,7 +46,7 @@ protected:
 
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Componoents")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<USceneComponent> Root;
 
 #pragma endregion
@@ -73,6 +73,9 @@ protected:
 #pragma region Deformation
 
 protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UAkComponent> MuscleDeformationNoises;
+
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Deformation")
 	bool bIsSolid = true;
 
@@ -97,7 +100,10 @@ protected:
 	TObjectPtr<UCurveFloat> DeformationCurve;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Deformation")
-	TObjectPtr<UAkAudioEvent> DeformationNoise;
+	TObjectPtr<UAkAudioEvent> SolidMuscleNoise;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Deformation")
+	TObjectPtr<UAkAudioEvent> SoftMuscleNoise;
 
 	UFUNCTION(CallInEditor, Category = "Deformation")
 	void StartDeformation();
@@ -127,6 +133,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Physics|Debug")
 	TObjectPtr<class UArrowComponent> BounceDirectionBack;
 #endif
+
+	UPROPERTY(EditDefaultsOnly, Category = "Physics")
+	TObjectPtr<UAkAudioEvent> BounceNoise;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Physics")
 	FVector TraceExtent = FVector(-300.0f, 0.0f, 50.0f);
@@ -197,6 +206,15 @@ protected:
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UStaticMeshComponent> SpikeInteraction;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UAkComponent> SpikeInteractionNoises;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> ToSoftInteractionNoise;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> ToSolidInteractionNoise;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	TObjectPtr<UInteractableComponent> Interactable;

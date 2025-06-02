@@ -12,6 +12,7 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "Nerve.generated.h"
 
+class UAkAudioEvent;
 class AFirstPersonCharacter;
 
 USTRUCT(BlueprintType)
@@ -65,6 +66,9 @@ protected:
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
 	TObjectPtr<USplineComponent> SplineCable;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
+	TObjectPtr<UAkAudioEvent> NerveGrowthNoise;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
 	TArray<TObjectPtr<USplineMeshComponent>> SplineMeshes;
@@ -193,8 +197,11 @@ public:
 #pragma region Interaction
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UInteractableComponent> InteractableComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> GrabNoise;
 
 	UFUNCTION()
 	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
