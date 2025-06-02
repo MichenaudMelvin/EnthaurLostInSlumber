@@ -1,0 +1,7 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2123200850	AMB_General			\WU_AMB_Event\AMB_General	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	391994859	AMB_PAD_Rfx_LP	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\10\{10A74F29-1246-0C83-0961-EE0D991A62E0}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Rfx\AMB_PAD_Rfx_LP		5377488
+	605536871	AMB_Pad_LP	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\23\{23F77C6F-E5E7-7CD8-0228-9E865D1ED03B}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad\AMB_Pad_LP		19968096
+

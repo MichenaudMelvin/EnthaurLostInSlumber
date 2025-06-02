@@ -5,13 +5,6 @@
 			<ChildrenList>
 				<Event Name="AMB_General" ID="{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}">
 					<ChildrenList>
-						<Action Name="" ID="{91DEF81A-6476-416B-AC70-01B5CF485118}" ShortID="733607188">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="AMB_FleshWall" ID="{65176453-07E7-44AE-B194-9742CE9F714C}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
 						<Action Name="" ID="{B42B1494-9327-4B5E-A4C8-EE664BABD715}" ShortID="1049382876">
 							<ReferenceList>
 								<Reference Name="Target">
