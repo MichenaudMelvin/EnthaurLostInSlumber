@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Menus/PRFWidgetBasics.h"
+#include "Menus/Elements/PRFCustomButton.h"
 #include "PRFQuitMenu.generated.h"
 
 /**
@@ -15,7 +16,7 @@ class PRFUI_API UPRFQuitMenu : public UPRFWidgetBasics
 	GENERATED_BODY()
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* QuitGameButton;
+	TObjectPtr<UPRFCustomButton> QuitGameButton;
 
 	virtual void NativeOnInitialized() override;
 	virtual void BeginDestroy() override;

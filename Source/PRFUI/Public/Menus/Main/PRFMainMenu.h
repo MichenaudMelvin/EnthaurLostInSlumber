@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "Menus/PRFWidgetBasics.h"
+#include "Menus/Elements/PRFCustomButton.h"
 #include "PRFMainMenu.generated.h"
 
 class UPRFUIManager;
@@ -14,25 +15,25 @@ class UButton;
  * 
  */
 UCLASS()
-class PRFUI_API UPRFMainMenu : public UUserWidget
+class PRFUI_API UPRFMainMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
 
 protected:
 	UPROPERTY(meta = (BindWidget))
-	UButton* NewGameButton;
+	TObjectPtr<UPRFCustomButton> NewGameButton;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* ContinueButton;
+	TObjectPtr<UPRFCustomButton> ContinueButton;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* OptionsButton;
+	TObjectPtr<UPRFCustomButton> OptionsButton;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* CreditsButton;
+	TObjectPtr<UPRFCustomButton> CreditsButton;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* QuitButton;
+	TObjectPtr<UPRFCustomButton> QuitButton;
 
 	virtual void NativeOnInitialized() override;
 	virtual void BeginDestroy() override;

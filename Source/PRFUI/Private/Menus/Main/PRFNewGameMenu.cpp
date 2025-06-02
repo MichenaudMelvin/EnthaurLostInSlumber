@@ -9,9 +9,9 @@ void UPRFNewGameMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 	
-	if (ContinueButton)
+	if (ContinueButton && ContinueButton->GetCustomButton())
 	{
-		ContinueButton->OnClicked.AddDynamic(this, &UPRFNewGameMenu::HandleNewGameInteraction);
+		ContinueButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFNewGameMenu::HandleNewGameInteraction);
 	}
 }
 
@@ -19,9 +19,9 @@ void UPRFNewGameMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
 	
-	if (ContinueButton)
+	if (ContinueButton && ContinueButton->GetCustomButton())
 	{
-		ContinueButton->OnClicked.RemoveDynamic(this, &UPRFNewGameMenu::HandleNewGameInteraction);
+		ContinueButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFNewGameMenu::HandleNewGameInteraction);
 	}
 }
 

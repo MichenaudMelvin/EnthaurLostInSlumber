@@ -9,12 +9,32 @@
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
 
-void UDeathMenuUI::NativeOnInitialized()
+void UDeathMenuUI::NativeConstruct()
 {
-	Super::NativeOnInitialized();
+	Super::NativeConstruct();
 
-	RespawnButton->OnClicked.AddDynamic(this, &UDeathMenuUI::RespawnPlayer);
-	BackMainMenuButton->OnClicked.AddDynamic(this, &UDeathMenuUI::BackToMainMenu);
+	if (RespawnButton && RespawnButton->GetCustomButton())
+	{
+		RespawnButton->GetCustomButton()->OnClicked.AddDynamic(this, &UDeathMenuUI::RespawnPlayer);
+	}
+	if (BackMainMenuButton && BackMainMenuButton->GetCustomButton())
+	{
+		BackMainMenuButton->GetCustomButton()->OnClicked.AddDynamic(this, &UDeathMenuUI::BackToMainMenu);
+	}
+}
+
+void UDeathMenuUI::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+	if (RespawnButton && RespawnButton->GetCustomButton())
+	{
+		RespawnButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UDeathMenuUI::RespawnPlayer);
+	}
+	if (BackMainMenuButton && BackMainMenuButton->GetCustomButton())
+	{
+		BackMainMenuButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UDeathMenuUI::BackToMainMenu);
+	}
 }
 
 void UDeathMenuUI::RespawnPlayer()

@@ -19,7 +19,7 @@ protected:
 	virtual void BeginDestroy() override;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<UButton> MainMenuButton;
+	TObjectPtr<UPRFCustomButton> MainMenuButton;
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UWorld> MainMenuLevel;
