@@ -240,10 +240,15 @@ private:
 
 #pragma region Save
 
+protected:
+	bool bIsLoaded = false;
+
 public:
 	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+
+	bool IsLoaded() const {return bIsLoaded;}
 
 #pragma endregion
 

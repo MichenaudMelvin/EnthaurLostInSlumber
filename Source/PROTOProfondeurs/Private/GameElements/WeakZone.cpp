@@ -192,22 +192,7 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 	InteractionPoint->bIsActive = true;
 	InteractionPoint->AmberMeshComp->SetVisibility(true); // anim todo
 
-	if (!IsEveryInteractionPointsActive())
-	{
-		return;
-	}
-
-	OnCure.Broadcast();
-	FCTween::Play(
-		1.f,
-		0.f,
-		[&](float X)
-		{
-			MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
-		},
-		CureDuration,
-		EFCEase::OutCubic
-	);
+	CheckIfEveryInteractionsPointActive();
 }
 
 FInteractionPoints* AWeakZone::FindInteractionPoint(TObjectPtr<UPrimitiveComponent> Comp)
@@ -236,18 +221,35 @@ bool AWeakZone::IsEveryInteractionPointsActive() const
 	return true;
 }
 
+void AWeakZone::CheckIfEveryInteractionsPointActive()
+{
+	if (!IsEveryInteractionPointsActive())
+	{
+		return;
+	}
+
+	OnCure.Broadcast();
+	FCTween::Play(
+		1.f,
+		0.f,
+		[&](float X)
+		{
+			MaterialBlackAndWhite->SetScalarParameterValue("Active", X);
+		},
+		CureDuration,
+		EFCEase::OutCubic
+	);
+}
+
 FGameElementData& AWeakZone::SaveGameElement(UWorldSave* CurrentWorldSave)
 {
 	FWeakZoneData Data = FWeakZoneData();
-	// for (TObjectPtr<UStaticMeshComponent> InteractionPoint : InteractionPoints)
-	// {
-	// 	if (!InteractionPoint)
-	// 	{
-	// 		continue;
-	// 	}
-	//
-	// 	Data.ExistingIndexes.Add(InteractionPoint.GetName());
-	// }
+
+	Data.ActivatedInteractionPoints.Empty(InteractionPoints.Num());
+	for (const FInteractionPoints& InteractionPoint : InteractionPoints)
+	{
+		Data.ActivatedInteractionPoints.Add(InteractionPoint.bIsActive);
+	}
 
 	return CurrentWorldSave->WeakZoneData.Add(GetName(), Data);
 }
@@ -256,22 +258,24 @@ void AWeakZone::LoadGameElement(const FGameElementData& GameElementData)
 {
 	const FWeakZoneData& Data = static_cast<const FWeakZoneData&>(GameElementData);
 
-	// todo fix
-	// for (int i = 0; i < InteractionPoints.Num(); ++i)
-	// {
-	// 	if (!InteractionPoints[i])
-	// 	{
-	// 		continue;
-	// 	}
-	//
-	// 	if(Data.ExistingIndexes.Contains(InteractionPoints[i].GetName()))
-	// 	{
-	// 		continue;
-	// 	}
-	//
-	// 	InteractionPoints[i]->DestroyComponent();
-	// 	InteractionPoints.RemoveAt(i);
-	// 	i--;
-	// }
-}
+	if (InteractionPoints.Num() != Data.ActivatedInteractionPoints.Num())
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("%s has a different number in the world and in the save, please clear your save file"), *GetActorLabel(false));
 
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	for (int i = 0; i < Data.ActivatedInteractionPoints.Num(); i++)
+	{
+		InteractionPoints[i].bIsActive = Data.ActivatedInteractionPoints[i];
+
+		if (InteractionPoints[i].bIsActive)
+		{
+			InteractionPoints[i].AmberMeshComp->SetVisibility(true); // anim todo
+		}
+	}
+}

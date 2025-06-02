@@ -575,6 +575,8 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 		CurrentAttachedReceptacle = nullptr;
 	}
 
+	bIsLoaded = false;
+
 	PlayerController = Cast<AFirstPersonController>(Controller);
 	AttachNerveBall(Pawn);
 
@@ -663,6 +665,8 @@ void ANerve::LoadGameElement(const FGameElementData& GameElementData)
 	UpdateSplineMeshes(false);
 
 	ImpactNormals = Data.ImpactNormals;
+
+	bIsLoaded = true;
 }
 
 #pragma endregion

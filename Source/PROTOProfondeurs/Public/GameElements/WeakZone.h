@@ -9,15 +9,6 @@
 #include "WeakZone.generated.h"
 
 USTRUCT(BlueprintType)
-struct FWeakZoneData : public FGameElementData
-{
-	GENERATED_BODY()
-
-	UPROPERTY(BlueprintReadWrite, Category = "WeakZone")
-	TArray<FString> ExistingIndexes;
-};
-
-USTRUCT(BlueprintType)
 struct FInteractionPoints
 {
 	GENERATED_BODY()
@@ -35,6 +26,15 @@ struct FInteractionPoints
 	FTransform Transform;
 
 	bool bIsActive = false;
+};
+
+USTRUCT(BlueprintType)
+struct FWeakZoneData : public FGameElementData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "WeakZone")
+	TArray<bool> ActivatedInteractionPoints;
 };
 
 class UInteractableComponent;
@@ -122,6 +122,9 @@ protected:
 	FInteractionPoints* FindInteractionPoint(TObjectPtr<UPrimitiveComponent> StaticMeshComponent);
 
 	bool IsEveryInteractionPointsActive() const;
+
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void CheckIfEveryInteractionsPointActive();
 
 public:
 	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
