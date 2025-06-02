@@ -31,10 +31,27 @@
 							<GameParameterRef Name="RTPC_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
 							<Value>0</Value>
 						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_Voice" ID="{9CF10DE5-32FB-4741-9D1F-EBA407F8E2E7}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"/>
+							<Value>100</Value>
+						</RTPCValue>
 					</RTPCValueList>
 					<CurrentStateList ShowAll="true"/>
 					<CurrentSwitchList ShowAll="true">
 						<CurrentSwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>
 			</ChildrenList>
