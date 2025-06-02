@@ -10,9 +10,9 @@ void UPRFWidgetBasics::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	if (BackButton)
+	if (BackButton && BackButton->GetCustomButton() && !BackButton->GetCustomButton()->OnClicked.IsAlreadyBound(this, &UPRFWidgetBasics::HandleBackAction))
 	{
-		BackButton->OnClicked.AddDynamic(this, &UPRFWidgetBasics::HandleBackAction);
+		BackButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFWidgetBasics::HandleBackAction);
 	}
 }
 
@@ -20,9 +20,9 @@ void UPRFWidgetBasics::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (BackButton)
+	if (BackButton && BackButton->GetCustomButton())
 	{
-		BackButton->OnClicked.RemoveDynamic(this, &UPRFWidgetBasics::HandleBackAction);
+		BackButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFWidgetBasics::HandleBackAction);
 	}
 }
 

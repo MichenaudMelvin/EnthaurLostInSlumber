@@ -13,7 +13,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+							<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
@@ -2133,6 +2133,365 @@
 								</GroupingList>
 							</GroupingInfo>
 						</SwitchContainer>
+						<ActorMixer Name="AM_MC_Foley" ID="{0F5AF532-ADFD-4FAA-8660-7B2A1F5333EA}" ShortID="420868986">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SwitchContainer Name="MC_Cloth" ID="{7CB79212-C1AB-4552-9239-7ACCD207BB2D}" ShortID="157898414">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="SWG_MC_FS_Speed" ID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="MC_Cloth_Walk" ID="{C7BBC8C2-3A68-440F-BF7C-5A0F7EAD924B}" ShortID="320907454">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="MC_Cloth_Run" ID="{CB3CC00F-DE70-4DA7-A943-1E89CC827C56}" ShortID="740798661">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="MC_Cloth_Run_01" ID="{3D621451-32B1-434D-89A4-1F3FB6C57FB6}" ShortID="385292291">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_01" ID="{C976A541-25E2-449A-B416-D5412EDCB50F}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1013574032"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_01" ID="{C976A541-25E2-449A-B416-D5412EDCB50F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_02" ID="{5F7A7B70-B8A3-43C3-9616-E0D30D54D931}" ShortID="1038640010">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_02" ID="{BFCA39BF-FE98-4808-BD1A-46E046D7481D}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="794150962"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_02" ID="{BFCA39BF-FE98-4808-BD1A-46E046D7481D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_03" ID="{5C6EC2B8-A2AF-4DDE-98BD-9C3D5CCB5A4A}" ShortID="67283722">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_03" ID="{AFCC6C1A-FA6C-4745-B384-62C376B37C5F}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="390884961"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_03" ID="{AFCC6C1A-FA6C-4745-B384-62C376B37C5F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_04" ID="{71CF71F8-C25E-46B7-B4B2-E44BACD06F84}" ShortID="492140146">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_04" ID="{130C1A58-7E8D-4005-A866-510044A72AEB}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="889515880"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_04" ID="{130C1A58-7E8D-4005-A866-510044A72AEB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_05" ID="{B1DE1F91-D468-4B50-9468-576621DE4B9E}" ShortID="870616193">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_05" ID="{7EA9EA9A-F11B-4BCD-97CB-EB59C2C7E1F6}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_05.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="540850573"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_05" ID="{7EA9EA9A-F11B-4BCD-97CB-EB59C2C7E1F6}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_06" ID="{C66C4683-D105-466A-9D2B-64CEF1720B5E}" ShortID="402625392">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_06" ID="{E31CD015-82E2-49A7-A971-EC767A685B1B}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_06.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="697774580"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_06" ID="{E31CD015-82E2-49A7-A971-EC767A685B1B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_07" ID="{D34C61C0-37B3-439E-A6B3-540771FBFF13}" ShortID="373146752">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_07" ID="{1BB70608-9E2D-4B64-BB02-5717A9EF8A05}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_07.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="211926631"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_07" ID="{1BB70608-9E2D-4B64-BB02-5717A9EF8A05}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_08" ID="{EF404FA8-0F4E-4B63-8284-83EF90FA6B22}" ShortID="785212147">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_08" ID="{F73CFDAF-D669-46D6-835D-4137CBC84279}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_08.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="882147115"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_08" ID="{F73CFDAF-D669-46D6-835D-4137CBC84279}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_09" ID="{D95A1651-16BB-46F3-8F61-840F9EEFC1E8}" ShortID="234822877">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_09" ID="{5F01C4D2-6BF1-4567-A5F6-B190E626A4D5}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_09.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="524436829"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_09" ID="{5F01C4D2-6BF1-4567-A5F6-B190E626A4D5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_10" ID="{581E8E77-A8BB-4CAE-908E-BCF3226DA741}" ShortID="973156977">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_10" ID="{03CA8CFB-CE93-49BE-A8C0-C345BE5C5E47}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_10.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="331087580"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_10" ID="{03CA8CFB-CE93-49BE-A8C0-C345BE5C5E47}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_11" ID="{146B57E3-2906-48E9-9005-E4FC5F47EA32}" ShortID="490987647">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_11" ID="{C177CF9A-4B3C-41EE-9A5B-F3CD19DE8B27}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_11.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="262194432"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_11" ID="{C177CF9A-4B3C-41EE-9A5B-F3CD19DE8B27}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_12" ID="{F02BDEF4-538F-4C72-8D24-5BEFE7CA87C7}" ShortID="1007956211">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_12" ID="{19D64317-6A10-407C-B53F-08472F237ADE}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_12.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="171841650"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_12" ID="{19D64317-6A10-407C-B53F-08472F237ADE}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Cloth_Run_13" ID="{BE2C68CF-FB04-4D9C-96E0-CE3A60D10074}" ShortID="576400146">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Cloth_Run_13" ID="{B038EFFB-8198-4339-B113-CE6895396633}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Cloth_Run_13.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="435669612"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Cloth_Run_13" ID="{B038EFFB-8198-4339-B113-CE6895396633}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="MC_Cloth_Run" ID="{CB3CC00F-DE70-4DA7-A943-1E89CC827C56}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="MC_Cloth_Walk" ID="{C7BBC8C2-3A68-440F-BF7C-5A0F7EAD924B}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+												<ItemList>
+													<ItemRef Name="MC_Cloth_Run" ID="{CB3CC00F-DE70-4DA7-A943-1E89CC827C56}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Walk" ID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"/>
+												<ItemList>
+													<ItemRef Name="MC_Cloth_Walk" ID="{C7BBC8C2-3A68-440F-BF7C-5A0F7EAD924B}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
+									</GroupingInfo>
+								</SwitchContainer>
+							</ChildrenList>
+						</ActorMixer>
 					</ChildrenList>
 				</ActorMixer>
 			</ChildrenList>

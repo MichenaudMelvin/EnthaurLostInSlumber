@@ -22,13 +22,35 @@ void AParasiteController::BeginPlay()
 	PerceptionComponent->OnTargetPerceptionUpdated.AddDynamic(this, &AParasiteController::OnTargetPerceptionUpdated);
 }
 
+void AParasiteController::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	if (!PerceptionComponent)
+	{
+		return;
+	}
+
+	if (PerceptionComponent->OnTargetPerceptionUpdated.IsAlreadyBound(this, &AParasiteController::OnTargetPerceptionUpdated))
+	{
+		PerceptionComponent->OnTargetPerceptionUpdated.RemoveDynamic(this, &AParasiteController::OnTargetPerceptionUpdated);
+	}
+}
+
 void AParasiteController::OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 {
 	FAISenseID HearingID = UAISense::GetSenseID(UAISense_Hearing::StaticClass());
 
 	if (Stimulus.Type == HearingID)
 	{
-		OnHearTarget(Actor, Stimulus);
+		if (Stimulus.IsExpired())
+		{
+			OnUnheardTarget(Actor);
+		}
+		else
+		{
+			OnHearTarget(Actor, Stimulus);
+		}
 	}
 }
 
@@ -51,7 +73,25 @@ void AParasiteController::OnHearTarget(AActor* Actor, const FAIStimulus& Stimulu
 	}
 
 	GetBlackboardComponent()->SetValueAsBool(HeardNoiseKeyName, true);
-	GetBlackboardComponent()->SetValueAsVector(MoveLocationKeyName, HitResult.Location);
+	GetBlackboardComponent()->SetValueAsObject(NoiseInvestigatorKeyName, Actor);
+}
+
+void AParasiteController::OnUnheardTarget(AActor* Actor)
+{
+	if (!GetBlackboardComponent())
+	{
+		return;
+	}
+
+	UObject* ObjectPtr = GetBlackboardComponent()->GetValueAsObject(NoiseInvestigatorKeyName);
+
+	if (ObjectPtr != Actor)
+	{
+		return;
+	}
+
+	GetBlackboardComponent()->SetValueAsBool(HeardNoiseKeyName, false);
+	GetBlackboardComponent()->SetValueAsObject(NoiseInvestigatorKeyName, nullptr);
 }
 
 void AParasiteController::SaveBlackBoardValues(FParaSiteData& AIData)

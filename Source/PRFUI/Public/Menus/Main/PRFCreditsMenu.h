@@ -13,4 +13,11 @@ UCLASS()
 class PRFUI_API UPRFCreditsMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
+
+protected:
+	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	TObjectPtr<UWidgetAnimation> NamesAnimation;
 };

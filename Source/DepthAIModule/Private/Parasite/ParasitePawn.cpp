@@ -11,22 +11,36 @@
 #include "Path/AIPath.h"
 #include "Saves/WorldSaves/WorldSave.h"
 
+#if WITH_EDITORONLY_DATA
+#include "Components/ArrowComponent.h"
+#endif
+
 AParasitePawn::AParasitePawn()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	PrimaryActorTick.bStartWithTickEnabled = false;
 
-	ParasiteCollision = CreateDefaultSubobject<UBoxComponent>("ParasiteHitBox");
+	ParasiteCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("ParasiteHitBox"));
 	SetRootComponent(ParasiteCollision);
 
 	ParasiteCollision->SetCollisionObjectType(ECC_Pawn);
 	ParasiteCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	ParasiteCollision->SetCollisionResponseToAllChannels(ECR_Block);
 
-	ParasiteMesh = CreateDefaultSubobject<USkeletalMeshComponent>("Mesh");
+	ParasiteMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
 	ParasiteMesh->SetupAttachment(ParasiteCollision);
 
-	MovementComponent = CreateDefaultSubobject<UGravityPawnMovement>("Movement");
+#if WITH_EDITORONLY_DATA
+	ForwardDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("ForwardDirection"));
+	ForwardDirection->SetupAttachment(ParasiteCollision);
+	ForwardDirection->bIsEditorOnly = true;
+#endif
+
+	ParasiteDeathZone = CreateDefaultSubobject<UBoxComponent>(TEXT("ParasiteDeathZone"));
+	ParasiteDeathZone->SetupAttachment(ParasiteMesh);
+	ParasiteDeathZone->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+
+	MovementComponent = CreateDefaultSubobject<UGravityPawnMovement>(TEXT("Movement"));
 	MovementComponent->MaxSpeed = 400.0f;
 
 	AIControllerClass = AParasiteController::StaticClass();
@@ -40,6 +54,8 @@ void AParasitePawn::BeginPlay()
 	{
 		return;
 	}
+
+	ParasiteDeathZone->OnComponentBeginOverlap.AddDynamic(this, &AParasitePawn::EnterDeathZone);
 
 	if (TargetPath && ParasiteController->GetBlackboardComponent())
 	{
@@ -55,6 +71,21 @@ void AParasitePawn::BeginPlay()
 	if (bLoadBlackboardData)
 	{
 		ParasiteController->LoadBlackboardValues(BlackboardData);
+	}
+}
+
+void AParasitePawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	if (!ParasiteDeathZone)
+	{
+		return;
+	}
+
+	if (ParasiteDeathZone->OnComponentBeginOverlap.IsAlreadyBound(this, &AParasitePawn::EnterDeathZone))
+	{
+		ParasiteDeathZone->OnComponentBeginOverlap.RemoveDynamic(this, &AParasitePawn::EnterDeathZone);
 	}
 }
 
@@ -154,6 +185,16 @@ void AParasitePawn::PossessedBy(AController* NewController)
 		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
 	}
 #endif
+}
+
+void AParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (!ParasiteController || !ParasiteController->GetBlackboardComponent() || !OtherActor)
+	{
+		return;
+	}
+
+	ParasiteController->GetBlackboardComponent()->SetValueAsObject(AttackTargetKeyName, OtherActor);
 }
 
 FGameElementData& AParasitePawn::SaveGameElement(UWorldSave* CurrentWorldSave)

@@ -15,7 +15,7 @@ class PRFUI_API UPRFNewGameMenu : public UPRFWidgetBasics
 	GENERATED_BODY()
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* ContinueButton;
+	TObjectPtr<UPRFCustomButton> ContinueButton;
 
 	virtual void NativeOnInitialized() override;
 	virtual void BeginDestroy() override;

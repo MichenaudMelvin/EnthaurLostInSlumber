@@ -2,6 +2,7 @@
 
 
 #include "GameElements/NerveReceptacle.h"
+#include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/CameraShakeComponent.h"
@@ -41,6 +42,9 @@ ANerveReceptacle::ANerveReceptacle()
 	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
 	Collision->SetupAttachment(NerveReceptacle);
 	Collision->SetMobility(EComponentMobility::Static);
+
+	NerveReceptaclesNoises = CreateDefaultSubobject<UAkComponent>(TEXT("NerveReceptaclesNoises"));
+	NerveReceptaclesNoises->SetupAttachment(NerveReceptacle);
 }
 
 void ANerveReceptacle::BeginPlay()
@@ -87,8 +91,8 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 			}
 		}
 
+		NerveReceptaclesNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 		PlayElectricityAnimation(Nerve);
-		UAkGameplayStatics::PostEventAtLocation(ReceptacleEnabledNoise, NerveReceptacle->GetComponentLocation(), NerveReceptacle->GetComponentRotation(), this);
 	}
 }
 
@@ -136,7 +140,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 	FCTween::Play(0.f, 30.f,
 		[&](const float& F)
 		{
-			NerveElectricityFeedback->Radius = F;
+			NerveElectricityFeedback->SetRadius(F);
 		},
 		.25f, EFCEase::InCubic);
 
@@ -153,14 +157,14 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 			FCTween::Play(30.f, 200.f,
 			[&](const float& F)
 			{
-				NerveElectricityFeedback->Radius = F;
+				NerveElectricityFeedback->SetRadius(F);
 			},
 			1.f)->SetOnComplete([&]{OnNerveAnimationFinished.Broadcast();});
 
 			FCTween::Play(1.f, 0.f,
 			[&](const float& F)
 			{
-				NerveElectricityFeedback->Material->SetScalarParameterValue("Opacity", F);
+				NerveElectricityFeedback->GetMaterial()->SetScalarParameterValue("Opacity", F);
 			},
 			2.f)->SetOnComplete([&]
 			{
