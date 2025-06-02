@@ -130,6 +130,7 @@
 									<ChildrenList>
 										<AudioFileSource Name="AMB_PAD_Rfx_LP" ID="{858D53B6-3382-49FA-8FEF-488809B3B079}">
 											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.264716445836318"/>
 												<Property Name="LoopBegin" Type="Real64" Value="0.142892856987155"/>
 												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 											</PropertyList>
