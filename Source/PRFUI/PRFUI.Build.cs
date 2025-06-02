@@ -20,7 +20,6 @@ public class PRFUI : ModuleRules
                 "DeveloperSettings",
                 "Engine",
                 "EnhancedInput",
-                "ModelViewViewModel",
                 "PROTOProfondeurs",
                 "Slate",
                 "SlateCore",

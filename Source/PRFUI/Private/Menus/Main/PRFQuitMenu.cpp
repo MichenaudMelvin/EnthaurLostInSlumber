@@ -3,7 +3,6 @@
 
 #include "Menus/Main/PRFQuitMenu.h"
 
-#include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -11,9 +10,9 @@ void UPRFQuitMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	if (QuitGameButton)
+	if (QuitGameButton && QuitGameButton->GetCustomButton())
 	{
-		QuitGameButton->OnClicked.AddDynamic(this, &UPRFQuitMenu::HandleQuitGameInteraction);
+		QuitGameButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFQuitMenu::HandleQuitGameInteraction);
 	}
 }
 
@@ -21,9 +20,9 @@ void UPRFQuitMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (QuitGameButton)
+	if (QuitGameButton && QuitGameButton->GetCustomButton())
 	{
-		QuitGameButton->OnClicked.RemoveDynamic(this, &UPRFQuitMenu::HandleQuitGameInteraction);
+		QuitGameButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFQuitMenu::HandleQuitGameInteraction);
 	}
 }
 
