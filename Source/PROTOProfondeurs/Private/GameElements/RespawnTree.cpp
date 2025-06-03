@@ -105,7 +105,7 @@ void ARespawnTree::SetActive()
 
 	FCTween::Play(
 		0.f,
-		100.f,
+		30.f,
 		[&](float x)
 		{
 			Material->SetScalarParameterValue("Emissive", x);
