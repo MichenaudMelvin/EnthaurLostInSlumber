@@ -11,21 +11,21 @@ void UPRFPauseMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	if (OptionsMenuButton)
+	if (OptionsMenuButton && OptionsMenuButton->GetCustomButton())
 	{
-		OptionsMenuButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
+		OptionsMenuButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
 	}
-	if (RestartCheckpointButton)
+	if (RestartCheckpointButton && RestartCheckpointButton->GetCustomButton())
 	{
-		RestartCheckpointButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleRestartCheckpointButton);
+		RestartCheckpointButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleRestartCheckpointButton);
 	}
-	if (MainMenuButton)
+	if (MainMenuButton && MainMenuButton->GetCustomButton())
 	{
-		MainMenuButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
+		MainMenuButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
 	}
-	if (QuitButton)
+	if (QuitButton && QuitButton->GetCustomButton())
 	{
-		QuitButton->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleQuitButton);
+		QuitButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleQuitButton);
 	}
 
 	
@@ -43,21 +43,21 @@ void UPRFPauseMenu::NativeDestruct()
 {
 	Super::NativeDestruct();
 
-	if (OptionsMenuButton)
+	if (OptionsMenuButton && OptionsMenuButton->GetCustomButton())
 	{
-		OptionsMenuButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
+		OptionsMenuButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleOptionsMenuButton);
 	}
-	if (RestartCheckpointButton)
+	if (RestartCheckpointButton && RestartCheckpointButton->GetCustomButton())
 	{
-		RestartCheckpointButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleRestartCheckpointButton);
+		RestartCheckpointButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleRestartCheckpointButton);
 	}
-	if (MainMenuButton)
+	if (MainMenuButton && MainMenuButton->GetCustomButton())
 	{
-		MainMenuButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
+		MainMenuButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleMainMenuButton);
 	}
-	if (QuitButton)
+	if (QuitButton && QuitButton->GetCustomButton())
 	{
-		QuitButton->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleQuitButton);
+		QuitButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFPauseMenu::HandleQuitButton);
 	}
 }
 

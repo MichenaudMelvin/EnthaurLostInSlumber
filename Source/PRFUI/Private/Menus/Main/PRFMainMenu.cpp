@@ -12,25 +12,25 @@ void UPRFMainMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 	
-	if (NewGameButton)
+	if (NewGameButton && NewGameButton->GetCustomButton())
 	{
-		NewGameButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleNewGameMenu);
+		NewGameButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleNewGameMenu);
 	}
-	if (ContinueButton)
+	if (ContinueButton && ContinueButton->GetCustomButton())
 	{
-		ContinueButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
+		ContinueButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
 	}
-	if (OptionsButton)
+	if (OptionsButton && OptionsButton->GetCustomButton())
 	{
-		OptionsButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleOptionsMenu);
+		OptionsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleOptionsMenu);
 	}
-	if (CreditsButton)
+	if (CreditsButton && CreditsButton->GetCustomButton())
 	{
-		CreditsButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleCreditsMenu);
+		CreditsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleCreditsMenu);
 	}
-	if (QuitButton)
+	if (QuitButton && QuitButton->GetCustomButton())
 	{
-		QuitButton->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleQuitMenu);
+		QuitButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleQuitMenu);
 	}
 }
 
@@ -38,25 +38,25 @@ void UPRFMainMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (NewGameButton)
+	if (NewGameButton && NewGameButton->GetCustomButton())
 	{
-		NewGameButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleNewGameMenu);
+		NewGameButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleNewGameMenu);
 	}
-	if (ContinueButton)
+	if (ContinueButton && ContinueButton->GetCustomButton())
 	{
-		ContinueButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
+		ContinueButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleContinueInteraction);
 	}
-	if (OptionsButton)
+	if (OptionsButton && OptionsButton->GetCustomButton())
 	{
-		OptionsButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleOptionsMenu);
+		OptionsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleOptionsMenu);
 	}
-	if (CreditsButton)
+	if (CreditsButton && CreditsButton->GetCustomButton())
 	{
-		CreditsButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleCreditsMenu);
+		CreditsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleCreditsMenu);
 	}
-	if (QuitButton)
+	if (QuitButton && QuitButton->GetCustomButton())
 	{
-		QuitButton->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleQuitMenu);
+		QuitButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFMainMenu::HandleQuitMenu);
 	}
 }
 

@@ -11,9 +11,9 @@ void UPRFMainMenuConfirmationMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	if (MainMenuButton)
+	if (MainMenuButton && MainMenuButton->GetCustomButton())
 	{
-		MainMenuButton->OnClicked.AddDynamic(this, &UPRFMainMenuConfirmationMenu::HandleMainMenuAction);
+		MainMenuButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFMainMenuConfirmationMenu::HandleMainMenuAction);
 	}
 }
 
@@ -21,9 +21,9 @@ void UPRFMainMenuConfirmationMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (MainMenuButton)
+	if (MainMenuButton && MainMenuButton->GetCustomButton())
 	{
-		MainMenuButton->OnClicked.RemoveDynamic(this, &UPRFMainMenuConfirmationMenu::HandleMainMenuAction);
+		MainMenuButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFMainMenuConfirmationMenu::HandleMainMenuAction);
 	}
 }
 
