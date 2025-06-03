@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{AC8515BD-9138-BDCE-5BEE-B28294972AF9}",
+    "Hash": "{9B16A682-B478-7055-463E-8AD7A988018E}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -69,6 +69,12 @@
       "Name": "Bus_Music",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\Bus_Music",
       "GUID": "{64D3E862-4D56-4AAF-8073-8D3F36C42250}"
+     },
+     {
+      "Id": "3045223865",
+      "Name": "RTPC_PlayerDistance",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\RTPC_PlayerDistance",
+      "GUID": "{37237315-CD20-4606-9F4F-AC73D0C27BE4}"
      },
      {
       "Id": "3076470155",
@@ -139,6 +145,6 @@
     ]
    }
   ],
-  "FileHash": "{6BA4C069-11EF-BED7-23A5-348C450B1677}"
+  "FileHash": "{89096A68-D01A-DA56-2294-3B533B0F6A65}"
  }
 }
