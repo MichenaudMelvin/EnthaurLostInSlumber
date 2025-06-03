@@ -27,7 +27,7 @@ class PROTOPROFONDEURS_API UBPRefParameters : public UDeveloperSettings
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Config)
 	TMap<TSoftObjectPtr<UWorld>, FDuoText> WorldMap;
 
 	UPROPERTY(VisibleAnywhere, Config)

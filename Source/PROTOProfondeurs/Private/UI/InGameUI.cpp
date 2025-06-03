@@ -10,17 +10,9 @@
 void UInGameUI::NativeConstruct()
 {
 	Super::NativeConstruct();
-}
-
-void UInGameUI::NativeOnInitialized()
-{
-	Super::NativeOnInitialized();
 
 	Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	if (Player)
-	{
-		Player->OnAmberUpdate.AddDynamic(this, &UInGameUI::AmberChargeChanged);
-	}
+	Player->OnAmberUpdate.AddDynamic(this, &UInGameUI::OnAmberUpdate);
 }
 
 void UInGameUI::SetPropulsionActive(bool active)
@@ -73,44 +65,16 @@ void UInGameUI::SetInteraction(const bool bActive) const
 	bActive ? Interact->SetOpacity(1.f) : Interact->SetOpacity(0.f);
 }
 
-void UInGameUI::AmberChargeChanged(EAmberType AmberType, int AmberAmount)
+void UInGameUI::OnAmberUpdate(EAmberType AmberType, int AmberAmount)
 {
-	switch (AmberType)
+	if (AmberType == EAmberType::WeakAmber)
 	{
-	case EAmberType::NecroseAmber:
+		if (AmberAmount > 0)
 		{
-			if (AmberAmount == 0)
-			{
-				PlayAnimationForward(NecrosisAmberGauge_Used);
-			}
-			else
-			{
-				if (AmberAmount == 1)
-				{
-					PlayAnimationForward(NecrosisAmberGauge_Step1);
-				}
-				else if (AmberAmount == 2)
-				{
-					PlayAnimationForward(NecrosisAmberGauge_Step2);
-				}
-				else if (AmberAmount == 3)
-				{
-					PlayAnimationForward(NecrosisAmberGauge_Step3);
-				}
-			}
-			break;
-		}
-
-	case EAmberType::WeakAmber:
+			OnAmberPickUp.Broadcast();
+		} else
 		{
-			if (AmberAmount == 0)
-			{
-				PlayAnimationReverse(GrayAmberGauge_Enabled);
-			} else
-			{
-				PlayAnimationForward(GrayAmberGauge_Enabled);
-			}
-			break;
+			OnAmberUsed.Broadcast();
 		}
 	}
 }
