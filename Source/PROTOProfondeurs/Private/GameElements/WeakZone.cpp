@@ -2,12 +2,12 @@
 
 
 #include "PROTOProfondeurs/Public/GameElements/WeakZone.h"
-
 #include "FCTween.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
 #include "Components/PostProcessComponent.h"
 #include "GameElements/AmberOre.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Saves/WorldSaves/WorldSave.h"
@@ -56,7 +56,11 @@ void AWeakZone::BeginPlay()
 	{
 		InteractionPoint.MeshComp->SetCollisionResponseToChannel(TraceSettings->InteractionTraceChannel, ECR_Block);
 		InteractionPoint.AmberMeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		Interactable->AddInteractable(InteractionPoint.MeshComp);
+
+		if (!InteractionPoint.bIsActive)
+		{
+			Interactable->AddInteractable(InteractionPoint.MeshComp);
+		}
 	}
 
 	Interactable->OnInteract.AddDynamic(this, &AWeakZone::OnInteract);
@@ -102,7 +106,26 @@ void AWeakZone::OnConstruction(const FTransform& Transform)
 
 		InteractionPoint.MeshComp->SetStaticMesh(InteractionPoint.Mesh);
 		InteractionPoint.AmberMeshComp->SetStaticMesh(AmberMesh);
-		InteractionPoint.AmberMeshComp->SetVisibility(false);
+	}
+}
+
+void AWeakZone::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	for (FInteractionPoints& InteractionPoint : InteractionPoints)
+	{
+		if (!InteractionPoint.bIsActive)
+		{
+			continue;
+		}
+
+		FVector CurrentLocation = InteractionPoint.AmberMeshComp->GetRelativeLocation();
+		FVector TargetLocation = FVector(0.0f, 0.0f, TargetAmberHeight);
+		float Alpha = DeltaSeconds * AmberAnimSpeed;
+
+		FVector ResultLocation = UKismetMathLibrary::VLerp(CurrentLocation, TargetLocation, Alpha);
+		InteractionPoint.AmberMeshComp->SetRelativeLocation(ResultLocation);
 	}
 }
 
@@ -190,7 +213,6 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 	}
 
 	InteractionPoint->bIsActive = true;
-	InteractionPoint->AmberMeshComp->SetVisibility(true); // anim todo
 
 	CheckIfEveryInteractionsPointActive();
 }
@@ -272,10 +294,5 @@ void AWeakZone::LoadGameElement(const FGameElementData& GameElementData)
 	for (int i = 0; i < Data.ActivatedInteractionPoints.Num(); i++)
 	{
 		InteractionPoints[i].bIsActive = Data.ActivatedInteractionPoints[i];
-
-		if (InteractionPoints[i].bIsActive)
-		{
-			InteractionPoints[i].AmberMeshComp->SetVisibility(true); // anim todo
-		}
 	}
 }

@@ -55,6 +55,8 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
 	TObjectPtr<USceneComponent> Root;
 
@@ -100,6 +102,12 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
 	TObjectPtr<UStaticMesh> AmberMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
+	float TargetAmberHeight = 35.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
+	float AmberAnimSpeed = 1.5f;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Interactable")
 	TArray<FInteractionPoints> InteractionPoints;
