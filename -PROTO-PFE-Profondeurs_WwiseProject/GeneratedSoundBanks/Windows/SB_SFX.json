@@ -11,11 +11,19 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{306C067B-1A95-C856-68BA-7F91AA41FA00}",
+    "Hash": "{8C3A8378-DF42-85C6-4B64-32A02841D5FE}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
     "Media": [
+     {
+      "Id": "8104921",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Elevator_Start_01.wav",
+      "CachePath": "BB/{BB0A6E73-ABDD-609F-7BAE-8EDD1B3115A2}.wem"
+     },
      {
       "Id": "16378350",
       "Language": "SFX",
@@ -71,6 +79,14 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveDoor_Layer_Gore_02.wav",
       "CachePath": "62/{62FB46FA-D514-F090-FBC8-FB54CCAC0928}.wem"
+     },
+     {
+      "Id": "74918348",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Make_Hard_V6.wav",
+      "CachePath": "61/{61261DEA-8D9A-FA43-20D3-72D34AC301C1}.wem"
      },
      {
       "Id": "119173871",
@@ -137,6 +153,14 @@
       "CachePath": "7D/{7DB56DDB-9C5A-C159-4C17-48C1F58C94ED}.wem"
      },
      {
+      "Id": "218825922",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Take_Ambre.wav",
+      "CachePath": "57/{576C412A-A9B2-0294-65BB-30411D7A64AB}.wem"
+     },
+     {
       "Id": "221647164",
       "Language": "SFX",
       "Streaming": "false",
@@ -175,6 +199,14 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveReceptacle_Electricty_Start_01.wav",
       "CachePath": "06/{06DC2696-05A3-E883-FA01-C1F75AE07A0A}.wem"
+     },
+     {
+      "Id": "294036953",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Elevator.wav",
+      "CachePath": "17/{17BCC5B2-84CA-C367-AD83-4D777E07FC90}.wem"
      },
      {
       "Id": "303207830",
@@ -225,6 +257,14 @@
       "CachePath": "90/{90C4B611-1886-03D6-C5F3-24AAA89377CC}.wem"
      },
      {
+      "Id": "438265194",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Make_Soft_V6.wav",
+      "CachePath": "59/{59A20C52-AE9B-189C-F2AC-AFF5AB5A601A}.wem"
+     },
+     {
       "Id": "515272845",
       "Language": "SFX",
       "Streaming": "false",
@@ -247,6 +287,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Muscle_Hard_03.wav",
       "CachePath": "6B/{6BF025F1-DCF1-7702-547C-628FF97E6CEB}.wem"
+     },
+     {
+      "Id": "591463370",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Inject_Ambre.wav",
+      "CachePath": "E3/{E3303EBF-EA7B-18FA-D260-6B71B7BF53E8}.wem"
      },
      {
       "Id": "592723353",
@@ -303,6 +351,14 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveReceptacle_Electricty_End_04.wav",
       "CachePath": "BD/{BDD7D4B7-28A9-6A67-A573-E7C5995B60E0}.wem"
+     },
+     {
+      "Id": "738955104",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Elevator_Start_02.wav",
+      "CachePath": "98/{985720D3-FB06-5889-6DB2-BA9F3ACE3CC5}.wem"
      },
      {
       "Id": "753932510",
@@ -377,6 +433,14 @@
       "CachePath": "F8/{F80C3384-112A-6BD2-1FF0-5D567CD683BD}.wem"
      },
      {
+      "Id": "910307899",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Elevator_Start_03.wav",
+      "CachePath": "FC/{FCCFF5C6-29D9-E426-7B81-DBEE894918D5}.wem"
+     },
+     {
       "Id": "939918079",
       "Language": "SFX",
       "Streaming": "false",
@@ -432,10 +496,23 @@
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_Elevator",
       "GUID": "{859C566F-6B89-419E-B78B-2BAF354E01B4}",
       "Color": "10",
-      "MaxAttenuation": "0",
       "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
+      "DurationMin": "54.866665",
+      "DurationMax": "54.866665",
+      "MediaRefs": [
+       {
+        "Id": "8104921"
+       },
+       {
+        "Id": "294036953"
+       },
+       {
+        "Id": "738955104"
+       },
+       {
+        "Id": "910307899"
+       }
+      ]
      },
      {
       "Id": "3956346405",
@@ -492,6 +569,51 @@
        },
        {
         "Id": "399813874"
+       }
+      ]
+     },
+     {
+      "Id": "3304276451",
+      "Name": "Play_SFX_Inject_Ambre",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Inject_Ambre",
+      "GUID": "{14CA4FE7-8867-4283-AD24-5919B3F33532}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.9",
+      "DurationMax": "0.9",
+      "MediaRefs": [
+       {
+        "Id": "591463370"
+       }
+      ]
+     },
+     {
+      "Id": "789176004",
+      "Name": "Play_SFX_Make_Hard",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Make_Hard",
+      "GUID": "{E46499EB-6249-4DEE-B975-F44DD0E7AEC1}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.5",
+      "DurationMax": "1.5",
+      "MediaRefs": [
+       {
+        "Id": "74918348"
+       }
+      ]
+     },
+     {
+      "Id": "1529896519",
+      "Name": "Play_SFX_Make_Soft",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Make_Soft",
+      "GUID": "{C5A46045-32E9-48D9-8CB8-7B551A12DC12}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.5",
+      "DurationMax": "1.5",
+      "MediaRefs": [
+       {
+        "Id": "438265194"
        }
       ]
      },
@@ -721,6 +843,21 @@
       ]
      },
      {
+      "Id": "3109774893",
+      "Name": "Play_SFX_Take_Ambre",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Take_Ambre",
+      "GUID": "{98E20B7D-1940-43B9-B344-D1F205698516}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.73333335",
+      "DurationMax": "0.73333335",
+      "MediaRefs": [
+       {
+        "Id": "218825922"
+       }
+      ]
+     },
+     {
       "Id": "895316894",
       "Name": "Stop_Elevator",
       "ObjectPath": "\\Events\\WU_SFX_Event\\Stop_Elevator",
@@ -742,6 +879,6 @@
     ]
    }
   ],
-  "FileHash": "{3B4D2AB0-76BB-F35B-B88E-F5E379F72637}"
+  "FileHash": "{5EF694EB-D13C-F10B-E7A5-CD752932AC62}"
  }
 }
