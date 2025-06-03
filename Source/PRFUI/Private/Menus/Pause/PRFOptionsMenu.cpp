@@ -6,6 +6,7 @@
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
 #include "Components/Button.h"
+#include "Kismet/KismetTextLibrary.h"
 #include "Saves/SettingsSubsystem.h"
 
 void UPRFOptionsMenu::NativeOnInitialized()
@@ -57,6 +58,17 @@ void UPRFOptionsMenu::NativeConstruct()
 	Super::NativeConstruct();
 
 	OnOverallButtonHovered();
+
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!IsValid(SettingsSubsystem))
+	{
+		return;
+	}
+
+	OverallVolumeSlider->SetValue(SettingsSubsystem->GetSettings()->MasterVolume);
+	MouseSensitivitySlider->SetValue(SettingsSubsystem->GetSettings()->MouseSensitivity);
+	InvertMouseAxisCheckBox->SetIsChecked(SettingsSubsystem->GetSettings()->bInvertYAxis);
+	ViewBobbingCheckbox->SetIsChecked(SettingsSubsystem->GetSettings()->bViewBobbing);
 }
 
 void UPRFOptionsMenu::NativeDestruct()
@@ -188,11 +200,7 @@ void UPRFOptionsMenu::OnOverallSliderChanged(float InValue)
 	}
 
 	SettingsSubsystem->SetMasterVolume(InValue);
-}
-
-void UPRFOptionsMenu::OnMouseSensSliderChanged()
-{
-	
+	OverallVolumeValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 3, 0, 0));
 }
 
 void UPRFOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked)
@@ -223,7 +231,8 @@ void UPRFOptionsMenu::OnMouseSensitivitySliderChanged(float InValue)
 	if (!SettingsSubsystem)
 	{
 		return;
-	}
+	}	
 
 	SettingsSubsystem->GetSettings()->MouseSensitivity = InValue;
+	MouseSensitivityValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 2, 1, 1));
 }

@@ -82,15 +82,17 @@ protected:
 	void OnOverallSliderChanged(float InValue);
 
 	UFUNCTION()
-	void OnMouseSensSliderChanged();
-
-	UFUNCTION()
 	void OnViewBobbingCheckBoxClicked(bool bIsChecked);
 
 	UFUNCTION()
 	void OnMouseYAxisCheckBoxClicked(bool bIsChecked);
 
 	UFUNCTION()
-
 	void OnMouseSensitivitySliderChanged(float InValue);
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UTextBlock> OverallVolumeValue;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UTextBlock> MouseSensitivityValue;
 };
