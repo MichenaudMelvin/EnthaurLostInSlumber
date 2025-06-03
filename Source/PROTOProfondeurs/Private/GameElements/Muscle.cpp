@@ -452,8 +452,6 @@ void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveCom
 {
 	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->GetCameraShake()->MakeSmallCameraShake();
 
-	UAkGameplayStatics::PostEventAtLocation(InteractionEvent, SpikeInteraction->GetComponentLocation(), SpikeInteraction->GetComponentRotation(), this);
-
 	ToggleMuscleSolidity();
 }
 

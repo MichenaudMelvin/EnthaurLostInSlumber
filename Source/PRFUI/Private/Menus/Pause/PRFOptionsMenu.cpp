@@ -12,6 +12,11 @@ void UPRFOptionsMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
+	if (OverallVolumeSlider)
+	{
+		OverallVolumeSlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::OnOverallSliderChanged);
+	}
+
 	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
 	{
 		OverallVolumeButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnOverallButtonHovered);
@@ -22,7 +27,7 @@ void UPRFOptionsMenu::NativeOnInitialized()
 	}
 	if (MouseSensitivitySlider)
 	{
-		MouseSensitivitySlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
+		MouseSensitivitySlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
 	}
 	if (InvertMouseAxisButton && InvertMouseAxisButton->GetCustomButton())
 	{
@@ -54,9 +59,27 @@ void UPRFOptionsMenu::NativeConstruct()
 	OnOverallButtonHovered();
 }
 
+void UPRFOptionsMenu::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->SaveToSlot(0);
+}
+
 void UPRFOptionsMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
+
+	if (OverallVolumeSlider)
+	{
+		OverallVolumeSlider->OnValueChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnOverallSliderChanged);
+	}
 
 	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
 	{
@@ -156,9 +179,15 @@ void UPRFOptionsMenu::OnViewControlsButtonClicked()
 	UIManager->OpenMenu(ControlsMenu, false);
 }
 
-void UPRFOptionsMenu::OnOverallSliderChanged()
+void UPRFOptionsMenu::OnOverallSliderChanged(float InValue)
 {
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
 
+	SettingsSubsystem->SetMasterVolume(InValue);
 }
 
 void UPRFOptionsMenu::OnMouseSensSliderChanged()

@@ -235,9 +235,6 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Interaction")
 	bool bAllowInteraction = true;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
-	TObjectPtr<UAkAudioEvent> InteractionEvent;
-
 	UFUNCTION()
 	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent);
 
