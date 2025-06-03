@@ -36,5 +36,7 @@ public:
 	UPROPERTY(Config, EditAnywhere)
 	TSubclassOf<AActor> ElectricityFeedback;
 
+#if WITH_EDITOR
 	void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 };

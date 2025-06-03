@@ -26,6 +26,7 @@ struct FMuscleData : public FGameElementData
 	bool bIsSolid = false;
 };
 
+class UAkComponent;
 class UAkAudioEvent;
 class UInteractableComponent;
 
