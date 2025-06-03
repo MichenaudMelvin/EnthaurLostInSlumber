@@ -3,6 +3,7 @@
 
 #include "Parameters/BPRefParameters.h"
 
+#if WITH_EDITOR
 void UBPRefParameters::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
@@ -13,3 +14,4 @@ void UBPRefParameters::PostEditChangeProperty(struct FPropertyChangedEvent& Prop
 		LevelNames.Add(World.Key.GetAssetName(), World.Value);
 	}
 }
+#endif

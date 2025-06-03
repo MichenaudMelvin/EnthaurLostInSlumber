@@ -2,6 +2,8 @@
 
 
 #include "GameElements/Nerve.h"
+
+#include "AkGameplayStatics.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/Character.h"
 #include "GameElements/NerveReceptacle.h"
@@ -180,8 +182,13 @@ void ANerve::AddSplineMesh()
 	SplineMesh->SetForwardAxis(CableForwardAxis, false);
 
 	int Index = SplineMeshes.Num();
-	FVector StartSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline((Index * SingleCableLength), ESplineCoordinateSpace::Local);
-	FVector EndSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(((Index + 1) * SingleCableLength), ESplineCoordinateSpace::Local);
+	float StartDistance = (Index * SingleCableLength);
+	float EndDistance = ((Index + 1) * SingleCableLength);
+
+	FVector StartSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(StartDistance, ESplineCoordinateSpace::Local);
+	FVector EndSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(EndDistance, ESplineCoordinateSpace::Local);
+
+	UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
 
 	FVector SplineDirection = UKismetMathLibrary::GetDirectionUnitVector(StartSplineLocation, EndSplineLocation);
 	SplineMesh->SetStartAndEnd(StartSplineLocation, SplineDirection, EndSplineLocation, SplineDirection, false);
@@ -198,6 +205,9 @@ void ANerve::RemoveSplineMesh()
 {
 	int LastIndex = SplineMeshes.Num() - 1;
 	TObjectPtr<USplineMeshComponent> SplineMesh = SplineMeshes[LastIndex];
+
+	UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
+
 	SplineMeshes.RemoveAt(LastIndex);
 	SplineMesh->DestroyComponent();
 }
@@ -212,7 +222,10 @@ void ANerve::UpdateSplineMeshes(bool bUseNerveBallAsEndPoint)
 			continue;
 		}
 
-		FVector StartSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline((i * SingleCableLength), ESplineCoordinateSpace::Local);
+		float StartDistance = (i * SingleCableLength);
+		float EndDistance = ((i + 1) * SingleCableLength);
+
+		FVector StartSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(StartDistance, ESplineCoordinateSpace::Local);
 
 		FVector EndSplineLocation;
 		if ((i + 1) == SplineMeshes.Num() && bUseNerveBallAsEndPoint)
@@ -221,7 +234,7 @@ void ANerve::UpdateSplineMeshes(bool bUseNerveBallAsEndPoint)
 		}
 		else
 		{
-			EndSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(((i + 1) * SingleCableLength), ESplineCoordinateSpace::Local);
+			EndSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(EndDistance, ESplineCoordinateSpace::Local);
 		}
 
 		SplineMesh->SetStartPosition(StartSplineLocation, false);
@@ -575,6 +588,10 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 		CurrentAttachedReceptacle = nullptr;
 	}
 
+	bIsLoaded = false;
+
+	UAkGameplayStatics::PostEventAtLocation(GrabNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
+
 	PlayerController = Cast<AFirstPersonController>(Controller);
 	AttachNerveBall(Pawn);
 
@@ -663,6 +680,8 @@ void ANerve::LoadGameElement(const FGameElementData& GameElementData)
 	UpdateSplineMeshes(false);
 
 	ImpactNormals = Data.ImpactNormals;
+
+	bIsLoaded = true;
 }
 
 #pragma endregion

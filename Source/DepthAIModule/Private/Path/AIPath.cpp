@@ -35,9 +35,7 @@ void AAIPath::BeginPlay()
 {
 	Super::BeginPlay();
 
-#if WITH_EDITORONLY_DATA
 	UpdatePoints(false);
-#endif
 }
 
 void AAIPath::OnConstruction(const FTransform& Transform)
@@ -76,6 +74,12 @@ void AAIPath::UpdatePoints(bool bInConstructionScript)
 			continue;
 		}
 
+		FVector TargetLocation = HitResult.Location;
+		if (!IsOnFloor())
+		{
+			TargetLocation += HitResult.Normal * WallPointsOffset;
+		}
+
 #if WITH_EDITORONLY_DATA
 		if (bInConstructionScript)
 		{
@@ -86,7 +90,7 @@ void AAIPath::UpdatePoints(bool bInConstructionScript)
 				continue;
 			}
 
-			ArrowComponent->SetWorldLocation(HitResult.Location);
+			ArrowComponent->SetWorldLocation(TargetLocation);
 			ArrowComponent->SetWorldRotation(HitResult.Normal.Rotation());
 			ArrowComponent->SetArrowColor(FLinearColor(0.0f, 0.2f, 0.8f));
 			Arrows.Add(ArrowComponent);
@@ -94,7 +98,7 @@ void AAIPath::UpdatePoints(bool bInConstructionScript)
 		else
 #endif
 		{
-			Spline->SetLocationAtSplinePoint(i, HitResult.Location, ESplineCoordinateSpace::World);
+			Spline->SetLocationAtSplinePoint(i, TargetLocation, ESplineCoordinateSpace::World);
 		}
 	}
 

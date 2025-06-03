@@ -7,6 +7,8 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "AmberOre.generated.h"
 
+class UBoxComponent;
+
 USTRUCT(BlueprintType)
 struct FAmberOreData : public FGameElementData
 {
@@ -44,20 +46,17 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber")
 	TObjectPtr<UStaticMeshComponent> Mesh;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber")
+	TObjectPtr<UStaticMeshComponent> AmberMesh;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
+	TObjectPtr<UBoxComponent> MeshInteraction;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UInteractableComponent> Interactable;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Amber|Material")
-	TObjectPtr<UMaterialInterface> NecroseMaterial;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Amber|Material")
-	TObjectPtr<UMaterialInterface> NecroseMaterialPickUp;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber|Material")
-	TObjectPtr<UMaterialInterface> WeakMaterial;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber|Material")
-	TObjectPtr<UMaterialInterface> WeakMaterialPickUp;
+	UPROPERTY(EditAnywhere, Category = "Amber")
+	TObjectPtr<UStaticMesh> SourceMesh;
 
 	UPROPERTY(EditInstanceOnly, Category = "Amber")
 	EAmberType AmberType = EAmberType::NecroseAmber;
@@ -67,8 +66,6 @@ protected:
 
 	UFUNCTION()
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
-
-	void UpdateMaterial(bool bPickedUp) const;
 
 public:
 	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;

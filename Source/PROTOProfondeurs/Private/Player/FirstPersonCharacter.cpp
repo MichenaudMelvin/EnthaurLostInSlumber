@@ -9,7 +9,6 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InteractableComponent.h"
-#include "EditorSettings/PlayerEditorSettings.h"
 #include "GameElements/AmberOre.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -27,6 +26,10 @@
 #include "Saves/PlayerSave.h"
 #include "Saves/PlayerSaveSubsystem.h"
 #include "UI/DeathMenuUI.h"
+
+#if WITH_EDITORONLY_DATA
+#include "EditorSettings/PlayerEditorSettings.h"
+#endif
 
 AFirstPersonCharacter::AFirstPersonCharacter()
 {
@@ -126,6 +129,8 @@ void AFirstPersonCharacter::BeginPlay()
 		return;
 	}
 
+	StartWidget = CreateWidget(FirstPersonController, StartWidgetClass);
+
 #if WITH_EDITORONLY_DATA
 	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
 
@@ -134,8 +139,6 @@ void AFirstPersonCharacter::BeginPlay()
 		return;
 	}
 #endif
-
-	StartWidget = CreateWidget(FirstPersonController, StartWidgetClass);
 
 	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(FirstPersonController, StartWidget);
 

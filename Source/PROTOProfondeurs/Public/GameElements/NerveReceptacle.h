@@ -61,6 +61,9 @@ protected:
 	UPROPERTY()
 	FTransform NerveEndTargetTransform;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity", meta = (ClampMin = 1.0f, Units = "cm/s"))
+	float ElectricitySpeed = 750.0f;
+
 	void PlayElectricityAnimation(ANerve* Nerve);
 
 	UFUNCTION()

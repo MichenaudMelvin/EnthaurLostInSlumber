@@ -250,12 +250,12 @@ void AFirstPersonController::OnInputPauseGame()
 	{
 		return;
 	}
-	
+
 	if (UIManager->GetMenuState() != EPRFUIState::Gameplay)
 	{
 		return;
 	}
-	
+
 	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(GetCharacter());
 	if (!IsValid(FirstPersonCharacter))
 	{

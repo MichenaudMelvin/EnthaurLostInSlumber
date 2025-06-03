@@ -17,8 +17,6 @@ UCharacterIdleState::UCharacterIdleState()
 void UCharacterIdleState::StateInit(UCharacterStateMachine* InStateMachine)
 {
 	Super::StateInit(InStateMachine);
-
-	Character->GetCamera()->FieldOfView = TargetFOV;
 }
 
 void UCharacterIdleState::StateTick_Implementation(float DeltaTime)

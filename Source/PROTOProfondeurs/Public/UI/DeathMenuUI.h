@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Menus/Elements/PRFCustomButton.h"
 #include "DeathMenuUI.generated.h"
 
 /**
@@ -15,7 +16,9 @@ class PROTOPROFONDEURS_API UDeathMenuUI : public UUserWidget
 	GENERATED_BODY()
 
 protected:
-	virtual void NativeOnInitialized() override;
+	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
+
 
 	UFUNCTION()
 	void RespawnPlayer();
@@ -23,10 +26,13 @@ protected:
 	void BackToMainMenu();
 
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<class UButton> RespawnButton;
+	TObjectPtr<UPRFCustomButton> RespawnButton;
 
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> BackMainMenuButton;
+	TObjectPtr<UPRFCustomButton> BackMainMenuButton;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UPRFCustomButton> QuitButton;
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UWorld> MainMenuLevel;
