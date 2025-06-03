@@ -4,12 +4,13 @@
 #include "PROTOProfondeurs/Public/GameElements/AmberOre.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Saves/WorldSaves/WorldSave.h"
 
 AAmberOre::AAmberOre()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(Root);
@@ -50,6 +51,23 @@ void AAmberOre::OnConstruction(const FTransform& Transform)
 	Super::OnConstruction(Transform);
 
 	Mesh->SetStaticMesh(SourceMesh);
+}
+
+void AAmberOre::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (OreAmount != 0)
+	{
+		return;
+	}
+
+	FVector CurrentLocation = AmberMesh->GetRelativeLocation();
+	FVector TargetLocation = FVector(0.0f, 0.0f, TargetAmberHeight);
+	float Alpha = DeltaSeconds * AmberAnimSpeed;
+
+	FVector ResultLocation = UKismetMathLibrary::VLerp(CurrentLocation, TargetLocation, Alpha);
+	AmberMesh->SetRelativeLocation(ResultLocation);
 }
 
 void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
@@ -98,6 +116,4 @@ void AAmberOre::LoadGameElement(const FGameElementData& GameElementData)
 {
 	const FAmberOreData& Data = static_cast<const FAmberOreData&>(GameElementData);
 	OreAmount = Data.CurrentOreAmount;
-
-	// material update done by the BeginPlay()
 }

@@ -306,6 +306,7 @@ void AMuscle::ToggleMuscleSolidity()
 	}
 
 	bIsSolid = !bIsSolid;
+	OnMuscleStateChange.Broadcast(bIsSolid);
 	UpdateMuscleSolidity();
 }
 
@@ -450,8 +451,6 @@ void AMuscle::UpdateMuscleStateTransition(float Alpha)
 void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent)
 {
 	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->GetCameraShake()->MakeSmallCameraShake();
-
-	UAkGameplayStatics::PostEventAtLocation(InteractionEvent, SpikeInteraction->GetComponentLocation(), SpikeInteraction->GetComponentRotation(), this);
 
 	ToggleMuscleSolidity();
 }

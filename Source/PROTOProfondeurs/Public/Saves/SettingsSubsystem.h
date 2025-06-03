@@ -24,4 +24,10 @@ protected:
 
 public:
 	USettingsSave* GetSettings() const {return Settings;}
+
+	void SetMasterVolume(float Volume) const;
+
+	void SetSFXVolume(float Volume) const;
+
+	void SetMusicVolume(float Volume) const;
 };
