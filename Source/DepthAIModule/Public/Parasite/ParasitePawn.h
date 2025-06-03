@@ -47,6 +47,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 #if WITH_EDITOR
@@ -63,6 +65,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> ParasiteMesh;
 
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditDefaultsOnly, Category = "Mesh")
+	TObjectPtr<class UArrowComponent> ForwardDirection;
+#endif
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UBoxComponent> ParasiteDeathZone;
+
 	UPROPERTY(BlueprintReadOnly, Category = "AI");
 	TObjectPtr<AParasiteController> ParasiteController;
 
@@ -75,8 +85,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName WalkOnFloorKeyName = "WalkOnFloor";
 
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName AttackTargetKeyName = "AttackTarget";
 
 	virtual void PossessedBy(AController* NewController) override;
+
+	UFUNCTION()
+	void EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 public:
 	UBoxComponent* GetCollisionComp() {return ParasiteCollision;}

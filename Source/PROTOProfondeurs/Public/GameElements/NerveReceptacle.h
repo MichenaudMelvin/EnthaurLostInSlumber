@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "NerveReceptacle.generated.h"
 
+class UAkComponent;
+
 UENUM(BlueprintType)
 enum class ENerveReactiveInteractionType : uint8
 {
@@ -45,6 +47,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
 	TObjectPtr<USphereComponent> Collision;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Components")
+	TObjectPtr<UAkComponent> NerveReceptaclesNoises;
+
 #if WITH_EDITORONLY_DATA
 	/**
 	 * @brief Set visibility to true if you want to edit it
@@ -56,6 +61,9 @@ protected:
 	UPROPERTY()
 	FTransform NerveEndTargetTransform;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity", meta = (ClampMin = 1.0f, Units = "cm/s"))
+	float ElectricitySpeed = 750.0f;
+
 	void PlayElectricityAnimation(ANerve* Nerve);
 
 	UFUNCTION()
@@ -63,9 +71,6 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Nerve")
 	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Noise")
-	TObjectPtr<UAkAudioEvent> ReceptacleEnabledNoise;
 
 private:
 	UPROPERTY(EditAnywhere)

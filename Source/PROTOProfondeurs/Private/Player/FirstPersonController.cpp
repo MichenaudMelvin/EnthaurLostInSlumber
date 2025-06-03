@@ -116,6 +116,8 @@ void AFirstPersonController::BeginPlay()
 		CurrentInGameUI->AddToViewport();
 	}
 
+	CurrentDeathUI = CreateWidget<UDeathMenuUI>(this, DeathWidgetClass);
+
 	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
 	if (!IsValid(UIManager))
 	{
@@ -249,6 +251,25 @@ void AFirstPersonController::OnInputPauseGame()
 		return;
 	}
 
+	if (UIManager->GetMenuState() != EPRFUIState::Gameplay)
+	{
+		return;
+	}
+
+	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(GetCharacter());
+	if (!IsValid(FirstPersonCharacter))
+	{
+		return;
+	}
+
+	UUserWidget* StartWidget =  FirstPersonCharacter->GetStartWidget();
+	if (!IsValid(StartWidget))
+	{
+		return;
+	}
+
+	StartWidget->SetVisibility(ESlateVisibility::Collapsed);
+
 	//UIManager->SetMenuState(EPRFUIState::PauseMenu);
 	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);
 }
@@ -321,17 +342,3 @@ void AFirstPersonController::DisplayInputs(bool bDisplay)
 #endif
 
 #pragma endregion
-
-void AFirstPersonController::KillPlayer()
-{
-	SetPause(true);
-	CurrentDeathUI = CreateWidget<UDeathMenuUI>(this, DeathWidgetClass);
-	if (CurrentDeathUI)
-	{
-		CurrentDeathUI->AddToViewport();
-	}
-}
-
-void AFirstPersonController::RespawnPlayer(FVector RespawnPosition)
-{
-}

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
+#include "Components/TextBlock.h"
 #include "Menus/PRFWidgetBasics.h"
 #include "PRFPauseMenu.generated.h"
 
@@ -16,27 +17,40 @@ class PRFUI_API UPRFPauseMenu : public UPRFWidgetBasics
 {
 	GENERATED_BODY()
 
-public:
-
-	UFUNCTION()
-	static void TogglePauseMenu();
-
 protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
 
 	UFUNCTION()
-	void HandleMainMenuButton();
-	
-	UFUNCTION()
 	void HandleOptionsMenuButton();
 
+	UFUNCTION()
+	void HandleRestartCheckpointButton();
+
+	UFUNCTION()
+	void HandleMainMenuButton();
+
+	UFUNCTION()
+	void HandleQuitButton();
+
 	UPROPERTY(Meta = (BindWidget))
-	UButton* MainMenuButton;
+	TObjectPtr<UPRFCustomButton> OptionsMenuButton;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UPRFCustomButton> RestartCheckpointButton;
 	
 	UPROPERTY(Meta = (BindWidget))
-	UButton* OptionsMenuButton;
+	TObjectPtr<UPRFCustomButton> MainMenuButton;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UPRFCustomButton> QuitButton;
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UWorld> MainMenuLevel;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UTextBlock> AreaName;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<UTextBlock> RegionName;
 };

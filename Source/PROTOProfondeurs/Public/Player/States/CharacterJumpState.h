@@ -35,6 +35,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Movement|Jump", meta = (ClampMin = 0.0f))
 	float FallingDeceleration = 100.0f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> JumpNoise;
+
 private:
 	float JumpVelocity = 0.0f;
 

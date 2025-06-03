@@ -2,7 +2,7 @@
 
 
 #include "Gamefeel/ElectricityFeedback.h"
-
+#include "AkComponent.h"
 #include "Components/PostProcessComponent.h"
 
 
@@ -15,18 +15,37 @@ AElectricityFeedback::AElectricityFeedback()
 
 	Electricity = CreateDefaultSubobject<UPostProcessComponent>(TEXT("Electricity"));
 	SetRootComponent(Electricity);
+
+	ElectricityNoises = CreateDefaultSubobject<UAkComponent>(TEXT("ElectricityNoises"));
+	ElectricityNoises->SetupAttachment(Electricity);
 }
 
-// Called when the game starts or when spawned
 void AElectricityFeedback::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	FOnAkPostEventCallback CallBackEvent;
+	CallBackEvent.BindDynamic(this, &AElectricityFeedback::PlayNoise);
+
+	// would prefer an infinite sound
+	ElectricityNoises->PostAssociatedAkEvent(static_cast<int32>(EAkCallbackType::EndOfEvent), CallBackEvent);
 }
 
-// Called every frame
-void AElectricityFeedback::Tick(float DeltaTime)
+void AElectricityFeedback::Destroyed()
 {
-	Super::Tick(DeltaTime);
+	Super::Destroyed();
+
+	ElectricityNoises->PostAkEvent(DestroyedEvent, 0, FOnAkPostEventCallback());
 }
 
+void AElectricityFeedback::PlayNoise(EAkCallbackType CallbackType, UAkCallbackInfo* CallbackInfo)
+{
+	if (CallbackType != EAkCallbackType::EndOfEvent)
+	{
+		return;
+	}
+
+	FOnAkPostEventCallback CallBackEvent;
+	CallBackEvent.BindDynamic(this, &AElectricityFeedback::PlayNoise);
+	ElectricityNoises->PostAssociatedAkEvent(static_cast<int32>(EAkCallbackType::EndOfEvent), CallBackEvent);
+}

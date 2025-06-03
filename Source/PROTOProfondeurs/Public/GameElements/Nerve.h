@@ -12,6 +12,9 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "Nerve.generated.h"
 
+class UAkAudioEvent;
+class AFirstPersonCharacter;
+
 USTRUCT(BlueprintType)
 struct FNerveData : public FGameElementData
 {
@@ -63,6 +66,9 @@ protected:
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
 	TObjectPtr<USplineComponent> SplineCable;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
+	TObjectPtr<UAkAudioEvent> NerveGrowthNoise;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
 	TArray<TObjectPtr<USplineMeshComponent>> SplineMeshes;
@@ -162,6 +168,9 @@ public:
 #pragma region NerveBall
 
 protected:
+	UFUNCTION()
+	void ForceDetachNerveBallFromPlayer();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
@@ -170,7 +179,7 @@ protected:
 public:
 	void AttachNerveBall(AActor* ActorToAttach);
 
-	void DetachNerveBall();
+	void DetachNerveBall(bool bForceDetachment);
 
 	UStaticMeshComponent* GetNerveBall() const {return NerveBall;}
 
@@ -188,14 +197,20 @@ public:
 #pragma region Interaction
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UInteractableComponent> InteractableComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> GrabNoise;
 
 	UFUNCTION()
 	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
 	UPROPERTY()
 	TObjectPtr<AFirstPersonController> PlayerController;
+
+	UPROPERTY()
+	TObjectPtr<AFirstPersonCharacter> PlayerCharacter;
 
 public:
 	TObjectPtr<UInteractableComponent> GetInteractable() const {return InteractableComponent;}
@@ -232,10 +247,15 @@ private:
 
 #pragma region Save
 
+protected:
+	bool bIsLoaded = false;
+
 public:
 	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+
+	bool IsLoaded() const {return bIsLoaded;}
 
 #pragma endregion
 

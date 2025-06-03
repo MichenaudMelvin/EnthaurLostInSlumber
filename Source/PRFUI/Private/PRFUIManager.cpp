@@ -10,41 +10,62 @@
 #include "Controller/PRFControllerMappingContext.h"
 #include "Controller/PRFUIController.h"
 #include "Kismet/GameplayStatics.h"
+#include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 
 
 void UPRFUIManager::CreateAllWidgets()
 {
+	GetWorld()->OnWorldBeginPlay.Remove(CreateWidgetsDelegate);
+
 	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
 	if (!IsValid(UIManagerSettings))
 	{
 		return;
 	}
-	
-	PressAnyMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->PressAnyMenuClass);
-	MainMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->MainMenuClass);
-	NewGameMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->NewGameMenuClass);
-	OptionsMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->OptionsMenuClass);
-	CreditsMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->CreditsMenuClass);
-	QuitMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->QuitMenuClass);
 
-	PauseMenu = CreateWidget<UUserWidget>(GetWorld()->GetFirstPlayerController(), UIManagerSettings->PauseMenuClass);
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (!PlayerController)
+	{
+		return;
+	}
+
+	PressAnyMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PressAnyMenuClass);
+	MainMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->MainMenuClass);
+	NewGameMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->NewGameMenuClass);
+	OptionsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->OptionsMenuClass);
+	CreditsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->CreditsMenuClass);
+	QuitMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->QuitMenuClass);
+	PauseMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PauseMenuClass);
+	ControlsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->ControlsMenuClass);
+	MainMenuConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->MainMenuConfirmationMenuClass);
 
 	OnWidgetsCreated.Broadcast();
+}
+
+void UPRFUIManager::OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues)
+{
+	if (!World)
+	{
+		return;
+	}
+
+	CreateWidgetsDelegate = World->OnWorldBeginPlay.AddUObject(this, &UPRFUIManager::CreateAllWidgets);
 }
 
 void UPRFUIManager::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
-	
-	CreateWidgetsDelegate = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UPRFUIManager::CreateAllWidgets);
+
+	// OnWorldBeginPlay isn't called properly in packaged games at Initialize()
+	PostWorldInitDelegateHandle = FWorldDelegates::OnPostWorldInitialization.AddUObject(this, &UPRFUIManager::OnNewWorldStarted);
 }
 
 void UPRFUIManager::Deinitialize()
 {
 	Super::Deinitialize();
 
-	GetWorld()->OnWorldBeginPlay.Remove(CreateWidgetsDelegate);
+	FWorldDelegates::OnPostWorldInitialization.Remove(PostWorldInitDelegateHandle);
 }
 
 void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
@@ -74,7 +95,7 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 
 	CheckMenuState();
 	
-	if (GEngine)
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::FromInt(MenuStack.Num()));
 		
@@ -99,7 +120,7 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	}
 
 	FString test = FString::Printf(TEXT("%d"), CurrentState);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);*/
 }
 
 void UPRFUIManager::CloseCurrentMenu()
@@ -143,39 +164,8 @@ void UPRFUIManager::CloseCurrentMenu()
 		UUserWidget* NewMenu = NewTopMenuPtr.Get();
 		NewMenu->AddToViewport();
 	}
-
-	/*if (MenuStack.Num() == 0)
-	{
-		UWorld* World = GEngine->GetCurrentPlayWorld();
-		if (!IsValid(World))
-		{
-			return;
-		}
-		
-		ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
-		if (!IsValid(LocalPlayer))
-		{
-			return;
-		}
-		
-		UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
-		if (!IsValid(InputSubsystem))
-		{
-			return;
-		}
-
-		AFirstPersonController* FirstPersonController = Cast<AFirstPersonController>(UGameplayStatics::GetPlayerController(this, 0));
-		if (!IsValid(FirstPersonController))
-		{
-			return;
-		}
-
-		InputSubsystem->ClearAllMappings();
-		InputSubsystem->AddMappingContext(FirstPersonController->GetDefaultMappingContext(), 0);
-		SetGameInputMode();
-	}*/
 	
-	if (GEngine)
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::FromInt(MenuStack.Num()));
 		
@@ -200,7 +190,7 @@ void UPRFUIManager::CloseCurrentMenu()
 	}
 
 	FString test = FString::Printf(TEXT("%d"), CurrentState);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);*/
 }
 
 void UPRFUIManager::CloseAllMenus(EPRFUIState InState)
@@ -212,6 +202,25 @@ void UPRFUIManager::CloseAllMenus(EPRFUIState InState)
 	}
 
 	CurrentState = InState;
+
+	if (CurrentState != EPRFUIState::Gameplay)
+	{
+		return;
+	}
+
+	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	if (!IsValid(FirstPersonCharacter))
+	{
+		return;
+	}
+
+	UUserWidget* StartWidget =  FirstPersonCharacter->GetStartWidget();
+	if (!IsValid(StartWidget))
+	{
+		return;
+	}
+
+	StartWidget->SetVisibility(ESlateVisibility::Visible);
 }
 
 void UPRFUIManager::SetMenuState(EPRFUIState InUIState)

@@ -16,6 +16,16 @@ void UGravityPawnMovement::TickComponent(float DeltaTime, enum ELevelTick TickTy
 	ApplyGravity(DeltaTime);
 }
 
+bool UGravityPawnMovement::IsMovingOnGround() const
+{
+	return VerticalVelocity == 0;
+}
+
+bool UGravityPawnMovement::IsFalling() const
+{
+	return VerticalVelocity != 0;
+}
+
 void UGravityPawnMovement::ApplyGravity(float DeltaTime)
 {
 	// gravity = m/s²
@@ -26,7 +36,8 @@ void UGravityPawnMovement::ApplyGravity(float DeltaTime)
 	// m
 	FVector Delta = VerticalVelocity * DeltaTime * (GravityDirection * -1);
 
-	bool bHit = MoveUpdatedComponent(Delta, UpdatedComponent->GetComponentRotation(), true);
+	FHitResult HitResult;
+	bool bHit = MoveUpdatedComponent(Delta, UpdatedComponent->GetComponentRotation(), true, &HitResult);
 
 	if (bHit)
 	{

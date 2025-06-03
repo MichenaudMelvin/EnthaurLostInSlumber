@@ -121,7 +121,7 @@ void UPlayerToNervePhysicConstraint::ReleasePlayer(const bool DetachFromPlayer)
 
 	if (DetachFromPlayer && LinkedNerve)
 	{
-		LinkedNerve->DetachNerveBall();
+		LinkedNerve->DetachNerveBall(false);
 	}
 
 	DestroyComponent();

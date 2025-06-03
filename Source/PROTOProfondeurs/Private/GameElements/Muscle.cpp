@@ -2,6 +2,8 @@
 
 
 #include "GameElements/Muscle.h"
+
+#include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "Components/CameraShakeComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -65,6 +67,12 @@ AMuscle::AMuscle()
 	SpikeInteraction->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	SpikeInteraction->SetCollisionResponseToAllChannels(ECR_Block);
 	SpikeInteraction->SetMobility(EComponentMobility::Static);
+
+	MuscleDeformationNoises = CreateDefaultSubobject<UAkComponent>(TEXT("MuscleDeformationNoises"));
+	MuscleDeformationNoises->SetupAttachment(MuscleMeshComp);
+
+	SpikeInteractionNoises = CreateDefaultSubobject<UAkComponent>(TEXT("SpikeInteractionNoises"));
+	SpikeInteractionNoises->SetupAttachment(SpikeInteraction);
 
 	Interactable = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interactable"));
 
@@ -185,7 +193,6 @@ void AMuscle::StartDeformation()
 {
 	DeformationDirection = 1;
 	bTriggerDeformation = true;
-	UAkGameplayStatics::PostEventAtLocation(DeformationNoise, MuscleMeshComp->GetComponentLocation(), MuscleMeshComp->GetComponentRotation(), this);
 }
 
 void AMuscle::EndDeformation()
@@ -249,11 +256,21 @@ void AMuscle::RebuildMuscleMesh() const
 	FVector MeshSize = (BoundingBox.Max - BoundingBox.Min) * MuscleMeshComp->GetRelativeScale3D();
 	MeshSize *= 0.5f;
 
-	BounceDirectionTop->SetRelativeLocation(FVector(0.0f, 0.0f, (MeshSize.Z / CurrentZScale)));
-	BounceDirectionBack->SetRelativeLocation(FVector(0.0f, 0.0f, -(MeshSize.Z / CurrentZScale)));
+	if (BounceDirectionTop)
+	{
+		BounceDirectionTop->SetRelativeLocation(FVector(0.0f, 0.0f, (MeshSize.Z / CurrentZScale)));
+	}
 
-	TraceExtentVisibility->SetWorldScale3D(FVector::OneVector);
-	TraceExtentVisibility->SetBoxExtent(MeshSize + (TraceExtent * MuscleMeshComp->GetRelativeScale3D() * 0.5f));
+	if (BounceDirectionBack)
+	{
+		BounceDirectionBack->SetRelativeLocation(FVector(0.0f, 0.0f, -(MeshSize.Z / CurrentZScale)));
+	}
+
+	if (TraceExtentVisibility)
+	{
+		TraceExtentVisibility->SetWorldScale3D(FVector::OneVector);
+		TraceExtentVisibility->SetBoxExtent(MeshSize + (TraceExtent * MuscleMeshComp->GetRelativeScale3D() * 0.5f));
+	}
 #endif
 }
 
@@ -264,12 +281,16 @@ void AMuscle::UpdateMuscleSolidity()
 		MuscleMeshComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Default, 0.0f));
 		Interactable->SetInteractionName(SolidMuscleInteraction);
 		MuscleStateTransitionTimeline.Reverse();
+		MuscleDeformationNoises->PostAkEvent(SolidMuscleNoise);
+		SpikeInteractionNoises->PostAkEvent(ToSolidInteractionNoise);
 	}
 	else
 	{
 		MuscleMeshComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.0f));
 		Interactable->SetInteractionName(SoftMuscleInteraction);
 		MuscleStateTransitionTimeline.Play();
+		MuscleDeformationNoises->PostAkEvent(SoftMuscleNoise);
+		SpikeInteractionNoises->PostAkEvent(ToSoftInteractionNoise);
 	}
 }
 
@@ -285,6 +306,7 @@ void AMuscle::ToggleMuscleSolidity()
 	}
 
 	bIsSolid = !bIsSolid;
+	OnMuscleStateChange.Broadcast(bIsSolid);
 	UpdateMuscleSolidity();
 }
 
@@ -340,6 +362,8 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 	}
 
 	ActorVelocityLength = FMath::Clamp(ActorVelocityLength, MinTriggerVelocity, MaxLaunchVelocity);
+
+	UAkGameplayStatics::PostEventAtLocation(BounceNoise, HitActor->GetActorLocation(), HitActor->GetActorRotation(), HitActor);
 
 	StartDeformation();
 
@@ -427,8 +451,6 @@ void AMuscle::UpdateMuscleStateTransition(float Alpha)
 void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent)
 {
 	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->GetCameraShake()->MakeSmallCameraShake();
-
-	UAkGameplayStatics::PostEventAtLocation(InteractionEvent, SpikeInteraction->GetComponentLocation(), SpikeInteraction->GetComponentRotation(), this);
 
 	ToggleMuscleSolidity();
 }

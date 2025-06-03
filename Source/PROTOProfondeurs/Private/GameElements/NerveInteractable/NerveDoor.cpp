@@ -2,6 +2,8 @@
 
 
 #include "GameElements/NerveInteractable/NerveDoor.h"
+
+#include "AkComponent.h"
 #include "FCTween.h"
 
 
@@ -16,6 +18,9 @@ ANerveDoor::ANerveDoor()
 
 	MeshDoor = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Door"));
 	MeshDoor->SetupAttachment(Root);
+
+	NerveDoorNoises = CreateDefaultSubobject<UAkComponent>(TEXT("NerveDoorNoises"));
+	NerveDoorNoises->SetupAttachment(Root);
 }
 
 // Called when the game starts or when spawned
@@ -27,7 +32,7 @@ void ANerveDoor::BeginPlay()
 
 	if (IsActiveAtStart)
 	{
-		DoorMaterial->SetScalarParameterValue("State", 2.f);
+		DoorMaterial->SetScalarParameterValue("State", -1.f);
 		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	}
 }
@@ -47,13 +52,16 @@ void ANerveDoor::Trigger_Implementation()
 		IsOpened = !IsOpened;
 		return;
 	}
-	
+
+	NerveDoorNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+
 	if (IsOpened)
 	{
 		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+
 		FCTween::Play(
-			2.f,
-			0.f,
+			-1.f,
+			1.f,
 			[&](float x)
 			{
 				DoorMaterial->SetScalarParameterValue("State", x);
@@ -64,8 +72,8 @@ void ANerveDoor::Trigger_Implementation()
 	{
 		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 		FCTween::Play(
-			0.f,
-			2.f,
+			1.f,
+			-1.f,
 			[&](float x)
 			{
 				DoorMaterial->SetScalarParameterValue("State", x);
@@ -73,6 +81,7 @@ void ANerveDoor::Trigger_Implementation()
 			1.5f,
 			EFCEase::OutSine);
 	}
+
 	IsOpened = !IsOpened;
 }
 

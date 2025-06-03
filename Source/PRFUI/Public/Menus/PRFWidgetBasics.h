@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Elements/PRFCustomButton.h"
 #include "PRFWidgetBasics.generated.h"
 
 class UButton;
@@ -20,9 +21,9 @@ protected:
 	virtual void NativeOnInitialized() override;
 	virtual void BeginDestroy() override;
 
-	UPROPERTY(meta = (BindWidget))
-	UButton* BackButton;
+	UPROPERTY(meta = (BindWidgetOptional), BlueprintReadOnly)
+	TObjectPtr<UPRFCustomButton> BackButton;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void HandleBackAction();
 };

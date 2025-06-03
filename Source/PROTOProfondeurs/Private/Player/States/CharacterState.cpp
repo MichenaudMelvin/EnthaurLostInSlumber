@@ -72,7 +72,6 @@ void UCharacterState::StateEnter_Implementation(const ECharacterStateID& Previou
 void UCharacterState::StateTick_Implementation(float DeltaTime)
 {
 	CameraMovement(DeltaTime);
-	UpdateCameraFOV(DeltaTime);
 	UpdateViewBobbing(DeltaTime);
 }
 
@@ -114,13 +113,6 @@ void UCharacterState::CameraMovement(float DeltaTime)
 
 	Character->AddControllerYawInput(TargetYaw);
 	Character->AddControllerPitchInput(TargetPitch);
-}
-
-void UCharacterState::UpdateCameraFOV(float DeltaTime)
-{
-	float CurrentFOV = Character->GetCamera()->FieldOfView;
-	float FOV = FMath::Lerp(CurrentFOV, TargetFOV, DeltaTime);
-	Character->GetCamera()->SetFieldOfView(FOV);
 }
 
 void UCharacterState::UpdateViewBobbing(float DeltaTime)
