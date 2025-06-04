@@ -326,8 +326,6 @@ void ANerve::ApplyCablesPhysics()
 	float Alpha = UKismetMathLibrary::NormalizeToRange(GetCableLength(), 0.0f, CableMaxExtension);
 	float RTPCValue = FMath::Lerp(0.0f, 100.0f, Alpha);
 
-	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%f"), RTPCValue));
-
 	UAkGameplayStatics::SetRTPCValue(NerveStretchRtpc, RTPCValue, 0, this);
 
 	UpdateSplineMeshes(false);
@@ -447,6 +445,11 @@ void ANerve::ResetCables(bool bHardReset)
 
 void ANerve::RetractCable(float Alpha)
 {
+	float AlphaRTPC = UKismetMathLibrary::NormalizeToRange(GetCableLength(), 0.0f, CableMaxExtension);
+	float RTPCValue = FMath::Lerp(0.0f, 100.0f, AlphaRTPC);
+
+	UAkGameplayStatics::SetRTPCValue(NerveStretchRtpc, RTPCValue, 0, this);
+
 	float Distance = FMath::Lerp(SplineCable->GetDistanceAlongSplineAtSplinePoint(1), GetCableLength(), Alpha);
 	FVector TargetLocation = SplineCable->GetLocationAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::Local);
 
