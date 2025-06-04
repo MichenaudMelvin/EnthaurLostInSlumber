@@ -29,7 +29,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_SFX_NerveReceptacle_Electricty" ID="{5C28218F-535A-43B7-9CD4-681EEC44DF40}">
+				<Event Name="Play_SFX_Electricty" ID="{5C28218F-535A-43B7-9CD4-681EEC44DF40}">
 					<ChildrenList>
 						<Action Name="" ID="{BF73EA49-277A-4CDF-A111-A48FEF57595A}" ShortID="614991199">
 							<ReferenceList>
@@ -50,7 +50,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_SFX_NerveReceptacle_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}">
+				<Event Name="Play_SFX_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}">
 					<ChildrenList>
 						<Action Name="" ID="{55669413-1827-4206-BA28-6127A58ACB87}" ShortID="961385006">
 							<ReferenceList>
@@ -176,8 +176,83 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_Elevator" ID="{859C566F-6B89-419E-B78B-2BAF354E01B4}"/>
-				<Event Name="Stop_Elevator" ID="{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}"/>
+				<Event Name="Play_Elevator" ID="{859C566F-6B89-419E-B78B-2BAF354E01B4}">
+					<ChildrenList>
+						<Action Name="" ID="{6661BE4B-63AF-455E-8669-2351DD88F4FD}" ShortID="1063910099">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Elevator_Start" ID="{714ED309-2680-42BE-A542-3C3173B720C0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{514ABBA8-237D-4CF7-972E-DEC59F49F94D}" ShortID="385087570">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Elevator" ID="{3F19CCE3-6437-4B77-BADB-25C5A1B7EA38}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_Elevator" ID="{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}">
+					<ChildrenList>
+						<Action Name="" ID="{ECF102C9-D6DA-4063-B6D8-9D43982E9486}" ShortID="376990303">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Elevator" ID="{3F19CCE3-6437-4B77-BADB-25C5A1B7EA38}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Inject_Ambre" ID="{14CA4FE7-8867-4283-AD24-5919B3F33532}">
+					<ChildrenList>
+						<Action Name="" ID="{0F0CB869-5B15-4946-8C24-002E10FE2C51}" ShortID="799406113">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Inject_Ambre" ID="{E1B7188B-98A6-4C2B-BF1F-8B261A83B649}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Take_Ambre" ID="{98E20B7D-1940-43B9-B344-D1F205698516}">
+					<ChildrenList>
+						<Action Name="" ID="{68926E15-F8AE-4EE9-BB4A-CDB0706E2B1E}" ShortID="558593910">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Take_Ambre" ID="{04BC95ED-F12E-4618-912B-B689052358FA}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Make_Hard" ID="{E46499EB-6249-4DEE-B975-F44DD0E7AEC1}">
+					<ChildrenList>
+						<Action Name="" ID="{76327DD5-8B5D-460A-97E1-6AD5A9BD92E6}" ShortID="156467685">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Make_Hard_V6" ID="{D3CBBCD1-DC1A-4BF6-ACE4-820DAD07BB8D}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Make_Soft" ID="{C5A46045-32E9-48D9-8CB8-7B551A12DC12}">
+					<ChildrenList>
+						<Action Name="" ID="{DF83E810-9928-4EC6-A905-8E9DCA171550}" ShortID="559689581">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Make_Soft_V6" ID="{8433FD9B-17F9-4DCE-BE50-70816E819FA7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
