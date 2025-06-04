@@ -21,6 +21,7 @@ class PRFUI_API UPRFOptionsMenu : public UPRFWidgetBasics
 protected:
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
 	virtual void BeginDestroy() override;
 
 	UPROPERTY(Meta = (BindWidget))
@@ -28,6 +29,9 @@ protected:
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UPRFCustomButton> MouseSensitivityButton;
+
+	UPROPERTY(Meta = (BindWidget))
+	TObjectPtr<USlider> OverallVolumeSlider;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<USlider> MouseSensitivitySlider;
@@ -75,10 +79,7 @@ protected:
 	void OnViewControlsButtonClicked();
 
 	UFUNCTION()
-	void OnOverallSliderChanged();
-
-	UFUNCTION()
-	void OnMouseSensSliderChanged();
+	void OnOverallSliderChanged(float InValue);
 
 	UFUNCTION()
 	void OnViewBobbingCheckBoxClicked(bool bIsChecked);
@@ -87,6 +88,11 @@ protected:
 	void OnMouseYAxisCheckBoxClicked(bool bIsChecked);
 
 	UFUNCTION()
-
 	void OnMouseSensitivitySliderChanged(float InValue);
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UTextBlock> OverallVolumeValue;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UTextBlock> MouseSensitivityValue;
 };
