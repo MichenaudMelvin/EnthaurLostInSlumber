@@ -6,13 +6,13 @@ Event	ID	Name			Wwise Object Path	Notes
 	895316894	Stop_Elevator			\WU_SFX_Event\Stop_Elevator	
 	1373430044	Play_SFX_NerveReceptacle_Activate			\WU_SFX_Event\Play_SFX_NerveReceptacle_Activate	
 	1529896519	Play_SFX_Make_Soft			\WU_SFX_Event\Play_SFX_Make_Soft	
-	1717915789	Play_SFX_NerveReceptacle_Electricty_End			\WU_SFX_Event\Play_SFX_NerveReceptacle_Electricty_End	
-	1918553675	Play_SFX_NerveReceptacle_Electricty			\WU_SFX_Event\Play_SFX_NerveReceptacle_Electricty	
+	1844258402	Play_SFX_Electricty			\WU_SFX_Event\Play_SFX_Electricty	
 	2772994470	Play_SFX_NerveDoor			\WU_SFX_Event\Play_SFX_NerveDoor	
 	3026607058	Play_SFX_RespawnTree_Activate			\WU_SFX_Event\Play_SFX_RespawnTree_Activate	
 	3109774893	Play_SFX_Take_Ambre			\WU_SFX_Event\Play_SFX_Take_Ambre	
 	3304276451	Play_SFX_Inject_Ambre			\WU_SFX_Event\Play_SFX_Inject_Ambre	
 	3621014260	Play_Elevator			\WU_SFX_Event\Play_Elevator	
+	3744781944	Play_SFX_Electricty_End			\WU_SFX_Event\Play_SFX_Electricty_End	
 	3956346405	Play_LPX_Nerve_Stretch			\WU_SFX_Event\Play_LPX_Nerve_Stretch	
 	4018880897	Play_SFX_Muscle_Hard			\WU_SFX_Event\Play_SFX_Muscle_Hard	
 	4148931070	Play_SFX_Muscle_Bounce			\WU_SFX_Event\Play_SFX_Muscle_Bounce	
