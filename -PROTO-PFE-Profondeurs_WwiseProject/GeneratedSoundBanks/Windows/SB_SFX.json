@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{8E642E63-4D39-6290-1EB2-2D0AADC4F93C}",
+    "Hash": "{306C067B-1A95-C856-68BA-7F91AA41FA00}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -427,6 +427,17 @@
     ],
     "Events": [
      {
+      "Id": "3621014260",
+      "Name": "Play_Elevator",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_Elevator",
+      "GUID": "{859C566F-6B89-419E-B78B-2BAF354E01B4}",
+      "Color": "10",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "3956346405",
       "Name": "Play_LPX_Nerve_Stretch",
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_LPX_Nerve_Stretch",
@@ -708,6 +719,17 @@
         "Id": "592723353"
        }
       ]
+     },
+     {
+      "Id": "895316894",
+      "Name": "Stop_Elevator",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Stop_Elevator",
+      "GUID": "{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}",
+      "Color": "10",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
      }
     ],
     "GameParameters": [
@@ -720,6 +742,6 @@
     ]
    }
   ],
-  "FileHash": "{A3A60D2E-E7B2-5DB0-4E70-9018D8BE0691}"
+  "FileHash": "{3B4D2AB0-76BB-F35B-B88E-F5E379F72637}"
  }
 }

@@ -7,6 +7,8 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "AmberOre.generated.h"
 
+class UBoxComponent;
+
 USTRUCT(BlueprintType)
 struct FAmberOreData : public FGameElementData
 {
@@ -38,37 +40,40 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber")
 	TObjectPtr<USceneComponent> Root;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber")
 	TObjectPtr<UStaticMeshComponent> Mesh;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber")
+	TObjectPtr<UStaticMeshComponent> AmberMesh;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
+	TObjectPtr<UBoxComponent> MeshInteraction;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UInteractableComponent> Interactable;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Amber|Material")
-	TObjectPtr<UMaterialInterface> NecroseMaterial;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Amber|Material")
-	TObjectPtr<UMaterialInterface> NecroseMaterialPickUp;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber|Material")
-	TObjectPtr<UMaterialInterface> WeakMaterial;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber|Material")
-	TObjectPtr<UMaterialInterface> WeakMaterialPickUp;
+	UPROPERTY(EditAnywhere, Category = "Amber")
+	TObjectPtr<UStaticMesh> SourceMesh;
 
 	UPROPERTY(EditInstanceOnly, Category = "Amber")
 	EAmberType AmberType = EAmberType::NecroseAmber;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	float TargetAmberHeight = 0.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	float AmberAnimSpeed = 1.5f;
 
 	UPROPERTY(EditInstanceOnly, Category = "Amber", meta = (ClampMin = 1))
 	uint8 OreAmount = 1;
 
 	UFUNCTION()
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
-
-	void UpdateMaterial(bool bPickedUp) const;
 
 public:
 	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;

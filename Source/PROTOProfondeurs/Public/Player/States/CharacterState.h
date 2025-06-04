@@ -94,13 +94,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	FWaveOscillator ViewBobbing;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Camera", DisplayName = "FOV", meta = (ClampMin = 5.0f, ClampMax = 170.0f, UIMin = 5.0f, UIMax = 170.0f))
-	float TargetFOV = 90.0f;
-
 private:
 	void CameraMovement(float DeltaTime);
-
-	void UpdateCameraFOV(float DeltaTime);
 
 	void UpdateViewBobbing(float DeltaTime);
 

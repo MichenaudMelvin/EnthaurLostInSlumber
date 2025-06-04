@@ -18,6 +18,19 @@ void USaveSubsystem::CreateSave(const int SaveIndex)
 	SaveObject = SaveToSlot(SaveIndex);
 }
 
+bool USaveSubsystem::DeleteSave(const int SaveIndex)
+{
+	if (!SaveClass || !SaveObject)
+	{
+		return false;
+	}
+
+	FString SlotName = SaveObject->GetSlotName();
+	SlotName += FString::FromInt(SaveIndex);
+
+	return UGameplayStatics::DeleteGameInSlot(SlotName, SaveIndex);
+}
+
 UDefaultSave* USaveSubsystem::SaveToSlot(const int SaveIndex)
 {
 	if (!SaveObject)
