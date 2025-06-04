@@ -8,6 +8,8 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "WeakZone.generated.h"
 
+class UAkAudioEvent;
+
 USTRUCT(BlueprintType)
 struct FInteractionPoints
 {
@@ -117,6 +119,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber", meta = (ClampMin = 0))
 	int CostByPoint = 1;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	TObjectPtr<UAkAudioEvent> InjectAmberNoise;
 
 	UFUNCTION()
 	void OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

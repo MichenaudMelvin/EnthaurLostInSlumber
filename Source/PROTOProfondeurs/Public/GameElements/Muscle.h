@@ -123,7 +123,7 @@ protected:
 
 	void RebuildMuscleMesh() const;
 
-	void UpdateMuscleSolidity();
+	void UpdateMuscleSolidity(bool bPlayNoises);
 
 #pragma endregion
 
