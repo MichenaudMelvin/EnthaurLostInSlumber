@@ -13,6 +13,7 @@
 #include "Menus/Pause/PRFMainMenuConfirmationMenu.h"
 #include "Menus/Pause/PRFOptionsMenu.h"
 #include "Menus/Pause/PRFPauseMenu.h"
+#include "Menus/Pause/PRFRestartConfirmationMenu.h"
 #include "UIManagerSettings.generated.h"
 
 /**
@@ -57,6 +58,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI")
 	TSubclassOf<UPRFMainMenuConfirmationMenu> MainMenuConfirmationMenuClass = UPRFMainMenuConfirmationMenu::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI")
+	TSubclassOf<UPRFRestartConfirmationMenu> RestartConfirmationMenuClass = UPRFRestartConfirmationMenu::StaticClass();
 
 #pragma endregion
 };
