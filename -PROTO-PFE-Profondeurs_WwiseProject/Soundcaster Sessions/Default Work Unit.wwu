@@ -18,6 +18,10 @@
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="Play_SFX_NerveReceptacle_Activate" ID="{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="Play_SFX_Muscle_Soft" ID="{F84BABDD-28BD-412A-95A6-5FDDB1D95432}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
 							<Position X="2" Y="0"/>
 						</Module>
