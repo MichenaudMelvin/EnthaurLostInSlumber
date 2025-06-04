@@ -22,7 +22,7 @@ protected:
 	virtual void Deinitialize() override;
 
 public:
-	virtual void CreateSave(const int SaveIndex) override;
+	virtual UDefaultSave* CreateSave(const int SaveIndex) override;
 
 	virtual UDefaultSave* SaveToSlot(const int SaveIndex) override;
 
