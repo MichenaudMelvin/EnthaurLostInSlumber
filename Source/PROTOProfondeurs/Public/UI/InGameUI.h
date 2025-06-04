@@ -18,6 +18,10 @@ class PROTOPROFONDEURS_API UInGameUI : public UUserWidget
 	GENERATED_BODY()
 
 public:
+	UFUNCTION()
+	void OnAmberUpdate(EAmberType AmberType, int AmberAmount);
+	virtual void NativeConstruct() override;
+	
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> Crosshair;
 	
@@ -27,42 +31,22 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> PropulsionIndicator;
 
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> NecrosisGauge1;
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> NecrosisGauge2;
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> NecrosisGauge3;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> GrayAmberGauge;
-
-	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	TObjectPtr<UWidgetAnimation> GrayAmberGauge_Enabled;
-	
-	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	TObjectPtr<UWidgetAnimation> NecrosisAmberGauge_Step1;
-	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	TObjectPtr<UWidgetAnimation> NecrosisAmberGauge_Step2;
-	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	TObjectPtr<UWidgetAnimation> NecrosisAmberGauge_Step3;
-	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	TObjectPtr<UWidgetAnimation> NecrosisAmberGauge_Used;
-
 	UPROPERTY()
 	TObjectPtr<class AFirstPersonCharacter> Player;
-
-	virtual void NativeConstruct() override;
 
 	void SetPropulsionActive(bool active);
 	void SetInteraction(bool bActive) const;
 
+protected:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAmberPickUp);
+	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	FOnAmberPickUp OnAmberPickUp;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAmberUsed);
+	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	FOnAmberUsed OnAmberUsed;
+
 private:
 	FCTweenInstance* CurrentTween;
 	TObjectPtr<UImage> Img;
-
-protected:
-	UFUNCTION()
-	void AmberChargeChanged(EAmberType AmberType, int AmberAmount);
-	virtual void NativeOnInitialized() override;
 };
