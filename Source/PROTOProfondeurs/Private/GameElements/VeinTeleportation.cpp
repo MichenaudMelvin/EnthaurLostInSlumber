@@ -15,21 +15,8 @@ AVeinTeleportation::AVeinTeleportation()
 	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(SceneComponent);
 
-	VeinMesh = CreateDefaultSubobject<UChildActorComponent>(TEXT("Vein"));
-	VeinMesh->SetupAttachment(RootComponent);
-
-	EntryPoint = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Entry Point"));
-	EntryPoint->SetupAttachment(RootComponent);
-
 	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 	Interaction->OnInteract.AddDynamic(this, &AVeinTeleportation::OnInteract);
-}
-
-// Called when the game starts or when spawned
-void AVeinTeleportation::BeginPlay()
-{
-	Super::BeginPlay();
-	Interaction->AddInteractable(EntryPoint);
 }
 
 void AVeinTeleportation::OnEnterWeakZone_Implementation(bool bIsZoneActive)
@@ -54,6 +41,6 @@ void AVeinTeleportation::OnExitWeakZone_Implementation()
 
 void AVeinTeleportation::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent)
 {
-	UGameplayStatics::OpenLevelBySoftObjectPtr(this, MapToLoad);
+	OnVeinInteracted.Broadcast();
 }
 

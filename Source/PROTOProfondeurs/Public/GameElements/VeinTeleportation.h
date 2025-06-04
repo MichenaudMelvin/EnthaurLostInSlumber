@@ -13,29 +13,22 @@ class PROTOPROFONDEURS_API AVeinTeleportation : public AActor, public IWeakZoneI
 	GENERATED_BODY()
 
 public:
-	UFUNCTION()
-	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent);
 	// Sets default values for this actor's properties
 	AVeinTeleportation();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USceneComponent> SceneComponent;
-	
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UChildActorComponent> VeinMesh;
 
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UStaticMeshComponent> EntryPoint;
-
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UInteractableComponent> Interaction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSoftObjectPtr<UWorld> MapToLoad;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnVeinInteracted);
+	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	FOnVeinInteracted OnVeinInteracted;
 
 #pragma region WeakZone
 
@@ -43,6 +36,9 @@ private:
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
+
+	UFUNCTION()
+	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent);
 
 #pragma endregion
 };

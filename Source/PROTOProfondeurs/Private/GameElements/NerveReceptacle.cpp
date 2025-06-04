@@ -54,6 +54,13 @@ void ANerveReceptacle::BeginPlay()
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &ANerveReceptacle::TriggerEnter);
 
 	NerveEndTargetTransform *= GetActorTransform();
+
+	FTimerHandle TimerHandle;
+
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+	{
+		Collision->UpdateOverlaps();
+	}, 0.1f, false);
 }
 
 #if WITH_EDITORONLY_DATA
@@ -135,7 +142,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 	NerveElectricityFeedback = GetWorld()->SpawnActor<AElectricityFeedback>(GetDefault<UBPRefParameters>()->ElectricityFeedback, Nerve->GetActorTransform());
 	KeepInMemoryNerve = Nerve;
 
-	float Duration = KeepInMemoryNerve->GetCableLength() / 750.f;
+	float Duration = Nerve->IsLoaded() ? 0.001f : (KeepInMemoryNerve->GetCableLength() / ElectricitySpeed);
 
 	FCTween::Play(0.f, 30.f,
 		[&](const float& F)
@@ -153,7 +160,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 		Duration, EFCEase::Linear)->SetOnComplete([&]
 		{
 			TriggerLinkedObjects(KeepInMemoryNerve);
-			
+
 			FCTween::Play(30.f, 200.f,
 			[&](const float& F)
 			{

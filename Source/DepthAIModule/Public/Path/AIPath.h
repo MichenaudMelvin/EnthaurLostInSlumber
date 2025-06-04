@@ -50,6 +50,9 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Direction", meta = (EditCondition = "!bAutoDirection"))
 	bool bInvertDirection = true;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Directon", meta = (ClampMin = 0.0f, Units = "cm"))
+	float WallPointsOffset = 1.0f;
+
 	void UpdatePoints(bool bInConstructionScript);
 
 #if WITH_EDITORONLY_DATA

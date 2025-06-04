@@ -2,6 +2,9 @@
 
 
 #include "Saves/SettingsSubsystem.h"
+#include "AkGameplayStatics.h"
+#include "AkRtpc.h"
+#include "Saves/SaveSettings.h"
 
 USettingsSubsystem::USettingsSubsystem()
 {
@@ -14,4 +17,62 @@ void USettingsSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 
 	LoadSave(0, true);
 	Settings = Cast<USettingsSave>(SaveObject);
+
+	SetMasterVolume(Settings->MasterVolume);
+	SetMusicVolume(Settings->MusicVolume);
+	SetSFXVolume(Settings->SFXVolume);
+}
+
+void USettingsSubsystem::SetMasterVolume(float Volume) const
+{
+	const USaveSettings* DevSettingsSave = GetDefault<USaveSettings>();
+	if (!DevSettingsSave)
+	{
+		return;
+	}
+
+	UAkRtpc* RTPC = DevSettingsSave->MasterRTPC.LoadSynchronous();
+	if(!RTPC)
+	{
+		return;
+	}
+
+	Settings->MasterVolume = Volume;
+	UAkGameplayStatics::SetRTPCValue(RTPC, Volume, 0, nullptr);
+}
+
+void USettingsSubsystem::SetSFXVolume(float Volume) const
+{
+	const USaveSettings* DevSettingsSave = GetDefault<USaveSettings>();
+	if (!DevSettingsSave)
+	{
+		return;
+	}
+
+	UAkRtpc* RTPC = DevSettingsSave->SFXRTPC.LoadSynchronous();
+	if(!RTPC)
+	{
+		return;
+	}
+
+	Settings->SFXVolume = Volume;
+	UAkGameplayStatics::SetRTPCValue(RTPC, Volume, 0, nullptr);
+}
+
+void USettingsSubsystem::SetMusicVolume(float Volume) const
+{
+	const USaveSettings* DevSettingsSave = GetDefault<USaveSettings>();
+	if (!DevSettingsSave)
+	{
+		return;
+	}
+
+	UAkRtpc* RTPC = DevSettingsSave->MusicRTPC.LoadSynchronous();
+	if(!RTPC)
+	{
+		return;
+	}
+
+	Settings->MusicVolume = Volume;
+	UAkGameplayStatics::SetRTPCValue(RTPC, Volume, 0, nullptr);
 }

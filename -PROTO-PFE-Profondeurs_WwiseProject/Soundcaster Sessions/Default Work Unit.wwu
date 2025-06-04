@@ -10,6 +10,10 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="AMB_Pad_Rfx" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="Play_SFX_NerveReceptacle_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
 							<Position X="1" Y="0"/>
 						</Module>
@@ -27,11 +31,38 @@
 							<GameParameterRef Name="RTPC_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
 							<Value>0</Value>
 						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_Voice" ID="{9CF10DE5-32FB-4741-9D1F-EBA407F8E2E7}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"/>
+							<Value>100</Value>
+						</RTPCValue>
 					</RTPCValueList>
 					<CurrentStateList ShowAll="true"/>
 					<CurrentSwitchList ShowAll="true">
 						<CurrentSwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
 					</CurrentSwitchList>
+				</SoundcasterSession>
+				<SoundcasterSession Name="AMB TEST" ID="{FD9DD7B6-D642-46FC-B38E-02D64FF06CDB}">
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="RTPC_PlayerDistance" ID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}"/>
+							<Value>100</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>

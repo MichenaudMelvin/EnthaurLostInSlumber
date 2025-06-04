@@ -25,16 +25,18 @@ UCLASS(Config = Game, DefaultConfig, meta = (DisplayName = "Blueprint References
 class PROTOPROFONDEURS_API UBPRefParameters : public UDeveloperSettings
 {
 	GENERATED_BODY()
-	
+
 public:
 	UPROPERTY(EditAnywhere, Config)
 	TMap<TSoftObjectPtr<UWorld>, FDuoText> WorldMap;
 
 	UPROPERTY(VisibleAnywhere, Config)
 	TMap<FString, FDuoText> LevelNames;
-	
+
 	UPROPERTY(Config, EditAnywhere)
 	TSubclassOf<AActor> ElectricityFeedback;
 
+#if WITH_EDITOR
 	void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 };

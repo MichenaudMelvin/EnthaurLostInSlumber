@@ -176,6 +176,8 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_Elevator" ID="{859C566F-6B89-419E-B78B-2BAF354E01B4}"/>
+				<Event Name="Stop_Elevator" ID="{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
