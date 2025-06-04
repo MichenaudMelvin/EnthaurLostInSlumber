@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{8C3A8378-DF42-85C6-4B64-32A02841D5FE}",
+    "Hash": "{5F650992-81A1-94C2-8DE9-4A3BC47A3709}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -555,6 +555,57 @@
       ]
      },
      {
+      "Id": "1844258402",
+      "Name": "Play_SFX_Electricty",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Electricty",
+      "GUID": "{5C28218F-535A-43B7-9CD4-681EEC44DF40}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "6.0333333",
+      "DurationMax": "6.0333333",
+      "MediaRefs": [
+       {
+        "Id": "290163593"
+       },
+       {
+        "Id": "753932510"
+       },
+       {
+        "Id": "897057365"
+       },
+       {
+        "Id": "909338791"
+       },
+       {
+        "Id": "939918079"
+       }
+      ]
+     },
+     {
+      "Id": "3744781944",
+      "Name": "Play_SFX_Electricty_End",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Electricty_End",
+      "GUID": "{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.17814584",
+      "DurationMax": "0.20677084",
+      "MediaRefs": [
+       {
+        "Id": "391363525"
+       },
+       {
+        "Id": "733450515"
+       },
+       {
+        "Id": "763356268"
+       },
+       {
+        "Id": "954112915"
+       }
+      ]
+     },
+     {
       "Id": "688124889",
       "Name": "Play_SFX_Grab_Nerve",
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Grab_Nerve",
@@ -777,57 +828,6 @@
       ]
      },
      {
-      "Id": "1918553675",
-      "Name": "Play_SFX_NerveReceptacle_Electricty",
-      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Electricty",
-      "GUID": "{5C28218F-535A-43B7-9CD4-681EEC44DF40}",
-      "Color": "10",
-      "DurationType": "OneShot",
-      "DurationMin": "6.0333333",
-      "DurationMax": "6.0333333",
-      "MediaRefs": [
-       {
-        "Id": "290163593"
-       },
-       {
-        "Id": "753932510"
-       },
-       {
-        "Id": "897057365"
-       },
-       {
-        "Id": "909338791"
-       },
-       {
-        "Id": "939918079"
-       }
-      ]
-     },
-     {
-      "Id": "1717915789",
-      "Name": "Play_SFX_NerveReceptacle_Electricty_End",
-      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Electricty_End",
-      "GUID": "{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}",
-      "Color": "10",
-      "DurationType": "OneShot",
-      "DurationMin": "0.17814584",
-      "DurationMax": "0.20677084",
-      "MediaRefs": [
-       {
-        "Id": "391363525"
-       },
-       {
-        "Id": "733450515"
-       },
-       {
-        "Id": "763356268"
-       },
-       {
-        "Id": "954112915"
-       }
-      ]
-     },
-     {
       "Id": "3026607058",
       "Name": "Play_SFX_RespawnTree_Activate",
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_RespawnTree_Activate",
@@ -879,6 +879,6 @@
     ]
    }
   ],
-  "FileHash": "{4DB305C9-AF32-7A7C-1AF0-6AE75B08749A}"
+  "FileHash": "{CD6D4F16-BB9B-9AC3-B6C9-ECECF858FDDB}"
  }
 }

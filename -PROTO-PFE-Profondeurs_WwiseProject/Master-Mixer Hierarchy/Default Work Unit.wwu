@@ -3,7 +3,7 @@
 	<Busses>
 		<WorkUnit Name="Default Work Unit" ID="{5758A909-4551-4C00-B2F6-793E72899CA7}" PersistMode="Standalone">
 			<ChildrenList>
-				<Bus Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}">
+				<Bus Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}">
 					<ReferenceList>
 						<Reference Name="AudioDevice" PluginName="System" CompanyID="0" PluginID="174" PluginType="7">
 							<ObjectRef Name="System" ID="{8EA8FBC0-75CB-480A-AF56-63363062FD17}" WorkUnitID="{38849C77-F9D0-4389-81A5-4649B419ECBE}"/>

@@ -29,7 +29,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_SFX_NerveReceptacle_Electricty" ID="{5C28218F-535A-43B7-9CD4-681EEC44DF40}">
+				<Event Name="Play_SFX_Electricty" ID="{5C28218F-535A-43B7-9CD4-681EEC44DF40}">
 					<ChildrenList>
 						<Action Name="" ID="{BF73EA49-277A-4CDF-A111-A48FEF57595A}" ShortID="614991199">
 							<ReferenceList>
@@ -50,7 +50,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_SFX_NerveReceptacle_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}">
+				<Event Name="Play_SFX_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}">
 					<ChildrenList>
 						<Action Name="" ID="{55669413-1827-4206-BA28-6127A58ACB87}" ShortID="961385006">
 							<ReferenceList>
