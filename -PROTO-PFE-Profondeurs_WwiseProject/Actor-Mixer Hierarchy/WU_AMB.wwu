@@ -17,67 +17,67 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<BlendContainer Name="AMB_General" ID="{D66404B2-7846-4FD1-B9E3-0BC5873B0900}" ShortID="686834012">
+						<RandomSequenceContainer Name="AMB_Pad_Healty" ID="{BBA1EA69-7281-4B05-8E65-C3C813C0807F}" ShortID="1018393109">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{488D0AA8-8170-47E9-8916-5A3A3952D05C}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-7"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{347AED85-ED18-4CD9-BC83-B9A7CF44BB2A}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="8"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{159133C6-04DE-4CEE-A9D3-508408B9281B}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="300"/>
+													<Property Name="Min" Type="Real64" Value="-300"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="4"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="12"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+									<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<RandomSequenceContainer Name="AMB_Pad" ID="{BBA1EA69-7281-4B05-8E65-C3C813C0807F}" ShortID="1018393109">
-									<PropertyList>
-										<Property Name="Highpass" Type="int16">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{488D0AA8-8170-47E9-8916-5A3A3952D05C}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Min" Type="Real64" Value="-7"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Lowpass" Type="int16">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{347AED85-ED18-4CD9-BC83-B9A7CF44BB2A}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="8"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{159133C6-04DE-4CEE-A9D3-508408B9281B}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="300"/>
-															<Property Name="Min" Type="Real64" Value="-300"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="4"/>
-										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="12"/>
-										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>1</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
+								<Sound Name="AMB_Pad_04_LP" ID="{E25E1D0C-64B0-434C-A129-E988E8740D6C}" ShortID="28863457">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -87,147 +87,19 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="AMB_Pad_04_LP" ID="{E25E1D0C-64B0-434C-A129-E988E8740D6C}" ShortID="28863457">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_04_LP" ID="{A65464F6-2D92-4C69-8CB6-25A7453819A3}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_04_LP.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="630202445"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_04_LP" ID="{A65464F6-2D92-4C69-8CB6-25A7453819A3}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_03_LP-glued" ID="{99E738FC-5DF3-4415-A01B-27C2E8BC5F39}" ShortID="719733636">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_03_LP-glued" ID="{34A84030-9905-436A-B68F-8696E3D5694A}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_03_LP-glued.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="743489974"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_03_LP-glued" ID="{34A84030-9905-436A-B68F-8696E3D5694A}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_02_LP" ID="{C08B3E4A-3BD8-4F85-8DEB-785868F75D12}" ShortID="1066975821">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_02_LP" ID="{E8E6BB99-42E1-4320-9A41-F7344FCD09AA}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_02_LP.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="879024324"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_02_LP" ID="{E8E6BB99-42E1-4320-9A41-F7344FCD09AA}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_01_LP" ID="{1672303C-B5D8-4238-AE2E-BB36FC779174}" ShortID="57970894">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_01_LP" ID="{C044D5E4-584B-4B9B-A56B-C7EDF5893D3A}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_01_LP.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="452759638"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_01_LP" ID="{C044D5E4-584B-4B9B-A56B-C7EDF5893D3A}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+										<AudioFileSource Name="AMB_Pad_04_LP" ID="{A65464F6-2D92-4C69-8CB6-25A7453819A3}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_04_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="630202445"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="AMB_Pad_Rfx" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" ShortID="630221540">
-									<PropertyList>
-										<Property Name="3DPosition" Type="int16" Value="1"/>
-										<Property Name="3DSpatialization" Type="int16" Value="1"/>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
-										<Property Name="OverridePositioning" Type="bool" Value="True"/>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{8EB2A92A-937A-49B0-B734-F1072FFC3E9F}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="300"/>
-															<Property Name="Min" Type="Real64" Value="-300"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
-										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="10">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{4EC814A3-363F-4104-B1AA-C556853CB4D4}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="20"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>3</Value>
-											</ValueList>
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{EAA339BE-C797-404E-BCD0-26E38FFCC996}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Min" Type="Real64" Value="-3"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_04_LP" ID="{A65464F6-2D92-4C69-8CB6-25A7453819A3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_Pad_03_LP-glued" ID="{99E738FC-5DF3-4415-A01B-27C2E8BC5F39}" ShortID="719733636">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -237,299 +109,604 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_01" ID="{F67A3F85-AADE-48DC-84C3-EDF1AA123B3B}" ShortID="533573509">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_01" ID="{84D8038B-5181-4703-8CEF-3738E4E3A961}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_01.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="84916266"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_01" ID="{84D8038B-5181-4703-8CEF-3738E4E3A961}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_03" ID="{2A29FFCC-C112-4FE1-8070-2ACE6E8CCD79}" ShortID="763838826">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_03" ID="{9818642B-1D39-453E-851E-BCE24692DA60}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_03.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="745301015"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_03" ID="{9818642B-1D39-453E-851E-BCE24692DA60}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_02" ID="{64BF4809-4CF3-433A-81A7-C8FF0497676D}" ShortID="661771373">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_02" ID="{BD8950F1-BA85-4F04-81B7-321729F19E1B}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_02.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="113684722"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_02" ID="{BD8950F1-BA85-4F04-81B7-321729F19E1B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_10" ID="{2718C0FE-79E5-4F5F-AC08-5262CB457DE2}" ShortID="433632605">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_10" ID="{060F74DF-1127-4362-802B-611AB49F0A24}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_10.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="964612303"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_10" ID="{060F74DF-1127-4362-802B-611AB49F0A24}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_12" ID="{4BC08E1D-098B-44CC-9916-29F61906BCF9}" ShortID="269461048">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_12" ID="{8943AEA8-E30D-49C4-BDCA-AEA0C8898B24}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_12.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="40028711"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_12" ID="{8943AEA8-E30D-49C4-BDCA-AEA0C8898B24}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_11" ID="{CC71BA71-A504-4669-A6A4-1A9F9B56C9DE}" ShortID="43256539">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_11" ID="{5B8FD7FF-20A0-46C6-B06B-DCEEC5FF50F2}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_11.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="726580023"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_11" ID="{5B8FD7FF-20A0-46C6-B06B-DCEEC5FF50F2}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_04" ID="{86B76350-8419-446C-AE74-7BAA06FD530F}" ShortID="708650416">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_04" ID="{BC4296E1-5548-40EF-BC47-5E169D3E76CF}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_04.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="678510795"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_04" ID="{BC4296E1-5548-40EF-BC47-5E169D3E76CF}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_05" ID="{2E9542B0-8199-48E5-8FD8-01BA08D7D169}" ShortID="886236109">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_05" ID="{CF30706C-2611-4291-919F-CA9EEDE29321}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_05.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1059098210"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_05" ID="{CF30706C-2611-4291-919F-CA9EEDE29321}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_06" ID="{9B3A522B-BEBA-4C2C-8209-51D7DBC6D20D}" ShortID="915814025">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_06" ID="{81CFA88F-7AF7-4FB1-9E5F-F1364EFB7ED3}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_06.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="427151800"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_06" ID="{81CFA88F-7AF7-4FB1-9E5F-F1364EFB7ED3}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_07" ID="{10076EBA-AD5A-48E7-8150-763A82E2D7E2}" ShortID="1072817563">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_07" ID="{A0B3D679-640A-4950-B00E-FBE39761A35B}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_07.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="118041272"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_07" ID="{A0B3D679-640A-4950-B00E-FBE39761A35B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_08" ID="{9361DF1F-7709-4668-B8C3-C316F36C02E0}" ShortID="428799391">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_08" ID="{F2072003-4BC7-4FF9-9A49-4CDF656E8C9E}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_08.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="863142678"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_08" ID="{F2072003-4BC7-4FF9-9A49-4CDF656E8C9E}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="AMB_Pad_Rfx_DistantScream_09" ID="{166625E2-F146-475A-94A4-7B42BAA512CB}" ShortID="537748609">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_09" ID="{0326F6F4-BA88-4951-AF70-97030FE88502}">
-													<Language>SFX</Language>
-													<AudioFile>AMB_Pad_Rfx_DistantScream_09.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="798986114"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="AMB_Pad_Rfx_DistantScream_09" ID="{0326F6F4-BA88-4951-AF70-97030FE88502}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+										<AudioFileSource Name="AMB_Pad_03_LP-glued" ID="{34A84030-9905-436A-B68F-8696E3D5694A}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_03_LP-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="743489974"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
-									<PositioningInfo>
-										<Position Name="" ID="{5722E877-5BB0-4FDC-BBB3-CEB5A4D6F79F}">
-											<PropertyList>
-												<Property Name="NewPathForEachSound" Type="bool" Value="True"/>
-												<Property Name="PlayMechanismRandomOrSequence" Type="int16" Value="1"/>
-											</PropertyList>
-											<ChildrenList>
-												<Path2D Name="AMB_Pad_Rfx_Path" ID="{80A9614D-A0DD-48D5-8DF2-4EA3796CBF8D}">
-													<PropertyList>
-														<Property Name="RandomX" Type="Real64" Value="50"/>
-														<Property Name="RandomY" Type="Real64" Value="99"/>
-														<Property Name="RandomZ" Type="Real64" Value="47"/>
-													</PropertyList>
-													<PointList>
-														<Point>
-															<XPos>0</XPos>
-															<YPos>0</YPos>
-															<Flags>12</Flags>
-															<Time>0</Time>
-														</Point>
-													</PointList>
-												</Path2D>
-											</ChildrenList>
-										</Position>
-									</PositioningInfo>
-								</RandomSequenceContainer>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_03_LP-glued" ID="{34A84030-9905-436A-B68F-8696E3D5694A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_Pad_02_LP" ID="{C08B3E4A-3BD8-4F85-8DEB-785868F75D12}" ShortID="1066975821">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_02_LP" ID="{E8E6BB99-42E1-4320-9A41-F7344FCD09AA}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_02_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="879024324"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_02_LP" ID="{E8E6BB99-42E1-4320-9A41-F7344FCD09AA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_Pad_01_LP" ID="{1672303C-B5D8-4238-AE2E-BB36FC779174}" ShortID="57970894">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_01_LP" ID="{C044D5E4-584B-4B9B-A56B-C7EDF5893D3A}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_01_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="452759638"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_01_LP" ID="{C044D5E4-584B-4B9B-A56B-C7EDF5893D3A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
-						</BlendContainer>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="STG_WEAKENEDZONE" ID="{BE53788A-24ED-40A0-9285-BE9E6C56B454}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
+										<CustomState Name="" ID="{D5B1B665-FC32-4B38-BA35-1FA68A14F38A}" ShortID="391451461"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="Weakened" ID="{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"/>
+										<CustomState Name="" ID="{0DDB6BD0-5AA6-4B28-9AE6-2196DED97FF5}" ShortID="1021022879">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="62"/>
+												<Property Name="Pitch" Type="int32" Value="-550"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="AMB_Breath" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" ShortID="630221540">
+							<PropertyList>
+								<Property Name="3DPosition" Type="int16" Value="1"/>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{8EB2A92A-937A-49B0-B734-F1072FFC3E9F}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="300"/>
+													<Property Name="Min" Type="Real64" Value="-300"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="10">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{4EC814A3-363F-4104-B1AA-C556853CB4D4}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="20"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{EAA339BE-C797-404E-BCD0-26E38FFCC996}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-3"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="AMB_BREATH_01" ID="{F67A3F85-AADE-48DC-84C3-EDF1AA123B3B}" ShortID="533573509">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_01" ID="{84D8038B-5181-4703-8CEF-3738E4E3A961}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="84916266"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_01" ID="{84D8038B-5181-4703-8CEF-3738E4E3A961}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_03" ID="{2A29FFCC-C112-4FE1-8070-2ACE6E8CCD79}" ShortID="763838826">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_03" ID="{9818642B-1D39-453E-851E-BCE24692DA60}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="745301015"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_03" ID="{9818642B-1D39-453E-851E-BCE24692DA60}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_02" ID="{64BF4809-4CF3-433A-81A7-C8FF0497676D}" ShortID="661771373">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_02" ID="{BD8950F1-BA85-4F04-81B7-321729F19E1B}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="113684722"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_02" ID="{BD8950F1-BA85-4F04-81B7-321729F19E1B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_10" ID="{2718C0FE-79E5-4F5F-AC08-5262CB457DE2}" ShortID="433632605">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_10" ID="{060F74DF-1127-4362-802B-611AB49F0A24}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_10.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="964612303"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_10" ID="{060F74DF-1127-4362-802B-611AB49F0A24}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_12" ID="{4BC08E1D-098B-44CC-9916-29F61906BCF9}" ShortID="269461048">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_12" ID="{8943AEA8-E30D-49C4-BDCA-AEA0C8898B24}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_12.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="40028711"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_12" ID="{8943AEA8-E30D-49C4-BDCA-AEA0C8898B24}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_11" ID="{CC71BA71-A504-4669-A6A4-1A9F9B56C9DE}" ShortID="43256539">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_11" ID="{5B8FD7FF-20A0-46C6-B06B-DCEEC5FF50F2}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_11.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="726580023"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_11" ID="{5B8FD7FF-20A0-46C6-B06B-DCEEC5FF50F2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_04" ID="{86B76350-8419-446C-AE74-7BAA06FD530F}" ShortID="708650416">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_04" ID="{BC4296E1-5548-40EF-BC47-5E169D3E76CF}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="678510795"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_04" ID="{BC4296E1-5548-40EF-BC47-5E169D3E76CF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_05" ID="{2E9542B0-8199-48E5-8FD8-01BA08D7D169}" ShortID="886236109">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_05" ID="{CF30706C-2611-4291-919F-CA9EEDE29321}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_05.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1059098210"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_05" ID="{CF30706C-2611-4291-919F-CA9EEDE29321}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_06" ID="{9B3A522B-BEBA-4C2C-8209-51D7DBC6D20D}" ShortID="915814025">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_06" ID="{81CFA88F-7AF7-4FB1-9E5F-F1364EFB7ED3}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_06.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="427151800"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_06" ID="{81CFA88F-7AF7-4FB1-9E5F-F1364EFB7ED3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_07" ID="{10076EBA-AD5A-48E7-8150-763A82E2D7E2}" ShortID="1072817563">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_07" ID="{A0B3D679-640A-4950-B00E-FBE39761A35B}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_07.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="118041272"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_07" ID="{A0B3D679-640A-4950-B00E-FBE39761A35B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_08" ID="{9361DF1F-7709-4668-B8C3-C316F36C02E0}" ShortID="428799391">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_08" ID="{F2072003-4BC7-4FF9-9A49-4CDF656E8C9E}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_08.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="863142678"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_08" ID="{F2072003-4BC7-4FF9-9A49-4CDF656E8C9E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_BREATH_09" ID="{166625E2-F146-475A-94A4-7B42BAA512CB}" ShortID="537748609">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Rfx_DistantScream_09" ID="{0326F6F4-BA88-4951-AF70-97030FE88502}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Rfx_DistantScream_09.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="798986114"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Rfx_DistantScream_09" ID="{0326F6F4-BA88-4951-AF70-97030FE88502}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<PositioningInfo>
+								<Position Name="" ID="{5722E877-5BB0-4FDC-BBB3-CEB5A4D6F79F}">
+									<PropertyList>
+										<Property Name="NewPathForEachSound" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismRandomOrSequence" Type="int16" Value="1"/>
+									</PropertyList>
+									<ChildrenList>
+										<Path2D Name="AMB_Pad_Rfx_Path" ID="{80A9614D-A0DD-48D5-8DF2-4EA3796CBF8D}">
+											<PropertyList>
+												<Property Name="RandomX" Type="Real64" Value="50"/>
+												<Property Name="RandomY" Type="Real64" Value="99"/>
+												<Property Name="RandomZ" Type="Real64" Value="47"/>
+											</PropertyList>
+											<PointList>
+												<Point>
+													<XPos>0</XPos>
+													<YPos>0</YPos>
+													<Flags>12</Flags>
+													<Time>0</Time>
+												</Point>
+											</PointList>
+										</Path2D>
+									</ChildrenList>
+								</Position>
+							</PositioningInfo>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="AMB_Pad_Corrupted" ID="{55A4F894-2304-4530-A88F-5BDC2C6F6C6A}" ShortID="748686934">
+							<PropertyList>
+								<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-300</Value>
+									</ValueList>
+								</Property>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="4"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="12"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-2</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="AMB_Pad_Necrosed_LP_01" ID="{ADFFDD5B-37F6-465A-AB9E-36DE542DD889}" ShortID="98174047">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Necrosed_LP_01" ID="{1005337E-C845-4E85-815E-C966918817FD}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Necrosed_LP_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="788512206"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Necrosed_LP_01" ID="{1005337E-C845-4E85-815E-C966918817FD}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_Pad_Necrosed_LP_02" ID="{71B78AEC-C6C6-40D3-B095-7834D905B2AF}" ShortID="375188902">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Necrosed_LP_02" ID="{7B7AB6C0-1F52-40AA-A009-5516722E46B7}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Necrosed_LP_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="481136108"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Necrosed_LP_02" ID="{7B7AB6C0-1F52-40AA-A009-5516722E46B7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_Pad_Necrosed_LP_03" ID="{CF66BC01-A1A3-41B2-A887-DC545B3A653C}" ShortID="362827444">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Necrosed_LP_03" ID="{04923B85-8122-402C-8B30-7A4EC83934BF}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Necrosed_LP_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="215594251"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Necrosed_LP_03" ID="{04923B85-8122-402C-8B30-7A4EC83934BF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_Pad_Necrosed_LP_04" ID="{71CD6334-29F3-49A3-AF2A-A94ACDA6144D}" ShortID="226814248">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_Pad_Necrosed_LP_04" ID="{8833D416-4A10-4259-AC9A-E52EC355A193}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_Pad_Necrosed_LP_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="79017697"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_Pad_Necrosed_LP_04" ID="{8833D416-4A10-4259-AC9A-E52EC355A193}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+						<Sound Name="AMB_Growl" ID="{F8A46104-846A-40CB-B97A-6FCF4A4CE44C}" ShortID="828955237">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{77BA792C-2DF4-4285-B0CA-247C82704AE9}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="50"/>
+													<Property Name="Min" Type="Real64" Value="-150"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{934608D2-F4A5-4AAF-84A5-CB17996C6FE9}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-3"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="AMB_Growl" ID="{A540EE4F-C744-4A27-A01C-BD6120EEBB3A}">
+									<Language>SFX</Language>
+									<AudioFile>AMB_Growl.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="610405175"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="AMB_Growl" ID="{A540EE4F-C744-4A27-A01C-BD6120EEBB3A}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 			</ChildrenList>
