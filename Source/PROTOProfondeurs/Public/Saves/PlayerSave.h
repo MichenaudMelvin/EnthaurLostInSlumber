@@ -17,7 +17,10 @@ public:
 	UPlayerSave();
 
 	UPROPERTY(BlueprintReadWrite, Category = "Player")
-	FTransform PlayerTransform = FTransform::Identity;
+	FVector PlayerLocation = FVector::ZeroVector;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Player")
+	FRotator PlayerCameraRotation = FRotator::ZeroRotator;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Player")
 	FName LastWorldSaved = NAME_None;

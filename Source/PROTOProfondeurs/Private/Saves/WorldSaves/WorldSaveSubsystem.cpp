@@ -220,7 +220,7 @@ void UWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& Acto
 			continue;
 		}
 
-		// if nerved found, delete the actor
+		// if never found, delete the actor
 		Actor->Destroy();
 	}
 }

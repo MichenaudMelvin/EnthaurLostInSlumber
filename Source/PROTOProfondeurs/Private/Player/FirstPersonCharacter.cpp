@@ -590,13 +590,13 @@ bool AFirstPersonCharacter::IsStopped() const
 void AFirstPersonCharacter::SavePlayerData() const
 {
 	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
+	if (!PlayerSaveSubsystem)
 	{
 		return;
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->LastWorldSaved = GetWorld()->GetFName();
-	PlayerSaveSubsystem->GetPlayerSave()->PlayerTransform = GetTransform();
+	PlayerSaveSubsystem->GetPlayerSave()->PlayerLocation = GetActorLocation();
+	PlayerSaveSubsystem->GetPlayerSave()->PlayerCameraRotation = GetControlRotation();
 	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = StateMachine->GetCurrentStateID();
 	PlayerSaveSubsystem->SaveToSlot(0);
 }
@@ -610,7 +610,17 @@ void AFirstPersonCharacter::LoadPlayerData()
 	}
 
 	TObjectPtr<UPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
-	SetActorTransform(SaveData->PlayerTransform);
+	SetActorLocation(SaveData->PlayerLocation);
+
+	if (GetPlayerController())
+	{
+		APlayerController* PlayerController = Cast<APlayerController>(GetPlayerController());
+		if (PlayerController)
+		{
+			PlayerController->SetControlRotation(SaveData->PlayerCameraRotation);
+		}
+	}
+
 	StateMachine->ChangeState(SaveData->CurrentState);
 	AmberInventory = SaveData->AmberInventory;
 
@@ -619,6 +629,7 @@ void AFirstPersonCharacter::LoadPlayerData()
 		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
 	}
 }
+
 #pragma endregion
 
 #pragma region Respawn

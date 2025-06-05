@@ -75,6 +75,11 @@ UDefaultSave* USaveSubsystem::LoadSave(const int SaveIndex, const bool bCreateNe
 	return nullptr;
 }
 
+bool USaveSubsystem::DoesSaveGameExist(const int SaveIndex)
+{
+	return SaveObject || LoadSave(0, false);
+}
+
 void USaveSubsystem::ResetSaveToDefault(const int SaveIndex)
 {
 	CreateSave(SaveIndex);
