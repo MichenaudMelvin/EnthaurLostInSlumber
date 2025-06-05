@@ -2,11 +2,10 @@
 
 
 #include "Menus/Main/PRFMainMenu.h"
-
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
 #include "Components/Button.h"
-#include "Kismet/GameplayStatics.h"
+#include "Saves/PlayerSaveSubsystem.h"
 
 void UPRFMainMenu::NativeOnInitialized()
 {
@@ -31,6 +30,26 @@ void UPRFMainMenu::NativeOnInitialized()
 	if (QuitButton && QuitButton->GetCustomButton())
 	{
 		QuitButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFMainMenu::HandleQuitMenu);
+	}
+}
+
+void UPRFMainMenu::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	if (!PlayerSaveSubsystem->DoesSaveGameExist(0))
+	{
+		ContinueButton->SetVisibility(ESlateVisibility::Collapsed);
+	}
+	else
+	{
+		ContinueButton->SetVisibility(ESlateVisibility::Visible);
 	}
 }
 
@@ -67,27 +86,26 @@ void UPRFMainMenu::HandleNewGameMenu()
 		return;
 	}
 
-	if (nullptr)
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
 	{
-		/* Todo Melvin Check s'il y a déjà une savegame qui existe
-		/ Si oui ça envoie en dessous pour ouvrir le menu qui prévient
-		/ Si non, tu lance direct la game
-		*/
+		return;
+	}
+
+	if (PlayerSaveSubsystem->DoesSaveGameExist(0))
+	{
+		GetUIManager()->OpenMenu(GetUIManager()->GetNewGameMenu(), false);
 	}
 	else
 	{
-		GetUIManager()->OpenMenu(GetUIManager()->GetNewGameMenu(), false);
+		PlayerSaveSubsystem->StartNewGame();
 	}
 }
 
 void UPRFMainMenu::HandleContinueInteraction()
 {
-	// Todo Melvin - Load save & continue game
-
-	// TEMPORARY:
-	
-
-	if (!IsValid(GetUIManager()))
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem || !IsValid(GetUIManager()))
 	{
 		return;
 	}
@@ -95,7 +113,7 @@ void UPRFMainMenu::HandleContinueInteraction()
 	GetUIManager()->SetMenuState(EPRFUIState::Waiting);
 	GetUIManager()->CloseAllMenus(EPRFUIState::Gameplay);
 
-	UGameplayStatics::OpenLevelBySoftObjectPtr(this, TempGameplayLevel);
+	PlayerSaveSubsystem->ContinueGame();
 }
 
 void UPRFMainMenu::HandleOptionsMenu()
@@ -104,7 +122,7 @@ void UPRFMainMenu::HandleOptionsMenu()
 	{
 		return;
 	}
-	
+
 	GetUIManager()->OpenMenu(GetUIManager()->GetOptionsMenu(), false);
 }
 
@@ -114,7 +132,7 @@ void UPRFMainMenu::HandleCreditsMenu()
 	{
 		return;
 	}
-	
+
 	GetUIManager()->OpenMenu(GetUIManager()->GetCreditsMenu(), false);
 }
 
@@ -124,34 +142,16 @@ void UPRFMainMenu::HandleQuitMenu()
 	{
 		return;
 	}
-	
+
 	GetUIManager()->OpenMenu(GetUIManager()->GetQuitMenu(), false);
 }
 
-const UUIManagerSettings* UPRFMainMenu::GetUIManagerSettings()
+const UUIManagerSettings* UPRFMainMenu::GetUIManagerSettings() const
 {
-	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
-	if (!IsValid(UIManager))
-	{
-		return nullptr;
-	}
-
-	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
-	if (!IsValid(UIManagerSettings))
-	{
-		return nullptr;
-	}
-
-	return UIManagerSettings;
+	return GetDefault<UUIManagerSettings>();
 }
 
-UPRFUIManager* UPRFMainMenu::GetUIManager()
+UPRFUIManager* UPRFMainMenu::GetUIManager() const
 {
-	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
-	if (!IsValid(UIManager))
-	{
-		return nullptr;
-	}
-
-	return UIManager;
+	return GetGameInstance()->GetSubsystem<UPRFUIManager>();
 }

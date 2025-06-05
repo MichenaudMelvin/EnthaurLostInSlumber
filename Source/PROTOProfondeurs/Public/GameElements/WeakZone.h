@@ -8,6 +8,8 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "WeakZone.generated.h"
 
+class UAkAudioEvent;
+
 USTRUCT(BlueprintType)
 struct FInteractionPoints
 {
@@ -55,6 +57,8 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
 	TObjectPtr<USceneComponent> Root;
 
@@ -101,6 +105,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
 	TObjectPtr<UStaticMesh> AmberMesh;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
+	float TargetAmberHeight = 35.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
+	float AmberAnimSpeed = 1.5f;
+
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Interactable")
 	TArray<FInteractionPoints> InteractionPoints;
 
@@ -109,6 +119,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber", meta = (ClampMin = 0))
 	int CostByPoint = 1;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	TObjectPtr<UAkAudioEvent> InjectAmberNoise;
 
 	UFUNCTION()
 	void OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

@@ -39,6 +39,7 @@ void UPRFUIManager::CreateAllWidgets()
 	PauseMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PauseMenuClass);
 	ControlsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->ControlsMenuClass);
 	MainMenuConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->MainMenuConfirmationMenuClass);
+	RestartConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->RestartConfirmationMenuClass);
 
 	OnWidgetsCreated.Broadcast();
 }
@@ -94,33 +95,6 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	}
 
 	CheckMenuState();
-	
-	/*if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::FromInt(MenuStack.Num()));
-		
-		for (const auto& Pair : MenuClasses)
-		{
-			const FString& YoMenuName = Pair.Key;
-			const auto& WidgetPtr = Pair.Value;
-
-			FString Output1;
-
-			if (IsValid(WidgetPtr))
-			{
-				Output1 = FString::Printf(TEXT("Menu: %s → %s"), *YoMenuName, *WidgetPtr->GetName());
-			}
-			else
-			{
-				Output1 = FString::Printf(TEXT("Menu: %s → Invalid (GC'd or destroyed)"), *YoMenuName);
-			}
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, Output1);
-		}
-	}
-
-	FString test = FString::Printf(TEXT("%d"), CurrentState);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);*/
 }
 
 void UPRFUIManager::CloseCurrentMenu()
@@ -164,33 +138,6 @@ void UPRFUIManager::CloseCurrentMenu()
 		UUserWidget* NewMenu = NewTopMenuPtr.Get();
 		NewMenu->AddToViewport();
 	}
-	
-	/*if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::FromInt(MenuStack.Num()));
-		
-		for (const auto& Pair : MenuClasses)
-		{
-			const FString& YoMenuName = Pair.Key;
-			const auto& WidgetPtr = Pair.Value;
-
-			FString Output1;
-
-			if (IsValid(WidgetPtr))
-			{
-				Output1 = FString::Printf(TEXT("Menu: %s → %s"), *YoMenuName, *WidgetPtr->GetName());
-			}
-			else
-			{
-				Output1 = FString::Printf(TEXT("Menu: %s → Invalid (GC'd or destroyed)"), *YoMenuName);
-			}
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, Output1);
-		}
-	}
-
-	FString test = FString::Printf(TEXT("%d"), CurrentState);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);*/
 }
 
 void UPRFUIManager::CloseAllMenus(EPRFUIState InState)

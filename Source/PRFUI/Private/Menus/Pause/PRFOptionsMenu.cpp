@@ -6,11 +6,17 @@
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
 #include "Components/Button.h"
+#include "Kismet/KismetTextLibrary.h"
 #include "Saves/SettingsSubsystem.h"
 
 void UPRFOptionsMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
+
+	if (OverallVolumeSlider)
+	{
+		OverallVolumeSlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::OnOverallSliderChanged);
+	}
 
 	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
 	{
@@ -22,7 +28,7 @@ void UPRFOptionsMenu::NativeOnInitialized()
 	}
 	if (MouseSensitivitySlider)
 	{
-		MouseSensitivitySlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
+		MouseSensitivitySlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
 	}
 	if (InvertMouseAxisButton && InvertMouseAxisButton->GetCustomButton())
 	{
@@ -45,6 +51,11 @@ void UPRFOptionsMenu::NativeOnInitialized()
 		ViewControlsButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
 		ViewControlsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
+
+	if (ResetButton)
+	{
+		ResetButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFOptionsMenu::ResetSettings);
+	}
 }
 
 void UPRFOptionsMenu::NativeConstruct()
@@ -52,11 +63,31 @@ void UPRFOptionsMenu::NativeConstruct()
 	Super::NativeConstruct();
 
 	OnOverallButtonHovered();
+
+	UpdateWidgetValues();
+}
+
+void UPRFOptionsMenu::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->SaveToSlot(0);
 }
 
 void UPRFOptionsMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
+
+	if (OverallVolumeSlider)
+	{
+		OverallVolumeSlider->OnValueChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnOverallSliderChanged);
+	}
 
 	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
 	{
@@ -91,6 +122,25 @@ void UPRFOptionsMenu::BeginDestroy()
 		ViewControlsButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
 		ViewControlsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
+
+	if (ResetButton)
+	{
+		ResetButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::ResetSettings);
+	}
+}
+
+void UPRFOptionsMenu::UpdateWidgetValues()
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!IsValid(SettingsSubsystem))
+	{
+		return;
+	}
+
+	OverallVolumeSlider->SetValue(SettingsSubsystem->GetSettings()->MasterVolume);
+	MouseSensitivitySlider->SetValue(SettingsSubsystem->GetSettings()->MouseSensitivity);
+	InvertMouseAxisCheckBox->SetIsChecked(SettingsSubsystem->GetSettings()->bInvertYAxis);
+	ViewBobbingCheckbox->SetIsChecked(SettingsSubsystem->GetSettings()->bViewBobbing);
 }
 
 void UPRFOptionsMenu::OnOverallButtonHovered()
@@ -156,14 +206,16 @@ void UPRFOptionsMenu::OnViewControlsButtonClicked()
 	UIManager->OpenMenu(ControlsMenu, false);
 }
 
-void UPRFOptionsMenu::OnOverallSliderChanged()
+void UPRFOptionsMenu::OnOverallSliderChanged(float InValue)
 {
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
 
-}
-
-void UPRFOptionsMenu::OnMouseSensSliderChanged()
-{
-	
+	SettingsSubsystem->SetMasterVolume(InValue);
+	OverallVolumeValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 3, 0, 0));
 }
 
 void UPRFOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked)
@@ -197,4 +249,17 @@ void UPRFOptionsMenu::OnMouseSensitivitySliderChanged(float InValue)
 	}
 
 	SettingsSubsystem->GetSettings()->MouseSensitivity = InValue;
+	MouseSensitivityValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 2, 1, 1));
+}
+
+void UPRFOptionsMenu::ResetSettings()
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->ResetSaveToDefault(0);
+	UpdateWidgetValues();
 }

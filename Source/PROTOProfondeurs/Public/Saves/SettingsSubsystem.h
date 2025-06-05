@@ -16,6 +16,7 @@ public:
 	USettingsSubsystem();
 
 protected:
+	virtual UDefaultSave* CreateSave(const int SaveIndex) override;
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 
@@ -24,4 +25,10 @@ protected:
 
 public:
 	USettingsSave* GetSettings() const {return Settings;}
+
+	void SetMasterVolume(float Volume) const;
+
+	void SetSFXVolume(float Volume) const;
+
+	void SetMusicVolume(float Volume) const;
 };

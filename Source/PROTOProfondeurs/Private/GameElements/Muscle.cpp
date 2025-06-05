@@ -133,7 +133,7 @@ void AMuscle::BeginPlay()
 
 	MuscleMeshComp->OnComponentHit.AddDynamic(this, &AMuscle::HitMuscleMesh);
 
-	UpdateMuscleSolidity();
+	UpdateMuscleSolidity(false);
 
 #if WITH_EDITORONLY_DATA
 	if (bDrawInRunTime)
@@ -274,23 +274,43 @@ void AMuscle::RebuildMuscleMesh() const
 #endif
 }
 
-void AMuscle::UpdateMuscleSolidity()
+void AMuscle::UpdateMuscleSolidity(bool bPlayNoises)
 {
 	if (bIsSolid)
 	{
 		MuscleMeshComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Default, 0.0f));
 		Interactable->SetInteractionName(SolidMuscleInteraction);
 		MuscleStateTransitionTimeline.Reverse();
+
+		if (!bPlayNoises)
+		{
+			return;
+		}
+
 		MuscleDeformationNoises->PostAkEvent(SolidMuscleNoise);
-		SpikeInteractionNoises->PostAkEvent(ToSolidInteractionNoise);
+
+		if (bAllowInteraction && SpikeInteractionNoises)
+		{
+			SpikeInteractionNoises->PostAkEvent(ToSolidInteractionNoise);
+		}
 	}
 	else
 	{
 		MuscleMeshComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.0f));
 		Interactable->SetInteractionName(SoftMuscleInteraction);
 		MuscleStateTransitionTimeline.Play();
+	
+		if (!bPlayNoises)
+		{
+			return;
+		}
+
 		MuscleDeformationNoises->PostAkEvent(SoftMuscleNoise);
-		SpikeInteractionNoises->PostAkEvent(ToSoftInteractionNoise);
+
+		if (bAllowInteraction && SpikeInteractionNoises)
+		{
+			SpikeInteractionNoises->PostAkEvent(ToSoftInteractionNoise);
+		}
 	}
 }
 
@@ -306,7 +326,8 @@ void AMuscle::ToggleMuscleSolidity()
 	}
 
 	bIsSolid = !bIsSolid;
-	UpdateMuscleSolidity();
+	OnMuscleStateChange.Broadcast(bIsSolid);
+	UpdateMuscleSolidity(true);
 }
 
 void AMuscle::HitMuscleMesh(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -323,7 +344,7 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 
 	if (bIsSolid)
 	{
-		UpdateMuscleSolidity();
+		UpdateMuscleSolidity(false);
 		return;
 	}
 
@@ -341,7 +362,7 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 		return;
 	}
 
-	UpdateMuscleSolidity();
+	UpdateMuscleSolidity(false);
 
 	float ActorVelocityLength = OtherComp ? OtherComp->GetComponentVelocity().Size() : HitActor->GetVelocity().Size();
 
@@ -451,8 +472,6 @@ void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveCom
 {
 	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->GetCameraShake()->MakeSmallCameraShake();
 
-	UAkGameplayStatics::PostEventAtLocation(InteractionEvent, SpikeInteraction->GetComponentLocation(), SpikeInteraction->GetComponentRotation(), this);
-
 	ToggleMuscleSolidity();
 }
 
@@ -524,7 +543,7 @@ void AMuscle::LoadGameElement(const FGameElementData& GameElementData)
 	const FMuscleData& Data = static_cast<const FMuscleData&>(GameElementData);
 	bIsSolid = Data.bIsSolid;
 
-	UpdateMuscleSolidity();
+	UpdateMuscleSolidity(false);
 }
 
 #pragma endregion

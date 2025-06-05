@@ -24,10 +24,17 @@ public:
 	/**
 	 * @brief Create a new save
 	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
-	 * @return The created save
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Saves", meta = (DisplayName = "CreateSave"))
-	virtual void CreateSave(const int SaveIndex);
+	UFUNCTION(BlueprintCallable, Category = "Saves")
+	virtual UDefaultSave* CreateSave(const int SaveIndex);
+
+	/**
+	 * @brief Delete a save
+	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
+	 * @return True if a file was actually able to be deleted. use DoesSaveGameExist to distinguish between delete failures and failure due to file not existing.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Saves")
+	virtual bool DeleteSave(const int SaveIndex);
 
 	/**
 	 * @brief Save to a slot
@@ -43,8 +50,16 @@ public:
 	 * @param bCreateNewSaveIfDoesntExist This will create a new save if the one you're trying to load doesn't exist
 	 * @return The save object
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Saves", meta = (DisplayName = "LoadSave"))
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Saves")
 	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true);
+
+	/**
+	 * @brief 
+	 * @param SaveIndex 
+	 * @return 
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Saves")
+	bool DoesSaveGameExist(const int SaveIndex);
 
 	/**
 	 * @brief Reset a save to defaults parameters

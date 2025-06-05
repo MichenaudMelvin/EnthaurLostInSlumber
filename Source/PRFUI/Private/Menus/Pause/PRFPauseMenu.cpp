@@ -4,7 +4,6 @@
 #include "Menus/Pause/PRFPauseMenu.h"
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
-#include "Kismet/GameplayStatics.h"
 #include "Subsystems/LevelNameSubsystem.h"
 
 void UPRFPauseMenu::NativeConstruct()
@@ -122,5 +121,18 @@ void UPRFPauseMenu::HandleOptionsMenuButton()
 
 void UPRFPauseMenu::HandleRestartCheckpointButton()
 {
-	// Todo Melvin
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+
+	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	if (!IsValid(UIManagerSettings))
+	{
+		return;
+	}
+
+	UUserWidget* RestartConfirmationMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->RestartConfirmationMenuClass);
+	UIManager->OpenMenu(RestartConfirmationMenu, false);
 }

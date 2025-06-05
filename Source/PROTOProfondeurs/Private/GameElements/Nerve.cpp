@@ -2,7 +2,7 @@
 
 
 #include "GameElements/Nerve.h"
-
+#include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "Components/InteractableComponent.h"
 #include "GameFramework/Character.h"
@@ -37,6 +37,9 @@ ANerve::ANerve()
 
 	NerveBall = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Sphere"));
 	NerveBall->SetupAttachment(RootComponent);
+
+	NerveStretchComp = CreateDefaultSubobject<UAkComponent>(TEXT("NerveStretchComp"));
+	NerveStretchComp->SetupAttachment(NerveBall);
 
 	InteractableComponent = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 	InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
@@ -188,6 +191,7 @@ void ANerve::AddSplineMesh()
 	FVector StartSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(StartDistance, ESplineCoordinateSpace::Local);
 	FVector EndSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(EndDistance, ESplineCoordinateSpace::Local);
 
+	// todo
 	UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
 
 	FVector SplineDirection = UKismetMathLibrary::GetDirectionUnitVector(StartSplineLocation, EndSplineLocation);
@@ -319,6 +323,11 @@ void ANerve::ApplyCablesPhysics()
 		return;
 	}
 
+	float Alpha = UKismetMathLibrary::NormalizeToRange(GetCableLength(), 0.0f, CableMaxExtension);
+	float RTPCValue = FMath::Lerp(0.0f, 100.0f, Alpha);
+
+	UAkGameplayStatics::SetRTPCValue(NerveStretchRtpc, RTPCValue, 0, this);
+
 	UpdateSplineMeshes(false);
 
 	FRotator NerveBallRotator = FRotationMatrix::MakeFromX(GetCableDirection()).Rotator();
@@ -436,6 +445,11 @@ void ANerve::ResetCables(bool bHardReset)
 
 void ANerve::RetractCable(float Alpha)
 {
+	float AlphaRTPC = UKismetMathLibrary::NormalizeToRange(GetCableLength(), 0.0f, CableMaxExtension);
+	float RTPCValue = FMath::Lerp(0.0f, 100.0f, AlphaRTPC);
+
+	UAkGameplayStatics::SetRTPCValue(NerveStretchRtpc, RTPCValue, 0, this);
+
 	float Distance = FMath::Lerp(SplineCable->GetDistanceAlongSplineAtSplinePoint(1), GetCableLength(), Alpha);
 	FVector TargetLocation = SplineCable->GetLocationAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::Local);
 
@@ -459,6 +473,7 @@ void ANerve::FinishRetractCable()
 		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
 	}
 
+	NerveStretchComp->Stop();
 	ResetCables(false);
 }
 
@@ -599,6 +614,7 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 		Pawn->AddComponentByClass(UPlayerToNervePhysicConstraint::StaticClass(), false, FTransform::Identity, false)
 	);
 
+	NerveStretchComp->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 	PhysicConstraint->Init(this, Cast<ACharacter>(Pawn));
 	InteractableComponent->RemoveInteractable(NerveBall);
 
@@ -710,6 +726,7 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 	FTransform AttachTransform = Receptacle->GetAttachTransform();
 	NerveBall->SetWorldTransform(AttachTransform);
 
+	NerveStretchComp->Stop();
 	UpdateLastSplinePointLocation(AttachTransform.GetLocation());
 	UpdateSplineMeshes(false);
 	InteractableComponent->AddInteractable(NerveBall);

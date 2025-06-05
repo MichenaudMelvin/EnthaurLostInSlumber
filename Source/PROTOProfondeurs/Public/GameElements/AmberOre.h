@@ -7,6 +7,7 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "AmberOre.generated.h"
 
+class UAkComponent;
 class UBoxComponent;
 
 USTRUCT(BlueprintType)
@@ -40,6 +41,8 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Amber")
 	TObjectPtr<USceneComponent> Root;
 
@@ -55,11 +58,20 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UInteractableComponent> Interactable;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	TObjectPtr<UAkComponent> AmberOreNoises;
+
 	UPROPERTY(EditAnywhere, Category = "Amber")
 	TObjectPtr<UStaticMesh> SourceMesh;
 
 	UPROPERTY(EditInstanceOnly, Category = "Amber")
 	EAmberType AmberType = EAmberType::NecroseAmber;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	float TargetAmberHeight = 0.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	float AmberAnimSpeed = 1.5f;
 
 	UPROPERTY(EditInstanceOnly, Category = "Amber", meta = (ClampMin = 1))
 	uint8 OreAmount = 1;

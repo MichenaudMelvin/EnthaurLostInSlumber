@@ -41,6 +41,7 @@ public:
 	TObjectPtr<UUserWidget> GetNewGameMenu() const { return NewGameMenu; }
 	TObjectPtr<UUserWidget> GetControlsMenu() const { return ControlsMenu; }
 	TObjectPtr<UUserWidget> GetMainMenuConfirmationMenu() const { return MainMenuConfirmationMenu; }
+	TObjectPtr<UUserWidget> GetRestartConfirmationMenu() const { return RestartConfirmationMenu; }
 
 	EPRFUIState GetMenuState() const { return CurrentState; }
 	void SetMenuState(EPRFUIState InUIState);
@@ -105,6 +106,8 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UUserWidget> MainMenuConfirmationMenu = nullptr;
+
+	TObjectPtr<UUserWidget> RestartConfirmationMenu = nullptr;
 
 #pragma endregion
 
