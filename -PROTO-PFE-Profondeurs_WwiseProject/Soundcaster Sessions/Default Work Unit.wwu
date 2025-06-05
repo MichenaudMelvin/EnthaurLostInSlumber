@@ -10,7 +10,7 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AMB_Pad_Rfx" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+							<ObjectRef Name="AMB_Breath" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
 							<Position X="0" Y="1"/>
 						</Module>
 						<Module>
@@ -59,14 +59,33 @@
 					</CurrentSwitchList>
 				</SoundcasterSession>
 				<SoundcasterSession Name="AMB TEST" ID="{FD9DD7B6-D642-46FC-B38E-02D64FF06CDB}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="AMB_GAMEPLAY" ID="{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AMB_CORRUPTEDZONE" ID="{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AMB_BREATH" ID="{AA87B9BB-78F7-4E1B-B3CB-35E5EF3E9618}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+					</ModuleList>
 					<RTPCValueList ShowAll="true">
 						<RTPCValue>
 							<GameParameterRef Name="RTPC_PlayerDistance" ID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}"/>
 							<Value>100</Value>
 						</RTPCValue>
 					</RTPCValueList>
-					<CurrentStateList ShowAll="true"/>
-					<CurrentSwitchList ShowAll="true"/>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+					</CurrentSwitchList>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>

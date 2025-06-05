@@ -1,3 +1,11 @@
+State Group	ID	Name			Wwise Object Path	Notes
+	232339302	STG_WEAKENEDZONE			\Default Work Unit\STG_WEAKENEDZONE	
+
+State	ID	Name	State Group			Notes
+	748895195	None	STG_WEAKENEDZONE			
+	1160234136	Normal	STG_WEAKENEDZONE			
+	4120836511	Weakened	STG_WEAKENEDZONE			
+
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	1162281553	Bus_Music			\Default Work Unit\Bus_Music	
 	3895923845	Bus_SFX			\Default Work Unit\Bus_SFX	
