@@ -28,6 +28,10 @@ public:
 
 	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true) override;
 
+	bool DeleteWorldSaveByName(const FString& WorldName, const int SaveIndex);
+
+	void DeleteAllWorldSaves(const int SaveIndex);
+
 protected:
 	FDelegateHandle WorldInitDelegateHandle;
 

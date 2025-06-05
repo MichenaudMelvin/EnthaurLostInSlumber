@@ -141,6 +141,39 @@ UDefaultSave* UWorldSaveSubsystem::LoadSave(const int SaveIndex, const bool bCre
 	return nullptr;
 }
 
+bool UWorldSaveSubsystem::DeleteWorldSaveByName(const FString& WorldName, const int SaveIndex)
+{
+	if (!SaveClass)
+	{
+		return false;
+	}
+
+	FString WorldSaveName = WorldName + SaveClass.GetDefaultObject()->GetSlotName() + FString::FromInt(SaveIndex);
+	return UGameplayStatics::DeleteGameInSlot(WorldSaveName, 0);
+}
+
+void UWorldSaveSubsystem::DeleteAllWorldSaves(const int SaveIndex)
+{
+	const UWorldSaveSettings* WorldSaveSettings = GetDefault<UWorldSaveSettings>();
+	if (!WorldSaveSettings)
+	{
+		return;
+	}
+
+	TArray<FPrimaryAssetId> PrimaryMapAssetIds;
+	UKismetSystemLibrary::GetPrimaryAssetIdList(WorldSaveSettings->PrimaryMapAsset, PrimaryMapAssetIds);
+
+	for (const FPrimaryAssetId& PrimaryMapAssetId : PrimaryMapAssetIds)
+	{
+		FString PathSeparation = "/";
+		FString PathName;
+		FString LevelName;
+		PrimaryMapAssetId.PrimaryAssetName.ToString().Split(PathSeparation, &PathName, &LevelName, ESearchCase::CaseSensitive, ESearchDir::FromEnd);
+
+		DeleteWorldSaveByName(LevelName, SaveIndex);
+	}
+}
+
 void UWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams)
 {
 	LoadSave(0, false);
@@ -220,7 +253,7 @@ void UWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& Acto
 			continue;
 		}
 
-		// if nerved found, delete the actor
+		// if never found, delete the actor
 		Actor->Destroy();
 	}
 }
