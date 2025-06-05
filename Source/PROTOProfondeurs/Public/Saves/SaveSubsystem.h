@@ -26,7 +26,7 @@ public:
 	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saves")
-	virtual void CreateSave(const int SaveIndex);
+	virtual UDefaultSave* CreateSave(const int SaveIndex);
 
 	/**
 	 * @brief Delete a save

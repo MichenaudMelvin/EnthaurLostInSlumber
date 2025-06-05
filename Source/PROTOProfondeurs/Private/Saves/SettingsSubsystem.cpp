@@ -11,6 +11,26 @@ USettingsSubsystem::USettingsSubsystem()
 	SaveClass = USettingsSave::StaticClass();
 }
 
+UDefaultSave* USettingsSubsystem::CreateSave(const int SaveIndex)
+{
+	UDefaultSave* Save = Super::CreateSave(SaveIndex);
+
+	if (!Save)
+	{
+		return nullptr;
+	}
+
+	USettingsSave* SettingsSave = Cast<USettingsSave>(Save);
+	if (!SettingsSave)
+	{
+		return nullptr;
+	}
+
+	Settings = SettingsSave;
+
+	return Settings;
+}
+
 void USettingsSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
