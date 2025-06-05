@@ -51,6 +51,11 @@ void UPRFOptionsMenu::NativeOnInitialized()
 		ViewControlsButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
 		ViewControlsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
+
+	if (ResetButton)
+	{
+		ResetButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFOptionsMenu::ResetSettings);
+	}
 }
 
 void UPRFOptionsMenu::NativeConstruct()
@@ -59,16 +64,7 @@ void UPRFOptionsMenu::NativeConstruct()
 
 	OnOverallButtonHovered();
 
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
-	if (!IsValid(SettingsSubsystem))
-	{
-		return;
-	}
-
-	OverallVolumeSlider->SetValue(SettingsSubsystem->GetSettings()->MasterVolume);
-	MouseSensitivitySlider->SetValue(SettingsSubsystem->GetSettings()->MouseSensitivity);
-	InvertMouseAxisCheckBox->SetIsChecked(SettingsSubsystem->GetSettings()->bInvertYAxis);
-	ViewBobbingCheckbox->SetIsChecked(SettingsSubsystem->GetSettings()->bViewBobbing);
+	UpdateWidgetValues();
 }
 
 void UPRFOptionsMenu::NativeDestruct()
@@ -126,6 +122,25 @@ void UPRFOptionsMenu::BeginDestroy()
 		ViewControlsButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
 		ViewControlsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
+
+	if (ResetButton)
+	{
+		ResetButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::ResetSettings);
+	}
+}
+
+void UPRFOptionsMenu::UpdateWidgetValues()
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!IsValid(SettingsSubsystem))
+	{
+		return;
+	}
+
+	OverallVolumeSlider->SetValue(SettingsSubsystem->GetSettings()->MasterVolume);
+	MouseSensitivitySlider->SetValue(SettingsSubsystem->GetSettings()->MouseSensitivity);
+	InvertMouseAxisCheckBox->SetIsChecked(SettingsSubsystem->GetSettings()->bInvertYAxis);
+	ViewBobbingCheckbox->SetIsChecked(SettingsSubsystem->GetSettings()->bViewBobbing);
 }
 
 void UPRFOptionsMenu::OnOverallButtonHovered()
@@ -231,8 +246,20 @@ void UPRFOptionsMenu::OnMouseSensitivitySliderChanged(float InValue)
 	if (!SettingsSubsystem)
 	{
 		return;
-	}	
+	}
 
 	SettingsSubsystem->GetSettings()->MouseSensitivity = InValue;
 	MouseSensitivityValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 2, 1, 1));
+}
+
+void UPRFOptionsMenu::ResetSettings()
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->ResetSaveToDefault(0);
+	UpdateWidgetValues();
 }

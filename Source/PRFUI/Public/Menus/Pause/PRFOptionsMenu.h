@@ -24,6 +24,8 @@ protected:
 	virtual void NativeDestruct() override;
 	virtual void BeginDestroy() override;
 
+	void UpdateWidgetValues();
+
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UPRFCustomButton> OverallVolumeButton;
 
@@ -50,6 +52,9 @@ protected:
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UPRFCustomButton> ViewControlsButton;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UPRFCustomButton> ResetButton;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UVerticalBox> InformationVerticalBox;
@@ -89,6 +94,9 @@ protected:
 
 	UFUNCTION()
 	void OnMouseSensitivitySliderChanged(float InValue);
+
+	UFUNCTION()
+	void ResetSettings();
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UTextBlock> OverallVolumeValue;
