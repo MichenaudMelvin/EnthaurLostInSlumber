@@ -54,6 +54,14 @@ public:
 	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true);
 
 	/**
+	 * @brief 
+	 * @param SaveIndex 
+	 * @return 
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Saves")
+	bool DoesSaveGameExist(const int SaveIndex);
+
+	/**
 	 * @brief Reset a save to defaults parameters
 	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
 	 */

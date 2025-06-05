@@ -36,6 +36,9 @@ protected:
 	TObjectPtr<UPRFCustomButton> QuitButton;
 
 	virtual void NativeOnInitialized() override;
+
+	virtual void NativeConstruct() override;
+
 	virtual void BeginDestroy() override;
 
 	UFUNCTION()
@@ -53,9 +56,6 @@ protected:
 	UFUNCTION()
 	void HandleQuitMenu();
 
-	const UUIManagerSettings* GetUIManagerSettings();
-	UPRFUIManager* GetUIManager();
-
-	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UWorld> TempGameplayLevel;
+	const UUIManagerSettings* GetUIManagerSettings() const;
+	UPRFUIManager* GetUIManager() const;
 };
