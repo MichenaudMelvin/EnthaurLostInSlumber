@@ -5,6 +5,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "Saves/PlayerSave.h"
 #include "Saves/WorldSaves/WorldSaveSettings.h"
+#include "Saves/WorldSaves/WorldSaveSubsystem.h"
 
 UPlayerSaveSubsystem::UPlayerSaveSubsystem()
 {
@@ -119,6 +120,12 @@ void UPlayerSaveSubsystem::StartNewGame()
 		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
 #endif
 		return;
+	}
+
+	UWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UWorldSaveSubsystem>();
+	if (WorldSaveSubsystem)
+	{
+		WorldSaveSubsystem->DeleteAllWorldSaves(0);
 	}
 
 	DeleteSave(0);

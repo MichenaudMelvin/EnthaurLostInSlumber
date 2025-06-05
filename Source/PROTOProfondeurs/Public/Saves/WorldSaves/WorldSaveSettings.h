@@ -23,4 +23,10 @@ public:
 	 */
 	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category = "WorldSave")
 	TSet<TSubclassOf<AGameModeBase>> AllowedGameModes;
+
+	/**
+	 * @brief 
+	 */
+	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category = "WorldSave")
+	FPrimaryAssetType PrimaryMapAsset;
 };
