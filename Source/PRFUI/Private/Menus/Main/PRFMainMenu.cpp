@@ -95,6 +95,9 @@ void UPRFMainMenu::HandleContinueInteraction()
 	GetUIManager()->SetMenuState(EPRFUIState::Waiting);
 	GetUIManager()->CloseAllMenus(EPRFUIState::Gameplay);
 
+	EPRFUIState State = GetUIManager()->GetMenuState();
+	State = EPRFUIState::AnyMenu;
+
 	UGameplayStatics::OpenLevelBySoftObjectPtr(this, TempGameplayLevel);
 }
 

@@ -30,6 +30,7 @@ struct FNerveData : public FGameElementData
 	TArray<FVector> ImpactNormals;
 };
 
+class UAkRtpc;
 class USplineMeshComponent;
 class USplineComponent;
 class AFirstPersonController;
@@ -171,8 +172,14 @@ protected:
 	UFUNCTION()
 	void ForceDetachNerveBallFromPlayer();
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UStaticMeshComponent> NerveBall;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
+	TObjectPtr<UAkComponent> NerveStretchComp;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
+	TObjectPtr<UAkRtpc> NerveStretchRtpc;
 
 	FVector DefaultNervePosition = FVector::ZeroVector;
 

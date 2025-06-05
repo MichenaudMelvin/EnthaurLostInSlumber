@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{5F650992-81A1-94C2-8DE9-4A3BC47A3709}",
+    "Hash": "{A8B741AC-8E9A-D63C-E49A-97AB06BDD407}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -81,14 +81,6 @@
       "CachePath": "62/{62FB46FA-D514-F090-FBC8-FB54CCAC0928}.wem"
      },
      {
-      "Id": "74918348",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Make_Hard_V6.wav",
-      "CachePath": "61/{61261DEA-8D9A-FA43-20D3-72D34AC301C1}.wem"
-     },
-     {
       "Id": "119173871",
       "Language": "SFX",
       "Streaming": "false",
@@ -143,6 +135,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Muscle_Bounce_Woosh_02.wav",
       "CachePath": "97/{97B10320-423B-1DCA-A447-D4F71F2770B0}.wem"
+     },
+     {
+      "Id": "191967900",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Make_Soft.wav",
+      "CachePath": "8F/{8FDDC228-5D9D-F429-FA84-F7CE39F16C53}.wem"
      },
      {
       "Id": "197068285",
@@ -257,12 +257,12 @@
       "CachePath": "90/{90C4B611-1886-03D6-C5F3-24AAA89377CC}.wem"
      },
      {
-      "Id": "438265194",
+      "Id": "466744989",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "SFX_Make_Soft_V6.wav",
-      "CachePath": "59/{59A20C52-AE9B-189C-F2AC-AFF5AB5A601A}.wem"
+      "ShortName": "SFX_Make_Hard.wav",
+      "CachePath": "F1/{F1EF1DBB-EDE6-9594-FF11-58AB9B30164B}.wem"
      },
      {
       "Id": "515272845",
@@ -366,7 +366,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_NerveReceptacle_Electricty.wav",
-      "CachePath": "A8/{A878E234-6AC9-A8C3-F03D-20A0CCDD176E}.wem"
+      "CachePath": "9F/{9F80CB9F-683C-E0C0-4304-98A995A2A729}.wem"
      },
      {
       "Id": "763356268",
@@ -560,9 +560,8 @@
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Electricty",
       "GUID": "{5C28218F-535A-43B7-9CD4-681EEC44DF40}",
       "Color": "10",
-      "DurationType": "OneShot",
-      "DurationMin": "6.0333333",
-      "DurationMax": "6.0333333",
+      "MaxAttenuation": "15000",
+      "DurationType": "Infinite",
       "MediaRefs": [
        {
         "Id": "290163593"
@@ -645,11 +644,11 @@
       "GUID": "{E46499EB-6249-4DEE-B975-F44DD0E7AEC1}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "1.5",
-      "DurationMax": "1.5",
+      "DurationMin": "1.0934167",
+      "DurationMax": "1.0934167",
       "MediaRefs": [
        {
-        "Id": "74918348"
+        "Id": "466744989"
        }
       ]
      },
@@ -660,11 +659,11 @@
       "GUID": "{C5A46045-32E9-48D9-8CB8-7B551A12DC12}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "1.5",
-      "DurationMax": "1.5",
+      "DurationMin": "1.13",
+      "DurationMax": "1.13",
       "MediaRefs": [
        {
-        "Id": "438265194"
+        "Id": "191967900"
        }
       ]
      },
@@ -879,6 +878,6 @@
     ]
    }
   ],
-  "FileHash": "{CD6D4F16-BB9B-9AC3-B6C9-ECECF858FDDB}"
+  "FileHash": "{3E5DC695-063C-E05E-E52E-48DAE93B68C5}"
  }
 }

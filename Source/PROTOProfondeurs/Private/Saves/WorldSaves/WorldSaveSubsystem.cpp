@@ -32,22 +32,22 @@ void UWorldSaveSubsystem::Deinitialize()
 	FWorldDelegates::OnWorldInitializedActors.Remove(WorldInitDelegateHandle);
 }
 
-void UWorldSaveSubsystem::CreateSave(const int SaveIndex)
+UDefaultSave* UWorldSaveSubsystem::CreateSave(const int SaveIndex)
 {
 	const UWorldSaveSettings* Settings = GetDefault<UWorldSaveSettings>();
 	if (!Settings)
 	{
-		return;
+		return nullptr;
 	}
 
 	if (!Settings->AllowedGameModes.Contains(GetWorld()->GetAuthGameMode()->GetClass()))
 	{
-		return;
+		return nullptr;
 	}
 
 	if (!SaveClass)
 	{
-		return;
+		return nullptr;
 	}
 
 	SaveObject = Cast<UDefaultSave>(UGameplayStatics::CreateSaveGameObject(SaveClass));
@@ -57,6 +57,8 @@ void UWorldSaveSubsystem::CreateSave(const int SaveIndex)
 	CurrentWorldSave->WorldName = GetWorld()->GetName();
 
 	SaveObject = SaveToSlot(SaveIndex);
+
+	return CurrentWorldSave;
 }
 
 UDefaultSave* UWorldSaveSubsystem::SaveToSlot(const int SaveIndex)

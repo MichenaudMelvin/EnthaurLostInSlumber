@@ -21,9 +21,23 @@
 				<Event Name="Play_SFX_NerveReceptacle_Activate" ID="{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}">
 					<ChildrenList>
 						<Action Name="" ID="{474388E8-4280-49C3-8FD7-1768CB8381FB}" ShortID="290478775">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="SFX_NerveReceptacle_Activate" ID="{6D409423-B1F9-4103-8241-B07692B2A8A1}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{B852D28B-027D-4115-A6C3-1B49E92E03B5}" ShortID="214623157">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Electricty" ID="{C79B1D69-36CC-4D9E-AF4B-DE9C8E8BA573}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -34,7 +48,7 @@
 						<Action Name="" ID="{BF73EA49-277A-4CDF-A111-A48FEF57595A}" ShortID="614991199">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_NerveReceptacle_Electricty_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Electricity_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -44,7 +58,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_NerveReceptacle_Electricty" ID="{09B80DEB-1198-47CC-A718-406B7FDC5349}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Electricty" ID="{C79B1D69-36CC-4D9E-AF4B-DE9C8E8BA573}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -65,7 +79,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_NerveReceptacle_Electricty" ID="{09B80DEB-1198-47CC-A718-406B7FDC5349}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Nerve_Electricty" ID="{09B80DEB-1198-47CC-A718-406B7FDC5349}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -236,7 +250,7 @@
 						<Action Name="" ID="{76327DD5-8B5D-460A-97E1-6AD5A9BD92E6}" ShortID="156467685">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_Make_Hard_V6" ID="{D3CBBCD1-DC1A-4BF6-ACE4-820DAD07BB8D}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Make_Hard" ID="{79FB42B4-080A-434A-BEED-064ABC491708}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -247,7 +261,7 @@
 						<Action Name="" ID="{DF83E810-9928-4EC6-A905-8E9DCA171550}" ShortID="559689581">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_Make_Soft_V6" ID="{8433FD9B-17F9-4DCE-BE50-70816E819FA7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Make_Soft" ID="{B711BC54-16B7-4970-9E9A-A0138B42212A}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
