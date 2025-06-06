@@ -29,7 +29,6 @@ void UPRFCustomSlider::OnCustomSliderValueChanged(float InValue)
 {
 	if (ProgressBarBackground)
 	{
-		float Test = UKismetMathLibrary::NormalizeToRange(InValue, CustomSlider->GetMinValue(), CustomSlider->GetMaxValue());
 		ProgressBarBackground->SetPercent(UKismetMathLibrary::NormalizeToRange(InValue, CustomSlider->GetMinValue(), CustomSlider->GetMaxValue()));
 	}
 }
