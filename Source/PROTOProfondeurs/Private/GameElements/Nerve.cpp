@@ -160,7 +160,7 @@ void ANerve::RemoveLastSplinePoint() const
 	SplineCable->RemoveSplinePoint(LastSplinePointIndex, true);
 }
 
-void ANerve::AddSplineMesh()
+void ANerve::AddSplineMesh(bool bMakeNoise)
 {
 	UActorComponent* Comp = AddComponentByClass(USplineMeshComponent::StaticClass(), false, FTransform::Identity, false);
 	if (!Comp)
@@ -191,8 +191,10 @@ void ANerve::AddSplineMesh()
 	FVector StartSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(StartDistance, ESplineCoordinateSpace::Local);
 	FVector EndSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(EndDistance, ESplineCoordinateSpace::Local);
 
-	// todo
-	UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
+	if (bMakeNoise)
+	{
+		UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
+	}
 
 	FVector SplineDirection = UKismetMathLibrary::GetDirectionUnitVector(StartSplineLocation, EndSplineLocation);
 	SplineMesh->SetStartAndEnd(StartSplineLocation, SplineDirection, EndSplineLocation, SplineDirection, false);
@@ -216,7 +218,7 @@ void ANerve::RemoveSplineMesh()
 	SplineMesh->DestroyComponent();
 }
 
-void ANerve::UpdateSplineMeshes(bool bUseNerveBallAsEndPoint)
+void ANerve::UpdateSplineMeshes(bool bUseNerveBallAsEndPoint, bool bMakeNoise)
 {
 	for (int i = 0; i < SplineMeshes.Num(); ++i)
 	{
@@ -259,7 +261,7 @@ void ANerve::UpdateSplineMeshes(bool bUseNerveBallAsEndPoint)
 		int NumberOfSplinesToAdd = TargetNumberOfSplinesMeshes - SplineMeshes.Num();
 		for (int i = 0; i < NumberOfSplinesToAdd; i++)
 		{
-			AddSplineMesh();
+			AddSplineMesh(bMakeNoise);
 		}
 	}
 
@@ -279,7 +281,7 @@ void ANerve::BuildSplineMeshes()
 
 	for (int i = 0; i < NumberOfSplineToCreate; i++)
 	{
-		AddSplineMesh();
+		AddSplineMesh(false);
 	}
 }
 
@@ -328,7 +330,7 @@ void ANerve::ApplyCablesPhysics()
 
 	UAkGameplayStatics::SetRTPCValue(NerveStretchRtpc, RTPCValue, 0, this);
 
-	UpdateSplineMeshes(false);
+	UpdateSplineMeshes(false, true);
 
 	FRotator NerveBallRotator = FRotationMatrix::MakeFromX(GetCableDirection()).Rotator();
 	NerveBallRotator += NerveBallRotationDelta;
@@ -461,7 +463,7 @@ void ANerve::RetractCable(float Alpha)
 	NerveBallRotator += NerveBallRotationDelta;
 	NerveBall->SetWorldRotation(NerveBallRotator);
 
-	UpdateSplineMeshes(true);
+	UpdateSplineMeshes(true, true);
 }
 
 void ANerve::FinishRetractCable()
@@ -693,7 +695,7 @@ void ANerve::LoadGameElement(const FGameElementData& GameElementData)
 	FVector LastPointLocation = Data.SplinePointsLocations[Data.SplinePointsLocations.Num() - 1];
 	NerveBall->SetRelativeLocation(LastPointLocation);
 
-	UpdateSplineMeshes(false);
+	UpdateSplineMeshes(false, false);
 
 	ImpactNormals = Data.ImpactNormals;
 
@@ -728,6 +730,6 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 
 	NerveStretchComp->Stop();
 	UpdateLastSplinePointLocation(AttachTransform.GetLocation());
-	UpdateSplineMeshes(false);
+	UpdateSplineMeshes(false, false);
 	InteractableComponent->AddInteractable(NerveBall);
 }

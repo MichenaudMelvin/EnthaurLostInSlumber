@@ -84,11 +84,11 @@ protected:
 
 	void RemoveLastSplinePoint() const;
 
-	void AddSplineMesh();
+	void AddSplineMesh(bool bMakeNoise);
 
 	void RemoveSplineMesh();
 
-	void UpdateSplineMeshes(bool bUseNerveBallAsEndPoint);
+	void UpdateSplineMeshes(bool bUseNerveBallAsEndPoint, bool bMakeNoise);
 
 	void BuildSplineMeshes();
 
