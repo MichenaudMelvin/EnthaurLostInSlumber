@@ -113,6 +113,7 @@ void ARespawnTree::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor
 	{
 		SetActive();
 	}
+
 	SetRespawnPoint(Player, true);
 }
 
@@ -128,6 +129,7 @@ void ARespawnTree::Interact(APlayerController* Controller, APawn* Pawn, UPrimiti
 	{
 		SetActive();
 	}
+
 	SetRespawnPoint(Player, true);
 }
 
