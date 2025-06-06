@@ -98,6 +98,9 @@ void UPRFMainMenu::HandleNewGameMenu()
 	}
 	else
 	{
+		//GetUIManager()->SetMenuState(EPRFUIState::Waiting);
+		//GetUIManager()->CloseAllMenus(EPRFUIState::Gameplay);
+
 		PlayerSaveSubsystem->StartNewGame();
 	}
 }
