@@ -38,7 +38,7 @@ protected:
 	bool bOverrideCurrentVelocity = false;
 
 	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "s"))
-	float SpikeBrakeDuration = 0.75f;
+	float SpikeBrakeMaxPressedDuration = 0.75f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "cm"))
 	float SpikeBrakeTraceLength = 200.0f;
@@ -51,7 +51,7 @@ private:
 
 	float CoyoteTime = 0.0f;
 
-	float SpikeBrakeTime = 0.0f;
+	float SpikeBrakePressedDuration = 0.0f;
 
 	bool bHasPressedInteraction = false;
 

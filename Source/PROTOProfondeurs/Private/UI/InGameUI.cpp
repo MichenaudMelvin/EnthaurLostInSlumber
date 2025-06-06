@@ -12,7 +12,10 @@ void UInGameUI::NativeConstruct()
 	Super::NativeConstruct();
 
 	Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	Player->OnAmberUpdate.AddDynamic(this, &UInGameUI::OnAmberUpdate);
+	if (Player)
+	{
+		Player->OnAmberUpdate.AddDynamic(this, &UInGameUI::OnAmberUpdate);
+	}
 }
 
 void UInGameUI::SetPropulsionActive(bool active)

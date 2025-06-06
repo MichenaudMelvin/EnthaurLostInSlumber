@@ -11,7 +11,7 @@
     "GUID": "{EE92B861-4D84-4707-9C17-9DF23002C642}",
     "Color": "4",
     "Language": "SFX",
-    "Hash": "{BC95C614-4E18-E529-BAEC-90D998BC5B6B}",
+    "Hash": "{63ABA76B-5984-A618-EA80-867152EA5DA2}",
     "ObjectPath": "\\SoundBanks\\WU_AMB\\SB_AMB",
     "ShortName": "SB_AMB",
     "Path": "SB_AMB.bnk",
@@ -23,6 +23,14 @@
       "Location": "Memory",
       "ShortName": "AMB_Pad_Rfx_DistantScream_12.wav",
       "CachePath": "89/{8942449A-973B-9A85-1F1B-EF054CC357C3}.wem"
+     },
+     {
+      "Id": "79017697",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_04.wav",
+      "CachePath": "47/{47D269AE-96F1-4CBE-AFEB-CEACBFB23732}.wem"
      },
      {
       "Id": "84916266",
@@ -49,6 +57,14 @@
       "CachePath": "3D/{3DF201E4-B1AF-6709-60D2-14B4BCC868C4}.wem"
      },
      {
+      "Id": "215594251",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_03.wav",
+      "CachePath": "28/{28045F6D-1BAF-4662-0C59-AC4960A862B9}.wem"
+     },
+     {
       "Id": "427151800",
       "Language": "SFX",
       "Streaming": "false",
@@ -63,6 +79,22 @@
       "Location": "Memory",
       "ShortName": "AMB_Pad_01_LP.wav",
       "CachePath": "C7/{C75BEDBD-9EEB-4B10-6192-A81EFE78DAD4}.wem"
+     },
+     {
+      "Id": "481136108",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_02.wav",
+      "CachePath": "3D/{3D7CD4A4-3EA2-11A9-6DE9-0B445E86A143}.wem"
+     },
+     {
+      "Id": "610405175",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Growl.wav",
+      "CachePath": "FD/{FD24ADA8-0B76-6E66-4D27-57B44205A739}.wem"
      },
      {
       "Id": "630202445",
@@ -103,6 +135,14 @@
       "Location": "Memory",
       "ShortName": "AMB_Pad_Rfx_DistantScream_03.wav",
       "CachePath": "1C/{1CFF8B7F-A2B7-8A98-C065-1359BC2E111D}.wem"
+     },
+     {
+      "Id": "788512206",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_01.wav",
+      "CachePath": "23/{2322FBBA-5EB7-5038-2A1E-FE75DD1308B3}.wem"
      },
      {
       "Id": "798986114",
@@ -147,10 +187,11 @@
     ],
     "Events": [
      {
-      "Id": "2123200850",
-      "Name": "AMB_General",
-      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_General",
-      "GUID": "{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}",
+      "Id": "2511814352",
+      "Name": "AMB_BREATH",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_BREATH",
+      "GUID": "{AA87B9BB-78F7-4E1B-B3CB-35E5EF3E9618}",
+      "Color": "4",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -169,19 +210,10 @@
         "Id": "427151800"
        },
        {
-        "Id": "452759638"
-       },
-       {
-        "Id": "630202445"
-       },
-       {
         "Id": "678510795"
        },
        {
         "Id": "726580023"
-       },
-       {
-        "Id": "743489974"
        },
        {
         "Id": "745301015"
@@ -193,19 +225,75 @@
         "Id": "863142678"
        },
        {
-        "Id": "879024324"
-       },
-       {
         "Id": "964612303"
        },
        {
         "Id": "1059098210"
        }
       ]
+     },
+     {
+      "Id": "4111363768",
+      "Name": "AMB_CORRUPTEDZONE",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_CORRUPTEDZONE",
+      "GUID": "{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "79017697"
+       },
+       {
+        "Id": "215594251"
+       },
+       {
+        "Id": "481136108"
+       },
+       {
+        "Id": "788512206"
+       }
+      ]
+     },
+     {
+      "Id": "3804067178",
+      "Name": "AMB_GAMEPLAY",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_GAMEPLAY",
+      "GUID": "{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "452759638"
+       },
+       {
+        "Id": "630202445"
+       },
+       {
+        "Id": "743489974"
+       },
+       {
+        "Id": "879024324"
+       }
+      ]
+     },
+     {
+      "Id": "836234157",
+      "Name": "AMB_GROWL",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_GROWL",
+      "GUID": "{BB85019A-5DFC-4CC8-BFD0-42EC5081E445}",
+      "Color": "4",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "5.9198213",
+      "MediaRefs": [
+       {
+        "Id": "610405175"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{86EFF323-80A5-2071-94C6-56366A56A4C5}"
+  "FileHash": "{987C4D3A-8F2D-5108-6DF2-27DAF9CED0D2}"
  }
 }

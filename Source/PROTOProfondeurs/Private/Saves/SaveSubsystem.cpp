@@ -29,7 +29,7 @@ bool USaveSubsystem::DeleteSave(const int SaveIndex)
 	FString SlotName = SaveObject->GetSlotName();
 	SlotName += FString::FromInt(SaveIndex);
 
-	return UGameplayStatics::DeleteGameInSlot(SlotName, SaveIndex);
+	return UGameplayStatics::DeleteGameInSlot(SlotName, 0);
 }
 
 UDefaultSave* USaveSubsystem::SaveToSlot(const int SaveIndex)
@@ -73,6 +73,11 @@ UDefaultSave* USaveSubsystem::LoadSave(const int SaveIndex, const bool bCreateNe
 	}
 
 	return nullptr;
+}
+
+bool USaveSubsystem::DoesSaveGameExist(const int SaveIndex)
+{
+	return IsValid(LoadSave(0, false));
 }
 
 void USaveSubsystem::ResetSaveToDefault(const int SaveIndex)

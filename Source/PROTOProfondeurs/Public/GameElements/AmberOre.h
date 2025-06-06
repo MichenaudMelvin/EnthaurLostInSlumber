@@ -64,7 +64,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Amber")
 	TObjectPtr<UStaticMesh> SourceMesh;
 
-	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	UPROPERTY(EditAnywhere, Category = "Amber")
 	EAmberType AmberType = EAmberType::NecroseAmber;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")

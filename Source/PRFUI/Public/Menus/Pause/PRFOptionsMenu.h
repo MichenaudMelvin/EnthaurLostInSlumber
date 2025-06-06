@@ -8,6 +8,7 @@
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Menus/PRFWidgetBasics.h"
+#include "Menus/Elements/PRFCustomSlider.h"
 #include "PRFOptionsMenu.generated.h"
 
 /**
@@ -33,10 +34,10 @@ protected:
 	TObjectPtr<UPRFCustomButton> MouseSensitivityButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<USlider> OverallVolumeSlider;
+	TObjectPtr<UPRFCustomSlider> OverallVolumeSlider;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<USlider> MouseSensitivitySlider;
+	TObjectPtr<UPRFCustomSlider> MouseSensitivitySlider;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UPRFCustomButton> InvertMouseAxisButton;
