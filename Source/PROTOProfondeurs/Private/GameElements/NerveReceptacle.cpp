@@ -105,6 +105,9 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 
 void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 {
+	IsConnected = !IsConnected;
+	OnNerveDisconnect(IsConnected);
+	
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
 
