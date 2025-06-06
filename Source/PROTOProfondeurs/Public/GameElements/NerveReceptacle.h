@@ -82,12 +82,17 @@ private:
 	UPROPERTY()
 	TObjectPtr<ANerve> KeepInMemoryNerve;
 
+	bool IsConnected;
+
 public:
 	void TriggerLinkedObjects(class ANerve* Nerve);
 
 	// Create Event
 	UFUNCTION(BlueprintImplementableEvent, Category = "Nerve")
 	void OnNerveConnect();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Nerve")
+	void OnNerveDisconnect(bool isConnected);
 
 	const FTransform& GetAttachTransform() const {return NerveEndTargetTransform;}
 
