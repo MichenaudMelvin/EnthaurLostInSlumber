@@ -11,7 +11,7 @@
     "GUID": "{41F7B312-D5F8-4A85-B3D3-117556F8AED5}",
     "Color": "13",
     "Language": "SFX",
-    "Hash": "{E8820A89-AC08-FC9D-7ECD-E2494CC6871E}",
+    "Hash": "{B199B3ED-5706-F6AD-F944-E18C5AC004CC}",
     "ObjectPath": "\\SoundBanks\\WU_MC\\SB_MC",
     "ShortName": "SB_MC",
     "Path": "SB_MC.bnk",
@@ -145,6 +145,14 @@
       "CachePath": "12/{127E52AD-E861-F73D-3ACD-12822CD13784}.wem"
      },
      {
+      "Id": "171841650",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_12.wav",
+      "CachePath": "39/{390995E2-6BBF-A3C6-B318-6CE13E0A8281}.wem"
+     },
+     {
       "Id": "229119786",
       "Language": "SFX",
       "Streaming": "false",
@@ -159,6 +167,14 @@
       "Location": "Memory",
       "ShortName": "MC_Jump_Muscle_03.wav",
       "CachePath": "C5/{C5C5CEB7-8E6F-671E-56F2-0F32E611EEA3}.wem"
+     },
+     {
+      "Id": "262194432",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_11.wav",
+      "CachePath": "FB/{FB4DAB97-BE21-1B8A-80ED-8C4E1FBB2B44}.wem"
      },
      {
       "Id": "264453376",
@@ -185,12 +201,36 @@
       "CachePath": "A0/{A0911792-D4D1-6666-C769-B3DE70B60F84}.wem"
      },
      {
+      "Id": "317040080",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Walk_03.wav",
+      "CachePath": "81/{811D2405-2B7B-703B-EDB2-6480B02FB1D0}.wem"
+     },
+     {
       "Id": "319076555",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MC_FS_Run_Bone_09.wav",
       "CachePath": "1F/{1F2E6F83-DA0F-E12B-419D-5524E070384E}.wem"
+     },
+     {
+      "Id": "330044548",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Walk_01.wav",
+      "CachePath": "FE/{FE08EDD7-0993-1DC5-030A-5E7571D3DD1B}.wem"
+     },
+     {
+      "Id": "331087580",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_10.wav",
+      "CachePath": "FF/{FFAA78DA-3CEE-0979-B00F-C55049191365}.wem"
      },
      {
       "Id": "332559977",
@@ -281,6 +321,14 @@
       "CachePath": "B0/{B09E6C93-78E4-13FD-1F61-8AE26C83DD3A}.wem"
      },
      {
+      "Id": "435669612",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_13.wav",
+      "CachePath": "E3/{E3F13A27-8A42-7E89-A986-2BCA1C84B278}.wem"
+     },
+     {
       "Id": "437799950",
       "Language": "SFX",
       "Streaming": "false",
@@ -305,12 +353,28 @@
       "CachePath": "AF/{AF09738F-9155-E0C8-561C-276A042FB87C}.wem"
      },
      {
+      "Id": "459494553",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Walk_02.wav",
+      "CachePath": "2B/{2BB70A05-224F-D32E-B592-08466B6C5D2C}.wem"
+     },
+     {
       "Id": "462097835",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MC_FS_Walk_Muscle_12.wav",
       "CachePath": "17/{17F792DF-8204-5FBF-F171-164CA3862F7B}.wem"
+     },
+     {
+      "Id": "489955890",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Walk_05.wav",
+      "CachePath": "F4/{F47F317C-D8A6-97D4-64E9-D216C3EA46DE}.wem"
      },
      {
       "Id": "494945728",
@@ -345,6 +409,14 @@
       "CachePath": "46/{46E8D283-DE88-CA31-A492-82A72DF1196C}.wem"
      },
      {
+      "Id": "524436829",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_09.wav",
+      "CachePath": "D2/{D2DD304D-86CD-EF26-A0C2-DEC4F0181900}.wem"
+     },
+     {
       "Id": "526774861",
       "Language": "SFX",
       "Streaming": "false",
@@ -359,6 +431,14 @@
       "Location": "Memory",
       "ShortName": "MC_FS_Run_Muscle_16.wav",
       "CachePath": "5B/{5B9A3EF1-4276-AE88-9280-FE321E937370}.wem"
+     },
+     {
+      "Id": "540850573",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_05.wav",
+      "CachePath": "8E/{8E5B414E-0787-31FF-6400-0EE57234FF98}.wem"
      },
      {
       "Id": "549898339",
@@ -391,6 +471,22 @@
       "Location": "Memory",
       "ShortName": "MC_FS_Run_Bone_03.wav",
       "CachePath": "93/{931F6C55-3803-288B-2FAC-D392CFB59DFB}.wem"
+     },
+     {
+      "Id": "566871023",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_14.wav",
+      "CachePath": "B5/{B5DCCDE3-FC40-E57E-17F4-19B7454693DE}.wem"
+     },
+     {
+      "Id": "570499991",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Walk_08.wav",
+      "CachePath": "A2/{A2B9A493-16F1-BB6C-AC4C-3F502D442526}.wem"
      },
      {
       "Id": "577559714",
@@ -433,6 +529,22 @@
       "CachePath": "86/{860565A0-5FED-93C4-4A74-C513FC513AAE}.wem"
      },
      {
+      "Id": "659827578",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Walk_09.wav",
+      "CachePath": "B5/{B572CBD0-B167-8302-5FFD-577101BEDC45}.wem"
+     },
+     {
+      "Id": "660425283",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Walk_06.wav",
+      "CachePath": "02/{025754D1-C097-2BF8-7D54-AF6B6AD6E0E5}.wem"
+     },
+     {
       "Id": "674355835",
       "Language": "SFX",
       "Streaming": "false",
@@ -447,6 +559,14 @@
       "Location": "Memory",
       "ShortName": "MC_FS_Run_Muscle_05.wav",
       "CachePath": "C8/{C8D00F5A-85BB-0F2A-309B-BDD47BA1C011}.wem"
+     },
+     {
+      "Id": "697774580",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_06.wav",
+      "CachePath": "52/{52C74C93-E2E9-C67C-49FE-E46B70B1A660}.wem"
      },
      {
       "Id": "724073063",
@@ -497,6 +617,14 @@
       "CachePath": "8F/{8F264F06-23FA-A412-6D74-677C97258AF7}.wem"
      },
      {
+      "Id": "794150962",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_02.wav",
+      "CachePath": "3A/{3AD7B48F-CD6A-64FC-8493-8889E09AD395}.wem"
+     },
+     {
       "Id": "805164583",
       "Language": "SFX",
       "Streaming": "false",
@@ -537,12 +665,28 @@
       "CachePath": "2A/{2A708357-3DA4-9BA6-281D-63C5D7DC4D70}.wem"
      },
      {
+      "Id": "881039563",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Walk_07.wav",
+      "CachePath": "32/{3254FCC8-B77F-9D1A-E0ED-B0E017B78933}.wem"
+     },
+     {
       "Id": "883538372",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MC_FS_Run_Bone_07.wav",
       "CachePath": "C8/{C870E6AD-8786-05E2-0596-91DAF6D5525D}.wem"
+     },
+     {
+      "Id": "889515880",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_04.wav",
+      "CachePath": "3B/{3B49911E-F170-DC4B-F3E4-30F2297FC728}.wem"
      },
      {
       "Id": "908600791",
@@ -649,6 +793,14 @@
       "CachePath": "4D/{4D7D06E3-AD35-A6B9-5879-24ABFBC88336}.wem"
      },
      {
+      "Id": "1013574032",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MC_Cloth_Run_01.wav",
+      "CachePath": "9D/{9DB03DA6-6CC6-80FE-C6FE-74D8AD282D37}.wem"
+     },
+     {
       "Id": "1015742993",
       "Language": "SFX",
       "Streaming": "false",
@@ -674,6 +826,95 @@
      }
     ],
     "Events": [
+     {
+      "Id": "1497366975",
+      "Name": "Play_MC_Cloth",
+      "ObjectPath": "\\Events\\Wu_MC_Event\\Play_MC_Cloth",
+      "GUID": "{69FE522F-23A7-4F90-9BC1-5A201A346C39}",
+      "Color": "13",
+      "DurationType": "OneShot",
+      "DurationMin": "0.237573",
+      "DurationMax": "1.1387886",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "675352309",
+         "Id": "712161704",
+         "GUID": "{37199D4B-2906-4A43-ADE9-1164C8E55247}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "171841650"
+         },
+         {
+          "Id": "262194432"
+         },
+         {
+          "Id": "331087580"
+         },
+         {
+          "Id": "435669612"
+         },
+         {
+          "Id": "524436829"
+         },
+         {
+          "Id": "540850573"
+         },
+         {
+          "Id": "566871023"
+         },
+         {
+          "Id": "697774580"
+         },
+         {
+          "Id": "794150962"
+         },
+         {
+          "Id": "889515880"
+         },
+         {
+          "Id": "1013574032"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "675352309",
+         "Id": "2108779966",
+         "GUID": "{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "317040080"
+         },
+         {
+          "Id": "330044548"
+         },
+         {
+          "Id": "459494553"
+         },
+         {
+          "Id": "489955890"
+         },
+         {
+          "Id": "570499991"
+         },
+         {
+          "Id": "659827578"
+         },
+         {
+          "Id": "660425283"
+         },
+         {
+          "Id": "881039563"
+         }
+        ]
+       }
+      ]
+     },
      {
       "Id": "4277858155",
       "Name": "Play_SW_MC_FS_Speed",
@@ -939,6 +1180,15 @@
          }
         ]
        }
+      ],
+      "ActionPostEvent": [
+       {
+        "Id": "1497366975",
+        "Name": "Play_MC_Cloth",
+        "ObjectPath": "\\Events\\Wu_MC_Event\\Play_MC_Cloth",
+        "GUID": "{69FE522F-23A7-4F90-9BC1-5A201A346C39}",
+        "Color": "13"
+       }
       ]
      },
      {
@@ -1104,6 +1354,6 @@
     ]
    }
   ],
-  "FileHash": "{611A28C1-B557-CBF8-B6A9-4486DA4133AC}"
+  "FileHash": "{561AFF1C-FCDE-1422-CD09-1A3DB4E4F913}"
  }
 }

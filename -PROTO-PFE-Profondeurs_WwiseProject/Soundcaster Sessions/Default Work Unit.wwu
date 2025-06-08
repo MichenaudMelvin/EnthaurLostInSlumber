@@ -65,12 +65,20 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AMB_CORRUPTEDZONE" ID="{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
-							<Position X="1" Y="0"/>
+							<ObjectRef Name="AMB_GROWL" ID="{BB85019A-5DFC-4CC8-BFD0-42EC5081E445}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<Position X="1" Y="2"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="AMB_BREATH" ID="{AA87B9BB-78F7-4E1B-B3CB-35E5EF3E9618}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
 							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AMB_WEAKENEDZONE" ID="{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<Position X="4" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AMB_CORRUPTEDZONE" ID="{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<Position X="4" Y="1"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
