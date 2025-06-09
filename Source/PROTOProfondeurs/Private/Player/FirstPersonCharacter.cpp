@@ -99,25 +99,25 @@ void AFirstPersonCharacter::BeginPlay()
 		return;
 	}
 
-// 	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CharacterSettings->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
-// 	if (!CameraShake)
-// 	{
-// 		return;
-// 	}
-//
-// 	UViewBobbing* CastedCameraShake = Cast<UViewBobbing>(CameraShake);
-// 	if (!CastedCameraShake)
-// 	{
-// #if WITH_EDITOR
-// 		const FString Message = FString::Printf(TEXT("ViewBobbingClass in %s is class of %s but should be %s"), *CharacterSettings->GetClass()->GetName(), *CameraShake->GetClass()->GetName(), *UViewBobbing::StaticClass()->GetName());
-//
-// 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
-// 		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
-// #endif
-// 		return;
-// 	}
-//
-// 	ViewBobbing = CastedCameraShake;
+	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CharacterSettings->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
+	if (!CameraShake)
+	{
+		return;
+	}
+
+	UViewBobbing* CastedCameraShake = Cast<UViewBobbing>(CameraShake);
+	if (!CastedCameraShake)
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("ViewBobbingClass in %s is class of %s but should be %s"), *CharacterSettings->GetClass()->GetName(), *CameraShake->GetClass()->GetName(), *UViewBobbing::StaticClass()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	ViewBobbing = CastedCameraShake;
 
 	DefaultFootStepEvent = FootstepsSounds->AkAudioEvent;
 

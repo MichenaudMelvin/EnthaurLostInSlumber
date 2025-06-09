@@ -29,6 +29,26 @@ FWaveOscillator UViewBobbing::GetOscillator() const
 	return ShakePattern->Z;
 }
 
+float UViewBobbing::GetLocationAmplitudeMultiplier() const
+{
+	if (!ShakePattern)
+	{
+		return 0.0f;
+	}
+
+	return ShakePattern->LocationAmplitudeMultiplier;
+}
+
+float UViewBobbing::GetLocationFrequencyMultiplier() const
+{
+	if (!ShakePattern)
+	{
+		return 0.0f;
+	}
+
+	return ShakePattern->LocationFrequencyMultiplier;
+}
+
 FWaveOscillator UViewBobbing::GetEmptyOscillator()
 {
 	FWaveOscillator DefaultOscillator;
@@ -38,12 +58,14 @@ FWaveOscillator UViewBobbing::GetEmptyOscillator()
 	return DefaultOscillator;
 }
 
-void UViewBobbing::SetOscillator(const FWaveOscillator& Oscillator) const
+void UViewBobbing::SetOscillator(const FWaveOscillator& Oscillator, float InLocationAmplitudeMultiplier, float InLocationFrequencyMultiplier) const
 {
 	if (!ShakePattern)
 	{
 		return;
 	}
 
+	ShakePattern->LocationAmplitudeMultiplier = InLocationAmplitudeMultiplier;
+	ShakePattern->LocationFrequencyMultiplier = InLocationFrequencyMultiplier;
 	ShakePattern->Z = Oscillator;
 }
