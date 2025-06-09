@@ -11,7 +11,7 @@
     "GUID": "{92562EA4-4CDC-4038-871C-53EA57EE68B8}",
     "Color": "24",
     "Language": "SFX",
-    "Hash": "{9B3C253A-747B-7422-D5C3-6DE0310DD588}",
+    "Hash": "{7CC778C0-3672-72A1-5EAC-2F80ADD42F06}",
     "ObjectPath": "\\SoundBanks\\WU_UI\\SB_UI",
     "ShortName": "SB_UI",
     "Path": "SB_UI.bnk",
@@ -47,6 +47,14 @@
       "Location": "Memory",
       "ShortName": "UI_PauseMenu_Exit.wav",
       "CachePath": "45/{4510B96D-69CE-10C3-948D-99BA187E09FF}.wem"
+     },
+     {
+      "Id": "983294714",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Pausemenu_SpalshScreen_Continue.wav",
+      "CachePath": "E6/{E634AE25-A4BF-5FEB-DFEC-69C150DCDC1A}.wem"
      }
     ],
     "Events": [
@@ -109,10 +117,25 @@
         "Id": "321341764"
        }
       ]
+     },
+     {
+      "Id": "3134029911",
+      "Name": "UI_Pausemenu_SplashScreen_Continue",
+      "ObjectPath": "\\Events\\WU_UI\\UI_Pausemenu_SplashScreen_Continue",
+      "GUID": "{76D9CB8F-97AF-46F2-A168-BC70655A11D9}",
+      "Color": "24",
+      "DurationType": "OneShot",
+      "DurationMin": "2.5584412",
+      "DurationMax": "3.17722",
+      "MediaRefs": [
+       {
+        "Id": "983294714"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{25B204E0-DE28-6073-902E-226492B4D64D}"
+  "FileHash": "{4BF04F30-45EB-DCF3-2982-AD4DA26135EA}"
  }
 }

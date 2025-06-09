@@ -6,15 +6,11 @@
 				<SoundcasterSession Name="New Soundcaster Session" ID="{14DBD87B-1FEE-4408-8889-60CC189B9217}">
 					<ModuleList>
 						<Module>
-							<ObjectRef Name="Play_SFX_Electricty" ID="{5C28218F-535A-43B7-9CD4-681EEC44DF40}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
-							<Position X="0" Y="0"/>
-						</Module>
-						<Module>
 							<ObjectRef Name="AMB_Breath" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
 							<Position X="0" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_SFX_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="Play_LPX_Nerve_Stretch" ID="{86D55011-33D5-488E-A299-439AE1860B89}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
@@ -24,6 +20,10 @@
 						<Module>
 							<ObjectRef Name="Play_SFX_Muscle_Soft" ID="{F84BABDD-28BD-412A-95A6-5FDDB1D95432}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
 							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Stop_LPX_Nerve_Stretch" ID="{C2BCB29F-3574-4185-A670-2E3B736BB478}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<Position X="2" Y="1"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="Play_SFX_Muscle_Hard" ID="{704DF249-C842-4399-A326-E93C5BDA66B8}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
@@ -52,7 +52,9 @@
 							<Value>100</Value>
 						</RTPCValue>
 					</RTPCValueList>
-					<CurrentStateList ShowAll="true"/>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="None" ID="{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"/>
+					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
 						<CurrentSwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
 						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>

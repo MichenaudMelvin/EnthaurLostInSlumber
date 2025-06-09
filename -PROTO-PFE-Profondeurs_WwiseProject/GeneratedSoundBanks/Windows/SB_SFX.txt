@@ -3,6 +3,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	688124889	Play_SFX_Grab_Nerve			\WU_SFX_Event\Play_SFX_Grab_Nerve	
 	789176004	Play_SFX_Make_Hard			\WU_SFX_Event\Play_SFX_Make_Hard	
 	895316894	Stop_Elevator			\WU_SFX_Event\Stop_Elevator	
+	930710263	Stop_LPX_Nerve_Stretch			\WU_SFX_Event\Stop_LPX_Nerve_Stretch	
 	1373430044	Play_SFX_NerveReceptacle_Activate			\WU_SFX_Event\Play_SFX_NerveReceptacle_Activate	
 	1529896519	Play_SFX_Make_Soft			\WU_SFX_Event\Play_SFX_Make_Soft	
 	1965005713	Play_SFX_Electricity			\WU_SFX_Event\Play_SFX_Electricity	
