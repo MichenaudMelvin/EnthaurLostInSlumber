@@ -55,10 +55,15 @@
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>4</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="ATT_50m" ID="{D90AF8F5-6CCB-43C3-BAB5-35D226462AE3}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+									<ObjectRef Name="ATT_20m" ID="{2A4ACBEE-A8B8-448F-A919-CAD4FCE6E6AB}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -824,8 +829,13 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
+																				<XPos>85.714</XPos>
+																				<YPos>-1079</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
 																				<XPos>100</XPos>
-																				<YPos>-864</YPos>
+																				<YPos>-1408</YPos>
 																				<Flags>37</Flags>
 																			</Point>
 																		</PointList>
@@ -1009,8 +1019,13 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
+																				<XPos>85.71429</XPos>
+																				<YPos>-1079</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
 																				<XPos>100</XPos>
-																				<YPos>-832</YPos>
+																				<YPos>-1248</YPos>
 																				<Flags>37</Flags>
 																			</Point>
 																		</PointList>
@@ -1896,6 +1911,62 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="SFX_Plant_Growth" ID="{F9F63C10-3915-404B-A773-746BF5C1938D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="AMB_Muscle" ID="{C3D9CD73-42C1-439F-B6B9-E9DD84149286}" ShortID="777212376">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="ATT_10m" ID="{4071E954-4A9E-41CD-8DCF-D6D59AC5EAE3}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="AMB_Muscle" ID="{C13250C8-D76F-43F5-8246-71647C9353DD}">
+									<Language>SFX</Language>
+									<AudioFile>AMB_Muscle.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="433441082"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="AMB_Muscle" ID="{C13250C8-D76F-43F5-8246-71647C9353DD}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Elevator_Stop" ID="{6DB15B6C-C30A-479E-BF72-5D420434778F}" ShortID="648670547">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Elevator_Stop" ID="{0E5C2806-3C50-4E45-8414-B2AFCD1DE445}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Elevator_Stop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="628782229"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Elevator_Stop" ID="{0E5C2806-3C50-4E45-8414-B2AFCD1DE445}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>

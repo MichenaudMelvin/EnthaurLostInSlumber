@@ -11,7 +11,7 @@
     "GUID": "{EE92B861-4D84-4707-9C17-9DF23002C642}",
     "Color": "4",
     "Language": "SFX",
-    "Hash": "{DC4D84C5-3EB7-F486-B441-3CB72B06A0C8}",
+    "Hash": "{4B873E92-4418-108D-2769-3138426DF5C7}",
     "ObjectPath": "\\SoundBanks\\WU_AMB\\SB_AMB",
     "ShortName": "SB_AMB",
     "Path": "SB_AMB.bnk",
@@ -79,6 +79,14 @@
       "Location": "Memory",
       "ShortName": "AMB_Pad_Rfx_DistantScream_06.wav",
       "CachePath": "37/{37E95FD6-0EB7-FB66-429C-1217CB7D8EF3}.wem"
+     },
+     {
+      "Id": "433441082",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Muscle.wav",
+      "CachePath": "D2/{D2EE14C5-490D-FB54-66B9-0B02E1F0E0CD}.wem"
      },
      {
       "Id": "452759638",
@@ -373,6 +381,22 @@
         "GUID": "{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"
        }
       ]
+     },
+     {
+      "Id": "2398966016",
+      "Name": "Play_AMB_Muscle",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\Play_AMB_Muscle",
+      "GUID": "{BCBDDE4B-360C-46C5-8D5C-992EDA263D15}",
+      "Color": "4",
+      "MaxAttenuation": "1000",
+      "DurationType": "OneShot",
+      "DurationMin": "14.5",
+      "DurationMax": "14.5",
+      "MediaRefs": [
+       {
+        "Id": "433441082"
+       }
+      ]
      }
     ],
     "StateGroups": [
@@ -405,6 +429,6 @@
     ]
    }
   ],
-  "FileHash": "{36444C75-573A-2197-C1F7-59DBB2EE09ED}"
+  "FileHash": "{78CD404C-3654-A045-248D-67F39F837200}"
  }
 }
