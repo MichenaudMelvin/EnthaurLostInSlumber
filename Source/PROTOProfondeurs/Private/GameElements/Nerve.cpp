@@ -69,6 +69,8 @@ void ANerve::OnConstruction(const FTransform& Transform)
 
 	ResetCables(false);
 
+	NerveBall->SetStaticMesh(ClosedMesh);
+
 	if (StartCableLength > CableMaxExtension)
 	{
 		CableMaxExtension = StartCableLength + 1000.0f;
@@ -551,6 +553,7 @@ void ANerve::AttachNerveBall(AActor* ActorToAttach)
 	bShouldApplyCablePhysics = true;
 
 	FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
+	NerveBall->SetStaticMesh(OpenedMesh);
 	NerveBall->AttachToComponent(ActorToAttach->GetRootComponent(), Rules);
 	NerveBall->SetRelativeLocation(GetDefault<UCharacterSettings>()->PawnGrabObjectOffset);
 }
@@ -569,6 +572,7 @@ void ANerve::DetachNerveBall(bool bForceDetachment)
 	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, true);
 	NerveBall->AttachToComponent(RootComponent, Rules);
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	NerveBall->SetStaticMesh(ClosedMesh);
 
 	SplineCable->AddSplinePointAtIndex(DefaultNervePosition, 1, ESplineCoordinateSpace::World, true);
 	SplineCable->SetTangentAtSplinePoint(1, FVector::ZeroVector, ESplineCoordinateSpace::Local);
