@@ -20,8 +20,9 @@ protected:
 	virtual void NativeDestruct() override;
 
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void RespawnPlayer();
+	
 	UFUNCTION()
 	void BackToMainMenu();
 
