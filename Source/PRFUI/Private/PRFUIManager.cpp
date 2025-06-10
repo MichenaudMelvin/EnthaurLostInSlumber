@@ -42,6 +42,32 @@ void UPRFUIManager::CreateAllWidgets()
 	RestartConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->RestartConfirmationMenuClass);
 
 	OnWidgetsCreated.Broadcast();
+
+	AFirstPersonController* FirstPersonController =  Cast<AFirstPersonController>(PlayerController);
+	if (!IsValid(FirstPersonController))
+	{
+		return;
+	}
+
+	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
+	if (!IsValid(LocalPlayer))
+	{
+		return;
+	}
+	
+	UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+	if (!IsValid(InputSubsystem))
+	{
+		return;
+	}
+
+	CurrentState = EPRFUIState::Gameplay;
+	InputSubsystem->ClearAllMappings();
+	InputSubsystem->AddMappingContext(Cast<IPRFControllerMappingContext>(FirstPersonController)->GetDefaultMappingContext(), 0);
+	SetGameInputMode();
+	FirstPersonController->SetPause(false);
+		
+	FirstPersonController->ClearPlayerInputs();
 }
 
 void UPRFUIManager::OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues)
@@ -177,12 +203,6 @@ void UPRFUIManager::SetMenuState(EPRFUIState InUIState)
 
 void UPRFUIManager::CheckMenuState()
 {
-	UWorld* World = GEngine->GetCurrentPlayWorld();
-	if (!IsValid(World))
-	{
-		return;
-	}
-	
 	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
 	if (!IsValid(LocalPlayer))
 	{
@@ -206,7 +226,7 @@ void UPRFUIManager::CheckMenuState()
 		return;
 	}
 
-	if (CurrentState == EPRFUIState::Waiting)
+	if (CurrentState == EPRFUIState::Waiting && !MenuStack.IsEmpty())
 	{
 		return;
 	}

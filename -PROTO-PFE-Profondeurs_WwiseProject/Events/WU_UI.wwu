@@ -51,6 +51,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="UI_Pausemenu_SplashScreen_Continue" ID="{76D9CB8F-97AF-46F2-A168-BC70655A11D9}">
+					<ChildrenList>
+						<Action Name="" ID="{F1558550-F24E-44B0-A137-11C62A46224F}" ShortID="740738065">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="UI_Pausemenu_SpalshScreen_Continue" ID="{631CE746-53A9-4845-94C3-2DC2ED1E0674}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

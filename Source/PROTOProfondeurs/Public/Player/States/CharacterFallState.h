@@ -43,8 +43,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "cm"))
 	float SpikeBrakeTraceLength = 200.0f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "s"))
+	float SpikeBrakeDelay = 0.5f;
+
 	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake")
-	TEnumAsByte<ECollisionChannel> SpikeBrakeTraceTypeQuery = ECC_GameTraceChannel1;
+	TArray<TEnumAsByte<EObjectTypeQuery>> SpikeBrakeObjectTypeQuery;
 
 private:
 	bool bCanDoCoyoteTime = false;
@@ -52,6 +55,8 @@ private:
 	float CoyoteTime = 0.0f;
 
 	float SpikeBrakePressedDuration = 0.0f;
+
+	float SpikeBrakeTimer = 0.0f;
 
 	bool bHasPressedInteraction = false;
 

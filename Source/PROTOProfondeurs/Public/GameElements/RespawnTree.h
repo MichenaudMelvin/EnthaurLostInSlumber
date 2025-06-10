@@ -8,6 +8,7 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "RespawnTree.generated.h"
 
+class UBoxComponent;
 class UAkComponent;
 class AFirstPersonCharacter;
 class UAkAudioEvent;
@@ -34,6 +35,11 @@ protected:
 
 	virtual void Destroyed() override;
 
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+	UFUNCTION()
+	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 	UFUNCTION()
 	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
@@ -45,13 +51,13 @@ protected:
 	TObjectPtr<USceneComponent> RootComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
+	TObjectPtr<UBoxComponent> TriggerBox;
+
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<UStaticMeshComponent> TreeModel;
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<class UInteractableComponent> Interaction;
-
-	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
-	TObjectPtr<USceneComponent> RespawnPoint;
 
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> Material;

@@ -8,6 +8,9 @@ public class PROTOProfondeurs : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
+		CircularlyReferencedDependentModules.Add("PRFUI");
+		CircularlyReferencedDependentModules.Add("DepthAIModule");
+
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"CableComponent",

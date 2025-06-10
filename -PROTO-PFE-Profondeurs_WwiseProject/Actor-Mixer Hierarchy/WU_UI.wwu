@@ -156,6 +156,28 @@
 								<ActiveSource Name="UI_PauseMenu_Hover" ID="{D312F219-FF4D-441C-BB69-143E99A9C8A5}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<Sound Name="UI_Pausemenu_SpalshScreen_Continue" ID="{631CE746-53A9-4845-94C3-2DC2ED1E0674}" ShortID="889925611">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="UI_Pausemenu_SpalshScreen_Continue" ID="{027298B1-7517-4FDD-B8B1-223E72FB7758}">
+									<Language>SFX</Language>
+									<AudioFile>UI_Pausemenu_SpalshScreen_Continue.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="983294714"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="UI_Pausemenu_SpalshScreen_Continue" ID="{027298B1-7517-4FDD-B8B1-223E72FB7758}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 			</ChildrenList>
