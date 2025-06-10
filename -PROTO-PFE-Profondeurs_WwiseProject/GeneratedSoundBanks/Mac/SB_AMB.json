@@ -11,7 +11,7 @@
     "GUID": "{EE92B861-4D84-4707-9C17-9DF23002C642}",
     "Color": "4",
     "Language": "SFX",
-    "Hash": "{80957E8E-03B9-931D-F5AE-817987056EDB}",
+    "Hash": "{DC4D84C5-3EB7-F486-B441-3CB72B06A0C8}",
     "ObjectPath": "\\SoundBanks\\WU_AMB\\SB_AMB",
     "ShortName": "SB_AMB",
     "Path": "SB_AMB.bnk",
@@ -346,6 +346,7 @@
       "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_VILLAGE_HEARTBEAT",
       "GUID": "{4F9B89C2-3761-41E6-BF81-653EEBA91D79}",
       "Color": "4",
+      "MaxAttenuation": "1500",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -404,6 +405,6 @@
     ]
    }
   ],
-  "FileHash": "{7F6C1DE8-CC7E-089B-131C-00A02810D0E2}"
+  "FileHash": "{36444C75-573A-2197-C1F7-59DBB2EE09ED}"
  }
 }

@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{7EFAFDF8-DE43-9E1B-FEBB-9697A477AF3C}",
+    "Hash": "{A47D4F03-220C-FA0F-1943-845369BDC1BC}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -265,6 +265,14 @@
       "CachePath": "86/{863C2335-BBA5-0250-A740-52464A860A41}.wem"
      },
      {
+      "Id": "523178003",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Plant_Growth.wav",
+      "CachePath": "70/{700725BF-50A0-A34D-0C47-D3FFE3CA86CA}.wem"
+     },
+     {
       "Id": "531951533",
       "Language": "SFX",
       "Streaming": "false",
@@ -407,6 +415,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Elevator_Start_03.wav",
       "CachePath": "FC/{FCCFF5C6-29D9-E426-7B81-DBEE894918D5}.wem"
+     },
+     {
+      "Id": "926594296",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_NerveReceptacle_Desactivate.wav",
+      "CachePath": "BA/{BAD973E0-72E3-25DD-F23C-DEEAA8388BAA}.wem"
      },
      {
       "Id": "992978286",
@@ -728,6 +744,36 @@
       ]
      },
      {
+      "Id": "241700254",
+      "Name": "Play_SFX_NerveReceptacle_Desactivate",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Desactivate",
+      "GUID": "{A94B20D5-2A8E-4301-A951-C09D4C0A7716}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.8333333",
+      "DurationMax": "0.8333333",
+      "MediaRefs": [
+       {
+        "Id": "926594296"
+       }
+      ]
+     },
+     {
+      "Id": "2288437117",
+      "Name": "Play_SFX_Plant_Growth",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Plant_Growth",
+      "GUID": "{EA587034-B04E-4D91-A9B1-4998FECBC59D}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.9",
+      "DurationMax": "1.9",
+      "MediaRefs": [
+       {
+        "Id": "523178003"
+       }
+      ]
+     },
+     {
       "Id": "3026607058",
       "Name": "Play_SFX_RespawnTree_Activate",
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_RespawnTree_Activate",
@@ -790,6 +836,6 @@
     ]
    }
   ],
-  "FileHash": "{7D47AA2B-B6D4-7032-08B8-04A1CF5C73D6}"
+  "FileHash": "{FFF78AC7-E660-3839-0976-E9629601E504}"
  }
 }

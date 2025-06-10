@@ -144,6 +144,7 @@
 											<XPos>0</XPos>
 											<YPos>0</YPos>
 											<Flags>5</Flags>
+											<SegmentShape>InvertedSCurve</SegmentShape>
 										</Point>
 										<Point>
 											<XPos>1500</XPos>
