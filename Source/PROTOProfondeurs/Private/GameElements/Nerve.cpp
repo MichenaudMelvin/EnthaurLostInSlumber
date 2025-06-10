@@ -193,11 +193,6 @@ void ANerve::AddSplineMesh(bool bMakeNoise)
 	FVector StartSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(StartDistance, ESplineCoordinateSpace::Local);
 	FVector EndSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(EndDistance, ESplineCoordinateSpace::Local);
 
-	if (bMakeNoise)
-	{
-		UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
-	}
-
 	FVector SplineDirection = UKismetMathLibrary::GetDirectionUnitVector(StartSplineLocation, EndSplineLocation);
 	SplineMesh->SetStartAndEnd(StartSplineLocation, SplineDirection, EndSplineLocation, SplineDirection, false);
 
@@ -213,8 +208,6 @@ void ANerve::RemoveSplineMesh()
 {
 	int LastIndex = SplineMeshes.Num() - 1;
 	TObjectPtr<USplineMeshComponent> SplineMesh = SplineMeshes[LastIndex];
-
-	UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
 
 	SplineMeshes.RemoveAt(LastIndex);
 	SplineMesh->DestroyComponent();
@@ -610,6 +603,7 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 			return;
 		}
 
+		CurrentAttachedReceptacle->DisableReceptacle();
 		CurrentAttachedReceptacle->TriggerLinkedObjects(this);
 		CurrentAttachedReceptacle = nullptr;
 	}

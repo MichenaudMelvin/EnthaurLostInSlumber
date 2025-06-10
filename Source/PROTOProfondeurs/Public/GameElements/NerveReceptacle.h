@@ -53,6 +53,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> GrowlNoise;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> EnabledNoise;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> DisabledNoise;
+
 #if WITH_EDITORONLY_DATA
 	/**
 	 * @brief Set visibility to true if you want to edit it
@@ -103,4 +109,6 @@ public:
 	FOnNerveAnimationFinished OnNerveAnimationFinished;
 
 	bool CanTheNerveBeTaken() const;
+
+	void DisableReceptacle();
 };

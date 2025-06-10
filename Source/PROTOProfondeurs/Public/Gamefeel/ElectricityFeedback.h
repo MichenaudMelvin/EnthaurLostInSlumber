@@ -21,13 +21,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	virtual void Destroyed() override;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UPostProcessComponent> Electricity;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Noises")
-	TObjectPtr<UAkAudioEvent> DestroyedEvent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noises")
 	TObjectPtr<UAkComponent> ElectricityNoises;
