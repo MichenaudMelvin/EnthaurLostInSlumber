@@ -11,7 +11,7 @@
     "GUID": "{EE92B861-4D84-4707-9C17-9DF23002C642}",
     "Color": "4",
     "Language": "SFX",
-    "Hash": "{B6ACE7FF-DC6E-5F9E-70FA-C71EFCCD34A1}",
+    "Hash": "{80957E8E-03B9-931D-F5AE-817987056EDB}",
     "ObjectPath": "\\SoundBanks\\WU_AMB\\SB_AMB",
     "ShortName": "SB_AMB",
     "Path": "SB_AMB.bnk",
@@ -41,6 +41,14 @@
       "CachePath": "B4/{B4DC8F89-6B44-AF89-FC0C-101CC60FADD3}.wem"
      },
      {
+      "Id": "106510936",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_VILLAGE_HEARTBEAT.wav",
+      "CachePath": "69/{69DBD403-67D4-8057-C75D-F6F66C49307D}.wem"
+     },
+     {
       "Id": "113684722",
       "Language": "SFX",
       "Streaming": "false",
@@ -63,14 +71,6 @@
       "Location": "Memory",
       "ShortName": "AMB_Pad_Necrosed_LP_03.wav",
       "CachePath": "28/{28045F6D-1BAF-4662-0C59-AC4960A862B9}.wem"
-     },
-     {
-      "Id": "393029686",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "AMB_Heartbeat_LP.wav",
-      "CachePath": "92/{92ACA23A-1517-F258-50BF-830CADD7B2E1}.wem"
      },
      {
       "Id": "427151800",
@@ -349,7 +349,7 @@
       "DurationType": "Infinite",
       "MediaRefs": [
        {
-        "Id": "393029686"
+        "Id": "106510936"
        }
       ]
      },
@@ -404,6 +404,6 @@
     ]
    }
   ],
-  "FileHash": "{9464E7B7-8FD4-834B-7559-0BF2330DAEB3}"
+  "FileHash": "{F7C4B3B0-E534-6B8B-18E6-26E7E1A5B52B}"
  }
 }

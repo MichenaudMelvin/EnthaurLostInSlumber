@@ -794,16 +794,16 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="AMB_Heartbeat_LP" ID="{95B43BD0-0457-4D6A-A04B-49F7B12E4488}">
+								<AudioFileSource Name="AMB_VILLAGE_HEARTBEAT" ID="{E3C9110F-31C2-4818-A5DB-5E39A51FB02A}">
 									<Language>SFX</Language>
-									<AudioFile>AMB_Heartbeat_LP.wav</AudioFile>
+									<AudioFile>AMB_VILLAGE_HEARTBEAT.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="393029686"/>
+										<MediaID ID="106510936"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="AMB_Heartbeat_LP" ID="{95B43BD0-0457-4D6A-A04B-49F7B12E4488}" Platform="Linked"/>
+								<ActiveSource Name="AMB_VILLAGE_HEARTBEAT" ID="{E3C9110F-31C2-4818-A5DB-5E39A51FB02A}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
