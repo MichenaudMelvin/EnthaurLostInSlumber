@@ -783,9 +783,14 @@
 						</BlendContainer>
 						<Sound Name="AMB_Heartbeat_LP" ID="{0E488877-2441-4266-B78A-3FDDA9ABC965}" ShortID="748046735">
 							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
 								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="ATT_15m" ID="{90A2CBF6-B897-48C3-8393-E24AC51368F1}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
