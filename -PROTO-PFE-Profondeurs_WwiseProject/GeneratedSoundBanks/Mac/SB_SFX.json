@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{618A050A-9501-122F-9251-50CDC4B8DAAF}",
+    "Hash": "{7EFAFDF8-DE43-9E1B-FEBB-9697A477AF3C}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -668,7 +668,7 @@
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveDoor",
       "GUID": "{058ED576-C9DC-436F-BC80-C460F36A2F0B}",
       "Color": "10",
-      "MaxAttenuation": "50000",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.73333335",
       "DurationMax": "0.73333335",
@@ -790,6 +790,6 @@
     ]
    }
   ],
-  "FileHash": "{60D34234-DF44-6523-BB6A-8C1FBC8B3749}"
+  "FileHash": "{DDA008DE-872E-66E8-3A3E-AE29FC9E8151}"
  }
 }
