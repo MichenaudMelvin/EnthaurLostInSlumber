@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{8314D886-1450-EE5E-8289-DA01C5805C90}",
+    "Hash": "{7EFAFDF8-DE43-9E1B-FEBB-9697A477AF3C}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -504,7 +504,7 @@
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_Electricity",
       "GUID": "{3BD0B7D7-1E41-4BC9-BFCE-EB60634E0A08}",
       "Color": "10",
-      "MaxAttenuation": "15000",
+      "MaxAttenuation": "1500",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -668,6 +668,7 @@
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveDoor",
       "GUID": "{058ED576-C9DC-436F-BC80-C460F36A2F0B}",
       "Color": "10",
+      "MaxAttenuation": "5000",
       "DurationType": "OneShot",
       "DurationMin": "0.73333335",
       "DurationMax": "0.73333335",
@@ -707,6 +708,7 @@
       "ObjectPath": "\\Events\\WU_SFX_Event\\Play_SFX_NerveReceptacle_Activate",
       "GUID": "{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}",
       "Color": "10",
+      "MaxAttenuation": "4000",
       "DurationType": "OneShot",
       "DurationMin": "4.5",
       "DurationMax": "4.8",
@@ -765,6 +767,17 @@
       "DurationType": "OneShot",
       "DurationMin": "0",
       "DurationMax": "0"
+     },
+     {
+      "Id": "930710263",
+      "Name": "Stop_LPX_Nerve_Stretch",
+      "ObjectPath": "\\Events\\WU_SFX_Event\\Stop_LPX_Nerve_Stretch",
+      "GUID": "{C2BCB29F-3574-4185-A670-2E3B736BB478}",
+      "Color": "10",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
      }
     ],
     "GameParameters": [
@@ -777,6 +790,6 @@
     ]
    }
   ],
-  "FileHash": "{B42CCB00-5F33-2A41-00F1-31E03C618C68}"
+  "FileHash": "{7D47AA2B-B6D4-7032-08B8-04A1CF5C73D6}"
  }
 }

@@ -47,7 +47,7 @@ protected:
 	float SpikeBrakeDelay = 0.5f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake")
-	TArray<TEnumAsByte<EObjectTypeQuery>> SpikeBrakeObjectTypeQuery;
+	TEnumAsByte<ETraceTypeQuery> SpikeBrakeTraceTypeQuery;
 
 private:
 	bool bCanDoCoyoteTime = false;
