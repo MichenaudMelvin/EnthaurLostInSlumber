@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{D02979C8-EEC8-4B5E-8F9D-1AD8326FD172}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="WU_UI" ID="{D02979C8-EEC8-4B5E-8F9D-1AD8326FD172}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="24"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<Event Name="Play_UI_PauseMenu_Exit" ID="{FF4EFF4A-526D-45D3-9EA2-DC0694C2F9F2}">
+					<ChildrenList>
+						<Action Name="" ID="{19CCB1EC-020C-4CA0-8B4C-2A14DA6FC1B2}" ShortID="1041307792">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="UI_PauseMenu_Exit" ID="{03E6210F-1D34-4A2C-AA6E-5CD3B65B777A}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_UI_PauseMenu_Hover" ID="{D6BDF366-8758-4623-B4B1-2C775ED4B6FD}">
+					<ChildrenList>
+						<Action Name="" ID="{327505E7-75FF-4444-BB0E-0176162F95D0}" ShortID="619959527">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="UI_PauseMenu_Hover" ID="{6592C382-CC1D-4B93-BC32-33DB6D425716}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_UI_PauseMenu_Enter" ID="{F6D96C0E-75C5-4FE5-97F7-273B6051D7D8}">
+					<ChildrenList>
+						<Action Name="" ID="{CF413714-9B81-4208-96E0-CAAC100C0DA8}" ShortID="244873042">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="UI_PauseMenu_Enter" ID="{88D0F736-5A11-4081-854A-C4A759813692}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_UI_NewPlaceTitle" ID="{B759DE3D-8FE8-41CC-8A76-704CB05DA2DF}">
+					<ChildrenList>
+						<Action Name="" ID="{6C026CEF-DCF4-4BB7-9FC2-759420D45D8C}" ShortID="1049772711">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="UI_NewPlaceTitle" ID="{F2AC06E3-3365-46D6-9B80-DAAC2264C7F5}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="UI_Pausemenu_SplashScreen_Continue" ID="{76D9CB8F-97AF-46F2-A168-BC70655A11D9}">
+					<ChildrenList>
+						<Action Name="" ID="{F1558550-F24E-44B0-A137-11C62A46224F}" ShortID="740738065">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="UI_Pausemenu_SpalshScreen_Continue" ID="{631CE746-53A9-4845-94C3-2DC2ED1E0674}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

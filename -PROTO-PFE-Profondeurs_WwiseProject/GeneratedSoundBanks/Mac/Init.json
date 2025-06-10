@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{AB116BB1-2F51-9587-CAA0-931E974E50C2}",
+    "Hash": "{E0F2DC3C-549D-1E60-650E-EE42ED4D994E}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -38,27 +38,27 @@
      {
       "Id": "1162281553",
       "Name": "Bus_Music",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_Music",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Music",
       "GUID": "{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}",
       "Color": "19"
      },
      {
       "Id": "2930365547",
       "Name": "Bus_SFX_Amb_MC",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_SFX_Amb_MC",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
       "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
       "Color": "9"
      },
      {
-      "Id": "3803692087",
-      "Name": "Master Audio Bus",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus",
+      "Id": "4267419003",
+      "Name": "Master Audio Bus_01",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
      },
      {
       "Id": "4277214558",
       "Name": "Bus_Voice",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_Voice",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Voice",
       "GUID": "{CD73F8A7-017F-4EA3-8D48-0308F27769B2}",
       "Color": "12"
      }
@@ -99,6 +99,34 @@
       "Name": "Bus_Voice",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\Bus_Voice",
       "GUID": "{9CF10DE5-32FB-4741-9D1F-EBA407F8E2E7}"
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "232339302",
+      "Name": "STG_WEAKENEDZONE",
+      "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE",
+      "GUID": "{BE53788A-24ED-40A0-9285-BE9E6C56B454}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\None",
+        "GUID": "{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"
+       },
+       {
+        "Id": "1160234136",
+        "Name": "Normal",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Normal",
+        "GUID": "{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"
+       },
+       {
+        "Id": "4120836511",
+        "Name": "Weakened",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Weakened",
+        "GUID": "{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"
+       }
+      ]
      }
     ],
     "SwitchGroups": [
@@ -145,6 +173,6 @@
     ]
    }
   ],
-  "FileHash": "{7403B55C-74BB-05A1-BC82-C3BE6139B029}"
+  "FileHash": "{8485C685-AFF8-3E42-23F6-F8FA54573C55}"
  }
 }

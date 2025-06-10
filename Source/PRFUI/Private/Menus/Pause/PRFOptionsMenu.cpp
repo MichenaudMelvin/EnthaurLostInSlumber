@@ -13,9 +13,9 @@ void UPRFOptionsMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	if (OverallVolumeSlider)
+	if (OverallVolumeSlider && OverallVolumeSlider->GetCustomSlider())
 	{
-		OverallVolumeSlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::OnOverallSliderChanged);
+		OverallVolumeSlider->GetCustomSlider()->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::OnOverallSliderChanged);
 	}
 
 	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
@@ -26,9 +26,9 @@ void UPRFOptionsMenu::NativeOnInitialized()
 	{
 		MouseSensitivityButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnMouseSensButtonHovered);
 	}
-	if (MouseSensitivitySlider)
+	if (MouseSensitivitySlider && MouseSensitivitySlider->GetCustomSlider())
 	{
-		MouseSensitivitySlider->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
+		MouseSensitivitySlider->GetCustomSlider()->OnValueChanged.AddDynamic(this, &UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
 	}
 	if (InvertMouseAxisButton && InvertMouseAxisButton->GetCustomButton())
 	{
@@ -36,7 +36,7 @@ void UPRFOptionsMenu::NativeOnInitialized()
 	}
 	if (InvertMouseAxisCheckBox)
 	{
-		InvertMouseAxisCheckBox->OnCheckStateChanged.AddDynamic(this, &UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked);
+		InvertMouseAxisCheckBox->OnCheckBoxStateChanged.AddDynamic(this, &UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked);
 	}
 	if (ViewBobbingButton && ViewBobbingButton->GetCustomButton())
 	{
@@ -44,12 +44,17 @@ void UPRFOptionsMenu::NativeOnInitialized()
 	}
 	if (ViewBobbingCheckbox)
 	{
-		ViewBobbingCheckbox->OnCheckStateChanged.AddDynamic(this, &UPRFOptionsMenu::OnViewBobbingCheckBoxClicked);
+		ViewBobbingCheckbox->OnCheckBoxStateChanged.AddDynamic(this, &UPRFOptionsMenu::OnViewBobbingCheckBoxClicked);
 	}
 	if (ViewControlsButton && ViewControlsButton->GetCustomButton())
 	{
 		ViewControlsButton->GetCustomButton()->OnHovered.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
 		ViewControlsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
+	}
+
+	if (ResetButton && ResetButton->GetCustomButton())
+	{
+		ResetButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFOptionsMenu::ResetSettings);
 	}
 }
 
@@ -59,16 +64,7 @@ void UPRFOptionsMenu::NativeConstruct()
 
 	OnOverallButtonHovered();
 
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
-	if (!IsValid(SettingsSubsystem))
-	{
-		return;
-	}
-
-	OverallVolumeSlider->SetValue(SettingsSubsystem->GetSettings()->MasterVolume);
-	MouseSensitivitySlider->SetValue(SettingsSubsystem->GetSettings()->MouseSensitivity);
-	InvertMouseAxisCheckBox->SetIsChecked(SettingsSubsystem->GetSettings()->bInvertYAxis);
-	ViewBobbingCheckbox->SetIsChecked(SettingsSubsystem->GetSettings()->bViewBobbing);
+	UpdateWidgetValues(true);
 }
 
 void UPRFOptionsMenu::NativeDestruct()
@@ -88,9 +84,9 @@ void UPRFOptionsMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (OverallVolumeSlider)
+	if (OverallVolumeSlider && OverallVolumeSlider->GetCustomSlider())
 	{
-		OverallVolumeSlider->OnValueChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnOverallSliderChanged);
+		OverallVolumeSlider->GetCustomSlider()->OnValueChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnOverallSliderChanged);
 	}
 
 	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
@@ -101,9 +97,9 @@ void UPRFOptionsMenu::BeginDestroy()
 	{
 		MouseSensitivityButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseSensButtonHovered);
 	}
-	if (MouseSensitivitySlider)
+	if (MouseSensitivitySlider && MouseSensitivitySlider->GetCustomSlider())
 	{
-		MouseSensitivitySlider->OnValueChanged.RemoveDynamic(this, &UPRFOptionsMenu::UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
+		MouseSensitivitySlider->GetCustomSlider()->OnValueChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseSensitivitySliderChanged);
 	}
 	if (InvertMouseAxisButton && InvertMouseAxisButton->GetCustomButton())
 	{
@@ -111,7 +107,7 @@ void UPRFOptionsMenu::BeginDestroy()
 	}
 	if (InvertMouseAxisCheckBox)
 	{
-		InvertMouseAxisCheckBox->OnCheckStateChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked);
+		InvertMouseAxisCheckBox->OnCheckBoxStateChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked);
 	}
 	if (ViewBobbingButton && ViewBobbingButton->GetCustomButton())
 	{
@@ -119,13 +115,32 @@ void UPRFOptionsMenu::BeginDestroy()
 	}
 	if (ViewBobbingCheckbox)
 	{
-		ViewBobbingCheckbox->OnCheckStateChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnViewBobbingCheckBoxClicked);
+		ViewBobbingCheckbox->OnCheckBoxStateChanged.RemoveDynamic(this, &UPRFOptionsMenu::OnViewBobbingCheckBoxClicked);
 	}
 	if (ViewControlsButton && ViewControlsButton->GetCustomButton())
 	{
 		ViewControlsButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonHovered);
 		ViewControlsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::OnViewControlsButtonClicked);
 	}
+
+	if (ResetButton && ResetButton->GetCustomButton())
+	{
+		ResetButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFOptionsMenu::ResetSettings);
+	}
+}
+
+void UPRFOptionsMenu::UpdateWidgetValues(bool bSkipAnim)
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!IsValid(SettingsSubsystem))
+	{
+		return;
+	}
+
+	OverallVolumeSlider->GetCustomSlider()->SetValue(SettingsSubsystem->GetSettings()->MasterVolume);
+	MouseSensitivitySlider->GetCustomSlider()->SetValue(SettingsSubsystem->GetSettings()->MouseSensitivity);
+	InvertMouseAxisCheckBox->SetIsOn(SettingsSubsystem->GetSettings()->bInvertYAxis, bSkipAnim);
+	ViewBobbingCheckbox->SetIsOn(SettingsSubsystem->GetSettings()->bViewBobbing, bSkipAnim);
 }
 
 void UPRFOptionsMenu::OnOverallButtonHovered()
@@ -203,7 +218,7 @@ void UPRFOptionsMenu::OnOverallSliderChanged(float InValue)
 	OverallVolumeValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 3, 0, 0));
 }
 
-void UPRFOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked)
+void UPRFOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked, bool bSkip)
 {
 	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
 	if (!SettingsSubsystem)
@@ -214,7 +229,7 @@ void UPRFOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked)
 	SettingsSubsystem->GetSettings()->bViewBobbing = bIsChecked;
 }
 
-void UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked(bool bIsChecked)
+void UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked(bool bIsChecked, bool bSkip)
 {
 	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
 	if (!SettingsSubsystem)
@@ -231,8 +246,20 @@ void UPRFOptionsMenu::OnMouseSensitivitySliderChanged(float InValue)
 	if (!SettingsSubsystem)
 	{
 		return;
-	}	
+	}
 
 	SettingsSubsystem->GetSettings()->MouseSensitivity = InValue;
 	MouseSensitivityValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 2, 1, 1));
+}
+
+void UPRFOptionsMenu::ResetSettings()
+{
+	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->ResetSaveToDefault(0);
+	UpdateWidgetValues(false);
 }

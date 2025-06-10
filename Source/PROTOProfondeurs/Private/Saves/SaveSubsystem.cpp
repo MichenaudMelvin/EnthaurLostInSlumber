@@ -6,16 +6,17 @@
 
 #pragma region SaveFunctions
 
-void USaveSubsystem::CreateSave(const int SaveIndex)
+UDefaultSave* USaveSubsystem::CreateSave(const int SaveIndex)
 {
 	if (!SaveClass)
 	{
-		return;
+		return nullptr;
 	}
 
 	SaveObject = Cast<UDefaultSave>(UGameplayStatics::CreateSaveGameObject(SaveClass));
 	SaveObject->SetSaveIndex(SaveIndex);
 	SaveObject = SaveToSlot(SaveIndex);
+	return SaveObject;
 }
 
 bool USaveSubsystem::DeleteSave(const int SaveIndex)
@@ -28,7 +29,7 @@ bool USaveSubsystem::DeleteSave(const int SaveIndex)
 	FString SlotName = SaveObject->GetSlotName();
 	SlotName += FString::FromInt(SaveIndex);
 
-	return UGameplayStatics::DeleteGameInSlot(SlotName, SaveIndex);
+	return UGameplayStatics::DeleteGameInSlot(SlotName, 0);
 }
 
 UDefaultSave* USaveSubsystem::SaveToSlot(const int SaveIndex)
@@ -74,13 +75,13 @@ UDefaultSave* USaveSubsystem::LoadSave(const int SaveIndex, const bool bCreateNe
 	return nullptr;
 }
 
+bool USaveSubsystem::DoesSaveGameExist(const int SaveIndex)
+{
+	return IsValid(LoadSave(0, false));
+}
+
 void USaveSubsystem::ResetSaveToDefault(const int SaveIndex)
 {
-	if (!SaveObject)
-	{
-		return;
-	}
-
 	CreateSave(SaveIndex);
 }
 

@@ -22,11 +22,15 @@ protected:
 	virtual void Deinitialize() override;
 
 public:
-	virtual void CreateSave(const int SaveIndex) override;
+	virtual UDefaultSave* CreateSave(const int SaveIndex) override;
 
 	virtual UDefaultSave* SaveToSlot(const int SaveIndex) override;
 
 	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true) override;
+
+	bool DeleteWorldSaveByName(const FString& WorldName, const int SaveIndex);
+
+	void DeleteAllWorldSaves(const int SaveIndex);
 
 protected:
 	FDelegateHandle WorldInitDelegateHandle;

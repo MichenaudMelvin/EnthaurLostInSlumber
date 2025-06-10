@@ -99,25 +99,25 @@ void AFirstPersonCharacter::BeginPlay()
 		return;
 	}
 
-// 	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CharacterSettings->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
-// 	if (!CameraShake)
-// 	{
-// 		return;
-// 	}
-//
-// 	UViewBobbing* CastedCameraShake = Cast<UViewBobbing>(CameraShake);
-// 	if (!CastedCameraShake)
-// 	{
-// #if WITH_EDITOR
-// 		const FString Message = FString::Printf(TEXT("ViewBobbingClass in %s is class of %s but should be %s"), *CharacterSettings->GetClass()->GetName(), *CameraShake->GetClass()->GetName(), *UViewBobbing::StaticClass()->GetName());
-//
-// 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
-// 		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
-// #endif
-// 		return;
-// 	}
-//
-// 	ViewBobbing = CastedCameraShake;
+	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CharacterSettings->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
+	if (!CameraShake)
+	{
+		return;
+	}
+
+	UViewBobbing* CastedCameraShake = Cast<UViewBobbing>(CameraShake);
+	if (!CastedCameraShake)
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("ViewBobbingClass in %s is class of %s but should be %s"), *CharacterSettings->GetClass()->GetName(), *CameraShake->GetClass()->GetName(), *UViewBobbing::StaticClass()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	ViewBobbing = CastedCameraShake;
 
 	DefaultFootStepEvent = FootstepsSounds->AkAudioEvent;
 
@@ -590,13 +590,13 @@ bool AFirstPersonCharacter::IsStopped() const
 void AFirstPersonCharacter::SavePlayerData() const
 {
 	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
+	if (!PlayerSaveSubsystem)
 	{
 		return;
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->LastWorldSaved = GetWorld()->GetFName();
-	PlayerSaveSubsystem->GetPlayerSave()->PlayerTransform = GetTransform();
+	PlayerSaveSubsystem->GetPlayerSave()->PlayerLocation = GetActorLocation();
+	PlayerSaveSubsystem->GetPlayerSave()->PlayerCameraRotation = GetControlRotation();
 	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = StateMachine->GetCurrentStateID();
 	PlayerSaveSubsystem->SaveToSlot(0);
 }
@@ -610,7 +610,17 @@ void AFirstPersonCharacter::LoadPlayerData()
 	}
 
 	TObjectPtr<UPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
-	SetActorTransform(SaveData->PlayerTransform);
+	SetActorLocation(SaveData->PlayerLocation);
+
+	if (GetPlayerController())
+	{
+		APlayerController* PlayerController = Cast<APlayerController>(GetPlayerController());
+		if (PlayerController)
+		{
+			PlayerController->SetControlRotation(SaveData->PlayerCameraRotation);
+		}
+	}
+
 	StateMachine->ChangeState(SaveData->CurrentState);
 	AmberInventory = SaveData->AmberInventory;
 
@@ -619,6 +629,7 @@ void AFirstPersonCharacter::LoadPlayerData()
 		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
 	}
 }
+
 #pragma endregion
 
 #pragma region Respawn

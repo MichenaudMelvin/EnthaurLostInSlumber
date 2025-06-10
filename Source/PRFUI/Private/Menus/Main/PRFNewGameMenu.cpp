@@ -3,7 +3,9 @@
 
 #include "Menus/Main/PRFNewGameMenu.h"
 
+#include "PRFUIManager.h"
 #include "Components/Button.h"
+#include "Saves/PlayerSaveSubsystem.h"
 
 void UPRFNewGameMenu::NativeOnInitialized()
 {
@@ -27,5 +29,20 @@ void UPRFNewGameMenu::BeginDestroy()
 
 void UPRFNewGameMenu::HandleNewGameInteraction()
 {
-	// Todo Melvin - Reset save & launch new game
+	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	if (!IsValid(UIManager))
+	{
+		return;
+	}
+	
+	PlayerSaveSubsystem->StartNewGame();
+	
+	UIManager->SetMenuState(EPRFUIState::Waiting);
+	UIManager->CloseAllMenus(EPRFUIState::Gameplay);
 }

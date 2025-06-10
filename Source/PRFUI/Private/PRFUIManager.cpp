@@ -39,8 +39,35 @@ void UPRFUIManager::CreateAllWidgets()
 	PauseMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PauseMenuClass);
 	ControlsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->ControlsMenuClass);
 	MainMenuConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->MainMenuConfirmationMenuClass);
+	RestartConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->RestartConfirmationMenuClass);
 
 	OnWidgetsCreated.Broadcast();
+
+	AFirstPersonController* FirstPersonController =  Cast<AFirstPersonController>(PlayerController);
+	if (!IsValid(FirstPersonController))
+	{
+		return;
+	}
+
+	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
+	if (!IsValid(LocalPlayer))
+	{
+		return;
+	}
+	
+	UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+	if (!IsValid(InputSubsystem))
+	{
+		return;
+	}
+
+	CurrentState = EPRFUIState::Gameplay;
+	InputSubsystem->ClearAllMappings();
+	InputSubsystem->AddMappingContext(Cast<IPRFControllerMappingContext>(FirstPersonController)->GetDefaultMappingContext(), 0);
+	SetGameInputMode();
+	FirstPersonController->SetPause(false);
+		
+	FirstPersonController->ClearPlayerInputs();
 }
 
 void UPRFUIManager::OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues)
@@ -94,33 +121,6 @@ void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	}
 
 	CheckMenuState();
-	
-	/*if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::FromInt(MenuStack.Num()));
-		
-		for (const auto& Pair : MenuClasses)
-		{
-			const FString& YoMenuName = Pair.Key;
-			const auto& WidgetPtr = Pair.Value;
-
-			FString Output1;
-
-			if (IsValid(WidgetPtr))
-			{
-				Output1 = FString::Printf(TEXT("Menu: %s → %s"), *YoMenuName, *WidgetPtr->GetName());
-			}
-			else
-			{
-				Output1 = FString::Printf(TEXT("Menu: %s → Invalid (GC'd or destroyed)"), *YoMenuName);
-			}
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, Output1);
-		}
-	}
-
-	FString test = FString::Printf(TEXT("%d"), CurrentState);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);*/
 }
 
 void UPRFUIManager::CloseCurrentMenu()
@@ -164,33 +164,6 @@ void UPRFUIManager::CloseCurrentMenu()
 		UUserWidget* NewMenu = NewTopMenuPtr.Get();
 		NewMenu->AddToViewport();
 	}
-	
-	/*if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::FromInt(MenuStack.Num()));
-		
-		for (const auto& Pair : MenuClasses)
-		{
-			const FString& YoMenuName = Pair.Key;
-			const auto& WidgetPtr = Pair.Value;
-
-			FString Output1;
-
-			if (IsValid(WidgetPtr))
-			{
-				Output1 = FString::Printf(TEXT("Menu: %s → %s"), *YoMenuName, *WidgetPtr->GetName());
-			}
-			else
-			{
-				Output1 = FString::Printf(TEXT("Menu: %s → Invalid (GC'd or destroyed)"), *YoMenuName);
-			}
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, Output1);
-		}
-	}
-
-	FString test = FString::Printf(TEXT("%d"), CurrentState);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, test);*/
 }
 
 void UPRFUIManager::CloseAllMenus(EPRFUIState InState)
@@ -230,12 +203,6 @@ void UPRFUIManager::SetMenuState(EPRFUIState InUIState)
 
 void UPRFUIManager::CheckMenuState()
 {
-	UWorld* World = GEngine->GetCurrentPlayWorld();
-	if (!IsValid(World))
-	{
-		return;
-	}
-	
 	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
 	if (!IsValid(LocalPlayer))
 	{
@@ -259,7 +226,7 @@ void UPRFUIManager::CheckMenuState()
 		return;
 	}
 
-	if (CurrentState == EPRFUIState::Waiting)
+	if (CurrentState == EPRFUIState::Waiting && !MenuStack.IsEmpty())
 	{
 		return;
 	}

@@ -7,6 +7,7 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "AmberOre.generated.h"
 
+class UAkComponent;
 class UBoxComponent;
 
 USTRUCT(BlueprintType)
@@ -57,10 +58,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UInteractableComponent> Interactable;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	TObjectPtr<UAkComponent> AmberOreNoises;
+
 	UPROPERTY(EditAnywhere, Category = "Amber")
 	TObjectPtr<UStaticMesh> SourceMesh;
 
-	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	UPROPERTY(EditAnywhere, Category = "Amber")
 	EAmberType AmberType = EAmberType::NecroseAmber;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")

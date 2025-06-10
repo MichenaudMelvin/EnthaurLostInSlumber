@@ -20,7 +20,7 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 {
 	Super::StateEnter_Implementation(PreviousStateID);
 
-	if (PreviousStateID != ECharacterStateID::Jump && PreviousStateID != ECharacterStateID::Fall)
+	if (PreviousStateID != ECharacterStateID::Jump && PreviousStateID != ECharacterStateID::Fall && PreviousStateID != ECharacterStateID::Stop)
 	{
 		bCanDoCoyoteTime = true;
 		CoyoteTime = 0.0f;
@@ -30,7 +30,8 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 		bCanDoCoyoteTime = false;
 	}
 
-	SpikeBrakeTime = 0.0f;
+	SpikeBrakePressedDuration = 0.0f;
+	SpikeBrakeTimer = 0.0f;
 	bHasPressedInteraction = false;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
@@ -68,44 +69,35 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 		}
 	}
 
-	if (Controller->GetPlayerInputs().bInputInteractTrigger)
+	SpikeBrakeTimer += DeltaTime;
+
+	if (Controller->GetPlayerInputs().bInputInteractTrigger && SpikeBrakeTimer >= SpikeBrakeDelay)
 	{
-		SpikeBrakeTime += DeltaTime;
-		SpikeBrakeTime = FMath::Clamp(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
-	}
-	else if (!Controller->GetPlayerInputs().bInputInteractTrigger)
-	{
-		if (SpikeBrakeTime >= SpikeBrakeDuration)
+		SpikeBrakePressedDuration += DeltaTime;
+
+		FVector StartLocation = Character->GetCamera()->GetComponentLocation();
+		FVector EndLocation = (Character->GetCamera()->GetForwardVector() * SpikeBrakeTraceLength) + StartLocation;
+
+		TArray<AActor*> ActorsToIgnore;
+		ActorsToIgnore.Add(Character);
+
+		FHitResult Hit;
+		bool bHit = UKismetSystemLibrary::LineTraceSingle(Character, StartLocation, EndLocation, SpikeBrakeTraceTypeQuery, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, false);
+
+		if (bHit)
 		{
-			FVector StartLocation = Character->GetCamera()->GetComponentLocation();
-			FVector EndLocation = (Character->GetCamera()->GetForwardVector() * SpikeBrakeTraceLength) + StartLocation;
-
-			TArray<AActor*> ActorsToIgnore;
-			ActorsToIgnore.Add(Character);
-
-			FHitResult Hit;
-			bool bHit = UKismetSystemLibrary::LineTraceSingle(Character, StartLocation, EndLocation, UEngineTypes::ConvertToTraceType(SpikeBrakeTraceTypeQuery), false, ActorsToIgnore, EDrawDebugTrace::None, Hit, false);
-
-			if (bHit)
-			{
-				Character->PlantSpike(Hit.Location);
-				StateMachine->ChangeState(ECharacterStateID::Stop);
-				return;
-			}
-			else
-			{
-				SpikeBrakeTime -= DeltaTime;
-				SpikeBrakeTime = FMath::Clamp(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
-			}
-		}
-		else
-		{
-			SpikeBrakeTime -= DeltaTime;
-			SpikeBrakeTime = FMath::Clamp(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
+			Character->PlantSpike(Hit.Location);
+			StateMachine->ChangeState(ECharacterStateID::Stop);
+			return;
 		}
 	}
+	else
+	{
+		SpikeBrakePressedDuration -= DeltaTime;
+	}
 
-	float Alpha = UKismetMathLibrary::NormalizeToRange(SpikeBrakeTime, 0.0f, SpikeBrakeDuration);
+	SpikeBrakePressedDuration = FMath::Clamp(SpikeBrakePressedDuration, 0.0f, SpikeBrakeMaxPressedDuration);
+	float Alpha = UKismetMathLibrary::NormalizeToRange(SpikeBrakePressedDuration, 0.0f, SpikeBrakeMaxPressedDuration);
 	Character->UpdateSpikeOffset(Alpha);
 
 	if(Character->GetCharacterMovement()->IsFalling())

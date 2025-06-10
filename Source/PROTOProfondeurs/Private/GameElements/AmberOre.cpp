@@ -2,6 +2,7 @@
 
 
 #include "PROTOProfondeurs/Public/GameElements/AmberOre.h"
+#include "AkComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -33,6 +34,9 @@ AAmberOre::AAmberOre()
 
 	Interactable = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interactable"));
 	Interactable->SetInteractionName(NSLOCTEXT("Actions", "PickAmber", "Pick Amber"));
+
+	AmberOreNoises = CreateDefaultSubobject<UAkComponent>(TEXT("AmberOreNoises"));
+	AmberOreNoises->SetupAttachment(Mesh);
 }
 
 void AAmberOre::BeginPlay()
@@ -93,6 +97,7 @@ void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 		return;
 	}
 
+	AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 	Character->MineAmber(AmberType, OreAmount);
 	OreAmount--;
 	OreAmount = FMath::Clamp(OreAmount, 0, 255);

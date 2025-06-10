@@ -2,6 +2,8 @@
 
 
 #include "PROTOProfondeurs/Public/GameElements/WeakZone.h"
+
+#include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
@@ -212,7 +214,9 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 		return;
 	}
 
+	UAkGameplayStatics::PostEventAtLocation(InjectAmberNoise, InteractionPoint->Transform.GetLocation(), InteractionPoint->Transform.GetRotation().Rotator(), this);
 	InteractionPoint->bIsActive = true;
+	Interactable->RemoveInteractable(InteractionPoint->MeshComp);
 
 	CheckIfEveryInteractionsPointActive();
 }

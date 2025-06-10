@@ -11,7 +11,7 @@
     "GUID": "{EE92B861-4D84-4707-9C17-9DF23002C642}",
     "Color": "4",
     "Language": "SFX",
-    "Hash": "{BC95C614-4E18-E529-BAEC-90D998BC5B6B}",
+    "Hash": "{B6ACE7FF-DC6E-5F9E-70FA-C71EFCCD34A1}",
     "ObjectPath": "\\SoundBanks\\WU_AMB\\SB_AMB",
     "ShortName": "SB_AMB",
     "Path": "SB_AMB.bnk",
@@ -23,6 +23,14 @@
       "Location": "Memory",
       "ShortName": "AMB_Pad_Rfx_DistantScream_12.wav",
       "CachePath": "89/{8942449A-973B-9A85-1F1B-EF054CC357C3}.wem"
+     },
+     {
+      "Id": "79017697",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_04.wav",
+      "CachePath": "47/{47D269AE-96F1-4CBE-AFEB-CEACBFB23732}.wem"
      },
      {
       "Id": "84916266",
@@ -49,6 +57,22 @@
       "CachePath": "3D/{3DF201E4-B1AF-6709-60D2-14B4BCC868C4}.wem"
      },
      {
+      "Id": "215594251",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_03.wav",
+      "CachePath": "28/{28045F6D-1BAF-4662-0C59-AC4960A862B9}.wem"
+     },
+     {
+      "Id": "393029686",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Heartbeat_LP.wav",
+      "CachePath": "92/{92ACA23A-1517-F258-50BF-830CADD7B2E1}.wem"
+     },
+     {
       "Id": "427151800",
       "Language": "SFX",
       "Streaming": "false",
@@ -63,6 +87,30 @@
       "Location": "Memory",
       "ShortName": "AMB_Pad_01_LP.wav",
       "CachePath": "C7/{C75BEDBD-9EEB-4B10-6192-A81EFE78DAD4}.wem"
+     },
+     {
+      "Id": "481136108",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_02.wav",
+      "CachePath": "3D/{3D7CD4A4-3EA2-11A9-6DE9-0B445E86A143}.wem"
+     },
+     {
+      "Id": "535431809",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Village_01_LP.wav",
+      "CachePath": "F5/{F52D9AA6-829D-5703-E77F-F0BB9AADEFD3}.wem"
+     },
+     {
+      "Id": "610405175",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Growl.wav",
+      "CachePath": "FD/{FD24ADA8-0B76-6E66-4D27-57B44205A739}.wem"
      },
      {
       "Id": "630202445",
@@ -105,6 +153,14 @@
       "CachePath": "1C/{1CFF8B7F-A2B7-8A98-C065-1359BC2E111D}.wem"
      },
      {
+      "Id": "788512206",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_01.wav",
+      "CachePath": "23/{2322FBBA-5EB7-5038-2A1E-FE75DD1308B3}.wem"
+     },
+     {
       "Id": "798986114",
       "Language": "SFX",
       "Streaming": "false",
@@ -137,6 +193,14 @@
       "CachePath": "00/{0065A589-7D0D-1AD7-EE1F-4567FDA71B67}.wem"
      },
      {
+      "Id": "976737059",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Village_02_LP.wav",
+      "CachePath": "96/{9647564F-DF68-75FD-9189-B7D1F3355548}.wem"
+     },
+     {
       "Id": "1059098210",
       "Language": "SFX",
       "Streaming": "false",
@@ -147,10 +211,11 @@
     ],
     "Events": [
      {
-      "Id": "2123200850",
-      "Name": "AMB_General",
-      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_General",
-      "GUID": "{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}",
+      "Id": "2511814352",
+      "Name": "AMB_BREATH",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_BREATH",
+      "GUID": "{AA87B9BB-78F7-4E1B-B3CB-35E5EF3E9618}",
+      "Color": "4",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -169,19 +234,10 @@
         "Id": "427151800"
        },
        {
-        "Id": "452759638"
-       },
-       {
-        "Id": "630202445"
-       },
-       {
         "Id": "678510795"
        },
        {
         "Id": "726580023"
-       },
-       {
-        "Id": "743489974"
        },
        {
         "Id": "745301015"
@@ -193,19 +249,161 @@
         "Id": "863142678"
        },
        {
-        "Id": "879024324"
-       },
-       {
         "Id": "964612303"
        },
        {
         "Id": "1059098210"
        }
       ]
+     },
+     {
+      "Id": "4111363768",
+      "Name": "AMB_CORRUPTEDZONE",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_CORRUPTEDZONE",
+      "GUID": "{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "79017697"
+       },
+       {
+        "Id": "215594251"
+       },
+       {
+        "Id": "481136108"
+       },
+       {
+        "Id": "788512206"
+       }
+      ]
+     },
+     {
+      "Id": "3804067178",
+      "Name": "AMB_GAMEPLAY",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_GAMEPLAY",
+      "GUID": "{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "452759638"
+       },
+       {
+        "Id": "630202445"
+       },
+       {
+        "Id": "743489974"
+       },
+       {
+        "Id": "879024324"
+       }
+      ],
+      "ActionSetState": [
+       {
+        "GroupId": "232339302",
+        "Id": "1160234136",
+        "Name": "Normal",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Normal",
+        "GUID": "{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"
+       }
+      ]
+     },
+     {
+      "Id": "836234157",
+      "Name": "AMB_GROWL",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_GROWL",
+      "GUID": "{BB85019A-5DFC-4CC8-BFD0-42EC5081E445}",
+      "Color": "4",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "5.9198213",
+      "MediaRefs": [
+       {
+        "Id": "610405175"
+       }
+      ]
+     },
+     {
+      "Id": "2699383670",
+      "Name": "AMB_VILLAGE",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_VILLAGE",
+      "GUID": "{A069072C-C569-4701-9756-087063501AE3}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "535431809"
+       },
+       {
+        "Id": "976737059"
+       }
+      ]
+     },
+     {
+      "Id": "1091882799",
+      "Name": "AMB_VILLAGE_HEARTBEAT",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_VILLAGE_HEARTBEAT",
+      "GUID": "{4F9B89C2-3761-41E6-BF81-653EEBA91D79}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "393029686"
+       }
+      ]
+     },
+     {
+      "Id": "3945432358",
+      "Name": "AMB_WEAKENEDZONE",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_WEAKENEDZONE",
+      "GUID": "{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}",
+      "Color": "4",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionSetState": [
+       {
+        "GroupId": "232339302",
+        "Id": "4120836511",
+        "Name": "Weakened",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Weakened",
+        "GUID": "{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"
+       }
+      ]
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "232339302",
+      "Name": "STG_WEAKENEDZONE",
+      "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE",
+      "GUID": "{BE53788A-24ED-40A0-9285-BE9E6C56B454}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\None",
+        "GUID": "{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"
+       },
+       {
+        "Id": "1160234136",
+        "Name": "Normal",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Normal",
+        "GUID": "{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"
+       },
+       {
+        "Id": "4120836511",
+        "Name": "Weakened",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Weakened",
+        "GUID": "{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{86EFF323-80A5-2071-94C6-56366A56A4C5}"
+  "FileHash": "{9464E7B7-8FD4-834B-7559-0BF2330DAEB3}"
  }
 }

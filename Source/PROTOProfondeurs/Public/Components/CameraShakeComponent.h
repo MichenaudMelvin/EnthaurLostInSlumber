@@ -10,7 +10,7 @@
 class AFirstPersonCharacter;
 class AFirstPersonController;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup = ("Player"), meta = (BlueprintSpawnableComponent))
 class PROTOPROFONDEURS_API UCameraShakeComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -19,14 +19,7 @@ public:
 	UCameraShakeComponent();
 
 protected:
-	// Called when the game starts
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
-	TSubclassOf<UCameraShakeBase> WalkingWobbling;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
-	TSubclassOf<UCameraShakeBase> RunningWobbling;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shake")
 	TSubclassOf<UCameraShakeBase> LittleShake;
@@ -34,23 +27,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shake")
 	TSubclassOf<UCameraShakeBase> BigShake;
 
-public:
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-	                           FActorComponentTickFunction* ThisTickFunction) override;
-
-	UFUNCTION(BlueprintCallable)
-	void MakeSmallCameraShake();
-	UFUNCTION(BlueprintCallable)
-	void MakeBigCameraShake();
-
-private:
-	UPROPERTY()
-	AFirstPersonCharacter* Player;
-	
 	UPROPERTY()
 	AFirstPersonController* PlayerController;
 
-	UPROPERTY()
-	bool b_IsRunning;
+public:
+	UFUNCTION(BlueprintCallable, Category = "Shake")
+	void MakeSmallCameraShake();
+
+	UFUNCTION(BlueprintCallable, Category = "Shake")
+	void MakeBigCameraShake();
 };

@@ -13,8 +13,20 @@ class PROTOPROFONDEURS_API UWorldSaveSettings : public UDeveloperSettings
 
 public:
 	/**
+	 * @brief The very first gameplay of the game
+	 */
+	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category = "World")
+	TSoftObjectPtr<UWorld> StartGameplayWorld;
+
+	/**
 	 * @brief Allowed GameModes for world saves
 	 */
 	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category = "WorldSave")
 	TSet<TSubclassOf<AGameModeBase>> AllowedGameModes;
+
+	/**
+	 * @brief 
+	 */
+	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category = "WorldSave")
+	FPrimaryAssetType PrimaryMapAsset;
 };

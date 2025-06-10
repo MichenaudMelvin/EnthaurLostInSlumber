@@ -16,6 +16,7 @@ public:
 	USettingsSubsystem();
 
 protected:
+	virtual UDefaultSave* CreateSave(const int SaveIndex) override;
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 

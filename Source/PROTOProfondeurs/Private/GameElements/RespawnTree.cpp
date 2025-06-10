@@ -5,6 +5,7 @@
 #include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "FCTween.h"
+#include "Components/BoxComponent.h"
 #include "Components/InteractableComponent.h"
 #include "GameModes/FirstPersonGameMode.h"
 #include "Kismet/GameplayStatics.h"
@@ -23,9 +24,11 @@ ARespawnTree::ARespawnTree()
 
 	TreeModel = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TreeModel"));
 	TreeModel->SetupAttachment(RootComp);
+	TreeModel->SetMobility(EComponentMobility::Static);
 
-	RespawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Respawn Point"));
-	RespawnPoint->SetupAttachment(RootComp);
+	TriggerBox = CreateDefaultSubobject<UBoxComponent>(TEXT("TriggerBox"));
+	TriggerBox->SetupAttachment(TreeModel);
+	TriggerBox->SetMobility(EComponentMobility::Static);
 
 	RespawnTreeNoises = CreateDefaultSubobject<UAkComponent>(TEXT("RespawnTreeNoises"));
 	RespawnTreeNoises->SetupAttachment(RootComp);
@@ -37,6 +40,8 @@ ARespawnTree::ARespawnTree()
 void ARespawnTree::BeginPlay()
 {
 	Super::BeginPlay();
+
+	TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &ARespawnTree::TriggerEnter);
 
 	RespawnTransform *= GetActorTransform();
 
@@ -77,31 +82,62 @@ void ARespawnTree::Destroyed()
 {
 	Super::Destroyed();
 
-	Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
+	if (Interaction && Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::Interact))
+	{
+		Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
+	}
+
+	if (TriggerBox && TriggerBox->OnComponentBeginOverlap.IsAlreadyBound(this, &ARespawnTree::TriggerEnter))
+	{
+		TriggerBox->OnComponentBeginOverlap.RemoveDynamic(this, &ARespawnTree::TriggerEnter);
+	}
 }
 
-void ARespawnTree::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
+void ARespawnTree::OnConstruction(const FTransform& Transform)
 {
-	if (bIsActivated)
+	Super::OnConstruction(Transform);
+
+	FVector RelativeLocation = TriggerBox->GetRelativeLocation();
+	TriggerBox->SetRelativeLocation(FVector(RelativeLocation.X, RelativeLocation.Y, TriggerBox->GetUnscaledBoxExtent().Z));
+}
+
+void ARespawnTree::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(OtherActor);
+	if (!Player)
 	{
 		return;
 	}
 
+	if (!bIsActivated)
+	{
+		SetActive();
+	}
+
+	SetRespawnPoint(Player, true);
+}
+
+void ARespawnTree::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
+{
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Pawn);
 	if (!Player)
 	{
 		return;
 	}
 
-	bIsActivated = true;
-	SetActive();
+	if (!bIsActivated)
+	{
+		SetActive();
+	}
+
 	SetRespawnPoint(Player, true);
 }
 
 void ARespawnTree::SetActive()
 {
-	Interaction->RemoveInteractable(TreeModel);
-	Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
+	bIsActivated = true;
+
+	RespawnTreeNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 
 	FCTween::Play(
 		0.f,
@@ -118,7 +154,6 @@ void ARespawnTree::SetActive()
 void ARespawnTree::SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave)
 {
 	Player->SetRespawnTree(this);
-	RespawnTreeNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 
 	if (!bSave)
 	{
