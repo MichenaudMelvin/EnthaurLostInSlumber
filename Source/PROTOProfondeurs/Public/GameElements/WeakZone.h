@@ -74,6 +74,9 @@ protected:
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnCure OnCure;
 
+	UPROPERTY(EditDefaultsOnly, Category = "WeakZone")
+	TObjectPtr<UAkAudioEvent> GrowlNoise;
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
 	TObjectPtr<UBillboardComponent> BillboardComponent;
