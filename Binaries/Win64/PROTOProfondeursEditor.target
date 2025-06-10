@@ -12,8 +12,8 @@
 	{
 		"MajorVersion": 5,
 		"MinorVersion": 5,
-		"PatchVersion": 4,
-		"Changelist": 40574608,
+		"PatchVersion": 3,
+		"Changelist": 39772772,
 		"CompatibleChangelist": 37670630,
 		"IsLicenseeVersion": 0,
 		"IsPromotedBuild": 0,
@@ -1119,14 +1119,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-BuildSettings.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-CEF3Utils.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-CEF3Utils.pdb",
 			"Type": "SymbolFile"
 		},
 		{
@@ -3970,14 +3962,6 @@
 			"Type": "SymbolFile"
 		},
 		{
-			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-WebBrowser.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-WebBrowser.pdb",
-			"Type": "SymbolFile"
-		},
-		{
 			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-WidgetCarousel.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -4707,70 +4691,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Animation/LiveLink/Binaries/Win64/UnrealEditor.modules",
-			"Type": "RequiredResource"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicDeveloper.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicDeveloper.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicEditor.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicEditor.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicLib.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicLib.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicLibTest.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicLibTest.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicModule.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor-RigLogicModule.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/Binaries/Win64/UnrealEditor.modules",
-			"Type": "RequiredResource"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Bridge/Binaries/Win64/UnrealEditor-Bridge.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Bridge/Binaries/Win64/UnrealEditor-Bridge.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Bridge/Binaries/Win64/UnrealEditor-MegascansPlugin.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Bridge/Binaries/Win64/UnrealEditor-MegascansPlugin.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Bridge/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
 		{
@@ -6095,26 +6015,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Experimental/MeshModelingToolsetExp/Binaries/Win64/UnrealEditor.modules",
-			"Type": "RequiredResource"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Experimental/MetaHuman/MetaHumanSDK/Binaries/Win64/UnrealEditor-MetaHumanSDKEditor.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Experimental/MetaHuman/MetaHumanSDK/Binaries/Win64/UnrealEditor-MetaHumanSDKEditor.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Experimental/MetaHuman/MetaHumanSDK/Binaries/Win64/UnrealEditor-MetaHumanSDKRuntime.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Experimental/MetaHuman/MetaHumanSDK/Binaries/Win64/UnrealEditor-MetaHumanSDKRuntime.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Experimental/MetaHuman/MetaHumanSDK/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
 		{
@@ -30040,10 +29940,6 @@
 			"Type": "DebugNonUFS"
 		},
 		{
-			"Path": "$(EngineDir)/Binaries/Win64/EpicWebHelper.exe",
-			"Type": "NonUFS"
-		},
-		{
 			"Path": "$(EngineDir)/Binaries/Win64/NNEEditorOnnxTools.dll",
 			"Type": "NonUFS"
 		},
@@ -33344,14 +33240,6 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(EngineDir)/Plugins/Animation/RigLogic/RigLogic.uplugin",
-			"Type": "UFS"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Bridge/Bridge.uplugin",
-			"Type": "UFS"
-		},
-		{
 			"Path": "$(EngineDir)/Plugins/Cameras/CameraShakePreviewer/CameraShakePreviewer.uplugin",
 			"Type": "UFS"
 		},
@@ -33689,10 +33577,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Experimental/MeshModelingToolsetExp/MeshModelingToolsetExp.uplugin",
-			"Type": "UFS"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Experimental/MetaHuman/MetaHumanSDK/MetaHumanSDK.uplugin",
 			"Type": "UFS"
 		},
 		{
@@ -34076,122 +33960,6 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/Ak3DAudioBedMixer.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkAudioInput.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkCompressor.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkDelay.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkExpander.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkFlanger.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkGain.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkGuitarDistortion.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkHarmonizer.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkMatrixReverb.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkParametricEQ.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkPeakLimiter.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkPitchShifter.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkRecorder.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkReflect.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkRoomVerb.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSilenceGenerator.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSineTone.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSoundEngineDLL.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSoundSeedAir.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkStereoDelay.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSynthOne.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkTimeStretch.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkToneGen.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkTremolo.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/Auro.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/McDSP.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/WwiseProjectDatabase.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/iZotope.dll",
-			"Type": "NonUFS"
-		},
-		{
 			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/WwiseSoundEngine.uplugin",
 			"Type": "UFS"
 		},
@@ -34229,7 +33997,6 @@
 		"BaseCharacterFXEditor",
 		"BlendSpaceMotionAnalysis",
 		"BlueprintHeaderView",
-		"Bridge",
 		"CLionSourceCodeAccess",
 		"CableComponent",
 		"CameraShakePreviewer",
@@ -34318,7 +34085,6 @@
 		"MeshModelingToolset",
 		"MeshModelingToolsetExp",
 		"MeshPainting",
-		"MetaHumanSDK",
 		"Metasound",
 		"MobileLauncherProfileWizard",
 		"MobilePatchingUtils",
@@ -34362,7 +34128,6 @@
 		"ResonanceAudio",
 		"RiderLink",
 		"RiderSourceCodeAccess",
-		"RigLogic",
 		"RigVM",
 		"SQLiteCore",
 		"SequencerAnimTools",
