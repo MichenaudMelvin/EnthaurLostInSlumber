@@ -69,9 +69,6 @@ protected:
 	TObjectPtr<USplineComponent> SplineCable;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
-	TObjectPtr<UAkAudioEvent> NerveGrowthNoise;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Cables")
 	TArray<TObjectPtr<USplineMeshComponent>> SplineMeshes;
 
 	UPROPERTY(EditAnywhere, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
@@ -238,6 +235,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, Units = "cm"))
 	float DistanceNeededToPropulsion = 500.0f;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Physics")
+	bool bIsStretchSoundPlayed = false;
 
 	UPROPERTY(EditAnywhere, Category = "Physics")
 	FFloatRange PropulsionForceRange = FFloatRange(500.0f, 1000.0f);

@@ -1844,6 +1844,60 @@
 								</Sound>
 							</ChildrenList>
 						</ActorMixer>
+						<Sound Name="SFX_NerveReceptacle_Desactivate" ID="{F3F03812-D49A-4806-BE85-2564744415A6}" ShortID="566468480">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_NerveReceptacle_Desactivate" ID="{4A72F56D-5003-42AB-8D5A-2C9AFCE02474}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_NerveReceptacle_Desactivate.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="926594296"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_NerveReceptacle_Desactivate" ID="{4A72F56D-5003-42AB-8D5A-2C9AFCE02474}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Plant_Growth" ID="{43E56E05-8E91-4218-8717-411147914A09}" ShortID="125141593">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Plant_Growth" ID="{F9F63C10-3915-404B-A773-746BF5C1938D}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Plant_Growth.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="523178003"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Plant_Growth" ID="{F9F63C10-3915-404B-A773-746BF5C1938D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 			</ChildrenList>
