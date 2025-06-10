@@ -206,6 +206,7 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 		return;
 	}
 
+	UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
 	Character->UseAmber(AmberType, CostByPoint);
 
 	FInteractionPoints* InteractionPoint = FindInteractionPoint(InteractionComponent);

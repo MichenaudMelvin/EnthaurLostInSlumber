@@ -50,6 +50,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Components")
 	TObjectPtr<UAkComponent> NerveReceptaclesNoises;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> GrowlNoise;
+
 #if WITH_EDITORONLY_DATA
 	/**
 	 * @brief Set visibility to true if you want to edit it
@@ -98,4 +101,6 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Nerve")
 	FOnNerveAnimationFinished OnNerveAnimationFinished;
+
+	bool CanTheNerveBeTaken() const;
 };
