@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{B50F8305-68C7-2A06-03B3-064CA5BFE080}",
+    "Hash": "{A47D4F03-220C-FA0F-1943-845369BDC1BC}",
     "ObjectPath": "\\SoundBanks\\WU_SFX\\SB_SFX",
     "ShortName": "SB_SFX",
     "Path": "SB_SFX.bnk",
@@ -836,6 +836,6 @@
     ]
    }
   ],
-  "FileHash": "{5C61A30D-A646-C801-785B-00C33010DE42}"
+  "FileHash": "{FF1BA666-B7C2-5735-BBB7-AFB55BF73A20}"
  }
 }
