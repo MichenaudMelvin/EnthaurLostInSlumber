@@ -6,6 +6,8 @@ public class PRFUI : ModuleRules
     {
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
+        CircularlyReferencedDependentModules.Add("PROTOProfondeurs");
+
         PublicDependencyModuleNames.AddRange(
             new string[]
             {

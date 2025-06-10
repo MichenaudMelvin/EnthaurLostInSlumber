@@ -39,12 +39,12 @@ void UToolbarModule::InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection
 {
 	const TSharedRef<SCheckBox> CheckBox = SNew(SCheckBox).OnCheckStateChanged_Raw(this, &UToolbarModule::UpdateSaveSettings);
 	CheckBox->SetToolTipText(FText::AsCultureInvariant("Load latest save in the current world if exist"));
-	
+
 	const USavesSettings* SavesSettings = GetDefault<USavesSettings>();
 	CheckBox->SetIsChecked(SavesSettings->bLoadLatestWorldSave ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
 
-	const TSharedRef<STextBlock> TextBlock = SNew(STextBlock);
-	TextBlock->SetText(FText::FromName("Load Latest Save"));
+	const TSharedRef<SCenteredText> TextBlock = SNew(SCenteredText);
+	TextBlock->SetText(NSLOCTEXT("ToolbarModule", "LoadLatestSave", "Load Latest Save"));
 
 	ToolbarSection.AddSeparator("SaveSettingsSeparator");
 
@@ -65,8 +65,8 @@ void UToolbarModule::InitPlayerEditorSettingsCheckBoxes(FToolMenuSection& Toolba
 	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
 	CheckBox->SetIsChecked(PlayerEditorSettings->bDisplayStartWidget ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
 
-	const TSharedRef<STextBlock> TextBlock = SNew(STextBlock);
-	TextBlock->SetText(FText::FromName("Display Start Widget"));
+	const TSharedRef<SCenteredText> TextBlock = SNew(SCenteredText);
+	TextBlock->SetText(NSLOCTEXT("ToolbarModule", "DisplayStartWidget", "Display Start Widget"));
 
 	ToolbarSection.AddSeparator("PlayerSettingsSeparator");
 

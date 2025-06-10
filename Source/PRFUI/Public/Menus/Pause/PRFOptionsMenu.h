@@ -8,6 +8,7 @@
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Menus/PRFWidgetBasics.h"
+#include "Menus/Elements/PRFCustomCheckBox.h"
 #include "Menus/Elements/PRFCustomSlider.h"
 #include "PRFOptionsMenu.generated.h"
 
@@ -25,7 +26,7 @@ protected:
 	virtual void NativeDestruct() override;
 	virtual void BeginDestroy() override;
 
-	void UpdateWidgetValues();
+	void UpdateWidgetValues(bool bSkipAnim);
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UPRFCustomButton> OverallVolumeButton;
@@ -43,13 +44,13 @@ protected:
 	TObjectPtr<UPRFCustomButton> InvertMouseAxisButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<UCheckBox> InvertMouseAxisCheckBox;
+	TObjectPtr<UPRFCustomCheckBox> InvertMouseAxisCheckBox;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UPRFCustomButton> ViewBobbingButton;
 
 	UPROPERTY(Meta = (BindWidget))
-	TObjectPtr<UCheckBox> ViewBobbingCheckbox;
+	TObjectPtr<UPRFCustomCheckBox> ViewBobbingCheckbox;
 
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UPRFCustomButton> ViewControlsButton;
@@ -88,10 +89,10 @@ protected:
 	void OnOverallSliderChanged(float InValue);
 
 	UFUNCTION()
-	void OnViewBobbingCheckBoxClicked(bool bIsChecked);
+	void OnViewBobbingCheckBoxClicked(bool bIsChecked, bool bSkip);
 
 	UFUNCTION()
-	void OnMouseYAxisCheckBoxClicked(bool bIsChecked);
+	void OnMouseYAxisCheckBoxClicked(bool bIsChecked, bool bSkip);
 
 	UFUNCTION()
 	void OnMouseSensitivitySliderChanged(float InValue);

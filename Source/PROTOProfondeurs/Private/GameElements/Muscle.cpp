@@ -381,13 +381,17 @@ void AMuscle::HitMuscle(AActor* HitActor, UPrimitiveComponent* OtherComp)
 		return;
 	}
 
+	FVector CharacterForwardVector = UKismetMathLibrary::GetDirectionUnitVector(MuscleMeshComp->GetComponentLocation(), HitActor->GetActorLocation());
+	float DotResult = MuscleMeshComp->GetUpVector().Dot(CharacterForwardVector);
+	float UpVectorFactor = DotResult >= 0 ? 1 : -1;
+
 	ActorVelocityLength = FMath::Clamp(ActorVelocityLength, MinTriggerVelocity, MaxLaunchVelocity);
 
 	UAkGameplayStatics::PostEventAtLocation(BounceNoise, HitActor->GetActorLocation(), HitActor->GetActorRotation(), HitActor);
 
 	StartDeformation();
 
-	FVector LaunchVelocity = MuscleMeshComp->GetUpVector() * (bUseFixedVelocity ? FixedVelocity : (ActorVelocityLength * VelocityMultiplier));
+	FVector LaunchVelocity = (MuscleMeshComp->GetUpVector() * UpVectorFactor) * (bUseFixedVelocity ? FixedVelocity : (ActorVelocityLength * VelocityMultiplier));
 
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(HitActor);
 	if (Player)
