@@ -173,12 +173,6 @@ protected:
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
-	TObjectPtr<UStaticMesh> ClosedMesh;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
-	TObjectPtr<UStaticMesh> OpenedMesh;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UAkComponent> NerveStretchComp;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
