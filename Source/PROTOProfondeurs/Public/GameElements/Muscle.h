@@ -227,6 +227,9 @@ protected:
 	TObjectPtr<UInteractableComponent> Interactable;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
+	TObjectPtr<UAkAudioEvent> GrowlNoise;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	FText SolidMuscleInteraction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")

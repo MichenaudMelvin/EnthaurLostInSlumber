@@ -601,6 +601,11 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 {
 	if (CurrentAttachedReceptacle != nullptr)
 	{
+		if (!CurrentAttachedReceptacle->CanTheNerveBeTaken())
+		{
+			return;
+		}
+
 		CurrentAttachedReceptacle->TriggerLinkedObjects(this);
 		CurrentAttachedReceptacle = nullptr;
 	}

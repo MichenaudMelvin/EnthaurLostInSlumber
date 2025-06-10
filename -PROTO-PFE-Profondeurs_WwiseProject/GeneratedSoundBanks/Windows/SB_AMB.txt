@@ -1,7 +1,10 @@
 Event	ID	Name			Wwise Object Path	Notes
 	836234157	AMB_GROWL			\WU_AMB_Event\AMB_GROWL	
+	1091882799	AMB_VILLAGE_HEARTBEAT			\WU_AMB_Event\AMB_VILLAGE_HEARTBEAT	
 	2511814352	AMB_BREATH			\WU_AMB_Event\AMB_BREATH	
+	2699383670	AMB_VILLAGE			\WU_AMB_Event\AMB_VILLAGE	
 	3804067178	AMB_GAMEPLAY			\WU_AMB_Event\AMB_GAMEPLAY	
+	3945432358	AMB_WEAKENEDZONE			\WU_AMB_Event\AMB_WEAKENEDZONE	
 	4111363768	AMB_CORRUPTEDZONE			\WU_AMB_Event\AMB_CORRUPTEDZONE	
 
 State Group	ID	Name			Wwise Object Path	Notes
@@ -13,25 +16,28 @@ State	ID	Name	State Group			Notes
 	4120836511	Weakened	STG_WEAKENEDZONE			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	40028711	AMB_BREATH_12	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\89\{8942449A-973B-9A85-1F1B-EF054CC357C3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_12		2432368
-	79017697	AMB_Pad_Necrosed_LP_04	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\47\{47D269AE-96F1-4CBE-AFEB-CEACBFB23732}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_04		6338492
-	84916266	AMB_BREATH_01	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\B4\{B4DC8F89-6B44-AF89-FC0C-101CC60FADD3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_01		2206800
-	113684722	AMB_BREATH_02	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\BC\{BC4198B8-0F85-2E53-979E-A4D28B8799F6}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_02		2458996
-	118041272	AMB_BREATH_07	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\3D\{3DF201E4-B1AF-6709-60D2-14B4BCC868C4}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_07		2603268
-	215594251	AMB_Pad_Necrosed_LP_03	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\28\{28045F6D-1BAF-4662-0C59-AC4960A862B9}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_03		5842764
-	427151800	AMB_BREATH_06	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\37\{37E95FD6-0EB7-FB66-429C-1217CB7D8EF3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_06		1982056
-	452759638	AMB_Pad_01_LP	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\C7\{C75BEDBD-9EEB-4B10-6192-A81EFE78DAD4}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_01_LP		19968096
-	481136108	AMB_Pad_Necrosed_LP_02	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\3D\{3D7CD4A4-3EA2-11A9-6DE9-0B445E86A143}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_02		7576260
-	610405175	AMB_Growl	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\FD\{FD24ADA8-0B76-6E66-4D27-57B44205A739}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Growl		1042368
-	630202445	AMB_Pad_04_LP	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\4C\{4C088803-B6C9-A382-8C2C-6EC6934FD4F3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_04_LP		4987064
-	678510795	AMB_BREATH_04	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\AE\{AE25B41D-9EF0-33DF-FC53-8ECC1A0B07D2}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_04		2218708
-	726580023	AMB_BREATH_11	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\A4\{A4C4287F-9D0E-7F5C-3E8C-C5B7F9140660}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_11		2573684
-	743489974	AMB_Pad_03_LP-glued	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\A9\{A9B688B7-13BA-2E9E-A37B-BD17ED64953E}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_03_LP-glued		4345032
-	745301015	AMB_BREATH_03	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\1C\{1CFF8B7F-A2B7-8A98-C065-1359BC2E111D}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_03		2403776
-	788512206	AMB_Pad_Necrosed_LP_01	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\23\{2322FBBA-5EB7-5038-2A1E-FE75DD1308B3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_01		9061612
-	798986114	AMB_BREATH_09	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\F7\{F7D9C20F-B9C2-E59A-AE40-615105B2CE91}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_09		2041220
-	863142678	AMB_BREATH_08	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\9B\{9B314D01-49F1-3FA9-6ABD-B0D0E9410A46}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_08		2248288
-	879024324	AMB_Pad_02_LP	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\97\{97D10EEB-9667-A63A-9934-16A5FFE8B640}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_02_LP		4318992
-	964612303	AMB_BREATH_10	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\00\{0065A589-7D0D-1AD7-EE1F-4567FDA71B67}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_10		2248288
-	1059098210	AMB_BREATH_05	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\96\{96229D84-843E-D15C-6734-E79516AADD1B}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_05		2070800
+	40028711	AMB_BREATH_12	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\89\{8942449A-973B-9A85-1F1B-EF054CC357C3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_12		2432368
+	79017697	AMB_Pad_Necrosed_LP_04	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\47\{47D269AE-96F1-4CBE-AFEB-CEACBFB23732}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_04		6338492
+	84916266	AMB_BREATH_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\B4\{B4DC8F89-6B44-AF89-FC0C-101CC60FADD3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_01		2206800
+	113684722	AMB_BREATH_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\BC\{BC4198B8-0F85-2E53-979E-A4D28B8799F6}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_02		2458996
+	118041272	AMB_BREATH_07	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\3D\{3DF201E4-B1AF-6709-60D2-14B4BCC868C4}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_07		2603268
+	215594251	AMB_Pad_Necrosed_LP_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\28\{28045F6D-1BAF-4662-0C59-AC4960A862B9}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_03		5842764
+	393029686	AMB_Heartbeat_LP	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\92\{92ACA23A-1517-F258-50BF-830CADD7B2E1}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Heartbeat_LP		463368
+	427151800	AMB_BREATH_06	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\37\{37E95FD6-0EB7-FB66-429C-1217CB7D8EF3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_06		1982056
+	452759638	AMB_Pad_01_LP	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\C7\{C75BEDBD-9EEB-4B10-6192-A81EFE78DAD4}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_01_LP		19968096
+	481136108	AMB_Pad_Necrosed_LP_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\3D\{3D7CD4A4-3EA2-11A9-6DE9-0B445E86A143}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_02		7576260
+	535431809	AMB_Pad_Village_01_LP	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\F5\{F52D9AA6-829D-5703-E77F-F0BB9AADEFD3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Village\AMB_Pad_Village_01_LP		2771580
+	610405175	AMB_Growl	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\FD\{FD24ADA8-0B76-6E66-4D27-57B44205A739}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Growl		1042368
+	630202445	AMB_Pad_04_LP	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\4C\{4C088803-B6C9-A382-8C2C-6EC6934FD4F3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_04_LP		4987064
+	678510795	AMB_BREATH_04	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\AE\{AE25B41D-9EF0-33DF-FC53-8ECC1A0B07D2}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_04		2218708
+	726580023	AMB_BREATH_11	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\A4\{A4C4287F-9D0E-7F5C-3E8C-C5B7F9140660}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_11		2573684
+	743489974	AMB_Pad_03_LP-glued	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\A9\{A9B688B7-13BA-2E9E-A37B-BD17ED64953E}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_03_LP-glued		4345032
+	745301015	AMB_BREATH_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\1C\{1CFF8B7F-A2B7-8A98-C065-1359BC2E111D}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_03		2403776
+	788512206	AMB_Pad_Necrosed_LP_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\23\{2322FBBA-5EB7-5038-2A1E-FE75DD1308B3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_01		9061612
+	798986114	AMB_BREATH_09	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\F7\{F7D9C20F-B9C2-E59A-AE40-615105B2CE91}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_09		2041220
+	863142678	AMB_BREATH_08	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\9B\{9B314D01-49F1-3FA9-6ABD-B0D0E9410A46}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_08		2248288
+	879024324	AMB_Pad_02_LP	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\97\{97D10EEB-9667-A63A-9934-16A5FFE8B640}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_02_LP		4318992
+	964612303	AMB_BREATH_10	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\00\{0065A589-7D0D-1AD7-EE1F-4567FDA71B67}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_10		2248288
+	976737059	AMB_Pad_Village_02_LP	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\96\{9647564F-DF68-75FD-9189-B7D1F3355548}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Village\AMB_Pad_Village_02_LP		1244248
+	1059098210	AMB_BREATH_05	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\96\{96229D84-843E-D15C-6734-E79516AADD1B}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_05		2070800
 

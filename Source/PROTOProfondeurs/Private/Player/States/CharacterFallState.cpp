@@ -82,7 +82,7 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 		ActorsToIgnore.Add(Character);
 
 		FHitResult Hit;
-		bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(Character, StartLocation, EndLocation, SpikeBrakeObjectTypeQuery, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, false);
+		bool bHit = UKismetSystemLibrary::LineTraceSingle(Character, StartLocation, EndLocation, SpikeBrakeTraceTypeQuery, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, false);
 
 		if (bHit)
 		{
