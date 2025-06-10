@@ -14,6 +14,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/CharacterSettings.h"
 #include "Player/FirstPersonController.h"
+#include "Player/States/CharacterStateMachine.h"
 #include "Saves/WorldSaves/WorldSave.h"
 
 ANerve::ANerve()
@@ -325,6 +326,24 @@ void ANerve::ApplyCablesPhysics()
 
 	UAkGameplayStatics::SetRTPCValue(NerveStretchRtpc, RTPCValue, 0, this);
 
+	if (PlayerCharacter)
+	{
+		UCharacterStateMachine* StateMachine = PlayerCharacter->GetStateMachine();
+		if (StateMachine)
+		{
+			if (StateMachine->GetCurrentStateID() == ECharacterStateID::Idle)
+			{
+				bIsStretchSoundPlayed = false;
+				NerveStretchComp->Stop();
+			}
+			else if (!bIsStretchSoundPlayed)
+			{
+				bIsStretchSoundPlayed = true;
+				NerveStretchComp->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+			}
+		}
+	}
+
 	UpdateSplineMeshes(false, true);
 
 	FRotator NerveBallRotator = FRotationMatrix::MakeFromX(GetCableDirection()).Rotator();
@@ -470,6 +489,7 @@ void ANerve::FinishRetractCable()
 		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
 	}
 
+	bIsStretchSoundPlayed = false;
 	NerveStretchComp->Stop();
 	ResetCables(false);
 }
@@ -619,7 +639,6 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 		Pawn->AddComponentByClass(UPlayerToNervePhysicConstraint::StaticClass(), false, FTransform::Identity, false)
 	);
 
-	NerveStretchComp->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 	PhysicConstraint->Init(this, Cast<ACharacter>(Pawn));
 	InteractableComponent->RemoveInteractable(NerveBall);
 
@@ -731,6 +750,7 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 	FTransform AttachTransform = Receptacle->GetAttachTransform();
 	NerveBall->SetWorldTransform(AttachTransform);
 
+	bIsStretchSoundPlayed = false;
 	NerveStretchComp->Stop();
 	UpdateLastSplinePointLocation(AttachTransform.GetLocation());
 	UpdateSplineMeshes(false, false);

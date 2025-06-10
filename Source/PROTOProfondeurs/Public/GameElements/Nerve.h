@@ -236,6 +236,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, Units = "cm"))
 	float DistanceNeededToPropulsion = 500.0f;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Physics")
+	bool bIsStretchSoundPlayed = false;
+
 	UPROPERTY(EditAnywhere, Category = "Physics")
 	FFloatRange PropulsionForceRange = FFloatRange(500.0f, 1000.0f);
 
