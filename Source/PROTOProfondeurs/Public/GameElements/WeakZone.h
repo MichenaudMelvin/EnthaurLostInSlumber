@@ -21,6 +21,9 @@ struct FInteractionPoints
 	UPROPERTY(VisibleInstanceOnly, Category = "InteractionsPoints")
 	TObjectPtr<UStaticMeshComponent> AmberMeshComp;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "InteractionsPoints")
+	TObjectPtr<UBoxComponent> InteractionBox;
+
 	UPROPERTY(EditAnywhere, Category = "InteractionsPoints")
 	TObjectPtr<UStaticMesh> Mesh;
 
@@ -113,6 +116,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
 	float AmberAnimSpeed = 1.5f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
+	FVector InteractionBoxExtent = FVector(100.0f, 100.0f, 30.0f);
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Interactable")
 	TArray<FInteractionPoints> InteractionPoints;
