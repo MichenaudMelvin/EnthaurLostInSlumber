@@ -130,7 +130,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_15m" ID="{90A2CBF6-B897-48C3-8393-E24AC51368F1}" ShortID="506786308">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="15000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="1500"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -146,7 +146,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>15000</XPos>
+											<XPos>1500</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -174,7 +174,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>15000</XPos>
+											<XPos>1500</XPos>
 											<YPos>21</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -198,12 +198,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>3019.8675</XPos>
+											<XPos>301.98675</XPos>
 											<YPos>10.20345</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>15000</XPos>
+											<XPos>1500</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -254,7 +254,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_20m" ID="{2A4ACBEE-A8B8-448F-A919-CAD4FCE6E6AB}" ShortID="637061864">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="20000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="2000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -270,7 +270,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>20000</XPos>
+											<XPos>2000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -298,7 +298,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>20000</XPos>
+											<XPos>2000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -322,12 +322,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>4026.49</XPos>
+											<XPos>402.649</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>20000</XPos>
+											<XPos>2000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -378,7 +378,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_30m" ID="{DF30AE00-7FC8-4503-9302-D5116F0E8F6B}" ShortID="907266753">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="30000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="3000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -394,7 +394,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>30000</XPos>
+											<XPos>3000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -422,7 +422,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>30000</XPos>
+											<XPos>3000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -446,12 +446,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>6039.735</XPos>
+											<XPos>603.9735</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>30000</XPos>
+											<XPos>3000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -502,7 +502,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_40m" ID="{BE58783D-4683-4F4D-9FF1-32626C97E07D}" ShortID="397624235">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="40000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="4000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -518,7 +518,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>40000</XPos>
+											<XPos>4000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -546,7 +546,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>40000</XPos>
+											<XPos>4000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -570,12 +570,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>8052.98</XPos>
+											<XPos>805.298</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>40000</XPos>
+											<XPos>4000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -626,7 +626,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_50m" ID="{D90AF8F5-6CCB-43C3-BAB5-35D226462AE3}" ShortID="487774525">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="50000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="5000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -642,7 +642,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>50000</XPos>
+											<XPos>5000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -670,7 +670,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>50000</XPos>
+											<XPos>5000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -694,12 +694,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>10066.225</XPos>
+											<XPos>1006.6225</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>50000</XPos>
+											<XPos>5000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -750,7 +750,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_60m" ID="{3531EC2F-BC90-4D75-8AF0-D7C4186A3AA9}" ShortID="635066371">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="60000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="6000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -766,7 +766,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>60000</XPos>
+											<XPos>6000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -794,7 +794,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>60000</XPos>
+											<XPos>6000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -818,12 +818,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>12079.47</XPos>
+											<XPos>1207.947</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>60000</XPos>
+											<XPos>6000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -874,7 +874,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_70m" ID="{A803A783-21CB-4F3C-AD50-7BCA3608C314}" ShortID="533836017">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="70000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="7000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -890,7 +890,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>70000</XPos>
+											<XPos>7000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -918,7 +918,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>70000</XPos>
+											<XPos>7000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -942,12 +942,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>14092.715</XPos>
+											<XPos>1409.2715</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>70000</XPos>
+											<XPos>7000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -998,7 +998,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_80m" ID="{3BD77612-C38E-4F78-87B8-03468F8C4B9C}" ShortID="525619248">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="80000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="8000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -1014,7 +1014,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>80000</XPos>
+											<XPos>8000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -1042,7 +1042,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>80000</XPos>
+											<XPos>8000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -1066,12 +1066,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>16105.96</XPos>
+											<XPos>1610.596</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>80000</XPos>
+											<XPos>8000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -1122,7 +1122,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_90m" ID="{90B39CCD-1C38-4142-81D5-8AEE9B9B6120}" ShortID="361212859">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="90000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="9000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -1138,7 +1138,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>90000</XPos>
+											<XPos>9000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -1166,7 +1166,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>90000</XPos>
+											<XPos>9000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -1190,12 +1190,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>18119.205</XPos>
+											<XPos>1811.9205</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>90000</XPos>
+											<XPos>9000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -1246,7 +1246,7 @@
 				</Attenuation>
 				<Attenuation Name="ATT_100m" ID="{B8F89873-73BF-4D43-822A-40E1730FBCF1}" ShortID="1047187458">
 					<PropertyList>
-						<Property Name="RadiusMax" Type="Real64" Value="100000"/>
+						<Property Name="RadiusMax" Type="Real64" Value="10000"/>
 					</PropertyList>
 					<CurveUsageInfoList>
 						<VolumeDryUsage>
@@ -1262,7 +1262,7 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>100000</XPos>
+											<XPos>10000</XPos>
 											<YPos>-200</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -1290,7 +1290,7 @@
 											<SegmentShape>Exp1</SegmentShape>
 										</Point>
 										<Point>
-											<XPos>100000</XPos>
+											<XPos>10000</XPos>
 											<YPos>22</YPos>
 											<Flags>37</Flags>
 										</Point>
@@ -1314,12 +1314,12 @@
 											<Flags>5</Flags>
 										</Point>
 										<Point>
-											<XPos>20132.45</XPos>
+											<XPos>2013.245</XPos>
 											<YPos>10.5571</YPos>
 											<Flags>0</Flags>
 										</Point>
 										<Point>
-											<XPos>100000</XPos>
+											<XPos>10000</XPos>
 											<YPos>0</YPos>
 											<Flags>37</Flags>
 										</Point>
