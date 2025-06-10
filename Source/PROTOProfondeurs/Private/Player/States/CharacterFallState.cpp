@@ -20,7 +20,7 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 {
 	Super::StateEnter_Implementation(PreviousStateID);
 
-	if (PreviousStateID != ECharacterStateID::Jump && PreviousStateID != ECharacterStateID::Fall)
+	if (PreviousStateID != ECharacterStateID::Jump && PreviousStateID != ECharacterStateID::Fall && PreviousStateID != ECharacterStateID::Stop)
 	{
 		bCanDoCoyoteTime = true;
 		CoyoteTime = 0.0f;
@@ -31,6 +31,7 @@ void UCharacterFallState::StateEnter_Implementation(const ECharacterStateID& Pre
 	}
 
 	SpikeBrakePressedDuration = 0.0f;
+	SpikeBrakeTimer = 0.0f;
 	bHasPressedInteraction = false;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
@@ -68,7 +69,9 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 		}
 	}
 
-	if (Controller->GetPlayerInputs().bInputInteractTrigger)
+	SpikeBrakeTimer += DeltaTime;
+
+	if (Controller->GetPlayerInputs().bInputInteractTrigger && SpikeBrakeTimer >= SpikeBrakeDelay)
 	{
 		SpikeBrakePressedDuration += DeltaTime;
 
@@ -79,7 +82,7 @@ void UCharacterFallState::StateTick_Implementation(float DeltaTime)
 		ActorsToIgnore.Add(Character);
 
 		FHitResult Hit;
-		bool bHit = UKismetSystemLibrary::LineTraceSingle(Character, StartLocation, EndLocation, UEngineTypes::ConvertToTraceType(SpikeBrakeTraceTypeQuery), false, ActorsToIgnore, EDrawDebugTrace::None, Hit, false);
+		bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(Character, StartLocation, EndLocation, SpikeBrakeObjectTypeQuery, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, false);
 
 		if (bHit)
 		{
