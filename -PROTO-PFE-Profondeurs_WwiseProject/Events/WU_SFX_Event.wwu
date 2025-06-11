@@ -190,6 +190,13 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{5251D9FA-374B-473E-8176-E8D69D90B41C}" ShortID="510275303">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Elevator_Stop" ID="{6DB15B6C-C30A-479E-BF72-5D420434778F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="Play_SFX_Inject_Ambre" ID="{14CA4FE7-8867-4283-AD24-5919B3F33532}">
