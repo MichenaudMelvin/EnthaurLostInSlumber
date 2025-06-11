@@ -31,13 +31,6 @@ void AElectricityFeedback::BeginPlay()
 	ElectricityNoises->PostAssociatedAkEvent(static_cast<int32>(EAkCallbackType::EndOfEvent), CallBackEvent);
 }
 
-void AElectricityFeedback::Destroyed()
-{
-	Super::Destroyed();
-
-	ElectricityNoises->PostAkEvent(DestroyedEvent, 0, FOnAkPostEventCallback());
-}
-
 void AElectricityFeedback::PlayNoise(EAkCallbackType CallbackType, UAkCallbackInfo* CallbackInfo)
 {
 	if (CallbackType != EAkCallbackType::EndOfEvent)

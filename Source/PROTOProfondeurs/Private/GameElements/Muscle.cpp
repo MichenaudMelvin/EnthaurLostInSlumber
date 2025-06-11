@@ -474,7 +474,19 @@ void AMuscle::UpdateMuscleStateTransition(float Alpha)
 
 void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent)
 {
-	Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))->GetCameraShake()->MakeSmallCameraShake();
+	if (!Pawn)
+	{
+		return;
+	}
+
+	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Pawn);
+	if (!Player)
+	{
+		return;
+	}
+
+	UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
+	Player->GetCameraShake()->MakeSmallCameraShake();
 
 	ToggleMuscleSolidity();
 }

@@ -87,8 +87,6 @@ void UDeathMenuUI::RespawnPlayer()
 	PlayerController->SetPause(false);
 	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController, true);
 	PlayerController->SetShowMouseCursor(false);
-
-	this->RemoveFromParent();
 }
 
 void UDeathMenuUI::BackToMainMenu()

@@ -1,11 +1,14 @@
 Event	ID	Name			Wwise Object Path	Notes
+	241700254	Play_SFX_NerveReceptacle_Desactivate			\WU_SFX_Event\Play_SFX_NerveReceptacle_Desactivate	
 	327116138	Play_SFX_Muscle_Soft			\WU_SFX_Event\Play_SFX_Muscle_Soft	
 	688124889	Play_SFX_Grab_Nerve			\WU_SFX_Event\Play_SFX_Grab_Nerve	
 	789176004	Play_SFX_Make_Hard			\WU_SFX_Event\Play_SFX_Make_Hard	
 	895316894	Stop_Elevator			\WU_SFX_Event\Stop_Elevator	
+	930710263	Stop_LPX_Nerve_Stretch			\WU_SFX_Event\Stop_LPX_Nerve_Stretch	
 	1373430044	Play_SFX_NerveReceptacle_Activate			\WU_SFX_Event\Play_SFX_NerveReceptacle_Activate	
 	1529896519	Play_SFX_Make_Soft			\WU_SFX_Event\Play_SFX_Make_Soft	
 	1965005713	Play_SFX_Electricity			\WU_SFX_Event\Play_SFX_Electricity	
+	2288437117	Play_SFX_Plant_Growth			\WU_SFX_Event\Play_SFX_Plant_Growth	
 	2772994470	Play_SFX_NerveDoor			\WU_SFX_Event\Play_SFX_NerveDoor	
 	3026607058	Play_SFX_RespawnTree_Activate			\WU_SFX_Event\Play_SFX_RespawnTree_Activate	
 	3109774893	Play_SFX_Take_Ambre			\WU_SFX_Event\Play_SFX_Take_Ambre	
@@ -50,12 +53,14 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	466744989	SFX_Make_Hard	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\F1\{F1EF1DBB-EDE6-9594-FF11-58AB9B30164B}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Make_Hard		105064
 	515272845	SFX_NerveDoor_Layer_Woosh_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\64\{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Woosh\SFX_NerveDoor_Layer_Woosh_03		70496
 	518928300	SFX_Muscle_Bounce_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\86\{863C2335-BBA5-0250-A740-52464A860A41}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Muscle\SFX_Muscle_Bounce\SFX_Muscle_Bounce_02		55374
+	523178003	SFX_Plant_Growth	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\70\{700725BF-50A0-A34D-0C47-D3FFE3CA86CA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Plant_Growth		364896
 	531951533	SFX_Muscle_Hard_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\6B\{6BF025F1-DCF1-7702-547C-628FF97E6CEB}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Muscle\SFX_Muscle_Hard\SFX_Muscle_Hard_03		64096
 	591463370	SFX_Inject_Ambre	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\E3\{E3303EBF-EA7B-18FA-D260-6B71B7BF53E8}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Inject_Ambre		86496
 	592723353	SFX_RespawnTree_Activate	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\00\{000E1002-DACC-DA1B-A8AC-149366E6DC95}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_RespawnTree_Activate		352096
 	595981696	SFX_NerveReceptacle_Activate_04	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\D2\{D241FEEC-D72E-2C97-FF3F-BAF360BDEB3D}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_04		883296
 	597642928	SFX_Electricity_Start_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\58\{58CFC810-6776-A3E6-6410-1CFD3BD73BB7}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_Electricity_Start\SFX_Electricity_Start_03		128096
 	603635966	SFX_Muscle_Soft_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\29\{2981B365-5BCE-1E9B-CF79-D594D47EA28C}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Muscle\SFX_Muscle_Soft\SFX_Muscle_Soft_01		83296
+	628782229	SFX_Elevator_Stop	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\56\{563CF1E2-4DEA-7DAF-EC5C-746A78AEC450}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Elevator_Stop		364896
 	695514868	SFX_Electricity_Layer_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\9F\{9F29435C-A346-997F-97FD-416A7F861D40}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Electricity\SFX_Electricity_Layer_01		320096
 	708400597	SFX_NerveDoor_Layer_Gore02_01	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\0C\{0C4F2FF8-84F9-5292-7664-9D39D5421D77}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore02\SFX_NerveDoor_Layer_Gore02_01		70496
 	714298177	SFX_Muscle_Soft_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\5D\{5D4502C9-728B-1CC3-DD2A-C3CCE4969590}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Muscle\SFX_Muscle_Soft\SFX_Muscle_Soft_03		83296
@@ -68,6 +73,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	861837351	SFX_NerveDoor_Layer_Gore02_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\05\{05362565-F73F-EC7B-365C-49076F99EAEA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore02\SFX_NerveDoor_Layer_Gore02_03		70496
 	889954801	LPX_Nerve_Stretch_04	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\F7\{F7D24825-AEF2-A6CD-0485-3934B48E028E}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\LPX_Nerve_Stretch\LPX_Nerve_Stretch_04		1144128
 	910307899	SFX_Elevator_Start_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\FC\{FCCFF5C6-29D9-E426-7B81-DBEE894918D5}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Elevator_Start\SFX_Elevator_Start_03		147296
+	926594296	SFX_NerveReceptacle_Desactivate	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\BA\{BAD973E0-72E3-25DD-F23C-DEEAA8388BAA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_NerveReceptacle_Desactivate		80096
 	992978286	SFX_NerveReceptacle_Activate_03	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\44\{44FAEC2E-7EE8-6A9A-CFA8-6173281A977C}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_03		864096
 	1021487410	LPX_Nerve_Stretch_05	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\C6\{C670B7C1-D2A2-C6C0-AC3C-856F0981C6BB}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\LPX_Nerve_Stretch\LPX_Nerve_Stretch_05		567648
 	1040785902	SFX_NerveDoor_Layer_Woosh_02	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\32\{324BC753-BD10-14C4-6ED0-6154433A111C}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Woosh\SFX_NerveDoor_Layer_Woosh_02		70496

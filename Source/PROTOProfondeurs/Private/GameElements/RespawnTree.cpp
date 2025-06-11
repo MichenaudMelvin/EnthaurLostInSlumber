@@ -137,6 +137,8 @@ void ARespawnTree::SetActive()
 {
 	bIsActivated = true;
 
+	RespawnTreeNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+
 	FCTween::Play(
 		0.f,
 		30.f,
@@ -152,7 +154,6 @@ void ARespawnTree::SetActive()
 void ARespawnTree::SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave)
 {
 	Player->SetRespawnTree(this);
-	RespawnTreeNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 
 	if (!bSave)
 	{

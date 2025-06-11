@@ -138,6 +138,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_AMB_Muscle" ID="{BCBDDE4B-360C-46C5-8D5C-992EDA263D15}">
+					<ChildrenList>
+						<Action Name="" ID="{DF47BC0F-0C6E-4EBF-BEDA-E2E54EFDBDCE}" ShortID="856211045">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_Muscle" ID="{C3D9CD73-42C1-439F-B6B9-E9DD84149286}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
