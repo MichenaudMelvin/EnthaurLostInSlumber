@@ -107,7 +107,7 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 {
 	IsConnected = !IsConnected;
 	OnNerveDisconnect(IsConnected);
-	
+
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
 
@@ -140,6 +140,11 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 bool ANerveReceptacle::CanTheNerveBeTaken() const
 {
 	return !IsValid(NerveElectricityFeedback);
+}
+
+void ANerveReceptacle::DisableReceptacle()
+{
+	NerveReceptaclesNoises->PostAkEvent(DisabledNoise);
 }
 
 void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
@@ -180,7 +185,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 			{
 				if (NerveElectricityFeedback)
 				{
-					NerveReceptaclesNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+					NerveReceptaclesNoises->PostAkEvent(EnabledNoise);
 					NerveElectricityFeedback->SetRadius(F);
 				}
 			},

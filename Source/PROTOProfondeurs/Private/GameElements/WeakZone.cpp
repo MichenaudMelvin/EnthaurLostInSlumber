@@ -56,12 +56,13 @@ void AWeakZone::BeginPlay()
 
 	for (const FInteractionPoints& InteractionPoint : InteractionPoints)
 	{
-		InteractionPoint.MeshComp->SetCollisionResponseToChannel(TraceSettings->InteractionTraceChannel, ECR_Block);
 		InteractionPoint.AmberMeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		InteractionPoint.InteractionBox->SetCollisionResponseToAllChannels(ECR_Ignore);
+		InteractionPoint.InteractionBox->SetCollisionResponseToChannel(TraceSettings->InteractionTraceChannel, ECR_Block);
 
 		if (!InteractionPoint.bIsActive)
 		{
-			Interactable->AddInteractable(InteractionPoint.MeshComp);
+			Interactable->AddInteractable(InteractionPoint.InteractionBox);
 		}
 	}
 
@@ -87,27 +88,33 @@ void AWeakZone::OnConstruction(const FTransform& Transform)
 
 		UActorComponent* DefaultComp = AddComponentByClass(UStaticMeshComponent::StaticClass(), true, InteractionPoint.Transform, false);
 		UActorComponent* AmberComp = AddComponentByClass(UStaticMeshComponent::StaticClass(), true, FTransform::Identity, false);
-		if (!DefaultComp || !AmberComp)
+		UActorComponent* BoxComp = AddComponentByClass(UBoxComponent::StaticClass(), true, FTransform::Identity, false);
+		if (!DefaultComp || !AmberComp || !BoxComp)
 		{
 			continue;
 		}
 
 		UStaticMeshComponent* DefaultMeshComp = Cast<UStaticMeshComponent>(DefaultComp);
 		UStaticMeshComponent* AmberMeshComp = Cast<UStaticMeshComponent>(AmberComp);
-		if (!DefaultMeshComp || !AmberMeshComp)
+		UBoxComponent* InteractionComp = Cast<UBoxComponent>(BoxComp);
+		if (!DefaultMeshComp || !AmberMeshComp || !InteractionComp)
 		{
 			continue;
 		}
 
 		InteractionPoint.MeshComp = DefaultMeshComp;
 		InteractionPoint.AmberMeshComp = AmberMeshComp;
+		InteractionPoint.InteractionBox = InteractionComp;
 
 		FAttachmentTransformRules AttachmentRules(EAttachmentRule::KeepRelative, false);
 		InteractionPoint.MeshComp->AttachToComponent(RootComponent, AttachmentRules);
 		InteractionPoint.AmberMeshComp->AttachToComponent(InteractionPoint.MeshComp, AttachmentRules);
+		InteractionPoint.InteractionBox->AttachToComponent(InteractionPoint.MeshComp, AttachmentRules);
 
 		InteractionPoint.MeshComp->SetStaticMesh(InteractionPoint.Mesh);
 		InteractionPoint.AmberMeshComp->SetStaticMesh(AmberMesh);
+		InteractionPoint.InteractionBox->SetBoxExtent(InteractionBoxExtent, false);
+		InteractionPoint.InteractionBox->SetRelativeLocation(FVector(0.0f, 0.0f, InteractionBoxExtent.Z));
 	}
 }
 
@@ -217,7 +224,7 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 
 	UAkGameplayStatics::PostEventAtLocation(InjectAmberNoise, InteractionPoint->Transform.GetLocation(), InteractionPoint->Transform.GetRotation().Rotator(), this);
 	InteractionPoint->bIsActive = true;
-	Interactable->RemoveInteractable(InteractionPoint->MeshComp);
+	Interactable->RemoveInteractable(InteractionPoint->InteractionBox);
 
 	CheckIfEveryInteractionsPointActive();
 }
@@ -226,7 +233,7 @@ FInteractionPoints* AWeakZone::FindInteractionPoint(TObjectPtr<UPrimitiveCompone
 {
 	for (FInteractionPoints& InteractionPoint : InteractionPoints)
 	{
-		if (InteractionPoint.MeshComp == Comp)
+		if (InteractionPoint.InteractionBox == Comp)
 		{
 			return &InteractionPoint;
 		}
