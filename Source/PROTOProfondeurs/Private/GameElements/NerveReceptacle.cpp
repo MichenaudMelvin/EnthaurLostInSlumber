@@ -178,6 +178,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 		},
 		Duration, EFCEase::Linear)->SetOnComplete([&]
 		{
+			NerveReceptaclesNoises->PostAkEvent(EnabledNoise);
 			TriggerLinkedObjects(KeepInMemoryNerve);
 
 			FCTween::Play(30.f, 200.f,
@@ -185,7 +186,6 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 			{
 				if (NerveElectricityFeedback)
 				{
-					NerveReceptaclesNoises->PostAkEvent(EnabledNoise);
 					NerveElectricityFeedback->SetRadius(F);
 				}
 			},
