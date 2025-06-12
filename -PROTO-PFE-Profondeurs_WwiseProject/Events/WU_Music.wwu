@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="WU_Music" ID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="19"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<Event Name="Play_MU_Menu" ID="{4E2866E6-D300-45F8-B62A-A54678F39D44}">
+					<ChildrenList>
+						<Action Name="" ID="{420F0CCA-7159-473B-A874-21357CACED90}" ShortID="174819633">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{89693C31-FB07-4796-820C-275CED1CDA77}" ShortID="306813185">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Full" ID="{BA69C266-C45A-4595-849B-8E043AEEB739}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{09980D9F-2F2C-4B90-B7E7-C6B57E57CB1D}" ShortID="3206590">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_MU_Village" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}">
+					<ChildrenList>
+						<Action Name="" ID="{D8DF8765-3393-49B6-B9F9-7F771519F334}" ShortID="649449349">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{BA13E80B-2060-4553-913B-E14F02BFFD75}" ShortID="240974408">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{4A655D2F-876C-43B1-A6B2-909C7A2538F7}" ShortID="642125085">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Full" ID="{BA69C266-C45A-4595-849B-8E043AEEB739}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_MU_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}">
+					<ChildrenList>
+						<Action Name="" ID="{D1725414-084D-4674-96AB-5AEEEBCEF6FB}" ShortID="205815653">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Full" ID="{BA69C266-C45A-4595-849B-8E043AEEB739}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{B68BFD07-2750-458F-A2D6-671C22AE8587}" ShortID="101021546">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{71F828F4-8B3B-48FC-816F-A23EE0183C2E}" ShortID="151403287">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
