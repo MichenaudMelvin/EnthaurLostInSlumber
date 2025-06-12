@@ -13,11 +13,9 @@
 #include "Saves/WorldSaves/WorldSave.h"
 #include "Saves/WorldSaves/WorldSaveSubsystem.h"
 
-// Sets default values
 ARespawnTree::ARespawnTree()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(RootComp);
@@ -32,11 +30,8 @@ ARespawnTree::ARespawnTree()
 
 	RespawnTreeNoises = CreateDefaultSubobject<UAkComponent>(TEXT("RespawnTreeNoises"));
 	RespawnTreeNoises->SetupAttachment(RootComp);
-
-	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
 }
 
-// Called when the game starts or when spawned
 void ARespawnTree::BeginPlay()
 {
 	Super::BeginPlay();
@@ -72,20 +67,13 @@ void ARespawnTree::BeginPlay()
 	else
 	{
 		TreeModel->SetMaterial(0, Material);
-		Material->SetScalarParameterValue("Emissive", 0.f);
-		Interaction->AddInteractable(TreeModel);
-		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::Interact);
+		Material->SetScalarParameterValue("Emissive", 0.0f);
 	}
 }
 
 void ARespawnTree::Destroyed()
 {
 	Super::Destroyed();
-
-	if (Interaction && Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::Interact))
-	{
-		Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
-	}
 
 	if (TriggerBox && TriggerBox->OnComponentBeginOverlap.IsAlreadyBound(this, &ARespawnTree::TriggerEnter))
 	{
@@ -104,22 +92,6 @@ void ARespawnTree::OnConstruction(const FTransform& Transform)
 void ARespawnTree::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(OtherActor);
-	if (!Player)
-	{
-		return;
-	}
-
-	if (!bIsActivated)
-	{
-		SetActive();
-	}
-
-	SetRespawnPoint(Player, true);
-}
-
-void ARespawnTree::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
-{
-	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Pawn);
 	if (!Player)
 	{
 		return;
@@ -185,9 +157,9 @@ void ARespawnTree::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
 
-	if (bIsZoneActive && Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::Interact))
+	if (bIsZoneActive && TriggerBox->OnComponentBeginOverlap.IsAlreadyBound(this, &ARespawnTree::TriggerEnter))
 	{
-		Interaction->OnInteract.RemoveDynamic(this, &ARespawnTree::Interact);
+		TriggerBox->OnComponentBeginOverlap.RemoveDynamic(this, &ARespawnTree::TriggerEnter);
 	}
 }
 
@@ -195,9 +167,9 @@ void ARespawnTree::OnExitWeakZone_Implementation()
 {
 	IWeakZoneInterface::OnExitWeakZone_Implementation();
 
-	if (!Interaction->OnInteract.IsAlreadyBound(this, &ARespawnTree::Interact))
+	if (!TriggerBox->OnComponentBeginOverlap.IsAlreadyBound(this, &ARespawnTree::TriggerEnter))
 	{
-		Interaction->OnInteract.AddDynamic(this, &ARespawnTree::Interact);
+		TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &ARespawnTree::TriggerEnter);
 	}
 }
 
