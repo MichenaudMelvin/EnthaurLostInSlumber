@@ -30,56 +30,36 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
-						<Action Name="" ID="{B852D28B-027D-4115-A6C3-1B49E92E03B5}" ShortID="214623157">
+						<Action Name="" ID="{B107B056-C2A2-4550-A82E-73A64BC7FE36}" ShortID="897915468">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="2"/>
-								<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_Electricty" ID="{C79B1D69-36CC-4D9E-AF4B-DE9C8E8BA573}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
-					</ChildrenList>
-				</Event>
-				<Event Name="Play_SFX_Electricty" ID="{5C28218F-535A-43B7-9CD4-681EEC44DF40}">
-					<ChildrenList>
-						<Action Name="" ID="{BF73EA49-277A-4CDF-A111-A48FEF57595A}" ShortID="614991199">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="SFX_Electricity_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{D0380C93-97EE-4F80-8B76-21BCB0D61CD3}" ShortID="684431986">
-							<PropertyList>
-								<Property Name="Delay" Type="Real64" Value="0.1"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="SFX_Electricty" ID="{C79B1D69-36CC-4D9E-AF4B-DE9C8E8BA573}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
-				<Event Name="Play_SFX_Electricty_End" ID="{646C3207-14E9-41FB-B6E1-BFF1CB8A6497}">
-					<ChildrenList>
-						<Action Name="" ID="{55669413-1827-4206-BA28-6127A58ACB87}" ShortID="961385006">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="SFX_NerveReceptacle_Electricty_End" ID="{DE93B8AC-F7EA-4037-B3E2-E500A95A6F93}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{EEBA1A39-D736-4DD1-9947-4FD025949F3D}" ShortID="994921837">
+						<Action Name="" ID="{E351266E-BF02-49A3-8DAB-5C8D7BB72BBF}" ShortID="30777389">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SFX_Nerve_Electricty" ID="{09B80DEB-1198-47CC-A718-406B7FDC5349}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+									<ObjectRef Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{F3E3E32E-1BF6-4616-9EB7-3F0C3EC64349}" ShortID="98135907">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -150,17 +130,6 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_SFX_Nerve_Growth" ID="{28718967-02E7-48AE-8783-3878B7F1CF4F}">
-					<ChildrenList>
-						<Action Name="" ID="{829F49EB-58FD-4446-8EE1-4A8BCF237834}" ShortID="394487480">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="SFX_Nerve_Growth" ID="{18118515-8ED3-4961-802C-44035A50BAC4}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
 				<Event Name="Play_LPX_Nerve_Stretch" ID="{86D55011-33D5-488E-A299-439AE1860B89}">
 					<ChildrenList>
 						<Action Name="" ID="{4295B903-D009-4FC5-BD77-A6170AFEC7C5}" ShortID="531200954">
@@ -221,6 +190,13 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{5251D9FA-374B-473E-8176-E8D69D90B41C}" ShortID="510275303">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Elevator_Stop" ID="{6DB15B6C-C30A-479E-BF72-5D420434778F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="Play_SFX_Inject_Ambre" ID="{14CA4FE7-8867-4283-AD24-5919B3F33532}">
@@ -262,6 +238,88 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="SFX_Make_Soft" ID="{B711BC54-16B7-4970-9E9A-A0138B42212A}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Electricity" ID="{3BD0B7D7-1E41-4BC9-BFCE-EB60634E0A08}">
+					<ChildrenList>
+						<Action Name="" ID="{1BB20F7D-EAF0-41C7-8A4A-7E09ECD0E695}" ShortID="310297691">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Electricity_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{9D3464D2-0195-44E5-83E8-D00F2BCD74FB}" ShortID="881183275">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{2DBB1D54-8979-491A-ABA6-C6224BEE9A5A}" ShortID="720303419">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{CAEB9CD8-6FC1-4F0E-8E32-D0FBF9A7DC38}" ShortID="612409937">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_LPX_Nerve_Stretch" ID="{C2BCB29F-3574-4185-A670-2E3B736BB478}">
+					<ChildrenList>
+						<Action Name="" ID="{5142CFDF-949F-485B-8DEE-B76B83372D8F}" ShortID="869268614">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="LPX_Nerve_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{42545181-3C3A-4B0B-A226-ABD1641E6D96}" ShortID="145428009">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="LPX_Nerve_Stretch_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_Plant_Growth" ID="{EA587034-B04E-4D91-A9B1-4998FECBC59D}">
+					<ChildrenList>
+						<Action Name="" ID="{DE06014C-9A6B-4F09-81DA-7ED870E7C06D}" ShortID="107662722">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Plant_Growth" ID="{43E56E05-8E91-4218-8717-411147914A09}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SFX_NerveReceptacle_Desactivate" ID="{A94B20D5-2A8E-4301-A951-C09D4C0A7716}">
+					<ChildrenList>
+						<Action Name="" ID="{88BAEB35-7E80-4E8D-86D1-4A8D4EE38DDE}" ShortID="716920485">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_NerveReceptacle_Desactivate" ID="{F3F03812-D49A-4806-BE85-2564744415A6}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

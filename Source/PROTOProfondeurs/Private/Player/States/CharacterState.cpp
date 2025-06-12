@@ -125,15 +125,24 @@ void UCharacterState::UpdateViewBobbing(float DeltaTime)
 	const FWaveOscillator CurrentWaveOscillator = Character->GetViewBobbingObject()->GetOscillator();
 	const FWaveOscillator TargetWaveOscillator = GetSettings()->bViewBobbing ? ViewBobbing : UViewBobbing::GetEmptyOscillator();
 
+	const float CurrentLocationAmplitudeMultiplier = Character->GetViewBobbingObject()->GetLocationAmplitudeMultiplier();
+	const float TargetLocationAmplitudeMultiplier = GetSettings()->bViewBobbing ? LocationAmplitudeMultiplier : 0.0f;
+
+	const float CurrentLocationFrequencyMultiplier = Character->GetViewBobbingObject()->GetLocationFrequencyMultiplier();
+	const float TargetLocationFrequencyMultiplier = GetSettings()->bViewBobbing ? LocationFrequencyMultiplier : 0.0f;
+
 	float TargetAmplitude = FMath::Lerp(CurrentWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
 	float TargetFrequency = FMath::Lerp(CurrentWaveOscillator.Frequency, TargetWaveOscillator.Frequency, DeltaTime);
+
+	float AmplitudeMultiplier = FMath::Lerp(CurrentLocationAmplitudeMultiplier, TargetLocationAmplitudeMultiplier, DeltaTime);
+	float FrequencyMultiplier = FMath::Lerp(CurrentLocationFrequencyMultiplier, TargetLocationFrequencyMultiplier, DeltaTime);
 
 	FWaveOscillator Oscillator;
 	Oscillator.Amplitude = TargetAmplitude;
 	Oscillator.Frequency = TargetFrequency;
 	Oscillator.InitialOffsetType = ViewBobbing.InitialOffsetType;
 
-	Character->GetViewBobbingObject()->SetOscillator(Oscillator);
+	Character->GetViewBobbingObject()->SetOscillator(Oscillator, AmplitudeMultiplier, FrequencyMultiplier);
 }
 
 #pragma endregion

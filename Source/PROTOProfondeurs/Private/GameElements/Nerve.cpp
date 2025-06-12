@@ -14,6 +14,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/CharacterSettings.h"
 #include "Player/FirstPersonController.h"
+#include "Player/States/CharacterStateMachine.h"
 #include "Saves/WorldSaves/WorldSave.h"
 
 ANerve::ANerve()
@@ -191,11 +192,6 @@ void ANerve::AddSplineMesh(bool bMakeNoise)
 	FVector StartSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(StartDistance, ESplineCoordinateSpace::Local);
 	FVector EndSplineLocation = SplineCable->GetLocationAtDistanceAlongSpline(EndDistance, ESplineCoordinateSpace::Local);
 
-	if (bMakeNoise)
-	{
-		UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
-	}
-
 	FVector SplineDirection = UKismetMathLibrary::GetDirectionUnitVector(StartSplineLocation, EndSplineLocation);
 	SplineMesh->SetStartAndEnd(StartSplineLocation, SplineDirection, EndSplineLocation, SplineDirection, false);
 
@@ -211,8 +207,6 @@ void ANerve::RemoveSplineMesh()
 {
 	int LastIndex = SplineMeshes.Num() - 1;
 	TObjectPtr<USplineMeshComponent> SplineMesh = SplineMeshes[LastIndex];
-
-	UAkGameplayStatics::PostEventAtLocation(NerveGrowthNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
 
 	SplineMeshes.RemoveAt(LastIndex);
 	SplineMesh->DestroyComponent();
@@ -329,6 +323,24 @@ void ANerve::ApplyCablesPhysics()
 	float RTPCValue = FMath::Lerp(0.0f, 100.0f, Alpha);
 
 	UAkGameplayStatics::SetRTPCValue(NerveStretchRtpc, RTPCValue, 0, this);
+
+	if (PlayerCharacter)
+	{
+		UCharacterStateMachine* StateMachine = PlayerCharacter->GetStateMachine();
+		if (StateMachine)
+		{
+			if (StateMachine->GetCurrentStateID() == ECharacterStateID::Idle)
+			{
+				bIsStretchSoundPlayed = false;
+				NerveStretchComp->Stop();
+			}
+			else if (!bIsStretchSoundPlayed)
+			{
+				bIsStretchSoundPlayed = true;
+				NerveStretchComp->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+			}
+		}
+	}
 
 	UpdateSplineMeshes(false, true);
 
@@ -475,6 +487,7 @@ void ANerve::FinishRetractCable()
 		InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
 	}
 
+	bIsStretchSoundPlayed = false;
 	NerveStretchComp->Stop();
 	ResetCables(false);
 }
@@ -559,6 +572,8 @@ void ANerve::DetachNerveBall(bool bForceDetachment)
 {
 	if (PlayerCharacter && PlayerCharacter->OnRespawn.IsAlreadyBound(this, &ANerve::ForceDetachNerveBallFromPlayer))
 	{
+		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Jump, false);
+		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Sprint, false);
 		PlayerCharacter->OnRespawn.RemoveDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
 	}
 
@@ -601,6 +616,12 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 {
 	if (CurrentAttachedReceptacle != nullptr)
 	{
+		if (!CurrentAttachedReceptacle->CanTheNerveBeTaken())
+		{
+			return;
+		}
+
+		CurrentAttachedReceptacle->DisableReceptacle();
 		CurrentAttachedReceptacle->TriggerLinkedObjects(this);
 		CurrentAttachedReceptacle = nullptr;
 	}
@@ -616,7 +637,6 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 		Pawn->AddComponentByClass(UPlayerToNervePhysicConstraint::StaticClass(), false, FTransform::Identity, false)
 	);
 
-	NerveStretchComp->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 	PhysicConstraint->Init(this, Cast<ACharacter>(Pawn));
 	InteractableComponent->RemoveInteractable(NerveBall);
 
@@ -627,6 +647,9 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 	}
 
 	PlayerCharacter = Player;
+	PlayerCharacter->GetStateMachine()->ChangeState(ECharacterStateID::Idle);
+	PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Sprint, true);
+	PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Jump, true);
 
 #if WITH_EDITOR
 	if (PlayerCharacter->OnRespawn.IsAlreadyBound(this, &ANerve::ForceDetachNerveBallFromPlayer))
@@ -715,6 +738,8 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 
 	if (PlayerCharacter && PlayerCharacter->OnRespawn.IsAlreadyBound(this, &ANerve::ForceDetachNerveBallFromPlayer))
 	{
+		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Jump, false);
+		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Sprint, false);
 		PlayerCharacter->OnRespawn.RemoveDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
 	}
 
@@ -728,6 +753,7 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 	FTransform AttachTransform = Receptacle->GetAttachTransform();
 	NerveBall->SetWorldTransform(AttachTransform);
 
+	bIsStretchSoundPlayed = false;
 	NerveStretchComp->Stop();
 	UpdateLastSplinePointLocation(AttachTransform.GetLocation());
 	UpdateSplineMeshes(false, false);

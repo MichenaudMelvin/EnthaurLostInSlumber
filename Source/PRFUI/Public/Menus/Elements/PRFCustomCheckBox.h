@@ -4,9 +4,11 @@
 
 #include <CoreMinimal.h>
 #include "Blueprint/UserWidget.h"
-#include "Components/CheckBox.h"
+#include "Components/Button.h"
 #include "PRFCustomCheckBox.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCheckBoxStateChanged, bool, bIsChecked, bool, bSkipped);
 /**
  * 
  */
@@ -16,9 +18,23 @@ class PRFUI_API UPRFCustomCheckBox : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	TObjectPtr<UCheckBox> GetCustomCheckBox() { return CustomCheckBox; }
+	TObjectPtr<UButton> GetCustomCheckBox() { return CustomCheckBoxButton; }
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnCheckBoxStateChanged OnCheckBoxStateChanged;
+
+	void SetIsOn(bool bInValue, bool bSkip);
 
 protected:
+	virtual void NativeOnInitialized() override;
+	virtual void BeginDestroy() override;
+
+	UFUNCTION()
+	void HandleButtonClick();
+	
 	UPROPERTY(meta = (BindWidget), BlueprintReadOnly)
-	TObjectPtr<UCheckBox> CustomCheckBox;
+	TObjectPtr<UButton> CustomCheckBoxButton;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsOn = false;
 };

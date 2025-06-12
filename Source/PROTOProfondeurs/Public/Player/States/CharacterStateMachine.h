@@ -47,6 +47,12 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
 	UCharacterState* FindState(ECharacterStateID StateID) const;
 
+	UFUNCTION(BlueprintCallable, Category = "CharacterStateMachine")
+	void LockState(ECharacterStateID StateToLock, bool bLock) const;
+
+	UFUNCTION(BlueprintCallable, Category = "CharacterStateMachine")
+	void LockAllStates(bool bLock);
+
 	ECharacterStateID GetCurrentStateID() const {return CurrentStateID;}
 
 	UCharacterState* GetCurrentState() const {return CurrentState;}

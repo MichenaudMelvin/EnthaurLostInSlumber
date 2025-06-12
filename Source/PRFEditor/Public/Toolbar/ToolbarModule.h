@@ -3,7 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Widgets/Text/STextBlock.h"
 #include "UObject/Object.h"
+
+class PRFEDITOR_API SCenteredText : public SCompoundWidget
+{
+public:
+	SLATE_BEGIN_ARGS(SCenteredText) {}
+	SLATE_END_ARGS()
+
+	void Construct(const FArguments& InArgs) {}
+
+	void SetText(const FText& Text)
+	{
+		ChildSlot
+		.HAlign(HAlign_Left)
+		.VAlign(VAlign_Center)
+		[
+			SNew(STextBlock).Text(Text)
+		];
+	}
+};
 
 class PRFEDITOR_API UToolbarModule : public IModuleInterface
 {

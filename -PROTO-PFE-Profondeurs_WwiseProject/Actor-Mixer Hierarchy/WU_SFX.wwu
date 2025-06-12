@@ -8,6 +8,10 @@
 			</PropertyList>
 			<ChildrenList>
 				<ActorMixer Name="AM_SFX" ID="{CD239548-A8EF-4B33-955D-C10051C3AE20}" ShortID="142934273">
+					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="1"/>
+						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -50,10 +54,16 @@
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>4</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="ATT_60m" ID="{3531EC2F-BC90-4D75-8AF0-D7C4186A3AA9}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+									<ObjectRef Name="ATT_20m" ID="{2A4ACBEE-A8B8-448F-A919-CAD4FCE6E6AB}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -651,7 +661,10 @@
 							<ChildrenList>
 								<RandomSequenceContainer Name="LPX_Nerve_Stretch_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" ShortID="305475513">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
 												<ModifierInfo>
@@ -816,8 +829,13 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
+																				<XPos>85.714</XPos>
+																				<YPos>-1079</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
 																				<XPos>100</XPos>
-																				<YPos>-864</YPos>
+																				<YPos>-1408</YPos>
 																				<Flags>37</Flags>
 																			</Point>
 																		</PointList>
@@ -833,7 +851,10 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="LPX_Nerve_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" ShortID="672292508">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
 												<ModifierInfo>
@@ -998,8 +1019,13 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
+																				<XPos>85.71429</XPos>
+																				<YPos>-1079</YPos>
+																				<Flags>0</Flags>
+																			</Point>
+																			<Point>
 																				<XPos>100</XPos>
-																				<YPos>-832</YPos>
+																				<YPos>-1248</YPos>
 																				<Flags>37</Flags>
 																			</Point>
 																		</PointList>
@@ -1258,7 +1284,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="SFX_NerveReceptacle_Electricty_Start_01" ID="{5130F6D1-4DE6-4BA2-8F9D-B0F295CB8795}" ShortID="257234975">
+										<Sound Name="SFX_Electricity_Start_01" ID="{254DBB03-1A87-4A6B-B28A-28732593CB02}" ShortID="596066234">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -1268,19 +1294,19 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="SFX_NerveReceptacle_Electricty_Start_01" ID="{74C3FF1C-24F9-40B6-9A13-6142159123DF}">
+												<AudioFileSource Name="SFX_Electricity_Start_01" ID="{F44616BC-7750-4D52-B4F1-DD821643554A}">
 													<Language>SFX</Language>
-													<AudioFile>SFX_NerveReceptacle_Electricty_Start_01.wav</AudioFile>
+													<AudioFile>SFX_Electricity_Start_01.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="290163593"/>
+														<MediaID ID="738632161"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="SFX_NerveReceptacle_Electricty_Start_01" ID="{74C3FF1C-24F9-40B6-9A13-6142159123DF}" Platform="Linked"/>
+												<ActiveSource Name="SFX_Electricity_Start_01" ID="{F44616BC-7750-4D52-B4F1-DD821643554A}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="SFX_NerveReceptacle_Electricty_Start_02" ID="{F7740365-3A51-4760-81DE-B333EA71DD89}" ShortID="951843677">
+										<Sound Name="SFX_Electricity_Start_02" ID="{D03A8B46-34BE-434F-A2CC-9284ACD64514}" ShortID="881303013">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -1290,19 +1316,19 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="SFX_NerveReceptacle_Electricty_Start_02" ID="{0BD0F040-4EDC-4976-A119-87E73CB32C72}">
+												<AudioFileSource Name="SFX_Electricity_Start_02" ID="{5C1D3058-52B7-49C1-9DCD-0B679E3B9743}">
 													<Language>SFX</Language>
-													<AudioFile>SFX_NerveReceptacle_Electricty_Start_02.wav</AudioFile>
+													<AudioFile>SFX_Electricity_Start_02.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="939918079"/>
+														<MediaID ID="435354478"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="SFX_NerveReceptacle_Electricty_Start_02" ID="{0BD0F040-4EDC-4976-A119-87E73CB32C72}" Platform="Linked"/>
+												<ActiveSource Name="SFX_Electricity_Start_02" ID="{5C1D3058-52B7-49C1-9DCD-0B679E3B9743}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="SFX_NerveReceptacle_Electricty_Start_03" ID="{5C83621B-CDF5-45FF-A1F1-9CF91105ECC8}" ShortID="939553763">
+										<Sound Name="SFX_Electricity_Start_03" ID="{23F74985-96B9-498D-B098-475E443E1D38}" ShortID="468797521">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -1312,38 +1338,16 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="SFX_NerveReceptacle_Electricty_Start_03" ID="{7AD28027-123D-48FE-9F32-E655A7B32471}">
+												<AudioFileSource Name="SFX_Electricity_Start_03" ID="{10DFCF86-BBEE-497A-B24D-5C6786DE09D5}">
 													<Language>SFX</Language>
-													<AudioFile>SFX_NerveReceptacle_Electricty_Start_03.wav</AudioFile>
+													<AudioFile>SFX_Electricity_Start_03.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="909338791"/>
+														<MediaID ID="597642928"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="SFX_NerveReceptacle_Electricty_Start_03" ID="{7AD28027-123D-48FE-9F32-E655A7B32471}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_NerveReceptacle_Electricty_Start_04" ID="{7F610734-FB0D-4695-9D77-BEECFBCC07E0}" ShortID="62986257">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_NerveReceptacle_Electricty_Start_04" ID="{9EE7E7FD-50FD-4F2D-8563-281F9AAF9F1C}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_NerveReceptacle_Electricty_Start_04.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="897057365"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_NerveReceptacle_Electricty_Start_04" ID="{9EE7E7FD-50FD-4F2D-8563-281F9AAF9F1C}" Platform="Linked"/>
+												<ActiveSource Name="SFX_Electricity_Start_03" ID="{10DFCF86-BBEE-497A-B24D-5C6786DE09D5}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -1453,10 +1457,15 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="SFX_NerveReceptacle_Activate" ID="{6D409423-B1F9-4103-8241-B07692B2A8A1}" ShortID="533002182">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
 										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="ATT_40m" ID="{BE58783D-4683-4F4D-9FF1-32626C97E07D}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 										</Reference>
@@ -1555,37 +1564,6 @@
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
-								<Sound Name="SFX_Electricty" ID="{C79B1D69-36CC-4D9E-AF4B-DE9C8E8BA573}" ShortID="386041093">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-										<Property Name="OverridePositioning" Type="bool" Value="True"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="ATT_15m" ID="{90A2CBF6-B897-48C3-8393-E24AC51368F1}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="SFX_NerveReceptacle_Electricty" ID="{C21DB1D6-8540-41BE-A976-FA160856D0A6}">
-											<Language>SFX</Language>
-											<AudioFile>SFX_NerveReceptacle_Electricty.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="753932510"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="SFX_NerveReceptacle_Electricty" ID="{C21DB1D6-8540-41BE-A976-FA160856D0A6}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 						<Sound Name="SFX_Inject_Ambre" ID="{E1B7188B-98A6-4C2B-BF1F-8B261A83B649}" ShortID="573283619">
@@ -1774,6 +1752,221 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="SFX_Make_Soft" ID="{42FFFE9F-81D1-4078-BA4D-2A4C8D05F79A}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<ActorMixer Name="AM_SFX_Electricity" ID="{6E9E021F-D5CB-45BB-AC4A-8B0899F8E625}" ShortID="361678755">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="ATT_10m" ID="{4071E954-4A9E-41CD-8DCF-D6D59AC5EAE3}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" ShortID="110558632">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Electricity_Layer_01" ID="{94DFD1C6-5F47-492C-A65A-425F18820DB6}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Electricity_Layer_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="695514868"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Electricity_Layer_01" ID="{94DFD1C6-5F47-492C-A65A-425F18820DB6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" ShortID="648664535">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Electricity_Layer_02" ID="{AB219D75-169B-4E3D-9A84-18DA925C3F4F}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Electricity_Layer_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="310414559"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Electricity_Layer_02" ID="{AB219D75-169B-4E3D-9A84-18DA925C3F4F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" ShortID="798643066">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Electricity_Layer_03" ID="{315F2B36-5765-4E0F-A9E0-E8EB5DA1F01A}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Electricity_Layer_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="155549434"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Electricity_Layer_03" ID="{315F2B36-5765-4E0F-A9E0-E8EB5DA1F01A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+						<Sound Name="SFX_NerveReceptacle_Desactivate" ID="{F3F03812-D49A-4806-BE85-2564744415A6}" ShortID="566468480">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_NerveReceptacle_Desactivate" ID="{4A72F56D-5003-42AB-8D5A-2C9AFCE02474}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_NerveReceptacle_Desactivate.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="926594296"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_NerveReceptacle_Desactivate" ID="{4A72F56D-5003-42AB-8D5A-2C9AFCE02474}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Plant_Growth" ID="{43E56E05-8E91-4218-8717-411147914A09}" ShortID="125141593">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Plant_Growth" ID="{F9F63C10-3915-404B-A773-746BF5C1938D}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Plant_Growth.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="523178003"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Plant_Growth" ID="{F9F63C10-3915-404B-A773-746BF5C1938D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="AMB_Muscle" ID="{C3D9CD73-42C1-439F-B6B9-E9DD84149286}" ShortID="777212376">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="ATT_10m" ID="{4071E954-4A9E-41CD-8DCF-D6D59AC5EAE3}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="AMB_Muscle" ID="{C13250C8-D76F-43F5-8246-71647C9353DD}">
+									<Language>SFX</Language>
+									<AudioFile>AMB_Muscle.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="433441082"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="AMB_Muscle" ID="{C13250C8-D76F-43F5-8246-71647C9353DD}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Elevator_Stop" ID="{6DB15B6C-C30A-479E-BF72-5D420434778F}" ShortID="648670547">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Elevator_Stop" ID="{0E5C2806-3C50-4E45-8414-B2AFCD1DE445}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Elevator_Stop.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="628782229"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Elevator_Stop" ID="{0E5C2806-3C50-4E45-8414-B2AFCD1DE445}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>

@@ -51,6 +51,11 @@ UCharacterState* UCharacterStateMachine::ChangeState(ECharacterStateID NextState
 		return nullptr;
 	}
 
+	if (NextState->IsLocked())
+	{
+		return nullptr;
+	}
+
 	if(CurrentState != nullptr)
 	{
 		CurrentState->StateExit(NextStateID);
@@ -80,6 +85,30 @@ UCharacterState* UCharacterStateMachine::FindState(ECharacterStateID StateID) co
 	}
 
 	return nullptr;
+}
+
+void UCharacterStateMachine::LockState(ECharacterStateID StateToLock, bool bLock) const
+{
+	UCharacterState* CharacterState = FindState(StateToLock);
+	if (!CharacterState)
+	{
+		return;
+	}
+
+	CharacterState->LockState(bLock);
+}
+
+void UCharacterStateMachine::LockAllStates(bool bLock)
+{
+	for (UCharacterState* State : StateList)
+	{
+		if (!State)
+		{
+			continue;
+		}
+
+		State->LockState(bLock);
+	}
 }
 
 UCharacterState* UCharacterStateMachine::FindStateByClass(TSubclassOf<UCharacterState> StateClass)

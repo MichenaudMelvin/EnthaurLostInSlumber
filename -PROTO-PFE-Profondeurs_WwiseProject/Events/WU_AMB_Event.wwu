@@ -30,6 +30,26 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{96DCBD57-7774-4483-9561-5BB31EC13C3D}" ShortID="129103539">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}" WorkUnitID="{01D8E349-603D-4DA9-958E-D925519311DC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{C1B809CA-5572-4AF4-8B9A-4A4E9127F9B7}" ShortID="854639958">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_Village" ID="{3324F281-A4BD-4EF2-8702-D09237051303}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="AMB_CORRUPTEDZONE" ID="{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}">
@@ -77,6 +97,53 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="AMB_Growl" ID="{F8A46104-846A-40CB-B97A-6FCF4A4CE44C}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AMB_WEAKENEDZONE" ID="{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}">
+					<ChildrenList>
+						<Action Name="" ID="{C0FA2477-D339-4301-9B45-8B6971CD8689}" ShortID="313846628">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Weakened" ID="{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}" WorkUnitID="{01D8E349-603D-4DA9-958E-D925519311DC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AMB_VILLAGE" ID="{A069072C-C569-4701-9756-087063501AE3}">
+					<ChildrenList>
+						<Action Name="" ID="{DC962D6B-FBB4-4974-96F0-76BBC0EA5E48}" ShortID="939671018">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_Village" ID="{3324F281-A4BD-4EF2-8702-D09237051303}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AMB_VILLAGE_HEARTBEAT" ID="{4F9B89C2-3761-41E6-BF81-653EEBA91D79}">
+					<ChildrenList>
+						<Action Name="" ID="{018BF2CA-2057-4B52-B96D-8947FC513B58}" ShortID="1026644786">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_Heartbeat_LP" ID="{0E488877-2441-4266-B78A-3FDDA9ABC965}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_AMB_Muscle" ID="{BCBDDE4B-360C-46C5-8D5C-992EDA263D15}">
+					<ChildrenList>
+						<Action Name="" ID="{DF47BC0F-0C6E-4EBF-BEDA-E2E54EFDBDCE}" ShortID="856211045">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AMB_Muscle" ID="{C3D9CD73-42C1-439F-B6B9-E9DD84149286}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

@@ -85,6 +85,7 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 		ANerve* Nerve = Cast<ANerve>(OtherActor);
 		Nerve->SetCurrentReceptacle(this);
 
+		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
 		OnNerveConnect();
 
 		ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
@@ -98,7 +99,6 @@ void ANerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AA
 			}
 		}
 
-		NerveReceptaclesNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 		PlayElectricityAnimation(Nerve);
 	}
 }
@@ -107,7 +107,7 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 {
 	IsConnected = !IsConnected;
 	OnNerveDisconnect(IsConnected);
-	
+
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
 
@@ -137,6 +137,16 @@ void ANerveReceptacle::TriggerLinkedObjects(ANerve* Nerve)
 	}
 }
 
+bool ANerveReceptacle::CanTheNerveBeTaken() const
+{
+	return !IsValid(NerveElectricityFeedback);
+}
+
+void ANerveReceptacle::DisableReceptacle()
+{
+	NerveReceptaclesNoises->PostAkEvent(DisabledNoise);
+}
+
 void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 {
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
@@ -150,37 +160,53 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 	FCTween::Play(0.f, 30.f,
 		[&](const float& F)
 		{
-			NerveElectricityFeedback->SetRadius(F);
+			if (NerveElectricityFeedback)
+			{
+				NerveElectricityFeedback->SetRadius(F);
+			}
 		},
 		.25f, EFCEase::InCubic);
 
 	FCTween::Play(0.f, 1.f,
 		[&](const float& F)
 		{
-			FVector NewPos = KeepInMemoryNerve->GetCablePosition(F);
-			NerveElectricityFeedback->SetActorLocation(NewPos);
+			if (NerveElectricityFeedback)
+			{
+				FVector NewPos = KeepInMemoryNerve->GetCablePosition(F);
+				NerveElectricityFeedback->SetActorLocation(NewPos);
+			}
 		},
 		Duration, EFCEase::Linear)->SetOnComplete([&]
 		{
+			NerveReceptaclesNoises->PostAkEvent(EnabledNoise);
 			TriggerLinkedObjects(KeepInMemoryNerve);
 
 			FCTween::Play(30.f, 200.f,
 			[&](const float& F)
 			{
-				NerveElectricityFeedback->SetRadius(F);
+				if (NerveElectricityFeedback)
+				{
+					NerveElectricityFeedback->SetRadius(F);
+				}
 			},
 			1.f)->SetOnComplete([&]{OnNerveAnimationFinished.Broadcast();});
 
 			FCTween::Play(1.f, 0.f,
 			[&](const float& F)
 			{
-				NerveElectricityFeedback->GetMaterial()->SetScalarParameterValue("Opacity", F);
+				if (NerveElectricityFeedback)
+				{
+					NerveElectricityFeedback->GetMaterial()->SetScalarParameterValue("Opacity", F);
+				}
 			},
 			2.f)->SetOnComplete([&]
 			{
-				NerveElectricityFeedback->Destroy();
-				NerveElectricityFeedback = nullptr;
-				KeepInMemoryNerve = nullptr;
+				if (NerveElectricityFeedback)
+				{
+					NerveElectricityFeedback->Destroy();
+					NerveElectricityFeedback = nullptr;
+					KeepInMemoryNerve = nullptr;
+				}
 			});
 		});
 }
