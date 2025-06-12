@@ -20,7 +20,8 @@ void UInGameUI::NativeConstruct()
 
 void UInGameUI::SetPropulsionActive(bool active)
 {
-	if (active)
+	PlayNerveActionReadyDelegate.Broadcast(active);
+	/*if (active)
 	{
 		FCTween::Play(
 			0.f,
@@ -60,12 +61,13 @@ void UInGameUI::SetPropulsionActive(bool active)
 
 			CurrentTween = nullptr;
 		}
-	}
+	}*/
 }
 
 void UInGameUI::SetInteraction(const bool bActive) const
 {
-	bActive ? Interact->SetOpacity(1.f) : Interact->SetOpacity(0.f);
+	PlayInteractionReadyDelegate.Broadcast(bActive);
+	//bActive ? Interact->SetOpacity(1.f) : Interact->SetOpacity(0.f);
 }
 
 void UInGameUI::OnAmberUpdate(EAmberType AmberType, int AmberAmount)
