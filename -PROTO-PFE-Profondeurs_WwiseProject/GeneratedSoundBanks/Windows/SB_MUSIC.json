@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{76FE1A5B-1EA8-8531-54AB-8C51BA155D90}",
+    "Hash": "{789714A1-96A7-3398-D7ED-FC97342ED57D}",
     "ObjectPath": "\\SoundBanks\\WU_MUSIC\\SB_MUSIC",
     "ShortName": "SB_MUSIC",
     "Path": "SB_MUSIC.bnk",
@@ -22,7 +22,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Village_LP.wav",
-      "CachePath": "75/{75BC997F-84B8-D050-AEAA-BFCF95781E96}.wem"
+      "CachePath": "9B/{9B609F42-62DF-1ABD-B582-A862B1256184}.wem"
      },
      {
       "Id": "257055636",
@@ -30,7 +30,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Intense_Part.wav",
-      "CachePath": "DC/{DCCDDA11-F32D-1CF3-C33E-DF24D4E144FC}.wem"
+      "CachePath": "3F/{3F7AFFD9-257C-E32C-C30C-D0492081C05A}.wem"
      },
      {
       "Id": "351474503",
@@ -38,7 +38,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Intro_pad.wav",
-      "CachePath": "57/{57F7DDFF-0CE9-A29F-F9A3-11A70FCB61EE}.wem"
+      "CachePath": "DE/{DE856B69-FE8A-9C74-4D2F-98D8BF1E2D62}.wem"
      },
      {
       "Id": "413814033",
@@ -46,7 +46,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MU_Transition.wav",
-      "CachePath": "5C/{5C3669F1-8A7A-EC40-ECE8-7E166F0B0D2A}.wem"
+      "CachePath": "00/{00F704E1-3B9F-D1B7-13C9-2F63BAEA7EA0}.wem"
      },
      {
       "Id": "477645610",
@@ -54,7 +54,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Melody.wav",
-      "CachePath": "4E/{4E58A83E-DBEA-2150-F448-DEFC9B438C7F}.wem"
+      "CachePath": "F1/{F1A0EEB2-3B7B-7766-96CA-B98D5500CAB8}.wem"
      },
      {
       "Id": "680603793",
@@ -62,7 +62,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Intro.wav",
-      "CachePath": "4A/{4A5824BE-53A6-8BBF-EB85-B6435D4F9105}.wem"
+      "CachePath": "CB/{CBB31371-05C6-BB48-2657-86DF55EAD458}.wem"
      },
      {
       "Id": "740215427",
@@ -70,7 +70,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Menu_LP.wav",
-      "CachePath": "73/{7341242B-6A24-5B7A-7BFA-51B79F9E9DF2}.wem"
+      "CachePath": "C3/{C38915F3-CBAA-5BD6-45B2-E46CF714A71A}.wem"
      },
      {
       "Id": "801394838",
@@ -78,7 +78,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Outro_Pad.wav",
-      "CachePath": "BE/{BE7E91B0-0E31-EAC7-FAA0-1B2A8628A9C9}.wem"
+      "CachePath": "BD/{BDE60918-E57C-152B-2368-C6F088706755}.wem"
      },
      {
       "Id": "944287877",
@@ -86,7 +86,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Slow_perc_part.wav",
-      "CachePath": "35/{35DF9485-97B1-2028-3AE5-F5D05DD4CCBF}.wem"
+      "CachePath": "B1/{B1DA27BC-67F1-5CF2-9E9B-46D3428B2CC2}.wem"
      },
      {
       "Id": "1043677490",
@@ -94,7 +94,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Cool_Down.wav",
-      "CachePath": "15/{15434ED9-3D74-7BDD-0EDF-C92EE310DC52}.wem"
+      "CachePath": "5A/{5A1AB1BA-9F56-D477-6AAD-989000AEB4DB}.wem"
      }
     ],
     "Events": [
@@ -161,6 +161,6 @@
     ]
    }
   ],
-  "FileHash": "{73F422BA-6BFD-13DD-0B8D-E697B26334CD}"
+  "FileHash": "{36FBEAF5-BC4B-4045-4521-3C5F279AE5A3}"
  }
 }

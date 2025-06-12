@@ -46,16 +46,16 @@
 									</PropertyList>
 									<ConversionPluginInfoList>
 										<ConversionPluginInfo Platform="Mac">
-											<ConversionPlugin Name="" ID="{51D7C5E1-13DF-4443-B994-982963FA5EC4}" PluginName="WEM Opus" CompanyID="0" PluginID="20">
+											<ConversionPlugin Name="" ID="{D0227636-6657-402E-8EEC-241CF7371425}" PluginName="WEM Opus" CompanyID="0" PluginID="20">
 												<PropertyList>
-													<Property Name="Quality" Type="int32" Value="12"/>
+													<Property Name="Quality" Type="int32" Value="40"/>
 												</PropertyList>
 											</ConversionPlugin>
 										</ConversionPluginInfo>
 										<ConversionPluginInfo Platform="Windows">
-											<ConversionPlugin Name="" ID="{29CEB7F5-3ADD-4DAF-8706-04EFDE89BA55}" PluginName="WEM Opus" CompanyID="0" PluginID="20">
+											<ConversionPlugin Name="" ID="{30EEAEDE-8B43-47E0-B97F-145D4B95330B}" PluginName="WEM Opus" CompanyID="0" PluginID="20">
 												<PropertyList>
-													<Property Name="Quality" Type="int32" Value="12"/>
+													<Property Name="Quality" Type="int32" Value="40"/>
 												</PropertyList>
 											</ConversionPlugin>
 										</ConversionPluginInfo>
