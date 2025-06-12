@@ -103,6 +103,8 @@ void ARespawnTree::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor
 	}
 
 	SetRespawnPoint(Player, true);
+
+	TriggerBox->OnComponentBeginOverlap.RemoveDynamic(this, &ARespawnTree::TriggerEnter);
 }
 
 void ARespawnTree::SetActive()
