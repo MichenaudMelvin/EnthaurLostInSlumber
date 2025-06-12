@@ -7,6 +7,7 @@
 #include "Components/InteractableComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Player/States/CharacterStateMachine.h"
 #include "Saves/WorldSaves/WorldSave.h"
 
 AAmberOre::AAmberOre()
@@ -95,6 +96,12 @@ void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 	if (Character->IsAmberTypeFilled(AmberType))
 	{
 		return;
+	}
+
+	if (Character->GetStateMachine())
+	{
+		// play the spike animation
+		Character->GetStateMachine()->ChangeState(ECharacterStateID::Anim);
 	}
 
 	AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());

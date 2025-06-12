@@ -69,12 +69,12 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 
 void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
 {
-	if (!Character)
+	if (!Character || !StateAnimation)
 	{
 		return;
 	}
 
-	Character->GetCharacterMesh()->SetAnimation(StateAnimation);
+	Character->GetCharacterMesh()->PlayAnimation(StateAnimation, StateAnimation->bLoop);
 }
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)

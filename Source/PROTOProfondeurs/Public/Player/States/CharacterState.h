@@ -26,6 +26,7 @@ enum class ECharacterStateID : uint8
 	Fall,
 	Interact,
 	Stop,
+	Anim,
 };
 
 /**
@@ -93,6 +94,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool IsFalling() const;
+
+public:
+	void SetStateAnimation(UAnimSequenceBase* InStateAnimation) {StateAnimation = InStateAnimation;}
 
 #pragma endregion
 

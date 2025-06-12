@@ -12,6 +12,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Player/States/CharacterStateMachine.h"
 #include "Saves/WorldSaves/WorldSave.h"
 
 #if WITH_EDITORONLY_DATA
@@ -211,6 +212,12 @@ void AWeakZone::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 	if (!Character->HasRequiredQuantity(EAmberType::WeakAmber, CostByPoint))
 	{
 		return;
+	}
+
+	if (Character->GetStateMachine())
+	{
+		// play the spike animation
+		Character->GetStateMachine()->ChangeState(ECharacterStateID::Anim);
 	}
 
 	UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
