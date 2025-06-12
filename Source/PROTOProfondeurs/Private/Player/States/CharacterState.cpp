@@ -2,14 +2,12 @@
 
 
 #include "Player/States/CharacterState.h"
-#include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/Camera/ViewBobbing.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Physics/TracePhysicsSettings.h"
 #include "Saves/SettingsSave.h"
 #include "Saves/SettingsSubsystem.h"
 
@@ -67,15 +65,7 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 #endif
 }
 
-void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
-{
-	if (!Character || !StateAnimation)
-	{
-		return;
-	}
-
-	Character->GetCharacterMesh()->PlayAnimation(StateAnimation, StateAnimation->bLoop);
-}
+void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID) {}
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)
 {
