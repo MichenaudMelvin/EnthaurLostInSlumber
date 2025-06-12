@@ -12,6 +12,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Player/States/CharacterStateMachine.h"
 #include "Saves/WorldSaves/WorldSave.h"
 
 #if WITH_EDITORONLY_DATA
@@ -489,6 +490,12 @@ void AMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveCom
 	Player->GetCameraShake()->MakeSmallCameraShake();
 
 	ToggleMuscleSolidity();
+
+	if (Player->GetStateMachine())
+	{
+		// play the spike animation
+		Player->GetStateMachine()->ChangeState(ECharacterStateID::Anim);
+	}
 }
 
 #pragma endregion

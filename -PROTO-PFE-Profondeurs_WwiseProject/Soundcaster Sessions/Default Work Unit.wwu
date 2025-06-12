@@ -87,6 +87,22 @@
 							<Position X="2" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="AMB_VILLAGE" ID="{A069072C-C569-4701-9756-087063501AE3}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AMB_VILLAGE_HEARTBEAT" ID="{4F9B89C2-3761-41E6-BF81-653EEBA91D79}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<Position X="2" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_MU_Village" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<Position X="3" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_MU_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<Position X="3" Y="3"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="AMB_WEAKENEDZONE" ID="{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
 							<Position X="4" Y="0"/>
 						</Module>
@@ -98,6 +114,10 @@
 					<RTPCValueList ShowAll="true">
 						<RTPCValue>
 							<GameParameterRef Name="RTPC_PlayerDistance" ID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Bus_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
 							<Value>100</Value>
 						</RTPCValue>
 					</RTPCValueList>

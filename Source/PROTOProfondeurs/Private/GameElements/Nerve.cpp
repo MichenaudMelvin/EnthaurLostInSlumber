@@ -574,6 +574,7 @@ void ANerve::DetachNerveBall(bool bForceDetachment)
 	{
 		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Jump, false);
 		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Sprint, false);
+		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Crouch, false);
 		PlayerCharacter->OnRespawn.RemoveDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
 	}
 
@@ -650,6 +651,7 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 	PlayerCharacter->GetStateMachine()->ChangeState(ECharacterStateID::Idle);
 	PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Sprint, true);
 	PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Jump, true);
+	PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Crouch, true);
 
 #if WITH_EDITOR
 	if (PlayerCharacter->OnRespawn.IsAlreadyBound(this, &ANerve::ForceDetachNerveBallFromPlayer))
@@ -740,6 +742,7 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 	{
 		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Jump, false);
 		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Sprint, false);
+		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Crouch, false);
 		PlayerCharacter->OnRespawn.RemoveDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
 	}
 

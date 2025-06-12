@@ -9,6 +9,10 @@
 
 class FCTweenInstance;
 class UImage;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNerveActionReady, bool, bValue);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractionReady, bool, bValue);
+
 /**
  * 
  */
@@ -45,6 +49,18 @@ protected:
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAmberUsed);
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnAmberUsed OnAmberUsed;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient, BlueprintReadOnly)
+	TObjectPtr<UWidgetAnimation> NerveActionReadyAnimation;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient, BlueprintReadOnly)
+	TObjectPtr<UWidgetAnimation> InteractionReadyAnimation;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnNerveActionReady PlayNerveActionReadyDelegate;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnInteractionReady PlayInteractionReadyDelegate;
 
 private:
 	FCTweenInstance* CurrentTween;

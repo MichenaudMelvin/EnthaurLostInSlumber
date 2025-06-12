@@ -1,0 +1,166 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "779753582",
+    "Type": "User",
+    "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
+    "Color": "19",
+    "Language": "SFX",
+    "Hash": "{789714A1-96A7-3398-D7ED-FC97342ED57D}",
+    "ObjectPath": "\\SoundBanks\\WU_MUSIC\\SB_MUSIC",
+    "ShortName": "SB_MUSIC",
+    "Path": "SB_MUSIC.bnk",
+    "Media": [
+     {
+      "Id": "152078623",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Enthaur_Music_Village_LP.wav",
+      "CachePath": "9B/{9B609F42-62DF-1ABD-B582-A862B1256184}.wem"
+     },
+     {
+      "Id": "257055636",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Intense_Part.wav",
+      "CachePath": "3F/{3F7AFFD9-257C-E32C-C30C-D0492081C05A}.wem"
+     },
+     {
+      "Id": "351474503",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Intro_pad.wav",
+      "CachePath": "DE/{DE856B69-FE8A-9C74-4D2F-98D8BF1E2D62}.wem"
+     },
+     {
+      "Id": "413814033",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MU_Transition.wav",
+      "CachePath": "00/{00F704E1-3B9F-D1B7-13C9-2F63BAEA7EA0}.wem"
+     },
+     {
+      "Id": "477645610",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Melody.wav",
+      "CachePath": "F1/{F1A0EEB2-3B7B-7766-96CA-B98D5500CAB8}.wem"
+     },
+     {
+      "Id": "680603793",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Intro.wav",
+      "CachePath": "CB/{CBB31371-05C6-BB48-2657-86DF55EAD458}.wem"
+     },
+     {
+      "Id": "740215427",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Enthaur_Music_Menu_LP.wav",
+      "CachePath": "C3/{C38915F3-CBAA-5BD6-45B2-E46CF714A71A}.wem"
+     },
+     {
+      "Id": "801394838",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Outro_Pad.wav",
+      "CachePath": "BD/{BDE60918-E57C-152B-2368-C6F088706755}.wem"
+     },
+     {
+      "Id": "944287877",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Slow_perc_part.wav",
+      "CachePath": "B1/{B1DA27BC-67F1-5CF2-9E9B-46D3428B2CC2}.wem"
+     },
+     {
+      "Id": "1043677490",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Cool_Down.wav",
+      "CachePath": "5A/{5A1AB1BA-9F56-D477-6AAD-989000AEB4DB}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3984565984",
+      "Name": "Play_MU_Full",
+      "ObjectPath": "\\Events\\WU_Music\\Play_MU_Full",
+      "GUID": "{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}",
+      "Color": "19",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "257055636"
+       },
+       {
+        "Id": "351474503"
+       },
+       {
+        "Id": "413814033"
+       },
+       {
+        "Id": "477645610"
+       },
+       {
+        "Id": "680603793"
+       },
+       {
+        "Id": "801394838"
+       },
+       {
+        "Id": "944287877"
+       },
+       {
+        "Id": "1043677490"
+       }
+      ]
+     },
+     {
+      "Id": "1658076698",
+      "Name": "Play_MU_Menu",
+      "ObjectPath": "\\Events\\WU_Music\\Play_MU_Menu",
+      "GUID": "{4E2866E6-D300-45F8-B62A-A54678F39D44}",
+      "Color": "19",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "740215427"
+       }
+      ]
+     },
+     {
+      "Id": "1183932125",
+      "Name": "Play_MU_Village",
+      "ObjectPath": "\\Events\\WU_Music\\Play_MU_Village",
+      "GUID": "{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}",
+      "Color": "19",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "152078623"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{36FBEAF5-BC4B-4045-4521-3C5F279AE5A3}"
+ }
+}
