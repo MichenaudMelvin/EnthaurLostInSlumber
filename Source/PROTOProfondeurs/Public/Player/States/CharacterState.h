@@ -37,6 +37,7 @@ class PROTOPROFONDEURS_API UCharacterState : public UObject
 	GENERATED_BODY()
 
 #pragma region States
+
 public:
 	UCharacterState();
 
@@ -46,6 +47,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterStateMachine")
 	ECharacterStateID StateID = ECharacterStateID::None;
+
+	UPROPERTY(EditDefaultsOnly, Category = "CharacterStateMachine")
+	bool bLockState = false;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Debug", meta = (ToolTip = "Enable debug features for the current state"))
@@ -65,6 +69,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, Category = "CharacterStateMachine")
 	void StateExit(const ECharacterStateID& NextStateID);
+
+	void LockState(bool bInLockState) {bLockState = bInLockState;}
+
+	bool IsLocked() const {return bLockState;}
 
 #pragma endregion
 
@@ -88,7 +96,7 @@ protected:
 #pragma region Camera
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Camera")
 	bool bAllowCameraMovement = true;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera|ViewBobbing")

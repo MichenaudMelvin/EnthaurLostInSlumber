@@ -12,6 +12,8 @@
 #include "Physics/NervePhysicsConstraint.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
+#include "Player/States/CharacterStateMachine.h"
+#include "Player/States/CharacterWalkState.h"
 
 
 UPlayerToNervePhysicConstraint::UPlayerToNervePhysicConstraint()
@@ -108,7 +110,13 @@ void UPlayerToNervePhysicConstraint::Init(ANerve* vLinkedNerve, ACharacter* vPla
 	}
 
 	PlayerCharacter = CastCharacter;
-	DefaultMaxSpeed = vPlayerCharacter->GetCharacterMovement()->MaxWalkSpeed;
+	UCharacterWalkState* WalkState = FindState<UCharacterWalkState>(PlayerCharacter->GetStateMachine());
+	if (!WalkState)
+	{
+		return;
+	}
+
+	DefaultMaxSpeed = WalkState->GetMoveSpeed();
 }
 
 void UPlayerToNervePhysicConstraint::ReleasePlayer(const bool DetachFromPlayer)
