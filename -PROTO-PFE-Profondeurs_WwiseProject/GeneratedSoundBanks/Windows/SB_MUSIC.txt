@@ -1,0 +1,17 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1183932125	Play_MU_Village			\WU_Music\Play_MU_Village	
+	1658076698	Play_MU_Menu			\WU_Music\Play_MU_Menu	
+	3984565984	Play_MU_Full			\WU_Music\Play_MU_Full	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	152078623	Enthaur_Music_Village_LP	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\75\{75BC997F-84B8-D050-AEAA-BFCF95781E96}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Village\Enthaur_Music_Village_LP\Enthaur_Music_Village_LP		402752
+	257055636	Intense_Part	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\DC\{DCCDDA11-F32D-1CF3-C33E-DF24D4E144FC}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Intense part\Intense_Part		189975
+	351474503	Intro_pad	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\57\{57F7DDFF-0CE9-A29F-F9A3-11A70FCB61EE}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Intro_pad\Intro_pad		427447
+	413814033	MU_Transition	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\5C\{5C3669F1-8A7A-EC40-ECE8-7E166F0B0D2A}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Transition\MU_Transition		29852
+	477645610	Melody	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\4E\{4E58A83E-DBEA-2150-F448-DEFC9B438C7F}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Melody\Melody		76648
+	680603793	Intro	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\4A\{4A5824BE-53A6-8BBF-EB85-B6435D4F9105}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Intro\Intro		71397
+	740215427	Enthaur_Music_Menu_LP	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\73\{7341242B-6A24-5B7A-7BFA-51B79F9E9DF2}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Menu\Enthaur_Music_Menu_LP\Enthaur_Music_Menu_LP		263218
+	801394838	Outro_Pad	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\BE\{BE7E91B0-0E31-EAC7-FAA0-1B2A8628A9C9}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Outro_Pad\Outro_Pad		55011
+	944287877	Slow_perc_part	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\35\{35DF9485-97B1-2028-3AE5-F5D05DD4CCBF}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Slow_Perc_Part\Slow_perc_part		144248
+	1043677490	Cool_Down	C:\Users\matri\Documents\GitHub\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\15\{15434ED9-3D74-7BDD-0EDF-C92EE310DC52}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Cool_down\Cool_Down		171614
+
