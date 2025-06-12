@@ -79,6 +79,9 @@ public:
 #pragma region Character
 
 protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character")
+	TObjectPtr<UAnimSequenceBase> StateAnimation;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Character")
 	TObjectPtr<AFirstPersonCharacter> Character;
 

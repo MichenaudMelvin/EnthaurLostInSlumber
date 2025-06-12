@@ -40,9 +40,6 @@ protected:
 	UFUNCTION()
 	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	UFUNCTION()
-	void Interact(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
-
 	void SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave);
 
 	void SetActive();
@@ -55,9 +52,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<UStaticMeshComponent> TreeModel;
-
-	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
-	TObjectPtr<class UInteractableComponent> Interaction;
 
 	UPROPERTY()
 	TObjectPtr<UMaterialInstanceDynamic> Material;

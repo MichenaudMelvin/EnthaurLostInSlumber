@@ -67,7 +67,15 @@ void UCharacterState::StateInit(UCharacterStateMachine* InStateMachine)
 #endif
 }
 
-void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID){}
+void UCharacterState::StateEnter_Implementation(const ECharacterStateID& PreviousStateID)
+{
+	if (!Character)
+	{
+		return;
+	}
+
+	Character->GetCharacterMesh()->SetAnimation(StateAnimation);
+}
 
 void UCharacterState::StateTick_Implementation(float DeltaTime)
 {

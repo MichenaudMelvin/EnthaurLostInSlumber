@@ -738,6 +738,8 @@ void ANerve::SetCurrentReceptacle(ANerveReceptacle* Receptacle)
 
 	if (PlayerCharacter && PlayerCharacter->OnRespawn.IsAlreadyBound(this, &ANerve::ForceDetachNerveBallFromPlayer))
 	{
+		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Jump, false);
+		PlayerCharacter->GetStateMachine()->LockState(ECharacterStateID::Sprint, false);
 		PlayerCharacter->OnRespawn.RemoveDynamic(this, &ANerve::ForceDetachNerveBallFromPlayer);
 	}
 
