@@ -106,13 +106,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<UInGameUI> InGameWidgetClass;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI")
 	TObjectPtr<UInGameUI> CurrentInGameUI;
 
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<UDeathMenuUI> DeathWidgetClass;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI")
 	TObjectPtr<UDeathMenuUI> CurrentDeathUI;
 
 public:
