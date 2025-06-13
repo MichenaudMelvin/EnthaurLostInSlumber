@@ -12,6 +12,7 @@
 #include "Physics/NervePhysicsConstraint.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
+#include "Player/States/CharacterCrouchState.h"
 #include "Player/States/CharacterStateMachine.h"
 #include "Player/States/CharacterWalkState.h"
 
@@ -110,13 +111,27 @@ void UPlayerToNervePhysicConstraint::Init(ANerve* vLinkedNerve, ACharacter* vPla
 	}
 
 	PlayerCharacter = CastCharacter;
-	UCharacterWalkState* WalkState = FindState<UCharacterWalkState>(PlayerCharacter->GetStateMachine());
-	if (!WalkState)
+	if (!PlayerCharacter->GetStateMachine())
 	{
 		return;
 	}
 
-	DefaultMaxSpeed = WalkState->GetMoveSpeed();
+	UCharacterMoveState* MoveState;
+	if (PlayerCharacter->GetStateMachine()->GetCurrentStateID() == ECharacterStateID::Crouch)
+	{
+		MoveState = FindState<UCharacterCrouchState>(PlayerCharacter->GetStateMachine());
+	}
+	else
+	{
+		MoveState = FindState<UCharacterWalkState>(PlayerCharacter->GetStateMachine());
+	}
+
+	if (!MoveState)
+	{
+		return;
+	}
+
+	DefaultMaxSpeed = MoveState->GetMoveSpeed();
 }
 
 void UPlayerToNervePhysicConstraint::ReleasePlayer(const bool DetachFromPlayer)
