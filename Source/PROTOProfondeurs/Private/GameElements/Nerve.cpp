@@ -471,7 +471,6 @@ void ANerve::RetractCable(float Alpha)
 
 	FVector CurrentSplineDirection = SplineCable->GetDirectionAtDistanceAlongSpline(GetNerveBallLength(), ESplineCoordinateSpace::World);
 	CurrentSplineDirection *= -1;
-
 	FRotator NerveBallRotator = FRotationMatrix::MakeFromX(CurrentSplineDirection).Rotator();
 	NerveBallRotator += NerveBallRotationDelta;
 	NerveBall->SetWorldRotation(NerveBallRotator);
@@ -482,7 +481,6 @@ void ANerve::RetractCable(float Alpha)
 void ANerve::FinishRetractCable()
 {
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-
 	InteractableComponent->AddInteractable(NerveBall);
 	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &ANerve::Interaction))
 	{
@@ -492,10 +490,6 @@ void ANerve::FinishRetractCable()
 	bIsStretchSoundPlayed = false;
 	NerveStretchComp->Stop();
 	ResetCables(false);
-
-	FRotator NerveBallRotator = FRotationMatrix::MakeFromY(GetCableDirection() * -1).Rotator();
-	NerveBallRotator += NerveBallRotationDelta;
-	NerveBall->SetWorldRotation(NerveBallRotator);
 }
 
 FVector ANerve::GetLastCableLocation(const ESplineCoordinateSpace::Type& CoordinateSpace) const

@@ -155,6 +155,8 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 	NerveElectricityFeedback = GetWorld()->SpawnActor<AElectricityFeedback>(GetDefault<UBPRefParameters>()->ElectricityFeedback, Nerve->GetActorTransform());
 	KeepInMemoryNerve = Nerve;
 
+	float Duration = Nerve->IsLoaded() ? 0.001f : (KeepInMemoryNerve->GetCableLength() / ElectricitySpeed);
+
 	FCTween::Play(0.f, 30.f,
 		[&](const float& F)
 		{
@@ -174,7 +176,7 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 				NerveElectricityFeedback->SetActorLocation(NewPos);
 			}
 		},
-		1.5f, EFCEase::Linear)->SetOnComplete([&]
+		Duration, EFCEase::Linear)->SetOnComplete([&]
 		{
 			NerveReceptaclesNoises->PostAkEvent(EnabledNoise);
 			TriggerLinkedObjects(KeepInMemoryNerve);
