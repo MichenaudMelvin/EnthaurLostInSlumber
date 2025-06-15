@@ -18,10 +18,10 @@ class PROTOPROFONDEURS_API ULevelEnteringUI : public UUserWidget
 	virtual void NativeOnInitialized() override;
 
 protected:
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	TObjectPtr<UTextBlock> AreaNameCPP;
 
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	TObjectPtr<UTextBlock> RegionNameCPP;
 	
 };
