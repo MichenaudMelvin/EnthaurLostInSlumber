@@ -44,7 +44,10 @@ public:
 	TObjectPtr<UUserWidget> GetRestartConfirmationMenu() const { return RestartConfirmationMenu; }
 
 	EPRFUIState GetMenuState() const { return CurrentState; }
+	
+	UFUNCTION(BlueprintCallable)
 	void SetMenuState(EPRFUIState InUIState);
+	
 	void CheckMenuState();
 
 	void SetUIInputMode() const;
