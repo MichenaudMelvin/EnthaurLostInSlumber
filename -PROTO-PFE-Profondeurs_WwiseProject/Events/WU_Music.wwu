@@ -36,6 +36,26 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{32023F83-9D51-4B60-97C0-2B072531984A}" ShortID="202888605">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{25FAFE94-363E-44F4-BD1A-ABFB3D2F6C20}" ShortID="47827830">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="Play_MU_Village" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}">
@@ -67,6 +87,26 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{28D52F9D-3D85-47E2-A369-92930B1DFBE8}" ShortID="964305376">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{D8139BC6-6C88-410A-B3B1-B706434FEB12}" ShortID="1014956414">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="Play_MU_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}">
@@ -95,6 +135,88 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_MU_Arm" ID="{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}">
+					<ChildrenList>
+						<Action Name="" ID="{5B2B6DE8-647F-4B07-A33D-2DC41A40F717}" ShortID="221407640">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{CE8B129F-7073-4F0A-8E56-78C705BB005F}" ShortID="100850410">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{2D26348C-AB58-44CD-8A7C-06787DDAFED4}" ShortID="921236304">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{DD9E27EE-C644-4517-A07B-0CE9047E2756}" ShortID="357925879">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_MU_Shoulder" ID="{6078419F-7F68-479D-AA56-581F2E77687E}">
+					<ChildrenList>
+						<Action Name="" ID="{3147920C-4AFA-4DA7-874C-F986DFF1804E}" ShortID="1038696695">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{025FC3A8-BAB0-4BD3-AB8D-C67F04F01CF0}" ShortID="845463428">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{96A35970-70F8-404F-B6E4-638B993629EE}" ShortID="768419346">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{A18D88BF-D211-4AE7-BD97-BC770A556C47}" ShortID="532163869">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

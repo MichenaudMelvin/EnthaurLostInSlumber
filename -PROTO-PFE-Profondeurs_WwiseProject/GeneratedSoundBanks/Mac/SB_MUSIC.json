@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{789714A1-96A7-3398-D7ED-FC97342ED57D}",
+    "Hash": "{27BBCA2B-9F82-FAB6-3EC6-89D3D99C7194}",
     "ObjectPath": "\\SoundBanks\\WU_MUSIC\\SB_MUSIC",
     "ShortName": "SB_MUSIC",
     "Path": "SB_MUSIC.bnk",
@@ -57,6 +57,30 @@
       "CachePath": "F1/{F1A0EEB2-3B7B-7766-96CA-B98D5500CAB8}.wem"
      },
      {
+      "Id": "558723873",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Arm_LP.wav",
+      "CachePath": "A3/{A3736567-D452-8353-0697-B6708256B34F}.wem"
+     },
+     {
+      "Id": "621012726",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Shoulder_LP.wav",
+      "CachePath": "A8/{A8F38F09-DD8E-80FB-5D42-F895CDC6B4D0}.wem"
+     },
+     {
+      "Id": "622623971",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Shoulder_Start.wav",
+      "CachePath": "51/{51865892-8794-65FF-FB7F-E26DD7EF9489}.wem"
+     },
+     {
       "Id": "680603793",
       "Language": "SFX",
       "Streaming": "false",
@@ -98,6 +122,19 @@
      }
     ],
     "Events": [
+     {
+      "Id": "717600931",
+      "Name": "Play_MU_Arm",
+      "ObjectPath": "\\Events\\WU_Music\\Play_MU_Arm",
+      "GUID": "{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}",
+      "Color": "19",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "558723873"
+       }
+      ]
+     },
      {
       "Id": "3984565984",
       "Name": "Play_MU_Full",
@@ -146,6 +183,22 @@
       ]
      },
      {
+      "Id": "1745601315",
+      "Name": "Play_MU_Shoulder",
+      "ObjectPath": "\\Events\\WU_Music\\Play_MU_Shoulder",
+      "GUID": "{6078419F-7F68-479D-AA56-581F2E77687E}",
+      "Color": "19",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "621012726"
+       },
+       {
+        "Id": "622623971"
+       }
+      ]
+     },
+     {
       "Id": "1183932125",
       "Name": "Play_MU_Village",
       "ObjectPath": "\\Events\\WU_Music\\Play_MU_Village",
@@ -161,6 +214,6 @@
     ]
    }
   ],
-  "FileHash": "{6B1628A3-E4CC-971F-27E6-E7AE37FCAB3A}"
+  "FileHash": "{50F46EE2-D2C4-140D-A837-84279FD33B13}"
  }
 }
