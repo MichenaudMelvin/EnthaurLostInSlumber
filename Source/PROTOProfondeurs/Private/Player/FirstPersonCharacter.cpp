@@ -142,7 +142,7 @@ void AFirstPersonCharacter::BeginPlay()
 
 	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(FirstPersonController, StartWidget);
 
-	StartWidget->AddToViewport();
+	StartWidget->AddToViewport(4);
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)
@@ -636,7 +636,8 @@ void AFirstPersonCharacter::LoadPlayerData()
 
 void AFirstPersonCharacter::Respawn(const FTransform& RespawnTransform)
 {
-	SetActorTransform(RespawnTransform);
+	//SetActorTransform(RespawnTransform);
+	SetActorLocation(RespawnTransform.GetLocation());
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	OnRespawn.Broadcast();
