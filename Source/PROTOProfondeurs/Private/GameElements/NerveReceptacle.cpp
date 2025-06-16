@@ -54,13 +54,6 @@ void ANerveReceptacle::BeginPlay()
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &ANerveReceptacle::TriggerEnter);
 
 	NerveEndTargetTransform *= GetActorTransform();
-
-	FTimerHandle TimerHandle;
-
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
-	{
-		Collision->UpdateOverlaps();
-	}, 0.1f, false);
 }
 
 #if WITH_EDITORONLY_DATA
