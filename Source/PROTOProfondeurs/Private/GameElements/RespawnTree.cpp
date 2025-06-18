@@ -112,27 +112,6 @@ void ARespawnTree::SetActive_Implementation()
 	bIsActivated = true;
 
 	RespawnTreeNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
-
-	/*FCTween::Play(
-		0.f,
-		30.f,
-		[&](float x)
-		{
-			if (!this)
-			{
-				return;
-			}
-			
-			if (!Material)
-			{
-				return;
-			}
-			
-			Material->SetScalarParameterValue("Emissive", x);
-		},
-		2.f,
-		EFCEase::InSine
-	);*/
 }
 
 void ARespawnTree::SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave)
