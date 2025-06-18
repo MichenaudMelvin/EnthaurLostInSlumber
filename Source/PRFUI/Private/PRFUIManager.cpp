@@ -154,13 +154,12 @@ void UPRFUIManager::CloseCurrentMenu()
 
 	if (MenuStack.Num() >= 1 && CurrentState != EPRFUIState::Gameplay)
 	{
-		
 		TWeakObjectPtr<UUserWidget> NewTopMenuPtr = MenuStack.Last();
-		if (!TopMenuPtr.IsValid())
+		if (!NewTopMenuPtr.IsValid())
 		{
 			return;
 		}
-		
+
 		UUserWidget* NewMenu = NewTopMenuPtr.Get();
 		NewMenu->AddToViewport();
 	}

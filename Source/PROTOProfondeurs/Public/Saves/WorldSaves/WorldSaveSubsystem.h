@@ -28,8 +28,10 @@ public:
 
 	virtual UDefaultSave* LoadSave(const int SaveIndex, const bool bCreateNewSaveIfDoesntExist = true) override;
 
+	UFUNCTION(BlueprintCallable, Category = "World")
 	bool DeleteWorldSaveByName(const FString& WorldName, const int SaveIndex);
 
+	UFUNCTION(BlueprintCallable, Category = "World")
 	void DeleteAllWorldSaves(const int SaveIndex);
 
 protected:
