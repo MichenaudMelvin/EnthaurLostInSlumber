@@ -42,18 +42,19 @@ protected:
 
 	void SetRespawnPoint(AFirstPersonCharacter* Player, bool bSave);
 
-	void SetActive();
+	UFUNCTION(BlueprintNativeEvent)
+	void SetActive();	
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<USceneComponent> RootComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
-	TObjectPtr<UBoxComponent> TriggerBox;
+	TObjectPtr<UBoxComponent> TriggerBox;	
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<UStaticMeshComponent> TreeModel;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<UMaterialInstanceDynamic> Material;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
