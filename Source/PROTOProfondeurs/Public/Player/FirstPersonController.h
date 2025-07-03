@@ -83,23 +83,6 @@ protected:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-// #if !UE_BUILD_SHIPPING
-	UPROPERTY()
-	TObjectPtr<AFirstPersonCharacter> OwnCharacter;
-
-	UPROPERTY()
-	TObjectPtr<AFirstPersonSpectator> Spectator;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Spectator")
-	TSubclassOf<AFirstPersonSpectator> SpectatorClass;
-
-	UFUNCTION(Exec)
-	void PossessSpectator();
-
-	UFUNCTION(Exec)
-	void UnPossessSpectator(bool bTeleport = true);
-// #endif
-
 #pragma region UI
 
 protected:
