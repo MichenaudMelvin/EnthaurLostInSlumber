@@ -18,25 +18,15 @@ struct FDuoText
 	FText RegionZone;
 };
 
-/**
- * 
- */
 UCLASS(Config = Game, DefaultConfig, meta = (DisplayName = "Blueprint References"))
 class PROTOPROFONDEURS_API UBPRefParameters : public UDeveloperSettings
 {
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, Config)
-	TMap<TSoftObjectPtr<UWorld>, FDuoText> WorldMap;
+	UPROPERTY(EditDefaultsOnly, Config, Category = "WorldNames")
+	TMap<TSoftObjectPtr<UWorld>, FDuoText> LevelNames;
 
-	UPROPERTY(VisibleAnywhere, Config)
-	TMap<FString, FDuoText> LevelNames;
-
-	UPROPERTY(Config, EditAnywhere)
+	UPROPERTY(EditDefaultsOnly, Config, Category = "Electricity")
 	TSubclassOf<AActor> ElectricityFeedback;
-
-#if WITH_EDITOR
-	void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
-#endif
 };

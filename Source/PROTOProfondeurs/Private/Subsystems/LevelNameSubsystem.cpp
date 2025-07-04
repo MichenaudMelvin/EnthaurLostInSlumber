@@ -2,27 +2,35 @@
 
 
 #include "Subsystems/LevelNameSubsystem.h"
-
 #include "Parameters/BPRefParameters.h"
 
 
 void ULevelNameSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
+
 	WorldInitDelegateHandle = FWorldDelegates::OnWorldInitializedActors.AddUObject(this, &ULevelNameSubsystem::SetupWorldName);
 }
 
 void ULevelNameSubsystem::Deinitialize()
 {
 	Super::Deinitialize();
+
 	FWorldDelegates::OnWorldInitializedActors.Remove(WorldInitDelegateHandle);
 }
 
 void ULevelNameSubsystem::SetupWorldName(const FActorsInitializedParams& ActorsInitializedParams)
 {
-	auto LevelNames = GetDefault<UBPRefParameters>()->LevelNames;
-	auto PathName = ActorsInitializedParams.World->GetName();
-	FDuoText* LevelName = LevelNames.Find(PathName);
+	FString SourcePath;
+	FString RemappedPath;
+	ActorsInitializedParams.World->GetSoftObjectPathMapping(SourcePath, RemappedPath);
+
+	FSoftObjectPath SoftObjectPath(SourcePath);
+	TSoftObjectPtr<UWorld> CurrentWorldSoftPtr(SoftObjectPath);
+
+	TMap<TSoftObjectPtr<UWorld>, FDuoText> LevelNames = GetDefault<UBPRefParameters>()->LevelNames;
+
+	FDuoText* LevelName = LevelNames.Find(CurrentWorldSoftPtr);
 	if (!LevelName)
 	{
 		return;

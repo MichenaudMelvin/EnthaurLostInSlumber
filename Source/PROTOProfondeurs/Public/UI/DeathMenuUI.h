@@ -7,34 +7,12 @@
 #include "Menus/Elements/PRFCustomButton.h"
 #include "DeathMenuUI.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class PROTOPROFONDEURS_API UDeathMenuUI : public UUserWidget
 {
 	GENERATED_BODY()
 
 protected:
-	virtual void NativeConstruct() override;
-	virtual void NativeDestruct() override;
-
-
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Player")
 	void RespawnPlayer();
-	
-	UFUNCTION()
-	void BackToMainMenu();
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UPRFCustomButton> RespawnButton;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UPRFCustomButton> BackMainMenuButton;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UPRFCustomButton> QuitButton;
-
-	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UWorld> MainMenuLevel;
 };

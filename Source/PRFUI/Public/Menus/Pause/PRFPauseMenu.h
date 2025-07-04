@@ -43,9 +43,6 @@ protected:
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UPRFCustomButton> QuitButton;
 
-	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UWorld> MainMenuLevel;
-
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UTextBlock> AreaName;
 

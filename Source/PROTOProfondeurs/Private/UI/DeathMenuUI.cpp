@@ -9,34 +9,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
 
-void UDeathMenuUI::NativeConstruct()
-{
-	Super::NativeConstruct();
-
-	if (RespawnButton && RespawnButton->GetCustomButton())
-	{
-		RespawnButton->GetCustomButton()->OnClicked.AddDynamic(this, &UDeathMenuUI::RespawnPlayer);
-	}
-	if (BackMainMenuButton && BackMainMenuButton->GetCustomButton())
-	{
-		BackMainMenuButton->GetCustomButton()->OnClicked.AddDynamic(this, &UDeathMenuUI::BackToMainMenu);
-	}
-}
-
-void UDeathMenuUI::NativeDestruct()
-{
-	Super::NativeDestruct();
-
-	if (RespawnButton && RespawnButton->GetCustomButton())
-	{
-		RespawnButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UDeathMenuUI::RespawnPlayer);
-	}
-	if (BackMainMenuButton && BackMainMenuButton->GetCustomButton())
-	{
-		BackMainMenuButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UDeathMenuUI::BackToMainMenu);
-	}
-}
-
 void UDeathMenuUI::RespawnPlayer()
 {
 	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
@@ -87,11 +59,4 @@ void UDeathMenuUI::RespawnPlayer()
 	PlayerController->SetPause(false);
 	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController, true);
 	PlayerController->SetShowMouseCursor(false);
-}
-
-void UDeathMenuUI::BackToMainMenu()
-{
-	UGameplayStatics::OpenLevelBySoftObjectPtr(
-		this,
-		MainMenuLevel);
 }
