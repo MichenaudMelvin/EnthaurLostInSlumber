@@ -12,74 +12,27 @@ void UInGameUI::NativeConstruct()
 	Super::NativeConstruct();
 
 	Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+
 	if (Player)
 	{
 		Player->OnAmberUpdate.AddDynamic(this, &UInGameUI::OnAmberUpdate);
 	}
 }
 
+void UInGameUI::OnAmberUpdate(EAmberType AmberType, int AmberAmount)
+{
+	if (AmberType == EAmberType::WeakAmber)
+	{
+		AmberAmount > 0 ? OnAmberPickUp.Broadcast() : OnAmberUsed.Broadcast();
+	}
+}
+
 void UInGameUI::SetPropulsionActive(bool active)
 {
 	PlayNerveActionReadyDelegate.Broadcast(active);
-	/*if (active)
-	{
-		FCTween::Play(
-			0.f,
-			1.f,
-			[&](float x)
-			{
-				PropulsionIndicator->SetOpacity(x);
-			},
-			0.5f,
-			EFCEase::OutSine)->SetOnComplete([&]
-		{
-			CurrentTween = FCTween::Play(
-				1.f,
-				0.f,
-				[&](float x)
-				{
-					PropulsionIndicator->SetOpacity(x);
-				},
-				0.5f,
-				EFCEase::OutSine)->SetYoyo(true)->SetLoops(-1);
-		});
-	}
-	else
-	{
-		if (CurrentTween != nullptr)
-		{
-			CurrentTween->Destroy();
-			FCTween::Play(
-				1.f,
-				0.f,
-				[&](float x)
-				{
-					PropulsionIndicator->SetOpacity(x);
-				},
-				0.5f,
-				EFCEase::OutSine);
-
-			CurrentTween = nullptr;
-		}
-	}*/
 }
 
 void UInGameUI::SetInteraction(const bool bActive) const
 {
 	PlayInteractionReadyDelegate.Broadcast(bActive);
-	//bActive ? Interact->SetOpacity(1.f) : Interact->SetOpacity(0.f);
-}
-
-void UInGameUI::OnAmberUpdate(EAmberType AmberType, int AmberAmount)
-{
-	if (AmberType == EAmberType::WeakAmber)
-	{
-		if (AmberAmount > 0)
-		{
-			OnAmberPickUp.Broadcast();
-		} else
-		{
-			OnAmberUsed.Broadcast();
-		}
-	}
 }

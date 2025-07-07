@@ -4,7 +4,7 @@
 #include "GameFramework/PlayerInput.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-void InitializeDebugCameraInputBindings()
+void InitializeCustomDebugCameraInputBindings()
 {
 	static bool bBindingsAdded = false;
 	if (bBindingsAdded)
@@ -21,7 +21,7 @@ void APRFCustomDebugCamera::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	InitializeDebugCameraInputBindings();
+	InitializeCustomDebugCameraInputBindings();
 	InputComponent->BindAction("CustomDebugCamera_TeleportToFacingLocation", IE_Pressed, this, &APRFCustomDebugCamera::TeleportToFacingLocation);
 	InputComponent->BindAction("CustomDebugCamera_DestroyFacingActor", IE_Pressed, this, &APRFCustomDebugCamera::DestroyFacingActor);
 }

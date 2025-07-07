@@ -4,7 +4,7 @@
 #include "PRFCustomSpectatorPawn.h"
 #include "GameFramework/PlayerInput.h"
 
-void InitializeDebugPawnInputBindings()
+void InitializeCustomSpectatorPawnInputBindings()
 {
 	static bool bBindingsAdded = false;
 	if (bBindingsAdded)
@@ -38,7 +38,7 @@ void APRFCustomSpectatorPawn::SetupPlayerInputComponent(UInputComponent* PlayerI
 		return;
 	}
 
-	InitializeDebugPawnInputBindings();
+	InitializeCustomSpectatorPawnInputBindings();
 
 	PlayerInputComponent->BindAxis("CustomSpectatorPawn_MoveForward", this, &ADefaultPawn::MoveForward);
 	PlayerInputComponent->BindAxis("CustomSpectatorPawn_MoveRight", this, &ADefaultPawn::MoveRight);

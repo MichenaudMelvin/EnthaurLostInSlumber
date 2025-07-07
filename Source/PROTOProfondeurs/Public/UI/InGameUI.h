@@ -10,59 +10,45 @@
 class FCTweenInstance;
 class UImage;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAmberUsed);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAmberPickUp);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNerveActionReady, bool, bValue);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractionReady, bool, bValue);
 
-/**
- * 
- */
 UCLASS()
 class PROTOPROFONDEURS_API UInGameUI : public UUserWidget
 {
 	GENERATED_BODY()
 
-public:
-	UFUNCTION()
-	void OnAmberUpdate(EAmberType AmberType, int AmberAmount);
+protected:
 	virtual void NativeConstruct() override;
-	
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> Crosshair;
-	
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> Interact;
-	
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> PropulsionIndicator;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Animations", meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> NerveActionReadyAnimation;
+
+	UPROPERTY(BlueprintReadOnly, Transient, Category = "Animations", meta = (BindWidgetAnim))
+	TObjectPtr<UWidgetAnimation> InteractionReadyAnimation;
 
 	UPROPERTY()
 	TObjectPtr<class AFirstPersonCharacter> Player;
 
-	void SetPropulsionActive(bool active);
-	void SetInteraction(bool bActive) const;
-
-protected:
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAmberPickUp);
-	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Deletages")
 	FOnAmberPickUp OnAmberPickUp;
 
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAmberUsed);
-	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Deletages")
 	FOnAmberUsed OnAmberUsed;
 
-	UPROPERTY(meta = (BindWidgetAnim), Transient, BlueprintReadOnly)
-	TObjectPtr<UWidgetAnimation> NerveActionReadyAnimation;
-
-	UPROPERTY(meta = (BindWidgetAnim), Transient, BlueprintReadOnly)
-	TObjectPtr<UWidgetAnimation> InteractionReadyAnimation;
-
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Deletages")
 	FOnNerveActionReady PlayNerveActionReadyDelegate;
 
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Deletages")
 	FOnInteractionReady PlayInteractionReadyDelegate;
 
-private:
-	FCTweenInstance* CurrentTween;
-	TObjectPtr<UImage> Img;
+	UFUNCTION()
+	void OnAmberUpdate(EAmberType AmberType, int AmberAmount);
+
+public:
+	void SetPropulsionActive(bool active);
+
+	void SetInteraction(bool bActive) const;
 };
