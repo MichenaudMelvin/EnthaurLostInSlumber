@@ -49,6 +49,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+#if WITH_EDITORONLY_DATA
+	virtual void Destroyed() override;
+#endif
+
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void Tick(float DeltaTime) override;

@@ -144,6 +144,20 @@ void AMuscle::BeginPlay()
 #endif
 }
 
+#if WITH_EDITORONLY_DATA
+void AMuscle::Destroyed()
+{
+	Super::Destroyed();
+
+	if (!SelectedInEditor)
+	{
+		return;
+	}
+
+	ClearProjectionDraw();
+}
+#endif
+
 void AMuscle::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);

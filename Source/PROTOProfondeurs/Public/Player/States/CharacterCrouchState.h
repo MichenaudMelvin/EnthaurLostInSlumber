@@ -21,7 +21,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Crouch", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CameraHeight = 16.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Crouch", meta = (ClampMin = 0.0f, Units = "cm"))
+	UPROPERTY(EditDefaultsOnly, Category = "Crouch", meta = (ClampMin = 0.0f, Units = "s"))
 	float Duration = 1.0f;
 
 	virtual void StateInit(UCharacterStateMachine* InStateMachine) override;
