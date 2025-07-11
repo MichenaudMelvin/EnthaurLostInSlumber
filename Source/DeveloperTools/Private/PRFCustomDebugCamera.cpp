@@ -14,7 +14,27 @@ void InitializeCustomDebugCameraInputBindings()
 
 	bBindingsAdded = true;
 	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_TeleportToFacingLocation", EKeys::RightMouseButton));
-	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DestroyFacingActor", EKeys::BackSpace));
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DestroyFacingActor", EKeys::Delete));
+
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_IncreaseSpeed", EKeys::Add));
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_IncreaseSpeed", EKeys::MouseScrollUp));
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_IncreaseSpeed", EKeys::Gamepad_RightShoulder));
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DecreaseSpeed", EKeys::Subtract));
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DecreaseSpeed", EKeys::MouseScrollDown));
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DecreaseSpeed", EKeys::Gamepad_LeftShoulder));
+}
+
+APRFCustomDebugCamera::APRFCustomDebugCamera()
+{
+	InitialMaxSpeed = 2.0f;
+	SpeedScale = 2.0f;
+}
+
+void APRFCustomDebugCamera::BeginPlay()
+{
+	Super::BeginPlay();
+
+	ToggleDisplay();
 }
 
 void APRFCustomDebugCamera::SetupInputComponent()
@@ -24,6 +44,12 @@ void APRFCustomDebugCamera::SetupInputComponent()
 	InitializeCustomDebugCameraInputBindings();
 	InputComponent->BindAction("CustomDebugCamera_TeleportToFacingLocation", IE_Pressed, this, &APRFCustomDebugCamera::TeleportToFacingLocation);
 	InputComponent->BindAction("CustomDebugCamera_DestroyFacingActor", IE_Pressed, this, &APRFCustomDebugCamera::DestroyFacingActor);
+
+	InputComponent->RemoveActionBinding("DebugCamera_IncreaseSpeed", IE_Pressed);
+	InputComponent->RemoveActionBinding("DebugCamera_DecreaseSpeed", IE_Pressed);
+
+	InputComponent->BindAction("CustomDebugCamera_IncreaseSpeed", IE_Pressed, this, &APRFCustomDebugCamera::CustomIncreaseCameraSpeed);
+	InputComponent->BindAction("CustomDebugCamera_DecreaseSpeed", IE_Pressed, this, &APRFCustomDebugCamera::CustomDecreaseCameraSpeed);
 }
 
 bool APRFCustomDebugCamera::Trace(FHitResult& HitResult) const
@@ -38,7 +64,7 @@ bool APRFCustomDebugCamera::Trace(FHitResult& HitResult) const
 	GetPlayerViewPoint(CamLocation, CamRotation);
 
 	FCollisionQueryParams TraceParams(NAME_None, FCollisionQueryParams::GetUnknownStatId(), true, OriginalControllerRef->GetPawn());
-	return GetWorld()->LineTraceSingleByChannel(HitResult, CamLocation, CamLocation + (CamRotation.Vector() * TeleportTraceLength), ECC_Pawn, TraceParams);
+	return GetWorld()->LineTraceSingleByChannel(HitResult, CamLocation, CamLocation + (CamRotation.Vector() * TraceLength), ECC_Pawn, TraceParams);
 }
 
 void APRFCustomDebugCamera::TeleportToFacingLocation()
@@ -67,4 +93,17 @@ void APRFCustomDebugCamera::DestroyFacingActor()
 	}
 
 	HitResult.GetActor()->Destroy();
+}
+
+void APRFCustomDebugCamera::CustomIncreaseCameraSpeed()
+{
+	SpeedScale += CameraSpeedScaleStep;
+	ApplySpeedScale();
+}
+
+void APRFCustomDebugCamera::CustomDecreaseCameraSpeed()
+{
+	SpeedScale -= CameraSpeedScaleStep;
+	SpeedScale = FMath::Max(SpeedScale, CameraSpeedScaleStep);
+	ApplySpeedScale();
 }

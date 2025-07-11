@@ -11,7 +11,12 @@ class DEVELOPERTOOLS_API APRFCustomDebugCamera : public ADebugCameraController
 {
 	GENERATED_BODY()
 
+public:
+	APRFCustomDebugCamera();
+
 protected:
+	virtual void BeginPlay() override;
+
 	virtual void SetupInputComponent() override;
 
 	bool Trace(FHitResult& HitResult) const;
@@ -29,5 +34,27 @@ protected:
 	/**
 	 * @brief Default Trace is 5000.0f * 20.0f (100 000.0cm)
 	 */
-	float TeleportTraceLength = 100000.0f;
+	float TraceLength = 100000.0f;
+
+#pragma region CameraSpeed
+
+protected:
+	/**
+	 * @brief Cannot override the ADebugCameraController because the function isn't virtual
+	 */
+	void CustomIncreaseCameraSpeed();
+
+	/**
+	 * @brief Cannot override the ADebugCameraController because the function isn't virtual
+	 */
+	void CustomDecreaseCameraSpeed();
+
+	FFloatRange CameraSpeed = FFloatRange(0.05f, 10.0f);
+
+	/**
+	 * @brief UE Debug Camera's value is 0.05f (SPEED_SCALE_ADJUSTMENT)
+	 */
+	float CameraSpeedScaleStep = 0.5f;
+
+#pragma endregion
 };
