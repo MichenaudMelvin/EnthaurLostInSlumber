@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{F84310C6-9FCB-4553-9790-0B200BE7FD0B}" SchemaVersion="123">
+	<AudioObjects>
+		<WorkUnit Name="Temp_Theo" ID="{F84310C6-9FCB-4553-9790-0B200BE7FD0B}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="TEST A" ID="{F7EF240B-5AAF-42FA-BDD1-0F04EC11D844}" ShortID="902046557">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+						</Reference>
+					</ReferenceList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

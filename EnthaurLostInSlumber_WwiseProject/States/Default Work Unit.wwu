@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{01D8E349-603D-4DA9-958E-D925519311DC}" SchemaVersion="123">
+	<States>
+		<WorkUnit Name="Default Work Unit" ID="{01D8E349-603D-4DA9-958E-D925519311DC}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="STG_WEAKENEDZONE" ID="{BE53788A-24ED-40A0-9285-BE9E6C56B454}">
+					<ChildrenList>
+						<State Name="None" ID="{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"/>
+						<State Name="Weakened" ID="{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"/>
+						<State Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
+					</ChildrenList>
+					<TransitionList>
+						<Transition>
+							<StartState Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
+							<EndState Name="Weakened" ID="{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"/>
+							<Time>0.5</Time>
+							<IsShared>true</IsShared>
+						</Transition>
+					</TransitionList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</States>
+</WwiseDocument>

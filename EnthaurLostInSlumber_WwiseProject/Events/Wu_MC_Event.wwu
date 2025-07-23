@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="Wu_MC_Event" ID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="13"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<Event Name="Play_SW_MC_FS_Speed" ID="{40C0DABC-E260-4BE7-9895-167ACF357472}">
+					<ChildrenList>
+						<Action Name="" ID="{2555F2E3-B5D4-49B3-AFAE-E44102D349B0}" ShortID="1016873512">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SW_MC_FS_Speed" ID="{04A75913-5906-4469-B94A-A2F94F445B6A}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{BCFCEC4F-E00A-4D8F-A347-634B5E9758A3}" ShortID="738953472">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="41"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Play_MC_Cloth" ID="{69FE522F-23A7-4F90-9BC1-5A201A346C39}" WorkUnitID="{15EFF1CC-CA34-49EE-90B5-7908FEC4C306}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SW_MC_Land_Material" ID="{27009C7D-31EB-42D4-BEA8-E873A733B256}">
+					<ChildrenList>
+						<Action Name="" ID="{4EE8B4A4-94B4-4312-9697-C32B0138E5B7}" ShortID="810462603">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SW_MC_Land_Material" ID="{DB871AA9-6A46-4727-B3CC-EE5984C3784C}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SW_MC_Jump_Material" ID="{84B16784-5C30-4EFA-A338-4ACE6DA19306}">
+					<ChildrenList>
+						<Action Name="" ID="{9FA0D5B6-DFF7-4196-9070-A44C3C57DFD0}" ShortID="1072651831">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SW_MC_Jump_Material" ID="{7010AB05-F651-499E-B89B-EBA9F63EDAAA}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_MC_Cloth" ID="{69FE522F-23A7-4F90-9BC1-5A201A346C39}">
+					<ChildrenList>
+						<Action Name="" ID="{A524C1DB-3BC0-420A-8D4E-44B45AB1EC90}" ShortID="576605213">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MC_Cloth" ID="{7CB79212-C1AB-4552-9239-7ACCD207BB2D}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -1,0 +1,434 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "925885567",
+    "Type": "User",
+    "GUID": "{EE92B861-4D84-4707-9C17-9DF23002C642}",
+    "Color": "4",
+    "Language": "SFX",
+    "Hash": "{4B873E92-4418-108D-2769-3138426DF5C7}",
+    "ObjectPath": "\\SoundBanks\\WU_AMB\\SB_AMB",
+    "ShortName": "SB_AMB",
+    "Path": "SB_AMB.bnk",
+    "Media": [
+     {
+      "Id": "40028711",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_12.wav",
+      "CachePath": "89/{8942449A-973B-9A85-1F1B-EF054CC357C3}.wem"
+     },
+     {
+      "Id": "79017697",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_04.wav",
+      "CachePath": "47/{47D269AE-96F1-4CBE-AFEB-CEACBFB23732}.wem"
+     },
+     {
+      "Id": "84916266",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_01.wav",
+      "CachePath": "B4/{B4DC8F89-6B44-AF89-FC0C-101CC60FADD3}.wem"
+     },
+     {
+      "Id": "106510936",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_VILLAGE_HEARTBEAT.wav",
+      "CachePath": "69/{69DBD403-67D4-8057-C75D-F6F66C49307D}.wem"
+     },
+     {
+      "Id": "113684722",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_02.wav",
+      "CachePath": "BC/{BC4198B8-0F85-2E53-979E-A4D28B8799F6}.wem"
+     },
+     {
+      "Id": "118041272",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_07.wav",
+      "CachePath": "3D/{3DF201E4-B1AF-6709-60D2-14B4BCC868C4}.wem"
+     },
+     {
+      "Id": "215594251",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_03.wav",
+      "CachePath": "28/{28045F6D-1BAF-4662-0C59-AC4960A862B9}.wem"
+     },
+     {
+      "Id": "427151800",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_06.wav",
+      "CachePath": "37/{37E95FD6-0EB7-FB66-429C-1217CB7D8EF3}.wem"
+     },
+     {
+      "Id": "433441082",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Muscle.wav",
+      "CachePath": "D2/{D2EE14C5-490D-FB54-66B9-0B02E1F0E0CD}.wem"
+     },
+     {
+      "Id": "452759638",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_01_LP.wav",
+      "CachePath": "C7/{C75BEDBD-9EEB-4B10-6192-A81EFE78DAD4}.wem"
+     },
+     {
+      "Id": "481136108",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_02.wav",
+      "CachePath": "3D/{3D7CD4A4-3EA2-11A9-6DE9-0B445E86A143}.wem"
+     },
+     {
+      "Id": "535431809",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Village_01_LP.wav",
+      "CachePath": "F5/{F52D9AA6-829D-5703-E77F-F0BB9AADEFD3}.wem"
+     },
+     {
+      "Id": "610405175",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Growl.wav",
+      "CachePath": "FD/{FD24ADA8-0B76-6E66-4D27-57B44205A739}.wem"
+     },
+     {
+      "Id": "630202445",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_04_LP.wav",
+      "CachePath": "4C/{4C088803-B6C9-A382-8C2C-6EC6934FD4F3}.wem"
+     },
+     {
+      "Id": "678510795",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_04.wav",
+      "CachePath": "AE/{AE25B41D-9EF0-33DF-FC53-8ECC1A0B07D2}.wem"
+     },
+     {
+      "Id": "726580023",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_11.wav",
+      "CachePath": "A4/{A4C4287F-9D0E-7F5C-3E8C-C5B7F9140660}.wem"
+     },
+     {
+      "Id": "743489974",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_03_LP-glued.wav",
+      "CachePath": "A9/{A9B688B7-13BA-2E9E-A37B-BD17ED64953E}.wem"
+     },
+     {
+      "Id": "745301015",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_03.wav",
+      "CachePath": "1C/{1CFF8B7F-A2B7-8A98-C065-1359BC2E111D}.wem"
+     },
+     {
+      "Id": "788512206",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Necrosed_LP_01.wav",
+      "CachePath": "23/{2322FBBA-5EB7-5038-2A1E-FE75DD1308B3}.wem"
+     },
+     {
+      "Id": "798986114",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_09.wav",
+      "CachePath": "F7/{F7D9C20F-B9C2-E59A-AE40-615105B2CE91}.wem"
+     },
+     {
+      "Id": "863142678",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_08.wav",
+      "CachePath": "9B/{9B314D01-49F1-3FA9-6ABD-B0D0E9410A46}.wem"
+     },
+     {
+      "Id": "879024324",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_02_LP.wav",
+      "CachePath": "97/{97D10EEB-9667-A63A-9934-16A5FFE8B640}.wem"
+     },
+     {
+      "Id": "964612303",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_10.wav",
+      "CachePath": "00/{0065A589-7D0D-1AD7-EE1F-4567FDA71B67}.wem"
+     },
+     {
+      "Id": "976737059",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Village_02_LP.wav",
+      "CachePath": "96/{9647564F-DF68-75FD-9189-B7D1F3355548}.wem"
+     },
+     {
+      "Id": "1059098210",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_Pad_Rfx_DistantScream_05.wav",
+      "CachePath": "96/{96229D84-843E-D15C-6734-E79516AADD1B}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "2511814352",
+      "Name": "AMB_BREATH",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_BREATH",
+      "GUID": "{AA87B9BB-78F7-4E1B-B3CB-35E5EF3E9618}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "40028711"
+       },
+       {
+        "Id": "84916266"
+       },
+       {
+        "Id": "113684722"
+       },
+       {
+        "Id": "118041272"
+       },
+       {
+        "Id": "427151800"
+       },
+       {
+        "Id": "678510795"
+       },
+       {
+        "Id": "726580023"
+       },
+       {
+        "Id": "745301015"
+       },
+       {
+        "Id": "798986114"
+       },
+       {
+        "Id": "863142678"
+       },
+       {
+        "Id": "964612303"
+       },
+       {
+        "Id": "1059098210"
+       }
+      ]
+     },
+     {
+      "Id": "4111363768",
+      "Name": "AMB_CORRUPTEDZONE",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_CORRUPTEDZONE",
+      "GUID": "{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "79017697"
+       },
+       {
+        "Id": "215594251"
+       },
+       {
+        "Id": "481136108"
+       },
+       {
+        "Id": "788512206"
+       }
+      ]
+     },
+     {
+      "Id": "3804067178",
+      "Name": "AMB_GAMEPLAY",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_GAMEPLAY",
+      "GUID": "{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "452759638"
+       },
+       {
+        "Id": "630202445"
+       },
+       {
+        "Id": "743489974"
+       },
+       {
+        "Id": "879024324"
+       }
+      ],
+      "ActionSetState": [
+       {
+        "GroupId": "232339302",
+        "Id": "1160234136",
+        "Name": "Normal",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Normal",
+        "GUID": "{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"
+       }
+      ]
+     },
+     {
+      "Id": "836234157",
+      "Name": "AMB_GROWL",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_GROWL",
+      "GUID": "{BB85019A-5DFC-4CC8-BFD0-42EC5081E445}",
+      "Color": "4",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "5.9198213",
+      "MediaRefs": [
+       {
+        "Id": "610405175"
+       }
+      ]
+     },
+     {
+      "Id": "2699383670",
+      "Name": "AMB_VILLAGE",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_VILLAGE",
+      "GUID": "{A069072C-C569-4701-9756-087063501AE3}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "535431809"
+       },
+       {
+        "Id": "976737059"
+       }
+      ]
+     },
+     {
+      "Id": "1091882799",
+      "Name": "AMB_VILLAGE_HEARTBEAT",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_VILLAGE_HEARTBEAT",
+      "GUID": "{4F9B89C2-3761-41E6-BF81-653EEBA91D79}",
+      "Color": "4",
+      "MaxAttenuation": "1500",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "106510936"
+       }
+      ]
+     },
+     {
+      "Id": "3945432358",
+      "Name": "AMB_WEAKENEDZONE",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\AMB_WEAKENEDZONE",
+      "GUID": "{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}",
+      "Color": "4",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionSetState": [
+       {
+        "GroupId": "232339302",
+        "Id": "4120836511",
+        "Name": "Weakened",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Weakened",
+        "GUID": "{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"
+       }
+      ]
+     },
+     {
+      "Id": "2398966016",
+      "Name": "Play_AMB_Muscle",
+      "ObjectPath": "\\Events\\WU_AMB_Event\\Play_AMB_Muscle",
+      "GUID": "{BCBDDE4B-360C-46C5-8D5C-992EDA263D15}",
+      "Color": "4",
+      "MaxAttenuation": "1000",
+      "DurationType": "OneShot",
+      "DurationMin": "14.5",
+      "DurationMax": "14.5",
+      "MediaRefs": [
+       {
+        "Id": "433441082"
+       }
+      ]
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "232339302",
+      "Name": "STG_WEAKENEDZONE",
+      "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE",
+      "GUID": "{BE53788A-24ED-40A0-9285-BE9E6C56B454}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\None",
+        "GUID": "{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"
+       },
+       {
+        "Id": "1160234136",
+        "Name": "Normal",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Normal",
+        "GUID": "{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"
+       },
+       {
+        "Id": "4120836511",
+        "Name": "Weakened",
+        "ObjectPath": "\\States\\Default Work Unit\\STG_WEAKENEDZONE\\Weakened",
+        "GUID": "{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{78CD404C-3654-A045-248D-67F39F837200}"
+ }
+}

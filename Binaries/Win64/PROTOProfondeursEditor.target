@@ -5,7 +5,7 @@
 	"TargetType": "Editor",
 	"IsTestTarget": false,
 	"Architecture": "x64",
-	"Project": "../../PROTOProfondeurs.uproject",
+	"Project": "../../EnthaurLostInSlumber.uproject",
 	"Launch": "$(EngineDir)/Binaries/Win64/UnrealEditor.exe",
 	"LaunchCmd": "$(EngineDir)/Binaries/Win64/UnrealEditor-Cmd.exe",
 	"Version": 
@@ -34072,7 +34072,7 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(ProjectDir)/PROTOProfondeurs.uproject",
+			"Path": "$(ProjectDir)/EnthaurLostInSlumber.uproject",
 			"Type": "UFS"
 		},
 		{
