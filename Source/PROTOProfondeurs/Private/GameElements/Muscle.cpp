@@ -550,9 +550,9 @@ void AMuscle::Trigger_Implementation()
 	ToggleMuscleSolidity();
 }
 
-void AMuscle::SetLock_Implementation(bool state)
+void AMuscle::SetLock_Implementation(bool bState)
 {
-	INerveReactive::SetLock_Implementation(state);
+	INerveReactive::SetLock_Implementation(bState);
 
 	if (bIsSolid == bDefaultSolidity)
 	{
@@ -560,7 +560,7 @@ void AMuscle::SetLock_Implementation(bool state)
 	}
 
 	Trigger();
-	bIsLocked = state;
+	bIsLocked = bState;
 }
 
 #pragma endregion

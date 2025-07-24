@@ -85,11 +85,11 @@ void ANerveDoor::Trigger_Implementation()
 	IsOpened = !IsOpened;
 }
 
-void ANerveDoor::SetLock_Implementation(bool state)
+void ANerveDoor::SetLock_Implementation(bool bState)
 {
-	INerveReactive::SetLock_Implementation(state);
+	INerveReactive::SetLock_Implementation(bState);
 
-	if (state)
+	if (bState)
 	{
 		if (IsOpened != IsActiveAtStart)
 		{

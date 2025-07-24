@@ -264,7 +264,7 @@ protected:
 
 	virtual void Trigger_Implementation() override;
 
-	virtual void SetLock_Implementation(bool state) override;
+	virtual void SetLock_Implementation(bool bState) override;
 
 #pragma endregion
 

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AmberOre.h"
 #include "WeakZoneInterface.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
@@ -12,6 +11,7 @@
 #include "Saves/WorldSaves/SaveGameElementInterface.h"
 #include "Nerve.generated.h"
 
+class UAkComponent;
 class UAkAudioEvent;
 class AFirstPersonCharacter;
 

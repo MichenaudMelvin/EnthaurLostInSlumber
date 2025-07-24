@@ -13,9 +13,6 @@ class UNerveReactive : public UInterface
 	GENERATED_BODY()
 };
 
-/**
- * 
- */
 class PROTOPROFONDEURS_API INerveReactive
 {
 	GENERATED_BODY()
@@ -27,6 +24,5 @@ public:
 	void Trigger();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SetLock(bool state);
-	
+	void SetLock(bool bState);
 };

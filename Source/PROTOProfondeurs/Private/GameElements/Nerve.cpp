@@ -16,6 +16,7 @@
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
 #include "Saves/WorldSaves/WorldSave.h"
+#include "Player/FirstPersonCharacter.h"
 
 ANerve::ANerve()
 {

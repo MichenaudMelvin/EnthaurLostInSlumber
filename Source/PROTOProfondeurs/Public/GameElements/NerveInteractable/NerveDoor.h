@@ -15,7 +15,6 @@ class PROTOPROFONDEURS_API ANerveDoor : public AActor, public INerveReactive
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	ANerveDoor();
 
 protected:
@@ -40,13 +39,14 @@ protected:
 	UPROPERTY()
 	bool IsLocked;
 
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
 	virtual void Trigger_Implementation() override;
-	virtual void SetLock_Implementation(bool state) override;
+
+	virtual void SetLock_Implementation(bool bState) override;
+
 	bool GetActiveAtStart() const { return IsActiveAtStart; }
 };
