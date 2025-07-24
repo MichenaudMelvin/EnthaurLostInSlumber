@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "PRFCustomDebugCamera.h"
+#include "ENTCustomDebugCamera.h"
 #include "GameFramework/PlayerInput.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -24,35 +24,35 @@ void InitializeCustomDebugCameraInputBindings()
 	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DecreaseSpeed", EKeys::Gamepad_LeftShoulder));
 }
 
-APRFCustomDebugCamera::APRFCustomDebugCamera()
+AENTCustomDebugCamera::AENTCustomDebugCamera()
 {
 	InitialMaxSpeed = 2.0f;
 	SpeedScale = 2.0f;
 }
 
-void APRFCustomDebugCamera::BeginPlay()
+void AENTCustomDebugCamera::BeginPlay()
 {
 	Super::BeginPlay();
 
 	ToggleDisplay();
 }
 
-void APRFCustomDebugCamera::SetupInputComponent()
+void AENTCustomDebugCamera::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
 	InitializeCustomDebugCameraInputBindings();
-	InputComponent->BindAction("CustomDebugCamera_TeleportToFacingLocation", IE_Pressed, this, &APRFCustomDebugCamera::TeleportToFacingLocation);
-	InputComponent->BindAction("CustomDebugCamera_DestroyFacingActor", IE_Pressed, this, &APRFCustomDebugCamera::DestroyFacingActor);
+	InputComponent->BindAction("CustomDebugCamera_TeleportToFacingLocation", IE_Pressed, this, &AENTCustomDebugCamera::TeleportToFacingLocation);
+	InputComponent->BindAction("CustomDebugCamera_DestroyFacingActor", IE_Pressed, this, &AENTCustomDebugCamera::DestroyFacingActor);
 
 	InputComponent->RemoveActionBinding("DebugCamera_IncreaseSpeed", IE_Pressed);
 	InputComponent->RemoveActionBinding("DebugCamera_DecreaseSpeed", IE_Pressed);
 
-	InputComponent->BindAction("CustomDebugCamera_IncreaseSpeed", IE_Pressed, this, &APRFCustomDebugCamera::CustomIncreaseCameraSpeed);
-	InputComponent->BindAction("CustomDebugCamera_DecreaseSpeed", IE_Pressed, this, &APRFCustomDebugCamera::CustomDecreaseCameraSpeed);
+	InputComponent->BindAction("CustomDebugCamera_IncreaseSpeed", IE_Pressed, this, &AENTCustomDebugCamera::CustomIncreaseCameraSpeed);
+	InputComponent->BindAction("CustomDebugCamera_DecreaseSpeed", IE_Pressed, this, &AENTCustomDebugCamera::CustomDecreaseCameraSpeed);
 }
 
-bool APRFCustomDebugCamera::Trace(FHitResult& HitResult) const
+bool AENTCustomDebugCamera::Trace(FHitResult& HitResult) const
 {
 	if (!OriginalControllerRef && !OriginalControllerRef->GetPawn())
 	{
@@ -67,7 +67,7 @@ bool APRFCustomDebugCamera::Trace(FHitResult& HitResult) const
 	return GetWorld()->LineTraceSingleByChannel(HitResult, CamLocation, CamLocation + (CamRotation.Vector() * TraceLength), ECC_Pawn, TraceParams);
 }
 
-void APRFCustomDebugCamera::TeleportToFacingLocation()
+void AENTCustomDebugCamera::TeleportToFacingLocation()
 {
 	FHitResult HitResult;
 	if(!Trace(HitResult) && !OriginalControllerRef && !OriginalControllerRef->GetPawn())
@@ -79,7 +79,7 @@ void APRFCustomDebugCamera::TeleportToFacingLocation()
 	UKismetSystemLibrary::ExecuteConsoleCommand(this, "ToggleDebugCamera", this);
 }
 
-void APRFCustomDebugCamera::DestroyFacingActor()
+void AENTCustomDebugCamera::DestroyFacingActor()
 {
 	FHitResult HitResult;
 	if(!Trace(HitResult))
@@ -95,13 +95,13 @@ void APRFCustomDebugCamera::DestroyFacingActor()
 	HitResult.GetActor()->Destroy();
 }
 
-void APRFCustomDebugCamera::CustomIncreaseCameraSpeed()
+void AENTCustomDebugCamera::CustomIncreaseCameraSpeed()
 {
 	SpeedScale += CameraSpeedScaleStep;
 	ApplySpeedScale();
 }
 
-void APRFCustomDebugCamera::CustomDecreaseCameraSpeed()
+void AENTCustomDebugCamera::CustomDecreaseCameraSpeed()
 {
 	SpeedScale -= CameraSpeedScaleStep;
 	SpeedScale = FMath::Max(SpeedScale, CameraSpeedScaleStep);

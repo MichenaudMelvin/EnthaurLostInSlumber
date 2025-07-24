@@ -13,7 +13,7 @@ void ULevelEnteringUI::NativeOnInitialized()
 	{
 		return;
 	}
-	
-	AreaNameCPP->SetText(Subsystem->GetLevelName().AreaZone);
-	RegionNameCPP->SetText(Subsystem->GetLevelName().RegionZone);
+
+	AreaName->SetText(Subsystem->GetLevelName().AreaZone);
+	RegionName->SetText(Subsystem->GetLevelName().RegionZone);
 }

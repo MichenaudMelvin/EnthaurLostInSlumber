@@ -25,7 +25,7 @@
 			"LoadingPhase": "Default"
 		},
 		{
-			"Name": "DeveloperTools",
+			"Name": "ENTDeveloperTools",
 			"Type": "Runtime",
 			"LoadingPhase": "PreDefault"
 		}
@@ -49,10 +49,6 @@
 		{
 			"Name": "PCGExternalDataInterop",
 			"Enabled": true
-		},
-		{
-			"Name": "BUITween",
-			"Enabled": false
 		},
 		{
 			"Name": "Fab",

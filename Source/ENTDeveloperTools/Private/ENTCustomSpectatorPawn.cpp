@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PRFCustomSpectatorPawn.h"
+#include "ENTCustomSpectatorPawn.h"
 #include "GameFramework/PlayerInput.h"
 
 void InitializeCustomSpectatorPawnInputBindings()
@@ -23,12 +23,12 @@ void InitializeCustomSpectatorPawnInputBindings()
 	UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("CustomSpectatorPawn_LookUp", EKeys::MouseY, -1.0f));
 }
 
-APRFCustomSpectatorPawn::APRFCustomSpectatorPawn()
+AENTCustomSpectatorPawn::AENTCustomSpectatorPawn()
 {
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-void APRFCustomSpectatorPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AENTCustomSpectatorPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Override the default pawn inputs
 	// Super::SetupPlayerInputComponent(PlayerInputComponent);

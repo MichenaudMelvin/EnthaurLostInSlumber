@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
-class FDeveloperToolsModule : public IModuleInterface
+class FENTDeveloperToolsModule : public IModuleInterface
 {
 public:
     virtual void StartupModule() override;

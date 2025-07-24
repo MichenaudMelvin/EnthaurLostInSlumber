@@ -7,9 +7,7 @@
 #include "LevelEnteringUI.generated.h"
 
 class UTextBlock;
-/**
- * 
- */
+
 UCLASS()
 class PROTOPROFONDEURS_API ULevelEnteringUI : public UUserWidget
 {
@@ -18,10 +16,9 @@ class PROTOPROFONDEURS_API ULevelEnteringUI : public UUserWidget
 	virtual void NativeOnInitialized() override;
 
 protected:
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	TObjectPtr<UTextBlock> AreaNameCPP;
+	UPROPERTY(BlueprintReadWrite, Category = "Text", meta = (BindWidget))
+	TObjectPtr<UTextBlock> AreaName;
 
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	TObjectPtr<UTextBlock> RegionNameCPP;
-	
+	UPROPERTY(BlueprintReadWrite, Category = "Text", meta = (BindWidget))
+	TObjectPtr<UTextBlock> RegionName;
 };

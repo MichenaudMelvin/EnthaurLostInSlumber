@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DebugCameraController.h"
-#include "PRFCustomDebugCamera.generated.h"
+#include "ENTCustomDebugCamera.generated.h"
 
 UCLASS()
-class DEVELOPERTOOLS_API APRFCustomDebugCamera : public ADebugCameraController
+class ENTDEVELOPERTOOLS_API AENTCustomDebugCamera : public ADebugCameraController
 {
 	GENERATED_BODY()
 
 public:
-	APRFCustomDebugCamera();
+	AENTCustomDebugCamera();
 
 protected:
 	virtual void BeginPlay() override;

@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/CheatManager.h"
-#include "PRFCustomCheatManager.generated.h"
+#include "ENTCustomCheatManager.generated.h"
 
 UCLASS()
-class DEVELOPERTOOLS_API UPRFCustomCheatManager : public UCheatManager
+class ENTDEVELOPERTOOLS_API UENTCustomCheatManager : public UCheatManager
 {
 	GENERATED_BODY()
 
 public:
-	UPRFCustomCheatManager();
+	UENTCustomCheatManager();
 };
