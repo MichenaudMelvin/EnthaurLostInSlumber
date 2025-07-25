@@ -28,7 +28,7 @@
 #include "UI/DeathMenuUI.h"
 
 #if WITH_EDITORONLY_DATA
-#include "EditorSettings/PlayerEditorSettings.h"
+#include "EditorSettings/ENTEditorSettings.h"
 #endif
 
 AFirstPersonCharacter::AFirstPersonCharacter()
@@ -132,9 +132,9 @@ void AFirstPersonCharacter::BeginPlay()
 	StartWidget = CreateWidget(FirstPersonController, StartWidgetClass);
 
 #if WITH_EDITORONLY_DATA
-	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
+	const UENTEditorSettings* EditorSettings = GetDefault<UENTEditorSettings>();
 
-	if (!PlayerEditorSettings || !PlayerEditorSettings->bDisplayStartWidget)
+	if (!EditorSettings || !EditorSettings->bDisplayStartWidget)
 	{
 		return;
 	}

@@ -39,7 +39,7 @@ public class PROTOProfondeurs : ModuleRules
 			PrivateDependencyModuleNames.AddRange(
 				new string[]
 				{
-					"PRFEditor",
+					"ENTEditor",
 					"UnrealEd"
 				}
 			);

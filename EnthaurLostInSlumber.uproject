@@ -20,7 +20,7 @@
 			"LoadingPhase": "Default"
 		},
 		{
-			"Name": "PRFEditor",
+			"Name": "ENTEditor",
 			"Type": "Editor",
 			"LoadingPhase": "Default"
 		},

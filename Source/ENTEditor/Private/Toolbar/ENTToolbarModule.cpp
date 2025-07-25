@@ -1,22 +1,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Toolbar/ToolbarModule.h"
-#include "EditorSettings/PlayerEditorSettings.h"
-#include "EditorSettings/SavesSettings.h"
+#include "Toolbar/ENTToolbarModule.h"
+#include "EditorSettings/ENTEditorSettings.h"
 
-IMPLEMENT_MODULE(UToolbarModule, ToolbarModule)
+IMPLEMENT_MODULE(UENTToolbarModule, ENTToolbarModule)
 
-#define LOCTEXT_NAMESPACE "ToolbarModule"
+#define LOCTEXT_NAMESPACE "ENTToolbarModule"
 
-void UToolbarModule::StartupModule()
+void UENTToolbarModule::StartupModule()
 {
 	IModuleInterface::StartupModule();
 
-	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &UToolbarModule::RegisterMenuExtensions));
+	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &UENTToolbarModule::RegisterMenuExtensions));
 }
 
-void UToolbarModule::ShutdownModule()
+void UENTToolbarModule::ShutdownModule()
 {
 	IModuleInterface::ShutdownModule();
 
@@ -24,7 +23,7 @@ void UToolbarModule::ShutdownModule()
 	UToolMenus::UnregisterOwner(this);
 }
 
-void UToolbarModule::RegisterMenuExtensions()
+void UENTToolbarModule::RegisterMenuExtensions()
 {
 	FToolMenuOwnerScoped OwnerScoped(this);
 
@@ -35,15 +34,15 @@ void UToolbarModule::RegisterMenuExtensions()
 	InitPlayerEditorSettingsCheckBoxes(ToolbarSection);
 }
 
-void UToolbarModule::InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection)
+void UENTToolbarModule::InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection)
 {
-	const TSharedRef<SCheckBox> CheckBox = SNew(SCheckBox).OnCheckStateChanged_Raw(this, &UToolbarModule::UpdateSaveSettings);
+	const TSharedRef<SCheckBox> CheckBox = SNew(SCheckBox).OnCheckStateChanged_Raw(this, &UENTToolbarModule::UpdateSaveSettings);
 	CheckBox->SetToolTipText(FText::AsCultureInvariant("Load latest save in the current world if exist"));
 
-	const USavesSettings* SavesSettings = GetDefault<USavesSettings>();
-	CheckBox->SetIsChecked(SavesSettings->bLoadLatestWorldSave ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+	const UENTEditorSettings* EditorSettings = GetDefault<UENTEditorSettings>();
+	CheckBox->SetIsChecked(EditorSettings->bLoadLatestWorldSave ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
 
-	const TSharedRef<SCenteredText> TextBlock = SNew(SCenteredText);
+	const TSharedRef<SENTCenteredText> TextBlock = SNew(SENTCenteredText);
 	TextBlock->SetText(NSLOCTEXT("ToolbarModule", "LoadLatestSave", "Load Latest Save"));
 
 	ToolbarSection.AddSeparator("SaveSettingsSeparator");
@@ -57,15 +56,15 @@ void UToolbarModule::InitLoadLatestSaveCheckBox(FToolMenuSection& ToolbarSection
 	ToolbarSection.AddEntry(FToolMenuEntry::InitWidget(TextBlockName, TextBlock, FText::FromString(TextBlockString)));
 }
 
-void UToolbarModule::InitPlayerEditorSettingsCheckBoxes(FToolMenuSection& ToolbarSection)
+void UENTToolbarModule::InitPlayerEditorSettingsCheckBoxes(FToolMenuSection& ToolbarSection)
 {
-	const TSharedRef<SCheckBox> CheckBox = SNew(SCheckBox).OnCheckStateChanged_Raw(this, &UToolbarModule::UpdateDisplayStartWidgetSetting);
+	const TSharedRef<SCheckBox> CheckBox = SNew(SCheckBox).OnCheckStateChanged_Raw(this, &UENTToolbarModule::UpdateDisplayStartWidgetSetting);
 	CheckBox->SetToolTipText(FText::AsCultureInvariant("Will display the start widget and lock controls or not, In packaged game it will be always true"));
 
-	const UPlayerEditorSettings* PlayerEditorSettings = GetDefault<UPlayerEditorSettings>();
-	CheckBox->SetIsChecked(PlayerEditorSettings->bDisplayStartWidget ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
+	const UENTEditorSettings* EditorSettings = GetDefault<UENTEditorSettings>();
+	CheckBox->SetIsChecked(EditorSettings->bDisplayStartWidget ? ECheckBoxState::Checked : ECheckBoxState::Unchecked);
 
-	const TSharedRef<SCenteredText> TextBlock = SNew(SCenteredText);
+	const TSharedRef<SENTCenteredText> TextBlock = SNew(SENTCenteredText);
 	TextBlock->SetText(NSLOCTEXT("ToolbarModule", "DisplayStartWidget", "Display Start Widget"));
 
 	ToolbarSection.AddSeparator("PlayerSettingsSeparator");
@@ -79,38 +78,38 @@ void UToolbarModule::InitPlayerEditorSettingsCheckBoxes(FToolMenuSection& Toolba
 	ToolbarSection.AddEntry(FToolMenuEntry::InitWidget(TextBlockName, TextBlock, FText::FromString(TextBlockString)));
 }
 
-void UToolbarModule::UpdateSaveSettings(ECheckBoxState CheckBoxState)
+void UENTToolbarModule::UpdateSaveSettings(ECheckBoxState CheckBoxState)
 {
-	USavesSettings* SavesSettings = GetMutableDefault<USavesSettings>();
+	UENTEditorSettings* EditorSettings = GetMutableDefault<UENTEditorSettings>();
 
 	switch (CheckBoxState) {
 	case ECheckBoxState::Unchecked:
 	case ECheckBoxState::Undetermined:
-		SavesSettings->bLoadLatestWorldSave = false;
+		EditorSettings->bLoadLatestWorldSave = false;
 		break;
 	case ECheckBoxState::Checked:
-		SavesSettings->bLoadLatestWorldSave = true;
+		EditorSettings->bLoadLatestWorldSave = true;
 		break;
 	}
 
-	SavesSettings->SaveConfig();
+	EditorSettings->SaveConfig();
 }
 
-void UToolbarModule::UpdateDisplayStartWidgetSetting(ECheckBoxState CheckBoxState)
+void UENTToolbarModule::UpdateDisplayStartWidgetSetting(ECheckBoxState CheckBoxState)
 {
-	UPlayerEditorSettings* PlayerEditorSettings = GetMutableDefault<UPlayerEditorSettings>();
+	UENTEditorSettings* EditorSettings = GetMutableDefault<UENTEditorSettings>();
 
 	switch (CheckBoxState) {
 	case ECheckBoxState::Unchecked:
 	case ECheckBoxState::Undetermined:
-		PlayerEditorSettings->bDisplayStartWidget = false;
+		EditorSettings->bDisplayStartWidget = false;
 		break;
 	case ECheckBoxState::Checked:
-		PlayerEditorSettings->bDisplayStartWidget = true;
+		EditorSettings->bDisplayStartWidget = true;
 		break;
 	}
 
-	PlayerEditorSettings->SaveConfig();
+	EditorSettings->SaveConfig();
 }
 
 #undef LOCTEXT_NAMESPACE

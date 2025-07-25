@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Editor/Blutility/Classes/ActorActionUtility.h"
-#include "NavMeshUtilities.generated.h"
+#include "ENTNavMeshUtilities.generated.h"
 
 class ANavMeshBoundsVolume;
 
 UCLASS()
-class PRFEDITOR_API UNavMeshUtilities : public UActorActionUtility
+class ENTEDITOR_API UENTNavMeshUtilities : public UActorActionUtility
 {
 	GENERATED_BODY()
 
 public:
-	UNavMeshUtilities();
+	UENTNavMeshUtilities();
 
 protected:
 	UFUNCTION(BlueprintCallable, Category = "NavMesh", CallInEditor)

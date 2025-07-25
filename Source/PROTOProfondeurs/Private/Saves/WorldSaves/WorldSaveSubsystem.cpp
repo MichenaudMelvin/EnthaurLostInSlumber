@@ -10,7 +10,7 @@
 #include "Saves/WorldSaves/WorldSaveSettings.h"
 
 #if WITH_EDITOR
-#include "EditorSettings/SavesSettings.h"
+#include "EditorSettings/ENTEditorSettings.h"
 #endif
 
 UWorldSaveSubsystem::UWorldSaveSubsystem()
@@ -181,9 +181,9 @@ void UWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& Acto
 	bool bCannotLoad = !CurrentWorldSave;
 
 #if WITH_EDITOR
-	const USavesSettings* SavesSettings = GetDefault<USavesSettings>();
+	const UENTEditorSettings* EditorSettings = GetDefault<UENTEditorSettings>();
 
-	if (SavesSettings && !SavesSettings->bLoadLatestWorldSave)
+	if (EditorSettings && !EditorSettings->bLoadLatestWorldSave)
 	{
 		bCannotLoad = true;
 	}

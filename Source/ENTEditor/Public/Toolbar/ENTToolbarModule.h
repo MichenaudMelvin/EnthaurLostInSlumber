@@ -6,10 +6,10 @@
 #include "Widgets/Text/STextBlock.h"
 #include "UObject/Object.h"
 
-class PRFEDITOR_API SCenteredText : public SCompoundWidget
+class ENTEDITOR_API SENTCenteredText : public SCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SCenteredText) {}
+	SLATE_BEGIN_ARGS(SENTCenteredText) {}
 	SLATE_END_ARGS()
 
 	void Construct(const FArguments& InArgs) {}
@@ -25,7 +25,7 @@ public:
 	}
 };
 
-class PRFEDITOR_API UToolbarModule : public IModuleInterface
+class ENTEDITOR_API UENTToolbarModule : public IModuleInterface
 {
 public:
 	virtual void StartupModule() override;

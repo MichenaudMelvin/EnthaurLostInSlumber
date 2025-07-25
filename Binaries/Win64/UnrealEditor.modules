@@ -4,7 +4,7 @@
 	{
 		"DepthAIModule": "UnrealEditor-DepthAIModule.dll",
 		"ENTDeveloperTools": "UnrealEditor-ENTDeveloperTools.dll",
-		"PRFEditor": "UnrealEditor-PRFEditor.dll",
+		"ENTEditor": "UnrealEditor-ENTEditor.dll",
 		"PRFUI": "UnrealEditor-PRFUI.dll",
 		"PROTOProfondeurs": "UnrealEditor-PROTOProfondeurs.dll"
 	}

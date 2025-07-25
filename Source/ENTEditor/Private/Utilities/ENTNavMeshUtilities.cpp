@@ -1,17 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Utilities/NavMeshUtilities.h"
+#include "Utilities/ENTNavMeshUtilities.h"
 #include "VRScoutingInteractor.h"
 #include "Kismet/GameplayStatics.h"
 #include "NavMesh/NavMeshBoundsVolume.h"
 
-UNavMeshUtilities::UNavMeshUtilities()
+UENTNavMeshUtilities::UENTNavMeshUtilities()
 {
 	
 }
 
-void UNavMeshUtilities::AutoScale()
+void UENTNavMeshUtilities::AutoScale()
 {
 	TArray<AActor*> SelectedActors = UVRScoutingInteractor::GetSelectedActors();
 
@@ -42,7 +42,7 @@ void UNavMeshUtilities::AutoScale()
 	// build navigation
 }
 
-ANavMeshBoundsVolume* UNavMeshUtilities::FindNavMesh(const TArray<AActor*>& Actors) const
+ANavMeshBoundsVolume* UENTNavMeshUtilities::FindNavMesh(const TArray<AActor*>& Actors) const
 {
 	for (AActor* Actor : Actors)
 	{

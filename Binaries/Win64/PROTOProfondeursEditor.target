@@ -8078,11 +8078,11 @@
 			"Type": "SymbolFile"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-PRFEditor.dll",
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTEditor.dll",
 			"Type": "DynamicLibrary"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-PRFEditor.pdb",
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTEditor.pdb",
 			"Type": "SymbolFile"
 		},
 		{
