@@ -23,7 +23,8 @@ public class DepthAIModule : ModuleRules
                 "AIModule",
                 "GameplayTasks",
                 "NavigationSystem",
-                "PROTOProfondeurs"
+                "PROTOProfondeurs",
+                "ENTSaves"
             }
         );
     }

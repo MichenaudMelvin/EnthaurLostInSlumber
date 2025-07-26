@@ -5,7 +5,7 @@
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Saves/WorldSaves/WorldSave.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Subsystems/PRFAISubsystem.h"
 
 ADefaultAIController::ADefaultAIController()

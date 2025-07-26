@@ -16,6 +16,6 @@ public class PROTOProfondeursTarget : TargetRules
 
 	private void RegisterModulesCreatedByRider()
 	{
-		ExtraModuleNames.AddRange(new string[] { "PRFUI", "DepthAIModule", "ENTDeveloperTools" });
+		ExtraModuleNames.AddRange(new string[] { "PRFUI", "DepthAIModule", "ENTDeveloperTools", "ENTSaves" });
 	}
 }

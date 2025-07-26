@@ -8,7 +8,8 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Saves/WorldSaves/WorldSave.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
 
 AAmberOre::AAmberOre()
 {
@@ -116,16 +117,16 @@ void AAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiv
 	}
 }
 
-FGameElementData& AAmberOre::SaveGameElement(UWorldSave* CurrentWorldSave)
+FENTGameElementData& AAmberOre::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FAmberOreData Data;
+	FENTAmberOreData Data;
 	Data.CurrentOreAmount = OreAmount;
 
 	return CurrentWorldSave->AmberOreData.Add(GetName(), Data);
 }
 
-void AAmberOre::LoadGameElement(const FGameElementData& GameElementData)
+void AAmberOre::LoadGameElement(const FENTGameElementData& GameElementData)
 {
-	const FAmberOreData& Data = static_cast<const FAmberOreData&>(GameElementData);
+	const FENTAmberOreData& Data = static_cast<const FENTAmberOreData&>(GameElementData);
 	OreAmount = Data.CurrentOreAmount;
 }

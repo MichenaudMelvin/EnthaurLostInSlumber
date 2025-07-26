@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "AmberOre.h"
 #include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/SaveGameElementInterface.h"
+#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "WeakZone.generated.h"
 
 class UAkAudioEvent;
@@ -33,20 +33,11 @@ struct FInteractionPoints
 	bool bIsActive = false;
 };
 
-USTRUCT(BlueprintType)
-struct FWeakZoneData : public FGameElementData
-{
-	GENERATED_BODY()
-
-	UPROPERTY(BlueprintReadWrite, Category = "WeakZone")
-	TArray<bool> ActivatedInteractionPoints;
-};
-
 class UInteractableComponent;
 class UBoxComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API AWeakZone : public AActor, public ISaveGameElementInterface
+class PROTOPROFONDEURS_API AWeakZone : public AActor, public IENTSaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -149,7 +140,7 @@ protected:
 	void CheckIfEveryInteractionsPointActive();
 
 public:
-	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
 };

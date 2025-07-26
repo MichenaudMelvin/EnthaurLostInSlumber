@@ -2,15 +2,14 @@
 
 
 #include "Menus/Main/PRFNewGameMenu.h"
-
 #include "PRFUIManager.h"
 #include "Components/Button.h"
-#include "Saves/PlayerSaveSubsystem.h"
+#include "Subsystems/ENTPlayerSaveSubsystem.h"
 
 void UPRFNewGameMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
-	
+
 	if (ContinueButton && ContinueButton->GetCustomButton())
 	{
 		ContinueButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFNewGameMenu::HandleNewGameInteraction);
@@ -20,7 +19,7 @@ void UPRFNewGameMenu::NativeOnInitialized()
 void UPRFNewGameMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
-	
+
 	if (ContinueButton && ContinueButton->GetCustomButton())
 	{
 		ContinueButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UPRFNewGameMenu::HandleNewGameInteraction);
@@ -29,7 +28,7 @@ void UPRFNewGameMenu::BeginDestroy()
 
 void UPRFNewGameMenu::HandleNewGameInteraction()
 {
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem)
 	{
 		return;
@@ -40,9 +39,9 @@ void UPRFNewGameMenu::HandleNewGameInteraction()
 	{
 		return;
 	}
-	
+
 	PlayerSaveSubsystem->StartNewGame();
-	
+
 	UIManager->SetMenuState(EPRFUIState::Waiting);
 	UIManager->CloseAllMenus(EPRFUIState::Gameplay);
 }

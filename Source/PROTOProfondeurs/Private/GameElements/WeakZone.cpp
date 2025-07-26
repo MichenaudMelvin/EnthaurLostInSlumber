@@ -13,7 +13,8 @@
 #include "Physics/TracePhysicsSettings.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Saves/WorldSaves/WorldSave.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/BillboardComponent.h"
@@ -282,9 +283,9 @@ void AWeakZone::CheckIfEveryInteractionsPointActive()
 	);
 }
 
-FGameElementData& AWeakZone::SaveGameElement(UWorldSave* CurrentWorldSave)
+FENTGameElementData& AWeakZone::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FWeakZoneData Data = FWeakZoneData();
+	FENTWeakZoneData Data = FENTWeakZoneData();
 
 	Data.ActivatedInteractionPoints.Empty(InteractionPoints.Num());
 	for (const FInteractionPoints& InteractionPoint : InteractionPoints)
@@ -295,9 +296,9 @@ FGameElementData& AWeakZone::SaveGameElement(UWorldSave* CurrentWorldSave)
 	return CurrentWorldSave->WeakZoneData.Add(GetName(), Data);
 }
 
-void AWeakZone::LoadGameElement(const FGameElementData& GameElementData)
+void AWeakZone::LoadGameElement(const FENTGameElementData& GameElementData)
 {
-	const FWeakZoneData& Data = static_cast<const FWeakZoneData&>(GameElementData);
+	const FENTWeakZoneData& Data = static_cast<const FENTWeakZoneData&>(GameElementData);
 
 	if (InteractionPoints.Num() != Data.ActivatedInteractionPoints.Num())
 	{

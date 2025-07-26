@@ -13,7 +13,8 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Saves/WorldSaves/WorldSave.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/ArrowComponent.h"
@@ -567,17 +568,17 @@ void AMuscle::SetLock_Implementation(bool bState)
 
 #pragma region Save
 
-FGameElementData& AMuscle::SaveGameElement(UWorldSave* CurrentWorldSave)
+FENTGameElementData& AMuscle::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FMuscleData Data;
+	FENTMuscleData Data;
 	Data.bIsSolid = bIsSolid;
 
 	return CurrentWorldSave->MuscleData.Add(GetName(), Data);
 }
 
-void AMuscle::LoadGameElement(const FGameElementData& GameElementData)
+void AMuscle::LoadGameElement(const FENTGameElementData& GameElementData)
 {
-	const FMuscleData& Data = static_cast<const FMuscleData&>(GameElementData);
+	const FENTMuscleData& Data = static_cast<const FENTMuscleData&>(GameElementData);
 	bIsSolid = Data.bIsSolid;
 
 	UpdateMuscleSolidity(false);

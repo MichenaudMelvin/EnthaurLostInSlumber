@@ -23,8 +23,10 @@
 #include "Perception/AISense_Hearing.h"
 #include "Physics/SurfaceSettings.h"
 #include "Player/States/CharacterFallState.h"
-#include "Saves/PlayerSave.h"
-#include "Saves/PlayerSaveSubsystem.h"
+#include "Saves/ENTPlayerSave.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
+#include "Subsystems/ENTPlayerSaveSubsystem.h"
 #include "UI/DeathMenuUI.h"
 
 #if WITH_EDITORONLY_DATA
@@ -432,13 +434,17 @@ void AFirstPersonCharacter::MineAmber(const EAmberType& AmberType, const int Amo
 
 	OnAmberUpdate.Broadcast(AmberType, *Count);
 
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem)
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
 	{
 		return;
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory = AmberInventory;
+	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Empty(AmberInventory.Num());
+	for (TTuple<EAmberType, int> Element : AmberInventory)
+	{
+		PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Add(static_cast<uint8>(Element.Key), Element.Value);
+	}
 }
 
 void AFirstPersonCharacter::UseAmber(const EAmberType& AmberType, const int Amount)
@@ -587,29 +593,33 @@ bool AFirstPersonCharacter::IsStopped() const
 
 #pragma region Saves
 
-void AFirstPersonCharacter::SavePlayerData() const
+FENTGameElementData& AFirstPersonCharacter::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem)
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem || !CurrentWorldSave)
 	{
-		return;
+		return EmptyData;
 	}
 
 	PlayerSaveSubsystem->GetPlayerSave()->PlayerLocation = GetActorLocation();
 	PlayerSaveSubsystem->GetPlayerSave()->PlayerCameraRotation = GetControlRotation();
-	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = StateMachine->GetCurrentStateID();
+	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = static_cast<uint8>(StateMachine->GetCurrentStateID());
 	PlayerSaveSubsystem->SaveToSlot(0);
+
+	CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
+
+	return EmptyData;
 }
 
-void AFirstPersonCharacter::LoadPlayerData()
+void AFirstPersonCharacter::LoadGameElement(const FENTGameElementData& GameElementData)
 {
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem)
 	{
 		return;
 	}
 
-	TObjectPtr<UPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
+	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
 	SetActorLocation(SaveData->PlayerLocation);
 
 	if (GetPlayerController())
@@ -621,10 +631,15 @@ void AFirstPersonCharacter::LoadPlayerData()
 		}
 	}
 
-	StateMachine->ChangeState(SaveData->CurrentState);
-	AmberInventory = SaveData->AmberInventory;
+	StateMachine->ChangeState(static_cast<ECharacterStateID>(SaveData->CurrentState));
 
-	for (TTuple<EAmberType, int> Element : AmberInventory)
+	AmberInventory.Empty(SaveData->AmberInventory.Num());
+	for (TTuple<uint8, int> Element : SaveData->AmberInventory)
+	{
+		AmberInventory.Add(static_cast<EAmberType>(Element.Key), Element.Value);
+	}
+
+	for (const TTuple<EAmberType, int>& Element : AmberInventory)
 	{
 		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
 	}

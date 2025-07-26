@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "WeakZoneInterface.h"
 #include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/SaveGameElementInterface.h"
+#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "RespawnTree.generated.h"
 
 class UBoxComponent;
@@ -13,17 +13,8 @@ class UAkComponent;
 class AFirstPersonCharacter;
 class UAkAudioEvent;
 
-USTRUCT(BlueprintType)
-struct FRespawnTreeData : public FGameElementData
-{
-	GENERATED_BODY()
-
-	UPROPERTY()
-	bool bIsActive = false;
-};
-
 UCLASS()
-class PROTOPROFONDEURS_API ARespawnTree : public AActor, public IWeakZoneInterface, public ISaveGameElementInterface
+class PROTOPROFONDEURS_API ARespawnTree : public AActor, public IWeakZoneInterface, public IENTSaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -72,9 +63,9 @@ protected:
 	virtual void OnExitWeakZone_Implementation() override;
 
 public:
-	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
 
 	const FTransform& GetRespawnTransform() const {return RespawnTransform;}
 };

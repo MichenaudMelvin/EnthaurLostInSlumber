@@ -9,7 +9,7 @@
 #include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
 #include "Player/Camera/ViewBobbing.h"
-#include "Saves/SettingsSave.h"
+#include "Saves/ENTSettingsSave.h"
 
 UCharacterMoveState::UCharacterMoveState()
 {

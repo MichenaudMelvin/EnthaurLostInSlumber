@@ -7,7 +7,7 @@
 #include "UObject/Object.h"
 #include "CharacterState.generated.h"
 
-class USettingsSave;
+class UENTSettingsSave;
 class UViewBobbing;
 struct FPlayerInputs;
 class AFirstPersonController;
@@ -145,5 +145,5 @@ protected:
 #pragma endregion
 
 protected:
-	USettingsSave* GetSettings() const;
+	UENTSettingsSave* GetSettings() const;
 };

@@ -27,11 +27,12 @@ public class PROTOProfondeurs : ModuleRules
 			"AIModule",
 			"AkAudio",
 			"DepthAIModule",
+			"ENTSaves"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
-			"PRFUI",
+			"PRFUI"
 		});
 
 		if (Target.bBuildEditor)

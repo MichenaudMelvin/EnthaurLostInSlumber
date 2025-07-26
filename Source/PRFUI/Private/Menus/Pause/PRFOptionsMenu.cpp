@@ -2,12 +2,12 @@
 
 
 #include "Menus/Pause/PRFOptionsMenu.h"
-
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
 #include "Components/Button.h"
 #include "Kismet/KismetTextLibrary.h"
-#include "Saves/SettingsSubsystem.h"
+#include "Saves/ENTSettingsSave.h"
+#include "Subsystems/ENTSettingsSaveSubsystem.h"
 
 void UPRFOptionsMenu::NativeOnInitialized()
 {
@@ -71,7 +71,7 @@ void UPRFOptionsMenu::NativeDestruct()
 {
 	Super::NativeDestruct();
 
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
 	if (!SettingsSubsystem)
 	{
 		return;
@@ -131,7 +131,7 @@ void UPRFOptionsMenu::BeginDestroy()
 
 void UPRFOptionsMenu::UpdateWidgetValues(bool bSkipAnim)
 {
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
 	if (!IsValid(SettingsSubsystem))
 	{
 		return;
@@ -208,7 +208,7 @@ void UPRFOptionsMenu::OnViewControlsButtonClicked()
 
 void UPRFOptionsMenu::OnOverallSliderChanged(float InValue)
 {
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
 	if (!SettingsSubsystem)
 	{
 		return;
@@ -220,7 +220,7 @@ void UPRFOptionsMenu::OnOverallSliderChanged(float InValue)
 
 void UPRFOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked, bool bSkip)
 {
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
 	if (!SettingsSubsystem)
 	{
 		return;
@@ -231,7 +231,7 @@ void UPRFOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked, bool bSkip)
 
 void UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked(bool bIsChecked, bool bSkip)
 {
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
 	if (!SettingsSubsystem)
 	{
 		return;
@@ -242,7 +242,7 @@ void UPRFOptionsMenu::OnMouseYAxisCheckBoxClicked(bool bIsChecked, bool bSkip)
 
 void UPRFOptionsMenu::OnMouseSensitivitySliderChanged(float InValue)
 {
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
 	if (!SettingsSubsystem)
 	{
 		return;
@@ -254,7 +254,7 @@ void UPRFOptionsMenu::OnMouseSensitivitySliderChanged(float InValue)
 
 void UPRFOptionsMenu::ResetSettings()
 {
-	USettingsSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<USettingsSubsystem>();
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
 	if (!SettingsSubsystem)
 	{
 		return;

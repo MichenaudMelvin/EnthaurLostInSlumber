@@ -5,7 +5,7 @@
 #include "PRFUIManager.h"
 #include "UIManagerSettings.h"
 #include "Components/Button.h"
-#include "Saves/PlayerSaveSubsystem.h"
+#include "Subsystems/ENTPlayerSaveSubsystem.h"
 
 void UPRFMainMenu::NativeOnInitialized()
 {
@@ -37,7 +37,7 @@ void UPRFMainMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem)
 	{
 		return;
@@ -86,7 +86,7 @@ void UPRFMainMenu::HandleNewGameMenu()
 		return;
 	}
 
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem)
 	{
 		return;
@@ -107,7 +107,7 @@ void UPRFMainMenu::HandleNewGameMenu()
 
 void UPRFMainMenu::HandleContinueInteraction()
 {
-	UPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UPlayerSaveSubsystem>();
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem || !IsValid(GetUIManager()))
 	{
 		return;

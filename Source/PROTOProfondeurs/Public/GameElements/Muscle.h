@@ -8,7 +8,7 @@
 #include "GameFramework/Actor.h"
 #include "Interface/GroundAction.h"
 #include "Interface/NerveReactive.h"
-#include "Saves/WorldSaves/SaveGameElementInterface.h"
+#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Player/FirstPersonCharacter.h"
@@ -16,15 +16,6 @@
 #endif
 
 #include "Muscle.generated.h"
-
-USTRUCT(BlueprintType)
-struct FMuscleData : public FGameElementData
-{
-	GENERATED_BODY()
-
-	UPROPERTY(BlueprintReadWrite)
-	bool bIsSolid = false;
-};
 
 class UAkComponent;
 class UAkAudioEvent;
@@ -37,7 +28,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKOnMuscleStateChange, bool, isSolid
 #pragma endregion
 
 UCLASS()
-class PROTOPROFONDEURS_API AMuscle : public AActor, public IGroundAction, public INerveReactive, public IWeakZoneInterface, public ISaveGameElementInterface
+class PROTOPROFONDEURS_API AMuscle : public AActor, public IGroundAction, public INerveReactive, public IWeakZoneInterface, public IENTSaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -271,9 +262,9 @@ protected:
 #pragma region Save
 
 public:
-	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
 
 #pragma endregion
 

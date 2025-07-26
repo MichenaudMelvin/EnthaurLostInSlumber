@@ -8,27 +8,12 @@
 #include "Components/SplineMeshComponent.h"
 #include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/SaveGameElementInterface.h"
+#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "Nerve.generated.h"
 
 class UAkComponent;
 class UAkAudioEvent;
 class AFirstPersonCharacter;
-
-USTRUCT(BlueprintType)
-struct FNerveData : public FGameElementData
-{
-	GENERATED_BODY()
-
-	/**
-	 * @brief In local space
-	 */
-	UPROPERTY(BlueprintReadWrite)
-	TArray<FVector> SplinePointsLocations;
-
-	UPROPERTY(BlueprintReadWrite)
-	TArray<FVector> ImpactNormals;
-};
 
 class UAkRtpc;
 class USplineMeshComponent;
@@ -39,7 +24,7 @@ class UPlayerToNervePhysicConstraint;
 class UInteractableComponent;
 
 UCLASS()
-class PROTOPROFONDEURS_API ANerve : public AActor, public IWeakZoneInterface, public ISaveGameElementInterface
+class PROTOPROFONDEURS_API ANerve : public AActor, public IWeakZoneInterface, public IENTSaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -258,9 +243,9 @@ protected:
 	bool bIsLoaded = false;
 
 public:
-	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
 
 	bool IsLoaded() const {return bIsLoaded;}
 

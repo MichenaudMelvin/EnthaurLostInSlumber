@@ -26,6 +26,7 @@ public class PRFUI : ModuleRules
                 "Slate",
                 "SlateCore",
                 "UMG",
+                "ENTSaves"
             }
         );
     }

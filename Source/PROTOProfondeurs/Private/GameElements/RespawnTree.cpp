@@ -4,14 +4,13 @@
 #include "GameElements/RespawnTree.h"
 #include "AkComponent.h"
 #include "AkGameplayStatics.h"
-#include "FCTween.h"
 #include "Components/BoxComponent.h"
-#include "Components/InteractableComponent.h"
 #include "GameModes/FirstPersonGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FirstPersonCharacter.h"
-#include "Saves/WorldSaves/WorldSave.h"
-#include "Saves/WorldSaves/WorldSaveSubsystem.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
+#include "Subsystems/ENTWorldSaveSubsystem.h"
 
 ARespawnTree::ARespawnTree()
 {
@@ -164,20 +163,20 @@ void ARespawnTree::OnExitWeakZone_Implementation()
 	}
 }
 
-FGameElementData& ARespawnTree::SaveGameElement(UWorldSave* CurrentWorldSave)
+FENTGameElementData& ARespawnTree::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FRespawnTreeData Data;
+	FENTRespawnTreeData Data;
 	Data.bIsActive = bIsActivated;
 
 	return CurrentWorldSave->RespawnTreeData.Add(GetName(), Data);
 }
 
-void ARespawnTree::LoadGameElement(const FGameElementData& GameElementData)
+void ARespawnTree::LoadGameElement(const FENTGameElementData& GameElementData)
 {
-	const FRespawnTreeData& Data = static_cast<const FRespawnTreeData&>(GameElementData);
+	const FENTRespawnTreeData& Data = static_cast<const FENTRespawnTreeData&>(GameElementData);
 	bIsActivated = Data.bIsActive;
 
-	UWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UWorldSaveSubsystem>();
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
 	if(!WorldSaveSubsystem)
 	{
 		return;

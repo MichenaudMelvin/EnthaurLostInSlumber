@@ -2,11 +2,11 @@
 
 
 #include "GameModes/FirstPersonGameMode.h"
-#include "Saves/WorldSaves/WorldSaveSubsystem.h"
+#include "Subsystems/ENTWorldSaveSubsystem.h"
 
 void AFirstPersonGameMode::SaveWorld() const
 {
-	UWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UWorldSaveSubsystem>();
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
 	if (!WorldSaveSubsystem)
 	{
 		return;
@@ -17,7 +17,7 @@ void AFirstPersonGameMode::SaveWorld() const
 
 void AFirstPersonGameMode::LoadWorld() const
 {
-	UWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UWorldSaveSubsystem>();
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
 	if (!WorldSaveSubsystem)
 	{
 		return;

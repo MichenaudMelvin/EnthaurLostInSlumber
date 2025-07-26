@@ -4,20 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/SaveGameElementInterface.h"
+#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "AmberOre.generated.h"
 
 class UAkComponent;
 class UBoxComponent;
-
-USTRUCT(BlueprintType)
-struct FAmberOreData : public FGameElementData
-{
-	GENERATED_BODY()
-
-	UPROPERTY(BlueprintReadWrite, Category = "AmberOre")
-	uint8 CurrentOreAmount = 0;
-};
 
 class UInteractableComponent;
 
@@ -29,7 +20,7 @@ enum class EAmberType : uint8
 };
 
 UCLASS()
-class PROTOPROFONDEURS_API AAmberOre : public AActor, public ISaveGameElementInterface
+class PROTOPROFONDEURS_API AAmberOre : public AActor, public IENTSaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -80,7 +71,7 @@ protected:
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
 public:
-	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
 };

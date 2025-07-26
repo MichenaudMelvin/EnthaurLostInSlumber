@@ -3,41 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SaveAIData.h"
 #include "GameFramework/Pawn.h"
-#include "Saves/WorldSaves/SaveGameElementInterface.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ParasitePawn.generated.h"
 
 class AParasiteController;
-
-USTRUCT(BlueprintType)
-struct FParaSiteData : public FAIData
-{
-	GENERATED_BODY()
-
-	UPROPERTY(BlueprintReadOnly, Category = "AI|Blackboard")
-	int PathIndex = -1;
-
-	UPROPERTY(BlueprintReadOnly, Category = "AI|Blackboard")
-	int PathDirection = 0;
-
-	UPROPERTY(BlueprintReadOnly, Category = "AI|Blackboard")
-	bool bWalkOnFloor = false;
-
-	UPROPERTY(BlueprintReadOnly, Category = "AI|Blackboard")
-	FVector MoveToLocation = FVector::ZeroVector;
-
-	UPROPERTY(BlueprintReadOnly, Category = "AI|Blackboard")
-	bool bHeardNoise = false;
-};
-
 class UGravityPawnMovement;
 class AAIPath;
 class UBoxComponent;
 class UAIPerceptionComponent;
 
 UCLASS()
-class DEPTHAIMODULE_API AParasitePawn : public APawn, public ISaveGameElementInterface
+class DEPTHAIMODULE_API AParasitePawn : public APawn, public IENTSaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -102,12 +80,12 @@ public:
 protected:
 	bool bLoadBlackboardData = false;
 
-	FParaSiteData BlackboardData;
+	FENTParaSiteData BlackboardData;
 
 public:
-	virtual FGameElementData& SaveGameElement(UWorldSave* CurrentWorldSave) override;
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
 
 #pragma endregion
 };

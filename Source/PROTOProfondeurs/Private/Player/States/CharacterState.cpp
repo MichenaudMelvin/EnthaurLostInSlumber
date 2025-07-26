@@ -8,8 +8,8 @@
 #include "Player/FirstPersonController.h"
 #include "Player/Camera/ViewBobbing.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Saves/SettingsSave.h"
-#include "Saves/SettingsSubsystem.h"
+#include "Saves/ENTSettingsSave.h"
+#include "Subsystems/ENTSettingsSaveSubsystem.h"
 
 #pragma region States
 
@@ -100,7 +100,7 @@ void UCharacterState::CameraMovement(float DeltaTime)
 		return;
 	}
 
-	const USettingsSave* Settings = GetSettings();
+	const UENTSettingsSave* Settings = GetSettings();
 	if (!Settings)
 	{
 		return;
@@ -159,7 +159,7 @@ void UCharacterState::EmitNoise() const
 
 #pragma endregion
 
-USettingsSave* UCharacterState::GetSettings() const
+UENTSettingsSave* UCharacterState::GetSettings() const
 {
 	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(Character);
 	if (!GameInstance)
@@ -167,7 +167,7 @@ USettingsSave* UCharacterState::GetSettings() const
 		return nullptr;
 	}
 
-	USettingsSubsystem* SettingsSubsystem = GameInstance->GetSubsystem<USettingsSubsystem>();
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GameInstance->GetSubsystem<UENTSettingsSaveSubsystem>();
 	if (!SettingsSubsystem)
 	{
 		return nullptr;

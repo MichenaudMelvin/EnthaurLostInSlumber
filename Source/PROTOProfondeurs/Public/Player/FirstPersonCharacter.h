@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "PROTOProfondeurs/Public/GameElements/WeakZoneInterface.h"
 #include "GameFramework/Character.h"
+#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "FirstPersonCharacter.generated.h"
 
 class UAkAudioEvent;
@@ -26,7 +27,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberT
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKOnRespawn);
 
 UCLASS()
-class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface
+class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface, public IENTSaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -253,10 +254,13 @@ public:
 
 #pragma region Saves
 
-public:
-	void SavePlayerData() const;
+private:
+	FENTGameElementData EmptyData;
 
-	void LoadPlayerData();
+public:
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
 
 #pragma endregion
 

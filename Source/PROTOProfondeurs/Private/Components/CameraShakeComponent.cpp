@@ -3,10 +3,7 @@
 
 #include "Components/CameraShakeComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "Player/FirstPersonCharacter.h"
 #include "Player/FirstPersonController.h"
-#include "Saves/SettingsSave.h"
-#include "Saves/SettingsSubsystem.h"
 
 UCameraShakeComponent::UCameraShakeComponent()
 {

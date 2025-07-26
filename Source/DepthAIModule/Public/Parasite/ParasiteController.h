@@ -8,6 +8,7 @@
 #include "Perception/AIPerceptionTypes.h"
 #include "ParasiteController.generated.h"
 
+struct FENTParaSiteData;
 class UAIPerceptionComponent;
 
 UCLASS()
@@ -52,7 +53,7 @@ protected:
 	float HearingZTolerance = 100.0f;
 
 public:
-	virtual void SaveBlackBoardValues(FParaSiteData& AIData);
+	virtual void SaveBlackBoardValues(FENTParaSiteData& AIData);
 
-	virtual void LoadBlackboardValues(const FParaSiteData& AIData);
+	virtual void LoadBlackboardValues(const FENTParaSiteData& AIData);
 };

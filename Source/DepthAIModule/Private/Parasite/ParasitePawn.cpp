@@ -9,7 +9,8 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ParasiteController.h"
 #include "Path/AIPath.h"
-#include "Saves/WorldSaves/WorldSave.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/ArrowComponent.h"
@@ -197,9 +198,9 @@ void AParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AAc
 	ParasiteController->GetBlackboardComponent()->SetValueAsObject(AttackTargetKeyName, OtherActor);
 }
 
-FGameElementData& AParasitePawn::SaveGameElement(UWorldSave* CurrentWorldSave)
+FENTGameElementData& AParasitePawn::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FParaSiteData Data;
+	FENTParaSiteData Data;
 	Data.PawnTransform = GetActorTransform();
 
 	if (ParasiteController)
@@ -210,9 +211,9 @@ FGameElementData& AParasitePawn::SaveGameElement(UWorldSave* CurrentWorldSave)
 	return CurrentWorldSave->ParasiteData.Add(GetName(), Data);
 }
 
-void AParasitePawn::LoadGameElement(const FGameElementData& GameElementData)
+void AParasitePawn::LoadGameElement(const FENTGameElementData& GameElementData)
 {
-	const FParaSiteData& Data = static_cast<const FParaSiteData&>(GameElementData);
+	const FENTParaSiteData& Data = static_cast<const FENTParaSiteData&>(GameElementData);
 
 	SetActorTransform(Data.PawnTransform);
 

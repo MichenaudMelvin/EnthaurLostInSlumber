@@ -5,7 +5,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISense_Hearing.h"
-#include "Saves/WorldSaves/WorldSave.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
 
 AParasiteController::AParasiteController()
 {
@@ -94,7 +94,7 @@ void AParasiteController::OnUnheardTarget(AActor* Actor)
 	GetBlackboardComponent()->SetValueAsObject(NoiseInvestigatorKeyName, nullptr);
 }
 
-void AParasiteController::SaveBlackBoardValues(FParaSiteData& AIData)
+void AParasiteController::SaveBlackBoardValues(FENTParaSiteData& AIData)
 {
 	if (!GetBlackboardComponent())
 	{
@@ -108,7 +108,7 @@ void AParasiteController::SaveBlackBoardValues(FParaSiteData& AIData)
 	AIData.bHeardNoise = GetBlackboardComponent()->GetValueAsBool(HeardNoiseKeyName);
 }
 
-void AParasiteController::LoadBlackboardValues(const FParaSiteData& AIData)
+void AParasiteController::LoadBlackboardValues(const FENTParaSiteData& AIData)
 {
 	if (!GetBlackboardComponent())
 	{

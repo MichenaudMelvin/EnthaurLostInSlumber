@@ -15,8 +15,9 @@
 #include "Player/CharacterSettings.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterStateMachine.h"
-#include "Saves/WorldSaves/WorldSave.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Player/FirstPersonCharacter.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
 
 ANerve::ANerve()
 {
@@ -706,9 +707,9 @@ void ANerve::OnExitWeakZone_Implementation()
 
 #pragma region Save
 
-FGameElementData& ANerve::SaveGameElement(UWorldSave* CurrentWorldSave)
+FENTGameElementData& ANerve::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FNerveData Data;
+	FENTNerveData Data;
 
 	for (int32 i = 0; i < SplineCable->GetNumberOfSplinePoints(); i++)
 	{
@@ -721,9 +722,9 @@ FGameElementData& ANerve::SaveGameElement(UWorldSave* CurrentWorldSave)
 	return CurrentWorldSave->NerveData.Add(GetName(), Data);
 }
 
-void ANerve::LoadGameElement(const FGameElementData& GameElementData)
+void ANerve::LoadGameElement(const FENTGameElementData& GameElementData)
 {
-	const FNerveData& Data = static_cast<const FNerveData&>(GameElementData);
+	const FENTNerveData& Data = static_cast<const FENTNerveData&>(GameElementData);
 
 	ResetCables(true);
 
