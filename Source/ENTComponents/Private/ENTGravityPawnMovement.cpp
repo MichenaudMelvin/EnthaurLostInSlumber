@@ -1,32 +1,32 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Components/GravityPawnMovement.h"
+#include "ENTGravityPawnMovement.h"
 
 
-UGravityPawnMovement::UGravityPawnMovement()
+UENTGravityPawnMovement::UENTGravityPawnMovement()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-void UGravityPawnMovement::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UENTGravityPawnMovement::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	ApplyGravity(DeltaTime);
 }
 
-bool UGravityPawnMovement::IsMovingOnGround() const
+bool UENTGravityPawnMovement::IsMovingOnGround() const
 {
 	return VerticalVelocity == 0;
 }
 
-bool UGravityPawnMovement::IsFalling() const
+bool UENTGravityPawnMovement::IsFalling() const
 {
 	return VerticalVelocity != 0;
 }
 
-void UGravityPawnMovement::ApplyGravity(float DeltaTime)
+void UENTGravityPawnMovement::ApplyGravity(float DeltaTime)
 {
 	// gravity = m/s²
 

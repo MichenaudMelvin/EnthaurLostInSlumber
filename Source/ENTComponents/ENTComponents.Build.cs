@@ -1,15 +1,15 @@
 ﻿using UnrealBuildTool;
 
-public class DepthAIModule : ModuleRules
+public class ENTComponents : ModuleRules
 {
-    public DepthAIModule(ReadOnlyTargetRules Target) : base(Target)
+    public ENTComponents(ReadOnlyTargetRules Target) : base(Target)
     {
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core", "AIModule",
+                "Core",
             }
         );
 
@@ -19,12 +19,7 @@ public class DepthAIModule : ModuleRules
                 "CoreUObject",
                 "Engine",
                 "Slate",
-                "SlateCore",
-                "AIModule",
-                "GameplayTasks",
-                "NavigationSystem",
-                "ENTSaves",
-                "ENTComponents"
+                "SlateCore"
             }
         );
     }

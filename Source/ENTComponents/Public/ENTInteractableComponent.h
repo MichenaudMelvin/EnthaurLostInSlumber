@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "InteractableComponent.generated.h"
+#include "ENTInteractableComponent.generated.h"
 
 #pragma region Delegates
 
@@ -13,12 +13,14 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FKOnInteract, APlayerController*,
 #pragma endregion
 
 UCLASS(ClassGroup = "Interactable", meta = (BlueprintSpawnableComponent))
-class PROTOPROFONDEURS_API UInteractableComponent : public UActorComponent
+class ENTCOMPONENTS_API UENTInteractableComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
-	UInteractableComponent();
+	UENTInteractableComponent();
+
+	virtual void BeginDestroy() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Interactable")
 	inline bool CheckComponent(const UPrimitiveComponent* ComponentToCheck) const

@@ -4,36 +4,36 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "CameraShakeComponent.generated.h"
+#include "ENTCameraShakeComponent.generated.h"
 
 
 class AFirstPersonCharacter;
 class AFirstPersonController;
 
-UCLASS(ClassGroup = ("Player"), meta = (BlueprintSpawnableComponent))
-class PROTOPROFONDEURS_API UCameraShakeComponent : public UActorComponent
+UCLASS(ClassGroup = "Camera", meta = (BlueprintSpawnableComponent))
+class ENTCOMPONENTS_API UENTCameraShakeComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
-	UCameraShakeComponent();
+	UENTCameraShakeComponent();
 
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shake")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shake")
 	TSubclassOf<UCameraShakeBase> LittleShake;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shake")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shake")
 	TSubclassOf<UCameraShakeBase> BigShake;
 
 	UPROPERTY()
-	AFirstPersonController* PlayerController;
+	TObjectPtr<APlayerController> PlayerController;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Shake")
-	void MakeSmallCameraShake();
+	void MakeSmallCameraShake() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Shake")
-	void MakeBigCameraShake();
+	void MakeBigCameraShake() const;
 };

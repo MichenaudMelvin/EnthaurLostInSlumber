@@ -19,7 +19,7 @@
 
 class UAkComponent;
 class UAkAudioEvent;
-class UInteractableComponent;
+class UENTInteractableComponent;
 
 #pragma region Delegates
 
@@ -219,7 +219,7 @@ protected:
 	TObjectPtr<UAkAudioEvent> ToSolidInteractionNoise;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
-	TObjectPtr<UInteractableComponent> Interactable;
+	TObjectPtr<UENTInteractableComponent> Interactable;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> GrowlNoise;

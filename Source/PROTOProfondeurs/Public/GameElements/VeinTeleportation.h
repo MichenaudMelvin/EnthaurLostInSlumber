@@ -21,7 +21,7 @@ protected:
 	TObjectPtr<USceneComponent> SceneComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UInteractableComponent> Interaction;
+	TObjectPtr<class UENTInteractableComponent> Interaction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSoftObjectPtr<UWorld> MapToLoad;

@@ -33,7 +33,7 @@ struct FInteractionPoints
 	bool bIsActive = false;
 };
 
-class UInteractableComponent;
+class UENTInteractableComponent;
 class UBoxComponent;
 
 UCLASS()
@@ -94,7 +94,7 @@ protected:
 	bool bIsZoneActive = true;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interactable")
-	TObjectPtr<UInteractableComponent> Interactable;
+	TObjectPtr<UENTInteractableComponent> Interactable;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
 	TObjectPtr<UStaticMesh> DefaultInteractionPointMesh;

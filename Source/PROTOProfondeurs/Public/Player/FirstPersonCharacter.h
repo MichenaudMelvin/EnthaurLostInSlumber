@@ -11,12 +11,13 @@
 class UAkAudioEvent;
 class ARespawnTree;
 class UAkComponent;
-class UCameraShakeComponent;
+class UENTCameraShakeComponent;
+class UENTHealthComponent;
 enum class EAmberType : uint8;
 class UTestViewModel;
 class UViewBobbing;
 class AFirstPersonController;
-class UInteractableComponent;
+class UENTInteractableComponent;
 class UCharacterStateMachine;
 class UAIPerceptionStimuliSourceComponent;
 class UCharacterState;
@@ -37,6 +38,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 	virtual void Tick(float DeltaSeconds) override;
 
 #pragma region Components
@@ -45,25 +48,28 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Camera")
-	TObjectPtr<UCameraShakeComponent> ShakeManager;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
+	TObjectPtr<UENTCameraShakeComponent> ShakeManager;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Controller")
-	TObjectPtr<AFirstPersonController> FirstPersonController;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Stimuli")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stimuli")
 	TObjectPtr<UAIPerceptionStimuliSourceComponent> HearingStimuli;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Spike")
 	TObjectPtr<USkeletalMeshComponent> SpikeMesh;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Health")
+	TObjectPtr<UENTHealthComponent> HealthComponent;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Controller")
+	TObjectPtr<AFirstPersonController> FirstPersonController;
+
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
 	USkeletalMeshComponent* GetCharacterMesh() const {return CharacterMesh;}
-	UCameraShakeComponent* GetCameraShake() const {return ShakeManager;}
+	UENTCameraShakeComponent* GetCameraShake() const {return ShakeManager;}
 
 #pragma endregion
 
@@ -124,14 +130,14 @@ protected:
 	float InteractionTraceLength = 100.0f;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
-	TObjectPtr<UInteractableComponent> CurrentInteractable;
+	TObjectPtr<UENTInteractableComponent> CurrentInteractable;
 
 	void InteractionTrace();
 
 	void RemoveInteraction();
 
 public:
-	UInteractableComponent* GetCurrentInteractable() const {return CurrentInteractable;}
+	UENTInteractableComponent* GetCurrentInteractable() const {return CurrentInteractable;}
 
 	void SetInteractionUI(bool bState) const;
 
@@ -270,6 +276,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
 	TObjectPtr<ARespawnTree> LastRespawnTree = nullptr;
 
+	UFUNCTION()
+	void OnPlayerDie();
+
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
 	FKOnRespawn OnRespawn;
@@ -279,9 +288,6 @@ public:
 	void SetRespawnTree(ARespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
 
 	void Respawn(const FTransform& RespawnTransform);
-
-	UFUNCTION(BlueprintCallable, Category = "Respawn")
-	void KillPlayer();
 
 #pragma endregion
 

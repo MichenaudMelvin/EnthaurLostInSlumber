@@ -4,21 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/FloatingPawnMovement.h"
-#include "GravityPawnMovement.generated.h"
+#include "ENTGravityPawnMovement.generated.h"
 
-/**
- * @brief Use the owner to tick the component
- */
-UCLASS(ClassGroup = ("AI"), meta = (BlueprintSpawnableComponent))
-class DEPTHAIMODULE_API UGravityPawnMovement : public UFloatingPawnMovement
+UCLASS(ClassGroup = "Pawn", meta = (BlueprintSpawnableComponent))
+class ENTCOMPONENTS_API UENTGravityPawnMovement : public UFloatingPawnMovement
 {
 	GENERATED_BODY()
 
 public:
-	UGravityPawnMovement();
+	UENTGravityPawnMovement();
 
 protected:
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	virtual bool IsMovingOnGround() const override;
 

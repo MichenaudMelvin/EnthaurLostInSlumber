@@ -9,7 +9,6 @@ public class PROTOProfondeurs : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		CircularlyReferencedDependentModules.Add("PRFUI");
-		CircularlyReferencedDependentModules.Add("DepthAIModule");
 
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
@@ -26,13 +25,13 @@ public class PROTOProfondeurs : ModuleRules
 			"UMG",
 			"AIModule",
 			"AkAudio",
-			"DepthAIModule",
 			"ENTSaves"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
-			"PRFUI"
+			"PRFUI",
+			"ENTComponents"
 		});
 
 		if (Target.bBuildEditor)

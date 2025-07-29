@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PROTOProfondeurs/Public/GameElements/AmberOre.h"
+#include "GameElements/AmberOre.h"
 #include "AkComponent.h"
 #include "Components/BoxComponent.h"
-#include "Components/InteractableComponent.h"
+#include "ENTInteractableComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Player/FirstPersonCharacter.h"
 #include "Player/States/CharacterStateMachine.h"
@@ -34,7 +34,7 @@ AAmberOre::AAmberOre()
 	AmberMesh->SetMobility(EComponentMobility::Movable);
 	AmberMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-	Interactable = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interactable"));
+	Interactable = CreateDefaultSubobject<UENTInteractableComponent>(TEXT("Interactable"));
 	Interactable->SetInteractionName(NSLOCTEXT("Actions", "PickAmber", "Pick Amber"));
 
 	AmberOreNoises = CreateDefaultSubobject<UAkComponent>(TEXT("AmberOreNoises"));

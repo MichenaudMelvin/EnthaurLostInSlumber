@@ -8070,6 +8070,14 @@
 			"Type": "SymbolFile"
 		},
 		{
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTComponents.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTComponents.pdb",
+			"Type": "SymbolFile"
+		},
+		{
 			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTDeveloperTools.dll",
 			"Type": "DynamicLibrary"
 		},

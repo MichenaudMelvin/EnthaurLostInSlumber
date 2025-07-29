@@ -5,10 +5,11 @@
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Interface/GroundAction.h"
 #include "Camera/CameraComponent.h"
-#include "Components/CameraShakeComponent.h"
+#include "ENTCameraShakeComponent.h"
+#include "ENTHealthComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "Components/InteractableComponent.h"
+#include "ENTInteractableComponent.h"
 #include "GameElements/AmberOre.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -42,7 +43,7 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f));
 	CameraComponent->bUsePawnControlRotation = true;
 
-	ShakeManager = CreateDefaultSubobject<UCameraShakeComponent>(TEXT("Shake Manager"));
+	ShakeManager = CreateDefaultSubobject<UENTCameraShakeComponent>(TEXT("Shake Manager"));
 
 	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("First Person Mesh"));
 	CharacterMesh->SetOnlyOwnerSee(true);
@@ -61,6 +62,8 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	FootstepsSounds = CreateDefaultSubobject<UAkComponent>(TEXT("FootstepsSounds"));
 	FootstepsSounds->SetupAttachment(RootComponent);
 
+	HealthComponent = CreateDefaultSubobject<UENTHealthComponent>("Health");
+
 	AmberInventory.Add(EAmberType::NecroseAmber, 0);
 	AmberInventory.Add(EAmberType::WeakAmber, 0);
 
@@ -75,6 +78,11 @@ void AFirstPersonCharacter::BeginPlay()
 	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
 	SpikeTargetTransform = SpikeRelativeTransform;
 	SpikeParent = SpikeMesh->GetAttachParent();
+
+	if (HealthComponent)
+	{
+		HealthComponent->OnHealthNull.AddDynamic(this, &AFirstPersonCharacter::OnPlayerDie);
+	}
 
 	if (!GetController())
 	{
@@ -145,6 +153,16 @@ void AFirstPersonCharacter::BeginPlay()
 	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(FirstPersonController, StartWidget);
 
 	StartWidget->AddToViewport(4);
+}
+
+void AFirstPersonCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	if (HealthComponent)
+	{
+		HealthComponent->OnHealthNull.RemoveDynamic(this, &AFirstPersonCharacter::OnPlayerDie);
+	}
 }
 
 void AFirstPersonCharacter::Tick(float DeltaSeconds)
@@ -267,14 +285,14 @@ void AFirstPersonCharacter::InteractionTrace()
 		return;
 	}
 
-	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UInteractableComponent::StaticClass());
+	UActorComponent* FoundComp = HitResult.GetActor()->GetComponentByClass(UENTInteractableComponent::StaticClass());
 	if (!FoundComp)
 	{
 		RemoveInteraction();
 		return;
 	}
 
-	UInteractableComponent* TargetInteractable = Cast<UInteractableComponent>(FoundComp);
+	UENTInteractableComponent* TargetInteractable = Cast<UENTInteractableComponent>(FoundComp);
 	if (!TargetInteractable)
 	{
 		RemoveInteraction();
@@ -658,7 +676,7 @@ void AFirstPersonCharacter::Respawn(const FTransform& RespawnTransform)
 	OnRespawn.Broadcast();
 }
 
-void AFirstPersonCharacter::KillPlayer()
+void AFirstPersonCharacter::OnPlayerDie()
 {
 	if (!FirstPersonController || !FirstPersonController->GetDeathMenuUI())
 	{

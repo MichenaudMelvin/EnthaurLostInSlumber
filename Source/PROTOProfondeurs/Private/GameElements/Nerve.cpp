@@ -4,7 +4,7 @@
 #include "GameElements/Nerve.h"
 #include "AkComponent.h"
 #include "AkGameplayStatics.h"
-#include "Components/InteractableComponent.h"
+#include "ENTInteractableComponent.h"
 #include "GameFramework/Character.h"
 #include "GameElements/NerveReceptacle.h"
 #include "Components/PlayerToNervePhysicConstraint.h"
@@ -44,7 +44,7 @@ ANerve::ANerve()
 	NerveStretchComp = CreateDefaultSubobject<UAkComponent>(TEXT("NerveStretchComp"));
 	NerveStretchComp->SetupAttachment(NerveBall);
 
-	InteractableComponent = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
+	InteractableComponent = CreateDefaultSubobject<UENTInteractableComponent>(TEXT("Interaction"));
 	InteractableComponent->OnInteract.AddDynamic(this, &ANerve::Interaction);
 
 	CableColliders.Add(ObjectTypeQuery1);

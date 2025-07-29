@@ -21,7 +21,7 @@ class USplineComponent;
 class AFirstPersonController;
 class ANerveReceptacle;
 class UPlayerToNervePhysicConstraint;
-class UInteractableComponent;
+class UENTInteractableComponent;
 
 UCLASS()
 class PROTOPROFONDEURS_API ANerve : public AActor, public IWeakZoneInterface, public IENTSaveGameElementInterface
@@ -187,7 +187,7 @@ public:
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
-	TObjectPtr<UInteractableComponent> InteractableComponent;
+	TObjectPtr<UENTInteractableComponent> InteractableComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> GrabNoise;
@@ -202,7 +202,7 @@ protected:
 	TObjectPtr<AFirstPersonCharacter> PlayerCharacter;
 
 public:
-	TObjectPtr<UInteractableComponent> GetInteractable() const {return InteractableComponent;}
+	TObjectPtr<UENTInteractableComponent> GetInteractable() const {return InteractableComponent;}
 
 #pragma endregion
 

@@ -2,9 +2,7 @@
 
 
 #include "GameElements/VeinTeleportation.h"
-
-#include "Components/InteractableComponent.h"
-#include "Kismet/GameplayStatics.h"
+#include "ENTInteractableComponent.h"
 
 AVeinTeleportation::AVeinTeleportation()
 {
@@ -13,7 +11,7 @@ AVeinTeleportation::AVeinTeleportation()
 	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(SceneComponent);
 
-	Interaction = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interaction"));
+	Interaction = CreateDefaultSubobject<UENTInteractableComponent>(TEXT("Interaction"));
 	Interaction->OnInteract.AddDynamic(this, &AVeinTeleportation::OnInteract);
 }
 

@@ -1,16 +1,28 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "PROTOProfondeurs/Public/Components/InteractableComponent.h"
+#include "ENTInteractableComponent.h"
 
-UInteractableComponent::UInteractableComponent()
+UENTInteractableComponent::UENTInteractableComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 	PrimaryComponentTick.bStartWithTickEnabled = false;
 }
 
+void UENTInteractableComponent::BeginDestroy()
+{
+	Super::BeginDestroy();
+
+	if (!GetOwner())
+	{
+		return;
+	}
+
+	OnInteract.RemoveAll(GetOwner());
+}
+
 #pragma region Add/Remove Interactable
 
-void UInteractableComponent::AddInteractable(UPrimitiveComponent* ComponentToAdd)
+void UENTInteractableComponent::AddInteractable(UPrimitiveComponent* ComponentToAdd)
 {
 	if (ComponentToAdd == nullptr)
 	{
@@ -20,12 +32,12 @@ void UInteractableComponent::AddInteractable(UPrimitiveComponent* ComponentToAdd
 	InteractableComponentSet.Add(ComponentToAdd);
 }
 
-void UInteractableComponent::AddInteractables(TArray<UPrimitiveComponent*> ComponentsToAdd)
+void UENTInteractableComponent::AddInteractables(TArray<UPrimitiveComponent*> ComponentsToAdd)
 {
 	InteractableComponentSet = TSet<UPrimitiveComponent*>(ComponentsToAdd);
 }
 
-void UInteractableComponent::RemoveInteractable(UPrimitiveComponent* ComponentToRemove)
+void UENTInteractableComponent::RemoveInteractable(UPrimitiveComponent* ComponentToRemove)
 {
 	if (ComponentToRemove == nullptr)
 	{
@@ -35,7 +47,7 @@ void UInteractableComponent::RemoveInteractable(UPrimitiveComponent* ComponentTo
 	InteractableComponentSet.Remove(ComponentToRemove);
 }
 
-void UInteractableComponent::RemoveInteractables(TArray<UPrimitiveComponent*> ComponentsToRemove)
+void UENTInteractableComponent::RemoveInteractables(TArray<UPrimitiveComponent*> ComponentsToRemove)
 {
 	for (UPrimitiveComponent* Comp : ComponentsToRemove)
 	{
@@ -43,7 +55,7 @@ void UInteractableComponent::RemoveInteractables(TArray<UPrimitiveComponent*> Co
 	}
 }
 
-void UInteractableComponent::SelectPrimitive(UPrimitiveComponent* PrimitiveComponent)
+void UENTInteractableComponent::SelectPrimitive(UPrimitiveComponent* PrimitiveComponent)
 {
 	if (!PrimitiveComponent)
 	{
@@ -58,7 +70,7 @@ void UInteractableComponent::SelectPrimitive(UPrimitiveComponent* PrimitiveCompo
 	TargetPrimitive = PrimitiveComponent;
 }
 
-void UInteractableComponent::Interact(APlayerController* PlayerController, APawn* Player)
+void UENTInteractableComponent::Interact(APlayerController* PlayerController, APawn* Player)
 {
 	OnInteract.Broadcast(PlayerController, Player, TargetPrimitive);
 }

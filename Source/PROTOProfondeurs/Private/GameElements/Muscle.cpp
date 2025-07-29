@@ -2,12 +2,11 @@
 
 
 #include "GameElements/Muscle.h"
-
 #include "AkComponent.h"
 #include "AkGameplayStatics.h"
-#include "Components/CameraShakeComponent.h"
+#include "ENTCameraShakeComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "Components/InteractableComponent.h"
+#include "ENTInteractableComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -76,7 +75,7 @@ AMuscle::AMuscle()
 	SpikeInteractionNoises = CreateDefaultSubobject<UAkComponent>(TEXT("SpikeInteractionNoises"));
 	SpikeInteractionNoises->SetupAttachment(SpikeInteraction);
 
-	Interactable = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interactable"));
+	Interactable = CreateDefaultSubobject<UENTInteractableComponent>(TEXT("Interactable"));
 
 	SolidMuscleInteraction = NSLOCTEXT("Interactions", "SolidMuscleInteraction", "Make soft");
 	SoftMuscleInteraction = NSLOCTEXT("Interactions", "SoftMuscleInteraction", "Make solid");

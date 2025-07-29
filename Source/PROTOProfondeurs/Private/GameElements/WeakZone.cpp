@@ -1,12 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PROTOProfondeurs/Public/GameElements/WeakZone.h"
-
+#include "GameElements/WeakZone.h"
 #include "AkGameplayStatics.h"
 #include "FCTween.h"
 #include "Components/BoxComponent.h"
-#include "Components/InteractableComponent.h"
+#include "ENTInteractableComponent.h"
 #include "Components/PostProcessComponent.h"
 #include "GameElements/AmberOre.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -38,7 +37,7 @@ AWeakZone::AWeakZone()
 	BillboardComponent->SetupAttachment(RootComponent);
 #endif
 
-	Interactable = CreateDefaultSubobject<UInteractableComponent>(TEXT("Interactable"));
+	Interactable = CreateDefaultSubobject<UENTInteractableComponent>(TEXT("Interactable"));
 	Interactable->SetInteractionName(NSLOCTEXT("Actions", "DropAmber", "Drop Amber"));
 }
 

@@ -10,7 +10,7 @@
 class UAkComponent;
 class UBoxComponent;
 
-class UInteractableComponent;
+class UENTInteractableComponent;
 
 UENUM()
 enum class EAmberType : uint8
@@ -47,7 +47,7 @@ protected:
 	TObjectPtr<UBoxComponent> MeshInteraction;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
-	TObjectPtr<UInteractableComponent> Interactable;
+	TObjectPtr<UENTInteractableComponent> Interactable;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UAkComponent> AmberOreNoises;

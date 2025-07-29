@@ -5,7 +5,7 @@
 #include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "FCTween.h"
-#include "Components/CameraShakeComponent.h"
+#include "ENTCameraShakeComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "Interface/NerveReactive.h"

@@ -4,7 +4,7 @@
 #include "Parasite/ParasitePawn.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Components/BoxComponent.h"
-#include "Components/GravityPawnMovement.h"
+#include "ENTGravityPawnMovement.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ParasiteController.h"
@@ -41,7 +41,7 @@ AParasitePawn::AParasitePawn()
 	ParasiteDeathZone->SetupAttachment(ParasiteMesh);
 	ParasiteDeathZone->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 
-	MovementComponent = CreateDefaultSubobject<UGravityPawnMovement>(TEXT("Movement"));
+	MovementComponent = CreateDefaultSubobject<UENTGravityPawnMovement>(TEXT("Movement"));
 	MovementComponent->MaxSpeed = 400.0f;
 
 	AIControllerClass = AParasiteController::StaticClass();

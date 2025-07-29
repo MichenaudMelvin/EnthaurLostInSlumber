@@ -9,7 +9,7 @@
 #include "ParasitePawn.generated.h"
 
 class AParasiteController;
-class UGravityPawnMovement;
+class UENTGravityPawnMovement;
 class AAIPath;
 class UBoxComponent;
 class UAIPerceptionComponent;
@@ -38,7 +38,7 @@ protected:
 	TObjectPtr<UBoxComponent> ParasiteCollision;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<UGravityPawnMovement> MovementComponent;
+	TObjectPtr<UENTGravityPawnMovement> MovementComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> ParasiteMesh;

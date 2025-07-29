@@ -3,6 +3,7 @@
 	"Modules": 
 	{
 		"DepthAIModule": "UnrealEditor-DepthAIModule.dll",
+		"ENTComponents": "UnrealEditor-ENTComponents.dll",
 		"ENTDeveloperTools": "UnrealEditor-ENTDeveloperTools.dll",
 		"ENTEditor": "UnrealEditor-ENTEditor.dll",
 		"ENTSaves": "UnrealEditor-ENTSaves.dll",

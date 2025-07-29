@@ -3,7 +3,7 @@
 
 #include "Tasks/ChangePawnGravity.h"
 #include "AIController.h"
-#include "Components/GravityPawnMovement.h"
+#include "ENTGravityPawnMovement.h"
 
 EBTNodeResult::Type UChangePawnGravity::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
@@ -22,7 +22,7 @@ EBTNodeResult::Type UChangePawnGravity::ExecuteTask(UBehaviorTreeComponent& Owne
 		return EBTNodeResult::Failed;
 	}
 
-	UGravityPawnMovement* GravityPawnMovement = CurrentPawn->GetComponentByClass<UGravityPawnMovement>();
+	UENTGravityPawnMovement* GravityPawnMovement = CurrentPawn->GetComponentByClass<UENTGravityPawnMovement>();
 	if (!GravityPawnMovement)
 	{
 		return EBTNodeResult::Failed;

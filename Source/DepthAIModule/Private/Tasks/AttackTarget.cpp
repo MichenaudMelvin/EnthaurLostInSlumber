@@ -2,8 +2,9 @@
 
 
 #include "Tasks/AttackTarget.h"
+
+#include "ENTHealthComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
-#include "Player/FirstPersonCharacter.h"
 
 UAttackTarget::UAttackTarget()
 {
@@ -26,14 +27,19 @@ EBTNodeResult::Type UAttackTarget::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 		return EBTNodeResult::Failed;
 	}
 
-	// hardcoded, would be nice to do a health component or an interface
-	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(TargetObject);
-	if (!FirstPersonCharacter)
+	AActor* TargetActor = Cast<AActor>(TargetObject);
+	if (!TargetActor)
 	{
 		return EBTNodeResult::Failed;
 	}
 
-	FirstPersonCharacter->KillPlayer();
+	UENTHealthComponent* HealthComponent = TargetActor->GetComponentByClass<UENTHealthComponent>();
+	if (!HealthComponent)
+	{
+		return EBTNodeResult::Failed;
+	}
+
+	HealthComponent->TakeDamages(Damages.GetValue(OwnerComp));
 
 	return EBTNodeResult::Succeeded;
 }
