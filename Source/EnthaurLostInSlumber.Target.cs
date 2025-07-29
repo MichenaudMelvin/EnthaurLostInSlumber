@@ -3,12 +3,14 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class PROTOProfondeursEditorTarget : TargetRules
+public class EnthaurLostInSlumberTarget : TargetRules
 {
-	public PROTOProfondeursEditorTarget(TargetInfo Target) : base(Target)
+	public EnthaurLostInSlumberTarget(TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Editor;
+		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
+
+		Name = "EnthaurLostInSlumber";
 
 		ExtraModuleNames.AddRange( new string[] { "PROTOProfondeurs" } );
 		RegisterModulesCreatedByRider();
@@ -16,6 +18,6 @@ public class PROTOProfondeursEditorTarget : TargetRules
 
 	private void RegisterModulesCreatedByRider()
 	{
-		ExtraModuleNames.AddRange(new string[] { "PRFUI", "DepthAIModule", "ENTEditor", "ENTDeveloperTools", "ENTSaves", "ENTComponents" });
+		ExtraModuleNames.AddRange(new string[] { "PRFUI", "DepthAIModule", "ENTDeveloperTools", "ENTSaves", "ENTComponents" });
 	}
 }
