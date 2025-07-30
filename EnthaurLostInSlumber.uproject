@@ -15,7 +15,7 @@
 			"LoadingPhase": "Default"
 		},
 		{
-			"Name": "DepthAIModule",
+			"Name": "ENTAI",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		},

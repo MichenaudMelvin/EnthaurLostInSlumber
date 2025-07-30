@@ -8062,11 +8062,11 @@
 			"Type": "RequiredResource"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-DepthAIModule.dll",
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTAI.dll",
 			"Type": "DynamicLibrary"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-DepthAIModule.pdb",
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTAI.pdb",
 			"Type": "SymbolFile"
 		},
 		{

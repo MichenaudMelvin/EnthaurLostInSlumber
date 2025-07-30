@@ -2,7 +2,7 @@
 	"BuildId": "37670630",
 	"Modules": 
 	{
-		"DepthAIModule": "UnrealEditor-DepthAIModule.dll",
+		"ENTAI": "UnrealEditor-ENTAI.dll",
 		"ENTComponents": "UnrealEditor-ENTComponents.dll",
 		"ENTDeveloperTools": "UnrealEditor-ENTDeveloperTools.dll",
 		"ENTEditor": "UnrealEditor-ENTEditor.dll",
