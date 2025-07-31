@@ -1,16 +1,15 @@
 State Group	ID	Name			Wwise Object Path	Notes
-	232339302	STG_WEAKENEDZONE			\Default Work Unit\STG_WEAKENEDZONE	
+	3907450003	AKST_WeakenedZone			\Gameplay\AKST_WeakenedZone	
 
 State	ID	Name	State Group			Notes
-	748895195	None	STG_WEAKENEDZONE			
-	1160234136	Normal	STG_WEAKENEDZONE			
-	4120836511	Weakened	STG_WEAKENEDZONE			
+	748895195	None	AKST_WeakenedZone			
+	1160234136	Normal	AKST_WeakenedZone			
+	4120836511	Weakened	AKST_WeakenedZone			
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
-	1162281553	Bus_Music			\Default Work Unit\Bus_Music	
-	3895923845	Bus_SFX			\Default Work Unit\Bus_SFX	
-	3964155266	Bus_Master			\Default Work Unit\Bus_Master	
-	4277214558	Bus_Voice			\Default Work Unit\Bus_Voice	
+	471070440	AKGP_Music			\Mix\AKGP_Music	
+	896534061	AKGP_Master			\Mix\AKGP_Master	
+	4013141432	AKGP_SFX			\Mix\AKGP_SFX	
 
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	1162281553	Bus_Music			\Default Work Unit\Master Audio Bus_01\Bus_Music	

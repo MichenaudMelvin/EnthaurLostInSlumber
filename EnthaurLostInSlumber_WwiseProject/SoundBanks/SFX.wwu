@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{C913C2E2-8DEF-458F-BA42-2A93FC6D22BF}" SchemaVersion="123">
+	<SoundBanks>
+		<WorkUnit Name="SFX" ID="{C913C2E2-8DEF-458F-BA42-2A93FC6D22BF}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="10"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<SoundBank Name="SB_UI" ID="{13465604-2D0A-476E-980D-31B04FA1E95E}">
+					<PropertyList>
+						<Property Name="Maximum" Type="int32">
+							<ValueList>
+								<Value>104857600</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ObjectInclusionList>
+						<ObjectRef Name="UI" ID="{2AA4AED4-6A96-48B1-BB56-39665DFA7BB3}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="SB_Gameplay" ID="{32268D10-2C94-4BB7-BD2D-D4E674E631DA}">
+					<PropertyList>
+						<Property Name="Maximum" Type="int32">
+							<ValueList>
+								<Value>104857600</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ObjectInclusionList>
+						<ObjectRef Name="Gameplay" ID="{F516DF05-C518-4EB3-B745-E735EF7FDCFE}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="SB_Ambient" ID="{FAFCEDDF-8A17-4B2E-8573-A6E8A69007B2}">
+					<PropertyList>
+						<Property Name="Maximum" Type="int32">
+							<ValueList>
+								<Value>104857600</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ObjectInclusionList>
+						<ObjectRef Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

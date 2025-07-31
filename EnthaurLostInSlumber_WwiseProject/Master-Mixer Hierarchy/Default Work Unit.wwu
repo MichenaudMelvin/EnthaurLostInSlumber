@@ -15,45 +15,6 @@
 								<Property Name="Color" Type="int16" Value="12"/>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
 							</PropertyList>
-							<ObjectLists>
-								<ObjectList Name="RTPC">
-									<Reference>
-										<Local>
-											<RTPC Name="" ID="{B412FE4A-2E5C-4D2A-A880-9F164171E485}" ShortID="1046883083">
-												<PropertyList>
-													<Property Name="PropertyName" Type="string" Value="BusVolume"/>
-												</PropertyList>
-												<ReferenceList>
-													<Reference Name="ControlInput">
-														<ObjectRef Name="Bus_Voice" ID="{9CF10DE5-32FB-4741-9D1F-EBA407F8E2E7}" WorkUnitID="{76DD821B-F05C-4991-B8F1-7909AAB4E4CC}"/>
-													</Reference>
-													<Reference Name="Curve">
-														<Custom>
-															<Curve Name="" ID="{F6A95EA5-0BCF-4946-8670-768EECFF89CC}">
-																<PropertyList>
-																	<Property Name="Flags" Type="int32" Value="3"/>
-																</PropertyList>
-																<PointList>
-																	<Point>
-																		<XPos>0</XPos>
-																		<YPos>-200</YPos>
-																		<Flags>5</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>100</XPos>
-																		<YPos>0</YPos>
-																		<Flags>37</Flags>
-																	</Point>
-																</PointList>
-															</Curve>
-														</Custom>
-													</Reference>
-												</ReferenceList>
-											</RTPC>
-										</Local>
-									</Reference>
-								</ObjectList>
-							</ObjectLists>
 						</Bus>
 						<Bus Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}">
 							<PropertyList>
@@ -70,7 +31,7 @@
 												</PropertyList>
 												<ReferenceList>
 													<Reference Name="ControlInput">
-														<ObjectRef Name="Bus_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}" WorkUnitID="{76DD821B-F05C-4991-B8F1-7909AAB4E4CC}"/>
+														<ObjectRef Name="AKGP_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}" WorkUnitID="{7FB4EB63-9D87-4DEB-8A99-077CB840053B}"/>
 													</Reference>
 													<Reference Name="Curve">
 														<Custom>
@@ -115,7 +76,7 @@
 												</PropertyList>
 												<ReferenceList>
 													<Reference Name="ControlInput">
-														<ObjectRef Name="Bus_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}" WorkUnitID="{76DD821B-F05C-4991-B8F1-7909AAB4E4CC}"/>
+														<ObjectRef Name="AKGP_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}" WorkUnitID="{7FB4EB63-9D87-4DEB-8A99-077CB840053B}"/>
 													</Reference>
 													<Reference Name="Curve">
 														<Custom>
@@ -156,7 +117,7 @@
 										</PropertyList>
 										<ReferenceList>
 											<Reference Name="ControlInput">
-												<ObjectRef Name="Bus_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}" WorkUnitID="{76DD821B-F05C-4991-B8F1-7909AAB4E4CC}"/>
+												<ObjectRef Name="AKGP_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}" WorkUnitID="{7FB4EB63-9D87-4DEB-8A99-077CB840053B}"/>
 											</Reference>
 											<Reference Name="Curve">
 												<Custom>

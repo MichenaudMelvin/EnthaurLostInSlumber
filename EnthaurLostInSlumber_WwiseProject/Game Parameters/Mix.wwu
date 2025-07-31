@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{7FB4EB63-9D87-4DEB-8A99-077CB840053B}" SchemaVersion="123">
+	<GameParameters>
+		<WorkUnit Name="Mix" ID="{7FB4EB63-9D87-4DEB-8A99-077CB840053B}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="AKGP_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="100"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="AKGP_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="100"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="AKGP_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="100"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
+	</GameParameters>
+</WwiseDocument>

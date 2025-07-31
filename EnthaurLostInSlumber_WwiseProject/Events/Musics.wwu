@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="Musics" ID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="19"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<Event Name="AKE_TitleScreen" ID="{4E2866E6-D300-45F8-B62A-A54678F39D44}">
+					<ChildrenList>
+						<Action Name="" ID="{420F0CCA-7159-473B-A874-21357CACED90}" ShortID="174819633">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{89693C31-FB07-4796-820C-275CED1CDA77}" ShortID="306813185">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Full" ID="{BA69C266-C45A-4595-849B-8E043AEEB739}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{09980D9F-2F2C-4B90-B7E7-C6B57E57CB1D}" ShortID="3206590">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{32023F83-9D51-4B60-97C0-2B072531984A}" ShortID="202888605">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{25FAFE94-363E-44F4-BD1A-ABFB3D2F6C20}" ShortID="47827830">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Heart" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}">
+					<ChildrenList>
+						<Action Name="" ID="{D8DF8765-3393-49B6-B9F9-7F771519F334}" ShortID="649449349">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{BA13E80B-2060-4553-913B-E14F02BFFD75}" ShortID="240974408">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{4A655D2F-876C-43B1-A6B2-909C7A2538F7}" ShortID="642125085">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Full" ID="{BA69C266-C45A-4595-849B-8E043AEEB739}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{28D52F9D-3D85-47E2-A369-92930B1DFBE8}" ShortID="964305376">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{D8139BC6-6C88-410A-B3B1-B706434FEB12}" ShortID="1014956414">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}">
+					<ChildrenList>
+						<Action Name="" ID="{D1725414-084D-4674-96AB-5AEEEBCEF6FB}" ShortID="205815653">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Full" ID="{BA69C266-C45A-4595-849B-8E043AEEB739}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{B68BFD07-2750-458F-A2D6-671C22AE8587}" ShortID="101021546">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{71F828F4-8B3B-48FC-816F-A23EE0183C2E}" ShortID="151403287">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Forearm" ID="{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}">
+					<ChildrenList>
+						<Action Name="" ID="{5B2B6DE8-647F-4B07-A33D-2DC41A40F717}" ShortID="221407640">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{CE8B129F-7073-4F0A-8E56-78C705BB005F}" ShortID="100850410">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{2D26348C-AB58-44CD-8A7C-06787DDAFED4}" ShortID="921236304">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{DD9E27EE-C644-4517-A07B-0CE9047E2756}" ShortID="357925879">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Shoulder" ID="{6078419F-7F68-479D-AA56-581F2E77687E}">
+					<ChildrenList>
+						<Action Name="" ID="{3147920C-4AFA-4DA7-874C-F986DFF1804E}" ShortID="1038696695">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{025FC3A8-BAB0-4BD3-AB8D-C67F04F01CF0}" ShortID="845463428">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{96A35970-70F8-404F-B6E4-638B993629EE}" ShortID="768419346">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{A18D88BF-D211-4AE7-BD97-BC770A556C47}" ShortID="532163869">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

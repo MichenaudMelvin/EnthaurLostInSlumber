@@ -33,13 +33,13 @@
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 										</Reference>
 										<Reference Name="DefaultSwitchOrState">
-											<ObjectRef Name="Walk" ID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+											<ObjectRef Name="Walk" ID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 										</Reference>
 										<Reference Name="OutputBus">
 											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 										</Reference>
 										<Reference Name="SwitchGroupOrStateGroup">
-											<ObjectRef Name="SWG_MC_FS_Speed" ID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+											<ObjectRef Name="AKSW_FootstepsSpeed" ID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
@@ -49,13 +49,13 @@
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 												</Reference>
 												<Reference Name="DefaultSwitchOrState">
-													<ObjectRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+													<ObjectRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 												</Reference>
 												<Reference Name="SwitchGroupOrStateGroup">
-													<ObjectRef Name="SWG_MC_FS_Material" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+													<ObjectRef Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
@@ -819,13 +819,13 @@
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 												</Reference>
 												<Reference Name="DefaultSwitchOrState">
-													<ObjectRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+													<ObjectRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 												</Reference>
 												<Reference Name="OutputBus">
 													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 												</Reference>
 												<Reference Name="SwitchGroupOrStateGroup">
-													<ObjectRef Name="SWG_MC_FS_Material" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+													<ObjectRef Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
@@ -1595,7 +1595,7 @@
 										</GroupingBehaviorList>
 										<GroupingList>
 											<Grouping>
-												<SwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+												<SwitchRef Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
 												<ItemList>
 													<ItemRef Name="SW_MC_FS_Run_Material" ID="{A373E588-64E7-4062-BA06-19803858FFF4}"/>
 												</ItemList>
@@ -1620,7 +1620,7 @@
 									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 								</Reference>
 								<Reference Name="SwitchGroupOrStateGroup">
-									<ObjectRef Name="SWG_MC_FS_Material" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+									<ObjectRef Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1881,7 +1881,7 @@
 									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 								</Reference>
 								<Reference Name="SwitchGroupOrStateGroup">
-									<ObjectRef Name="SWG_MC_FS_Material" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+									<ObjectRef Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -2159,7 +2159,7 @@
 											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 										</Reference>
 										<Reference Name="SwitchGroupOrStateGroup">
-											<ObjectRef Name="SWG_MC_FS_Speed" ID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}" WorkUnitID="{BD857128-828F-4B79-B039-29264EBF7ACD}"/>
+											<ObjectRef Name="AKSW_FootstepsSpeed" ID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
@@ -2662,7 +2662,7 @@
 										</GroupingBehaviorList>
 										<GroupingList>
 											<Grouping>
-												<SwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+												<SwitchRef Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
 												<ItemList>
 													<ItemRef Name="MC_Cloth_Run" ID="{CB3CC00F-DE70-4DA7-A943-1E89CC827C56}"/>
 												</ItemList>

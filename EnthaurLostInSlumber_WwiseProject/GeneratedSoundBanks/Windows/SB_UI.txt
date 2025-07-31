@@ -1,14 +1,14 @@
 Event	ID	Name			Wwise Object Path	Notes
-	99411285	Play_UI_PauseMenu_Exit			\WU_UI\Play_UI_PauseMenu_Exit	
-	1100494325	Play_UI_PauseMenu_Hover			\WU_UI\Play_UI_PauseMenu_Hover	
-	3134029911	UI_Pausemenu_SplashScreen_Continue			\WU_UI\UI_Pausemenu_SplashScreen_Continue	
-	3555456778	Play_UI_NewPlaceTitle			\WU_UI\Play_UI_NewPlaceTitle	
-	3883835929	Play_UI_PauseMenu_Enter			\WU_UI\Play_UI_PauseMenu_Enter	
+	414729164	AKE_OpenPauseMenu			\SFX\UI\AKE_OpenPauseMenu	
+	1638072158	AKE_ClosePauseMenu			\SFX\UI\AKE_ClosePauseMenu	
+	3312019116	AKE_SplashScreen			\SFX\UI\AKE_SplashScreen	
+	3322171790	AKE_EnterNewPlace			\SFX\UI\AKE_EnterNewPlace	
+	4288581885	AKE_Hover			\SFX\UI\AKE_Hover	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	281543815	UI_PauseMenu_Enter	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\F3\{F3512858-8630-C988-7421-94A247410F3B}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_PauseMenu_Enter		69624
-	291935587	UI_NewPlaceTitle	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\3C\{3C1B18EA-629D-0A7B-29D4-9A3257F98367}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_NewPlaceTitle		991916
-	321341764	UI_PauseMenu_Hover	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\22\{2291A313-2CEC-FC6E-1A4F-FF573434683D}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_PauseMenu_Hover		49988
-	628497567	UI_PauseMenu_Exit	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\45\{4510B96D-69CE-10C3-948D-99BA187E09FF}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_PauseMenu_Exit		96304
-	983294714	UI_Pausemenu_SpalshScreen_Continue	F:\SLOPE\IlM A4\-PROTO-PFE-Profondeurs\-PROTO-PFE-Profondeurs_WwiseProject\.cache\E6\{E634AE25-A4BF-5FEB-DFEC-69C150DCDC1A}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_Pausemenu_SpalshScreen_Continue		535776
+	281543815	UI_PauseMenu_Enter	E:\UEProjects\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\F3\{F3512858-8630-C988-7421-94A247410F3B}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_PauseMenu_Enter		69624
+	291935587	UI_NewPlaceTitle	E:\UEProjects\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3C\{3C1B18EA-629D-0A7B-29D4-9A3257F98367}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_NewPlaceTitle		991916
+	321341764	UI_PauseMenu_Hover	E:\UEProjects\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\22\{2291A313-2CEC-FC6E-1A4F-FF573434683D}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_PauseMenu_Hover		49988
+	628497567	UI_PauseMenu_Exit	E:\UEProjects\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\45\{4510B96D-69CE-10C3-948D-99BA187E09FF}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_PauseMenu_Exit		96304
+	983294714	UI_Pausemenu_SpalshScreen_Continue	E:\UEProjects\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E6\{E634AE25-A4BF-5FEB-DFEC-69C150DCDC1A}.wem		\Actor-Mixer Hierarchy\WU_UI\AM_UI\UI_Pausemenu_SpalshScreen_Continue		535776
 

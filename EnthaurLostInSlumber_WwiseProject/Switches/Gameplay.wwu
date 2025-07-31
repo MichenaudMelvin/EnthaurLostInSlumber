@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}" SchemaVersion="123">
+	<Switches>
+		<WorkUnit Name="Gameplay" ID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}" PersistMode="Standalone">
+			<ChildrenList>
+				<SwitchGroup Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}">
+					<ChildrenList>
+						<Switch Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+						<Switch Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+					</ChildrenList>
+				</SwitchGroup>
+				<SwitchGroup Name="AKSW_FootstepsSpeed" ID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}">
+					<ChildrenList>
+						<Switch Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<Switch Name="Walk" ID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"/>
+					</ChildrenList>
+				</SwitchGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</Switches>
+</WwiseDocument>

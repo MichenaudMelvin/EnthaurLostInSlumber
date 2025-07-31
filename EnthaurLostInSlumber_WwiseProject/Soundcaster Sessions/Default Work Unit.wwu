@@ -6,7 +6,7 @@
 				<SoundcasterSession Name="New Soundcaster Session" ID="{14DBD87B-1FEE-4408-8889-60CC189B9217}">
 					<ModuleList>
 						<Module>
-							<ObjectRef Name="Play_Elevator" ID="{859C566F-6B89-419E-B78B-2BAF354E01B4}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="AKE_StartElevator" ID="{859C566F-6B89-419E-B78B-2BAF354E01B4}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
@@ -14,65 +14,61 @@
 							<Position X="0" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_SFX_NerveDoor" ID="{058ED576-C9DC-436F-BC80-C460F36A2F0B}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="AKE_AmberDoor" ID="{058ED576-C9DC-436F-BC80-C460F36A2F0B}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="0" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_LPX_Nerve_Stretch" ID="{86D55011-33D5-488E-A299-439AE1860B89}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="AKE_StartNerveStretch" ID="{86D55011-33D5-488E-A299-439AE1860B89}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_SFX_NerveReceptacle_Activate" ID="{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="AKE_NerveReceptacleActivate" ID="{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="1" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_MU_Menu" ID="{4E2866E6-D300-45F8-B62A-A54678F39D44}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<ObjectRef Name="AKE_TitleScreen" ID="{4E2866E6-D300-45F8-B62A-A54678F39D44}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
 							<Position X="1" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_SFX_Muscle_Soft" ID="{F84BABDD-28BD-412A-95A6-5FDDB1D95432}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="AKE_MuscleSoftTransformation" ID="{F84BABDD-28BD-412A-95A6-5FDDB1D95432}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="2" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Stop_LPX_Nerve_Stretch" ID="{C2BCB29F-3574-4185-A670-2E3B736BB478}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="AKE_StopNerveStretch" ID="{C2BCB29F-3574-4185-A670-2E3B736BB478}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="2" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_MU_Village" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<ObjectRef Name="AKE_Heart" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
 							<Position X="2" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_SFX_Muscle_Hard" ID="{704DF249-C842-4399-A326-E93C5BDA66B8}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="AKE_MuscleSolidTransformation" ID="{704DF249-C842-4399-A326-E93C5BDA66B8}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="3" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Stop_Elevator" ID="{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}" WorkUnitID="{4933FB35-1CD7-4E23-8369-62825115CCB8}"/>
+							<ObjectRef Name="AKE_StopElevator" ID="{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="3" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_MU_Arm" ID="{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<ObjectRef Name="AKE_Forearm" ID="{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
 							<Position X="3" Y="2"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
 						<RTPCValue>
-							<GameParameterRef Name="RTPC_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
+							<GameParameterRef Name="AKGP_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
 							<Value>86.7532467532468</Value>
 						</RTPCValue>
 						<RTPCValue>
-							<GameParameterRef Name="Bus_Voice" ID="{9CF10DE5-32FB-4741-9D1F-EBA407F8E2E7}"/>
+							<GameParameterRef Name="AKGP_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}"/>
 							<Value>100</Value>
 						</RTPCValue>
 						<RTPCValue>
-							<GameParameterRef Name="Bus_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}"/>
+							<GameParameterRef Name="AKGP_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
 							<Value>100</Value>
 						</RTPCValue>
 						<RTPCValue>
-							<GameParameterRef Name="Bus_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
-							<Value>100</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="Bus_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"/>
+							<GameParameterRef Name="AKGP_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"/>
 							<Value>100</Value>
 						</RTPCValue>
 					</RTPCValueList>
@@ -80,56 +76,56 @@
 						<CurrentStateRef Name="None" ID="{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<CurrentSwitchRef Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
 						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>
 				<SoundcasterSession Name="AMB TEST" ID="{FD9DD7B6-D642-46FC-B38E-02D64FF06CDB}">
 					<ModuleList>
 						<Module>
-							<ObjectRef Name="AMB_GAMEPLAY" ID="{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<ObjectRef Name="AKE_Gameplay" ID="{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AMB_GROWL" ID="{BB85019A-5DFC-4CC8-BFD0-42EC5081E445}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<ObjectRef Name="AKE_Growl" ID="{BB85019A-5DFC-4CC8-BFD0-42EC5081E445}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="1" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AMB_BREATH" ID="{AA87B9BB-78F7-4E1B-B3CB-35E5EF3E9618}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<ObjectRef Name="AKE_Breath" ID="{AA87B9BB-78F7-4E1B-B3CB-35E5EF3E9618}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="2" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AMB_VILLAGE" ID="{A069072C-C569-4701-9756-087063501AE3}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<ObjectRef Name="AKE_Village" ID="{A069072C-C569-4701-9756-087063501AE3}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="2" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AMB_VILLAGE_HEARTBEAT" ID="{4F9B89C2-3761-41E6-BF81-653EEBA91D79}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<ObjectRef Name="AKE_VillageHeartbeat" ID="{4F9B89C2-3761-41E6-BF81-653EEBA91D79}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="2" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_MU_Village" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<ObjectRef Name="AKE_Heart" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
 							<Position X="3" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Play_MU_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<ObjectRef Name="AKE_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
 							<Position X="3" Y="3"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AMB_WEAKENEDZONE" ID="{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<ObjectRef Name="AKE_WeakenedZone" ID="{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="4" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AMB_CORRUPTEDZONE" ID="{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}" WorkUnitID="{60FC85B9-1094-4AAB-B1D8-3ABB655D206B}"/>
+							<ObjectRef Name="AKE_CorruptedZone" ID="{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="4" Y="1"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
 						<RTPCValue>
-							<GameParameterRef Name="RTPC_PlayerDistance" ID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}"/>
+							<GameParameterRef Name="AKGP_PlayerDistance" ID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}"/>
 							<Value>100</Value>
 						</RTPCValue>
 						<RTPCValue>
-							<GameParameterRef Name="Bus_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
+							<GameParameterRef Name="AKGP_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
 							<Value>100</Value>
 						</RTPCValue>
 					</RTPCValueList>
@@ -137,7 +133,7 @@
 						<CurrentStateRef Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Run" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<CurrentSwitchRef Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
 						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>

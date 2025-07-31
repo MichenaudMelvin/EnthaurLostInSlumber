@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}" SchemaVersion="123">
+	<GameParameters>
+		<WorkUnit Name="Gameplay" ID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="AKGP_PlayerDistance" ID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="AKGP_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
+	</GameParameters>
+</WwiseDocument>

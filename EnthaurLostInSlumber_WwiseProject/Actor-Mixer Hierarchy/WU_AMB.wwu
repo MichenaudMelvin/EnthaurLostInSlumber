@@ -181,7 +181,7 @@
 							<StateInfo>
 								<StateGroupList>
 									<StateGroupInfo>
-										<StateGroupRef Name="STG_WEAKENEDZONE" ID="{BE53788A-24ED-40A0-9285-BE9E6C56B454}"/>
+										<StateGroupRef Name="AKST_WeakenedZone" ID="{BE53788A-24ED-40A0-9285-BE9E6C56B454}"/>
 									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>

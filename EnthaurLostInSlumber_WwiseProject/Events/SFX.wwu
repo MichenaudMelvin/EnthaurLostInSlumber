@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{3E0841D4-B946-4638-92BD-0C93C60583DC}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="SFX" ID="{3E0841D4-B946-4638-92BD-0C93C60583DC}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="10"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<Folder Name="Gameplay" ID="{F516DF05-C518-4EB3-B745-E735EF7FDCFE}" ShortID="491904476">
+					<ChildrenList>
+						<Event Name="AKE_AmberDoor" ID="{058ED576-C9DC-436F-BC80-C460F36A2F0B}">
+							<ChildrenList>
+								<Action Name="" ID="{5DDCC906-1109-48F0-A3DF-413968E56394}" ShortID="590029062">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_NerveDoor_Layer_Gore" ID="{BC65F784-57F9-48AE-84CA-6531706B8A45}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{23B5CE01-FE88-4380-8FFF-403BEE919CBD}" ShortID="230915798">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_NerveDoor_Layer_Gore02" ID="{CB581F83-DA63-46ED-8007-23DA1E7C57BD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{32F02B96-6D6D-49F6-B371-365E1A4708C5}" ShortID="558922395">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_NerveDoor_Layer_Woosh" ID="{91722D8D-D4DD-49E4-B958-108615EA18FE}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_GrabNerve" ID="{B94FCB08-373F-4AB1-ACD3-52ECCEDF635F}">
+							<ChildrenList>
+								<Action Name="" ID="{9B76EA19-15FC-41C5-9186-D368B00FE7DE}" ShortID="764497118">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Grab_Nerve" ID="{AA7B027C-349E-4E64-919A-56EB8D0421D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Cloth" ID="{69FE522F-23A7-4F90-9BC1-5A201A346C39}">
+							<ChildrenList>
+								<Action Name="" ID="{A524C1DB-3BC0-420A-8D4E-44B45AB1EC90}" ShortID="576605213">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="MC_Cloth" ID="{7CB79212-C1AB-4552-9239-7ACCD207BB2D}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_StopNerveStretch" ID="{C2BCB29F-3574-4185-A670-2E3B736BB478}">
+							<ChildrenList>
+								<Action Name="" ID="{5142CFDF-949F-485B-8DEE-B76B83372D8F}" ShortID="869268614">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="LPX_Nerve_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{42545181-3C3A-4B0B-A226-ABD1641E6D96}" ShortID="145428009">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="LPX_Nerve_Stretch_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_StartNerveStretch" ID="{86D55011-33D5-488E-A299-439AE1860B89}">
+							<ChildrenList>
+								<Action Name="" ID="{4295B903-D009-4FC5-BD77-A6170AFEC7C5}" ShortID="531200954">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="LPX_Nerve_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{852DAE5D-3900-4B10-B99B-31A55666C009}" ShortID="179194033">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="LPX_Nerve_Stretch_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Land" ID="{27009C7D-31EB-42D4-BEA8-E873A733B256}">
+							<ChildrenList>
+								<Action Name="" ID="{4EE8B4A4-94B4-4312-9697-C32B0138E5B7}" ShortID="810462603">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SW_MC_Land_Material" ID="{DB871AA9-6A46-4727-B3CC-EE5984C3784C}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_NerveReceptacleActivate" ID="{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}">
+							<ChildrenList>
+								<Action Name="" ID="{474388E8-4280-49C3-8FD7-1768CB8381FB}" ShortID="290478775">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_NerveReceptacle_Activate" ID="{6D409423-B1F9-4103-8241-B07692B2A8A1}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{B107B056-C2A2-4550-A82E-73A64BC7FE36}" ShortID="897915468">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{E351266E-BF02-49A3-8DAB-5C8D7BB72BBF}" ShortID="30777389">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{F3E3E32E-1BF6-4616-9EB7-3F0C3EC64349}" ShortID="98135907">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_InjectAmbrer" ID="{14CA4FE7-8867-4283-AD24-5919B3F33532}">
+							<ChildrenList>
+								<Action Name="" ID="{0F0CB869-5B15-4946-8C24-002E10FE2C51}" ShortID="799406113">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Inject_Ambre" ID="{E1B7188B-98A6-4C2B-BF1F-8B261A83B649}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_RespawnTreeActivate" ID="{99E1A8F0-FB47-4839-860B-4D205E6B0F5D}">
+							<ChildrenList>
+								<Action Name="" ID="{4FAB28E9-5A93-492E-9D38-F7814461CD3D}" ShortID="468410651">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_RespawnTree_Activate" ID="{C10129E7-0C73-43C5-8343-AA601F1F0A67}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_MuscleBounce" ID="{7E7C5F33-63F9-44F5-A0D3-1B6490437C3C}">
+							<ChildrenList>
+								<Action Name="" ID="{B74DD669-09BF-40DD-809D-01A5F050F4EE}" ShortID="117871265">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Muscle_Bounce" ID="{E6BC09BF-2223-4A72-8D00-7165D79DFC4A}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{3AADA5BA-D228-4307-9BDF-2FAC31E4971D}" ShortID="955571925">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Muscle_Bounce_Woosh" ID="{ED9A4C5C-DEDC-4F27-ADEC-0020597A6D2B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Electricity" ID="{3BD0B7D7-1E41-4BC9-BFCE-EB60634E0A08}">
+							<ChildrenList>
+								<Action Name="" ID="{1BB20F7D-EAF0-41C7-8A4A-7E09ECD0E695}" ShortID="310297691">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Electricity_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{9D3464D2-0195-44E5-83E8-D00F2BCD74FB}" ShortID="881183275">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{2DBB1D54-8979-491A-ABA6-C6224BEE9A5A}" ShortID="720303419">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{CAEB9CD8-6FC1-4F0E-8E32-D0FBF9A7DC38}" ShortID="612409937">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PlantGrowth" ID="{EA587034-B04E-4D91-A9B1-4998FECBC59D}">
+							<ChildrenList>
+								<Action Name="" ID="{DE06014C-9A6B-4F09-81DA-7ED870E7C06D}" ShortID="107662722">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Plant_Growth" ID="{43E56E05-8E91-4218-8717-411147914A09}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_MakeMuscleSoft" ID="{C5A46045-32E9-48D9-8CB8-7B551A12DC12}">
+							<ChildrenList>
+								<Action Name="" ID="{DF83E810-9928-4EC6-A905-8E9DCA171550}" ShortID="559689581">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Make_Soft" ID="{B711BC54-16B7-4970-9E9A-A0138B42212A}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_NerveReceptacleDesactivate" ID="{A94B20D5-2A8E-4301-A951-C09D4C0A7716}">
+							<ChildrenList>
+								<Action Name="" ID="{88BAEB35-7E80-4E8D-86D1-4A8D4EE38DDE}" ShortID="716920485">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_NerveReceptacle_Desactivate" ID="{F3F03812-D49A-4806-BE85-2564744415A6}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_MakeMuscleSolid" ID="{E46499EB-6249-4DEE-B975-F44DD0E7AEC1}">
+							<ChildrenList>
+								<Action Name="" ID="{76327DD5-8B5D-460A-97E1-6AD5A9BD92E6}" ShortID="156467685">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Make_Hard" ID="{79FB42B4-080A-434A-BEED-064ABC491708}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Jump" ID="{84B16784-5C30-4EFA-A338-4ACE6DA19306}">
+							<ChildrenList>
+								<Action Name="" ID="{9FA0D5B6-DFF7-4196-9070-A44C3C57DFD0}" ShortID="1072651831">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SW_MC_Jump_Material" ID="{7010AB05-F651-499E-B89B-EBA9F63EDAAA}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_MuscleSolidTransformation" ID="{704DF249-C842-4399-A326-E93C5BDA66B8}">
+							<ChildrenList>
+								<Action Name="" ID="{F8568B00-33C8-4434-B975-B497340850B6}" ShortID="44651939">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Muscle_Hard" ID="{CB26BA98-0C82-4458-A5A3-492A44A6937C}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_MuscleSoftTransformation" ID="{F84BABDD-28BD-412A-95A6-5FDDB1D95432}">
+							<ChildrenList>
+								<Action Name="" ID="{C3B2020C-A553-45E8-AEC4-884A9D243875}" ShortID="291631587">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Muscle_Soft" ID="{EE69607D-A99D-4D19-8790-31D6F8AD3C21}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Footsteps" ID="{40C0DABC-E260-4BE7-9895-167ACF357472}">
+							<ChildrenList>
+								<Action Name="" ID="{2555F2E3-B5D4-49B3-AFAE-E44102D349B0}" ShortID="1016873512">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SW_MC_FS_Speed" ID="{04A75913-5906-4469-B94A-A2F94F445B6A}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{BCFCEC4F-E00A-4D8F-A347-634B5E9758A3}" ShortID="738953472">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="41"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AKE_Cloth" ID="{69FE522F-23A7-4F90-9BC1-5A201A346C39}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_TakeAmbrer" ID="{98E20B7D-1940-43B9-B344-D1F205698516}">
+							<ChildrenList>
+								<Action Name="" ID="{68926E15-F8AE-4EE9-BB4A-CDB0706E2B1E}" ShortID="558593910">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Take_Ambre" ID="{04BC95ED-F12E-4618-912B-B689052358FA}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_StopElevator" ID="{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}">
+							<ChildrenList>
+								<Action Name="" ID="{ECF102C9-D6DA-4063-B6D8-9D43982E9486}" ShortID="376990303">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Elevator" ID="{3F19CCE3-6437-4B77-BADB-25C5A1B7EA38}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{5251D9FA-374B-473E-8176-E8D69D90B41C}" ShortID="510275303">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Elevator_Stop" ID="{6DB15B6C-C30A-479E-BF72-5D420434778F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_StartElevator" ID="{859C566F-6B89-419E-B78B-2BAF354E01B4}">
+							<ChildrenList>
+								<Action Name="" ID="{6661BE4B-63AF-455E-8669-2351DD88F4FD}" ShortID="1063910099">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Elevator_Start" ID="{714ED309-2680-42BE-A542-3C3173B720C0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{514ABBA8-237D-4CF7-972E-DEC59F49F94D}" ShortID="385087570">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Elevator" ID="{3F19CCE3-6437-4B77-BADB-25C5A1B7EA38}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">
+					<ChildrenList>
+						<Event Name="AKE_CorruptedZone" ID="{CF1A9F0A-BFE6-4499-A5DF-531AE4AC2AFC}">
+							<ChildrenList>
+								<Action Name="" ID="{079296D3-91A2-47BD-A7DB-00DB9E38235C}" ShortID="389105619">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="0.8"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Pad_Corrupted" ID="{55A4F894-2304-4530-A88F-5BDC2C6F6C6A}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{07540074-F890-42FD-ADB7-11117AD17ABF}" ShortID="467869929">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.8"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Pad_Healty" ID="{BBA1EA69-7281-4B05-8E65-C3C813C0807F}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Gameplay" ID="{D5CFEFE7-262F-4B2A-976D-A7DF8966F82B}">
+							<ChildrenList>
+								<Action Name="" ID="{74AF1941-8B10-45C6-ACA7-067479CED0F2}" ShortID="282313656">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="0.8"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Pad_Healty" ID="{BBA1EA69-7281-4B05-8E65-C3C813C0807F}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{107F548B-A794-407D-8EFC-442023D7A9A9}" ShortID="244744573">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.8"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Pad_Corrupted" ID="{55A4F894-2304-4530-A88F-5BDC2C6F6C6A}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{96DCBD57-7774-4483-9561-5BB31EC13C3D}" ShortID="129103539">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}" WorkUnitID="{8262D412-41CB-447C-9F54-76B465B36326}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{C1B809CA-5572-4AF4-8B9A-4A4E9127F9B7}" ShortID="854639958">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Village" ID="{3324F281-A4BD-4EF2-8702-D09237051303}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Village" ID="{A069072C-C569-4701-9756-087063501AE3}">
+							<ChildrenList>
+								<Action Name="" ID="{DC962D6B-FBB4-4974-96F0-76BBC0EA5E48}" ShortID="939671018">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Village" ID="{3324F281-A4BD-4EF2-8702-D09237051303}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_VillageHeartbeat" ID="{4F9B89C2-3761-41E6-BF81-653EEBA91D79}">
+							<ChildrenList>
+								<Action Name="" ID="{018BF2CA-2057-4B52-B96D-8947FC513B58}" ShortID="1026644786">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Heartbeat_LP" ID="{0E488877-2441-4266-B78A-3FDDA9ABC965}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_WeakenedZone" ID="{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}">
+							<ChildrenList>
+								<Action Name="" ID="{C0FA2477-D339-4301-9B45-8B6971CD8689}" ShortID="313846628">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Weakened" ID="{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}" WorkUnitID="{8262D412-41CB-447C-9F54-76B465B36326}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Growl" ID="{BB85019A-5DFC-4CC8-BFD0-42EC5081E445}">
+							<ChildrenList>
+								<Action Name="" ID="{B3EAF828-2989-45E3-A258-7A26DA032690}" ShortID="243836881">
+									<PropertyList>
+										<Property Name="Probability" Type="Real64" Value="13"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Growl" ID="{F8A46104-846A-40CB-B97A-6FCF4A4CE44C}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Breath" ID="{AA87B9BB-78F7-4E1B-B3CB-35E5EF3E9618}">
+							<ChildrenList>
+								<Action Name="" ID="{E809F2E7-B0B5-4AC5-A1C4-D491398E8007}" ShortID="466019249">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Breath" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="UI" ID="{2AA4AED4-6A96-48B1-BB56-39665DFA7BB3}" ShortID="733077516">
+					<ChildrenList>
+						<Event Name="AKE_Hover" ID="{D6BDF366-8758-4623-B4B1-2C775ED4B6FD}">
+							<ChildrenList>
+								<Action Name="" ID="{327505E7-75FF-4444-BB0E-0176162F95D0}" ShortID="619959527">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UI_PauseMenu_Hover" ID="{6592C382-CC1D-4B93-BC32-33DB6D425716}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_SplashScreen" ID="{76D9CB8F-97AF-46F2-A168-BC70655A11D9}">
+							<ChildrenList>
+								<Action Name="" ID="{F1558550-F24E-44B0-A137-11C62A46224F}" ShortID="740738065">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UI_Pausemenu_SpalshScreen_Continue" ID="{631CE746-53A9-4845-94C3-2DC2ED1E0674}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_ClosePauseMenu" ID="{FF4EFF4A-526D-45D3-9EA2-DC0694C2F9F2}">
+							<ChildrenList>
+								<Action Name="" ID="{19CCB1EC-020C-4CA0-8B4C-2A14DA6FC1B2}" ShortID="1041307792">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UI_PauseMenu_Exit" ID="{03E6210F-1D34-4A2C-AA6E-5CD3B65B777A}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_EnterNewPlace" ID="{B759DE3D-8FE8-41CC-8A76-704CB05DA2DF}">
+							<ChildrenList>
+								<Action Name="" ID="{6C026CEF-DCF4-4BB7-9FC2-759420D45D8C}" ShortID="1049772711">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UI_NewPlaceTitle" ID="{F2AC06E3-3365-46D6-9B80-DAAC2264C7F5}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_OpenPauseMenu" ID="{F6D96C0E-75C5-4FE5-97F7-273B6051D7D8}">
+							<ChildrenList>
+								<Action Name="" ID="{CF413714-9B81-4208-96E0-CAAC100C0DA8}" ShortID="244873042">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UI_PauseMenu_Enter" ID="{88D0F736-5A11-4081-854A-C4A759813692}" WorkUnitID="{7BD822FD-8DCC-4D84-8C02-5C09400E0DA1}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
