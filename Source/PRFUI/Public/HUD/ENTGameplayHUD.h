@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "GameElements/AmberOre.h"
-#include "InGameUI.generated.h"
+#include "ENTGameplayHUD.generated.h"
 
 class FCTweenInstance;
 class UImage;
@@ -16,7 +16,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNerveActionReady, bool, bValue);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractionReady, bool, bValue);
 
 UCLASS()
-class PROTOPROFONDEURS_API UInGameUI : public UUserWidget
+class PRFUI_API UENTGameplayHUD : public UUserWidget
 {
 	GENERATED_BODY()
 
@@ -48,7 +48,9 @@ protected:
 	void OnAmberUpdate(EAmberType AmberType, int AmberAmount);
 
 public:
+	UFUNCTION()
 	void SetPropulsionActive(bool active);
 
-	void SetInteraction(bool bActive) const;
+	UFUNCTION()
+	void SetInteraction(bool bActive);
 };

@@ -3,7 +3,7 @@
 
 #include "Menus/Main/PRFMainMenu.h"
 #include "PRFUIManager.h"
-#include "UIManagerSettings.h"
+#include "Config/ENTUIConfig.h"
 #include "Components/Button.h"
 #include "Subsystems/ENTPlayerSaveSubsystem.h"
 
@@ -149,9 +149,9 @@ void UPRFMainMenu::HandleQuitMenu()
 	GetUIManager()->OpenMenu(GetUIManager()->GetQuitMenu(), false);
 }
 
-const UUIManagerSettings* UPRFMainMenu::GetUIManagerSettings() const
+const UENTUIConfig* UPRFMainMenu::GetUIManagerSettings() const
 {
-	return GetDefault<UUIManagerSettings>();
+	return GetDefault<UENTUIConfig>();
 }
 
 UPRFUIManager* UPRFMainMenu::GetUIManager() const

@@ -2,12 +2,10 @@
 
 
 #include "Controller/PRFUIController.h"
-
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "PRFUIManager.h"
 #include "Blueprint/UserWidget.h"
-#include "Player/FirstPersonCharacter.h"
 
 void FActionUI::BindActionUI(UEnhancedInputComponent* EnhancedInputComponent, UObject* Object)
 {
@@ -44,21 +42,6 @@ APRFUIController::APRFUIController()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-TObjectPtr<UInputMappingContext> APRFUIController::GetUIMappingContext() const
-{
-	return UIMappingContext;
-}
-
-TObjectPtr<UInputMappingContext> APRFUIController::GetAnyKeyMappingContext() const
-{
-	return AnyKeyMappingContext;
-}
-
-TObjectPtr<UInputMappingContext> APRFUIController::GetDefaultMappingContext() const
-{
-	return UIMappingContext;
-}
-
 void APRFUIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -75,10 +58,10 @@ void APRFUIController::BeginPlay()
 		return;
 	}
 
-	if (!UIMappingContext)
+	if (!AnyKeyMappingContext)
 	{
 #if WITH_EDITOR
-		const FString Message = FString::Printf(TEXT("Missing DefaultMappingContext in %s"), *GetClass()->GetName());
+		const FString Message = FString::Printf(TEXT("Missing AnyKeyMappingContext in %s"), *GetClass()->GetName());
 
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
 		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
@@ -95,7 +78,7 @@ void APRFUIController::SetupInputComponent()
 
 	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 
-	if (EnhancedInputComponent == nullptr)
+	if (!EnhancedInputComponent)
 	{
 		return;
 	}
@@ -103,7 +86,7 @@ void APRFUIController::SetupInputComponent()
 	ResumeAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED(APRFUIController, OnInputResume);
 	AnyAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED(APRFUIController, OnInputAny);
 	BackAction.FunctionNameUI = GET_FUNCTION_NAME_CHECKED(APRFUIController, OnInputBack);
-	
+
 	ResumeAction.BindActionUI(EnhancedInputComponent, this);
 	AnyAction.BindActionUI(EnhancedInputComponent, this);
 	BackAction.BindActionUI(EnhancedInputComponent, this);
@@ -149,13 +132,6 @@ void APRFUIController::OnInputBack()
 	{
 		return;
 	}
-	
+
 	UIManager->CloseCurrentMenu();
 }
-
-// Called every frame
-void APRFUIController::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-

@@ -13,7 +13,6 @@
 #include "Components/PlayerToNervePhysicConstraint.h"
 #include "Gamefeel/ElectricityFeedback.h"
 #include "Kismet/GameplayStatics.h"
-#include "Parameters/BPRefParameters.h"
 #include "Player/FirstPersonCharacter.h"
 
 ANerveReceptacle::ANerveReceptacle()
@@ -145,7 +144,12 @@ void ANerveReceptacle::PlayElectricityAnimation(ANerve* Nerve)
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	Player->GetCameraShake()->MakeSmallCameraShake();
 
-	NerveElectricityFeedback = GetWorld()->SpawnActor<AElectricityFeedback>(GetDefault<UBPRefParameters>()->ElectricityFeedback, Nerve->GetActorTransform());
+	if (!ElectricityFeedbackClass)
+	{
+		return;
+	}
+
+	NerveElectricityFeedback = GetWorld()->SpawnActor<AElectricityFeedback>(ElectricityFeedbackClass, Nerve->GetActorTransform());
 	KeepInMemoryNerve = Nerve;
 
 	FCTween::Play(0.f, 30.f,

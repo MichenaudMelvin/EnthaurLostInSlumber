@@ -3,8 +3,8 @@
 
 #include "Menus/Pause/PRFPauseMenu.h"
 #include "PRFUIManager.h"
-#include "UIManagerSettings.h"
-#include "Subsystems/LevelNameSubsystem.h"
+#include "Config/ENTUIConfig.h"
+#include "Subsystems/ENTLevelNameSubsystem.h"
 
 void UPRFPauseMenu::NativeConstruct()
 {
@@ -27,8 +27,7 @@ void UPRFPauseMenu::NativeConstruct()
 		QuitButton->GetCustomButton()->OnClicked.AddDynamic(this, &UPRFPauseMenu::HandleQuitButton);
 	}
 
-	
-	ULevelNameSubsystem* LevelNameSubsystem = GetGameInstance()->GetSubsystem<ULevelNameSubsystem>();
+	UENTLevelNameSubsystem* LevelNameSubsystem = GetGameInstance()->GetSubsystem<UENTLevelNameSubsystem>();
 	if (!IsValid(LevelNameSubsystem))
 	{
 		return;
@@ -68,7 +67,7 @@ void UPRFPauseMenu::HandleMainMenuButton()
 		return;
 	}
 
-	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	const UENTUIConfig* UIManagerSettings = GetDefault<UENTUIConfig>();
 	if (!IsValid(UIManagerSettings))
 	{
 		return;
@@ -86,7 +85,7 @@ void UPRFPauseMenu::HandleQuitButton()
 		return;
 	}
 
-	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	const UENTUIConfig* UIManagerSettings = GetDefault<UENTUIConfig>();
 	if (!IsValid(UIManagerSettings))
 	{
 		return;
@@ -104,7 +103,7 @@ void UPRFPauseMenu::HandleOptionsMenuButton()
 		return;
 	}
 
-	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	const UENTUIConfig* UIManagerSettings = GetDefault<UENTUIConfig>();
 	if (!IsValid(UIManagerSettings))
 	{
 		return;
@@ -127,7 +126,7 @@ void UPRFPauseMenu::HandleRestartCheckpointButton()
 		return;
 	}
 
-	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	const UENTUIConfig* UIManagerSettings = GetDefault<UENTUIConfig>();
 	if (!IsValid(UIManagerSettings))
 	{
 		return;

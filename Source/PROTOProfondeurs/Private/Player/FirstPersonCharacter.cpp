@@ -11,9 +11,10 @@
 #include "Components/CapsuleComponent.h"
 #include "ENTInteractableComponent.h"
 #include "GameElements/AmberOre.h"
+#include "GameElements/RespawnTree.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/PlayerStart.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "UI/InGameUI.h"
 #include "Player/FirstPersonController.h"
 #include "Player/States/CharacterState.h"
 #include "Player/States/CharacterStateMachine.h"
@@ -28,7 +29,6 @@
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Subsystems/ENTPlayerSaveSubsystem.h"
-#include "UI/DeathMenuUI.h"
 
 #if WITH_EDITORONLY_DATA
 #include "EditorSettings/ENTEditorSettings.h"
@@ -133,26 +133,6 @@ void AFirstPersonCharacter::BeginPlay()
 
 	CreateStates();
 	InitStateMachine();
-
-	if (!StartWidgetClass)
-	{
-		return;
-	}
-
-	StartWidget = CreateWidget(FirstPersonController, StartWidgetClass);
-
-#if WITH_EDITORONLY_DATA
-	const UENTEditorSettings* EditorSettings = GetDefault<UENTEditorSettings>();
-
-	if (!EditorSettings || !EditorSettings->bDisplayStartWidget)
-	{
-		return;
-	}
-#endif
-
-	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(FirstPersonController, StartWidget);
-
-	StartWidget->AddToViewport(4);
 }
 
 void AFirstPersonCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -301,7 +281,7 @@ void AFirstPersonCharacter::InteractionTrace()
 
 	if (TargetInteractable->CheckComponent(HitResult.GetComponent()))
 	{
-		SetInteractionUI(true);
+		OnInteractionFeedback.Broadcast(true);
 		CurrentInteractable = TargetInteractable;
 		CurrentInteractable->SelectPrimitive(HitResult.GetComponent());
 
@@ -317,7 +297,7 @@ void AFirstPersonCharacter::InteractionTrace()
 
 void AFirstPersonCharacter::RemoveInteraction()
 {
-	SetInteractionUI(false);
+	OnInteractionFeedback.Broadcast(false);
 	if(!CurrentInteractable)
 	{
 		return;
@@ -325,14 +305,6 @@ void AFirstPersonCharacter::RemoveInteraction()
 
 	CurrentInteractable->SelectPrimitive(nullptr);
 	CurrentInteractable = nullptr;
-}
-
-void AFirstPersonCharacter::SetInteractionUI(const bool bState) const
-{
-	if (CurrentInteractable != nullptr)
-	{
-		GetPlayerController()->GetCurrentInGameUI()->SetInteraction(bState);
-	}
 }
 
 #pragma endregion
@@ -667,10 +639,43 @@ void AFirstPersonCharacter::LoadGameElement(const FENTGameElementData& GameEleme
 
 #pragma region Respawn
 
-void AFirstPersonCharacter::Respawn(const FTransform& RespawnTransform)
+void AFirstPersonCharacter::Respawn()
 {
-	//SetActorTransform(RespawnTransform);
-	SetActorLocation(RespawnTransform.GetLocation());
+	ARespawnTree* RespawnTree = GetRespawnTree();
+	FTransform RespawnTransform(FTransform::Identity);
+
+	if (RespawnTree)
+	{
+		RespawnTransform = RespawnTree->GetRespawnTransform();
+	}
+	else
+	{
+		AActor* PlayerStart = UGameplayStatics::GetActorOfClass(this, APlayerStart::StaticClass());
+		if (PlayerStart)
+		{
+			RespawnTransform = PlayerStart->GetActorTransform();
+		}
+
+#if WITH_EDITOR
+		else
+		{
+			const FString Message = FString::Printf(TEXT("Missing playerStart in this level"));
+
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+			FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+		}
+#endif
+	}
+
+	FRotator CurrentRotation = GetActorRotation();
+	FRotator RespawnRotation = RespawnTransform.GetRotation().Rotator();
+	RespawnRotation.Pitch = CurrentRotation.Pitch;
+	RespawnRotation.Roll = CurrentRotation.Roll;
+
+	RespawnTransform.SetRotation(RespawnRotation.Quaternion());
+	RespawnTransform.SetScale3D(FVector::OneVector);
+
+	SetActorTransform(RespawnTransform);
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	OnRespawn.Broadcast();
@@ -678,13 +683,12 @@ void AFirstPersonCharacter::Respawn(const FTransform& RespawnTransform)
 
 void AFirstPersonCharacter::OnPlayerDie()
 {
-	if (!FirstPersonController || !FirstPersonController->GetDeathMenuUI())
+	if (!FirstPersonController)
 	{
 		return;
 	}
 
-	FirstPersonController->SetPause(true);
-	FirstPersonController->GetDeathMenuUI()->AddToViewport();
+	HealthComponent->ResetHealth();
 }
 
 #pragma endregion
@@ -694,6 +698,19 @@ void AFirstPersonCharacter::OnPlayerDie()
 void AFirstPersonCharacter::ResetFootStepsEvent() const
 {
 	FootstepsSounds->AkAudioEvent = DefaultFootStepEvent;
+}
+
+UPlayerToNervePhysicConstraint* AFirstPersonCharacter::AddConstraint()
+{
+	UActorComponent* Comp = AddComponentByClass(UPlayerToNervePhysicConstraint::StaticClass(), false, FTransform::Identity, false);
+	if (!Comp)
+	{
+		return nullptr;
+	}
+
+	UPlayerToNervePhysicConstraint* Constraint = Cast<UPlayerToNervePhysicConstraint>(Comp);
+	OnConstraintAdded.Broadcast(Constraint);
+	return Constraint;
 }
 
 #pragma endregion

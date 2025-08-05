@@ -3,7 +3,7 @@
 
 #include "Menus/Pause/PRFOptionsMenu.h"
 #include "PRFUIManager.h"
-#include "UIManagerSettings.h"
+#include "Config/ENTUIConfig.h"
 #include "Components/Button.h"
 #include "Kismet/KismetTextLibrary.h"
 #include "Saves/ENTSettingsSave.h"
@@ -196,7 +196,7 @@ void UPRFOptionsMenu::OnViewControlsButtonClicked()
 		return;
 	}
 	
-	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
+	const UENTUIConfig* UIManagerSettings = GetDefault<UENTUIConfig>();
 	if (!IsValid(UIManagerSettings))
 	{
 		return;

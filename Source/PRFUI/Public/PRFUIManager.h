@@ -7,11 +7,6 @@
 #include "UObject/Object.h"
 #include "PRFUIManager.generated.h"
 
-class AFirstPersonController;
-
-/**
- * 
- */
 UCLASS()
 class PRFUI_API UPRFUIManager : public UGameInstanceSubsystem
 {
@@ -19,18 +14,18 @@ class PRFUI_API UPRFUIManager : public UGameInstanceSubsystem
 
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+
 	virtual void Deinitialize() override;
 
 	// bIsSubMenu is for confirmation boxes that have to not hide the menu just before
 	// Can also be used for menus with a fixed part and an inner part that changes (options menu)
-
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "UI")
 	void OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "UI")
 	void CloseCurrentMenu();
-	
-	UFUNCTION(BlueprintCallable)
+
+	UFUNCTION(BlueprintCallable, Category = "UI")
 	void CloseAllMenus(EPRFUIState InState);
 
 	TObjectPtr<UUserWidget> GetPauseMenu() const { return PauseMenu; }
@@ -44,10 +39,10 @@ public:
 	TObjectPtr<UUserWidget> GetRestartConfirmationMenu() const { return RestartConfirmationMenu; }
 
 	EPRFUIState GetMenuState() const { return CurrentState; }
-	
-	UFUNCTION(BlueprintCallable)
+
+	UFUNCTION(BlueprintCallable, Category = "UI")
 	void SetMenuState(EPRFUIState InUIState);
-	
+
 	void CheckMenuState();
 
 	void SetUIInputMode() const;
@@ -70,6 +65,7 @@ protected:
 
 #pragma region UI State
 
+protected:
 	EPRFUIState CurrentState = EPRFUIState::AnyMenu;
 
 	DECLARE_MULTICAST_DELEGATE_OneParam(FOnUIContextChanged, EPRFUIState);
@@ -79,35 +75,37 @@ protected:
 
 #pragma region Main Menus
 
-	UPROPERTY(BlueprintReadOnly)
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "UI|PauseMenus")
 	TObjectPtr<UUserWidget> PressAnyMenu = nullptr;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI|MainMenus")
 	TObjectPtr<UUserWidget> MainMenu = nullptr;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI|MainMenus")
 	TObjectPtr<UUserWidget> NewGameMenu = nullptr;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI|MainMenus")
 	TObjectPtr<UUserWidget> LoadGameMenu = nullptr;
-	
-	UPROPERTY()
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI|MainMenus")
 	TObjectPtr<UUserWidget> CreditsMenu = nullptr;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI|MainMenus")
 	TObjectPtr<UUserWidget> QuitMenu = nullptr;
-	
+
 #pragma endregion
 
 #pragma region Pause Menus
-	
-	UPROPERTY()
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "UI|PauseMenus")
 	TObjectPtr<UUserWidget> PauseMenu = nullptr;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI|PauseMenus")
 	TObjectPtr<UUserWidget> OptionsMenu = nullptr;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI|PauseMenus")
 	TObjectPtr<UUserWidget> MainMenuConfirmationMenu = nullptr;
 
 	TObjectPtr<UUserWidget> RestartConfirmationMenu = nullptr;
@@ -116,10 +114,23 @@ protected:
 
 #pragma region Option Menus
 
-	UPROPERTY()
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "UI|OptionMenus")
 	TObjectPtr<UUserWidget> ControlsMenu = nullptr;
+
 #pragma endregion
-	
+
+#pragma region Actions
+
+protected:
+	UFUNCTION()
+	void DisplayPauseMenu();
+
+	UFUNCTION()
+	void Resume();
+
+#pragma endregion
+
 private:
 	TArray<TWeakObjectPtr<UUserWidget>> MenuStack;
 	TMap<FString, UUserWidget*> MenuClasses;

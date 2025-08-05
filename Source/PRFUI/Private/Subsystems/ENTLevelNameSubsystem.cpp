@@ -1,25 +1,23 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Subsystems/LevelNameSubsystem.h"
-#include "Parameters/BPRefParameters.h"
+#include "Subsystems/ENTLevelNameSubsystem.h"
 
-
-void ULevelNameSubsystem::Initialize(FSubsystemCollectionBase& Collection)
+void UENTLevelNameSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 
-	WorldInitDelegateHandle = FWorldDelegates::OnWorldInitializedActors.AddUObject(this, &ULevelNameSubsystem::SetupWorldName);
+	WorldInitDelegateHandle = FWorldDelegates::OnWorldInitializedActors.AddUObject(this, &UENTLevelNameSubsystem::SetupWorldName);
 }
 
-void ULevelNameSubsystem::Deinitialize()
+void UENTLevelNameSubsystem::Deinitialize()
 {
 	Super::Deinitialize();
 
 	FWorldDelegates::OnWorldInitializedActors.Remove(WorldInitDelegateHandle);
 }
 
-void ULevelNameSubsystem::SetupWorldName(const FActorsInitializedParams& ActorsInitializedParams)
+void UENTLevelNameSubsystem::SetupWorldName(const FActorsInitializedParams& ActorsInitializedParams)
 {
 	FString SourcePath;
 	FString RemappedPath;
@@ -28,7 +26,7 @@ void ULevelNameSubsystem::SetupWorldName(const FActorsInitializedParams& ActorsI
 	FSoftObjectPath SoftObjectPath(SourcePath);
 	TSoftObjectPtr<UWorld> CurrentWorldSoftPtr(SoftObjectPath);
 
-	TMap<TSoftObjectPtr<UWorld>, FDuoText> LevelNames = GetDefault<UBPRefParameters>()->LevelNames;
+	TMap<TSoftObjectPtr<UWorld>, FDuoText> LevelNames = GetDefault<UENTUIConfig>()->LevelNames;
 
 	FDuoText* LevelName = LevelNames.Find(CurrentWorldSoftPtr);
 	if (!LevelName)

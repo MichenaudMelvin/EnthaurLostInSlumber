@@ -59,6 +59,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> DisabledNoise;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity")
+	TSubclassOf<AActor> ElectricityFeedbackClass;
+
 #if WITH_EDITORONLY_DATA
 	/**
 	 * @brief Set visibility to true if you want to edit it

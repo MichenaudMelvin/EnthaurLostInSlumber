@@ -6,7 +6,6 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameElements/Nerve.h"
-#include "UI/InGameUI.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Physics/NervePhysicsConstraint.h"
@@ -38,6 +37,11 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 		bHasReleasedInteraction = true;
 	}
 
+	if (!LinkedNerve)
+	{
+		return;
+	}
+
 	float Distance = LinkedNerve->GetCableLength();
 	float Lerp = UKismetMathLibrary::NormalizeToRange(
 			Distance,
@@ -65,8 +69,8 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 	{
 		if (!IsPropultionActive)
 		{
-			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(true);
 			IsPropultionActive = true;
+			OnPropulsionStateChanged.Broadcast(IsPropultionActive);
 		}
 
 		if (PlayerController->GetPlayerInputs().bInputInteractPressed && !IsAlreadyPropulsing)
@@ -90,8 +94,8 @@ void UPlayerToNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick T
 
 		if (IsPropultionActive)
 		{
-			PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
 			IsPropultionActive = false;
+			OnPropulsionStateChanged.Broadcast(IsPropultionActive);
 		}
 
 		else if (PlayerController->GetPlayerInputs().bInputInteractPressed)
@@ -138,7 +142,8 @@ void UPlayerToNervePhysicConstraint::ReleasePlayer(const bool DetachFromPlayer)
 {
 	if (PlayerCharacter && PlayerController)
 	{
-		PlayerController->GetCurrentInGameUI()->SetPropulsionActive(false);
+		IsPropultionActive = false;
+		OnPropulsionStateChanged.Broadcast(IsPropultionActive);
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed;
 	}
 

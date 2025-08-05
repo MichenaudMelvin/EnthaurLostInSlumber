@@ -10,7 +10,9 @@ class AFirstPersonCharacter;
 class AFirstPersonController;
 class ANerve;
 
-UCLASS(ClassGroup = (Physics), meta=(BlueprintSpawnableComponent))
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPropulsionStateChanged, bool, bCanBePropelled);
+
+UCLASS(ClassGroup = (Physics), meta = (BlueprintSpawnableComponent))
 class PROTOPROFONDEURS_API UPlayerToNervePhysicConstraint : public UActorComponent
 {
 	GENERATED_BODY()
@@ -27,6 +29,9 @@ public:
 	void Init(ANerve* vLinkedNerve, ACharacter* vPlayerCharacter);
 	void ReleasePlayer(const bool DetachFromPlayer = false);
 	bool IsMovingTowardsPosition(const FVector& TargetPosition, float AcceptanceThreshold) const;
+
+	UPROPERTY(BlueprintAssignable, Category = "Physics")
+	FOnPropulsionStateChanged OnPropulsionStateChanged;
 
 	UPROPERTY()
 	TObjectPtr<ANerve> LinkedNerve;

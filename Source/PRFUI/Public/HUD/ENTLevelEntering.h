@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "LevelEnteringUI.generated.h"
+#include "ENTLevelEntering.generated.h"
 
 class UTextBlock;
 
 UCLASS()
-class PROTOPROFONDEURS_API ULevelEnteringUI : public UUserWidget
+class PRFUI_API UENTLevelEntering : public UUserWidget
 {
 	GENERATED_BODY()
 

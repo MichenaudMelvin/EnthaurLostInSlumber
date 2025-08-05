@@ -8,7 +8,7 @@
 #include "PRFMainMenu.generated.h"
 
 class UPRFUIManager;
-class UUIManagerSettings;
+class UENTUIConfig;
 class UButton;
 
 /**
@@ -56,6 +56,6 @@ protected:
 	UFUNCTION()
 	void HandleQuitMenu();
 
-	const UUIManagerSettings* GetUIManagerSettings() const;
+	const UENTUIConfig* GetUIManagerSettings() const;
 	UPRFUIManager* GetUIManager() const;
 };

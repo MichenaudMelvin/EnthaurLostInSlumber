@@ -4,12 +4,8 @@
 #include "Player/FirstPersonController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "UIManagerSettings.h"
 #include "Blueprint/UserWidget.h"
-#include "UI/DeathMenuUI.h"
-#include "UI/InGameUI.h"
 #include "Player/FirstPersonCharacter.h"
-#include "PRFUI/Public/PRFUIManager.h"
 
 FAction::FAction()
 {
@@ -103,21 +99,14 @@ void AFirstPersonController::BeginPlay()
 
 	Subsystem->AddMappingContext(DefaultMappingContext, 0);
 
-	CurrentInGameUI = CreateWidget<UInGameUI>(this, InGameWidgetClass);
-	if (CurrentInGameUI)
-	{
-		CurrentInGameUI->AddToViewport();
-	}
-
-	CurrentDeathUI = CreateWidget<UDeathMenuUI>(this, DeathWidgetClass);
-
-	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
-	if (!IsValid(UIManager))
-	{
-		return;
-	}
-
-	UIManager->SetMenuState(EPRFUIState::Gameplay);
+	// TODO check this
+	// UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
+	// if (!IsValid(UIManager))
+	// {
+	// 	return;
+	// }
+	//
+	// UIManager->SetMenuState(EPRFUIState::Gameplay);
 }
 
 void AFirstPersonController::Tick(float DeltaSeconds)
@@ -209,95 +198,30 @@ void AFirstPersonController::OnInputInteractTrigger(const FInputActionValue& Inp
 	PlayerInputs.bInputInteractTrigger = InputActionValue.Get<bool>();
 }
 
-void AFirstPersonController::OnInputPauseGame()
+void AFirstPersonController::OnInputPauseGame(const FInputActionValue& InputActionValue)
 {
-	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
-	if (!IsValid(UIManager))
-	{
-		return;
-	}
-
-	if (UIManager->GetMenuState() != EPRFUIState::Gameplay)
-	{
-		return;
-	}
-
-	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(GetCharacter());
-	if (!IsValid(FirstPersonCharacter))
-	{
-		return;
-	}
-
-	UUserWidget* StartWidget =  FirstPersonCharacter->GetStartWidget();
-	if (!IsValid(StartWidget))
-	{
-		return;
-	}
-
-	StartWidget->SetVisibility(ESlateVisibility::Collapsed);
-
-	//UIManager->SetMenuState(EPRFUIState::PauseMenu);
-	UIManager->OpenMenu(UIManager->GetPauseMenu(), false);
-}
-
-TObjectPtr<UInputMappingContext> AFirstPersonController::GetUIMappingContext() const
-{
-	return UIMappingContext;
-}
-
-TObjectPtr<UInputMappingContext> AFirstPersonController::GetAnyKeyMappingContext() const
-{
-	return AnyKeyMappingContext;
-}
-
-TObjectPtr<UInputMappingContext> AFirstPersonController::GetDefaultMappingContext() const
-{
-	return DefaultMappingContext;
+	PlayerInputs.bInputPauseGame = InputActionValue.Get<bool>();
+	OnPauseGame.Broadcast();
 }
 
 void AFirstPersonController::OnInputNavigate(const FInputActionValue& InputActionValue)
 {
-	
+	OnNavigate.Broadcast(InputActionValue.Get<FVector2D>());
 }
 
 void AFirstPersonController::OnInputSelect()
 {
-	
+	OnSelect.Broadcast();
 }
 
 void AFirstPersonController::OnInputBack()
 {
-	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
-	if (!IsValid(UIManager))
-	{
-		return;
-	}
-
-	UIManager->CloseCurrentMenu();
+	OnBack.Broadcast();
 }
 
 void AFirstPersonController::OnInputResume()
 {
-	UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
-	if (!IsValid(UIManager))
-	{
-		return;
-	}
-
-	switch (UIManager->GetMenuState())
-	{
-		case EPRFUIState::PauseMenu:
-			//UIManager->SetMenuState(EPRFUIState::Gameplay);
-        	UIManager->CloseAllMenus(EPRFUIState::Gameplay);
-			break;
-
-		case EPRFUIState::MainMenu:
-			UIManager->CloseCurrentMenu();
-			break;
-
-		default:
-			break;
-	}
+	OnResume.Broadcast();
 }
 
 #if WITH_EDITOR

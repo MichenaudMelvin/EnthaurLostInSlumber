@@ -640,18 +640,20 @@ void ANerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveC
 	PlayerController = Cast<AFirstPersonController>(Controller);
 	AttachNerveBall(Pawn);
 
-	PhysicConstraint = Cast<UPlayerToNervePhysicConstraint>(
-		Pawn->AddComponentByClass(UPlayerToNervePhysicConstraint::StaticClass(), false, FTransform::Identity, false)
-	);
-
-	PhysicConstraint->Init(this, Cast<ACharacter>(Pawn));
-	InteractableComponent->RemoveInteractable(NerveBall);
-
 	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Pawn);
 	if (!Player)
 	{
 		return;
 	}
+
+	PhysicConstraint = Player->AddConstraint();
+	if (PhysicConstraint)
+	{
+		return;
+	}
+
+	PhysicConstraint->Init(this, Player);
+	InteractableComponent->RemoveInteractable(NerveBall);
 
 	PlayerCharacter = Player;
 	if (PlayerCharacter->GetStateMachine()->GetCurrentStateID() == ECharacterStateID::Crouch)

@@ -8,8 +8,6 @@ public class PROTOProfondeurs : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		CircularlyReferencedDependentModules.Add("PRFUI");
-
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"CableComponent",
@@ -30,7 +28,6 @@ public class PROTOProfondeurs : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
-			"PRFUI",
 			"ENTComponents"
 		});
 

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/PlayerToNervePhysicConstraint.h"
 #include "PROTOProfondeurs/Public/GameElements/WeakZoneInterface.h"
 #include "GameFramework/Character.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
@@ -26,6 +27,7 @@ class UCameraComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberType, int, AmberAmount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKOnRespawn);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractionFeedback, bool, bCanInteract);
 
 UCLASS()
 class PROTOPROFONDEURS_API AFirstPersonCharacter : public ACharacter, public IWeakZoneInterface, public IENTSaveGameElementInterface
@@ -68,7 +70,11 @@ protected:
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
+
 	USkeletalMeshComponent* GetCharacterMesh() const {return CharacterMesh;}
+
+	UENTHealthComponent* GetHealth() const {return HealthComponent;}
+
 	UENTCameraShakeComponent* GetCameraShake() const {return ShakeManager;}
 
 #pragma endregion
@@ -137,9 +143,10 @@ protected:
 	void RemoveInteraction();
 
 public:
-	UENTInteractableComponent* GetCurrentInteractable() const {return CurrentInteractable;}
+	UPROPERTY(BlueprintAssignable, Category = "Interaction")
+	FOnInteractionFeedback OnInteractionFeedback;
 
-	void SetInteractionUI(bool bState) const;
+	UENTInteractableComponent* GetCurrentInteractable() const {return CurrentInteractable;}
 
 #pragma endregion
 
@@ -287,7 +294,7 @@ public:
 
 	void SetRespawnTree(ARespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
 
-	void Respawn(const FTransform& RespawnTransform);
+	void Respawn();
 
 #pragma endregion
 
@@ -310,13 +317,15 @@ public:
 
 #pragma endregion
 
-protected:
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSubclassOf<UUserWidget> StartWidgetClass;
-
-	UPROPERTY(BlueprintReadOnly, Category = "UI")
-	TObjectPtr<UUserWidget> StartWidget;
+#pragma region Temp
 
 public:
-	TObjectPtr<UUserWidget> GetStartWidget() { return StartWidget; }
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConstraintAdded, UPlayerToNervePhysicConstraint*, Constraint);
+
+	UPROPERTY(BlueprintAssignable, Category = "Constraints")
+	FOnConstraintAdded OnConstraintAdded;
+
+	UPlayerToNervePhysicConstraint* AddConstraint();
+
+#pragma endregion
 };

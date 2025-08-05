@@ -4,8 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "InputMappingContext.h"
-#include "PRFControllerMappingContext.h"
-#include "GameFramework/Controller.h"
+#include "Player/ENTControllerMappingContext.h"
 #include "PRFUIController.generated.h"
 
 USTRUCT(Blueprintable)
@@ -29,24 +28,25 @@ struct FActionUI
 };
 
 UCLASS()
-class PRFUI_API APRFUIController : public APlayerController, public IPRFControllerMappingContext
+class PRFUI_API APRFUIController : public APlayerController, public IENTControllerMappingContext
 {
 	GENERATED_BODY()
 
 public:
 	APRFUIController();
 
-	virtual TObjectPtr<UInputMappingContext> GetUIMappingContext() const override;
-	virtual TObjectPtr<UInputMappingContext> GetAnyKeyMappingContext() const override;
-	virtual TObjectPtr<UInputMappingContext> GetDefaultMappingContext() const override;
+	virtual TObjectPtr<UInputMappingContext> GetDefaultMappingContext() const override {return UIMappingContext;}
+
+	virtual TObjectPtr<UInputMappingContext> GetUIMappingContext() const override {return UIMappingContext;}
+
+	virtual TObjectPtr<UInputMappingContext> GetAnyKeyMappingContext() const override {return AnyKeyMappingContext;}
 
 	virtual void SetupInputComponent() override;
 
 protected:
-	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
 	TObjectPtr<UInputMappingContext> AnyKeyMappingContext;
-	
+
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
@@ -57,7 +57,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FActionUI AnyAction;
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs")
 	FActionUI BackAction;
 
@@ -69,7 +69,4 @@ protected:
 
 	UFUNCTION()
 	void OnInputBack();
-
-public:
-	virtual void Tick(float DeltaTime) override;
 };

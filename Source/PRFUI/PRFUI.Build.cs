@@ -6,12 +6,11 @@ public class PRFUI : ModuleRules
     {
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        CircularlyReferencedDependentModules.Add("PROTOProfondeurs");
-
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core"
+                "Core",
+                "PROTOProfondeurs"
             }
         );
 
@@ -22,12 +21,22 @@ public class PRFUI : ModuleRules
                 "DeveloperSettings",
                 "Engine",
                 "EnhancedInput",
-                "PROTOProfondeurs",
                 "Slate",
                 "SlateCore",
                 "UMG",
-                "ENTSaves"
+                "ENTSaves",
+                "ENTComponents"
             }
         );
+
+        if (Target.bBuildEditor)
+        {
+            PrivateDependencyModuleNames.AddRange(
+                new string[]
+                {
+                    "ENTEditor"
+                }
+            );
+        }
     }
 }

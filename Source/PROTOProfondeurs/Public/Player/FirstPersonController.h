@@ -4,14 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "InputMappingContext.h"
-#include "Controller/PRFControllerMappingContext.h"
+#include "ENTControllerMappingContext.h"
 #include "GameFramework/PlayerController.h"
 #include "FirstPersonController.generated.h"
 
 class AFirstPersonSpectator;
 class AFirstPersonCharacter;
-class UInGameUI;
-class UDeathMenuUI;
 struct FInputActionValue;
 class UInputAction;
 enum class ETriggerEvent : uint8;
@@ -64,7 +62,7 @@ struct FPlayerInputs
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	bool bInputInteractTrigger = false;
-	
+
 	UPROPERTY(BlueprintReadOnly, Category = "Inputs Default")
 	bool bInputPauseGame = false;
 
@@ -73,8 +71,18 @@ struct FPlayerInputs
 #endif
 };
 
+# pragma region UI Related Deletages
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPauseGame);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNavigate, FVector2D, Axis);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnSelect);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBack);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnResume);
+
+#pragma endregion
+
 UCLASS()
-class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController, public IPRFControllerMappingContext
+class PROTOPROFONDEURS_API AFirstPersonController : public APlayerController, public IENTControllerMappingContext
 {
 	GENERATED_BODY()
 
@@ -82,28 +90,6 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
-
-#pragma region UI
-
-protected:
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSubclassOf<UInGameUI> InGameWidgetClass;
-
-	UPROPERTY(BlueprintReadOnly, Category = "UI")
-	TObjectPtr<UInGameUI> CurrentInGameUI;
-
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSubclassOf<UDeathMenuUI> DeathWidgetClass;
-
-	UPROPERTY(BlueprintReadOnly, Category = "UI")
-	TObjectPtr<UDeathMenuUI> CurrentDeathUI;
-
-public:
-	TObjectPtr<UInGameUI> GetCurrentInGameUI() {return CurrentInGameUI;}
-
-	TObjectPtr<UDeathMenuUI> GetDeathMenuUI() {return CurrentDeathUI;}
-
-#pragma endregion
 
 #pragma region Inputs
 
@@ -167,17 +153,31 @@ protected:
 	UFUNCTION()
 	void OnInputInteractTrigger(const FInputActionValue& InputActionValue);
 
-	UFUNCTION()
-	void OnInputPauseGame();
-
 #pragma endregion
 
 #pragma region IMC_UI
 
 public:
-	virtual TObjectPtr<UInputMappingContext> GetUIMappingContext() const override;
-	virtual TObjectPtr<UInputMappingContext> GetAnyKeyMappingContext() const override;
-	virtual TObjectPtr<UInputMappingContext> GetDefaultMappingContext() const override;
+	UPROPERTY(BlueprintAssignable, Category = "UI|Delegates")
+	FOnPauseGame OnPauseGame;
+
+	UPROPERTY(BlueprintAssignable, Category = "UI|Delegates")
+	FOnNavigate OnNavigate;
+
+	UPROPERTY(BlueprintAssignable, Category = "UI|Delegates")
+	FOnSelect OnSelect;
+
+	UPROPERTY(BlueprintAssignable, Category = "UI|Delegates")
+	FOnBack OnBack;
+
+	UPROPERTY(BlueprintAssignable, Category = "UI|Delegates")
+	FOnResume OnResume;
+
+	virtual TObjectPtr<UInputMappingContext> GetDefaultMappingContext() const override {return DefaultMappingContext;}
+
+	virtual TObjectPtr<UInputMappingContext> GetUIMappingContext() const override {return UIMappingContext;}
+
+	virtual TObjectPtr<UInputMappingContext> GetAnyKeyMappingContext() const override {return AnyKeyMappingContext;}
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
@@ -188,15 +188,18 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
 	FAction NavigateAction;
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
 	FAction SelectAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
 	FAction BackAction;
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs UI")
 	FAction ResumeAction;
+
+	UFUNCTION()
+	void OnInputPauseGame(const FInputActionValue& InputActionValue);
 
 	UFUNCTION()
 	void OnInputNavigate(const FInputActionValue& InputActionValue);
@@ -214,6 +217,7 @@ protected:
 
 public:
 	const FPlayerInputs& GetPlayerInputs() const {return PlayerInputs;}
+
 	void ClearPlayerInputs() { PlayerInputs = FPlayerInputs(); }
 
 #if WITH_EDITORONLY_DATA

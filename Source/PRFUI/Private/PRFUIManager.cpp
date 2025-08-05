@@ -2,83 +2,14 @@
 
 
 #include "PRFUIManager.h"
-
 #include "EnhancedInputSubsystems.h"
-#include "UIManagerSettings.h"
+#include "Config/ENTUIConfig.h"
 #include "Blueprint/UserWidget.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
-#include "Controller/PRFControllerMappingContext.h"
-#include "Controller/PRFUIController.h"
-#include "Kismet/GameplayStatics.h"
-#include "Player/FirstPersonCharacter.h"
+#include "Player/ENTControllerMappingContext.h"
 #include "Player/FirstPersonController.h"
-
-
-void UPRFUIManager::CreateAllWidgets()
-{
-	GetWorld()->OnWorldBeginPlay.Remove(CreateWidgetsDelegate);
-
-	const UUIManagerSettings* UIManagerSettings = GetDefault<UUIManagerSettings>();
-	if (!IsValid(UIManagerSettings))
-	{
-		return;
-	}
-
-	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
-	if (!PlayerController)
-	{
-		return;
-	}
-
-	PressAnyMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PressAnyMenuClass);
-	MainMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->MainMenuClass);
-	NewGameMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->NewGameMenuClass);
-	OptionsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->OptionsMenuClass);
-	CreditsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->CreditsMenuClass);
-	QuitMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->QuitMenuClass);
-	PauseMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->PauseMenuClass);
-	ControlsMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->ControlsMenuClass);
-	MainMenuConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->MainMenuConfirmationMenuClass);
-	RestartConfirmationMenu = CreateWidget<UUserWidget>(PlayerController, UIManagerSettings->RestartConfirmationMenuClass);
-
-	OnWidgetsCreated.Broadcast();
-
-	AFirstPersonController* FirstPersonController =  Cast<AFirstPersonController>(PlayerController);
-	if (!IsValid(FirstPersonController))
-	{
-		return;
-	}
-
-	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
-	if (!IsValid(LocalPlayer))
-	{
-		return;
-	}
-	
-	UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
-	if (!IsValid(InputSubsystem))
-	{
-		return;
-	}
-
-	CurrentState = EPRFUIState::Gameplay;
-	InputSubsystem->ClearAllMappings();
-	InputSubsystem->AddMappingContext(Cast<IPRFControllerMappingContext>(FirstPersonController)->GetDefaultMappingContext(), 0);
-	SetGameInputMode();
-	FirstPersonController->SetPause(false);
-		
-	FirstPersonController->ClearPlayerInputs();
-}
-
-void UPRFUIManager::OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues)
-{
-	if (!World)
-	{
-		return;
-	}
-
-	CreateWidgetsDelegate = World->OnWorldBeginPlay.AddUObject(this, &UPRFUIManager::CreateAllWidgets);
-}
+#include "Kismet/GameplayStatics.h"
+#include "Subsystems/ENTHUDManager.h"
 
 void UPRFUIManager::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -93,6 +24,77 @@ void UPRFUIManager::Deinitialize()
 	Super::Deinitialize();
 
 	FWorldDelegates::OnPostWorldInitialization.Remove(PostWorldInitDelegateHandle);
+}
+
+void UPRFUIManager::CreateAllWidgets()
+{
+	GetWorld()->OnWorldBeginPlay.Remove(CreateWidgetsDelegate);
+
+	const UENTUIConfig* UIConfig = GetDefault<UENTUIConfig>();
+	if (!IsValid(UIConfig))
+	{
+		return;
+	}
+
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (!PlayerController)
+	{
+		return;
+	}
+
+	PressAnyMenu = CreateWidget(PlayerController, UIConfig->PressAnyMenuClass);
+	MainMenu = CreateWidget(PlayerController, UIConfig->MainMenuClass);
+	NewGameMenu = CreateWidget(PlayerController, UIConfig->NewGameMenuClass);
+	OptionsMenu = CreateWidget(PlayerController, UIConfig->OptionsMenuClass);
+	CreditsMenu = CreateWidget(PlayerController, UIConfig->CreditsMenuClass);
+	QuitMenu = CreateWidget(PlayerController, UIConfig->QuitMenuClass);
+	PauseMenu = CreateWidget(PlayerController, UIConfig->PauseMenuClass);
+	ControlsMenu = CreateWidget(PlayerController, UIConfig->ControlsMenuClass);
+	MainMenuConfirmationMenu = CreateWidget(PlayerController, UIConfig->MainMenuConfirmationMenuClass);
+	RestartConfirmationMenu = CreateWidget(PlayerController, UIConfig->RestartConfirmationMenuClass);
+
+	OnWidgetsCreated.Broadcast();
+
+	AFirstPersonController* FirstPersonController = Cast<AFirstPersonController>(PlayerController);
+	if (!IsValid(FirstPersonController))
+	{
+		return;
+	}
+
+	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
+	if (!IsValid(LocalPlayer))
+	{
+		return;
+	}
+
+	UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+	if (!IsValid(InputSubsystem))
+	{
+		return;
+	}
+
+	CurrentState = EPRFUIState::Gameplay;
+	InputSubsystem->ClearAllMappings();
+	InputSubsystem->AddMappingContext(Cast<IENTControllerMappingContext>(FirstPersonController)->GetDefaultMappingContext(), 0);
+	SetGameInputMode();
+	FirstPersonController->SetPause(false);
+
+	FirstPersonController->OnPauseGame.AddDynamic(this, &UPRFUIManager::DisplayPauseMenu);
+	FirstPersonController->OnNavigate; // No uses for this event right now
+	FirstPersonController->OnSelect; // No uses for this event right now
+	FirstPersonController->OnBack.AddDynamic(this, &UPRFUIManager::CloseCurrentMenu);
+	FirstPersonController->OnResume.AddDynamic(this, &UPRFUIManager::Resume);
+	FirstPersonController->ClearPlayerInputs();
+}
+
+void UPRFUIManager::OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues)
+{
+	if (!World)
+	{
+		return;
+	}
+
+	CreateWidgetsDelegate = World->OnWorldBeginPlay.AddUObject(this, &UPRFUIManager::CreateAllWidgets);
 }
 
 void UPRFUIManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
@@ -180,19 +182,19 @@ void UPRFUIManager::CloseAllMenus(EPRFUIState InState)
 		return;
 	}
 
-	AFirstPersonCharacter* FirstPersonCharacter = Cast<AFirstPersonCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
-	if (!IsValid(FirstPersonCharacter))
+	UGameInstance* GameInstance = GetGameInstance();
+	if (GameInstance)
 	{
 		return;
 	}
 
-	UUserWidget* StartWidget =  FirstPersonCharacter->GetStartWidget();
-	if (!IsValid(StartWidget))
+	UENTHUDManager* HUDManager = GameInstance->GetSubsystem<UENTHUDManager>();
+	if (!HUDManager)
 	{
 		return;
 	}
 
-	StartWidget->SetVisibility(ESlateVisibility::Visible);
+	HUDManager->SetHUDVisibility(ESlateVisibility::Visible);
 }
 
 void UPRFUIManager::SetMenuState(EPRFUIState InUIState)
@@ -220,7 +222,7 @@ void UPRFUIManager::CheckMenuState()
 		return;
 	}
 
-	if (!Controller->Implements<UPRFControllerMappingContext>())
+	if (!Controller->Implements<UENTControllerMappingContext>())
 	{
 		return;
 	}
@@ -236,7 +238,7 @@ void UPRFUIManager::CheckMenuState()
 		{
 			CurrentState = EPRFUIState::MainMenu;
 			InputSubsystem->ClearAllMappings();
-			InputSubsystem->AddMappingContext(Cast<IPRFControllerMappingContext>(Controller)->GetUIMappingContext(), 0);
+			InputSubsystem->AddMappingContext(Cast<IENTControllerMappingContext>(Controller)->GetUIMappingContext(), 0);
 			SetUIInputMode();
 		}
 	}
@@ -244,7 +246,7 @@ void UPRFUIManager::CheckMenuState()
 	{
 		CurrentState = EPRFUIState::AnyMenu;
 		InputSubsystem->ClearAllMappings();
-		InputSubsystem->AddMappingContext(Cast<IPRFControllerMappingContext>(Controller)->GetAnyKeyMappingContext(), 0);
+		InputSubsystem->AddMappingContext(Cast<IENTControllerMappingContext>(Controller)->GetAnyKeyMappingContext(), 0);
 		SetUIInputMode();
 		Controller->SetPause(false);
 	}
@@ -252,7 +254,7 @@ void UPRFUIManager::CheckMenuState()
 	{
 		CurrentState = EPRFUIState::PauseMenu;
 		InputSubsystem->ClearAllMappings();
-		InputSubsystem->AddMappingContext(Cast<IPRFControllerMappingContext>(Controller)->GetUIMappingContext(), 0);
+		InputSubsystem->AddMappingContext(Cast<IENTControllerMappingContext>(Controller)->GetUIMappingContext(), 0);
 		SetUIInputMode();
 		CenterCursor();
 		Controller->SetPause(true);
@@ -261,16 +263,16 @@ void UPRFUIManager::CheckMenuState()
 	{
 		CurrentState = EPRFUIState::Gameplay;
 		InputSubsystem->ClearAllMappings();
-		InputSubsystem->AddMappingContext(Cast<IPRFControllerMappingContext>(Controller)->GetDefaultMappingContext(), 0);
+		InputSubsystem->AddMappingContext(Cast<IENTControllerMappingContext>(Controller)->GetDefaultMappingContext(), 0);
 		SetGameInputMode();
 		Controller->SetPause(false);
-		
+
 		AFirstPersonController* FirstPersonController = Cast<AFirstPersonController>(Controller);
 		if (!IsValid(FirstPersonController))
 		{
 			return;
 		}
-		
+
 		FirstPersonController->ClearPlayerInputs();
 	}
 }
@@ -340,4 +342,49 @@ void UPRFUIManager::CenterCursor() const
 	const int32 CenterY = FMath::RoundToInt(ViewportSize.Y * 0.5f);
 
 	PlayerController->SetMouseLocation(CenterX, CenterY);
+}
+
+void UPRFUIManager::DisplayPauseMenu()
+{
+	if (CurrentState != EPRFUIState::Gameplay)
+	{
+		return;
+	}
+
+	//UIManager->SetMenuState(EPRFUIState::PauseMenu);
+	OpenMenu(PauseMenu, false);
+
+	UGameInstance* GameInstance = GetGameInstance();
+	if (GameInstance)
+	{
+		return;
+	}
+
+	UENTHUDManager* HUDManager = GameInstance->GetSubsystem<UENTHUDManager>();
+	if (!HUDManager)
+	{
+		return;
+	}
+
+	HUDManager->SetHUDVisibility(ESlateVisibility::Hidden);
+}
+
+void UPRFUIManager::Resume()
+{
+	switch (CurrentState)
+	{
+	case EPRFUIState::PauseMenu:
+		//UIManager->SetMenuState(EPRFUIState::Gameplay);
+		CloseAllMenus(EPRFUIState::Gameplay);
+		break;
+
+	case EPRFUIState::MainMenu:
+		CloseCurrentMenu();
+		break;
+
+	case EPRFUIState::AnyMenu:
+	case EPRFUIState::Gameplay:
+	case EPRFUIState::Waiting:
+		break;
+	}
 }

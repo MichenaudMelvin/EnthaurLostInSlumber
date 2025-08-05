@@ -4,11 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "Menus/Elements/PRFCustomButton.h"
-#include "DeathMenuUI.generated.h"
+#include "ENTDeathTransition.generated.h"
 
 UCLASS()
-class PROTOPROFONDEURS_API UDeathMenuUI : public UUserWidget
+class PRFUI_API UENTDeathTransition : public UUserWidget
 {
 	GENERATED_BODY()
 

@@ -3,13 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Parameters/BPRefParameters.h"
+#include "Config/ENTUIConfig.h"
 #include "Subsystems/GameInstanceSubsystem.h"
-#include "LevelNameSubsystem.generated.h"
-
+#include "ENTLevelNameSubsystem.generated.h"
 
 UCLASS()
-class PROTOPROFONDEURS_API ULevelNameSubsystem : public UGameInstanceSubsystem
+class PRFUI_API UENTLevelNameSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 

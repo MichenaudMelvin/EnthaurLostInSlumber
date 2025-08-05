@@ -1,14 +1,13 @@
-﻿#include "UI/LevelEnteringUI.h"
-
+﻿#include "HUD/ENTLevelEntering.h"
 #include "Components/TextBlock.h"
 #include "Kismet/GameplayStatics.h"
-#include "Subsystems/LevelNameSubsystem.h"
+#include "Subsystems/ENTLevelNameSubsystem.h"
 
-void ULevelEnteringUI::NativeOnInitialized()
+void UENTLevelEntering::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	ULevelNameSubsystem* Subsystem = UGameplayStatics::GetGameInstance(this)->GetSubsystem<ULevelNameSubsystem>();
+	UENTLevelNameSubsystem* Subsystem = UGameplayStatics::GetGameInstance(this)->GetSubsystem<UENTLevelNameSubsystem>();
 	if (!IsValid(Subsystem))
 	{
 		return;
