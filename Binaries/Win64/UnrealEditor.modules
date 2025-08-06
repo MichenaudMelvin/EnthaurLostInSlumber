@@ -7,7 +7,7 @@
 		"ENTDeveloperTools": "UnrealEditor-ENTDeveloperTools.dll",
 		"ENTEditor": "UnrealEditor-ENTEditor.dll",
 		"ENTSaves": "UnrealEditor-ENTSaves.dll",
-		"PRFUI": "UnrealEditor-PRFUI.dll",
+		"ENTUI": "UnrealEditor-ENTUI.dll",
 		"PROTOProfondeurs": "UnrealEditor-PROTOProfondeurs.dll"
 	}
 }

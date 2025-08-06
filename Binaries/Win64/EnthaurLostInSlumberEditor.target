@@ -8102,11 +8102,11 @@
 			"Type": "SymbolFile"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-PRFUI.dll",
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTUI.dll",
 			"Type": "DynamicLibrary"
 		},
 		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-PRFUI.pdb",
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTUI.pdb",
 			"Type": "SymbolFile"
 		},
 		{

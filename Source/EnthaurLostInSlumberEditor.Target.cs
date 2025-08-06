@@ -18,6 +18,6 @@ public class EnthaurLostInSlumberEditorTarget : TargetRules
 
 	private void RegisterModulesCreatedByRider()
 	{
-		ExtraModuleNames.AddRange(new string[] { "PRFUI", "ENTAI", "ENTEditor", "ENTDeveloperTools", "ENTSaves", "ENTComponents" });
+		ExtraModuleNames.AddRange(new string[] { "ENTUI", "ENTAI", "ENTEditor", "ENTDeveloperTools", "ENTSaves", "ENTComponents" });
 	}
 }

@@ -10,7 +10,7 @@
 			"LoadingPhase": "Default"
 		},
 		{
-			"Name": "PRFUI",
+			"Name": "ENTUI",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		},
