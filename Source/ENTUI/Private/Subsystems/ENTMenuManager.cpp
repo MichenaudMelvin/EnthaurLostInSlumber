@@ -7,7 +7,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Player/ENTControllerMappingContext.h"
-#include "Player/FirstPersonController.h"
+#include "Player/ENTDefaultPlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Subsystems/ENTHUDManager.h"
 
@@ -55,7 +55,7 @@ void UENTMenuManager::CreateAllWidgets()
 
 	OnWidgetsCreated.Broadcast();
 
-	AFirstPersonController* FirstPersonController = Cast<AFirstPersonController>(PlayerController);
+	AENTDefaultPlayerController* FirstPersonController = Cast<AENTDefaultPlayerController>(PlayerController);
 	if (!IsValid(FirstPersonController))
 	{
 		return;
@@ -183,7 +183,7 @@ void UENTMenuManager::CloseAllMenus(EENTMenuState InState)
 	}
 
 	UGameInstance* GameInstance = GetGameInstance();
-	if (GameInstance)
+	if (!GameInstance)
 	{
 		return;
 	}
@@ -267,7 +267,7 @@ void UENTMenuManager::CheckMenuState()
 		SetGameInputMode();
 		Controller->SetPause(false);
 
-		AFirstPersonController* FirstPersonController = Cast<AFirstPersonController>(Controller);
+		AENTDefaultPlayerController* FirstPersonController = Cast<AENTDefaultPlayerController>(Controller);
 		if (!IsValid(FirstPersonController))
 		{
 			return;
@@ -355,7 +355,7 @@ void UENTMenuManager::DisplayPauseMenu()
 	OpenMenu(PauseMenu, false);
 
 	UGameInstance* GameInstance = GetGameInstance();
-	if (GameInstance)
+	if (!GameInstance)
 	{
 		return;
 	}

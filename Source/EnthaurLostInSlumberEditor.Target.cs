@@ -12,12 +12,6 @@ public class EnthaurLostInSlumberEditorTarget : TargetRules
 
 		Name = "EnthaurLostInSlumberEditor";
 
-		ExtraModuleNames.AddRange( new string[] { "PROTOProfondeurs" } );
-		RegisterModulesCreatedByRider();
-	}
-
-	private void RegisterModulesCreatedByRider()
-	{
-		ExtraModuleNames.AddRange(new string[] { "ENTUI", "ENTAI", "ENTEditor", "ENTDeveloperTools", "ENTSaves", "ENTComponents" });
+		ExtraModuleNames.AddRange( new string[] { "ENTCore", "ENTUI", "ENTAI", "ENTEditor", "ENTDeveloperTools", "ENTSaves", "ENTComponents" } );
 	}
 }

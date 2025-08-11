@@ -3,7 +3,7 @@
 
 #include "HUD/ENTGameplayHUD.h"
 #include "Kismet/GameplayStatics.h"
-#include "Player/FirstPersonCharacter.h"
+#include "Player/ENTDefaultCharacter.h"
 
 void UENTGameplayHUD::NativeConstruct()
 {
@@ -15,7 +15,7 @@ void UENTGameplayHUD::NativeConstruct()
 		return;
 	}
 
-	Player = Cast<AFirstPersonCharacter>(PlayerCharacter);
+	Player = Cast<AENTDefaultCharacter>(PlayerCharacter);
 	if (Player)
 	{
 		Player->OnAmberUpdate.AddDynamic(this, &UENTGameplayHUD::OnAmberUpdate);

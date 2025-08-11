@@ -9,7 +9,7 @@
 #include "ENTComponents/Public/ENTHealthComponent.h"
 #include "GameFramework/GameModeBase.h"
 #include "Kismet/GameplayStatics.h"
-#include "Player/FirstPersonCharacter.h"
+#include "Player/ENTDefaultCharacter.h"
 
 void UENTHUDManager::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -58,7 +58,7 @@ void UENTHUDManager::CreateHUDWidgets()
 		return;
 	}
 
-	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Pawn);
+	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Pawn);
 	if (!Player)
 	{
 		return;
@@ -146,7 +146,7 @@ void UENTHUDManager::SetHUDVisibility(const ESlateVisibility& Visibility)
 	}
 }
 
-void UENTHUDManager::BindConstraintDelegates(UPlayerToNervePhysicConstraint* Constraint)
+void UENTHUDManager::BindConstraintDelegates(UENTPropulsionConstraint* Constraint)
 {
 	if (!Constraint)
 	{

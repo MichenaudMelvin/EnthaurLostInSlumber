@@ -10,7 +10,7 @@ public class ENTUI : ModuleRules
             new string[]
             {
                 "Core",
-                "PROTOProfondeurs"
+                "ENTCore"
             }
         );
 

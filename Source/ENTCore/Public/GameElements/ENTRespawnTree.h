@@ -1,0 +1,71 @@
+﻿// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "ENTWeakZoneInterface.h"
+#include "GameFramework/Actor.h"
+#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
+#include "ENTRespawnTree.generated.h"
+
+class UBoxComponent;
+class UAkComponent;
+class AENTDefaultCharacter;
+class UAkAudioEvent;
+
+UCLASS()
+class ENTCORE_API AENTRespawnTree : public AActor, public IENTWeakZoneInterface, public IENTSaveGameElementInterface
+{
+	GENERATED_BODY()
+
+public:
+	AENTRespawnTree();
+
+protected:
+	virtual void BeginPlay() override;
+
+	virtual void Destroyed() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+	UFUNCTION()
+	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	void SetRespawnPoint(AENTDefaultCharacter* Player, bool bSave);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void SetActive();	
+
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
+	TObjectPtr<USceneComponent> RootComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
+	TObjectPtr<UBoxComponent> TriggerBox;	
+
+	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
+	TObjectPtr<UStaticMeshComponent> TreeModel;
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UMaterialInstanceDynamic> Material;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkComponent> RespawnTreeNoises;
+
+	UPROPERTY(EditAnywhere, Category = "Respawn", meta = (MakeEditWidget))
+	FTransform RespawnTransform = FTransform(FVector(0.0f, 150.0f, 100.0f));
+
+	FString LastCheckPointName;
+
+	bool bIsActivated = false;
+
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
+
+public:
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
+
+	const FTransform& GetRespawnTransform() const {return RespawnTransform;}
+};

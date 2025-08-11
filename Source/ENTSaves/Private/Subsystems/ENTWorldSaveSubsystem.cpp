@@ -67,6 +67,17 @@ UENTDefaultSave* UENTWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 	if (!CurrentWorldSave)
 	{
 		CreateSave(SaveIndex);
+
+		if (!CurrentWorldSave)
+		{
+#if WITH_EDITOR
+			const FString Message = FString::Printf(TEXT("Cannot create save, check allowed GameModes"));
+
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+			FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+#endif
+			return nullptr;
+		}
 	}
 
 	TArray<AActor*> Actors;

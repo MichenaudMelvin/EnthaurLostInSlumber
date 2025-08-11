@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "GameElements/AmberOre.h"
+#include "GameElements/ENTAmberOre.h"
 #include "ENTGameplayHUD.generated.h"
 
 class FCTweenInstance;
@@ -30,7 +30,7 @@ protected:
 	TObjectPtr<UWidgetAnimation> InteractionReadyAnimation;
 
 	UPROPERTY()
-	TObjectPtr<class AFirstPersonCharacter> Player;
+	TObjectPtr<class AENTDefaultCharacter> Player;
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Deletages")
 	FOnAmberPickUp OnAmberPickUp;

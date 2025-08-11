@@ -5,7 +5,7 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "PROTOProfondeurs",
+			"Name": "ENTCore",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		},

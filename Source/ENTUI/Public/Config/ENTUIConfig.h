@@ -31,7 +31,7 @@ struct FENTZoneName
 	FText RegionName;
 };
 
-UCLASS(Config = Game, DefaultConfig, meta = (DisplayName = "UIConfig"))
+UCLASS(Config = Game, DefaultConfig, meta = (DisplayName = "UI Config"))
 class ENTUI_API UENTUIConfig : public UDeveloperSettings
 {
 	GENERATED_BODY()

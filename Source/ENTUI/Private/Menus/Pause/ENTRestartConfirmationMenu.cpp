@@ -5,7 +5,7 @@
 #include "Subsystems/ENTMenuManager.h"
 #include "Kismet/GameplayStatics.h"
 #include "Menus/Elements/ENTCustomButton.h"
-#include "Player/FirstPersonCharacter.h"
+#include "Player/ENTDefaultCharacter.h"
 
 void UENTRestartConfirmationMenu::NativeConstruct()
 {
@@ -35,7 +35,7 @@ void UENTRestartConfirmationMenu::HandleRestartAction()
 		return;
 	}
 
-	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Character);
+	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Character);
 	if (!Player)
 	{
 		return;

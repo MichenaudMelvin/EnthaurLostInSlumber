@@ -7,8 +7,8 @@
 #include "ENTCameraShakeComponent.generated.h"
 
 
-class AFirstPersonCharacter;
-class AFirstPersonController;
+class AENTDefaultCharacter;
+class AENTDefaultPlayerController;
 
 UCLASS(ClassGroup = "Camera", meta = (BlueprintSpawnableComponent))
 class ENTCOMPONENTS_API UENTCameraShakeComponent : public UActorComponent

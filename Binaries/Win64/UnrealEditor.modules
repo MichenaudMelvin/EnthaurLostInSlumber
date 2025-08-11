@@ -4,10 +4,10 @@
 	{
 		"ENTAI": "UnrealEditor-ENTAI.dll",
 		"ENTComponents": "UnrealEditor-ENTComponents.dll",
+		"ENTCore": "UnrealEditor-ENTCore.dll",
 		"ENTDeveloperTools": "UnrealEditor-ENTDeveloperTools.dll",
 		"ENTEditor": "UnrealEditor-ENTEditor.dll",
 		"ENTSaves": "UnrealEditor-ENTSaves.dll",
-		"ENTUI": "UnrealEditor-ENTUI.dll",
-		"PROTOProfondeurs": "UnrealEditor-PROTOProfondeurs.dll"
+		"ENTUI": "UnrealEditor-ENTUI.dll"
 	}
 }

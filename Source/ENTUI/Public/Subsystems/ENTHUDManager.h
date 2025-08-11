@@ -9,7 +9,7 @@
 class UENTLevelEntering;
 class UENTDeathTransition;
 class UENTGameplayHUD;
-class UPlayerToNervePhysicConstraint;
+class UENTPropulsionConstraint;
 
 UCLASS()
 class ENTUI_API UENTHUDManager : public UGameInstanceSubsystem
@@ -57,7 +57,7 @@ public:
 
 	TObjectPtr<UENTDeathTransition> GetDeathTransition() const {return DeathTransition;}
 
-	TObjectPtr<UENTLevelEntering> GetLevelEntering() { return LevelEntering; }
+	TObjectPtr<UENTLevelEntering> GetLevelEntering() {return LevelEntering;}
 
 #pragma endregion
 
@@ -82,10 +82,10 @@ public:
 
 protected:
 	UFUNCTION()
-	void BindConstraintDelegates(UPlayerToNervePhysicConstraint* Constraint);
+	void BindConstraintDelegates(UENTPropulsionConstraint* Constraint);
 
 	UPROPERTY()
-	TObjectPtr<UPlayerToNervePhysicConstraint> CurrentConstraint;
+	TObjectPtr<UENTPropulsionConstraint> CurrentConstraint;
 
 #pragma endregion
 

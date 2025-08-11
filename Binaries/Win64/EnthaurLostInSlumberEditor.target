@@ -8078,6 +8078,14 @@
 			"Type": "SymbolFile"
 		},
 		{
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTCore.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTCore.pdb",
+			"Type": "SymbolFile"
+		},
+		{
 			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTDeveloperTools.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -8107,14 +8115,6 @@
 		},
 		{
 			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-ENTUI.pdb",
-			"Type": "SymbolFile"
-		},
-		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-PROTOProfondeurs.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
-			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor-PROTOProfondeurs.pdb",
 			"Type": "SymbolFile"
 		},
 		{

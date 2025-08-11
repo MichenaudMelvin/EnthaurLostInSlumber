@@ -4,7 +4,7 @@
 #include "HUD/ENTDeathTransition.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Kismet/GameplayStatics.h"
-#include "Player/FirstPersonCharacter.h"
+#include "Player/ENTDefaultCharacter.h"
 
 void UENTDeathTransition::RespawnPlayer()
 {
@@ -14,7 +14,7 @@ void UENTDeathTransition::RespawnPlayer()
 		return;
 	}
 
-	AFirstPersonCharacter* Player = Cast<AFirstPersonCharacter>(Character);
+	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Character);
 	if (!Player)
 	{
 		return;
