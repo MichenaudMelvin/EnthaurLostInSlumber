@@ -10,6 +10,7 @@ public class ENTEditor : ModuleRules
             new string[]
             {
                 "Core",
+                "DataValidation"
             }
         );
 
@@ -24,7 +25,8 @@ public class ENTEditor : ModuleRules
                 "Blutility",
                 "VREditor",
                 "ToolMenus",
-                "DeveloperSettings"
+                "DeveloperSettings",
+                "EditorScriptingUtilities"
             }
         );
     }
