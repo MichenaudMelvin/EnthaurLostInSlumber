@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "ENTAmberOre.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTWeakZone.generated.h"
@@ -35,6 +36,7 @@ struct FENTInteractionPoints
 
 class UENTInteractableComponent;
 class UBoxComponent;
+class UPostProcessComponent;
 
 UCLASS()
 class ENTCORE_API AENTWeakZone : public AActor, public IENTSaveGameElementInterface
@@ -43,8 +45,6 @@ class ENTCORE_API AENTWeakZone : public AActor, public IENTSaveGameElementInterf
 
 public:
 	AENTWeakZone();
-
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCure);
 
 protected:
 	virtual void BeginPlay() override;
@@ -60,13 +60,10 @@ protected:
 	TObjectPtr<UBoxComponent> BoxComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
-	TObjectPtr<class UPostProcessComponent> BlackAndWhiteShader;
+	TObjectPtr<UPostProcessComponent> BlackAndWhiteShader;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "WeakZone")
 	TObjectPtr<UMaterialInstanceDynamic> MaterialBlackAndWhite;
-
-	UPROPERTY(BlueprintCallable, BlueprintAssignable)
-	FOnCure OnCure;
 
 	UPROPERTY(EditDefaultsOnly, Category = "WeakZone")
 	TObjectPtr<UAkAudioEvent> GrowlNoise;
@@ -82,10 +79,27 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
 
-	UPROPERTY(EditDefaultsOnly, Category = "WeakZone", meta = (ClampMin = 0.0f, Units = s))
+#pragma region Cure
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "WeakZone|Cure")
+	TObjectPtr<UCurveFloat> CureCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "WeakZone|Cure", meta = (ClampMin = 0.0f, Units = s))
 	float CureDuration = 5.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Zone")
+	UPROPERTY(EditDefaultsOnly, Category = "WeakZone|Cure")
+	FName CureParam;
+
+	FTimeline CureTimeline;
+
+	UFUNCTION()
+	void CureUpdate(float Alpha);
+
+#pragma endregion
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeakZone")
 	FVector ZoneSize = FVector(100.0f);
 
 	UPROPERTY(BlueprintReadWrite)
@@ -138,6 +152,60 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void CheckIfEveryInteractionsPointActive();
+
+#pragma region Foliage
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Foliage")
+	TObjectPtr<UInstancedStaticMeshComponent> Foliage;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	TObjectPtr<UStaticMesh> FoliageMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	FVector FoliageScale = FVector(0.1f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	FFloatRange FoliageOffsetRange = FFloatRange(250.0f, 500.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	uint16 MeshesNumberByInteractionsPoints = 75;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage|Trace")
+	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectsTypes;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage|Trace", meta = (Units = cm))
+	float TraceLength = 100.0f;
+
+	UPROPERTY(EditInstanceOnly, Category = "Foliage")
+	FRandomStream Seed;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	TObjectPtr<UCurveFloat> FoliageGrowthCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	TObjectPtr<UAkAudioEvent> FoliageGrowthNoise;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage", meta = (Units = s))
+	float GrowthDuration = 3.0f;
+
+	FTimeline FoliageTimeline;
+
+	UFUNCTION()
+	void FoliageGrowthUpdate(float Alpha);
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
+	bool bShowFoliage = false;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
+	bool bShowTraces = false;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
+	float TracesSize = 15.0f;
+#endif
+
+#pragma endregion
 
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
