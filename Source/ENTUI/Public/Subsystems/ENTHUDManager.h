@@ -53,7 +53,7 @@ protected:
 	void CreateHUDWidgets();
 
 public:
-	TObjectPtr<UENTGameplayHUD> GetGameplayHDU() const {return GameplayHUD;}
+	TObjectPtr<UENTGameplayHUD> GetGameplayHUD() const {return GameplayHUD;}
 
 	TObjectPtr<UENTDeathTransition> GetDeathTransition() const {return DeathTransition;}
 

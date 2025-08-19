@@ -10,6 +10,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/ENTDefaultCharacter.h"
+#include "Subsystems/ENTLevelNameSubsystem.h"
 
 void UENTHUDManager::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -110,15 +111,14 @@ void UENTHUDManager::DisplayHUD()
 	}
 #endif
 
-	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
-	if (!PlayerController)
+	UENTLevelNameSubsystem* Subsystem = UGameplayStatics::GetGameInstance(this)->GetSubsystem<UENTLevelNameSubsystem>();
+	if (!IsValid(Subsystem))
 	{
 		return;
 	}
 
-	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController, LevelEntering);
-
-	LevelEntering->AddToViewport(4);
+	LevelEntering->SetZoneName(Subsystem->GetZoneName());
+	LevelEntering->AddToViewport();
 }
 
 void UENTHUDManager::DisplayDeathTransition()
