@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
 #include "ENTNerveReceptacle.generated.h"
 
@@ -33,6 +34,8 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaSeconds) override;
 
 #if WITH_EDITORONLY_DATA
 	virtual void OnConstruction(const FTransform& Transform) override;
@@ -84,6 +87,82 @@ protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Nerve")
 	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
 
+#pragma region ElectricityRadius
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
+	TObjectPtr<UCurveFloat> FirstElectricityRadiusCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
+	TObjectPtr<UCurveFloat> SecondElectricityRadiusCurve;
+
+	FTimeline ElectricityRadiusTimeline;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius", meta = (Units = s))
+	float FirstElectricityRadiusDuration = 0.25f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius", meta = (Units = s))
+	float SecondElectricityRadiusDuration = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
+	float FirstRadiusTarget = 30.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
+	float SecondRadiusTarget = 200.0f;
+
+	float StartRadiusTarget = 0.0f;
+
+	float EndRadiusTarget = 0.0f;
+
+	UFUNCTION()
+	void ElectricityRadiusUpdate(float Alpha);
+
+	UFUNCTION()
+	void ElectricityRadiusFinished();
+
+#pragma endregion
+
+#pragma region ElectricityMovement
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Movement")
+	TObjectPtr<UCurveFloat> ElectricityMovementCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Movement", meta = (Units = s))
+	float ElectricityMovementDuration = 1.5f;
+
+	FTimeline ElectricityMovementTimeline;
+
+	UFUNCTION()
+	void ElectricityMovementUpdate(float Alpha);
+
+	UFUNCTION()
+	void ElectricityMovementFinished();
+
+#pragma endregion
+
+#pragma region ElectricityOpacity
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity")
+	TObjectPtr<UCurveFloat> ElectricityOpacityCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity")
+	FName ElectricityOpacityParam = "Opacity";
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity", meta = (Units = s))
+	float ElectricityOpacityDuration = 2.0f;
+
+	FTimeline ElectricityOpacityTimeline;
+
+	UFUNCTION()
+	void ElectricityOpacityUpdate(float Alpha);
+
+	UFUNCTION()
+	void ElectricityOpacityFinished();
+
+#pragma endregion
+
 private:
 	UPROPERTY(EditAnywhere)
 	FName ConnectedShaderTag;
@@ -92,7 +171,7 @@ private:
 	TObjectPtr<AENTElectricityFeedback> NerveElectricityFeedback;
 
 	UPROPERTY()
-	TObjectPtr<AENTNerve> KeepInMemoryNerve;
+	TObjectPtr<AENTNerve> LinkedNerve;
 
 	bool IsConnected;
 

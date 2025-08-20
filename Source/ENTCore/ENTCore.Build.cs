@@ -15,7 +15,6 @@ public class ENTCore : ModuleRules
             "Engine",
             "EngineCameras",
             "EnhancedInput",
-            "FCTween",
             "InputCore",
             "PhysicsCore",
             "UMG",

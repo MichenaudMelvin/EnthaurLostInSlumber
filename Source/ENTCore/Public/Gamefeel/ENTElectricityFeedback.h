@@ -15,7 +15,6 @@ class ENTCORE_API AENTElectricityFeedback : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AENTElectricityFeedback();
 
 protected:
@@ -27,10 +26,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Noises")
 	TObjectPtr<UAkComponent> ElectricityNoises;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Radius;
+	UPROPERTY(BlueprintReadWrite, Category = "Electricity")
+	float Radius = 0.0f;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "Electricity")
 	TObjectPtr<UMaterialInstanceDynamic> Material;
 
 	UFUNCTION()

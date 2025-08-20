@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
 #include "Interface/ENTActivation.h"
 #include "ENTDoor.generated.h"
@@ -18,10 +19,14 @@ public:
 	AENTDoor();
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
+	virtual void BeginPlay() override;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Door")
 	TObjectPtr<USceneComponent> Root;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Door")
 	TObjectPtr<UStaticMeshComponent> MeshDoor;
 
 	UPROPERTY()
@@ -37,7 +42,22 @@ protected:
 
 	bool bIsLocked;
 
-	virtual void BeginPlay() override;
+	UPROPERTY(EditDefaultsOnly, Category = "Door")
+	FName DoorMaterialParam = "State";
+
+	UPROPERTY(EditDefaultsOnly, Category = "Door", meta = (Units = s))
+	float OpenDuration = 0.5f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Door", meta = (Units = s))
+	float CloseDuration = 1.5f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Door")
+	TObjectPtr<UCurveFloat> DoorCurve;
+
+	FTimeline DoorTimeline;
+
+	UFUNCTION()
+	void DoorTimelineUpdate(float Alpha);
 
 public:
 	virtual void Tick(float DeltaTime) override;

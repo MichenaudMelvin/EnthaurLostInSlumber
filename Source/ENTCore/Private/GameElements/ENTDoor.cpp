@@ -3,12 +3,9 @@
 
 #include "GameElements/ENTDoor.h"
 #include "AkComponent.h"
-#include "FCTween.h"
 
-// Sets default values
 AENTDoor::AENTDoor()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Door Mesh"));
@@ -21,24 +18,44 @@ AENTDoor::AENTDoor()
 	NerveDoorNoises->SetupAttachment(Root);
 }
 
-// Called when the game starts or when spawned
 void AENTDoor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	FOnTimelineFloat UpdateEvent;
+	UpdateEvent.BindDynamic(this, &AENTDoor::DoorTimelineUpdate);
+	DoorTimeline.AddInterpFloat(DoorCurve, UpdateEvent);
+}
+
+void AENTDoor::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
 
 	DoorMaterial = MeshDoor->CreateDynamicMaterialInstance(0, MeshDoor->GetMaterial(0));
 
 	if (IsActiveAtStart)
 	{
-		DoorMaterial->SetScalarParameterValue("State", -1.f);
-		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		DoorMaterial->SetScalarParameterValue(DoorMaterialParam, -1.0f);
+		MeshDoor->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
+	else
+	{
+		DoorMaterial->SetScalarParameterValue(DoorMaterialParam, 1.0f);
+		MeshDoor->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	}
 }
 
-// Called every frame
+void AENTDoor::DoorTimelineUpdate(float Alpha)
+{
+	float ScalarValue = FMath::Lerp(-1.0f, 1.0f, Alpha);
+	DoorMaterial->SetScalarParameterValue(DoorMaterialParam, ScalarValue);
+}
+
 void AENTDoor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	DoorTimeline.TickTimeline(DeltaTime);
 }
 
 void AENTDoor::Trigger_Implementation()
@@ -55,29 +72,17 @@ void AENTDoor::Trigger_Implementation()
 
 	if (bIsOpened)
 	{
-		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		MeshDoor->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
-		FCTween::Play(
-			-1.f,
-			1.f,
-			[&](float x)
-			{
-				DoorMaterial->SetScalarParameterValue("State", x);
-			},
-			0.5f,
-			EFCEase::InSine);
-	} else
+		DoorTimeline.SetPlayRate(1 / OpenDuration);
+		DoorTimeline.Play();
+	}
+	else
 	{
-		MeshDoor->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-		FCTween::Play(
-			1.f,
-			-1.f,
-			[&](float x)
-			{
-				DoorMaterial->SetScalarParameterValue("State", x);
-			},
-			1.5f,
-			EFCEase::OutSine);
+		MeshDoor->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+		DoorTimeline.SetPlayRate(1 / CloseDuration);
+		DoorTimeline.Reverse();
 	}
 
 	bIsOpened = !bIsOpened;
