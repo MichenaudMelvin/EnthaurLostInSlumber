@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{1FDED6D6-D066-C763-1CF7-F73198AFE7D5}",
+    "Hash": "{73C94437-B234-6BC0-257F-CF35C7B49C42}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -83,9 +83,9 @@
       "GUID": "{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"
      },
      {
-      "Id": "3150424871",
-      "Name": "AKGP_Nerve_Stretch",
-      "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_Nerve_Stretch",
+      "Id": "2866023372",
+      "Name": "AKGP_NerveStretch",
+      "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_NerveStretch",
       "GUID": "{31886D5C-1267-426C-A7AA-FC467CBBF581}"
      },
      {
@@ -167,6 +167,6 @@
     ]
    }
   ],
-  "FileHash": "{CD11E4D7-9225-0249-9673-90039D5DBBFC}"
+  "FileHash": "{B76B90D2-406F-9493-A723-156ACFD041B3}"
  }
 }

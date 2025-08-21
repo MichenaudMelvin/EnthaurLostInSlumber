@@ -33,7 +33,7 @@ Switch	ID	Name	Switch Group			Notes
 	2108779966	Walk	AKSW_FootstepsSpeed			
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
-	3150424871	AKGP_Nerve_Stretch			\Gameplay\AKGP_Nerve_Stretch	
+	2866023372	AKGP_NerveStretch			\Gameplay\AKGP_NerveStretch	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	8104921	SFX_Elevator_Start_01	E:\UEProjects\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BB\{BB0A6E73-ABDD-609F-7BAE-8EDD1B3115A2}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Elevator_Start\SFX_Elevator_Start_01		122208

@@ -11,6 +11,9 @@ class ENTEDITOR_API UENTClassValidator : public UEditorValidatorBase
 {
 	GENERATED_BODY()
 
+public:
+	UENTClassValidator();
+
 protected:
 	virtual bool CanValidateAsset_Implementation(const FAssetData& InAssetData, UObject* InObject, FDataValidationContext& InContext) const override;
 
@@ -27,4 +30,10 @@ protected:
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "Class")
 	TSet<TSubclassOf<UObject>> ExcludedClasses;
+
+	/**
+	 * @brief Paths to ignore
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "Path")
+	TArray<FDirectoryPath> ExcludedPaths;
 };

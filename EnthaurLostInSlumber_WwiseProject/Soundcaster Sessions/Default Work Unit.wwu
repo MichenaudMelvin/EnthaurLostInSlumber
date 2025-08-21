@@ -56,7 +56,7 @@
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
 						<RTPCValue>
-							<GameParameterRef Name="AKGP_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
+							<GameParameterRef Name="AKGP_NerveStretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
 							<Value>86.7532467532468</Value>
 						</RTPCValue>
 						<RTPCValue>

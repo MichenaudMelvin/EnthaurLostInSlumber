@@ -36,6 +36,11 @@ protected:
 	 */
 	float TraceLength = 100000.0f;
 
+	/**
+	 * @brief Cannot change it runtime, maybe later
+	 */
+	bool bResetCameraPitch = true;
+
 #pragma region CameraSpeed
 
 protected:

@@ -3,9 +3,24 @@
 
 #include "Utilities/ENTClassValidator.h"
 
+UENTClassValidator::UENTClassValidator()
+{
+	ExcludedPaths.Add(FDirectoryPath("/Engine"));
+	ExcludedPaths.Add(FDirectoryPath("/Script"));
+	ExcludedPaths.Add(FDirectoryPath("/Game/StarterContent"));
+}
+
 bool UENTClassValidator::CanValidateAsset_Implementation(const FAssetData& InAssetData, UObject* InObject, FDataValidationContext& InContext) const
 {
 	Super::CanValidateAsset_Implementation(InAssetData, InObject, InContext);
+
+	for (const FDirectoryPath& Path : ExcludedPaths)
+	{
+		if (InAssetData.PackagePath.ToString().StartsWith(Path.Path))
+		{
+			return false;
+		}
+	}
 
 	for (const TSubclassOf<UObject>& ExcludedClass : ExcludedClasses)
 	{

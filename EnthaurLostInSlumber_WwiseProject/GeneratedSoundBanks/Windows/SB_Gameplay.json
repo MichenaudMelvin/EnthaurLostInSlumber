@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{4535D400-C02A-82A1-1D14-E3223164DD66}",
+    "Hash": "{50B8E620-2F1F-5228-7741-83601D78E1C5}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -2131,9 +2131,9 @@
     ],
     "GameParameters": [
      {
-      "Id": "3150424871",
-      "Name": "AKGP_Nerve_Stretch",
-      "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_Nerve_Stretch",
+      "Id": "2866023372",
+      "Name": "AKGP_NerveStretch",
+      "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_NerveStretch",
       "GUID": "{31886D5C-1267-426C-A7AA-FC467CBBF581}"
      }
     ],
@@ -2181,6 +2181,6 @@
     ]
    }
   ],
-  "FileHash": "{9196533D-96D5-2931-5298-6674FE41132E}"
+  "FileHash": "{BDCEAA04-F384-F7EF-D74A-FFDAC70E2FE7}"
  }
 }

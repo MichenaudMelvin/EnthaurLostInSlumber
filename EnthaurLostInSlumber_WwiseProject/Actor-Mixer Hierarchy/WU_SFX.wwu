@@ -814,7 +814,7 @@
 														</PropertyList>
 														<ReferenceList>
 															<Reference Name="ControlInput">
-																<ObjectRef Name="AKGP_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
+																<ObjectRef Name="AKGP_NerveStretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
 															</Reference>
 															<Reference Name="Curve">
 																<Custom>
@@ -1004,7 +1004,7 @@
 														</PropertyList>
 														<ReferenceList>
 															<Reference Name="ControlInput">
-																<ObjectRef Name="AKGP_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
+																<ObjectRef Name="AKGP_NerveStretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
 															</Reference>
 															<Reference Name="Curve">
 																<Custom>
@@ -1164,7 +1164,7 @@
 														</PropertyList>
 														<ReferenceList>
 															<Reference Name="ControlInput">
-																<ObjectRef Name="AKGP_Nerve_Stretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
+																<ObjectRef Name="AKGP_NerveStretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
 															</Reference>
 															<Reference Name="Curve">
 																<Custom>

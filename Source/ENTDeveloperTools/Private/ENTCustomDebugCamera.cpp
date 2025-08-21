@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ENTCustomDebugCamera.h"
+#include "Components/CapsuleComponent.h"
+#include "GameFramework/Character.h"
 #include "GameFramework/PlayerInput.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -75,7 +77,25 @@ void AENTCustomDebugCamera::TeleportToFacingLocation()
 		return;
 	}
 
+	ACharacter* CharacterObject = Cast<ACharacter>(OriginalControllerRef->GetPawn());
+
+	if (CharacterObject)
+	{
+		float CapsuleHalfHeight = CharacterObject->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+
+		HitResult.Location.Z += CapsuleHalfHeight * (HitResult.Normal.Z >= 0.0f ? 1.0f : -1.0f);
+	}
+
 	OriginalControllerRef->GetPawn()->SetActorLocation(HitResult.Location, false);
+
+	FRotator TargetControlRotation = GetControlRotation();
+
+	if (bResetCameraPitch)
+	{
+		TargetControlRotation.Pitch = 0.0f;
+	}
+
+	OriginalControllerRef->SetControlRotation(TargetControlRotation);
 	UKismetSystemLibrary::ExecuteConsoleCommand(this, "ToggleDebugCamera", this);
 }
 
