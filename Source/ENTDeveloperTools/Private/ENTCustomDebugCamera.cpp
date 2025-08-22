@@ -4,6 +4,7 @@
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PlayerInput.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 void InitializeCustomDebugCameraInputBindings()
@@ -15,6 +16,7 @@ void InitializeCustomDebugCameraInputBindings()
 	}
 
 	bBindingsAdded = true;
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_ShowTeleportLocation", EKeys::RightMouseButton));
 	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_TeleportToFacingLocation", EKeys::RightMouseButton));
 	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DestroyFacingActor", EKeys::Delete));
 
@@ -36,7 +38,18 @@ void AENTCustomDebugCamera::BeginPlay()
 {
 	Super::BeginPlay();
 
+	bShowTeleportLocation = false;
 	ToggleDisplay();
+}
+
+void AENTCustomDebugCamera::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (bShowTeleportLocation)
+	{
+		ShowTeleportLocation();
+	}
 }
 
 void AENTCustomDebugCamera::SetupInputComponent()
@@ -44,7 +57,8 @@ void AENTCustomDebugCamera::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	InitializeCustomDebugCameraInputBindings();
-	InputComponent->BindAction("CustomDebugCamera_TeleportToFacingLocation", IE_Pressed, this, &AENTCustomDebugCamera::TeleportToFacingLocation);
+	InputComponent->BindAction("CustomDebugCamera_ShowTeleportLocation", IE_Pressed, this, &AENTCustomDebugCamera::TriggerShowTeleportLocation);
+	InputComponent->BindAction("CustomDebugCamera_TeleportToFacingLocation", IE_Released, this, &AENTCustomDebugCamera::TeleportToFacingLocation);
 	InputComponent->BindAction("CustomDebugCamera_DestroyFacingActor", IE_Pressed, this, &AENTCustomDebugCamera::DestroyFacingActor);
 
 	InputComponent->RemoveActionBinding("DebugCamera_IncreaseSpeed", IE_Pressed);
@@ -69,12 +83,12 @@ bool AENTCustomDebugCamera::Trace(FHitResult& HitResult) const
 	return GetWorld()->LineTraceSingleByChannel(HitResult, CamLocation, CamLocation + (CamRotation.Vector() * TraceLength), ECC_Pawn, TraceParams);
 }
 
-void AENTCustomDebugCamera::TeleportToFacingLocation()
+bool AENTCustomDebugCamera::GetTeleportationResult(FVector& TeleportLocation, FRotator& TeleportControlRotation) const
 {
 	FHitResult HitResult;
 	if(!Trace(HitResult) && !OriginalControllerRef && !OriginalControllerRef->GetPawn())
 	{
-		return;
+		return false;
 	}
 
 	ACharacter* CharacterObject = Cast<ACharacter>(OriginalControllerRef->GetPawn());
@@ -86,16 +100,62 @@ void AENTCustomDebugCamera::TeleportToFacingLocation()
 		HitResult.Location.Z += CapsuleHalfHeight * (HitResult.Normal.Z >= 0.0f ? 1.0f : -1.0f);
 	}
 
-	OriginalControllerRef->GetPawn()->SetActorLocation(HitResult.Location, false);
+	TeleportLocation = HitResult.Location;
 
-	FRotator TargetControlRotation = GetControlRotation();
+	TeleportControlRotation = GetControlRotation();
 
 	if (bResetCameraPitch)
 	{
-		TargetControlRotation.Pitch = 0.0f;
+		TeleportControlRotation.Pitch = 0.0f;
 	}
 
-	OriginalControllerRef->SetControlRotation(TargetControlRotation);
+	return true;
+}
+
+void AENTCustomDebugCamera::TriggerShowTeleportLocation()
+{
+	bShowTeleportLocation = true;
+}
+
+void AENTCustomDebugCamera::ShowTeleportLocation() const
+{
+	FVector Location;
+	FRotator Rotation;
+	if (!GetTeleportationResult(Location, Rotation))
+	{
+		return;
+	}
+
+	ACharacter* CharacterObject = Cast<ACharacter>(OriginalControllerRef->GetPawn());
+
+	if (CharacterObject)
+	{
+		float HalfHeight = CharacterObject->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+		float Radius = CharacterObject->GetCapsuleComponent()->GetScaledCapsuleRadius();
+
+		UKismetSystemLibrary::DrawDebugCapsule(this, Location, HalfHeight, Radius, FRotator::ZeroRotator, FLinearColor::Red, 0.0f, 1.0f);
+	}
+
+	UKismetSystemLibrary::DrawDebugPoint(this, Location, 5.0f, FLinearColor::Green, 0.0f);
+
+	FVector Direction = UKismetMathLibrary::GetForwardVector(Rotation);
+	FVector EndLocation = Location + (Direction * ArrowLength);
+	UKismetSystemLibrary::DrawDebugArrow(this, Location, EndLocation, 5.0f, FLinearColor::Red, 0, 1.0f);
+}
+
+void AENTCustomDebugCamera::TeleportToFacingLocation()
+{
+	bShowTeleportLocation = false;
+
+	FVector Location;
+	FRotator Rotation;
+	if (!GetTeleportationResult(Location, Rotation))
+	{
+		return;
+	}
+
+	OriginalControllerRef->GetPawn()->SetActorLocation(Location, false);
+	OriginalControllerRef->SetControlRotation(Rotation);
 	UKismetSystemLibrary::ExecuteConsoleCommand(this, "ToggleDebugCamera", this);
 }
 

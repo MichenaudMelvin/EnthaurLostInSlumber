@@ -17,13 +17,21 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
 	virtual void SetupInputComponent() override;
 
 	bool Trace(FHitResult& HitResult) const;
 
+	bool GetTeleportationResult(FVector& TeleportLocation, FRotator& TeleportControlRotation) const;
+
 #pragma region CustomActions
 
 protected:
+	void TriggerShowTeleportLocation();
+
+	void ShowTeleportLocation() const;
+
 	void TeleportToFacingLocation();
 
 	void DestroyFacingActor();
@@ -40,6 +48,14 @@ protected:
 	 * @brief Cannot change it runtime, maybe later
 	 */
 	bool bResetCameraPitch = true;
+
+	bool bShowTeleportLocation = false;
+
+	/**
+	 * @brief Direction arrow length (cm)
+	 */
+	float ArrowLength = 100.0f;
+
 
 #pragma region CameraSpeed
 
