@@ -4,13 +4,15 @@
 #include "Subsystems/ENTHUDManager.h"
 #include "Config/ENTUIConfig.h"
 #include "Blueprint/UserWidget.h"
-#include "Blueprint/WidgetBlueprintLibrary.h"
-#include "EditorSettings/ENTEditorSettings.h"
 #include "ENTComponents/Public/ENTHealthComponent.h"
 #include "GameFramework/GameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/ENTDefaultCharacter.h"
 #include "Subsystems/ENTLevelNameSubsystem.h"
+
+#if WITH_EDITORONLY_DATA
+#include "EditorSettings/ENTEditorSettings.h"
+#endif
 
 void UENTHUDManager::Initialize(FSubsystemCollectionBase& Collection)
 {

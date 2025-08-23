@@ -647,7 +647,7 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 	}
 
 	PhysicConstraint = Player->AddConstraint();
-	if (PhysicConstraint)
+	if (!PhysicConstraint)
 	{
 		return;
 	}

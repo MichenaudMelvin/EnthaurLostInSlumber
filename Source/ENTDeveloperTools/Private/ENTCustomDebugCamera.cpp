@@ -70,23 +70,33 @@ void AENTCustomDebugCamera::SetupInputComponent()
 
 bool AENTCustomDebugCamera::Trace(FHitResult& HitResult) const
 {
-	if (!OriginalControllerRef && !OriginalControllerRef->GetPawn())
-	{
-		return false;
-	}
-
 	FVector CamLocation;
 	FRotator CamRotation;
 	GetPlayerViewPoint(CamLocation, CamRotation);
 
-	FCollisionQueryParams TraceParams(NAME_None, FCollisionQueryParams::GetUnknownStatId(), true, OriginalControllerRef->GetPawn());
+	FCollisionQueryParams TraceParams(NAME_None, FCollisionQueryParams::GetUnknownStatId(), false);
+
+	if (OriginalControllerRef && OriginalControllerRef->GetPawn())
+	{
+		TraceParams.AddIgnoredActor(OriginalControllerRef->GetPawn());
+	}
+
 	return GetWorld()->LineTraceSingleByChannel(HitResult, CamLocation, CamLocation + (CamRotation.Vector() * TraceLength), ECC_Pawn, TraceParams);
 }
 
 bool AENTCustomDebugCamera::GetTeleportationResult(FVector& TeleportLocation, FRotator& TeleportControlRotation) const
 {
+	if (!OriginalControllerRef || !OriginalControllerRef->GetPawn())
+	{
+		const FString Message = FString::Printf(TEXT("Controller or pawn doesn't exist"));
+
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+		return false;
+	}
+
 	FHitResult HitResult;
-	if(!Trace(HitResult) && !OriginalControllerRef && !OriginalControllerRef->GetPawn())
+	if(!Trace(HitResult))
 	{
 		return false;
 	}
