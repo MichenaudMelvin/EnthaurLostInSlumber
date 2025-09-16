@@ -2,7 +2,7 @@
 	"BuildId": "37670630",
 	"Modules": 
 	{
-		"ENTAI": "UnrealEditor-ENTAI.dll",
+		"ENTArtificialIntelligence": "UnrealEditor-ENTArtificialIntelligence.dll",
 		"ENTComponents": "UnrealEditor-ENTComponents.dll",
 		"ENTCore": "UnrealEditor-ENTCore.dll",
 		"ENTDeveloperTools": "UnrealEditor-ENTDeveloperTools.dll",

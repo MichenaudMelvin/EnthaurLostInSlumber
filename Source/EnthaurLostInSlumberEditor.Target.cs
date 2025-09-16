@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 using UnrealBuildTool;
-using System.Collections.Generic;
 
 public class EnthaurLostInSlumberEditorTarget : TargetRules
 {
@@ -12,6 +11,6 @@ public class EnthaurLostInSlumberEditorTarget : TargetRules
 
 		Name = "EnthaurLostInSlumberEditor";
 
-		ExtraModuleNames.AddRange( new string[] { "ENTCore", "ENTUI", "ENTAI", "ENTEditor", "ENTDeveloperTools", "ENTSaves", "ENTComponents" } );
+		ExtraModuleNames.AddRange( new string[] { "ENTCore", "ENTUI", "ENTArtificialIntelligence", "ENTEditor", "ENTDeveloperTools", "ENTSaves", "ENTComponents" } );
 	}
 }

@@ -15,7 +15,7 @@
 			"LoadingPhase": "Default"
 		},
 		{
-			"Name": "ENTAI",
+			"Name": "ENTArtificialIntelligence",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		},
