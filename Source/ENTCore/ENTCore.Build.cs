@@ -25,7 +25,9 @@ public class ENTCore : ModuleRules
 
         PrivateDependencyModuleNames.AddRange(new string[]
         {
-            "ENTComponents"
+            "ENTComponents",
+            "OnlineSubsystem",
+            "OnlineSubsystemSteam"
         });
 
         if (Target.bBuildEditor)
