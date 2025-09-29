@@ -71,7 +71,10 @@ UENTCharacterState* UENTCharacterStateMachine::ChangeState(EENTCharacterStateID 
 	}
 
 	CurrentState->StateEnter(PreviousStateID);
-	return NextState;
+
+	OnChangeState.Broadcast(CurrentState, CurrentStateID);
+
+	return CurrentState;
 }
 
 UENTCharacterState* UENTCharacterStateMachine::FindState(EENTCharacterStateID StateID) const
