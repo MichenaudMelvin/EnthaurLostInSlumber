@@ -22,11 +22,15 @@
 		{
 			"Name": "ENTEditor",
 			"Type": "Editor",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies":
+			[
+				"EditorScriptingUtilities"
+			]
 		},
 		{
 			"Name": "ENTDeveloperTools",
-			"Type": "Runtime",
+			"Type": "DeveloperTool",
 			"LoadingPhase": "PreDefault"
 		},
 		{
@@ -63,6 +67,10 @@
 		{
 			"Name": "Fab",
 			"Enabled": false
+		},
+		{
+			"Name": "EditorScriptingUtilities",
+			"Enabled": true
 		},
 		{
 			"Name": "OnlineSubsystemSteam",
