@@ -232,4 +232,14 @@ private:
 #endif
 
 #pragma endregion
+
+protected:
+	UFUNCTION(BlueprintCallable)
+	void SwitchKeyBind();
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	TObjectPtr<UInputAction> NewIA;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	FKey NewKey;
 };

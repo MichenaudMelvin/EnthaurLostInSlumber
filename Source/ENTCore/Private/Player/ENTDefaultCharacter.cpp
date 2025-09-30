@@ -2,6 +2,7 @@
 
 #include "Player/ENTDefaultCharacter.h"
 #include "AkComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "Interface/ENTGroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "ENTCameraShakeComponent.h"
@@ -26,6 +27,8 @@
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Subsystems/ENTPlayerSaveSubsystem.h"
+
+class UEnhancedInputLocalPlayerSubsystem;
 
 AENTDefaultCharacter::AENTDefaultCharacter()
 {

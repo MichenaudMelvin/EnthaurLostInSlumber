@@ -6,6 +6,9 @@
 #include "Menus/ENTWidgetBasics.h"
 #include "ENTControlsMenu.generated.h"
 
+class UENTInputSlot;
+class UVerticalBox;
+
 UCLASS()
 class ENTUI_API UENTControlsMenu : public UENTWidgetBasics
 {
@@ -13,6 +16,13 @@ class ENTUI_API UENTControlsMenu : public UENTWidgetBasics
 
 protected:
 	virtual void NativeConstruct() override;
-
 	virtual void NativeDestruct() override;
+
+	void AddInputRows();
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<UVerticalBox> VBox;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UENTInputSlot> InputSlotClass;
 };
