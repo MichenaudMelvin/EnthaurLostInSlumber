@@ -40,6 +40,7 @@ Copyright (c) 2025 Audiokinetic Inc.
 
 TMap<uint32, FWwisePackagedFile::FWeakBulkDataArrayPtr> FWwisePackagedFile::KnownBulkDatas;
 FCriticalSection FWwisePackagedFile::KnownBulkDatasCriticalSection;
+constexpr int WwisePackagedFileLogHeaderAlignment = -90; 
 
 FWwisePackagedFile::FWwisePackagedFile()
 {
@@ -112,6 +113,12 @@ void FWwisePackagedFile::SerializeBulkData(FArchive& Ar, const FWwisePackagedFil
 	// External files have no predefined Bulk Data. They should use existing ones.
 	if (PackagingStrategy == EWwisePackagingStrategy::External)
 	{
+#if WITH_EDITORONLY_DATA
+		const auto Header = FString::Printf(TEXT("Wwise [%s]: Skipping %s"),
+			*Options.Owner->GetName(), *FPaths::GetCleanFilename(SourcePathName));
+		UE_CLOG(!bIsLoadingFromCookedPlatform, LogWwiseFileHandler, Display, TEXT("%*s [Asset Library%s] from %s"),
+			WwisePackagedFileLogHeaderAlignment, *Header, *Options.ExtraLog, *DebugName);
+#endif
 		return;
 	}
 
@@ -131,17 +138,17 @@ void FWwisePackagedFile::SerializeBulkData(FArchive& Ar, const FWwisePackagedFil
 				BulkData.Serialize(Ar, Options.Owner);
 			}
 #if UE_5_2_OR_LATER
-			const auto DebugName { " ID " + BulkData.GetDebugName() };
+			const auto BulkDataId { " ID " + BulkData.GetDebugName() };
 #else
-			const FString DebugName {};
+			const FString BulkDataId {};
 #endif
-			UE_LOG(LogWwiseFileHandler, Verbose, TEXT("FWwisePackagedFile::SerializeBulkData: Loaded asset for %s [Bulk Data, %s, %" PRIi64 " bytes%s]"),
+			UE_LOG(LogWwiseFileHandler, Verbose, TEXT("FWwisePackagedFile::SerializeBulkData: Loaded asset for %s [Bulk Data, %s, %" PRIi64 " bytes%s%s]"),
 				*Options.Owner->GetName(),
 				Options.bOptional ?
 					PrefetchSize > 0 ? TEXT("Optional Prefetch") : TEXT("Optional") :
 					PrefetchSize > 0 ? TEXT("Prefetch") : TEXT("Inline"),
 				BulkData.GetElementCount(),
-				*DebugName);
+				*Options.ExtraLog, *BulkDataId);
 		}
 
 		// Retrieve Streaming data
@@ -154,15 +161,15 @@ void FWwisePackagedFile::SerializeBulkData(FArchive& Ar, const FWwisePackagedFil
 			}
 
 #if UE_5_2_OR_LATER
-			const auto DebugName { " ID " + BulkData.GetDebugName() };
+			const auto BulkDataId { " ID " + BulkData.GetDebugName() };
 #else
-			const FString DebugName {};
+			const FString BulkDataId {};
 #endif
-			UE_LOG(LogWwiseFileHandler, Verbose, TEXT("FWwisePackagedFile::SerializeBulkData: Loaded asset for %s [Bulk Data, %sStream, %" PRIi64 " bytes%s]"),
+			UE_LOG(LogWwiseFileHandler, Verbose, TEXT("FWwisePackagedFile::SerializeBulkData: Loaded asset for %s [Bulk Data, %sStream, %" PRIi64 " bytes%s%s]"),
 				*Options.Owner->GetName(),
 				Options.bOptional ? TEXT("Optional ") : TEXT(""),
 				BulkData.GetElementCount(),
-				*DebugName);
+				*Options.ExtraLog, *BulkDataId);
 		}
 	}
 	
@@ -216,12 +223,18 @@ void FWwisePackagedFile::SerializeBulkData(FArchive& Ar, const FWwisePackagedFil
 				FPlatformMemory::Memcpy(Dest, DataPtr, DataSize);
 				BulkData.Unlock();
 
-				UE_LOG(LogWwiseFileHandler, Display, TEXT("Wwise: Adding to %s [Bulk Data, %s, %" PRIi64 " bytes] from %s"),
-					*Options.Owner->GetName(),
+				const auto Header = FString::Printf(TEXT("Wwise [%s]: Cooking %s"),
+					*Options.Owner->GetName(), *FPaths::GetCleanFilename(SourcePathName));
+				UE_CLOG(WwiseProjectUsageCount == 1, LogWwiseFileHandler, Display, TEXT("%*s [Bulk Data, %s, %" PRIi64 " bytes%s] from %s"), WwisePackagedFileLogHeaderAlignment, *Header,
 					Options.bOptional ?
 						PrefetchSize > 0 ? TEXT("Optional Prefetch") : TEXT("Optional") :
 						PrefetchSize > 0 ? TEXT("Prefetch") : TEXT("Inline"),
-					DataSize, *FPaths::GetCleanFilename(SourcePathName));
+					DataSize, *Options.ExtraLog, *DebugName);
+				UE_CLOG(WwiseProjectUsageCount != 1, LogWwiseFileHandler, Display, TEXT("%*s [Bulk Data, %s, %" PRIi64 " bytes%s, %d users] from %s"), WwisePackagedFileLogHeaderAlignment, *Header,
+					Options.bOptional ?
+						PrefetchSize > 0 ? TEXT("Optional Prefetch") : TEXT("Optional") :
+						PrefetchSize > 0 ? TEXT("Prefetch") : TEXT("Inline"),
+					DataSize, *Options.ExtraLog, WwiseProjectUsageCount, *DebugName);
 				
 				BulkData.Serialize(Ar, Options.Owner);
 			}
@@ -247,10 +260,14 @@ void FWwisePackagedFile::SerializeBulkData(FArchive& Ar, const FWwisePackagedFil
 				FPlatformMemory::Memcpy(Dest, DataPtr, DataSize);
 				BulkData.Unlock();
 
-				UE_LOG(LogWwiseFileHandler, Display, TEXT("Wwise: Adding to %s [Bulk Data, %sStream, %" PRIi64 " bytes] from %s"),
-					*Options.Owner->GetName(),
+				const auto Header = FString::Printf(TEXT("Wwise [%s]: Cooking %s"),
+					*Options.Owner->GetName(), *FPaths::GetCleanFilename(SourcePathName));
+				UE_CLOG(WwiseProjectUsageCount == 1, LogWwiseFileHandler, Display, TEXT("%*s [Bulk Data, %sStream, %" PRIi64 " bytes%s] from %s"), WwisePackagedFileLogHeaderAlignment, *Header,
 					Options.bOptional ? TEXT("Optional ") : TEXT(""),
-					DataSize, *FPaths::GetCleanFilename(SourcePathName));
+					DataSize, *Options.ExtraLog, *DebugName);
+				UE_CLOG(WwiseProjectUsageCount != 1, LogWwiseFileHandler, Display, TEXT("%*s [Bulk Data, %sStream, %" PRIi64 " bytes%s, %d users] from %s"), WwisePackagedFileLogHeaderAlignment, *Header,
+					Options.bOptional ? TEXT("Optional ") : TEXT(""),
+					DataSize, *Options.ExtraLog, WwiseProjectUsageCount, *DebugName);
 				
 				BulkData.Serialize(Ar, Options.Owner);
 			}
@@ -329,7 +346,9 @@ void FWwisePackagedFile::CookToSandbox(const FString& CookRootPath,
 		{
 			return;
 		}
-		UE_LOG(LogWwiseFileHandler, Display, TEXT("Wwise: Adding file %s [%" PRIi64 " bytes] from %s"), *PathName.ToString(), Size, *FPaths::GetCleanFilename(SourcePathName));
+		const auto Header = FString::Printf(TEXT("Wwise [%s]: Writing %s"), *PathName.ToString(), *FPaths::GetCleanFilename(SourcePathName));
+		UE_LOG(LogWwiseFileHandler, Display, TEXT("%*s [Additional File, %" PRIi64 " bytes]"), WwisePackagedFileLogHeaderAlignment, *Header,
+			Size);
 		WriteAdditionalFile(*CookPath, (void*)Ptr, Size);
 	});
 	EventRef->Wait();
@@ -628,9 +647,9 @@ void FWwisePackagedFile::GetBulkFileToPtr(GetFileToPtrCallback&& InCallback, boo
 
 	const bool bReadEntireFile{ ReadFirstBytes == -1 || BulkData->GetElementCount() == ReadFirstBytes };
 #if UE_5_2_OR_LATER
-	const auto DebugName { BulkData->GetDebugName() };
+	const auto BulkDataId { BulkData->GetDebugName() };
 #else
-	const FString DebugName {"Bulk Data"};
+	const FString BulkDataId {"Bulk Data"};
 #endif
 
 	if (BulkData->IsBulkDataLoaded())
@@ -639,13 +658,13 @@ void FWwisePackagedFile::GetBulkFileToPtr(GetFileToPtrCallback&& InCallback, boo
 		uint8* Ptr = AllocateMemory(Size, bInEnforceMemoryRequirements, InStat, InStatDevice);
 		if (UNLIKELY(!Ptr))
 		{
-			UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Could not Allocate %" PRIi64 " for %s"), Size, *DebugName);
+			UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Could not Allocate %" PRIi64 " for %s"), Size, *BulkDataId);
 			InCallback(false, nullptr, 0);
 			return;
 		}
 
-		UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Getting the first %" PRIi64 " bytes of in-memory file %s (%" PRIi64 " bytes)"), ReadFirstBytes, *DebugName, Size);
-		UE_CLOG(bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Getting the entire in-memory file %s (%" PRIi64 " bytes). Will be set as streamed afterwards."), *DebugName, Size);
+		UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Getting the first %" PRIi64 " bytes of in-memory file %s (%" PRIi64 " bytes)"), ReadFirstBytes, *BulkDataId, Size);
+		UE_CLOG(bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Getting the entire in-memory file %s (%" PRIi64 " bytes). Will be set as streamed afterwards."), *BulkDataId, Size);
 
 		if (LIKELY(bReadEntireFile))
 		{
@@ -661,7 +680,7 @@ void FWwisePackagedFile::GetBulkFileToPtr(GetFileToPtrCallback&& InCallback, boo
 		}
 		else
 		{
-			UE_LOG(LogWwiseFileHandler, Verbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Could not lock in-memory data of %" PRIi64 " for %s. Will try streaming it."), Size, *DebugName);
+			UE_LOG(LogWwiseFileHandler, Verbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Could not lock in-memory data of %" PRIi64 " for %s. Will try streaming it."), Size, *BulkDataId);
 			DeallocateMemory(Ptr, Size, bInEnforceMemoryRequirements, InStat, InStatDevice);
 		}
 	}
@@ -669,26 +688,26 @@ void FWwisePackagedFile::GetBulkFileToPtr(GetFileToPtrCallback&& InCallback, boo
 	auto* FileCache = FWwiseFileCache::Get();
 	if (UNLIKELY(!FileCache))
 	{
-		UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Failed to get FileCache instance while reading %s"), *DebugName);
+		UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Failed to get FileCache instance while reading %s"), *BulkDataId);
 		return InCallback(false, nullptr, 0);
 	}
 
 	auto* HandlePtr = new IWwiseFileCacheHandle*;
 	if (UNLIKELY(!HandlePtr))
 	{
-		UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Failed to allocate FileCacheHandle pointer while reading %s"), *DebugName);
+		UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Failed to allocate FileCacheHandle pointer while reading %s"), *BulkDataId);
 		return InCallback(false, nullptr, 0);
 	}
 
 	FileCache->CreateFileCacheHandle(*HandlePtr, BulkData,
-		[this, BulkData, DebugName, HandlePtr, InCallback = MoveTemp(InCallback), bInEnforceMemoryRequirements, InStat, InStatDevice, InLlmName, InPriority, ReadFirstBytes, bReadEntireFile](bool bResult) mutable
+		[this, BulkData, BulkDataId, HandlePtr, InCallback = MoveTemp(InCallback), bInEnforceMemoryRequirements, InStat, InStatDevice, InLlmName, InPriority, ReadFirstBytes, bReadEntireFile](bool bResult) mutable
 		{
 			SCOPED_WWISEFILEHANDLER_EVENT_4(TEXT("FWwisePackagedFile::GetBulkFileToPtr Opened"));
 			auto* Handle = *HandlePtr;
 			
 			if (UNLIKELY(!bResult) || UNLIKELY(!Handle))
 			{
-				UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Open failed while reading Bulk Data %s"), *DebugName);
+				UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Open failed while reading Bulk Data %s"), *BulkDataId);
 				delete HandlePtr;
 				InCallback(false, nullptr, 0);
 				if (Handle) Handle->CloseAndDelete();
@@ -699,7 +718,7 @@ void FWwisePackagedFile::GetBulkFileToPtr(GetFileToPtrCallback&& InCallback, boo
 		
 			if (UNLIKELY(!Size))
 			{
-				UE_LOG(LogWwiseFileHandler, Error, TEXT("FWwisePackagedFile::GetBulkFileToPtr: File not found %s"), *DebugName);
+				UE_LOG(LogWwiseFileHandler, Error, TEXT("FWwisePackagedFile::GetBulkFileToPtr: File not found %s"), *BulkDataId);
 				delete HandlePtr;
 				InCallback(false, nullptr, 0);
 				Handle->CloseAndDelete();
@@ -715,18 +734,18 @@ void FWwisePackagedFile::GetBulkFileToPtr(GetFileToPtrCallback&& InCallback, boo
 			uint8* Ptr = AllocateMemory(Size, bInEnforceMemoryRequirements, InStat, InStatDevice);
 			if (UNLIKELY(!Ptr))
 			{
-				UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Could not Allocate %" PRIi64 " for %s"), Size, *DebugName);
+				UE_LOG(LogWwiseFileHandler, Warning, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Could not Allocate %" PRIi64 " for %s"), Size, *BulkDataId);
 				delete HandlePtr;
 				InCallback(false, nullptr, 0);
 				Handle->CloseAndDelete();
 				return;
 			}
 
-			UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Getting the first %" PRIi64 " bytes of file %s (%" PRIi64 " bytes)"), Size, *DebugName, Handle->GetFileSize());
-			UE_CLOG(bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Getting the entire file %s (%" PRIi64 " bytes)"), *DebugName, Size);
+			UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Getting the first %" PRIi64 " bytes of file %s (%" PRIi64 " bytes)"), Size, *BulkDataId, Handle->GetFileSize());
+			UE_CLOG(bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Getting the entire file %s (%" PRIi64 " bytes)"), *BulkDataId, Size);
 
 			Handle->ReadData(Ptr, 0, Size, InPriority,
-				[this, HandlePtr, InCallback = MoveTemp(InCallback), BulkData, DebugName, Ptr, Size, bInEnforceMemoryRequirements, InStat, InStatDevice, ReadFirstBytes, bReadEntireFile](bool bResult) mutable
+				[this, HandlePtr, InCallback = MoveTemp(InCallback), BulkData, BulkDataId, Ptr, Size, bInEnforceMemoryRequirements, InStat, InStatDevice, ReadFirstBytes, bReadEntireFile](bool bResult) mutable
 				{
 					SCOPED_WWISEFILEHANDLER_EVENT_4(TEXT("FWwisePackagedFile::GetBulkFileToPtr Done"));
 					auto* Handle = *HandlePtr;
@@ -734,13 +753,13 @@ void FWwisePackagedFile::GetBulkFileToPtr(GetFileToPtrCallback&& InCallback, boo
 
 					if (LIKELY(bResult))
 					{
-						UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Done getting the first bytes of file %s (%" PRIi64 " bytes)"), *DebugName, Size);
-						UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Done getting the entire file %s (%" PRIi64 " bytes)"), *DebugName, Size);
+						UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Done getting the first bytes of file %s (%" PRIi64 " bytes)"), *BulkDataId, Size);
+						UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, VeryVerbose, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Done getting the entire file %s (%" PRIi64 " bytes)"), *BulkDataId, Size);
 					}
 					else
 					{
-						UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, Error, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Failed getting the first bytes of file %s (%" PRIi64 " bytes)"), *DebugName, Size);
-						UE_CLOG(bReadEntireFile, LogWwiseFileHandler, Error, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Failed getting the entire file %s (%" PRIi64 " bytes)"), *DebugName, Size);
+						UE_CLOG(!bReadEntireFile, LogWwiseFileHandler, Error, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Failed getting the first bytes of file %s (%" PRIi64 " bytes)"), *BulkDataId, Size);
+						UE_CLOG(bReadEntireFile, LogWwiseFileHandler, Error, TEXT("FWwisePackagedFile::GetBulkFileToPtr: Failed getting the entire file %s (%" PRIi64 " bytes)"), *BulkDataId, Size);
 						DeallocateMemory(Ptr, Size, bInEnforceMemoryRequirements, InStat, InStatDevice);
 					}
 

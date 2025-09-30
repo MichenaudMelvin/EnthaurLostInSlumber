@@ -78,6 +78,7 @@ public:
 	
 	const WwiseEventGlobalIdsMap& GetEvents() const;
 	WwiseDBSet<WwiseRefEvent> GetEvent(const FWwiseEventInfo& InInfo) const;
+	WwiseDBSet<WwiseRefEvent> GetAllLanguageEvents(const FWwiseEventInfo& InInfo) const;
 	
 	const WwiseExternalSourceGlobalIdsMap& GetExternalSources() const;
 	WwiseRefExternalSource GetExternalSource(const FWwiseObjectInfo& InInfo) const;
@@ -86,7 +87,7 @@ public:
 	WwiseRefGameParameter GetGameParameter(const FWwiseObjectInfo& InInfo) const;
 	
 	const WwiseMediaGlobalIdsMap& GetMediaFiles() const;
-	WwiseRefMedia GetMediaFile(const FWwiseObjectInfo& InInfo) const;
+	WwiseRefMedia GetMediaFile(const FWwiseObjectInfo& InInfo, uint32 InLanguageId = 0) const;
 	
 	const WwisePluginLibGlobalIdsMap& GetPluginLibs() const;
 	WwiseRefPluginLib GetPluginLib(const FWwiseObjectInfo& InInfo) const;
@@ -122,10 +123,10 @@ public:
 	const WwiseDBSharedPlatformId& GetCurrentPlatform() const { return CurrentPlatform; }
 	bool DisableDefaultPlatforms() const { return bDisableDefaultPlatforms; }
 
-	bool IsSingleUser(const WwiseAnyRef& Asset) const;
-	bool IsSingleUserMedia(uint32 InId) const;
-	bool IsSingleUserSoundBank(uint32 InId, uint32 InLanguageId) const;
-	bool IsSingleUserSoundBank(uint32 InId, const WwiseDBString& InLanguage) const;
+	int GetUsageCount(const WwiseAnyRef& Asset) const;
+	int GetMediaUsageCount(uint32 InId) const;
+	int GetSoundBankUsageCount(uint32 InId, uint32 InLanguageId) const;
+	int GetSoundBankUsageCount(uint32 InId, const WwiseDBString& InLanguage) const;
 
 	uint32 GetLanguageId(const WwiseDBString& Name) const;
 	WwiseDBString GetLanguageName(uint32 InId) const;

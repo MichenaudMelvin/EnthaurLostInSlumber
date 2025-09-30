@@ -22,7 +22,7 @@ Copyright (c) 2025 Audiokinetic Inc.
 bool UWwiseAssetLibraryFilterMultiReference::IsAssetAvailable(const FWwiseAssetLibraryFilteringSharedData& Shared,
 		const WwiseAnyRef& Asset) const
 {
-	return !Shared.Db.IsSingleUser(Asset);
+	return Shared.Db.GetUsageCount(Asset) != 1;
 }
 
 #define LOCTEXT_NAMESPACE "AssetTypeActions"

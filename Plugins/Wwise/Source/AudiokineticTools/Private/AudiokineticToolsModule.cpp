@@ -489,7 +489,6 @@ void FAudiokineticToolsModule::OnAssetRegistryFilesLoaded()
 	UAkSettings* AkSettings = GetMutableDefault<UAkSettings>();
 	UAkSettingsPerUser* AkSettingsPerUser = GetMutableDefault<UAkSettingsPerUser>();
 	auto* CurrentProject = IProjectManager::Get().GetCurrentProject();
-	bool doModifyProject = true;
 
 	WwiseProjectInfo wwiseProjectInfo;
 	wwiseProjectInfo.Parse();
@@ -525,11 +524,6 @@ void FAudiokineticToolsModule::OnAssetRegistryFilesLoaded()
 	if (CurrentProject && AkSettings && AkSettingsPerUser)
 	{
 		VerifyGeneratedSoundBanksPath(AkSettings, AkSettingsPerUser);
-
-		if (doModifyProject)
-		{
-			AssetMigrationManager.SetStandardProjectSettings();
-		}
 	}
 }
 

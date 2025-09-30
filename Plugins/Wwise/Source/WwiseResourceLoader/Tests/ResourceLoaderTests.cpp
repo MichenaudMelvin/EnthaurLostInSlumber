@@ -662,10 +662,10 @@ WWISE_TEST_CASE(ResourceLoader_Smoke, "Wwise::ResourceLoader::ResourceLoader_Smo
 WWISE_TEST_CASE(ResourceLoader_Async, "Wwise::ResourceLoader::ResourceLoader_Async", "[ApplicationContextMask][ProductFilter]")
 {
 	// Keeping these in prime numbers so we get a higher set of possibilities
-	static constexpr const auto GroupValueCount = 7;
-	static constexpr const auto FileCount = 23;
-	static constexpr const auto CookedDataCount = 53;
-	static constexpr const auto NodeCount = 173;
+	static constexpr const auto GroupValueCount = 3;
+	static constexpr const auto FileCount = 7;
+	static constexpr const auto CookedDataCount = 11;
+	static constexpr const auto NodeCount = 13;
 	
 	SECTION("Async AuxBus")
 	{

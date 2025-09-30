@@ -69,6 +69,11 @@ struct WWISEFILEHANDLER_API FWwisePackagedFileSerializationOptions
 	 * Whether the Bulk Data being packaged is optional or mandatory.
 	 */
 	bool bOptional{ false };
+
+	/**
+	 * Extra information to add to the logging. For example, the language. Should be preceded by a ", ".
+	 */
+	FString ExtraLog;
 };
 
 /**
@@ -265,6 +270,23 @@ public:
 	 */
 	UPROPERTY()
 	FString SourcePathName;
+
+	/**
+	 * @brief Debug name of the asset, as used for logging during packaging.
+	 */
+	UPROPERTY()
+	FString DebugName;
+
+	/**
+	 * @brief Number of usages in the Wwise project.
+	 *
+	 * Using the same file in two different Events, or the same Event in two different Switch Containers, will mark the file to 2.
+	 * It can be 0 if undefined.
+	 *
+	 * This is not a ref-count!
+	 */
+	UPROPERTY(Transient)
+	int WwiseProjectUsageCount { 0 };
 #endif
 
 	/**

@@ -1503,6 +1503,8 @@ public:
 	void LoadDelayedObjects();
 
 	bool IsWwiseProfilerConnected() const { return bWwiseProfilerConnected;}
+	void CleanupUnfinishedResourceUnload();
+	void AddUnfinishedResourceUnload(FWwiseResourceUnloadFuture&& ResourceUnload);
 
 private:
 	bool EnsureInitialized();
@@ -1633,4 +1635,6 @@ private:
 #endif //WITH_EDITORONLY_DATA
 
 	FThreadSafeBool bWwiseProfilerConnected {false};
+	FCriticalSection ResourceUnloadFuturesCriticalSection;
+	TArray<FWwiseResourceUnloadFuture> ResourceUnloadFutures;
 };

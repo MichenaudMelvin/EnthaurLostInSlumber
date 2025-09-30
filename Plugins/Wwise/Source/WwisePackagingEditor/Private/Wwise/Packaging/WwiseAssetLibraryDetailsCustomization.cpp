@@ -518,44 +518,68 @@ void FWwiseAssetLibraryDetailsCustomization::RebuildFilteredAssets()
 	}
 	bRebuildAlreadyRequested = true;
 
-	UE::Tasks::Launch(TEXT("FWwiseAssetLibraryDetailsCustomization::RebuildFilteredAssets"), [this, IsAliveRefCopy = IsAliveRef]
+	TArray<FAssetData> AssetsData;
+	FWwiseAssetLibraryProcessor::GetRelevantAssets(GetFilterableAssetLibrary()->GetPathName(), AssetsData);
+
+	AsyncTask(ENamedThreads::GameThread, [this, IsAliveRefCopy = IsAliveRef, AssetsData]() mutable
 	{
 		if (UNLIKELY(!*IsAliveRefCopy))
 		{
 			return;
 		}
+		
 		ClaimWorkingThread();
-		bRebuildAlreadyRequested = false;
-
 		if (!WeakDetailBuilder.IsValid())
 		{
 			ReleaseWorkingThread();
 			return;
 		}
 
-		UWwiseFilterableAssetLibrary* AssetLibrary { GetFilterableAssetLibrary() };
-		if (!AssetLibrary)
+		if (UWwiseFilterableAssetLibrary* AssetLibrary { GetFilterableAssetLibrary() })
 		{
-			ReleaseWorkingThread();
-			return;
+			AssetLibrary->Info.PreloadFilters();
 		}
 
-		TUniquePtr<FWwiseAssetLibraryFilteringSharedData> FilteringSharedData;
-		
-		const bool bResult {
-			CalculateFilteredAssets(AssetLibrary, FilteringSharedData)
-			&& CopyFilteredAssets(FilteringSharedData)
-		};
 		ReleaseWorkingThread();
-
-		if (bResult)
+		UE::Tasks::Launch(TEXT("FWwiseAssetLibraryDetailsCustomization::RebuildFilteredAssets"), [this, IsAliveRefCopy = IsAliveRef, AssetsData]
 		{
-			ApplySearchAndSort();
-		}
+			if (UNLIKELY(!*IsAliveRefCopy))
+			{
+				return;
+			}
+			ClaimWorkingThread();
+			bRebuildAlreadyRequested = false;
+
+			if (!WeakDetailBuilder.IsValid())
+			{
+				ReleaseWorkingThread();
+				return;
+			}
+
+			UWwiseFilterableAssetLibrary* AssetLibrary { GetFilterableAssetLibrary() };
+			if (!AssetLibrary)
+			{
+				ReleaseWorkingThread();
+				return;
+			}
+
+			TUniquePtr<FWwiseAssetLibraryFilteringSharedData> FilteringSharedData;
+			
+			const bool bResult {
+				CalculateFilteredAssets(AssetLibrary, FilteringSharedData, AssetsData)
+				&& CopyFilteredAssets(FilteringSharedData)
+			};
+			ReleaseWorkingThread();
+
+			if (bResult)
+			{
+				ApplySearchAndSort();
+			}
+		});
 	});
 }
 
-bool FWwiseAssetLibraryDetailsCustomization::CalculateFilteredAssets(UWwiseFilterableAssetLibrary* AssetLibrary, TUniquePtr<FWwiseAssetLibraryFilteringSharedData>& FilteringSharedData)
+bool FWwiseAssetLibraryDetailsCustomization::CalculateFilteredAssets(UWwiseFilterableAssetLibrary* AssetLibrary, TUniquePtr<FWwiseAssetLibraryFilteringSharedData>& FilteringSharedData, const TArray<FAssetData>& AssetsData)
 {
 	auto* ProjectDB{ FWwiseProjectDatabase::Get() };
 	if (UNLIKELY(!ProjectDB))
@@ -570,6 +594,7 @@ bool FWwiseAssetLibraryDetailsCustomization::CalculateFilteredAssets(UWwiseFilte
 	}
 
 	FilteringSharedData = TUniquePtr<FWwiseAssetLibraryFilteringSharedData>{ Processor->InstantiateSharedData(*ProjectDB) };
+	FilteringSharedData->AssetsData = AssetsData;
 	Processor->RetrieveAssetMap(*FilteringSharedData);
 
 	if (IsPackagingSettingsHonored())
@@ -577,7 +602,7 @@ bool FWwiseAssetLibraryDetailsCustomization::CalculateFilteredAssets(UWwiseFilte
 		FilterPackagingSettings(Processor, FilteringSharedData, AssetLibrary);
 	}	
 
-	Processor->FilterLibraryAssets(*FilteringSharedData, AssetLibrary->Info, false, true, false);
+	Processor->FilterLibraryAssets(*FilteringSharedData, AssetLibrary->Info, false, false);
 	return true;
 }
 
@@ -633,7 +658,7 @@ bool FWwiseAssetLibraryDetailsCustomization::CopyFilteredAssets(TUniquePtr<FWwis
 					(uint32)NewRef.Id,
 					NewRef.Name,
 					(uint32)NewRef.SoundBankId
-				})
+				}, NewRef.LanguageId)
 			};
 			if (!Ref.IsValid())
 			{
@@ -687,7 +712,7 @@ bool FWwiseAssetLibraryDetailsCustomization::CopyFilteredAssets(TUniquePtr<FWwis
 					(uint32)FilteredAsset.Id,
 					FilteredAsset.Name,
 					(uint32)FilteredAsset.SoundBankId
-				})
+				}, FilteredAsset.LanguageId)
 			};
 			if (!Ref.IsValid())
 			{
@@ -952,7 +977,7 @@ void FWwiseAssetLibraryDetailsCustomization::FilterPackagingSettings(FWwiseAsset
 		}
 
 		Processor->FilterLibraryAssets(*FilteringSharedData, AssetLibraryPtr->Info,
-		!AssetLibraryPtr->bFallthrough && Iter < AssetLibraryArray.Num() - 1, AssetLibraryPtr->bPackageAssets, false);
+			!AssetLibraryPtr->bFallthrough && Iter < AssetLibraryArray.Num() - 1, false);
 	}
 }
 
