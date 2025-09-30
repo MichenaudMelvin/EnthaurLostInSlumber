@@ -575,7 +575,7 @@ FENTGameElementData& AENTMuscle::SaveGameElement(UENTWorldSave* CurrentWorldSave
 	return CurrentWorldSave->MuscleData.Add(GetName(), Data);
 }
 
-void AENTMuscle::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTMuscle::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	const FENTMuscleData& Data = static_cast<const FENTMuscleData&>(GameElementData);
 	bIsSolid = Data.bIsSolid;

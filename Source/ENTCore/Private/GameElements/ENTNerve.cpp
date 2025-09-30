@@ -713,7 +713,7 @@ FENTGameElementData& AENTNerve::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 	return CurrentWorldSave->NerveData.Add(GetName(), Data);
 }
 
-void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	const FENTNerveData& Data = static_cast<const FENTNerveData&>(GameElementData);
 

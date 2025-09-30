@@ -427,7 +427,7 @@ FENTGameElementData& AENTWeakZone::SaveGameElement(UENTWorldSave* CurrentWorldSa
 	return CurrentWorldSave->WeakZoneData.Add(GetName(), Data);
 }
 
-void AENTWeakZone::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTWeakZone::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	const FENTWeakZoneData& Data = static_cast<const FENTWeakZoneData&>(GameElementData);
 
