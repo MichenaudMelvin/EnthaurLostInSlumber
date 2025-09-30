@@ -136,6 +136,10 @@ void AENTDefaultCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	{
 		HealthComponent->OnHealthNull.RemoveDynamic(this, &AENTDefaultCharacter::OnPlayerDie);
 	}
+
+	OnRespawn.Clear();
+	OnAmberUpdate.Clear();
+	OnInteractionFeedback.Clear();
 }
 
 void AENTDefaultCharacter::Tick(float DeltaSeconds)
@@ -584,12 +588,15 @@ FENTGameElementData& AENTDefaultCharacter::SaveGameElement(UENTWorldSave* Curren
 		return EmptyData;
 	}
 
-	CurrentWorldSave->PlayerLocation = GetActorLocation();
-	CurrentWorldSave->PlayerCameraRotation = GetControlRotation();
+	if (CurrentWorldSave)
+	{
+		CurrentWorldSave->PlayerLocation = GetActorLocation();
+		CurrentWorldSave->PlayerCameraRotation = GetControlRotation();
+		CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
+	}
+
 	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = static_cast<uint8>(StateMachine->GetCurrentStateID());
 	PlayerSaveSubsystem->SaveToSlot(0);
-
-	CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
 
 	return EmptyData;
 }

@@ -73,6 +73,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "UI|HUD")
 	void HideHUD();
 
+	void RebindPlayerDelegates();
+
 public:
 	void SetHUDVisibility(const ESlateVisibility& Visibility);
 
