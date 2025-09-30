@@ -96,6 +96,11 @@ public:
 		return this->Map.FindRef(Key);
 	}
 
+	const ObjectType& FindChecked(const KeyType& Key) const
+	{
+		return this->Map.FindChecked(Key);
+	}
+
 	ObjectType& FindChecked(const KeyType& Key)
 	{
 		return this->Map.FindChecked(Key);
@@ -109,7 +114,7 @@ public:
 		}
 		this->Map[Key] = Object;
 	}
-	
+
 	ObjectType operator[](KeyType Key) const
 	{
 		if(!this->Map.Contains(Key))
@@ -131,5 +136,10 @@ public:
 			Count++;
 		}
 		return {};
+	}
+
+	static KeyType GetKey(const TPair<KeyType, ObjectType>& Pair)
+	{
+		return Pair.Key;
 	}
 };

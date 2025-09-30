@@ -1079,7 +1079,7 @@ EWwiseConnectionStatus FWaapiDataSource::IsProjectLoaded()
 		{
 			FString WaapiPath;
 			TSharedPtr<FJsonObject> outJsonResult;
-			AkWaapiClient->Call(ak::wwise::core::getProjectInfo, MakeShareable(new FJsonObject()), MakeShareable(new FJsonObject()), outJsonResult, 500, false);
+			AkWaapiClient->Call(ak::wwise::core::getProjectInfo, MakeShareable(new FJsonObject()), MakeShareable(new FJsonObject()), outJsonResult, false);
 			if(auto directoriesObject = outJsonResult->GetObjectField(TEXT("directories")))
 			{
 				WaapiPath = directoriesObject->GetStringField(TEXT("soundBankOutputRoot"));

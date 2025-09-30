@@ -430,7 +430,7 @@ void UAkComponent::OnRegister()
 		RegisterGameObject(); // Done before parent so that OnUpdateTransform follows registration and updates position correctly.
 
 	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
-	if (AudioDevice)
+	if (AudioDevice && CurrentWorld)
 	{
 		ObstructionService.Init(GetAkGameObjectID(), CurrentWorld, OcclusionRefreshInterval, AudioDevice->UsingSpatialAudioRooms(CurrentWorld));
 	}
@@ -637,6 +637,13 @@ void UAkComponent::BeginPlay()
 
 	if (EnableSpotReflectors)
 		AAkSpotReflector::UpdateSpotReflectors(this);
+
+	FAkAudioDevice* AudioDevice = FAkAudioDevice::Get();
+	UWorld* CurrentWorld = GetWorld();
+	if (AudioDevice && CurrentWorld)
+	{
+		ObstructionService.Init(GetAkGameObjectID(), CurrentWorld, OcclusionRefreshInterval, AudioDevice->UsingSpatialAudioRooms(CurrentWorld));
+	}
 }
 
 void UAkComponent::OnUpdateTransform(EUpdateTransformFlags UpdateTransformFlags, ETeleportType Teleport)

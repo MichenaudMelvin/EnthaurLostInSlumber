@@ -77,7 +77,7 @@ void UWwiseAssetLibrary::Serialize(FArchive& Ar)
 			}
 			if (auto* ResourceCooker = IWwiseResourceCooker::GetForArchive(Ar))
 			{
-				ResourceCooker->PrepareAssetLibrary(this, PlatformCookedData);
+				ResourceCooker->PrepareAssetLibrary(this, PlatformCookedData, bPackageAssets);
 			}
 			else
 			{
@@ -189,33 +189,41 @@ void UWwiseAssetLibrary::UnloadData([[maybe_unused]] bool bAsync)
 #if WITH_EDITORONLY_DATA && UE_5_5_OR_LATER
 UE_COOK_DEPENDENCY_FUNCTION(HashWwiseAssetLibraryDependenciesForCook, UWwiseAssetLibrary::HashDependenciesForCook);
 
-void UWwiseAssetLibrary::PreSave(FObjectPreSaveContext SaveContext)
+#if UE_5_6_OR_LATER
+void UWwiseAssetLibrary::OnCookEvent(UE::Cook::ECookEvent CookEvent, UE::Cook::FCookEventContext& Context)
 {
 	ON_SCOPE_EXIT
 	{
-		Super::PreSave(SaveContext);
+		Super::OnCookEvent(CookEvent, Context);
 	};
-
-	if (!SaveContext.IsCooking())
+#else
+void UWwiseAssetLibrary::PreSave(FObjectPreSaveContext Context)
+{
+	ON_SCOPE_EXIT
+	{
+		Super::PreSave(Context);
+	};
+#endif
+	if (!Context.IsCooking())
 	{
 		return;
 	}
 
-	auto* ResourceCooker = IWwiseResourceCooker::GetForPlatform(SaveContext.GetTargetPlatform());
+	auto* ResourceCooker = IWwiseResourceCooker::GetForPlatform(Context.GetTargetPlatform());
 	if (UNLIKELY(!ResourceCooker))
 	{
 		return;
 	}
 
 	FWwiseAssetLibraryCookedData CookedDataToArchive;
-	ResourceCooker->PrepareAssetLibrary(this, CookedDataToArchive);
+	ResourceCooker->PrepareAssetLibrary(this, CookedDataToArchive, bPackageAssets);
 
 	FCbWriter Writer;
 	Writer.BeginObject();
-	CookedDataToArchive.PreSave(SaveContext, Writer);
+	CookedDataToArchive.GetPlatformCookDependencies(Context, Writer);
 	Writer.EndObject();
 	
-	SaveContext.AddCookBuildDependency(
+	WwiseCookEventContext::AddLoadBuildDependency(Context,
 		UE::Cook::FCookDependency::Function(
 			UE_COOK_DEPENDENCY_FUNCTION_CALL(HashWwiseAssetLibraryDependenciesForCook), Writer.Save()));
 }
