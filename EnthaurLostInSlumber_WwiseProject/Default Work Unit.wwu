@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{B82B9E7B-F4C7-498E-A4BE-5569A68ED5CA}" SchemaVersion="123">
+<WwiseDocument Type="WorkUnit" ID="{70646214-59FF-451F-B9FE-CA548BEABC00}" SchemaVersion="123">
 	<Metadatas>
-		<WorkUnit Name="Default Work Unit" ID="{B82B9E7B-F4C7-498E-A4BE-5569A68ED5CA}" OwnerID="{00000000-0000-0000-0000-000000000000}" PersistMode="Nested"/>
+		<WorkUnit Name="Default Work Unit" ID="{70646214-59FF-451F-B9FE-CA548BEABC00}" OwnerID="{00000000-0000-0000-0000-000000000000}" PersistMode="Nested"/>
 	</Metadatas>
 </WwiseDocument>

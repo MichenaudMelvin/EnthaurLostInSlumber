@@ -46,7 +46,7 @@ public:
 	virtual void PreCacheAssetLibraryRef(FCookedAssetLibraryFiles& OutFiles, UObject* Owner, const FWwiseAssetLibraryRef& AssetLibraryRef);
 	virtual void UpdateAssetLibraryPackagedFile(FWwisePackagedFile& File);
 	
-	virtual void PrepareAssetLibrary(UObject* Owner, FWwiseAssetLibraryCookedData& OutCookedData) override;
+	virtual void PrepareAssetLibrary(UObject* Owner, FWwiseAssetLibraryCookedData& OutCookedData, bool bPackageAssets) override;
 	virtual bool PrepareCookedData(FWwiseAcousticTextureCookedData& OutCookedData, const FWwiseObjectInfo& InInfo) override;
 	virtual bool PrepareCookedData(FWwiseAudioDeviceShareSetCookedData& OutCookedData, const FWwiseObjectInfo& InInfo) override;
 	virtual bool PrepareCookedData(FWwiseLocalizedAuxBusCookedData& OutCookedData, const UObject* Owner, const FWwiseObjectInfo& InInfo) override;

@@ -132,7 +132,7 @@ public:
 	virtual void CookSoundBank(const FWwiseObjectInfo& InInfo, const UObject* Owner, const TCHAR* PackageFilename, const WriteAdditionalFileFunction& WriteAdditionalFile) = 0;
 
 	virtual void PreCacheAssetLibraries(const IWwiseResourceCookerModule::FAssetLibraryInfoMap& AssetLibraryInfoMap) = 0;
-	virtual void PrepareAssetLibrary(UObject* Owner, FWwiseAssetLibraryCookedData& OutCookedData) = 0;
+	virtual void PrepareAssetLibrary(UObject* Owner, FWwiseAssetLibraryCookedData& OutCookedData, bool bPackageAssets) = 0;
 	
 	virtual bool PrepareCookedData(FWwiseAcousticTextureCookedData& OutCookedData, const FWwiseObjectInfo& InInfo) = 0;
 	virtual bool PrepareCookedData(FWwiseAudioDeviceShareSetCookedData& OutCookedData, const FWwiseObjectInfo& InInfo) = 0;

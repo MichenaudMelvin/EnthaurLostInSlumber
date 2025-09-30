@@ -665,10 +665,15 @@ bool FAkWaapiClient::AttemptConnection()
 }
 
 bool FAkWaapiClient::Subscribe(const char* in_uri, const FString& in_options, WampEventCallback in_callback,
-	uint64& out_subscriptionId, FString& out_result, int in_iTimeoutMs /*= 500*/)
+	uint64& out_subscriptionId, FString& out_result)
 {
 	bool eResult = false;
 #if AK_SUPPORT_WAAPI
+	int timeout = 500;
+	if (auto Settings = GetDefault<UAkSettingsPerUser>())
+	{
+		timeout = Settings->WaapiCallsTimeout;
+	}
 	std::string out_resultString("");
 	if (IsConnected())
 	{
@@ -678,7 +683,7 @@ bool FAkWaapiClient::Subscribe(const char* in_uri, const FString& in_options, Wa
 			if (LIKELY(g_AkWaapiClient->m_Impl->m_Client))
 			{
 				FScopeLock Lock(&m_Impl->ClientSection);
-				eResult = m_Impl->m_Client->Subscribe(in_uri, TCHAR_TO_UTF8(*in_options), &WampEventCallbacks, out_subscriptionId, out_resultString, in_iTimeoutMs);
+				eResult = m_Impl->m_Client->Subscribe(in_uri, TCHAR_TO_UTF8(*in_options), &WampEventCallbacks, out_subscriptionId, out_resultString, timeout);
 			}
 			if (eResult)
 			{
@@ -703,7 +708,7 @@ bool FAkWaapiClient::Subscribe(const char* in_uri, const FString& in_options, Wa
 }
 
 bool FAkWaapiClient::Subscribe(const char* in_uri, const TSharedRef<FJsonObject>& in_options, WampEventCallback in_callback,
-	uint64& out_subscriptionId, TSharedPtr<FJsonObject>& out_result, int in_iTimeoutMs /*= 500*/)
+	uint64& out_subscriptionId, TSharedPtr<FJsonObject>& out_result)
 {
 	bool eResult = false;
 #if AK_SUPPORT_WAAPI
@@ -714,7 +719,7 @@ bool FAkWaapiClient::Subscribe(const char* in_uri, const TSharedRef<FJsonObject>
 
 	FString out_resultString(TEXT(""));
 	// Call for the AK WAAPI method using string params.
-	eResult = Subscribe(in_uri, in_optionsString, in_callback, out_subscriptionId, out_resultString, in_iTimeoutMs);
+	eResult = Subscribe(in_uri, in_optionsString, in_callback, out_subscriptionId, out_resultString);
 
 	if (!eResult)
 	{
@@ -730,10 +735,15 @@ bool FAkWaapiClient::Subscribe(const char* in_uri, const TSharedRef<FJsonObject>
 	return eResult;
 }
 
-bool FAkWaapiClient::Unsubscribe(const uint64_t& in_subscriptionId, FString& out_result, int in_iTimeoutMs /*= 500*/, bool in_bSilenceLog /*= false*/)
+bool FAkWaapiClient::Unsubscribe(const uint64_t& in_subscriptionId, FString& out_result, bool in_bSilenceLog /*= false*/)
 {
 	bool eResult = false;
 #if AK_SUPPORT_WAAPI
+	int timeout = 500;
+	if (auto Settings = GetDefault<UAkSettingsPerUser>())
+	{
+		timeout = Settings->WaapiCallsTimeout;
+	}
 	if (IsConnected())
 	{
 		if (!m_Impl->bIsConnectionClosing)
@@ -743,7 +753,7 @@ bool FAkWaapiClient::Unsubscribe(const uint64_t& in_subscriptionId, FString& out
 			if (LIKELY(g_AkWaapiClient->m_Impl->m_Client))
 			{
 				FScopeLock Lock(&m_Impl->ClientSection);
-				eResult = m_Impl->m_Client->Unsubscribe(in_subscriptionId, out_resultString, in_iTimeoutMs);
+				eResult = m_Impl->m_Client->Unsubscribe(in_subscriptionId, out_resultString, timeout);
 			}
 			if (eResult)
 			{
@@ -768,7 +778,7 @@ bool FAkWaapiClient::Unsubscribe(const uint64_t& in_subscriptionId, FString& out
 	return eResult;
 }
 
-bool FAkWaapiClient::Unsubscribe(const uint64_t& in_subscriptionId, TSharedPtr<FJsonObject>& out_result, int in_iTimeoutMs /*= 500*/, bool in_bSilenceLog /*= false*/)
+bool FAkWaapiClient::Unsubscribe(const uint64_t& in_subscriptionId, TSharedPtr<FJsonObject>& out_result, bool in_bSilenceLog /*= false*/)
 {
 	bool eResult = false;
 #if AK_SUPPORT_WAAPI
@@ -776,7 +786,7 @@ bool FAkWaapiClient::Unsubscribe(const uint64_t& in_subscriptionId, TSharedPtr<F
 	{
 		FString out_resultString(TEXT(""));
 		// Call the AK WAAPI method.
-		eResult = Unsubscribe(in_subscriptionId, out_resultString, in_iTimeoutMs, in_bSilenceLog);
+		eResult = Unsubscribe(in_subscriptionId, out_resultString, in_bSilenceLog);
 
 		if (!eResult)
 		{
@@ -852,7 +862,7 @@ bool FAkWaapiClient::Call(const char* in_uri, const FString& in_args, const FStr
 	{
 		return Call(in_uri, in_args, in_options, out_result, UserSettings->WaapiCallsTimeout, silenceLog);
 	}
-	return false;
+	return Call(in_uri, in_args, in_options, out_result, 500, silenceLog);
 }
 
 bool FAkWaapiClient::Call(const char* in_uri, const TSharedRef<FJsonObject>& in_args, const TSharedRef<FJsonObject>& in_options,
@@ -894,7 +904,7 @@ bool FAkWaapiClient::Call(const char* in_uri, const TSharedRef<FJsonObject>& in_
 	{
 		return Call(in_uri, in_args, in_options, out_result, UserSettings->WaapiCallsTimeout, silenceLog);
 	}
-	return false;
+	return Call(in_uri, in_args, in_options, out_result, 500, silenceLog);
 }
 
 bool FAkWaapiClient::Call(const char* inUri, const TArray<KeyValueArgs>& Values,

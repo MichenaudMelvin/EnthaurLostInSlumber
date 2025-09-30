@@ -88,7 +88,7 @@ public:
 	 * Shared filters to use to select assets to include in this Asset Library, and that can be applied to multiple Asset Libraries.
 	 */
 	UPROPERTY(EditAnywhere, Category = "Default", meta=(EditConditionHides=true))
-	TArray<TWeakObjectPtr<UWwiseSharedAssetLibraryFilter>> SharedFilters;
+	TArray<TSoftObjectPtr<UWwiseSharedAssetLibraryFilter>> SharedFilters;
 
 	/**
 	 * Filtered assets, as determined by the current filter criteria.
@@ -97,7 +97,12 @@ public:
 	 */
 	TArray<FWwiseAssetLibraryRef> FilteredAssets;
 
+	void PreloadFilters();
 	TArray<TObjectPtr<UWwiseAssetLibraryFilter>> GetFilters(
 		TSet<const UObject*>* ProcessedFilters = nullptr) const;
+
+protected:
+	UPROPERTY(Transient)
+	TArray<TObjectPtr<UWwiseSharedAssetLibraryFilter>> PreloadedFilters;
 #endif
 };

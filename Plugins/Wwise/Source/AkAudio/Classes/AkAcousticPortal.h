@@ -133,12 +133,6 @@ public:
 	AkRoomID GetBackRoomID() const;
 	AkPortalID GetPortalID() const { return AkPortalID(this); }
 
-	/** Update the room connections for the portal, given the portals current transform. 
-		Return true if the room connections have changed.
-	*/
-	bool UpdateConnectedRooms(bool in_bForceUpdate = false);
-	void RemovePortalConnections();
-
 	const TWeakObjectPtr<UAkRoomComponent> GetFrontRoomComponent() const { return FrontRoom; }
 	const TWeakObjectPtr<UAkRoomComponent> GetBackRoomComponent() const { return BackRoom; }
 	const TWeakObjectPtr<UAkRoomComponent> GetOppositeRoomComponent(const UAkRoomComponent* pRoomComponent) const;
@@ -175,6 +169,8 @@ private:
 
 	void InitializeParent();
 	void SetSpatialAudioPortal();
+	void UpdateConnectedRooms();
+	void UpdatePortalConnections();
 
 	void FindConnectedComponents(FAkEnvironmentIndex& RoomQuery, TWeakObjectPtr<UAkRoomComponent>& out_pFront, TWeakObjectPtr<UAkRoomComponent>& out_pBack);
 
@@ -192,8 +188,11 @@ private:
 	bool bPortalNeedsUpdate = false;
 	bool PortalOcclusionChanged = false;
 	bool bPortalRoomsNeedUpdate = false;
+	bool bPortalConnectionsNeedUpdate = false;
 	TWeakObjectPtr<UAkRoomComponent> FrontRoom;
 	TWeakObjectPtr<UAkRoomComponent> BackRoom;
+	TWeakObjectPtr<UAkRoomComponent> PreviousFrontRoom;
+	TWeakObjectPtr<UAkRoomComponent> PreviousBackRoom;
 
 	AkPortalObstructionAndOcclusionService ObstructionServiceFrontRoom;
 	AkPortalObstructionAndOcclusionService ObstructionServiceBackRoom;

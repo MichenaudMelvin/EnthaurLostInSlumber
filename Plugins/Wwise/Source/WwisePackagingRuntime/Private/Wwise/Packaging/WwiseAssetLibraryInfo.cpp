@@ -21,6 +21,27 @@ Copyright (c) 2025 Audiokinetic Inc.
 #include "Wwise/Stats/PackagingRuntime.h"
 
 #if WITH_EDITORONLY_DATA
+void FWwiseAssetLibraryInfo::PreloadFilters()
+{
+	checkf(IsInGameThread(), TEXT("PreloadFilters must be called on GameThread"));
+
+	PreloadedFilters.Empty(SharedFilters.Num());
+	for (const auto& SharedFilter: SharedFilters)
+	{
+		if (auto* Obj = SharedFilter.LoadSynchronous())
+		{
+			UE_LOG(LogWwisePackagingRuntime, Verbose,
+				TEXT("FWwiseAssetLibraryInfo::PreloadFilters: Preloaded filter %s"), *Obj->GetName());
+			PreloadedFilters.Add(ToObjectPtr(Obj));
+		}
+		else
+		{
+			UE_CLOG(!SharedFilter.IsNull(),
+				LogWwisePackagingRuntime, Warning, TEXT("FWwiseAssetLibraryInfo::PreloadFilters: Could not preload filter %s"), *SharedFilter.GetAssetName());
+		}
+	}
+}
+
 TArray<TObjectPtr<UWwiseAssetLibraryFilter>> FWwiseAssetLibraryInfo::GetFilters(TSet<const UObject*>* ProcessedFilters) const
 {
 	TSet<const UObject*> NewProcessedFilters;
@@ -49,22 +70,19 @@ TArray<TObjectPtr<UWwiseAssetLibraryFilter>> FWwiseAssetLibraryInfo::GetFilters(
 		}
 	}
 
-	for (const auto& SharedFilter: SharedFilters)
+	for (const auto& SharedFilter: PreloadedFilters)
 	{
-		if (SharedFilter.IsValid())
+		if (const auto* Filter = SharedFilter.Get())
 		{
-			if (const auto* Filter = SharedFilter.Get())
+			bool bIsAlreadyInSetPtr{ false };
+			ProcessedFilters->FindOrAdd(Filter, &bIsAlreadyInSetPtr);
+			if (UNLIKELY(bIsAlreadyInSetPtr))
 			{
-				bool bIsAlreadyInSetPtr{ false };
-				ProcessedFilters->FindOrAdd(Filter, &bIsAlreadyInSetPtr);
-				if (UNLIKELY(bIsAlreadyInSetPtr))
-				{
-					UE_LOG(LogWwisePackagingRuntime, Verbose, TEXT("FWwiseAssetLibraryInfo::GetFilters: Shared filter re-use detected: %s is processed twice. Skipping"), *Filter->GetName());
-				}
-				else
-				{
-					Result.Append(Filter->Info.GetFilters(ProcessedFilters));
-				}
+				UE_LOG(LogWwisePackagingRuntime, Verbose, TEXT("FWwiseAssetLibraryInfo::GetFilters: Shared filter re-use detected: %s is processed twice. Skipping"), *Filter->GetName());
+			}
+			else
+			{
+				Result.Append(Filter->Info.GetFilters(ProcessedFilters));
 			}
 		}
 	}

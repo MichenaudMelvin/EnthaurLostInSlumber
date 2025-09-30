@@ -43,7 +43,6 @@ UAkIOSInitializationSettings::UAkIOSInitializationSettings(const FObjectInitiali
 {
 	CommonSettings.MainOutputSettings.PanningRule = EAkPanningRule::Headphones;
 	CommonSettings.MainOutputSettings.ChannelConfigType = EAkChannelConfigType::Standard;
-	CommonSettings.MainOutputSettings.ChannelMask = AK_SPEAKER_SETUP_STEREO;
 }
 
 void UAkIOSInitializationSettings::FillInitializationStructure(FAkInitializationStructure& InitializationStructure) const
