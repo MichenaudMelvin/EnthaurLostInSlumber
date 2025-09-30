@@ -211,7 +211,7 @@ FENTGameElementData& AENTParasitePawn::SaveGameElement(UENTWorldSave* CurrentWor
 	return CurrentWorldSave->ParasiteData.Add(GetName(), Data);
 }
 
-void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	const FENTParaSiteData& Data = static_cast<const FENTParaSiteData&>(GameElementData);
 

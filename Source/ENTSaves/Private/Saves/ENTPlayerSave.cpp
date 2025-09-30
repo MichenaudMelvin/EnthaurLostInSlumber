@@ -6,4 +6,7 @@
 UENTPlayerSave::UENTPlayerSave()
 {
 	SlotName = "PlayerSave";
+
+	AmberInventory.Add(0, 0);
+	AmberInventory.Add(1, 0);
 }

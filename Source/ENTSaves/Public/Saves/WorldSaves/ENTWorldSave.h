@@ -38,7 +38,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
 	TMap<FString, FENTParaSiteData> ParasiteData;
 
-	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
+	UPROPERTY(BlueprintReadWrite, Category = "World|Player")
+	FVector PlayerLocation = FVector::ZeroVector;
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|Player")
+	FRotator PlayerCameraRotation = FRotator::ZeroRotator;
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|Player")
 	FString LastCheckPointName;
 
 	void ClearMapData();
