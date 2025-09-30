@@ -580,10 +580,17 @@ bool AENTDefaultCharacter::IsStopped() const
 
 #pragma region Saves
 
+#if WITH_EDITOR
+void AENTDefaultCharacter::SavePlayer()
+{
+	SaveGameElement(nullptr);
+}
+#endif
+
 FENTGameElementData& AENTDefaultCharacter::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
 	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem || !CurrentWorldSave)
+	if (!PlayerSaveSubsystem)
 	{
 		return EmptyData;
 	}

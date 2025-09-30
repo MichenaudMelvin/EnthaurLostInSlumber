@@ -270,6 +270,11 @@ public:
 private:
 	FENTGameElementData EmptyData;
 
+#if WITH_EDITOR
+	UFUNCTION(Exec)
+	void SavePlayer();
+#endif
+
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
