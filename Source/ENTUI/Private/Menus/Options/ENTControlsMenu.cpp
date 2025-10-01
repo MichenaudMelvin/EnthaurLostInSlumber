@@ -23,6 +23,29 @@ void UENTControlsMenu::NativeDestruct()
 	Super::NativeDestruct();
 }
 
+TObjectPtr<UEnhancedInputLocalPlayerSubsystem> UENTControlsMenu::GetEnhancedInputLocalPlayerSubsystem()
+{
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (!IsValid(PlayerController))
+	{
+		return nullptr;
+	}
+
+	ULocalPlayer* LocalPlayer = PlayerController->GetLocalPlayer();
+	if (!IsValid(LocalPlayer))
+	{
+		return nullptr;
+	}
+
+	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
+	if (!InputLocalPlayerSubsystem)
+	{
+		return nullptr;
+	}
+
+	return InputLocalPlayerSubsystem;
+}
+
 void UENTControlsMenu::AddInputRows()
 {
 	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
@@ -30,14 +53,8 @@ void UENTControlsMenu::AddInputRows()
 	{
 		return;
 	}
-
-	ULocalPlayer* LocalPlayer = PlayerController->GetLocalPlayer();
-	if (!IsValid(LocalPlayer))
-	{
-		return;
-	}
-
-	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
+	
+	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
 	if (!InputLocalPlayerSubsystem)
 	{
 		return;
@@ -78,10 +95,11 @@ void UENTControlsMenu::AddInputRows()
 			continue;
 		}
 
-		FText KeyName = FText::AsCultureInvariant(PlayerKeyMapping->GetMappingName().ToString());
-		InputSlot->SetKeyName(KeyName);
-		InputSlot->SetButtonTextBlock(PlayerKeyMapping->GetDisplayName());
+		FText KeyName = FText::AsCultureInvariant(PlayerKeyMapping->GetCurrentKey().ToString());
+		InputSlot->SetKeyName(PlayerKeyMapping->GetDisplayName());
+		InputSlot->SetButtonKeyName(KeyName);
 		InputSlot->SetKeyMappingName(Key.Key);
+		InputSlot->SetControlsMenu(this);
 
 		UVerticalBoxSlot* VerticalBoxSlot = Cast<UVerticalBoxSlot>(InputSlot->Slot);
 		if (!IsValid(VerticalBoxSlot))
@@ -94,4 +112,41 @@ void UENTControlsMenu::AddInputRows()
 		
 		VerticalBoxSlot->SetSize(ChildSize);
 	}
+}
+
+void UENTControlsMenu::RebindKey(const FKey& InKey)
+{
+	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
+	if (!InputLocalPlayerSubsystem)
+	{
+		return;
+	}
+
+	UEnhancedInputUserSettings* EnhancedInputUserSettings = InputLocalPlayerSubsystem->GetUserSettings();
+	if (!EnhancedInputUserSettings)
+	{
+		return;
+	}
+
+	FMapPlayerKeyArgs InArgs;
+	InArgs.NewKey = InKey;
+	InArgs.Slot = EPlayerMappableKeySlot::First;
+	InArgs.MappingName = ActiveInputSlot->GetMappingName();
+	UE_LOG(LogTemp, Warning, TEXT("Mapping Name: %s"), *InArgs.MappingName.ToString());
+
+	FGameplayTagContainer FailureReason;
+
+	EnhancedInputUserSettings->MapPlayerKey(InArgs, FailureReason);
+	
+	if (!FailureReason.IsEmpty())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Failed to map player key: %s"), *FailureReason.ToStringSimple());
+	}
+
+	ActiveInputSlot->SetButtonKeyName(InKey.GetDisplayName());
+}
+
+void UENTControlsMenu::OnKeyButton(UENTInputSlot* InInputSlot)
+{
+	ActiveInputSlot = InInputSlot;
 }

@@ -4,21 +4,31 @@
 #include "Menus/Elements/ENTInputSlot.h"
 
 #include "Components/Button.h"
-
+#include "Menus/Options/ENTControlsMenu.h"
 
 void UENTInputSlot::SetKeyMappingName(const FName& InKeyMappingName)
 {
 	KeyMappingName = InKeyMappingName;
 }
 
+void UENTInputSlot::SetButtonKeyName(const FText& InButtonKeyName)
+{
+	ButtonKeyName->SetText(InButtonKeyName);
+}
+
+void UENTInputSlot::SetControlsMenu(UENTControlsMenu* InControlsMenu)
+{
+	ControlsMenu = InControlsMenu;
+}
+
+FName UENTInputSlot::GetMappingName()
+{
+	return KeyMappingName;
+}
+
 void UENTInputSlot::SetKeyName(const FText& InKeyName)
 {
 	KeyName->SetText(InKeyName);
-}
-
-void UENTInputSlot::SetButtonTextBlock(const FText& InButtonTextBlock)
-{
-	ButtonTextBlock->SetText(InButtonTextBlock);
 }
 
 void UENTInputSlot::NativeOnInitialized()
@@ -27,7 +37,7 @@ void UENTInputSlot::NativeOnInitialized()
 
 	if (Button)
 	{
-		//Button->OnClicked.AddDynamic(this, );
+		Button->OnPressed.AddDynamic(this, &UENTInputSlot::OnKeyButtonPressed);
 	}
 }
 
@@ -37,6 +47,12 @@ void UENTInputSlot::BeginDestroy()
 
 	if (Button)
 	{
-		//Button->OnClicked.RemoveDynamic(this, );
+		Button->OnPressed.RemoveDynamic(this, &UENTInputSlot::OnKeyButtonPressed);
 	}
+}
+
+void UENTInputSlot::OnKeyButtonPressed()
+{
+	ControlsMenu->OnKeyButton(this);
+	SetKeyboardFocus();
 }

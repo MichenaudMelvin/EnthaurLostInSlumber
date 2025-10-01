@@ -22,22 +22,27 @@ class ENTUI_API UENTInputSlot : public UUserWidget
 public:
 	void SetKeyMappingName(const FName& InKeyMappingName);
 	void SetKeyName(const FText& InKeyName);
-	void SetButtonTextBlock(const FText& InButtonTextBlock);
+	void SetButtonKeyName(const FText& InButtonKeyName);
+	void SetControlsMenu(UENTControlsMenu* InControlsMenu);
+	FName GetMappingName();
 	
 protected:
 	virtual void NativeOnInitialized() override;
 	virtual void BeginDestroy() override;
+
+	UFUNCTION()
+	void OnKeyButtonPressed();
 	
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UTextBlock> KeyName;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UTextBlock> ButtonTextBlock;
+	TObjectPtr<UTextBlock> ButtonKeyName;
 	
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UButton> Button;
 
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, ExposeOnSpawn), EditInstanceOnly)
+	UPROPERTY(BlueprintReadOnly, meta = (ExposeOnSpawn), EditInstanceOnly)
 	FName KeyMappingName;
 
 	UPROPERTY(BlueprintReadOnly, meta = (ExposeOnSpawn), EditInstanceOnly)
