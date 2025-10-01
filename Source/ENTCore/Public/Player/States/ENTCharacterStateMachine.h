@@ -11,6 +11,8 @@ enum class EENTCharacterStateID : uint8;
 class UENTCharacterState;
 class AENTDefaultCharacter;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnChangeState, UENTCharacterState*, State, const EENTCharacterStateID&, StateID);
+
 UCLASS()
 class ENTCORE_API UENTCharacterStateMachine final : public UObject
 {
@@ -43,6 +45,9 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "CharacterStateMachine")
 	UENTCharacterState* ChangeState(EENTCharacterStateID NextStateID);
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "CharacterStateMachine")
+	FKOnChangeState OnChangeState;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
 	UENTCharacterState* FindState(EENTCharacterStateID StateID) const;

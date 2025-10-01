@@ -60,9 +60,6 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 
 	HealthComponent = CreateDefaultSubobject<UENTHealthComponent>("Health");
 
-	AmberInventory.Add(EAmberType::NecroseAmber, 0);
-	AmberInventory.Add(EAmberType::WeakAmber, 0);
-
 	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 3);
 	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 1);
 }
@@ -74,6 +71,9 @@ void AENTDefaultCharacter::BeginPlay()
 	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
 	SpikeTargetTransform = SpikeRelativeTransform;
 	SpikeParent = SpikeMesh->GetAttachParent();
+
+	AmberInventory.Add(EAmberType::NecroseAmber, 0);
+	AmberInventory.Add(EAmberType::WeakAmber, 0);
 
 	if (HealthComponent)
 	{
@@ -139,6 +139,10 @@ void AENTDefaultCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	{
 		HealthComponent->OnHealthNull.RemoveDynamic(this, &AENTDefaultCharacter::OnPlayerDie);
 	}
+
+	OnRespawn.Clear();
+	OnAmberUpdate.Clear();
+	OnInteractionFeedback.Clear();
 }
 
 void AENTDefaultCharacter::Tick(float DeltaSeconds)
@@ -427,7 +431,7 @@ void AENTDefaultCharacter::MineAmber(const EAmberType& AmberType, const int Amou
 	}
 
 	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Empty(AmberInventory.Num());
-	for (TTuple<EAmberType, int> Element : AmberInventory)
+	for (const TTuple<EAmberType, int>& Element : AmberInventory)
 	{
 		PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Add(static_cast<uint8>(Element.Key), Element.Value);
 	}
@@ -579,25 +583,35 @@ bool AENTDefaultCharacter::IsStopped() const
 
 #pragma region Saves
 
+#if WITH_EDITOR
+void AENTDefaultCharacter::SavePlayer()
+{
+	SaveGameElement(nullptr);
+}
+#endif
+
 FENTGameElementData& AENTDefaultCharacter::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
 	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem || !CurrentWorldSave)
+	if (!PlayerSaveSubsystem)
 	{
 		return EmptyData;
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->PlayerLocation = GetActorLocation();
-	PlayerSaveSubsystem->GetPlayerSave()->PlayerCameraRotation = GetControlRotation();
+	if (CurrentWorldSave)
+	{
+		CurrentWorldSave->PlayerLocation = GetActorLocation();
+		CurrentWorldSave->PlayerCameraRotation = GetControlRotation();
+		CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
+	}
+
 	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = static_cast<uint8>(StateMachine->GetCurrentStateID());
 	PlayerSaveSubsystem->SaveToSlot(0);
-
-	CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
 
 	return EmptyData;
 }
 
-void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem)
@@ -605,22 +619,25 @@ void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElemen
 		return;
 	}
 
-	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
-	SetActorLocation(SaveData->PlayerLocation);
-
-	if (GetPlayerController())
+	if (LoadedWorldSave)
 	{
-		APlayerController* PlayerController = Cast<APlayerController>(GetPlayerController());
-		if (PlayerController)
+		SetActorLocation(LoadedWorldSave->PlayerLocation);
+
+		if (GetPlayerController())
 		{
-			PlayerController->SetControlRotation(SaveData->PlayerCameraRotation);
+			APlayerController* PlayerController = Cast<APlayerController>(GetPlayerController());
+			if (PlayerController)
+			{
+				PlayerController->SetControlRotation(LoadedWorldSave->PlayerCameraRotation);
+			}
 		}
 	}
 
+	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
 	StateMachine->ChangeState(static_cast<EENTCharacterStateID>(SaveData->CurrentState));
 
 	AmberInventory.Empty(SaveData->AmberInventory.Num());
-	for (TTuple<uint8, int> Element : SaveData->AmberInventory)
+	for (const TTuple<uint8, int>& Element : SaveData->AmberInventory)
 	{
 		AmberInventory.Add(static_cast<EAmberType>(Element.Key), Element.Value);
 	}

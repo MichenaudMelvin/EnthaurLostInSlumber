@@ -31,7 +31,10 @@ void UENTHUDManager::Deinitialize()
 
 void UENTHUDManager::CreateHUDWidgets()
 {
-	GetWorld()->OnWorldBeginPlay.Remove(CreateHUDWidgetsDelegate);
+	if (GetWorld()->OnWorldBeginPlay.IsBoundToObject(this))
+	{
+		GetWorld()->OnWorldBeginPlay.Remove(CreateHUDWidgetsDelegate);
+	}
 
 	const UENTUIConfig* UIConfig = GetDefault<UENTUIConfig>();
 	if (!IsValid(UIConfig))
@@ -55,26 +58,7 @@ void UENTHUDManager::CreateHUDWidgets()
 
 	OnHUDWidgetsCreated.Broadcast();
 
-	APawn* Pawn = PlayerController->GetPawn();
-	if (!Pawn)
-	{
-		return;
-	}
-
-	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Pawn);
-	if (!Player)
-	{
-		return;
-	}
-
-	UENTHealthComponent* HealthComponent = Player->GetHealth();
-	if (HealthComponent)
-	{
-		HealthComponent->OnHealthNull.AddDynamic(this, &UENTHUDManager::DisplayDeathTransition);
-	}
-
-	Player->OnConstraintAdded.AddDynamic(this, &UENTHUDManager::BindConstraintDelegates);
-	Player->OnInteractionFeedback.AddDynamic(GameplayHUD, &UENTGameplayHUD::SetInteraction);
+	RebindPlayerDelegates();
 }
 
 void UENTHUDManager::DisplayHUD()
@@ -135,6 +119,45 @@ void UENTHUDManager::HideHUD()
 	LevelEntering->RemoveFromParent();
 }
 
+void UENTHUDManager::RebindPlayerDelegates()
+{
+	if (GetWorld()->OnWorldBeginPlay.IsBoundToObject(this))
+	{
+		GetWorld()->OnWorldBeginPlay.Remove(CreateHUDWidgetsDelegate);
+	}
+
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (!PlayerController)
+	{
+		return;
+	}
+
+	APawn* Pawn = PlayerController->GetPawn();
+	if (!Pawn)
+	{
+		return;
+	}
+
+	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Pawn);
+	if (!Player)
+	{
+		return;
+	}
+
+	UENTHealthComponent* HealthComponent = Player->GetHealth();
+	if (HealthComponent)
+	{
+		HealthComponent->OnHealthNull.AddDynamic(this, &UENTHUDManager::DisplayDeathTransition);
+	}
+
+	Player->OnConstraintAdded.AddDynamic(this, &UENTHUDManager::BindConstraintDelegates);
+
+	if (GameplayHUD)
+	{
+		GameplayHUD->RebindDelegates();
+	}
+}
+
 void UENTHUDManager::SetHUDVisibility(const ESlateVisibility& Visibility)
 {
 	for (UUserWidget* HUDWidget : AllHUDWidgets)
@@ -168,6 +191,10 @@ void UENTHUDManager::OnNewWorldStarted(const FActorsInitializedParams& ActorsIni
 	if (AllHUDWidgets.Num() == 0)
 	{
 		CreateHUDWidgetsDelegate = ActorsInitializedParams.World->OnWorldBeginPlay.AddUObject(this, &UENTHUDManager::CreateHUDWidgets);
+	}
+	else
+	{
+		CreateHUDWidgetsDelegate = ActorsInitializedParams.World->OnWorldBeginPlay.AddUObject(this, &UENTHUDManager::RebindPlayerDelegates);
 	}
 
 	const UENTUIConfig* UIConfig = GetDefault<UENTUIConfig>();

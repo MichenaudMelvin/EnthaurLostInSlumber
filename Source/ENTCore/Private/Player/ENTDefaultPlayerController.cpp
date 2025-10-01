@@ -107,6 +107,16 @@ void AENTDefaultPlayerController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
+	if (PlayerInputs.bInputInteractPressed)
+	{
+		PressedDuration += DeltaSeconds;
+		if (PressedDuration >= MaxPressedDuration)
+		{
+			PressedDuration = 0.0f;
+			PlayerInputs.bInputInteractPressed = false;
+		}
+	}
+
 #if WITH_EDITORONLY_DATA
 	if (bDebugInputs)
 	{
