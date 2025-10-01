@@ -132,15 +132,13 @@ void UENTControlsMenu::RebindKey(const FKey& InKey)
 	InArgs.NewKey = InKey;
 	InArgs.Slot = EPlayerMappableKeySlot::First;
 	InArgs.MappingName = ActiveInputSlot->GetMappingName();
-	UE_LOG(LogTemp, Warning, TEXT("Mapping Name: %s"), *InArgs.MappingName.ToString());
-
+	//UE_LOG(LogTemp, Warning, TEXT("Mapping Name: %s"), *InArgs.MappingName.ToString());
 	FGameplayTagContainer FailureReason;
 
 	EnhancedInputUserSettings->MapPlayerKey(InArgs, FailureReason);
-	
 	if (!FailureReason.IsEmpty())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Failed to map player key: %s"), *FailureReason.ToStringSimple());
+		UE_LOG(LogTemp, Warning, TEXT("Failed to map player key: %s"), *FailureReason.ToString());
 	}
 
 	ActiveInputSlot->SetButtonKeyName(InKey.GetDisplayName());

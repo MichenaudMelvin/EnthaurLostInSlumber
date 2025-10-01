@@ -27,6 +27,7 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	void RebindKey(const FKey& InKey);
+	
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UVerticalBox> VBox;
