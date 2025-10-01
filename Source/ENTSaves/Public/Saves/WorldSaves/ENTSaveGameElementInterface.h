@@ -11,7 +11,7 @@ class UENTWorldSave;
 
 // This class does not need to be modified.
 UINTERFACE()
-class UENTSaveGameElementInterface : public UInterface
+class ENTSAVES_API UENTSaveGameElementInterface : public UInterface
 {
 	GENERATED_BODY()
 };
