@@ -656,17 +656,6 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 	InteractableComponent->RemoveInteractable(NerveBall);
 
 	PlayerCharacter = Player;
-	if (PlayerCharacter->GetStateMachine()->GetCurrentStateID() == EENTCharacterStateID::Crouch)
-	{
-		PlayerCharacter->GetStateMachine()->ChangeState(EENTCharacterStateID::Crouch);
-		PlayerCharacter->GetStateMachine()->LockState(EENTCharacterStateID::Idle, true);
-		PlayerCharacter->GetStateMachine()->LockState(EENTCharacterStateID::Walk, true);
-	}
-	else
-	{
-		PlayerCharacter->GetStateMachine()->ChangeState(EENTCharacterStateID::Idle);
-		PlayerCharacter->GetStateMachine()->LockState(EENTCharacterStateID::Crouch, true);
-	}
 
 	PlayerCharacter->GetStateMachine()->LockState(EENTCharacterStateID::Sprint, true);
 	PlayerCharacter->GetStateMachine()->LockState(EENTCharacterStateID::Jump, true);
@@ -724,7 +713,7 @@ FENTGameElementData& AENTNerve::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 	return CurrentWorldSave->NerveData.Add(GetName(), Data);
 }
 
-void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	const FENTNerveData& Data = static_cast<const FENTNerveData&>(GameElementData);
 

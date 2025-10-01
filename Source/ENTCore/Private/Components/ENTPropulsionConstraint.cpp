@@ -11,10 +11,8 @@
 #include "Config/ENTCoreConfig.h"
 #include "Player/ENTDefaultCharacter.h"
 #include "Player/ENTDefaultPlayerController.h"
-#include "Player/States/ENTCharacterCrouchState.h"
 #include "Player/States/ENTCharacterStateMachine.h"
-#include "Player/States/ENTCharacterWalkState.h"
-
+#include "Player/States/ENTCharacterMoveState.h"
 
 UENTPropulsionConstraint::UENTPropulsionConstraint()
 {
@@ -26,6 +24,43 @@ void UENTPropulsionConstraint::BeginPlay()
 	Super::BeginPlay();
 
 	PlayerController = Cast<AENTDefaultPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
+}
+
+void UENTPropulsionConstraint::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	if (!PlayerCharacter)
+	{
+		return;
+	}
+
+	UENTCharacterStateMachine* StateMachine = PlayerCharacter->GetStateMachine();
+	if (!StateMachine)
+	{
+		return;
+	}
+
+	if (StateMachine->OnChangeState.IsAlreadyBound(this, &UENTPropulsionConstraint::UpdateDefaultMaxSpeed))
+	{
+		StateMachine->OnChangeState.RemoveDynamic(this, &UENTPropulsionConstraint::UpdateDefaultMaxSpeed);
+	}
+}
+
+void UENTPropulsionConstraint::UpdateDefaultMaxSpeed(UENTCharacterState* State, const EENTCharacterStateID& StateID)
+{
+	if (!State)
+	{
+		return;
+	}
+
+	UENTCharacterMoveState* MoveState = Cast<UENTCharacterMoveState>(State);
+	if (!MoveState)
+	{
+		return;
+	}
+
+	DefaultMaxSpeed = MoveState->GetMoveSpeed();
 }
 
 void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -43,21 +78,18 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 	}
 
 	float Distance = LinkedNerve->GetCableLength();
-	float Lerp = UKismetMathLibrary::NormalizeToRange(
-			Distance,
-			0.0f,
-			LinkedNerve->GetCableMaxExtension()
-		);
+	float Lerp = UKismetMathLibrary::NormalizeToRange(Distance, 0.0f, LinkedNerve->GetCableMaxExtension()
+);
 
-	Lerp = FMath::Clamp(Lerp, 0.f, 1.f);
-	Lerp = FMath::Sin((Lerp * PI) / 2.f);
+	Lerp = FMath::Clamp(Lerp, 0.0f, 1.0f);
+	Lerp = FMath::Sin((Lerp * PI) / 2.0f);
 
 	if (IsMovingTowardsPosition(LinkedNerve->GetLastCableLocation(), 0.2f))
 	{
-		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f + Lerp);
+		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.0f + Lerp);
 	} else
 	{
-		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.f - Lerp);
+		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.0f - Lerp);
 	}
 
 	if (!bHasReleasedInteraction)
@@ -115,27 +147,14 @@ void UENTPropulsionConstraint::Init(AENTNerve* vLinkedNerve, ACharacter* vPlayer
 	}
 
 	PlayerCharacter = CastCharacter;
-	if (!PlayerCharacter->GetStateMachine())
+	UENTCharacterStateMachine* StateMachine = PlayerCharacter->GetStateMachine();
+	if (!StateMachine)
 	{
 		return;
 	}
 
-	UENTCharacterMoveState* MoveState;
-	if (PlayerCharacter->GetStateMachine()->GetCurrentStateID() == EENTCharacterStateID::Crouch)
-	{
-		MoveState = FindState<UENTCharacterCrouchState>(PlayerCharacter->GetStateMachine());
-	}
-	else
-	{
-		MoveState = FindState<UENTCharacterWalkState>(PlayerCharacter->GetStateMachine());
-	}
-
-	if (!MoveState)
-	{
-		return;
-	}
-
-	DefaultMaxSpeed = MoveState->GetMoveSpeed();
+	UpdateDefaultMaxSpeed(StateMachine->GetCurrentState(), StateMachine->GetCurrentStateID());
+	StateMachine->OnChangeState.AddDynamic(this, &UENTPropulsionConstraint::UpdateDefaultMaxSpeed);
 }
 
 void UENTPropulsionConstraint::ReleasePlayer(const bool DetachFromPlayer)
@@ -158,10 +177,16 @@ void UENTPropulsionConstraint::ReleasePlayer(const bool DetachFromPlayer)
 bool UENTPropulsionConstraint::IsMovingTowardsPosition(const FVector& TargetPosition, float AcceptanceThreshold) const
 {
 	const UCharacterMovementComponent* MovementComponent = PlayerCharacter->GetCharacterMovement();
-	if (!MovementComponent) return false;
+	if (!MovementComponent)
+	{
+		return false;
+	}
 
 	const FVector Velocity = MovementComponent->Velocity;
-	if (Velocity.IsNearlyZero()) return false;
+	if (Velocity.IsNearlyZero())
+	{
+		return false;
+	}
 
 	const FVector CurrentLocation = PlayerCharacter->GetActorLocation();
 	const FVector ToTargetDirection = (TargetPosition - CurrentLocation).GetSafeNormal();

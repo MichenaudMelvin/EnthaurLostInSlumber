@@ -107,7 +107,7 @@ public:
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction MoveAction;
 
@@ -129,9 +129,17 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction InteractTriggerAction;
 
+	float PressedDuration = 0.0f;
+
+	/**
+	 * @brief Due to the UE 5.6 migration, might be a temporary solution
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	float MaxPressedDuration = (1.0f/60.0f) * 2;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction PauseGameAction;
-	
+
 	UFUNCTION()
 	void OnInputMove(const FInputActionValue& InputActionValue);
 

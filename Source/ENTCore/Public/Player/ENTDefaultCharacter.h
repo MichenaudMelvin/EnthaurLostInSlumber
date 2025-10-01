@@ -270,10 +270,15 @@ public:
 private:
 	FENTGameElementData EmptyData;
 
+#if WITH_EDITOR
+	UFUNCTION(Exec)
+	void SavePlayer();
+#endif
+
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
 #pragma endregion
 
