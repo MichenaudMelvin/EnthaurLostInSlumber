@@ -2,6 +2,12 @@
 
 
 #include "ENTToolStatics.h"
+#include "Kismet/KismetMathLibrary.h"
+
+float UENTToolStatics::GetNormalizedFloatRange(float Value, const FFloatRange& FloatRange)
+{
+	return UKismetMathLibrary::NormalizeToRange(Value, FloatRange.GetLowerBoundValue(), FloatRange.GetUpperBoundValue());
+}
 
 float UENTToolStatics::GetAnimLength(UAnimSequenceBase* Anim)
 {

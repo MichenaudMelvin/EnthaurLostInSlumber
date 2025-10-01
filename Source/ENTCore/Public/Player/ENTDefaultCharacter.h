@@ -9,6 +9,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTDefaultCharacter.generated.h"
 
+class UPostProcessComponent;
 class UAkAudioEvent;
 class AENTRespawnTree;
 class UAkComponent;
@@ -87,6 +88,36 @@ protected:
 
 public:
 	UENTViewBobbing* GetViewBobbingObject() const {return ViewBobbing;}
+
+#pragma endregion
+
+#pragma region PostProcess
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "PostProcess")
+	TObjectPtr<UPostProcessComponent> PostProcessComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
+	TObjectPtr<UMaterialInterface> SpeedEffectMaterialReference;
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	TObjectPtr<UMaterialInstanceDynamic> SpeedEffectMaterial;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "PostProcess")
+	FName SpeedEffectParamName = "BlurDistance";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "PostProcess")
+	FFloatRange SpeedEffectVelocityRange = FFloatRange(1000.0f, 5000.0f);
+
+	void UpdateSpeedEffect(float DeltaSeconds);
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Display related speed effect values at screen, editor only
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
+	bool bShowSpeedEffectValues = false;
+#endif
 
 #pragma endregion
 
