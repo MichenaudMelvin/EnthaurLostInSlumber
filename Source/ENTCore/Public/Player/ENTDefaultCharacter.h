@@ -287,6 +287,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const;
 
+#if WITH_EDITOR
+	UFUNCTION(Exec)
+	void EjectCharacterForward(float Force = 5000.0f) const;
+#endif
+
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void StopCharacter() const;
 

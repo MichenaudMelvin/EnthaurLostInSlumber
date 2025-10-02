@@ -604,6 +604,13 @@ void AENTDefaultCharacter::EjectCharacter(const FVector ProjectionVelocity, bool
 	StateMachine->ChangeState(EENTCharacterStateID::Fall);
 }
 
+#if WITH_EDITOR
+void AENTDefaultCharacter::EjectCharacterForward(float Force) const
+{
+	EjectCharacter(CameraComponent->GetForwardVector() * Force, true);
+}
+#endif
+
 void AENTDefaultCharacter::StopCharacter() const
 {
 	if (!StateMachine)
