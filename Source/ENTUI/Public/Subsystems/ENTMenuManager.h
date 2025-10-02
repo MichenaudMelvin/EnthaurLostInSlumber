@@ -142,6 +142,7 @@ protected:
 #pragma endregion
 
 private:
-	TArray<TWeakObjectPtr<UUserWidget>> MenuStack;
+	UPROPERTY()
+	TArray<TObjectPtr<UUserWidget>> MenuStack;
 	TMap<FString, UUserWidget*> MenuClasses;
 };

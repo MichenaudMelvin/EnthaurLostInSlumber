@@ -109,13 +109,19 @@ void UENTMenuManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	MenuStack.Add(InMenuClass);
 
 	InMenuClass->AddToViewport();
+	UE_LOG(LogTemp, Warning, TEXT("Opened menu: %s"), *InMenuClass->GetName());
+
+	for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	}
 
 	if (MenuStack.Num() >= 2)
 	{
 		if (!bIsSubMenu)
 		{
-			TWeakObjectPtr<UUserWidget> PreviousMenu = MenuStack[MenuStack.Num() - 2];
-			if (PreviousMenu.IsValid())
+			TObjectPtr<UUserWidget> PreviousMenu = MenuStack[MenuStack.Num() - 2];
+			if (PreviousMenu)
 			{
 				PreviousMenu->RemoveFromParent();
 			}
@@ -138,8 +144,8 @@ void UENTMenuManager::CloseCurrentMenu()
 		return;
 	}
 
-	TWeakObjectPtr<UUserWidget> TopMenuPtr = MenuStack.Last();
-	if (!TopMenuPtr.IsValid())
+	TObjectPtr<UUserWidget> TopMenuPtr = MenuStack.Last();
+	if (!TopMenuPtr)
 	{
 		return;
 	}
@@ -152,12 +158,19 @@ void UENTMenuManager::CloseCurrentMenu()
 	Menu->RemoveFromParent();
 	MenuClasses.Remove(MenuKey);
 
+	UE_LOG(LogTemp, Warning, TEXT("Removed menu: %s"),  *Menu->GetClass()->GetName());
+
+	for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	}
+
 	CheckMenuState();
 
 	if (MenuStack.Num() >= 1 && CurrentState != EENTMenuState::Gameplay)
 	{
-		TWeakObjectPtr<UUserWidget> NewTopMenuPtr = MenuStack.Last();
-		if (!NewTopMenuPtr.IsValid())
+		TObjectPtr<UUserWidget> NewTopMenuPtr = MenuStack.Last();
+		if (!NewTopMenuPtr)
 		{
 			return;
 		}
