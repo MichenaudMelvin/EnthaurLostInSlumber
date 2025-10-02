@@ -108,12 +108,13 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 		if (PlayerController->GetPlayerInputs().bInputInteractPressed && !bIsAlreadyPropelled)
 		{
 			bIsAlreadyPropelled = true;
+			
+			FVector CableDirection = LinkedNerve->GetCableDirection().GetSafeNormal();
 
-			FVector CableDirection = LinkedNerve->GetCableDirection();
-			const FVector CameraDirection = PlayerCharacter->GetCamera()->GetForwardVector();
-
-			const FFloatRange& CameraRange = GetDefault<UENTCoreConfig>()->CameraPropulsion;
-			CableDirection.Z = FMath::Clamp(CameraDirection.Z, CameraRange.GetLowerBoundValue(), CameraRange.GetUpperBoundValue());
+			//Jump Direction Is Set By Cable Direction + An AngularBuff (Positive Or Negative) Set By Designers
+			const float AngleBuff = LinkedNerve -> GetEjectionAngleBuff();
+			const FRotator Rotation(-AngleBuff, 0.f, 0.f);  
+			CableDirection = Rotation.RotateVector(CableDirection).GetSafeNormal();
 
 			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceRange().GetLowerBoundValue(), LinkedNerve->GetPropulsionForceRange().GetUpperBoundValue(), Lerp);
 
@@ -170,7 +171,7 @@ void UENTPropulsionConstraint::ReleasePlayer(const bool DetachFromPlayer)
 	{
 		LinkedNerve->DetachNerveBall(false);
 	}
-
+	
 	DestroyComponent();
 }
 

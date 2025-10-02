@@ -2,6 +2,7 @@
 
 #include "Player/ENTDefaultCharacter.h"
 #include "AkComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "Interface/ENTGroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "ENTCameraShakeComponent.h"
@@ -9,6 +10,8 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "ENTInteractableComponent.h"
+#include "ENTToolStatics.h"
+#include "Components/PostProcessComponent.h"
 #include "GameElements/ENTAmberOre.h"
 #include "GameElements/ENTRespawnTree.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -21,11 +24,14 @@
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
 #include "Config/ENTCoreConfig.h"
+#include "Kismet/KismetMaterialLibrary.h"
 #include "Player/States/ENTCharacterFallState.h"
 #include "Saves/ENTPlayerSave.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Subsystems/ENTPlayerSaveSubsystem.h"
+
+class UEnhancedInputLocalPlayerSubsystem;
 
 AENTDefaultCharacter::AENTDefaultCharacter()
 {
@@ -35,6 +41,10 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f));
 	CameraComponent->bUsePawnControlRotation = true;
+
+	PostProcessComp = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcess"));
+	PostProcessComp->SetupAttachment(CameraComponent);
+	PostProcessComp->bUnbound = true;
 
 	ShakeManager = CreateDefaultSubobject<UENTCameraShakeComponent>(TEXT("Shake Manager"));
 
@@ -71,6 +81,12 @@ void AENTDefaultCharacter::BeginPlay()
 
 	AmberInventory.Add(EAmberType::NecroseAmber, 0);
 	AmberInventory.Add(EAmberType::WeakAmber, 0);
+
+	if (PostProcessComp && SpeedEffectMaterialReference)
+	{
+		SpeedEffectMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, SpeedEffectMaterialReference);
+		PostProcessComp->Settings.AddBlendable(SpeedEffectMaterial, 1.0f);
+	}
 
 	if (HealthComponent)
 	{
@@ -150,6 +166,7 @@ void AENTDefaultCharacter::Tick(float DeltaSeconds)
 	InteractionTrace();
 	GroundMovement();
 	UpdateSpikeLocation(DeltaSeconds);
+	UpdateSpeedEffect(DeltaSeconds);
 
 	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteractPressed)
 	{
@@ -158,6 +175,32 @@ void AENTDefaultCharacter::Tick(float DeltaSeconds)
 }
 
 #pragma region StateMachine
+
+void AENTDefaultCharacter::UpdateSpeedEffect(float DeltaSeconds)
+{
+	if (!SpeedEffectMaterialReference)
+	{
+		return;
+	}
+
+	float ParamValue;
+	SpeedEffectMaterial->GetScalarParameterValue(SpeedEffectParamName, ParamValue);
+
+	float NormalizeValue = UENTToolStatics::GetNormalizedFloatRange(GetVelocity().Length(), SpeedEffectVelocityRange);
+
+	ParamValue = FMath::Lerp(ParamValue, NormalizeValue, DeltaSeconds);
+	ParamValue = FMath::Clamp(ParamValue, 0.0f, 1.0f);
+
+#if WITH_EDITORONLY_DATA
+	if (bShowSpeedEffectValues)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("VelocityLength: %f"), GetVelocity().Length()));
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("SpeedEffectParamValue: %f"), ParamValue));
+	}
+#endif
+
+	SpeedEffectMaterial->SetScalarParameterValue(SpeedEffectParamName, ParamValue);
+}
 
 void AENTDefaultCharacter::InitStateMachine()
 {
@@ -560,6 +603,13 @@ void AENTDefaultCharacter::EjectCharacter(const FVector ProjectionVelocity, bool
 	FallState->SetProjectionVelocity(ProjectionVelocity, bOverrideCurrentVelocity);
 	StateMachine->ChangeState(EENTCharacterStateID::Fall);
 }
+
+#if WITH_EDITOR
+void AENTDefaultCharacter::EjectCharacterForward(float Force) const
+{
+	EjectCharacter(CameraComponent->GetForwardVector() * Force, true);
+}
+#endif
 
 void AENTDefaultCharacter::StopCharacter() const
 {
