@@ -135,13 +135,56 @@ void UENTControlsMenu::RebindKey(const FKey& InKey)
 	//UE_LOG(LogTemp, Warning, TEXT("Mapping Name: %s"), *InArgs.MappingName.ToString());
 	FGameplayTagContainer FailureReason;
 
+	if (CheckDuplicateKeys(InKey))
+	{
+		return;
+	}
+
 	EnhancedInputUserSettings->MapPlayerKey(InArgs, FailureReason);
 	if (!FailureReason.IsEmpty())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Failed to map player key: %s"), *FailureReason.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("UENTControlsMenu::RebindKey - Failed to map player key: %s"), *FailureReason.ToString());
 	}
 
 	ActiveInputSlot->SetButtonKeyName(InKey.GetDisplayName());
+}
+
+bool UENTControlsMenu::CheckDuplicateKeys(const FKey& InKey)
+{
+	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
+	if (!InputLocalPlayerSubsystem)
+	{
+		return false;
+	}
+
+	UEnhancedInputUserSettings* EnhancedInputUserSettings = InputLocalPlayerSubsystem->GetUserSettings();
+	if (!EnhancedInputUserSettings)
+	{
+		return false;
+	}
+
+	UEnhancedPlayerMappableKeyProfile* PlayerMappableKeyProfile = EnhancedInputUserSettings->GetActiveKeyProfile();
+	if (!IsValid(PlayerMappableKeyProfile))
+	{
+		return false;
+	}
+	const TMap<FName, FKeyMappingRow>& PlayerMappingRows = PlayerMappableKeyProfile->GetPlayerMappingRows();
+
+	for (const TTuple<FName, FKeyMappingRow>& Row : PlayerMappingRows)
+	{
+		const FKeyMappingRow& MappingRow = Row.Value;
+		
+		for (const FPlayerKeyMapping& Mapping : MappingRow.Mappings)
+		{
+			if (Mapping.GetCurrentKey() == InKey)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("UENTControlsMenu::CheckDuplicateKeys - Key is already bound to an InputAction"));
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 void UENTControlsMenu::OnKeyButton(UENTInputSlot* InInputSlot)
