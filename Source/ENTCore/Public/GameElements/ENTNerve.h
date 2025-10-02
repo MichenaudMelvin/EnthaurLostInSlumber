@@ -62,6 +62,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableMaxExtension = 1000.0f;
 
+	bool bIsHolding = false;
+
 	void AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World, bool bAutoCorrect = true) const;
 
 	void RemoveLastSplinePoint() const;
@@ -94,11 +96,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Cables")
 	TArray<TEnumAsByte<EObjectTypeQuery>> CableColliders;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
 	TObjectPtr<UStaticMesh> CableMesh;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
 	TObjectPtr<UMaterial> CableMaterial;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> CableStretchedMaterial;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	TEnumAsByte<ESplineMeshAxis::Type> CableForwardAxis = ESplineMeshAxis::Z;
@@ -192,6 +197,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> GrabNoise;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta=(ClampMin="-90.0", ClampMax="90.0", UIMin="-90", UIMax="90.0"))
+	float EjectionAngleBuff = 30.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta=(ClampMin="-90.0", ClampMax="90.0", UIMin="-90", UIMax="90.0"))
+	bool bIsLigament = false;
+
 	UFUNCTION()
 	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
@@ -203,6 +214,8 @@ protected:
 
 public:
 	TObjectPtr<UENTInteractableComponent> GetInteractable() const {return InteractableComponent;}
+
+	float GetEjectionAngleBuff() const {return EjectionAngleBuff;}
 
 #pragma endregion
 
