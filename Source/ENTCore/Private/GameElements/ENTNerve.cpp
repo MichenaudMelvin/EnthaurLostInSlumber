@@ -179,11 +179,13 @@ void AENTNerve::AddSplineMesh(bool bMakeNoise)
 
 	SplineMesh->SetMobility(EComponentMobility::Movable);
 	SplineMesh->SetStaticMesh(CableMesh);
-	SplineMesh->SetMaterial(0, CableMaterial);
+	SplineMesh->SetMaterial(0,(bIsLigament && bIsHolding) ? CableStretchedMaterial : CableMaterial);
 
 	SplineMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	SplineMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
 	SplineMesh->SetGenerateOverlapEvents(false);
+
+	for (USplineMeshComponent* Mesh : SplineMeshes) if (Mesh) Mesh->SetMaterial(0, (bIsLigament && bIsHolding) ? CableStretchedMaterial : CableMaterial);
 
 	SplineMesh->SetForwardAxis(CableForwardAxis, false);
 
@@ -588,6 +590,8 @@ void AENTNerve::DetachNerveBall(bool bForceDetachment)
 	PlayerController = nullptr;
 	bShouldApplyCablePhysics = false;
 
+	bIsHolding = false;
+
 	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, true);
 	NerveBall->AttachToComponent(RootComponent, Rules);
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -634,6 +638,7 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 	}
 
 	bIsLoaded = false;
+	bIsHolding = true;
 
 	UAkGameplayStatics::PostEventAtLocation(GrabNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
 
