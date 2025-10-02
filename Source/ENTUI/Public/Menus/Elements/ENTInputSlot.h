@@ -7,6 +7,7 @@
 #include "Components/TextBlock.h"
 #include "ENTInputSlot.generated.h"
 
+class UENTCustomButton;
 class UENTControlsMenu;
 class UButton;
 class UTextBlock;
@@ -37,10 +38,7 @@ protected:
 	TObjectPtr<UTextBlock> KeyName;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UTextBlock> ButtonKeyName;
-	
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UButton> Button;
+	TObjectPtr<UENTCustomButton> Button;
 
 	UPROPERTY(BlueprintReadOnly, meta = (ExposeOnSpawn), EditInstanceOnly)
 	FName KeyMappingName;
