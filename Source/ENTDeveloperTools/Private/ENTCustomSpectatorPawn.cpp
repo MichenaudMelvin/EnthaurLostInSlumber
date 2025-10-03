@@ -14,6 +14,8 @@ void InitializeCustomSpectatorPawnInputBindings()
 
 	bBindingsAdded = true;
 
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomSpectatorPawn_RebindMovement", EKeys::AnyKey));
+
 	UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("CustomSpectatorPawn_MoveForward", EKeys::Z, 1.0f));
 	UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("CustomSpectatorPawn_MoveRight", EKeys::Q, -1.0f));
 	UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("CustomSpectatorPawn_MoveForward", EKeys::S, -1.0f));
@@ -40,9 +42,26 @@ void AENTCustomSpectatorPawn::SetupPlayerInputComponent(UInputComponent* PlayerI
 
 	InitializeCustomSpectatorPawnInputBindings();
 
-	PlayerInputComponent->BindAxis("CustomSpectatorPawn_MoveForward", this, &ADefaultPawn::MoveForward);
-	PlayerInputComponent->BindAxis("CustomSpectatorPawn_MoveRight", this, &ADefaultPawn::MoveRight);
-	PlayerInputComponent->BindAxis("CustomSpectatorPawn_Turn", this, &ADefaultPawn::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("CustomSpectatorPawn_LookUp", this, &ADefaultPawn::AddControllerPitchInput);
+	PlayerInputComponent->ClearActionBindings();
+
+	InputComponent->BindAxis("CustomSpectatorPawn_Turn", this, &ADefaultPawn::AddControllerYawInput);
+	InputComponent->BindAxis("CustomSpectatorPawn_LookUp", this, &ADefaultPawn::AddControllerPitchInput);
+
+	PlayerInputComponent->BindAction("CustomSpectatorPawn_RebindMovement", IE_Pressed, this, &AENTCustomSpectatorPawn::RebindMovement);
+
+	PlayerInputComponent->ClearBindingValues();
+}
+
+void AENTCustomSpectatorPawn::RebindMovement()
+{
+	if (!InputComponent)
+	{
+		return;
+	}
+
+	InputComponent->RemoveActionBinding("CustomSpectatorPawn_RebindMovement", IE_Pressed);
+
+	InputComponent->BindAxis("CustomSpectatorPawn_MoveForward", this, &ADefaultPawn::MoveForward);
+	InputComponent->BindAxis("CustomSpectatorPawn_MoveRight", this, &ADefaultPawn::MoveRight);
 }
 
