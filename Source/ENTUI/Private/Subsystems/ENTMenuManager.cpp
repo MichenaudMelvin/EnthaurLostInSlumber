@@ -42,20 +42,28 @@ void UENTMenuManager::CreateAllWidgets()
 		return;
 	}
 
-	PressAnyMenu = CreateWidget(PlayerController, UIConfig->PressAnyMenuClass);
-	MainMenu = CreateWidget(PlayerController, UIConfig->MainMenuClass);
-	NewGameMenu = CreateWidget(PlayerController, UIConfig->NewGameMenuClass);
-	OptionsMenu = CreateWidget(PlayerController, UIConfig->OptionsMenuClass);
-	CreditsMenu = CreateWidget(PlayerController, UIConfig->CreditsMenuClass);
-	QuitMenu = CreateWidget(PlayerController, UIConfig->QuitMenuClass);
-	PauseMenu = CreateWidget(PlayerController, UIConfig->PauseMenuClass);
-	ControlsMenu = CreateWidget(PlayerController, UIConfig->ControlsMenuClass);
-	MainMenuConfirmationMenu = CreateWidget(PlayerController, UIConfig->MainMenuConfirmationMenuClass);
-	RestartConfirmationMenu = CreateWidget(PlayerController, UIConfig->RestartConfirmationMenuClass);
+	CurrentController = Cast<AENTAnyKeyController>(PlayerController);
+	if (!CurrentController)
+	{
+		return;
+	}
+
+	OnChangeCurrentController.Broadcast(CurrentController);
+
+	PressAnyMenu = CreateWidget(CurrentController, UIConfig->PressAnyMenuClass);
+	MainMenu = CreateWidget(CurrentController, UIConfig->MainMenuClass);
+	NewGameMenu = CreateWidget(CurrentController, UIConfig->NewGameMenuClass);
+	OptionsMenu = CreateWidget(CurrentController, UIConfig->OptionsMenuClass);
+	CreditsMenu = CreateWidget(CurrentController, UIConfig->CreditsMenuClass);
+	QuitMenu = CreateWidget(CurrentController, UIConfig->QuitMenuClass);
+	PauseMenu = CreateWidget(CurrentController, UIConfig->PauseMenuClass);
+	ControlsMenu = CreateWidget(CurrentController, UIConfig->ControlsMenuClass);
+	MainMenuConfirmationMenu = CreateWidget(CurrentController, UIConfig->MainMenuConfirmationMenuClass);
+	RestartConfirmationMenu = CreateWidget(CurrentController, UIConfig->RestartConfirmationMenuClass);
 
 	OnWidgetsCreated.Broadcast();
 
-	AENTDefaultPlayerController* FirstPersonController = Cast<AENTDefaultPlayerController>(PlayerController);
+	AENTDefaultPlayerController* FirstPersonController = Cast<AENTDefaultPlayerController>(CurrentController);
 	if (!IsValid(FirstPersonController))
 	{
 		return;

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "InputMappingContext.h"
+#include "Player/ENTAnyKeyController.h"
 #include "Player/ENTControllerMappingContext.h"
 #include "ENTMenuController.generated.h"
 
@@ -28,7 +29,7 @@ struct FENTActionUI
 };
 
 UCLASS()
-class ENTUI_API AENTMenuController : public APlayerController, public IENTControllerMappingContext
+class ENTUI_API AENTMenuController : public AENTAnyKeyController, public IENTControllerMappingContext
 {
 	GENERATED_BODY()
 

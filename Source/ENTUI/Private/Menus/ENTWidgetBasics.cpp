@@ -28,11 +28,11 @@ void UENTWidgetBasics::BeginDestroy()
 
 void UENTWidgetBasics::HandleBackAction()
 {
-	UENTMenuManager* UIManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	if (!IsValid(UIManager))
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
 
-	UIManager->CloseCurrentMenu();
+	MenuManager->CloseCurrentMenu();
 }
