@@ -7,6 +7,8 @@
 #include "Components/Button.h"
 #include "ENTCustomButton.generated.h"
 
+class UTextBlock;
+
 UCLASS(Abstract)
 class ENTUI_API UENTCustomButton : public UUserWidget
 {
@@ -14,8 +16,12 @@ class ENTUI_API UENTCustomButton : public UUserWidget
 
 public:
 	TObjectPtr<UButton> GetCustomButton() { return CustomButton; }
+	TObjectPtr<UTextBlock> GetButtonText() { return TextBlock; }
 
 protected:
 	UPROPERTY(meta = (BindWidget), BlueprintReadOnly)
 	TObjectPtr<UButton> CustomButton;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	TObjectPtr<UTextBlock> TextBlock;
 };

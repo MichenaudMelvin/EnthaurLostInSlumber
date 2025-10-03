@@ -4,6 +4,7 @@
 #include "Menus/Elements/ENTInputSlot.h"
 
 #include "Components/Button.h"
+#include "Menus/Elements/ENTCustomButton.h"
 #include "Menus/Options/ENTControlsMenu.h"
 
 void UENTInputSlot::SetKeyMappingName(const FName& InKeyMappingName)
@@ -13,7 +14,7 @@ void UENTInputSlot::SetKeyMappingName(const FName& InKeyMappingName)
 
 void UENTInputSlot::SetButtonKeyName(const FText& InButtonKeyName)
 {
-	ButtonKeyName->SetText(InButtonKeyName);
+	Button->GetButtonText()->SetText(InButtonKeyName);
 }
 
 void UENTInputSlot::SetControlsMenu(UENTControlsMenu* InControlsMenu)
@@ -35,9 +36,9 @@ void UENTInputSlot::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	if (Button)
+	if (Button && Button->GetCustomButton())
 	{
-		Button->OnPressed.AddDynamic(this, &UENTInputSlot::OnKeyButtonPressed);
+		Button->GetCustomButton()->OnPressed.AddDynamic(this, &UENTInputSlot::OnKeyButtonPressed);
 	}
 }
 
@@ -45,9 +46,9 @@ void UENTInputSlot::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (Button)
+	if (Button && Button->GetCustomButton())
 	{
-		Button->OnPressed.RemoveDynamic(this, &UENTInputSlot::OnKeyButtonPressed);
+		Button->GetCustomButton()->OnPressed.RemoveDynamic(this, &UENTInputSlot::OnKeyButtonPressed);
 	}
 }
 

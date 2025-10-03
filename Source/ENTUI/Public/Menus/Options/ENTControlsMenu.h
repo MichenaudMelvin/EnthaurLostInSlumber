@@ -6,6 +6,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Menus/ENTWidgetBasics.h"
 #include "Menus/Elements/ENTInputSlot.h"
+#include "Player/ENTAnyKeyController.h"
 #include "ENTControlsMenu.generated.h"
 
 class UVerticalBox;
@@ -17,11 +18,13 @@ class ENTUI_API UENTControlsMenu : public UENTWidgetBasics
 
 public:
 	void OnKeyButton(UENTInputSlot* InInputSlot);
-	
+
 protected:
+	virtual void NativeOnInitialized() override;
+
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
-	
+
 	TObjectPtr<UEnhancedInputLocalPlayerSubsystem> GetEnhancedInputLocalPlayerSubsystem();
 	void AddInputRows();
 
@@ -38,4 +41,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UENTInputSlot> InputSlotClass;
+
+	UFUNCTION()
+	void UpdateAnyKeyBind(AENTAnyKeyController* CurrentController);
 };
