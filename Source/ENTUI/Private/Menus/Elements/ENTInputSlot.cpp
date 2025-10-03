@@ -14,7 +14,8 @@ void UENTInputSlot::SetKeyMappingName(const FName& InKeyMappingName)
 
 void UENTInputSlot::SetButtonKeyName(const FText& InButtonKeyName)
 {
-	Button->GetButtonText()->SetText(InButtonKeyName);
+	ButtonKeyNameText = InButtonKeyName;
+	Button->GetButtonText()->SetText(ButtonKeyNameText);
 }
 
 void UENTInputSlot::SetControlsMenu(UENTControlsMenu* InControlsMenu)
@@ -25,6 +26,13 @@ void UENTInputSlot::SetControlsMenu(UENTControlsMenu* InControlsMenu)
 FName UENTInputSlot::GetMappingName()
 {
 	return KeyMappingName;
+}
+
+void UENTInputSlot::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	Button->GetButtonText()->SetText(ButtonKeyNameText);
 }
 
 void UENTInputSlot::SetKeyName(const FText& InKeyName)

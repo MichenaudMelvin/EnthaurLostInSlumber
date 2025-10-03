@@ -23,13 +23,14 @@ void UENTControlsMenu::NativeOnInitialized()
 
 	UpdateAnyKeyBind(MenuManager->GetCurrentController());
 	MenuManager->OnChangeCurrentController.AddDynamic(this, &UENTControlsMenu::UpdateAnyKeyBind);
+
+	AddInputRows();
 }
 
 void UENTControlsMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	AddInputRows();
 }
 
 void UENTControlsMenu::NativeDestruct()
@@ -67,7 +68,7 @@ void UENTControlsMenu::AddInputRows()
 	{
 		return;
 	}
-	
+
 	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
 	if (!InputLocalPlayerSubsystem)
 	{
@@ -79,12 +80,13 @@ void UENTControlsMenu::AddInputRows()
 	{
 		return;
 	}
-	
+
 	UEnhancedPlayerMappableKeyProfile* PlayerMappableKeyProfile = EnhancedInputUserSettings->GetActiveKeyProfile();
 	if (!IsValid(PlayerMappableKeyProfile))
 	{
 		return;
 	}
+
 	const TMap<FName, FKeyMappingRow>& PlayerMappingRows = PlayerMappableKeyProfile->GetPlayerMappingRows();
 
 	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
@@ -102,7 +104,7 @@ void UENTControlsMenu::AddInputRows()
 		FMapPlayerKeyArgs InArgs;
 		InArgs.MappingName = Key.Key;
 		InArgs.Slot = EPlayerMappableKeySlot::First;
-		
+
 		const FPlayerKeyMapping* PlayerKeyMapping = PlayerMappableKeyProfile->FindKeyMapping(InArgs);
 		if (!PlayerKeyMapping)
 		{
@@ -123,7 +125,7 @@ void UENTControlsMenu::AddInputRows()
 
 		FSlateChildSize ChildSize;
 		ChildSize.Value = ESlateSizeRule::Fill;
-		
+
 		VerticalBoxSlot->SetSize(ChildSize);
 	}
 }
