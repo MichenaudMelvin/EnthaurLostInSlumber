@@ -233,6 +233,12 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
 	bool HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const;
 
+#if WITH_EDITOR
+private:
+	UFUNCTION(Exec)
+	void IgnoreWeakZone(bool bIgnore) const;
+#endif
+
 #pragma endregion
 
 #pragma region Spike

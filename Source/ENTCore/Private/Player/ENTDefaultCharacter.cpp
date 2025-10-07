@@ -24,6 +24,7 @@
 #include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
 #include "Config/ENTCoreConfig.h"
+#include "GameElements/ENTWeakZone.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Player/States/ENTCharacterFallState.h"
 #include "Saves/ENTPlayerSave.h"
@@ -506,6 +507,28 @@ bool AENTDefaultCharacter::HasRequiredQuantity(const EAmberType& AmberType, cons
 
 	return *Count >= Quantity;
 }
+
+#if WITH_EDITOR
+void AENTDefaultCharacter::IgnoreWeakZone(bool bIgnore) const
+{
+	TArray<AActor*> WeakZones;
+	UGameplayStatics::GetAllActorsOfClass(this, AENTWeakZone::StaticClass(), WeakZones);
+
+	for (AActor* Actor : WeakZones)
+	{
+		if (!Actor)
+		{
+			continue;
+		}
+
+		AENTWeakZone* WeakZone = Cast<AENTWeakZone>(Actor);
+		if (WeakZone)
+		{
+			WeakZone->ActivateZone(!bIgnore);
+		}
+	}
+}
+#endif
 
 #pragma endregion
 
