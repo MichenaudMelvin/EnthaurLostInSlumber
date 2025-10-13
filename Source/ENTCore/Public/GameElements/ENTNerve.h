@@ -105,6 +105,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
 	TObjectPtr<UMaterial> CableStretchedMaterial;
 
+	UPROPERTY()
+	TObjectPtr<UMaterialInstanceDynamic> DynamicCableStretchedMaterial;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	TEnumAsByte<ESplineMeshAxis::Type> CableForwardAxis = ESplineMeshAxis::Z;
 
@@ -113,6 +116,12 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	FVector2D CableScale = FVector2D(1.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	float TransparencyDistance = 250.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	float MaxVibrationStrength = 1.5f;
 
 	/**
 	 * @brief 
@@ -145,11 +154,15 @@ public:
 
 	float GetCableMaxExtension() const {return CableMaxExtension;}
 
+	float GetMaxVibrationStrength() const {return MaxVibrationStrength;}
+
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCableDirection() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCablePosition(float Percent, ESplineCoordinateSpace::Type CoordinateSpace = ESplineCoordinateSpace::World) const;
+
+	TObjectPtr<UMaterialInstanceDynamic> GetDynamicCableStretchedMaterial() const {return DynamicCableStretchedMaterial;}
 
 #pragma endregion
 
