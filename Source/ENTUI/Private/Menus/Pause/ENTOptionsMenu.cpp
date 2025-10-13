@@ -193,20 +193,13 @@ void UENTOptionsMenu::OnViewControlsButtonHovered()
 
 void UENTOptionsMenu::OnViewControlsButtonClicked()
 {
-	UENTMenuManager* UIManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	if (!IsValid(UIManager))
-	{
-		return;
-	}
-	
-	const UENTUIConfig* UIManagerSettings = GetDefault<UENTUIConfig>();
-	if (!IsValid(UIManagerSettings))
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
 
-	UUserWidget* ControlsMenu = CreateWidget<UUserWidget>(GetWorld(), UIManagerSettings->ControlsMenuClass);
-	UIManager->OpenMenu(ControlsMenu, false);
+	MenuManager->OpenMenu(MenuManager->GetControlsMenu(), false);
 }
 
 void UENTOptionsMenu::OnOverallSliderChanged(float InValue)

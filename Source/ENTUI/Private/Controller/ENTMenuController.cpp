@@ -93,44 +93,44 @@ void AENTMenuController::SetupInputComponent()
 
 void AENTMenuController::OnInputResume()
 {
-	UENTMenuManager* UIManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	if (!IsValid(UIManager))
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
 
-	if (UIManager->GetMenuState() == EENTMenuState::MainMenu)
+	if (MenuManager->GetMenuState() == EENTMenuState::MainMenu)
 	{
-		UIManager->CloseCurrentMenu();
+		MenuManager->CloseCurrentMenu();
 		return;
 	}
 
-	UIManager->CloseAllMenus(EENTMenuState::Gameplay);
+	MenuManager->CloseAllMenus(EENTMenuState::Gameplay);
 }
 
 void AENTMenuController::OnInputAny()
 {
-	UENTMenuManager* UIManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	if (!IsValid(UIManager))
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
 
-	if (UIManager->GetMenuState() != EENTMenuState::AnyMenu)
+	if (MenuManager->GetMenuState() != EENTMenuState::AnyMenu)
 	{
 		return;
 	}
 
-	UIManager->OpenMenu(UIManager->GetMainMenu(), false);
+	MenuManager->OpenMenu(MenuManager->GetMainMenu(), false);
 }
 
 void AENTMenuController::OnInputBack()
 {
-	UENTMenuManager* UIManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	if (!IsValid(UIManager))
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
 
-	UIManager->CloseCurrentMenu();
+	MenuManager->CloseCurrentMenu();
 }

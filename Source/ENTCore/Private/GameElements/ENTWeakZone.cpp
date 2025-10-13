@@ -248,6 +248,8 @@ void AENTWeakZone::Tick(float DeltaSeconds)
 
 void AENTWeakZone::InitZone()
 {
+	BoxComponent->UpdateOverlaps();
+
 	TArray<AActor*> OverlappingActors;
 	BoxComponent->GetOverlappingActors(OverlappingActors);
 

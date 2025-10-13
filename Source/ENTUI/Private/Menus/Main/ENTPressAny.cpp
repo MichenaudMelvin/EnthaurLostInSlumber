@@ -8,12 +8,12 @@ void UENTPressAny::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	UENTMenuManager* UIManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	if (!IsValid(UIManager))
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
 
-	UIManager->SetUIInputMode();
-	//UIManager->SetMenuState(EPRFUIState::AnyMenu);
+	MenuManager->SetUIInputMode();
+	//MenuManager->SetMenuState(EPRFUIState::AnyMenu);
 }

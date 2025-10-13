@@ -11,10 +11,24 @@
 #include "Subsystems/ENTMenuManager.h"
 #include "UserSettings/EnhancedInputUserSettings.h"
 
+void UENTControlsMenu::NativeOnInitialized()
+{
+	Super::NativeOnInitialized();
+
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	UpdateAnyKeyBind(MenuManager->GetCurrentController());
+	MenuManager->OnChangeCurrentController.AddDynamic(this, &UENTControlsMenu::UpdateAnyKeyBind);
+}
+
 void UENTControlsMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
-	
+
 	AddInputRows();
 }
 
@@ -116,6 +130,11 @@ void UENTControlsMenu::AddInputRows()
 
 void UENTControlsMenu::RebindKey(const FKey& InKey)
 {
+	if (!ActiveInputSlot)
+	{
+		return;
+	}
+
 	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
 	if (!InputLocalPlayerSubsystem)
 	{
@@ -147,6 +166,8 @@ void UENTControlsMenu::RebindKey(const FKey& InKey)
 	}
 
 	ActiveInputSlot->SetButtonKeyName(InKey.GetDisplayName());
+
+	ActiveInputSlot = nullptr;
 }
 
 bool UENTControlsMenu::CheckDuplicateKeys(const FKey& InKey)
@@ -185,6 +206,16 @@ bool UENTControlsMenu::CheckDuplicateKeys(const FKey& InKey)
 	}
 
 	return false;
+}
+
+void UENTControlsMenu::UpdateAnyKeyBind(AENTAnyKeyController* CurrentController)
+{
+	if (!CurrentController)
+	{
+		return;
+	}
+
+	CurrentController->OnAnyKeyPressed.AddDynamic(this, &UENTControlsMenu::RebindKey);
 }
 
 void UENTControlsMenu::OnKeyButton(UENTInputSlot* InInputSlot)

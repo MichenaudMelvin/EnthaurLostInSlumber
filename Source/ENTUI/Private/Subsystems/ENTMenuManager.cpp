@@ -42,20 +42,28 @@ void UENTMenuManager::CreateAllWidgets()
 		return;
 	}
 
-	PressAnyMenu = CreateWidget(PlayerController, UIConfig->PressAnyMenuClass);
-	MainMenu = CreateWidget(PlayerController, UIConfig->MainMenuClass);
-	NewGameMenu = CreateWidget(PlayerController, UIConfig->NewGameMenuClass);
-	OptionsMenu = CreateWidget(PlayerController, UIConfig->OptionsMenuClass);
-	CreditsMenu = CreateWidget(PlayerController, UIConfig->CreditsMenuClass);
-	QuitMenu = CreateWidget(PlayerController, UIConfig->QuitMenuClass);
-	PauseMenu = CreateWidget(PlayerController, UIConfig->PauseMenuClass);
-	ControlsMenu = CreateWidget(PlayerController, UIConfig->ControlsMenuClass);
-	MainMenuConfirmationMenu = CreateWidget(PlayerController, UIConfig->MainMenuConfirmationMenuClass);
-	RestartConfirmationMenu = CreateWidget(PlayerController, UIConfig->RestartConfirmationMenuClass);
+	CurrentController = Cast<AENTAnyKeyController>(PlayerController);
+	if (!CurrentController)
+	{
+		return;
+	}
+
+	OnChangeCurrentController.Broadcast(CurrentController);
+
+	PressAnyMenu = CreateWidget(CurrentController, UIConfig->PressAnyMenuClass);
+	MainMenu = CreateWidget(CurrentController, UIConfig->MainMenuClass);
+	NewGameMenu = CreateWidget(CurrentController, UIConfig->NewGameMenuClass);
+	OptionsMenu = CreateWidget(CurrentController, UIConfig->OptionsMenuClass);
+	CreditsMenu = CreateWidget(CurrentController, UIConfig->CreditsMenuClass);
+	QuitMenu = CreateWidget(CurrentController, UIConfig->QuitMenuClass);
+	PauseMenu = CreateWidget(CurrentController, UIConfig->PauseMenuClass);
+	ControlsMenu = CreateWidget(CurrentController, UIConfig->ControlsMenuClass);
+	MainMenuConfirmationMenu = CreateWidget(CurrentController, UIConfig->MainMenuConfirmationMenuClass);
+	RestartConfirmationMenu = CreateWidget(CurrentController, UIConfig->RestartConfirmationMenuClass);
 
 	OnWidgetsCreated.Broadcast();
 
-	AENTDefaultPlayerController* FirstPersonController = Cast<AENTDefaultPlayerController>(PlayerController);
+	AENTDefaultPlayerController* FirstPersonController = Cast<AENTDefaultPlayerController>(CurrentController);
 	if (!IsValid(FirstPersonController))
 	{
 		return;
@@ -109,13 +117,19 @@ void UENTMenuManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	MenuStack.Add(InMenuClass);
 
 	InMenuClass->AddToViewport();
+	UE_LOG(LogTemp, Warning, TEXT("Opened menu: %s"), *InMenuClass->GetName());
+
+	for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	}
 
 	if (MenuStack.Num() >= 2)
 	{
 		if (!bIsSubMenu)
 		{
-			TWeakObjectPtr<UUserWidget> PreviousMenu = MenuStack[MenuStack.Num() - 2];
-			if (PreviousMenu.IsValid())
+			TObjectPtr<UUserWidget> PreviousMenu = MenuStack[MenuStack.Num() - 2];
+			if (PreviousMenu)
 			{
 				PreviousMenu->RemoveFromParent();
 			}
@@ -138,8 +152,8 @@ void UENTMenuManager::CloseCurrentMenu()
 		return;
 	}
 
-	TWeakObjectPtr<UUserWidget> TopMenuPtr = MenuStack.Last();
-	if (!TopMenuPtr.IsValid())
+	TObjectPtr<UUserWidget> TopMenuPtr = MenuStack.Last();
+	if (!TopMenuPtr)
 	{
 		return;
 	}
@@ -152,12 +166,19 @@ void UENTMenuManager::CloseCurrentMenu()
 	Menu->RemoveFromParent();
 	MenuClasses.Remove(MenuKey);
 
+	UE_LOG(LogTemp, Warning, TEXT("Removed menu: %s"),  *Menu->GetClass()->GetName());
+
+	for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	}
+
 	CheckMenuState();
 
 	if (MenuStack.Num() >= 1 && CurrentState != EENTMenuState::Gameplay)
 	{
-		TWeakObjectPtr<UUserWidget> NewTopMenuPtr = MenuStack.Last();
-		if (!NewTopMenuPtr.IsValid())
+		TObjectPtr<UUserWidget> NewTopMenuPtr = MenuStack.Last();
+		if (!NewTopMenuPtr)
 		{
 			return;
 		}

@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ENTAnyKeyController.h"
 #include "InputMappingContext.h"
 #include "ENTControllerMappingContext.h"
-#include "GameFramework/PlayerController.h"
 #include "ENTDefaultPlayerController.generated.h"
 
 class AFirstPersonSpectator;
@@ -82,7 +82,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnResume);
 #pragma endregion
 
 UCLASS()
-class ENTCORE_API AENTDefaultPlayerController : public APlayerController, public IENTControllerMappingContext
+class ENTCORE_API AENTDefaultPlayerController : public AENTAnyKeyController, public IENTControllerMappingContext
 {
 	GENERATED_BODY()
 
