@@ -13,6 +13,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Config/ENTCoreConfig.h"
+#include "Kismet/KismetMaterialLibrary.h"
 #include "Player/ENTDefaultPlayerController.h"
 #include "Player/States/ENTCharacterStateMachine.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
@@ -64,6 +65,9 @@ void AENTNerve::BeginPlay()
 	FinishEvent.BindDynamic(this, &AENTNerve::FinishRetractCable);
 	RetractTimeline.AddInterpFloat(RetractionCurve, UpdateEvent);
 	RetractTimeline.SetTimelineFinishedFunc(FinishEvent);
+
+	DynamicCableStretchedMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, CableStretchedMaterial);
+	DynamicCableStretchedMaterial->SetScalarParameterValue(FName("TransparencyDistance"), TransparencyDistance);
 }
 
 void AENTNerve::OnConstruction(const FTransform& Transform)
@@ -179,13 +183,14 @@ void AENTNerve::AddSplineMesh(bool bMakeNoise)
 
 	SplineMesh->SetMobility(EComponentMobility::Movable);
 	SplineMesh->SetStaticMesh(CableMesh);
-	SplineMesh->SetMaterial(0,(bIsLigament && bIsHolding) ? CableStretchedMaterial : CableMaterial);
+	UMaterialInterface* NewMaterial = (bIsLigament && bIsHolding)? Cast<UMaterialInterface>(DynamicCableStretchedMaterial) : Cast<UMaterialInterface>(CableMaterial);
+	SplineMesh->SetMaterial(0, NewMaterial);
 
 	SplineMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	SplineMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
 	SplineMesh->SetGenerateOverlapEvents(false);
 
-	for (USplineMeshComponent* Mesh : SplineMeshes) if (Mesh) Mesh->SetMaterial(0, (bIsLigament && bIsHolding) ? CableStretchedMaterial : CableMaterial);
+	for (USplineMeshComponent* Mesh : SplineMeshes) if (Mesh) Mesh->SetMaterial(0, NewMaterial);
 
 	SplineMesh->SetForwardAxis(CableForwardAxis, false);
 

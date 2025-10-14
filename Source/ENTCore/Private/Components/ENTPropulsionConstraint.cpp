@@ -78,8 +78,7 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 	}
 
 	float Distance = LinkedNerve->GetCableLength();
-	float Lerp = UKismetMathLibrary::NormalizeToRange(Distance, 0.0f, LinkedNerve->GetCableMaxExtension()
-);
+	float Lerp = UKismetMathLibrary::NormalizeToRange(Distance, 0.0f, LinkedNerve->GetCableMaxExtension());
 
 	Lerp = FMath::Clamp(Lerp, 0.0f, 1.0f);
 	Lerp = FMath::Sin((Lerp * PI) / 2.0f);
@@ -105,6 +104,9 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 			OnPropulsionStateChanged.Broadcast(bIsPropulsionActive);
 		}
 
+		const float Vibration = Lerp * (LinkedNerve -> GetMaxVibrationStrength());
+		LinkedNerve->GetDynamicCableStretchedMaterial()->SetScalarParameterValue(FName("VibrationStrength"), Vibration);
+
 		if (PlayerController->GetPlayerInputs().bInputInteractPressed && !bIsAlreadyPropelled)
 		{
 			bIsAlreadyPropelled = true;
@@ -124,11 +126,11 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 		}
 	} else if (Distance < LinkedNerve->GetDistanceNeededToPropulsion())
 	{
-
 		if (bIsPropulsionActive)
 		{
 			bIsPropulsionActive = false;
 			OnPropulsionStateChanged.Broadcast(bIsPropulsionActive);
+			LinkedNerve->GetDynamicCableStretchedMaterial()->SetScalarParameterValue(FName("VibrationStrength"), 0.f);
 		}
 
 		else if (PlayerController->GetPlayerInputs().bInputInteractPressed)
