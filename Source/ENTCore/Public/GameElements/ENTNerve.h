@@ -156,6 +156,8 @@ public:
 
 	float GetMaxVibrationStrength() const {return MaxVibrationStrength;}
 
+	FVector GetStartCableLocation() const {return SplineCable->GetLocationAtSplinePoint(0, ESplineCoordinateSpace::World);}
+
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCableDirection() const;
 
@@ -229,6 +231,8 @@ public:
 	TObjectPtr<UENTInteractableComponent> GetInteractable() const {return InteractableComponent;}
 
 	float GetEjectionAngleBuff() const {return EjectionAngleBuff;}
+
+	bool IsLigament() const {return bIsLigament;}
 
 #pragma endregion
 

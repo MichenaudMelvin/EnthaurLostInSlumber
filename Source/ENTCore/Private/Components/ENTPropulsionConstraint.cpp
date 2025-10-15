@@ -95,6 +95,47 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 	{
 		return;
 	}
+	
+	//Tourner la cam vers le point d'ancrage
+	const FVector CableDirection = UKismetMathLibrary::GetDirectionUnitVector(PlayerCharacter->GetActorLocation(), LinkedNerve->GetStartCableLocation());
+	/*
+	if (!LinkedNerve->IsLigament())
+	{
+		const FRotator TargetRotation = CableDirection.Rotation();
+
+		AENTDefaultPlayerController* PC = PlayerCharacter->GetPlayerController();
+		if (PC)
+		{
+			const FRotator CurrentRotation = PC->GetControlRotation();
+			constexpr float InterpSpeed = 5.0f;
+			const FRotator SmoothRotation = FMath::RInterpTo(CurrentRotation, TargetRotation, DeltaTime, InterpSpeed);
+			PC->SetControlRotation(SmoothRotation);
+		}
+	}
+	*/
+
+	//Jump Direction Is Set By Cable Direction + An AngularBuff (Positive Or Negative) Set By Designers
+	FVector CableDirectionGround = CableDirection;
+	CableDirectionGround.Z = 0.f;
+	CableDirectionGround = CableDirectionGround.GetSafeNormal();
+			
+	const FVector RotationAxis = FVector::CrossProduct(CableDirectionGround, CableDirection).GetSafeNormal();
+			
+	const float AngleBuff = LinkedNerve->GetEjectionAngleBuff();
+	const FQuat RotationQuat = FQuat(RotationAxis, FMath::DegreesToRadians(AngleBuff));
+			
+	const FVector JumpDirection = RotationQuat.RotateVector(CableDirection).GetSafeNormal();
+	
+	const FRotator TargetCameraRotation = JumpDirection.Rotation();
+
+	AENTDefaultPlayerController* PC = PlayerCharacter->GetPlayerController();
+	if (PC)
+	{
+		const FRotator CurrentRotation = PC->GetControlRotation();
+		constexpr float InterpSpeed = 5.0f;
+		const FRotator SmoothRotation = FMath::RInterpTo(CurrentRotation, TargetCameraRotation, DeltaTime, InterpSpeed);
+		PC->SetControlRotation(SmoothRotation);
+	}
 
 	if (Distance >= LinkedNerve->GetDistanceNeededToPropulsion())
 	{
@@ -106,21 +147,14 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 
 		const float Vibration = Lerp * (LinkedNerve -> GetMaxVibrationStrength());
 		LinkedNerve->GetDynamicCableStretchedMaterial()->SetScalarParameterValue(FName("VibrationStrength"), Vibration);
-
+		
 		if (PlayerController->GetPlayerInputs().bInputInteractPressed && !bIsAlreadyPropelled)
 		{
 			bIsAlreadyPropelled = true;
 			
-			FVector CableDirection = LinkedNerve->GetCableDirection().GetSafeNormal();
-
-			//Jump Direction Is Set By Cable Direction + An AngularBuff (Positive Or Negative) Set By Designers
-			const float AngleBuff = LinkedNerve -> GetEjectionAngleBuff();
-			const FRotator Rotation(-AngleBuff, 0.f, 0.f);  
-			CableDirection = Rotation.RotateVector(CableDirection).GetSafeNormal();
-
 			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceRange().GetLowerBoundValue(), LinkedNerve->GetPropulsionForceRange().GetUpperBoundValue(), Lerp);
 
-			PlayerCharacter->EjectCharacter(CableDirection * Force, false);
+			PlayerCharacter->EjectCharacter(JumpDirection * Force, false);
 
 			ReleasePlayer(true);
 		}
@@ -156,6 +190,9 @@ void UENTPropulsionConstraint::Init(AENTNerve* vLinkedNerve, ACharacter* vPlayer
 		return;
 	}
 
+	//if (!LinkedNerve->IsLigament()) StateMachine->LockCameraMovements(true);
+	StateMachine->LockCameraMovements(true);
+	
 	UpdateDefaultMaxSpeed(StateMachine->GetCurrentState(), StateMachine->GetCurrentStateID());
 	StateMachine->OnChangeState.AddDynamic(this, &UENTPropulsionConstraint::UpdateDefaultMaxSpeed);
 }
@@ -166,6 +203,7 @@ void UENTPropulsionConstraint::ReleasePlayer(const bool DetachFromPlayer)
 	{
 		bIsPropulsionActive = false;
 		OnPropulsionStateChanged.Broadcast(bIsPropulsionActive);
+		PlayerCharacter->GetStateMachine()->LockCameraMovements(false);
 		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed;
 	}
 
@@ -173,6 +211,8 @@ void UENTPropulsionConstraint::ReleasePlayer(const bool DetachFromPlayer)
 	{
 		LinkedNerve->DetachNerveBall(false);
 	}
+
+	LinkedNerve->GetDynamicCableStretchedMaterial()->SetScalarParameterValue(FName("VibrationStrength"), 0.f);
 	
 	DestroyComponent();
 }
