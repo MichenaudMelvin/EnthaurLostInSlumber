@@ -61,6 +61,11 @@ void UENTPropulsionConstraint::UpdateDefaultMaxSpeed(UENTCharacterState* State, 
 	}
 
 	DefaultMaxSpeed = MoveState->GetMoveSpeed();
+
+	if (!LinkedNerve->IsLigament())
+	{
+		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed *= LinkedNerve->GetSlowDownFactor();
+	}
 }
 
 void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -83,12 +88,15 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 	Lerp = FMath::Clamp(Lerp, 0.0f, 1.0f);
 	Lerp = FMath::Sin((Lerp * PI) / 2.0f);
 
-	if (IsMovingTowardsPosition(LinkedNerve->GetLastCableLocation(), 0.2f))
+	if (LinkedNerve->IsLigament())
 	{
-		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.0f + Lerp);
-	} else
-	{
-		PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.0f - Lerp);
+		if (IsMovingTowardsPosition(LinkedNerve->GetLastCableLocation(), 0.2f))
+		{
+			PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.0f + Lerp);
+		} else
+		{
+			PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed = DefaultMaxSpeed * (1.0f - Lerp);
+		}
 	}
 
 	if (!bHasReleasedInteraction)
@@ -98,21 +106,6 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 	
 	//Tourner la cam vers le point d'ancrage
 	const FVector CableDirection = UKismetMathLibrary::GetDirectionUnitVector(PlayerCharacter->GetActorLocation(), LinkedNerve->GetStartCableLocation());
-	/*
-	if (!LinkedNerve->IsLigament())
-	{
-		const FRotator TargetRotation = CableDirection.Rotation();
-
-		AENTDefaultPlayerController* PC = PlayerCharacter->GetPlayerController();
-		if (PC)
-		{
-			const FRotator CurrentRotation = PC->GetControlRotation();
-			constexpr float InterpSpeed = 5.0f;
-			const FRotator SmoothRotation = FMath::RInterpTo(CurrentRotation, TargetRotation, DeltaTime, InterpSpeed);
-			PC->SetControlRotation(SmoothRotation);
-		}
-	}
-	*/
 
 	//Jump Direction Is Set By Cable Direction + An AngularBuff (Positive Or Negative) Set By Designers
 	FVector CableDirectionGround = CableDirection;
@@ -125,16 +118,42 @@ void UENTPropulsionConstraint::TickComponent(float DeltaTime, ELevelTick TickTyp
 	const FQuat RotationQuat = FQuat(RotationAxis, FMath::DegreesToRadians(AngleBuff));
 			
 	const FVector JumpDirection = RotationQuat.RotateVector(CableDirection).GetSafeNormal();
-	
-	const FRotator TargetCameraRotation = JumpDirection.Rotation();
 
-	AENTDefaultPlayerController* PC = PlayerCharacter->GetPlayerController();
-	if (PC)
+	//on dirgie la caméra vers le point d'attache si c'est un ligament
+	if (LinkedNerve->IsLigament())
 	{
-		const FRotator CurrentRotation = PC->GetControlRotation();
-		constexpr float InterpSpeed = 5.0f;
-		const FRotator SmoothRotation = FMath::RInterpTo(CurrentRotation, TargetCameraRotation, DeltaTime, InterpSpeed);
-		PC->SetControlRotation(SmoothRotation);
+		const FRotator TargetCameraRotation = JumpDirection.Rotation();
+
+		AENTDefaultPlayerController* PC = PlayerCharacter->GetPlayerController();
+		if (PC)
+		{
+			const FRotator CurrentRotation = PC->GetControlRotation();
+			constexpr float InterpSpeed = 5.0f;
+			const FRotator SmoothRotation = FMath::RInterpTo(CurrentRotation, TargetCameraRotation, DeltaTime, InterpSpeed);
+			PC->SetControlRotation(SmoothRotation);
+		}
+	}
+	else
+	{
+		const float CurrentSpeed = PlayerCharacter->GetVelocity().Size() / PlayerCharacter->GetCharacterMovement()->MaxWalkSpeed;
+		
+		constexpr float BaseFrequency = 1.0f;   // fréquence de base du bobbing
+		constexpr float BaseAmplitude = 2.5f;   // amplitude de base en degrés
+
+		CameraBobbingTime += DeltaTime * (BaseFrequency);
+
+		const float RollOffset = FMath::Sin(CameraBobbingTime * PI * 2.0f) * BaseAmplitude * CurrentSpeed;
+
+		AENTDefaultPlayerController* PC = PlayerCharacter->GetPlayerController();
+		if (PC)
+		{
+			FRotator ControlRot = PC->GetControlRotation();
+			FRotator TargetRotation = ControlRot;
+			TargetRotation.Roll = RollOffset;
+			constexpr float InterpSpeed = 5.0f;
+			const FRotator SmoothRotation = FMath::RInterpTo(ControlRot, TargetRotation, DeltaTime, InterpSpeed);
+			PC->SetControlRotation(SmoothRotation);
+		}
 	}
 
 	if (Distance >= LinkedNerve->GetDistanceNeededToPropulsion())
@@ -189,9 +208,8 @@ void UENTPropulsionConstraint::Init(AENTNerve* vLinkedNerve, ACharacter* vPlayer
 	{
 		return;
 	}
-
-	//if (!LinkedNerve->IsLigament()) StateMachine->LockCameraMovements(true);
-	StateMachine->LockCameraMovements(true);
+	
+	if (LinkedNerve->IsLigament()) StateMachine->LockCameraMovements(true);
 	
 	UpdateDefaultMaxSpeed(StateMachine->GetCurrentState(), StateMachine->GetCurrentStateID());
 	StateMachine->OnChangeState.AddDynamic(this, &UENTPropulsionConstraint::UpdateDefaultMaxSpeed);

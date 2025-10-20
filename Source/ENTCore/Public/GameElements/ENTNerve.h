@@ -248,6 +248,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Physics")
 	bool bIsStretchSoundPlayed = false;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Physics", meta=(ClampMin="0.0", ClampMax="1.0", UIMin="0.0", UIMax="1.0"))
+	float SlowDownFactor;
+
 	UPROPERTY(EditAnywhere, Category = "Physics")
 	FFloatRange PropulsionForceRange = FFloatRange(500.0f, 1000.0f);
 
@@ -255,6 +258,8 @@ public:
 	float GetDistanceNeededToPropulsion() const {return DistanceNeededToPropulsion;}
 
 	FFloatRange GetPropulsionForceRange() const {return PropulsionForceRange;}
+
+	float GetSlowDownFactor() const {return SlowDownFactor;}
 
 #pragma endregion
 
