@@ -102,6 +102,9 @@ public:
 
 #pragma region Camera
 
+public:
+	void SetAllowCameraMovement(const bool bInAllowCameraMovement){ bAllowCameraMovement = bInAllowCameraMovement;}
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Camera")
 	bool bAllowCameraMovement = true;
