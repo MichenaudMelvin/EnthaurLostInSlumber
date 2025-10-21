@@ -47,14 +47,19 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 	// int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
 	// int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
 
-	if(Index == PathOBJ->GetSpline()->GetNumberOfSplinePoints() - 1)
+	if(PathOBJ->IsAtTheEndOfThePath(Index))
 	{
-		if (PathOBJ->GetSpline()->IsClosedLoop())
+		if (PathOBJ->IsAClosedLoop())
 		{
 			Index = 0;
 		}
 		else
 		{
+			if (bCanStopBehaviorIfThePathDoesNotLoop)
+			{
+				OwnerComp.StopLogic("FinishAIPath");
+			}
+
 			Index -= 1;
 			Direction *= -1;
 

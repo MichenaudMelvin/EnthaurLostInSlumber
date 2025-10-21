@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Interfaces/ENTPawnAIInterface.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTParasitePawn.generated.h"
@@ -13,9 +14,11 @@ class UENTGravityPawnMovement;
 class AENTArtificialIntelligencePath;
 class UBoxComponent;
 class UAIPerceptionComponent;
+struct FENTAIData;
+struct FENTGameElementData;
 
 UCLASS()
-class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface
+class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface, public IENTPawnAIInterface
 {
 	GENERATED_BODY()
 
@@ -66,6 +69,18 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName AttackTargetKeyName = "AttackTarget";
 
+	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	bool bAutoStartBehavior = true;
+
+	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;
+
+	virtual bool DoesAutoStartBehaviorTree_Implementation() const override {return bAutoStartBehavior;}
+
+	virtual UBehaviorTree* GetOverridenBehaviorTree_Implementation() const override {return OverridenBehaviorTree;}
+
+	virtual void OnBehaviorTreeStarted_Implementation() override;
+
 	virtual void PossessedBy(AController* NewController) override;
 
 	UFUNCTION()
@@ -78,14 +93,18 @@ public:
 #pragma region Save
 
 protected:
-	bool bLoadBlackboardData = false;
+	bool bHasReceivedLoadingRequest = false;
 
-	FENTParaSiteData BlackboardData;
+	FENTParasiteData LoadingData;
 
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
+
+	virtual bool HasReceivedLoadingRequest() const override {return bHasReceivedLoadingRequest;}
+
+	virtual const FENTAIData& GetLoadingData() const override {return LoadingData;}
 
 #pragma endregion
 };

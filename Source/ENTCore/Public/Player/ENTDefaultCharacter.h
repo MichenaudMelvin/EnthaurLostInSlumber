@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "InputMappingContext.h"
 #include "Components/ENTPropulsionConstraint.h"
 #include "GameElements/ENTWeakZoneInterface.h"
 #include "GameFramework/Character.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTDefaultCharacter.generated.h"
 

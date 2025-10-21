@@ -20,7 +20,6 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 
 	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 	Spline->SetupAttachment(Root);
-	Spline->SetClosedLoop(true);
 
 #if WITH_EDITORONLY_DATA
 	BillboardComponent = CreateDefaultSubobject<UBillboardComponent>("Billboard");
@@ -45,6 +44,7 @@ void AENTArtificialIntelligencePath::OnConstruction(const FTransform& Transform)
 	FVector SplineRelativeLocation = Spline->GetRelativeLocation();
 	SplineRelativeLocation.Z = SplineHeight;
 	Spline->SetRelativeLocation(SplineRelativeLocation);
+	Spline->SetClosedLoop(bIsAClosedLoop);
 
 	UpdatePoints(true);
 
@@ -163,6 +163,12 @@ FVector AENTArtificialIntelligencePath::GetPointLocation(int8 PointIndex, float 
 	FVector PointLocation = Spline->GetLocationAtSplinePoint(PointIndex, ESplineCoordinateSpace::World);
 	PointLocation += (GetDirection() * PawnHeight * -1);
 	return PointLocation;
+}
+
+bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index) const
+{
+	auto a = Spline->GetNumberOfSplinePoints() - 1;
+	return Index == a;
 }
 
 bool AENTArtificialIntelligencePath::GetTracedPointLocation(int8 PointIndex, FHitResult& HitResult)

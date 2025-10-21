@@ -41,13 +41,16 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Spline", meta = (Units = "cm"))
 	float SplineHeight = 100.0f;
 
+	UPROPERTY(EditInstanceOnly, Category = "Spline")
+	bool bIsAClosedLoop = true;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Trace")
 	TArray<TEnumAsByte<EObjectTypeQuery>> GroundObjectTypes;
 
-	UPROPERTY(EditInstanceOnly, Category = "Direction", meta = (EditCondition = "!bAutoDirection"))
+	UPROPERTY(EditInstanceOnly, Category = "Direction")
 	TEnumAsByte<EAxis::Type> Direction = EAxis::Z;
 
-	UPROPERTY(EditInstanceOnly, Category = "Direction", meta = (EditCondition = "!bAutoDirection"))
+	UPROPERTY(EditInstanceOnly, Category = "Direction")
 	bool bInvertDirection = true;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Directon", meta = (ClampMin = 0.0f, Units = "cm"))
@@ -65,6 +68,10 @@ public:
 	FVector GetDirection() const;
 
 	FVector GetPointLocation(int8 PointIndex, float PawnHeight) const;
+
+	bool IsAClosedLoop() const {return bIsAClosedLoop;}
+
+	bool IsAtTheEndOfThePath(uint16 Index) const;
 
 	USplineComponent* GetSpline() const {return Spline;}
 

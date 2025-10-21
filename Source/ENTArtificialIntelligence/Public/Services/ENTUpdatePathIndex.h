@@ -26,4 +26,7 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector PathDirection;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	bool bCanStopBehaviorIfThePathDoesNotLoop = true;
 };

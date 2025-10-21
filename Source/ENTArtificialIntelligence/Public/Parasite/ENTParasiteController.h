@@ -52,8 +52,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Behavior", meta = (ClampMin = 0.0f, Units = "cm"))
 	float HearingZTolerance = 100.0f;
 
-public:
-	virtual void SaveBlackBoardValues(FENTParaSiteData& AIData);
+#pragma region Saves
 
-	virtual void LoadBlackboardValues(const FENTParaSiteData& AIData);
+public:
+	virtual void SaveControllerData(FENTAIData& AIData) override;
+
+	virtual void LoadControllerData(const FENTAIData& AIData) override;
+
+#pragma endregion
 };

@@ -5,7 +5,7 @@
 #include "ENTGameElementData.generated.h"
 
 USTRUCT(BlueprintType, Category = "SaveData")
-struct FENTGameElementData
+struct ENTSAVES_API FENTGameElementData
 {
 	GENERATED_BODY()
 };
@@ -13,7 +13,7 @@ struct FENTGameElementData
 #pragma region GameElements
 
 USTRUCT(BlueprintType, Category = "SaveData")
-struct FENTMuscleData : public FENTGameElementData
+struct ENTSAVES_API FENTMuscleData : public FENTGameElementData
 {
 	GENERATED_BODY()
 
@@ -22,7 +22,7 @@ struct FENTMuscleData : public FENTGameElementData
 };
 
 USTRUCT(BlueprintType, Category = "SaveData")
-struct FENTNerveData : public FENTGameElementData
+struct ENTSAVES_API FENTNerveData : public FENTGameElementData
 {
 	GENERATED_BODY()
 
@@ -37,7 +37,7 @@ struct FENTNerveData : public FENTGameElementData
 };
 
 USTRUCT(BlueprintType, Category = "SaveData")
-struct FENTAmberOreData : public FENTGameElementData
+struct ENTSAVES_API FENTAmberOreData : public FENTGameElementData
 {
 	GENERATED_BODY()
 
@@ -46,7 +46,7 @@ struct FENTAmberOreData : public FENTGameElementData
 };
 
 USTRUCT(BlueprintType, Category = "SaveData")
-struct FENTWeakZoneData : public FENTGameElementData
+struct ENTSAVES_API FENTWeakZoneData : public FENTGameElementData
 {
 	GENERATED_BODY()
 
@@ -55,7 +55,7 @@ struct FENTWeakZoneData : public FENTGameElementData
 };
 
 USTRUCT(BlueprintType)
-struct FENTRespawnTreeData : public FENTGameElementData
+struct ENTSAVES_API FENTRespawnTreeData : public FENTGameElementData
 {
 	GENERATED_BODY()
 
@@ -68,16 +68,19 @@ struct FENTRespawnTreeData : public FENTGameElementData
 #pragma region AI
 
 USTRUCT(BlueprintType, Category = "SaveData")
-struct FENTAIData : public FENTGameElementData
+struct ENTSAVES_API FENTAIData : public FENTGameElementData
 {
 	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "AI")
+	bool bRunningBehaviorTree = false;
 
 	UPROPERTY(BlueprintReadWrite, Category = "AI")
 	FTransform PawnTransform;
 };
 
 USTRUCT(BlueprintType, Category = "SaveData")
-struct FENTParaSiteData : public FENTAIData
+struct ENTSAVES_API FENTParasiteData : public FENTAIData
 {
 	GENERATED_BODY()
 
@@ -95,6 +98,12 @@ struct FENTParaSiteData : public FENTAIData
 
 	UPROPERTY(BlueprintReadOnly, Category = "AI|Blackboard")
 	bool bHeardNoise = false;
+};
+
+USTRUCT(BlueprintType, Category = "SaveData")
+struct ENTSAVES_API FETNScriptedAIElementData : public FENTGameElementData
+{
+	GENERATED_BODY()
 };
 
 #pragma endregion

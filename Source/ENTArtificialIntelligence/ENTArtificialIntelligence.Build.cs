@@ -9,7 +9,7 @@ public class ENTArtificialIntelligence : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core", "AIModule",
+                "Core", "AIModule"
             }
         );
 

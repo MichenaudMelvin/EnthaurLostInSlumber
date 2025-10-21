@@ -58,20 +58,9 @@ void AENTParasitePawn::BeginPlay()
 
 	ParasiteDeathZone->OnComponentBeginOverlap.AddDynamic(this, &AENTParasitePawn::EnterDeathZone);
 
-	if (TargetPath && ParasiteController->GetBlackboardComponent())
+	if (!TargetPath->IsOnFloor())
 	{
-		ParasiteController->GetBlackboardComponent()->SetValueAsObject(PathKeyName, TargetPath);
-		ParasiteController->GetBlackboardComponent()->SetValueAsBool(WalkOnFloorKeyName, TargetPath->IsOnFloor());
-
-		if (!TargetPath->IsOnFloor())
-		{
-			MovementComponent->SetGravityScale(0.0f);
-		}
-	}
-
-	if (bLoadBlackboardData)
-	{
-		ParasiteController->LoadBlackboardValues(BlackboardData);
+		MovementComponent->SetGravityScale(0.0f);
 	}
 }
 
@@ -169,7 +158,16 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 }
 #endif
 
-#pragma region Save
+void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
+{
+	IENTPawnAIInterface::OnBehaviorTreeStarted_Implementation();
+
+	if (TargetPath && ParasiteController->GetBlackboardComponent())
+	{
+		ParasiteController->GetBlackboardComponent()->SetValueAsObject(PathKeyName, TargetPath);
+		ParasiteController->GetBlackboardComponent()->SetValueAsBool(WalkOnFloorKeyName, TargetPath->IsOnFloor());
+	}
+}
 
 void AENTParasitePawn::PossessedBy(AController* NewController)
 {
@@ -198,14 +196,16 @@ void AENTParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, 
 	ParasiteController->GetBlackboardComponent()->SetValueAsObject(AttackTargetKeyName, OtherActor);
 }
 
+#pragma region Save
+
 FENTGameElementData& AENTParasitePawn::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FENTParaSiteData Data;
+	FENTParasiteData Data;
 	Data.PawnTransform = GetActorTransform();
 
 	if (ParasiteController)
 	{
-		ParasiteController->SaveBlackBoardValues(Data);
+		ParasiteController->SaveControllerData(Data);
 	}
 
 	return CurrentWorldSave->ParasiteData.Add(GetName(), Data);
@@ -213,12 +213,12 @@ FENTGameElementData& AENTParasitePawn::SaveGameElement(UENTWorldSave* CurrentWor
 
 void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
-	const FENTParaSiteData& Data = static_cast<const FENTParaSiteData&>(GameElementData);
+	const FENTParasiteData& Data = static_cast<const FENTParasiteData&>(GameElementData);
 
 	SetActorTransform(Data.PawnTransform);
 
-	bLoadBlackboardData = true;
-	BlackboardData = Data;
+	bHasReceivedLoadingRequest = true;
+	LoadingData = Data;
 }
 
 #pragma endregion
