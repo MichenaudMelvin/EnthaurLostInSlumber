@@ -97,16 +97,25 @@ protected:
 	TArray<TEnumAsByte<EObjectTypeQuery>> CableColliders;
 
 	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
-	TObjectPtr<UStaticMesh> CableMesh;
+	TObjectPtr<UStaticMesh> NerveMesh;
 
 	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
-	TObjectPtr<UMaterial> CableMaterial;
-
-	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
-	TObjectPtr<UMaterial> CableStretchedMaterial;
+	TObjectPtr<UStaticMesh> LigamentMesh;
 
 	UPROPERTY()
-	TObjectPtr<UMaterialInstanceDynamic> DynamicCableStretchedMaterial;
+	TObjectPtr<UStaticMesh> TargetMesh;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> NerveMaterial;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> BaseLigamentMaterial;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> StretchedLigamentMaterial;
+
+	UPROPERTY()
+	TObjectPtr<UMaterialInstanceDynamic> DynamicStretchedLigamentMaterial;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	TEnumAsByte<ESplineMeshAxis::Type> CableForwardAxis = ESplineMeshAxis::Z;
@@ -164,7 +173,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCablePosition(float Percent, ESplineCoordinateSpace::Type CoordinateSpace = ESplineCoordinateSpace::World) const;
 
-	TObjectPtr<UMaterialInstanceDynamic> GetDynamicCableStretchedMaterial() const {return DynamicCableStretchedMaterial;}
+	TObjectPtr<UMaterialInstanceDynamic> GetDynamicCableStretchedMaterial() const {return DynamicStretchedLigamentMaterial;}
 
 #pragma endregion
 
