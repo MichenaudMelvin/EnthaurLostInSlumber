@@ -666,6 +666,7 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 	}
 
 	PhysicConstraint->Init(this, Player);
+	
 	InteractableComponent->RemoveInteractable(NerveBall);
 
 	PlayerCharacter = Player;

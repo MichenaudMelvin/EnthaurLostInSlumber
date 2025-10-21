@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Menus/ENTWidgetBasics.h"
 #include "ENTPressAny.generated.h"
 
 UCLASS()
-class ENTUI_API UENTPressAny : public UUserWidget
+class ENTUI_API UENTPressAny : public UENTWidgetBasics
 {
 	GENERATED_BODY()
 
