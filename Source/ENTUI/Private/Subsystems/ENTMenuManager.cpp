@@ -24,6 +24,10 @@ void UENTMenuManager::Deinitialize()
 	Super::Deinitialize();
 
 	FWorldDelegates::OnPostWorldInitialization.Remove(PostWorldInitDelegateHandle);
+	if (BasicMenu && BasicMenu->OnFadeAnimationFinishedHandle.IsBound())
+	{
+		BasicMenu->OnFadeAnimationFinishedHandle.RemoveAll(this);
+	}
 }
 
 void UENTMenuManager::CreateAllWidgets()
@@ -162,8 +166,21 @@ void UENTMenuManager::CloseCurrentMenu()
 
 	UUserWidget* Menu = TopMenuPtr.Get();
 	FString MenuKey = Menu->GetClass()->GetName();
+	BasicMenu = Cast<UENTWidgetBasics>(Menu);
 
-	Menu->RemoveFromParent();
+	if (BasicMenu)
+	{
+		BasicMenu->PlayFadeAnimation(true);
+		if (!BasicMenu->OnFadeAnimationFinishedHandle.IsAlreadyBound(this, &UENTMenuManager::HandleNewMenuDisplaying))
+		{
+			BasicMenu->OnFadeAnimationFinishedHandle.AddDynamic(this, &UENTMenuManager::HandleNewMenuDisplaying);
+		}
+	}
+	else
+	{
+		Menu->RemoveFromParent();
+	}
+	
 	MenuClasses.Remove(MenuKey);
 
 	UE_LOG(LogTemp, Warning, TEXT("Removed menu: %s"),  *Menu->GetClass()->GetName());
@@ -172,7 +189,10 @@ void UENTMenuManager::CloseCurrentMenu()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
 	}
+}
 
+void UENTMenuManager::HandleNewMenuDisplaying(UUserWidget* InMenu)
+{
 	CheckMenuState();
 
 	if (MenuStack.Num() >= 1 && CurrentState != EENTMenuState::Gameplay)
@@ -184,7 +204,10 @@ void UENTMenuManager::CloseCurrentMenu()
 		}
 
 		UUserWidget* NewMenu = NewTopMenuPtr.Get();
-		NewMenu->AddToViewport();
+		if (!NewMenu->IsInViewport())
+		{
+			NewMenu->AddToViewport();
+		}
 	}
 }
 
