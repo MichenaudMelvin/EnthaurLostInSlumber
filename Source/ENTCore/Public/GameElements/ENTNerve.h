@@ -20,7 +20,7 @@ class USplineMeshComponent;
 class USplineComponent;
 class AENTDefaultPlayerController;
 class AENTNerveReceptacle;
-class UENTPropulsionConstraint;
+class UENTPhysicConstraint;
 class UENTInteractableComponent;
 
 UCLASS()
@@ -232,15 +232,13 @@ public:
 
 	float GetEjectionAngleBuff() const {return EjectionAngleBuff;}
 
-	bool IsLigament() const {return bIsLigament;}
-
 #pragma endregion
 
 #pragma region Physics
 
 protected:
 	UPROPERTY()
-	TObjectPtr<UENTPropulsionConstraint> PhysicConstraint;
+	TObjectPtr<UENTPhysicConstraint> PhysicConstraint;
 
 	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, Units = "cm"))
 	float DistanceNeededToPropulsion = 500.0f;

@@ -11,6 +11,8 @@
 #include "Components/CapsuleComponent.h"
 #include "ENTInteractableComponent.h"
 #include "ENTToolStatics.h"
+#include "Components/ENTLigamentPhysicConstraint.h"
+#include "Components/ENTNervePhysicConstraint.h"
 #include "Components/PostProcessComponent.h"
 #include "GameElements/ENTAmberOre.h"
 #include "GameElements/ENTRespawnTree.h"
@@ -760,15 +762,21 @@ void AENTDefaultCharacter::ResetFootStepsEvent() const
 	FootstepsSounds->AkAudioEvent = DefaultFootStepEvent;
 }
 
-UENTPropulsionConstraint* AENTDefaultCharacter::AddConstraint()
+UENTPhysicConstraint* AENTDefaultCharacter::AddConstraint(bool bIsLigament)
 {
-	UActorComponent* Comp = AddComponentByClass(UENTPropulsionConstraint::StaticClass(), false, FTransform::Identity, false);
+	// Choix de la classe à instancier
+	TSubclassOf<UENTPhysicConstraint> ConstraintClass = bIsLigament
+		? UENTLigamentPhysicConstraint::StaticClass()
+		: UENTNervePhysicConstraint::StaticClass();
+
+	// Création du composant
+	UActorComponent* Comp = AddComponentByClass(ConstraintClass, false, FTransform::Identity, false);
 	if (!Comp)
 	{
 		return nullptr;
 	}
 
-	UENTPropulsionConstraint* Constraint = Cast<UENTPropulsionConstraint>(Comp);
+	UENTPhysicConstraint* Constraint = Cast<UENTPhysicConstraint>(Comp);
 	OnConstraintAdded.Broadcast(Constraint);
 	return Constraint;
 }

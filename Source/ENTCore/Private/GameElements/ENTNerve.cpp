@@ -7,7 +7,7 @@
 #include "ENTInteractableComponent.h"
 #include "GameFramework/Character.h"
 #include "GameElements/ENTNerveReceptacle.h"
-#include "Components/ENTPropulsionConstraint.h"
+#include "Components/ENTPhysicConstraint.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -560,7 +560,7 @@ void AENTNerve::ForceDetachNerveBallFromPlayer()
 		return;
 	}
 
-	UENTPropulsionConstraint* Constraint = PlayerCharacter->GetComponentByClass<UENTPropulsionConstraint>();
+	UENTPhysicConstraint* Constraint = PlayerCharacter->GetComponentByClass<UENTPhysicConstraint>();
 	if (Constraint)
 	{
 		Constraint->ReleasePlayer(true);
@@ -659,7 +659,7 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 		return;
 	}
 
-	PhysicConstraint = Player->AddConstraint();
+	PhysicConstraint = Player->AddConstraint(bIsLigament);
 	if (!PhysicConstraint)
 	{
 		return;
