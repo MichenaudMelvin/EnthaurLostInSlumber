@@ -58,6 +58,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CharacterStateMachine")
 	void LockAllStates(bool bLock);
 
+	void LockCameraMovements(bool bLock);
+
 	EENTCharacterStateID GetCurrentStateID() const {return CurrentStateID;}
 
 	UENTCharacterState* GetCurrentState() const {return CurrentState;}

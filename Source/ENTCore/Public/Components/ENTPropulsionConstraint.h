@@ -59,4 +59,7 @@ private:
 	float DefaultMaxSpeed = 0.0f;
 
 	bool bIsPropulsionActive = false;
+
+	UPROPERTY()
+	float CameraBobbingTime = 0.0f;
 };

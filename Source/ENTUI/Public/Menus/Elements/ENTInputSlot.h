@@ -26,14 +26,18 @@ public:
 	void SetButtonKeyName(const FText& InButtonKeyName);
 	void SetControlsMenu(UENTControlsMenu* InControlsMenu);
 	FName GetMappingName();
-	
+
 protected:
+	virtual void NativeConstruct() override;
+
 	virtual void NativeOnInitialized() override;
 	virtual void BeginDestroy() override;
 
 	UFUNCTION()
 	void OnKeyButtonPressed();
-	
+
+	FText ButtonKeyNameText;
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UTextBlock> KeyName;
 

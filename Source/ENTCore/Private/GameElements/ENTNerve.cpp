@@ -66,8 +66,11 @@ void AENTNerve::BeginPlay()
 	RetractTimeline.AddInterpFloat(RetractionCurve, UpdateEvent);
 	RetractTimeline.SetTimelineFinishedFunc(FinishEvent);
 
-	DynamicCableStretchedMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, CableStretchedMaterial);
-	DynamicCableStretchedMaterial->SetScalarParameterValue(FName("TransparencyDistance"), TransparencyDistance);
+	if (CableStretchedMaterial)
+	{
+		DynamicCableStretchedMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, CableStretchedMaterial);
+		DynamicCableStretchedMaterial->SetScalarParameterValue(FName("TransparencyDistance"), TransparencyDistance);
+	}
 }
 
 void AENTNerve::OnConstruction(const FTransform& Transform)
@@ -663,6 +666,7 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 	}
 
 	PhysicConstraint->Init(this, Player);
+	
 	InteractableComponent->RemoveInteractable(NerveBall);
 
 	PlayerCharacter = Player;

@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "ENTMenuManager.generated.h"
 
+class UENTWidgetBasics;
 class AENTAnyKeyController;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeCurrentController, AENTAnyKeyController*, CurrentController);
@@ -68,7 +69,6 @@ protected:
 	void OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues);
 
 	FDelegateHandle CreateWidgetsDelegate;
-
 	FDelegateHandle PostWorldInitDelegateHandle;
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWidgetsCreated);
@@ -78,6 +78,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Controller")
 	TObjectPtr<AENTAnyKeyController> CurrentController;
+
+	UFUNCTION()
+	void HandleNewMenuDisplaying(UUserWidget* InMenu);
 
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Controller")
@@ -161,4 +164,7 @@ private:
 
 	UPROPERTY()
 	TMap<FString, UUserWidget*> MenuClasses;
+
+	UPROPERTY()
+	TObjectPtr<UENTWidgetBasics> BasicMenu;
 };
