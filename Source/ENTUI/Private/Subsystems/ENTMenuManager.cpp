@@ -189,11 +189,13 @@ void UENTMenuManager::CloseCurrentMenu()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
 	}
+
+	CheckMenuState();
 }
 
 void UENTMenuManager::HandleNewMenuDisplaying(UUserWidget* InMenu)
 {
-	CheckMenuState();
+	//CheckMenuState();
 
 	if (MenuStack.Num() >= 1 && CurrentState != EENTMenuState::Gameplay)
 	{
