@@ -13,7 +13,11 @@
 
 AENTDefaultAIController::AENTDefaultAIController()
 {
+#if WITH_EDITORONLY_DATA
+	PrimaryActorTick.bCanEverTick = true;
+#else
 	PrimaryActorTick.bCanEverTick = false;
+#endif
 }
 
 void AENTDefaultAIController::BeginPlay()
@@ -52,6 +56,26 @@ void AENTDefaultAIController::BeginPlay()
 		AISubsystem->AddAI(this);
 	}
 }
+
+#if WITH_EDITORONLY_DATA
+void AENTDefaultAIController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (!bDebugAI)
+	{
+		return;
+	}
+
+	if (GetPawn()->Implements<UENTPawnAIInterface>())
+	{
+		Cast<IENTPawnAIInterface>(GetPawn())->DebugPawn();
+	}
+
+	FVector SpawnLocationValue = GetBlackboardComponent()->GetValueAsVector(SpawnLocationKeyName);
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *SpawnLocationKeyName.ToString(), *SpawnLocationValue.ToString()));
+}
+#endif
 
 void AENTDefaultAIController::Destroyed()
 {

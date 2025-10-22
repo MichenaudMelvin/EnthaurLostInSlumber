@@ -22,6 +22,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+#if WITH_EDITORONLY_DATA
+	virtual void Tick(float DeltaSeconds) override;
+#endif
+
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	UFUNCTION()
@@ -45,6 +49,12 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName HeardNoiseKeyName = "HeardNoise";
+
+	/**
+	 * @brief This must be an object value instead of a vector
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName NoiseLocationKeyName = "NoiseLocation";
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName NoiseInvestigatorKeyName = "NoiseInvestigator";

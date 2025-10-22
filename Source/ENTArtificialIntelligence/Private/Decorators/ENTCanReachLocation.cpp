@@ -1,0 +1,78 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "Decorators/ENTCanReachLocation.h"
+
+#include "ENTDefaultAIController.h"
+#include "BehaviorTree/BlackboardComponent.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
+
+UENTCanReachLocation::UENTCanReachLocation()
+{
+	NodeName = "CanReachLocation";
+	Location.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTCanReachLocation, Location));
+	Location.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTCanReachLocation, Location), AActor::StaticClass());
+	bNotifyTick = true;
+}
+
+void UENTCanReachLocation::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+{
+	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
+
+	CheckAbort(OwnerComp, NodeMemory);
+}
+
+void UENTCanReachLocation::CheckAbort(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const
+{
+	if(FlowAbortMode == EBTFlowAbortMode::None)
+	{
+		return;
+	}
+
+	const bool bIsOnActiveBranch = OwnerComp.IsExecutingBranch(GetMyNode(), GetChildIndex());
+
+	bool bShouldAbort;
+
+	if (bIsOnActiveBranch)
+	{
+		bShouldAbort = (FlowAbortMode == EBTFlowAbortMode::Self || FlowAbortMode == EBTFlowAbortMode::Both) && !CalculateRawConditionValue(OwnerComp, NodeMemory);
+	}
+	else
+	{
+		bShouldAbort = (FlowAbortMode == EBTFlowAbortMode::LowerPriority || FlowAbortMode == EBTFlowAbortMode::Both) && CalculateRawConditionValue(OwnerComp, NodeMemory);
+	}
+
+	if(bShouldAbort)
+	{
+		OwnerComp.RequestExecution(this);
+	}
+}
+
+bool UENTCanReachLocation::CalculateRawConditionValue(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const
+{
+	AENTDefaultAIController* Controller = Cast<AENTDefaultAIController>(OwnerComp.GetAIOwner());
+	if (!Controller)
+	{
+		return false;
+	}
+
+	const UBlackboardComponent* CurrentBlackboard = OwnerComp.GetBlackboardComponent();
+	if (!CurrentBlackboard)
+	{
+		return false;
+	}
+
+	FVector TargetLocation = FVector::ZeroVector;
+	if (Location.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	{
+		AActor* TargetActor = Cast<AActor>(CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(Location.SelectedKeyName));
+		TargetLocation = TargetActor->GetActorLocation();
+	}
+	else if (Location.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+	{
+		TargetLocation = CurrentBlackboard->GetValue<UBlackboardKeyType_Vector>(Location.SelectedKeyName);
+	}
+
+	return Controller->IsPointReachable(TargetLocation);
+}

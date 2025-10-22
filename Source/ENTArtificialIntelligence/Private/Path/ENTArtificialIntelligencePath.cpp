@@ -22,8 +22,18 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 	Spline->SetupAttachment(Root);
 
 #if WITH_EDITORONLY_DATA
+	DebugMeshComp = CreateDefaultSubobject<UStaticMeshComponent>("DebugMesh");
+	DebugMeshComp->SetupAttachment(Root);
+	DebugMeshComp->bIsEditorOnly = true;
+	DebugMeshComp->SetMobility(EComponentMobility::Static);
+	DebugMeshComp->CastShadow = false;
+	DebugMeshComp->SetCollisionResponseToAllChannels(ECR_Ignore);
+	DebugMeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	DebugMeshComp->SetCanEverAffectNavigation(false);
+
 	BillboardComponent = CreateDefaultSubobject<UBillboardComponent>("Billboard");
 	BillboardComponent->SetupAttachment(Root);
+	BillboardComponent->bIsEditorOnly = true;
 #endif
 
 	GroundObjectTypes.Add(ObjectTypeQuery1);
@@ -33,6 +43,10 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 void AENTArtificialIntelligencePath::BeginPlay()
 {
 	Super::BeginPlay();
+
+#if WITH_EDITORONLY_DATA
+	DebugMeshComp->DestroyComponent();
+#endif
 
 	UpdatePoints(false);
 }
@@ -68,7 +82,6 @@ void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 
 		FHitResult HitResult;
 		bool bHit = GetTracedPointLocation(i, HitResult);
-
 		if (!bHit)
 		{
 			continue;
@@ -92,7 +105,9 @@ void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 
 			ArrowComponent->SetWorldLocation(TargetLocation);
 			ArrowComponent->SetWorldRotation(HitResult.Normal.Rotation());
+			ArrowComponent->SetArrowSize(GroundArrowSize);
 			ArrowComponent->SetArrowColor(FLinearColor(0.0f, 0.2f, 0.8f));
+
 			Arrows.Add(ArrowComponent);
 		}
 		else
@@ -126,9 +141,25 @@ void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 		FVector MidPoint = (PointB + PointA) * 0.5f;
 		ArrowComponent->SetWorldLocation(MidPoint);
 		ArrowComponent->SetWorldRotation(Rotation);
+		ArrowComponent->SetArrowSize(PathArrowSize);
 
 		Arrows.Add(ArrowComponent);
 	}
+
+	DebugMeshComp->SetStaticMesh(DebugMesh);
+
+	if (!bShowDebugMesh)
+	{
+		DebugMeshComp->SetVisibility(false);
+		return;
+	}
+
+	DebugMeshComp->SetVisibility(true);
+
+	float Distance = FMath::Lerp(0.0f, Spline->GetSplineLength(), DebugSplineAlpha);
+	FTransform TargetTransform = Spline->GetTransformAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::World);
+
+	DebugMeshComp->SetWorldTransform(TargetTransform);
 #endif
 }
 
@@ -167,8 +198,7 @@ FVector AENTArtificialIntelligencePath::GetPointLocation(int8 PointIndex, float 
 
 bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index) const
 {
-	auto a = Spline->GetNumberOfSplinePoints() - 1;
-	return Index == a;
+	return Index == (Spline->GetNumberOfSplinePoints() - 1);
 }
 
 bool AENTArtificialIntelligencePath::GetTracedPointLocation(int8 PointIndex, FHitResult& HitResult)

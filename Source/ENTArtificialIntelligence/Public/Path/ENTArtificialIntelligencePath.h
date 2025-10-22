@@ -33,6 +33,12 @@ protected:
 
 	UPROPERTY(Transient)
 	TArray<TObjectPtr<class UArrowComponent>> Arrows;
+
+	UPROPERTY(EditAnywhere, Category = "Debug", meta = (ClampMin = 0.0f))
+	float GroundArrowSize = 1.5f;
+
+	UPROPERTY(EditAnywhere, Category = "Debug", meta = (ClampMin = 0.0f))
+	float PathArrowSize = 2.5f;
 #endif
 
 	UPROPERTY(EditDefaultsOnly, Category = "Trace", meta = (Units = "cm"))
@@ -90,4 +96,25 @@ public:
 
 	void DetachAI(APawn* AI);
 #endif
+
+#pragma region Debug
+
+#if WITH_EDITORONLY_DATA
+
+protected:
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug")
+	bool bShowDebugMesh = false;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f, EditCondition = bShowDebugMesh))
+	float DebugSplineAlpha = 0.0f;
+
+	UPROPERTY(EditDefaultsOnly, Transient)
+	TObjectPtr<UStaticMeshComponent> DebugMeshComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Debug")
+	TObjectPtr<UStaticMesh> DebugMesh;
+
+#endif
+
+#pragma endregion
 };

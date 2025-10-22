@@ -98,6 +98,9 @@ struct ENTSAVES_API FENTParasiteData : public FENTAIData
 
 	UPROPERTY(BlueprintReadOnly, Category = "AI|Blackboard")
 	bool bHeardNoise = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "AI|Blackboard")
+	FVector NoiseLocation = FVector::ZeroVector;
 };
 
 USTRUCT(BlueprintType, Category = "SaveData")

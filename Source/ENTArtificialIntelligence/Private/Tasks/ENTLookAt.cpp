@@ -59,6 +59,12 @@ EBTNodeResult::Type UENTLookAt::ExecuteTask(UBehaviorTreeComponent& OwnerComp, u
 	else if(LookAtPosition.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
 	{
 		const AActor* ActorToLookAt = Cast<AActor>(CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(LookAtPosition.GetSelectedKeyID()));
+
+		if (!ActorToLookAt)
+		{
+			return EBTNodeResult::Failed;
+		}
+
 		TargetRotation = UKismetMathLibrary::FindLookAtRotation(CurrentPawn->GetActorLocation(), ActorToLookAt->GetActorLocation());
 	}
 

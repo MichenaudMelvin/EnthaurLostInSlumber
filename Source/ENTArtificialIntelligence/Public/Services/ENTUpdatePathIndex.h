@@ -16,6 +16,8 @@ public:
 	UENTUpdatePathIndex();
 
 protected:
+	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
+
 	virtual void OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")

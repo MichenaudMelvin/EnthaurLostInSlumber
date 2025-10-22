@@ -86,9 +86,12 @@ protected:
 	UFUNCTION()
 	void EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+#if WITH_EDITORONLY_DATA
+	virtual void DebugPawn() const override;
+#endif
+
 public:
 	UBoxComponent* GetCollisionComp() {return ParasiteCollision;}
-
 
 #pragma region Save
 

@@ -21,7 +21,7 @@ EBTNodeResult::Type UENTAttackTarget::ExecuteTask(UBehaviorTreeComponent& OwnerC
 		return EBTNodeResult::Failed;
 	}
 
-	UObject* TargetObject = CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(Target.SelectedKeyName);
+	UObject* TargetObject = CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(Target.GetSelectedKeyID());
 	if (!TargetObject)
 	{
 		return EBTNodeResult::Failed;

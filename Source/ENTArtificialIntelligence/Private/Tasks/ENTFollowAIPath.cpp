@@ -41,6 +41,7 @@ void UENTFollowAIPath::InitializeFromAsset(UBehaviorTree& Asset)
 		AIPath.ResolveSelectedKey(*BBAsset);
 		PathIndex.ResolveSelectedKey(*BBAsset);
 		WalkOnFloor.ResolveSelectedKey(*BBAsset);
+		TargetKeyLocation.ResolveSelectedKey(*BBAsset);
 	}
 
 	if (!MovementCurve)
@@ -106,7 +107,7 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 
 	if (bWalkOnFloor)
 	{
-		BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(TargetKeyLocation.SelectedKeyName, TargetLocation);
+		BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(TargetKeyLocation.GetSelectedKeyID(), TargetLocation);
 		NodeResult = EBTNodeResult::Succeeded;
 	}
 	else

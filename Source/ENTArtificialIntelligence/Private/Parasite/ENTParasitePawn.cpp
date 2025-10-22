@@ -58,7 +58,7 @@ void AENTParasitePawn::BeginPlay()
 
 	ParasiteDeathZone->OnComponentBeginOverlap.AddDynamic(this, &AENTParasitePawn::EnterDeathZone);
 
-	if (!TargetPath->IsOnFloor())
+	if (TargetPath && !TargetPath->IsOnFloor())
 	{
 		MovementComponent->SetGravityScale(0.0f);
 	}
@@ -195,6 +195,35 @@ void AENTParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, 
 
 	ParasiteController->GetBlackboardComponent()->SetValueAsObject(AttackTargetKeyName, OtherActor);
 }
+
+#if WITH_EDITORONLY_DATA
+void AENTParasitePawn::DebugPawn() const
+{
+	if (!ParasiteController || !ParasiteController->GetBlackboardComponent())
+	{
+		return;
+	}
+
+	UObject* PathValue = ParasiteController->GetBlackboardComponent()->GetValueAsObject(PathKeyName);
+	FString PathValueName = "Nullptr";
+	if (PathValue)
+	{
+		PathValueName = PathValue->GetName();
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *PathKeyName.ToString(), *PathValueName));
+
+	bool bWalkOnFloor = ParasiteController->GetBlackboardComponent()->GetValueAsBool(WalkOnFloorKeyName);
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *WalkOnFloorKeyName.ToString(), (bWalkOnFloor ? TEXT("true") : TEXT("false"))));
+
+	UObject* AttackTargetValue = ParasiteController->GetBlackboardComponent()->GetValueAsObject(AttackTargetKeyName);
+	FString AttackTargetValueName = "Nullptr";
+	if (AttackTargetValue)
+	{
+		AttackTargetValueName = PathValue->GetName();
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *AttackTargetKeyName.ToString(), *AttackTargetValueName));
+}
+#endif
 
 #pragma region Save
 

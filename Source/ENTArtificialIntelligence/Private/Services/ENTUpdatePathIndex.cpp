@@ -19,6 +19,19 @@ UENTUpdatePathIndex::UENTUpdatePathIndex()
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, PathDirection));
 }
 
+void UENTUpdatePathIndex::InitializeFromAsset(UBehaviorTree& Asset)
+{
+	Super::InitializeFromAsset(Asset);
+
+	const UBlackboardData* BBAsset = GetBlackboardAsset();
+	if (ensure(BBAsset))
+	{
+		AIPath.ResolveSelectedKey(*BBAsset);
+		PathIndex.ResolveSelectedKey(*BBAsset);
+		PathDirection.ResolveSelectedKey(*BBAsset);
+	}
+}
+
 void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	Super::OnBecomeRelevant(OwnerComp, NodeMemory);
@@ -29,8 +42,7 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 		return;
 	}
 
-	UObject* KeyObject = BlackboardComponent->GetValueAsObject("AIPath");
-	// UObject* KeyObject = BlackboardComponent->GetValue<UBlackboardKeyType_Object>(Path.GetSelectedKeyID());
+	UObject* KeyObject = BlackboardComponent->GetValue<UBlackboardKeyType_Object>(AIPath.GetSelectedKeyID());
 	if (!KeyObject)
 	{
 		return;
@@ -42,10 +54,8 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 		return;
 	}
 
-	int Index = BlackboardComponent->GetValueAsInt("PathIndex");
-	int Direction = BlackboardComponent->GetValueAsInt("PathDirection");
-	// int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
-	// int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
+	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
+	int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
 
 	if(PathOBJ->IsAtTheEndOfThePath(Index))
 	{

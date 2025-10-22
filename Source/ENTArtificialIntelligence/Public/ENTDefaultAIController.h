@@ -20,6 +20,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+#if WITH_EDITORONLY_DATA
+	virtual void Tick(float DeltaSeconds) override;
+#endif
+
 	virtual void Destroyed() override;
 
 	virtual void TickAI_Implementation(float DeltaTime) override;
@@ -32,6 +36,11 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "AI")
 	bool bIsBehaviorTreeRunning = false;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Debug")
+	bool bDebugAI = false;
+#endif
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Navigation")
