@@ -186,12 +186,19 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
+	UPROPERTY(EditDefaultsOnly, Category = "NerveBall|Apperance")
+	TObjectPtr<UStaticMesh> LigamentBallMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "NerveBall|Apperance")
+	TObjectPtr<UStaticMesh> NerveBallMesh;
+	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UAkComponent> NerveStretchComp;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UAkRtpc> NerveStretchRtpc;
-
+	
 	FVector DefaultNervePosition = FVector::ZeroVector;
 
 public:

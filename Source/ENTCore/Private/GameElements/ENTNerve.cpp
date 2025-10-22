@@ -81,6 +81,8 @@ void AENTNerve::OnConstruction(const FTransform& Transform)
 
 	TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
 
+	NerveBall -> SetStaticMesh((bIsLigament) ? LigamentBallMesh : NerveBallMesh);
+
 	FVector CableMeshSize = TargetMesh->GetBoundingBox().Max - TargetMesh->GetBoundingBox().Min;
 	switch (CableForwardAxis)
 	{
