@@ -17,6 +17,7 @@ UENTUpdatePathIndex::UENTUpdatePathIndex()
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, AIPath), AENTArtificialIntelligencePath::StaticClass());
 	PathIndex.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, PathIndex));
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, PathDirection));
+	AINextPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, AINextPath),  AENTArtificialIntelligencePath::StaticClass());
 }
 
 void UENTUpdatePathIndex::InitializeFromAsset(UBehaviorTree& Asset)
@@ -29,6 +30,7 @@ void UENTUpdatePathIndex::InitializeFromAsset(UBehaviorTree& Asset)
 		AIPath.ResolveSelectedKey(*BBAsset);
 		PathIndex.ResolveSelectedKey(*BBAsset);
 		PathDirection.ResolveSelectedKey(*BBAsset);
+		AINextPath.ResolveSelectedKey(*BBAsset);
 	}
 }
 
@@ -65,16 +67,24 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 		}
 		else
 		{
-			if (bCanStopBehaviorIfThePathDoesNotLoop)
+			if (PathOBJ->GetNextPath())
+			{
+				Index = 0;
+				Direction = 1;
+				BlackboardComponent->SetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID(), PathOBJ->GetNextPath());
+			}
+			else if (bCanStopBehaviorIfThePathDoesNotLoop)
 			{
 				OwnerComp.StopLogic("FinishAIPath");
+				return;
+			}
+			else
+			{
+				Index -= 1;
+				Direction *= -1;
 			}
 
-			Index -= 1;
-			Direction *= -1;
-
-			BlackboardComponent->SetValueAsInt("PathDirection", Direction);
-			// BlackboardComponent->SetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID(), Direction);
+			BlackboardComponent->SetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID(), Direction);
 		}
 	}
 	else
@@ -82,6 +92,5 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 		Index += 1 * Direction;
 	}
 
-	BlackboardComponent->SetValueAsInt("PathIndex", Index);
-	// BlackboardComponent->SetValue<UBlackboardKeyType_Int>(AIPath.GetSelectedKeyID(), Index);
+	BlackboardComponent->SetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID(), Index);
 }

@@ -2,6 +2,8 @@
 
 
 #include "Path/ENTArtificialIntelligencePath.h"
+
+#include "NavLinkComponent.h"
 #include "Components/SplineComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -21,9 +23,17 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 	Spline->SetupAttachment(Root);
 
+	LinkToAnotherPath = CreateDefaultSubobject<UNavLinkComponent>(TEXT("PathLink"));
+	LinkToAnotherPath->SetupAttachment(Root);
+
 #if WITH_EDITORONLY_DATA
+	DebugMeshRootComp = CreateDefaultSubobject<USceneComponent>(TEXT("DebugRoot"));
+	DebugMeshRootComp->SetupAttachment(Root);
+	DebugMeshRootComp->SetMobility(EComponentMobility::Static);
+	DebugMeshRootComp->bIsEditorOnly = true;
+
 	DebugMeshComp = CreateDefaultSubobject<UStaticMeshComponent>("DebugMesh");
-	DebugMeshComp->SetupAttachment(Root);
+	DebugMeshComp->SetupAttachment(DebugMeshRootComp);
 	DebugMeshComp->bIsEditorOnly = true;
 	DebugMeshComp->SetMobility(EComponentMobility::Static);
 	DebugMeshComp->CastShadow = false;
@@ -48,6 +58,11 @@ void AENTArtificialIntelligencePath::BeginPlay()
 	DebugMeshComp->DestroyComponent();
 #endif
 
+	if (bIsAClosedLoop)
+	{
+		LinkToAnotherPath->DestroyComponent();
+	}
+
 	UpdatePoints(false);
 }
 
@@ -67,8 +82,49 @@ void AENTArtificialIntelligencePath::OnConstruction(const FTransform& Transform)
 	{
 		AttachedAI->OnConstruction(AttachedAI->GetActorTransform());
 	}
+
+	TArray<TObjectPtr<AENTArtificialIntelligencePath>> PathsToUpdate = PreviousPaths;
+	PreviousPaths.Empty();
+	for (TObjectPtr<AENTArtificialIntelligencePath> PathToUpdate : PathsToUpdate)
+	{
+		if (PathToUpdate)
+		{
+			PathToUpdate->UpdateNavLink();
+		}
+	}
 #endif
+
+	UpdateNavLink();
 }
+
+#if WITH_EDITOR
+void AENTArtificialIntelligencePath::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	FName PropertyName = PropertyChangedEvent.GetPropertyName();
+
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(AENTArtificialIntelligencePath, NextPath))
+	{
+		if (NextPath)
+		{
+			if (NextPath == this || bIsAClosedLoop)
+			{
+				NextPath->PreviousPaths.Remove(this);
+				NextPath = nullptr;
+			}
+		}
+	}
+	else if (PropertyName == GET_MEMBER_NAME_CHECKED(AENTArtificialIntelligencePath, bIsAClosedLoop))
+	{
+		if (bIsAClosedLoop && NextPath)
+		{
+			NextPath->PreviousPaths.Remove(this);
+			NextPath = nullptr;
+		}
+	}
+}
+#endif
 
 void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 {
@@ -156,11 +212,32 @@ void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 
 	DebugMeshComp->SetVisibility(true);
 
-	float Distance = FMath::Lerp(0.0f, Spline->GetSplineLength(), DebugSplineAlpha);
-	FTransform TargetTransform = Spline->GetTransformAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::World);
-
-	DebugMeshComp->SetWorldTransform(TargetTransform);
+	DebugMeshRootComp->SetWorldTransform(GetTransformAtAlpha(DebugSplineAlpha));
+	DebugMeshComp->SetRelativeRotation(RotationOffset);
 #endif
+}
+
+void AENTArtificialIntelligencePath::UpdateNavLink()
+{
+	LinkToAnotherPath->Links.Empty();
+
+	if (bIsAClosedLoop || !NextPath || NextPath == this)
+	{
+		return;
+	}
+
+	FTransform FirstTransform = NextPath->GetFirstPointTransform(ESplineCoordinateSpace::World);
+	FVector LocalPosition = GetActorTransform().InverseTransformPosition(FirstTransform.GetLocation());
+
+	FTransform LastTransform = GetLastPointTransform(ESplineCoordinateSpace::Local);
+
+	FNavigationLink NavLink(LastTransform.GetLocation(), LocalPosition);
+	LinkToAnotherPath->Links.Add(NavLink);
+
+	if (!NextPath->PreviousPaths.Contains(this))
+	{
+		NextPath->PreviousPaths.Add(this);
+	}
 }
 
 FVector AENTArtificialIntelligencePath::GetDirection() const
@@ -189,11 +266,39 @@ FVector AENTArtificialIntelligencePath::GetDirection() const
 	return VectorDirection;
 }
 
-FVector AENTArtificialIntelligencePath::GetPointLocation(int8 PointIndex, float PawnHeight) const
+FVector AENTArtificialIntelligencePath::GetPointLocation(int32 PointIndex, float PawnHeight) const
 {
 	FVector PointLocation = Spline->GetLocationAtSplinePoint(PointIndex, ESplineCoordinateSpace::World);
 	PointLocation += (GetDirection() * PawnHeight * -1);
 	return PointLocation;
+}
+
+FTransform AENTArtificialIntelligencePath::GetFirstPointTransform(const ESplineCoordinateSpace::Type& CoordinateSpace) const
+{
+	return Spline->GetTransformAtSplinePoint(0, CoordinateSpace);
+}
+
+FTransform AENTArtificialIntelligencePath::GetLastPointTransform(const ESplineCoordinateSpace::Type& CoordinateSpace) const
+{
+	int32 Index = Spline->GetNumberOfSplinePoints() - 1;
+	return Spline->GetTransformAtSplinePoint(Index, CoordinateSpace);
+}
+
+FTransform AENTArtificialIntelligencePath::GetTransformAtAlpha(float Alpha) const
+{
+	float Distance = FMath::Lerp(0.0f, Spline->GetSplineLength(), Alpha);
+	FTransform TargetTransform = Spline->GetTransformAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::World);
+
+	float NextAlpha = FMath::Clamp(Alpha + 0.1f, 0.0f, 1.0f);
+	float NextDistance = FMath::Lerp(0.0f, Spline->GetSplineLength(), NextAlpha);
+	FVector NextLocation = Spline->GetLocationAtDistanceAlongSpline(NextDistance, ESplineCoordinateSpace::World);
+
+	FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(TargetTransform.GetLocation(), NextLocation);
+	FQuat TargetRotation = FRotationMatrix::MakeFromXZ(ForwardDirection, (GetDirection() * -1)).ToQuat();
+
+	TargetTransform.SetRotation(TargetRotation);
+
+	return TargetTransform;
 }
 
 bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index) const

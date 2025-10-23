@@ -24,6 +24,9 @@ protected:
 	FBlackboardKeySelector AIPath;
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
+	FBlackboardKeySelector AINextPath;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector PathIndex;
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
