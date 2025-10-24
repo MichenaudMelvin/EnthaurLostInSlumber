@@ -28,6 +28,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (ClampMin = 0.0f))
 	float MoveAcceleration = 2048.0f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Movement", meta=(ClampMin="0.0", ClampMax="1.0", UIMin="0.0", UIMax="1.0"))
+	float SlowDownFactor = 0.3f;
+
 	virtual void ApplyMovement(float DeltaTime);
 
 	bool bMovementLocked = false;
@@ -51,6 +54,8 @@ public:
 	float GetMoveSpeed() const {return MoveSpeed;}
 
 	float GetMoveAcceleration() const {return MoveAcceleration;}
+
+	float GetSlowDownFactor() const {return SlowDownFactor;}
 
 	/**
 	 * @brief Update the current speed of the Character
