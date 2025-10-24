@@ -27,5 +27,15 @@ public class ENTArtificialIntelligence : ModuleRules
                 "ENTComponents"
             }
         );
+
+        if (Target.bBuildEditor)
+        {
+            PrivateDependencyModuleNames.AddRange(
+                new string[]
+                {
+                    "ENTEditor"
+                }
+            );
+        }
     }
 }

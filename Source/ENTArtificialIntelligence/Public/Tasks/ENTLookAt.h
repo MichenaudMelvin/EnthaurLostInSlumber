@@ -39,6 +39,10 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "Rotation", meta = (ClampMin = 0.0f, ClampMax = 360.0f, UIMin = 0.0f, UIMax = 360.0f, EditCondition = "!bInstantRotation"))
 	float RotationTolerance = 1.0f;
 
-private:
 	FRotator TargetRotation = FRotator::ZeroRotator;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDebugTask = false;
+#endif
 };

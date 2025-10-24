@@ -257,6 +257,11 @@ void AENTNerveReceptacle::DisableReceptacle()
 void AENTNerveReceptacle::PlayElectricityAnimation(AENTNerve* Nerve)
 {
 	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	if (!Player)
+	{
+		return;
+	}
+
 	Player->GetCameraShake()->MakeSmallCameraShake();
 
 	if (!ElectricityFeedbackClass)

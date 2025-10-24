@@ -4,15 +4,19 @@
 #include "Tasks/ENTJumpToNextPath.h"
 
 #include "AIController.h"
+#include "ENTGravityPawnMovement.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
-#include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ENTParasitePawn.h"
 #include "Path/ENTArtificialIntelligencePath.h"
+#include "Path/ENTJumpSpline.h"
+
+#if WITH_EDITORONLY_DATA
+#include "Debug/ENTArrowActor.h"
+#endif
 
 UENTJumpToNextPath::UENTJumpToNextPath()
 {
@@ -53,7 +57,7 @@ EBTNodeResult::Type UENTJumpToNextPath::ExecuteTask(UBehaviorTreeComponent& Owne
 {
 	Super::ExecuteTask(OwnerComp, NodeMemory);
 
-	CurrentOwnerComp = OwnerComp;
+	CurrentOwnerComp = &OwnerComp;
 	if (!CurrentOwnerComp)
 	{
 		return EBTNodeResult::Failed;
@@ -103,26 +107,26 @@ EBTNodeResult::Type UENTJumpToNextPath::ExecuteTask(UBehaviorTreeComponent& Owne
 
 	TargetTransform.SetLocation(TargetLocation);
 
+	UWorld* World = CurrentPawn->GetWorld();
+	JumpSpline = World->SpawnActor<AENTJumpSpline>();
+	if (!JumpSpline)
+	{
+		return EBTNodeResult::Failed;
+	}
+
+	JumpSpline->InitSpline(StartTransform, TargetTransform);
+
 #if WITH_EDITORONLY_DATA
 	if (bDebugTask)
 	{
-		UWorld* World = CurrentPawn->GetWorld();
-		AActor* ArrowActor = World->SpawnActor(AActor::StaticClass());
-		ArrowActor->SetActorLabel("ArrowActor", true);
+		JumpSpline->ShowSpline(FLinearColor::Blue);
 
-		UActorComponent* ActorComp = ArrowActor->AddComponentByClass(UArrowComponent::StaticClass(), false, FTransform::Identity, false);
-		if (ActorComp)
+		AENTArrowActor* ArrowActor = World->SpawnActor<AENTArrowActor>();
+		if (ArrowActor)
 		{
-			UArrowComponent* ArrowComp = Cast<UArrowComponent>(ActorComp);
-			if (ArrowComp)
-			{
-				ArrowActor->SetRootComponent(ArrowComp);
-				ArrowComp->SetWorldTransform(TargetTransform);
-				ArrowComp->SetHiddenInGame(false);
-				ArrowComp->SetVisibility(true);
-				ArrowComp->SetArrowSize(5.0f);
-				ArrowComp->SetArrowLength(25.0f);
-			}
+			ArrowActor->SetArrowColor(FColor::Blue);
+			ArrowActor->SetActorTransform(TargetTransform);
+			ArrowActor->SetArrowDimensions(5.0f, 50.0f);
 		}
 	}
 #endif
@@ -140,13 +144,31 @@ void UENTJumpToNextPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* Node
 
 void UENTJumpToNextPath::MovementUpdate(float Alpha)
 {
-	FTransform ResultTransform = UKismetMathLibrary::TLerp(StartTransform, TargetTransform, Alpha, ELerpInterpolationMode::QuatInterp);
+	FTransform ResultTransform;
+	ResultTransform.SetLocation(JumpSpline->GetLocationAtAlpha(Alpha));
+
+	FQuat TargetRotation = FQuat::Slerp(StartTransform.GetRotation(), TargetTransform.GetRotation(), Alpha);
+
+	ResultTransform.SetRotation(TargetRotation);
+	ResultTransform.SetScale3D(FVector::OneVector);
 
 	CurrentPawn->SetActorTransform(ResultTransform);
 }
 
 void UENTJumpToNextPath::FinishTask()
 {
+	if (JumpSpline)
+	{
+#if WITH_EDITORONLY_DATA
+		if (!bDebugTask)
+		{
+#endif
+		JumpSpline->Destroy();
+#if WITH_EDITORONLY_DATA
+		}
+#endif
+	}
+
 	UObject* NextAIPath = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID());
 
 	if (!NextAIPath)
@@ -160,6 +182,12 @@ void UENTJumpToNextPath::FinishTask()
 	{
 		FinishLatentTask(*CurrentOwnerComp, EBTNodeResult::Failed);
 		return;
+	}
+
+	UENTGravityPawnMovement* GravityPawnMovement = Cast<UENTGravityPawnMovement>(CurrentPawn->GetMovementComponent());
+	if (GravityPawnMovement)
+	{
+		Path->IsOnFloor() ? GravityPawnMovement->ResetGravityScale() : GravityPawnMovement->SetGravityScale(0.0f);
 	}
 
 	CurrentBlackboardComponent->SetValue<UBlackboardKeyType_Bool>(DoesWalkOnFloor.GetSelectedKeyID(), Path->IsOnFloor());

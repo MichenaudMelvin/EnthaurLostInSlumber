@@ -5,6 +5,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 #include "Components/SplineComponent.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 
@@ -15,9 +16,10 @@ UENTUpdatePathIndex::UENTUpdatePathIndex()
 	bNotifyBecomeRelevant = true;
 
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, AIPath), AENTArtificialIntelligencePath::StaticClass());
+	AINextPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, AINextPath),  AENTArtificialIntelligencePath::StaticClass());
+	NextPathLocation.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, NextPathLocation));
 	PathIndex.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, PathIndex));
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, PathDirection));
-	AINextPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, AINextPath),  AENTArtificialIntelligencePath::StaticClass());
 }
 
 void UENTUpdatePathIndex::InitializeFromAsset(UBehaviorTree& Asset)
@@ -28,9 +30,10 @@ void UENTUpdatePathIndex::InitializeFromAsset(UBehaviorTree& Asset)
 	if (ensure(BBAsset))
 	{
 		AIPath.ResolveSelectedKey(*BBAsset);
+		AINextPath.ResolveSelectedKey(*BBAsset);
+		NextPathLocation.ResolveSelectedKey(*BBAsset);
 		PathIndex.ResolveSelectedKey(*BBAsset);
 		PathDirection.ResolveSelectedKey(*BBAsset);
-		AINextPath.ResolveSelectedKey(*BBAsset);
 	}
 }
 
@@ -67,11 +70,15 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 		}
 		else
 		{
-			if (PathOBJ->GetNextPath())
+			AENTArtificialIntelligencePath* NextPath = PathOBJ->GetNextPath();
+			if (NextPath)
 			{
+				FTransform StartTransform = NextPath->GetStartTransform();
 				Index = 0;
 				Direction = 1;
-				BlackboardComponent->SetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID(), PathOBJ->GetNextPath());
+
+				BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(NextPathLocation.GetSelectedKeyID(), StartTransform.GetLocation());
+				BlackboardComponent->SetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID(), NextPath);
 			}
 			else if (bCanStopBehaviorIfThePathDoesNotLoop)
 			{

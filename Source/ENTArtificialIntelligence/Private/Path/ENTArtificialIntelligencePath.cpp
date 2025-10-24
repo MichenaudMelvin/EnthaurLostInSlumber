@@ -234,10 +234,12 @@ void AENTArtificialIntelligencePath::UpdateNavLink()
 	FNavigationLink NavLink(LastTransform.GetLocation(), LocalPosition);
 	LinkToAnotherPath->Links.Add(NavLink);
 
+#if WITH_EDITORONLY_DATA
 	if (!NextPath->PreviousPaths.Contains(this))
 	{
 		NextPath->PreviousPaths.Add(this);
 	}
+#endif
 }
 
 FVector AENTArtificialIntelligencePath::GetDirection() const

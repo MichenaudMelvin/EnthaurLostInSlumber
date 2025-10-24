@@ -7,6 +7,8 @@
 #include "Components/TimelineComponent.h"
 #include "ENTJumpToNextPath.generated.h"
 
+class AENTJumpSpline;
+
 UCLASS()
 class ENTARTIFICIALINTELLIGENCE_API UENTJumpToNextPath : public UBTTaskNode
 {
@@ -48,6 +50,9 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UBehaviorTreeComponent> CurrentOwnerComp;
+
+	UPROPERTY()
+	TObjectPtr<AENTJumpSpline> JumpSpline;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
