@@ -3,6 +3,8 @@
 
 #include "Tasks/ENTMoveToWithRotation.h"
 #include "AIController.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -35,6 +37,28 @@ void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* 
 	UKismetSystemLibrary::LineTraceSingle(Pawn, PawnLocation, EndLocation, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, Actors, EDrawDebugTrace::None, HitResult, true);
 
 	FVector ForwardVector = Pawn->GetMovementComponent()->Velocity;
+
+	if (ForwardVector.Equals(FVector::ZeroVector, 0.0f))
+	{
+		FVector TargetLocation;
+		const UBlackboardComponent* CurrentBlackboard = OwnerComp.GetBlackboardComponent();
+		if (BlackboardKey.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+		{
+			UObject* KeyValue = CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(BlackboardKey.GetSelectedKeyID());
+			AActor* TargetActor = Cast<AActor>(KeyValue);
+			if (TargetActor)
+			{
+				TargetLocation = TargetActor->GetActorLocation();
+			}
+		}
+		else if (BlackboardKey.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+		{
+			TargetLocation = CurrentBlackboard->GetValue<UBlackboardKeyType_Vector>(BlackboardKey.GetSelectedKeyID());
+		}
+
+		ForwardVector = TargetLocation - Pawn->GetActorLocation();
+	}
+
 	FVector RightVector = UKismetMathLibrary::RotateAngleAxis(ForwardVector, 90.0f, HitResult.Normal);
 	ForwardVector.Normalize();
 	RightVector.Normalize();

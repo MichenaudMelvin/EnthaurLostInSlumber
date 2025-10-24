@@ -74,7 +74,7 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 			if (NextPath)
 			{
 				FTransform StartTransform = NextPath->GetStartTransform();
-				Index = 0;
+				Index = 1;
 				Direction = 1;
 
 				BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(NextPathLocation.GetSelectedKeyID(), StartTransform.GetLocation());
