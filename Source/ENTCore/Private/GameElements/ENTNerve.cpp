@@ -7,7 +7,7 @@
 #include "ENTInteractableComponent.h"
 #include "GameFramework/Character.h"
 #include "GameElements/ENTNerveReceptacle.h"
-#include "Components/ENTPropulsionConstraint.h"
+#include "Components/ENTPhysicConstraint.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -59,6 +59,8 @@ void AENTNerve::BeginPlay()
 	InteractableComponent->AddInteractable(NerveBall);
 	DefaultNervePosition = NerveBall->GetComponentLocation();
 
+	TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
+
 	FOnTimelineFloat UpdateEvent;
 	FOnTimelineEvent FinishEvent;
 	UpdateEvent.BindDynamic(this, &AENTNerve::RetractCable);
@@ -66,16 +68,34 @@ void AENTNerve::BeginPlay()
 	RetractTimeline.AddInterpFloat(RetractionCurve, UpdateEvent);
 	RetractTimeline.SetTimelineFinishedFunc(FinishEvent);
 
-	if (CableStretchedMaterial)
+	if (StretchedLigamentMaterial)
 	{
-		DynamicCableStretchedMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, CableStretchedMaterial);
-		DynamicCableStretchedMaterial->SetScalarParameterValue(FName("TransparencyDistance"), TransparencyDistance);
+		DynamicStretchedLigamentMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, StretchedLigamentMaterial);
+		DynamicStretchedLigamentMaterial->SetScalarParameterValue(FName("TransparencyDistance"), TransparencyDistance);
 	}
 }
 
 void AENTNerve::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
+
+	TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
+
+	NerveBall -> SetStaticMesh((bIsLigament) ? LigamentBallMesh : NerveBallMesh);
+
+	FVector CableMeshSize = TargetMesh->GetBoundingBox().Max - TargetMesh->GetBoundingBox().Min;
+	switch (CableForwardAxis)
+	{
+	case ESplineMeshAxis::X:
+		SingleCableLength = CableMeshSize.X;
+		break;
+	case ESplineMeshAxis::Y:
+		SingleCableLength = CableMeshSize.Y;
+		break;
+	case ESplineMeshAxis::Z:
+		SingleCableLength = CableMeshSize.Z;
+		break;
+	}
 
 	ResetCables(false);
 
@@ -90,23 +110,9 @@ void AENTNerve::PostInitProperties()
 {
 	Super::PostInitProperties();
 
-	if (!CableMesh)
+	if (!NerveMesh || !LigamentMesh)
 	{
 		return;
-	}
-
-	FVector CableMeshSize = CableMesh->GetBoundingBox().Max - CableMesh->GetBoundingBox().Min;
-	switch (CableForwardAxis)
-	{
-		case ESplineMeshAxis::X:
-			SingleCableLength = CableMeshSize.X;
-			break;
-		case ESplineMeshAxis::Y:
-			SingleCableLength = CableMeshSize.Y;
-			break;
-		case ESplineMeshAxis::Z:
-			SingleCableLength = CableMeshSize.Z;
-			break;
 	}
 }
 
@@ -116,9 +122,9 @@ void AENTNerve::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyCha
 
 	FName PropertyName = PropertyChangedEvent.GetPropertyName();
 
-	if ((CableMesh && PropertyName == GET_MEMBER_NAME_CHECKED(AENTNerve, CableMesh)) || PropertyName == GET_MEMBER_NAME_CHECKED(AENTNerve, CableForwardAxis))
+	if ((TargetMesh && PropertyName == GET_MEMBER_NAME_CHECKED(AENTNerve, TargetMesh)) || PropertyName == GET_MEMBER_NAME_CHECKED(AENTNerve, CableForwardAxis))
 	{
-		FVector CableMeshSize = CableMesh->GetBoundingBox().Max - CableMesh->GetBoundingBox().Min;
+		FVector CableMeshSize = TargetMesh->GetBoundingBox().Max - TargetMesh->GetBoundingBox().Min;
 		switch (CableForwardAxis)
 		{
 			case ESplineMeshAxis::X:
@@ -172,6 +178,7 @@ void AENTNerve::RemoveLastSplinePoint() const
 
 void AENTNerve::AddSplineMesh(bool bMakeNoise)
 {
+	
 	UActorComponent* Comp = AddComponentByClass(USplineMeshComponent::StaticClass(), false, FTransform::Identity, false);
 	if (!Comp)
 	{
@@ -185,8 +192,8 @@ void AENTNerve::AddSplineMesh(bool bMakeNoise)
 	}
 
 	SplineMesh->SetMobility(EComponentMobility::Movable);
-	SplineMesh->SetStaticMesh(CableMesh);
-	UMaterialInterface* NewMaterial = (bIsLigament && bIsHolding)? Cast<UMaterialInterface>(DynamicCableStretchedMaterial) : Cast<UMaterialInterface>(CableMaterial);
+	SplineMesh->SetStaticMesh(TargetMesh);
+	UMaterialInterface* NewMaterial = bIsLigament ? (bIsHolding ? Cast<UMaterialInterface>(DynamicStretchedLigamentMaterial) : Cast<UMaterialInterface>(BaseLigamentMaterial)) : Cast<UMaterialInterface>(NerveMaterial);
 	SplineMesh->SetMaterial(0, NewMaterial);
 
 	SplineMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -560,7 +567,7 @@ void AENTNerve::ForceDetachNerveBallFromPlayer()
 		return;
 	}
 
-	UENTPropulsionConstraint* Constraint = PlayerCharacter->GetComponentByClass<UENTPropulsionConstraint>();
+	UENTPhysicConstraint* Constraint = PlayerCharacter->GetComponentByClass<UENTPhysicConstraint>();
 	if (Constraint)
 	{
 		Constraint->ReleasePlayer(true);
@@ -659,7 +666,7 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 		return;
 	}
 
-	PhysicConstraint = Player->AddConstraint();
+	PhysicConstraint = Player->AddConstraint(bIsLigament);
 	if (!PhysicConstraint)
 	{
 		return;

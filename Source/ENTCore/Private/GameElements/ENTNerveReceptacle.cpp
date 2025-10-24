@@ -9,7 +9,7 @@
 #include "GameFramework/Character.h"
 #include "Interface/ENTActivation.h"
 #include "GameElements/ENTNerve.h"
-#include "Components/ENTPropulsionConstraint.h"
+#include "Components/ENTPhysicConstraint.h"
 #include "Gamefeel/ENTElectricityFeedback.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/ENTDefaultCharacter.h"
@@ -121,7 +121,7 @@ void AENTNerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent,
 		ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
 		if (Character)
 		{
-			UENTPropulsionConstraint* Constraint = Character->GetComponentByClass<UENTPropulsionConstraint>();
+			UENTPhysicConstraint* Constraint = Character->GetComponentByClass<UENTPhysicConstraint>();
 
 			if (Constraint)
 			{
