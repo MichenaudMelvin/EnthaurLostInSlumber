@@ -120,7 +120,7 @@ void AENTDefaultCharacter::BeginPlay()
 		return;
 	}
 
-	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CoreConfig->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
+	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CoreConfig->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::CameraLocal);
 	if (!CameraShake)
 	{
 		return;

@@ -127,6 +127,17 @@ void UENTCharacterStateMachine::LockCameraMovements(bool bLock)
 	}
 }
 
+void UENTCharacterStateMachine::LockRollBobbing(bool bLock)
+{
+	for (UENTCharacterState* State : StateList)
+	{
+		if (!State)
+			continue;
+
+		State->SetAllowRollBobbing(!bLock);
+	}
+}
+
 
 UENTCharacterState* UENTCharacterStateMachine::FindStateByClass(TSubclassOf<UENTCharacterState> StateClass)
 {

@@ -49,7 +49,7 @@ void UENTCharacterCrouchState::StateInit(UENTCharacterStateMachine* InStateMachi
 		return;
 	}
 
-	DefaultSpeed = WalkState->GetMoveSpeed();
+	DefaultSpeed = WalkState->GetMoveSpeed() * (bAllowRollBobbing)? SlowDownFactor : 1.f;
 }
 
 void UENTCharacterCrouchState::StateEnter_Implementation(const EENTCharacterStateID& PreviousStateID)
@@ -92,7 +92,7 @@ void UENTCharacterCrouchState::LerpCrouch(float DeltaTime, bool bStandUp)
 
 	float CrouchAlpha = UKismetMathLibrary::NormalizeToRange(CurrentDuration, 0.0f, Duration);
 	float TargetHeight = FMath::Lerp(DefaultHalfHeight, CrouchHalfHeight, CrouchAlpha);
-	float TargetSpeed = FMath::Lerp(DefaultSpeed, MoveSpeed, CrouchAlpha);
+	float TargetSpeed = FMath::Lerp(DefaultSpeed, MoveSpeed * (bAllowRollBobbing? SlowDownFactor : 1.f), CrouchAlpha);
 
 	FVector TargetRelativeLocation = DefaultCameraLocation;
 	TargetRelativeLocation.Z = FMath::Lerp(DefaultCameraLocation.Z, CameraHeight, CrouchAlpha);
