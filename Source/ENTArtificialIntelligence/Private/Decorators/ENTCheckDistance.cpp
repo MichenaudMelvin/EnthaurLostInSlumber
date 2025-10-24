@@ -20,6 +20,17 @@ void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 	CheckAbort(OwnerComp, NodeMemory);
 }
 
+void UENTCheckDistance::InitializeFromAsset(UBehaviorTree& Asset)
+{
+	Super::InitializeFromAsset(Asset);
+
+	const UBlackboardData* BBAsset = GetBlackboardAsset();
+	if (ensure(BBAsset))
+	{
+		Actor.ResolveSelectedKey(*BBAsset);
+	}
+}
+
 void UENTCheckDistance::CheckAbort(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const
 {
 	if(FlowAbortMode == EBTFlowAbortMode::None)
@@ -92,3 +103,39 @@ bool UENTCheckDistance::CalculateRawConditionValue(UBehaviorTreeComponent& Owner
 
 	return bResult;
 }
+
+#if WITH_EDITOR
+FString UENTCheckDistance::GetStaticDescription() const
+{
+	FString KeyDesc("invalid");
+	if (Actor.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	{
+		KeyDesc = Actor.SelectedKeyName.ToString();
+	}
+
+	FString CheckMethodStr = "None";
+	switch (CheckMethod)
+	{
+	case EENTCheckMethod::Equal:
+		CheckMethodStr = "==";
+		break;
+	case EENTCheckMethod::NotEqual:
+		CheckMethodStr = "!=";
+		break;
+	case EENTCheckMethod::GreaterThanOrEqualTo:
+		CheckMethodStr = ">=";
+		break;
+	case EENTCheckMethod::LessOrEqual:
+		CheckMethodStr = "<=";
+		break;
+	case EENTCheckMethod::GreaterThan:
+		CheckMethodStr = ">";
+		break;
+	case EENTCheckMethod::LessThan:
+		CheckMethodStr = "<";
+		break;
+	}
+
+	return FString::Printf(TEXT("Is distance between OwnerPawn and %s is %s %s"), *KeyDesc, *CheckMethodStr, *Distance.ToString());
+}
+#endif

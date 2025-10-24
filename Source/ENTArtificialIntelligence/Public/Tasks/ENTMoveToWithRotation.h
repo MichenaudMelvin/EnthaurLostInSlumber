@@ -17,6 +17,10 @@ public:
 protected:
 	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
+#if WITH_EDITOR
+	virtual FString GetStaticDescription() const override;
+#endif
+
 	UPROPERTY(EditInstanceOnly, Category = "Ground", meta = (ClampMin = 0.0f, Units = "cm"))
 	float GroundTraceLength = 25.0f;
 };

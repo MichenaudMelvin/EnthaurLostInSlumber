@@ -20,6 +20,10 @@ protected:
 
 	virtual void OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
+#if WITH_EDITOR
+	virtual FString GetStaticDescription() const override;
+#endif
+
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector AIPath;
 

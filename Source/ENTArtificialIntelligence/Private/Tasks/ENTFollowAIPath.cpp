@@ -165,6 +165,19 @@ void UENTFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 	}
 }
 
+#if WITH_EDITOR
+FString UENTFollowAIPath::GetStaticDescription() const
+{
+	FString KeyDesc("invalid");
+	if (AIPath.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	{
+		KeyDesc = AIPath.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Follow %s"), *KeyDesc);
+}
+#endif
+
 void UENTFollowAIPath::MovementUpdate(float Alpha)
 {
 	FVector LerpResult = UKismetMathLibrary::VLerp(StartLocation, TargetLocation, Alpha);

@@ -23,6 +23,17 @@ void UENTCanReachLocation::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* No
 	CheckAbort(OwnerComp, NodeMemory);
 }
 
+void UENTCanReachLocation::InitializeFromAsset(UBehaviorTree& Asset)
+{
+	Super::InitializeFromAsset(Asset);
+
+	const UBlackboardData* BBAsset = GetBlackboardAsset();
+	if (ensure(BBAsset))
+	{
+		Location.ResolveSelectedKey(*BBAsset);
+	}
+}
+
 void UENTCanReachLocation::CheckAbort(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const
 {
 	if(FlowAbortMode == EBTFlowAbortMode::None)
@@ -76,3 +87,16 @@ bool UENTCanReachLocation::CalculateRawConditionValue(UBehaviorTreeComponent& Ow
 
 	return Controller->IsPointReachable(TargetLocation);
 }
+
+#if WITH_EDITOR
+FString UENTCanReachLocation::GetStaticDescription() const
+{
+	FString KeyDesc("invalid");
+	if (Location.SelectedKeyType == UBlackboardKeyType_Object::StaticClass() || Location.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+	{
+		KeyDesc = Location.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Can reach: %s"), *KeyDesc);
+}
+#endif

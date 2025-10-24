@@ -29,10 +29,16 @@ public:
 protected:
 	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
+	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
+
 private:
 	void CheckAbort(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const;
 
 	virtual bool CalculateRawConditionValue(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const override;
+
+#if WITH_EDITOR
+	virtual FString GetStaticDescription() const override;
+#endif
 
 	UPROPERTY(EditInstanceOnly, Category = "Distance")
 	FBlackboardKeySelector Actor;

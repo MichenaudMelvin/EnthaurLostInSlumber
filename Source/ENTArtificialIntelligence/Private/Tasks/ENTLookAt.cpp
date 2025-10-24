@@ -165,3 +165,16 @@ void UENTLookAt::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, 
 
 	FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 }
+
+#if WITH_EDITOR
+FString UENTLookAt::GetStaticDescription() const
+{
+	FString LookAtPositionKeyDesc("invalid");
+	if (LookAtPosition.SelectedKeyType == UBlackboardKeyType_Object::StaticClass() || LookAtPosition.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass() || LookAtPosition.SelectedKeyType == UBlackboardKeyType_Rotator::StaticClass())
+	{
+		LookAtPositionKeyDesc = LookAtPosition.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Look at %s"), *LookAtPositionKeyDesc);
+}
+#endif

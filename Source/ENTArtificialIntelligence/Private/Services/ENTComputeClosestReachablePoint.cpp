@@ -84,3 +84,22 @@ void UENTComputeClosestReachablePoint::OnBecomeRelevant(UBehaviorTreeComponent& 
 
 	CurrentBlackboard->SetValueAsVector(ClosestPoint.SelectedKeyName, Result.Location);
 }
+
+#if WITH_EDITOR
+FString UENTComputeClosestReachablePoint::GetStaticDescription() const
+{
+	FString PointKeyDesc("invalid");
+	if (Point.SelectedKeyType == UBlackboardKeyType_Object::StaticClass() || Point.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+	{
+		PointKeyDesc = Point.SelectedKeyName.ToString();
+	}
+
+	FString ClosestPointKeyDesc("invalid");
+	if (ClosestPoint.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+	{
+		ClosestPointKeyDesc = ClosestPoint.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Compute %s to become the closest point (%s)"), *PointKeyDesc, *ClosestPointKeyDesc);
+}
+#endif

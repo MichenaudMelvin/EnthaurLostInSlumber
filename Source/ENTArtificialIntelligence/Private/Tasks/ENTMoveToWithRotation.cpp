@@ -70,3 +70,16 @@ void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* 
 
 	Pawn->SetActorRotation(TargetRotation);
 }
+
+#if WITH_EDITOR
+FString UENTMoveToWithRotation::GetStaticDescription() const
+{
+	FString KeyDesc("invalid");
+	if (BlackboardKey.SelectedKeyType == UBlackboardKeyType_Object::StaticClass() || BlackboardKey.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+	{
+		KeyDesc = BlackboardKey.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Move to: %s"), *KeyDesc);
+}
+#endif

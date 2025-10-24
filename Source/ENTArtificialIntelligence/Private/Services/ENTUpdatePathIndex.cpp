@@ -6,7 +6,6 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
-#include "Components/SplineComponent.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 
 UENTUpdatePathIndex::UENTUpdatePathIndex()
@@ -101,3 +100,28 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 
 	BlackboardComponent->SetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID(), Index);
 }
+
+#if WITH_EDITOR
+FString UENTUpdatePathIndex::GetStaticDescription() const
+{
+	FString PathKeyDesc("invalid");
+	if (AIPath.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	{
+		PathKeyDesc = AIPath.SelectedKeyName.ToString();
+	}
+
+	FString PathIndexKeyDesc("invalid");
+	if (PathIndex.SelectedKeyType == UBlackboardKeyType_Int::StaticClass())
+	{
+		PathIndexKeyDesc = PathIndex.SelectedKeyName.ToString();
+	}
+
+	FString PathDirectionKeyDesc("invalid");
+	if (PathDirection.SelectedKeyType == UBlackboardKeyType_Int::StaticClass())
+	{
+		PathDirectionKeyDesc = PathDirection.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Update %s (Index: %s, Direction %s)"), *PathKeyDesc, *PathIndexKeyDesc, *PathDirectionKeyDesc );
+}
+#endif

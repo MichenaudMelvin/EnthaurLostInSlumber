@@ -51,6 +51,7 @@ void UENTJumpToNextPath::InitializeFromAsset(UBehaviorTree& Asset)
 	FinishEvent.BindDynamic(this, &UENTJumpToNextPath::FinishTask);
 	JumpTimeline.AddInterpFloat(JumpCurve, UpdateEvent);
 	JumpTimeline.SetTimelineFinishedFunc(FinishEvent);
+	JumpTimeline.SetPlayRate(1 / JumpDuration);
 }
 
 EBTNodeResult::Type UENTJumpToNextPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -141,6 +142,25 @@ void UENTJumpToNextPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* Node
 
 	JumpTimeline.TickTimeline(DeltaSeconds);
 }
+
+#if WITH_EDITOR
+FString UENTJumpToNextPath::GetStaticDescription() const
+{
+	FString AIPathKeyDesc("invalid");
+	if (AIPath.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	{
+		AIPathKeyDesc = AIPath.SelectedKeyName.ToString();
+	}
+
+	FString NextPathKeyDesc("invalid");
+	if (AINextPath.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	{
+		NextPathKeyDesc = AINextPath.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Jump from %s to %s during %f seconds"), *AIPathKeyDesc, *NextPathKeyDesc, JumpDuration);
+}
+#endif
 
 void UENTJumpToNextPath::MovementUpdate(float Alpha)
 {

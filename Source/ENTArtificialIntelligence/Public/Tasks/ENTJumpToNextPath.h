@@ -24,6 +24,10 @@ protected:
 
 	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
+#if WITH_EDITOR
+	virtual FString GetStaticDescription() const override;
+#endif
+
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector AIPath;
 
@@ -39,6 +43,9 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	TObjectPtr<UCurveFloat> JumpCurve;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path", meta = (Units = s, ClampMin = 0.0f))
+	float JumpDuration = 1.0f;
 
 	FTimeline JumpTimeline;
 
