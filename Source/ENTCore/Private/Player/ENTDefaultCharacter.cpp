@@ -2,7 +2,6 @@
 
 #include "Player/ENTDefaultCharacter.h"
 #include "AkComponent.h"
-#include "EnhancedInputSubsystems.h"
 #include "Interface/ENTGroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "ENTCameraShakeComponent.h"
@@ -23,7 +22,7 @@
 #include "Player/States/ENTCharacterState.h"
 #include "Player/States/ENTCharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
 #include "Config/ENTCoreConfig.h"
 #include "GameElements/ENTWeakZone.h"
