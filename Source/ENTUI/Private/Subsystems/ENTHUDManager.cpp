@@ -4,6 +4,7 @@
 #include "Subsystems/ENTHUDManager.h"
 #include "Config/ENTUIConfig.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/ENTLigamentPhysicConstraint.h"
 #include "ENTComponents/Public/ENTHealthComponent.h"
 #include "GameFramework/GameModeBase.h"
 #include "Kismet/GameplayStatics.h"
@@ -171,14 +172,17 @@ void UENTHUDManager::SetHUDVisibility(const ESlateVisibility& Visibility)
 	}
 }
 
-void UENTHUDManager::BindConstraintDelegates(UENTPropulsionConstraint* Constraint)
+void UENTHUDManager::BindConstraintDelegates(UENTPhysicConstraint* Constraint)
 {
 	if (!Constraint)
 	{
 		return;
 	}
 
-	Constraint->OnPropulsionStateChanged.AddDynamic(GameplayHUD, &UENTGameplayHUD::SetPropulsionActive);
+	if (UENTLigamentPhysicConstraint* LigamentConstraint = Cast<UENTLigamentPhysicConstraint>(Constraint))
+	{
+		LigamentConstraint->OnPropulsionStateChanged.AddDynamic(GameplayHUD, &UENTGameplayHUD::SetPropulsionActive);
+	}
 }
 
 void UENTHUDManager::OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams)

@@ -20,7 +20,7 @@ class USplineMeshComponent;
 class USplineComponent;
 class AENTDefaultPlayerController;
 class AENTNerveReceptacle;
-class UENTPropulsionConstraint;
+class UENTPhysicConstraint;
 class UENTInteractableComponent;
 
 UCLASS()
@@ -97,16 +97,25 @@ protected:
 	TArray<TEnumAsByte<EObjectTypeQuery>> CableColliders;
 
 	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
-	TObjectPtr<UStaticMesh> CableMesh;
+	TObjectPtr<UStaticMesh> NerveMesh;
 
 	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
-	TObjectPtr<UMaterial> CableMaterial;
-
-	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
-	TObjectPtr<UMaterial> CableStretchedMaterial;
+	TObjectPtr<UStaticMesh> LigamentMesh;
 
 	UPROPERTY()
-	TObjectPtr<UMaterialInstanceDynamic> DynamicCableStretchedMaterial;
+	TObjectPtr<UStaticMesh> TargetMesh;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> NerveMaterial;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> BaseLigamentMaterial;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> StretchedLigamentMaterial;
+
+	UPROPERTY()
+	TObjectPtr<UMaterialInstanceDynamic> DynamicStretchedLigamentMaterial;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	TEnumAsByte<ESplineMeshAxis::Type> CableForwardAxis = ESplineMeshAxis::Z;
@@ -156,13 +165,15 @@ public:
 
 	float GetMaxVibrationStrength() const {return MaxVibrationStrength;}
 
+	FVector GetStartCableLocation() const {return SplineCable->GetLocationAtSplinePoint(0, ESplineCoordinateSpace::World);}
+
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCableDirection() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCablePosition(float Percent, ESplineCoordinateSpace::Type CoordinateSpace = ESplineCoordinateSpace::World) const;
 
-	TObjectPtr<UMaterialInstanceDynamic> GetDynamicCableStretchedMaterial() const {return DynamicCableStretchedMaterial;}
+	TObjectPtr<UMaterialInstanceDynamic> GetDynamicCableStretchedMaterial() const {return DynamicStretchedLigamentMaterial;}
 
 #pragma endregion
 
@@ -175,12 +186,19 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
+	UPROPERTY(EditDefaultsOnly, Category = "NerveBall|Apperance")
+	TObjectPtr<UStaticMesh> LigamentBallMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "NerveBall|Apperance")
+	TObjectPtr<UStaticMesh> NerveBallMesh;
+	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UAkComponent> NerveStretchComp;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UAkRtpc> NerveStretchRtpc;
-
+	
 	FVector DefaultNervePosition = FVector::ZeroVector;
 
 public:
@@ -236,7 +254,7 @@ public:
 
 protected:
 	UPROPERTY()
-	TObjectPtr<UENTPropulsionConstraint> PhysicConstraint;
+	TObjectPtr<UENTPhysicConstraint> PhysicConstraint;
 
 	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, Units = "cm"))
 	float DistanceNeededToPropulsion = 500.0f;

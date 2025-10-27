@@ -16,6 +16,10 @@ UENTViewBobbing::UENTViewBobbing(const FObjectInitializer& ObjectInitializer) : 
 	ShakePattern->Z.Amplitude = 5.0f;
 	ShakePattern->Z.InitialOffsetType = EInitialWaveOscillatorOffsetType::Zero;
 
+	ShakePattern->Yaw.Amplitude = 0.f;
+	ShakePattern->Pitch.Amplitude = 0.f;
+	ShakePattern->Roll.InitialOffsetType = EInitialWaveOscillatorOffsetType::Zero;
+
 	SetRootShakePattern(ShakePattern);
 }
 
@@ -29,6 +33,14 @@ FWaveOscillator UENTViewBobbing::GetOscillator() const
 	return ShakePattern->Z;
 }
 
+FWaveOscillator UENTViewBobbing::GetRollOscillator() const
+{
+	if (!ShakePattern)
+		return GetEmptyOscillator();
+
+	return ShakePattern->Roll;
+}
+
 float UENTViewBobbing::GetLocationAmplitudeMultiplier() const
 {
 	if (!ShakePattern)
@@ -37,6 +49,14 @@ float UENTViewBobbing::GetLocationAmplitudeMultiplier() const
 	}
 
 	return ShakePattern->LocationAmplitudeMultiplier;
+}
+
+float UENTViewBobbing::GetRotationAmplitudeMultiplier() const
+{
+	if (!ShakePattern)
+		return 0.0f;
+
+	return ShakePattern->RotationAmplitudeMultiplier;
 }
 
 float UENTViewBobbing::GetLocationFrequencyMultiplier() const
@@ -58,14 +78,22 @@ FWaveOscillator UENTViewBobbing::GetEmptyOscillator()
 	return DefaultOscillator;
 }
 
-void UENTViewBobbing::SetOscillator(const FWaveOscillator& Oscillator, float InLocationAmplitudeMultiplier, float InLocationFrequencyMultiplier) const
+void UENTViewBobbing::SetLocationOscillator(const FWaveOscillator& Oscillator, float InLocationAmplitudeMultiplier, float InLocationFrequencyMultiplier) const
 {
 	if (!ShakePattern)
-	{
 		return;
-	}
 
 	ShakePattern->LocationAmplitudeMultiplier = InLocationAmplitudeMultiplier;
 	ShakePattern->LocationFrequencyMultiplier = InLocationFrequencyMultiplier;
 	ShakePattern->Z = Oscillator;
+}
+
+void UENTViewBobbing::SetRollOscillator(const FWaveOscillator& Oscillator, float InRotationAmplitudeMultiplier, float InRotationFrequencyMultiplier) const
+{
+	if (!ShakePattern)
+		return;
+	
+	ShakePattern->RotationAmplitudeMultiplier = InRotationAmplitudeMultiplier;
+	ShakePattern->RotationFrequencyMultiplier = InRotationFrequencyMultiplier;
+	ShakePattern->Roll = Oscillator;
 }
