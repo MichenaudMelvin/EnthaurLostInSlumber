@@ -38,7 +38,10 @@ AENTNavigationArea::AENTNavigationArea()
 	AreaSpline->SetupAttachment(Root);
 	AreaSpline->SetMobility(EComponentMobility::Static);
 
-	AreaSpline->AddSplinePoint(FVector(0.0f, 100.0f, 0.0f), ESplineCoordinateSpace::Local, true);
+	AreaSpline->ClearSplinePoints();
+	AreaSpline->AddSplinePoint(FVector::ZeroVector, ESplineCoordinateSpace::Local, false);
+	AreaSpline->AddSplinePoint(FVector(500.0f, 0.0f, 0.0f), ESplineCoordinateSpace::Local, false);
+	AreaSpline->AddSplinePoint(FVector(0.0f, 500.0f, 0.0f), ESplineCoordinateSpace::Local, true);
 
 #if WITH_EDITORONLY_DATA
 	BillboardComponent = CreateDefaultSubobject<UBillboardComponent>(TEXT("Billboard"));

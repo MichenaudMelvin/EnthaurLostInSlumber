@@ -76,8 +76,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Area")
 	FVector GetRandomPointInArea() const;
 
-
-
 #pragma region Debug
 
 #if WITH_EDITORONLY_DATA
@@ -103,7 +101,7 @@ protected:
 	float TriangleThickness = 10.0f;
 
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
-	bool bDrawWithOffset = true;
+	bool bDrawWithOffset = false;
 
 	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug")
 	bool bDrawTriangles = true;
