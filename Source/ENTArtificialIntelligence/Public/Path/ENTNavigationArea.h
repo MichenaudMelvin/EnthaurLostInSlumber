@@ -78,7 +78,8 @@ public:
 
 #pragma region Debug
 
-#if WITH_EDITORONLY_DATA
+#if WITH_EDITOR
+
 protected:
 	void OnSelectionUpdate(UObject* Object);
 
@@ -88,6 +89,10 @@ protected:
 
 	UFUNCTION(CallInEditor, Category = "Debug")
 	void DrawRandomPoint() const;
+
+#endif
+
+#if WITH_EDITORONLY_DATA
 
 	bool SelectedInEditor = false;
 
@@ -105,6 +110,7 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug")
 	bool bDrawTriangles = true;
+
 #endif
 
 #pragma endregion

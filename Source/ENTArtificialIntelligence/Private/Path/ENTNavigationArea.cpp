@@ -248,7 +248,8 @@ FVector AENTNavigationArea::GetRandomPointInArea() const
 
 #pragma region Debug
 
-#if WITH_EDITORONLY_DATA
+#if WITH_EDITOR
+
 void AENTNavigationArea::OnSelectionUpdate(UObject* Object)
 {
 	if (Object == this && !SelectedInEditor)

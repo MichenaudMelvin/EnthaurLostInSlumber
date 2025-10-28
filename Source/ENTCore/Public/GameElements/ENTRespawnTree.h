@@ -34,7 +34,7 @@ protected:
 	void SetRespawnPoint(AENTDefaultCharacter* Player, bool bSave);
 
 	UFUNCTION(BlueprintNativeEvent)
-	void SetActive();	
+	void SetActive();
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<USceneComponent> RootComp;
