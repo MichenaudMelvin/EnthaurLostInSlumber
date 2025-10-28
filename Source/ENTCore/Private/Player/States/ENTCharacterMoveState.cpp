@@ -47,10 +47,9 @@ void UENTCharacterMoveState::ApplyMovement(float DeltaTime)
 	Character->AddMovementInput(Character->GetActorRightVector(), GetInputs().InputMove.X);
 
 	EmitNoise();
-
 	if(Character->GetViewBobbingObject() && GetSettings() && GetSettings()->bViewBobbing)
 	{
-		float SpeedRange = UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->MaxWalkSpeed, 0.0f, MoveSpeed);
+		float SpeedRange = UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->Velocity.Length(), 0.0f, MoveSpeed);
 		Character->GetViewBobbingObject()->ShakeScale = SpeedRange;
 	}
 

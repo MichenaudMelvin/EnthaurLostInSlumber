@@ -9,6 +9,13 @@ UENTGravityPawnMovement::UENTGravityPawnMovement()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+void UENTGravityPawnMovement::BeginPlay()
+{
+	Super::BeginPlay();
+
+	DefaultGravityScale = GravityScale;
+}
+
 void UENTGravityPawnMovement::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -25,6 +32,27 @@ bool UENTGravityPawnMovement::IsFalling() const
 {
 	return VerticalVelocity != 0;
 }
+
+#if WITH_EDITOR
+void UENTGravityPawnMovement::PostLoad()
+{
+	Super::PostLoad();
+
+	DefaultGravityScale = GravityScale;
+}
+
+void UENTGravityPawnMovement::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	FName PropertyName = PropertyChangedEvent.GetPropertyName();
+
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(UENTGravityPawnMovement, GravityScale))
+	{
+		DefaultGravityScale = GravityScale;
+	}
+}
+#endif
 
 void UENTGravityPawnMovement::ApplyGravity(float DeltaTime)
 {

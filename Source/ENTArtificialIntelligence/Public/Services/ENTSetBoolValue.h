@@ -21,6 +21,10 @@ protected:
 
 	virtual void OnCeaseRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
+#if WITH_EDITOR
+	virtual FString GetStaticDescription() const override;
+#endif
+
 	UPROPERTY(EditInstanceOnly, Category = "Bool")
 	FBlackboardKeySelector BoolKey;
 
