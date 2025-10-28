@@ -33,7 +33,8 @@ public class ENTArtificialIntelligence : ModuleRules
             PrivateDependencyModuleNames.AddRange(
                 new string[]
                 {
-                    "ENTEditor"
+                    "ENTEditor",
+                    "UnrealEd"
                 }
             );
         }

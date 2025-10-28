@@ -9,6 +9,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ENTParasiteController.h"
 #include "Path/ENTArtificialIntelligencePath.h"
+#include "Path/ENTNavigationArea.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 
@@ -147,12 +148,20 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 	{
 		if (TargetPath)
 		{
+			NavigationArea = nullptr;
 			bool bIsAttached = TargetPath->AttachAI(this);
 
 			if (!bIsAttached)
 			{
 				TargetPath = nullptr;
 			}
+		}
+	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, NavigationArea))
+	{
+		if (NavigationArea)
+		{
+			TargetPath = nullptr;
 		}
 	}
 }
@@ -162,10 +171,20 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 {
 	IENTPawnAIInterface::OnBehaviorTreeStarted_Implementation();
 
-	if (TargetPath && ParasiteController->GetBlackboardComponent())
+	if (!ParasiteController->GetBlackboardComponent())
+	{
+		return;
+	}
+
+	if (TargetPath)
 	{
 		ParasiteController->GetBlackboardComponent()->SetValueAsObject(PathKeyName, TargetPath);
 		ParasiteController->GetBlackboardComponent()->SetValueAsBool(WalkOnFloorKeyName, TargetPath->IsOnFloor());
+	}
+
+	if (NavigationArea)
+	{
+		ParasiteController->GetBlackboardComponent()->SetValueAsObject(NavAreaKeyName, NavigationArea);
 	}
 }
 
@@ -211,6 +230,15 @@ void AENTParasitePawn::DebugPawn() const
 		PathValueName = PathValue->GetName();
 	}
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *PathKeyName.ToString(), *PathValueName));
+
+	UObject* NavAreaValue = ParasiteController->GetBlackboardComponent()->GetValueAsObject(NavAreaKeyName);
+	FString NavAreaValueName = "Nullptr";
+	if (NavAreaValue)
+	{
+		NavAreaValueName = NavAreaValue->GetName();
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *NavAreaKeyName.ToString(), *NavAreaValueName));
+
 
 	bool bWalkOnFloor = ParasiteController->GetBlackboardComponent()->GetValueAsBool(WalkOnFloorKeyName);
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *WalkOnFloorKeyName.ToString(), (bWalkOnFloor ? TEXT("true") : TEXT("false"))));

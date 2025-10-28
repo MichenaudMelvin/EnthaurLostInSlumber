@@ -9,6 +9,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTParasitePawn.generated.h"
 
+class AENTNavigationArea;
 class AENTParasiteController;
 class UENTGravityPawnMovement;
 class AENTArtificialIntelligencePath;
@@ -60,8 +61,14 @@ protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Path")
 	TObjectPtr<AENTArtificialIntelligencePath> TargetPath;
 
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Path")
+	TObjectPtr<AENTNavigationArea> NavigationArea;
+
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName PathKeyName = "AIPath";
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName NavAreaKeyName = "NavigationArea";
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName WalkOnFloorKeyName = "WalkOnFloor";
