@@ -7,6 +7,7 @@
 #include "Components/ENTPhysicConstraint.h"
 #include "GameElements/ENTWeakZoneInterface.h"
 #include "GameFramework/Character.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTDefaultCharacter.generated.h"
 
@@ -232,6 +233,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
 	bool HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const;
+
+#if WITH_EDITOR
+private:
+	UFUNCTION(Exec)
+	void IgnoreWeakZone(bool bIgnore) const;
+#endif
 
 #pragma endregion
 

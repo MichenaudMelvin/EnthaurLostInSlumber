@@ -7,6 +7,8 @@
 #include "Runtime/AIModule/Classes/AIController.h"
 #include "ENTDefaultAIController.generated.h"
 
+struct FENTAIData;
+
 UCLASS()
 class ENTARTIFICIALINTELLIGENCE_API AENTDefaultAIController : public AAIController, public IENTArtificialIntelligenceInterface
 {
@@ -18,6 +20,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+#if WITH_EDITORONLY_DATA
+	virtual void Tick(float DeltaSeconds) override;
+#endif
+
 	virtual void Destroyed() override;
 
 	virtual void TickAI_Implementation(float DeltaTime) override;
@@ -28,7 +34,29 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName SpawnLocationKeyName = "SpawnLocation";
 
+	UPROPERTY(BlueprintReadOnly, Category = "AI")
+	bool bIsBehaviorTreeRunning = false;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Debug")
+	bool bDebugAI = false;
+#endif
+
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Navigation")
 	bool IsPointReachable(const FVector Point) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Behavior")
+	void RunCurrentBehaviorTree();
+
+	UFUNCTION(BlueprintCallable, Category = "Behavior")
+	void StopBehaviorTree();
+
+#pragma region Saves
+
+public:
+	virtual void SaveControllerData(FENTAIData& AIData);
+
+	virtual void LoadControllerData(const FENTAIData& AIData);
+#pragma endregion
 };

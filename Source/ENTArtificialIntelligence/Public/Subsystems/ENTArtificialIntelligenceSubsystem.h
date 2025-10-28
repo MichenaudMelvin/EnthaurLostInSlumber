@@ -16,6 +16,8 @@ class ENTARTIFICIALINTELLIGENCE_API UENTArtificialIntelligenceSubsystem : public
 protected:
 	virtual void PostInitialize() override;
 
+	virtual void OnWorldBeginPlay(UWorld& InWorld) override;
+
 	virtual TStatId GetStatId() const override {return TStatId();}
 
 	virtual void Tick(float DeltaTime) override;
@@ -28,10 +30,18 @@ protected:
 	UPROPERTY()
 	TArray<TObjectPtr<UObject>> AIList;
 
+	/**
+	 * @brief This actor is used for AI to track a moving noise
+	 */
+	UPROPERTY()
+	TObjectPtr<AActor> NoiseActor;
+
 public:
 	void AddAI(UObject* AIObject);
 
 	void RemoveAI(UObject* AIObject);
+
+	AActor* GetNoiseActor() const {return NoiseActor;}
 
 #pragma endregion
 };

@@ -16,4 +16,5 @@ void UENTWorldSave::ClearMapData()
 	WeakZoneData.Empty();
 	RespawnTreeData.Empty();
 	ParasiteData.Empty();
+	ScriptedAIElementsData.Empty();
 }

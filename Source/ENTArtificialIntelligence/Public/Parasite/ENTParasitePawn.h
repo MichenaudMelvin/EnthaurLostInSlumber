@@ -4,18 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Interfaces/ENTPawnAIInterface.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTParasitePawn.generated.h"
 
+class AENTNavigationArea;
 class AENTParasiteController;
 class UENTGravityPawnMovement;
 class AENTArtificialIntelligencePath;
 class UBoxComponent;
 class UAIPerceptionComponent;
+struct FENTAIData;
+struct FENTGameElementData;
 
 UCLASS()
-class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface
+class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface, public IENTPawnAIInterface
 {
 	GENERATED_BODY()
 
@@ -57,8 +61,14 @@ protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Path")
 	TObjectPtr<AENTArtificialIntelligencePath> TargetPath;
 
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Path")
+	TObjectPtr<AENTNavigationArea> NavigationArea;
+
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName PathKeyName = "AIPath";
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName NavAreaKeyName = "NavigationArea";
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName WalkOnFloorKeyName = "WalkOnFloor";
@@ -66,26 +76,45 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName AttackTargetKeyName = "AttackTarget";
 
+	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	bool bAutoStartBehavior = true;
+
+	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;
+
+	virtual bool DoesAutoStartBehaviorTree_Implementation() const override {return bAutoStartBehavior;}
+
+	virtual UBehaviorTree* GetOverridenBehaviorTree_Implementation() const override {return OverridenBehaviorTree;}
+
+	virtual void OnBehaviorTreeStarted_Implementation() override;
+
 	virtual void PossessedBy(AController* NewController) override;
 
 	UFUNCTION()
 	void EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+#if WITH_EDITORONLY_DATA
+	virtual void DebugPawn() const override;
+#endif
+
 public:
 	UBoxComponent* GetCollisionComp() {return ParasiteCollision;}
-
 
 #pragma region Save
 
 protected:
-	bool bLoadBlackboardData = false;
+	bool bHasReceivedLoadingRequest = false;
 
-	FENTParaSiteData BlackboardData;
+	FENTParasiteData LoadingData;
 
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
+
+	virtual bool HasReceivedLoadingRequest() const override {return bHasReceivedLoadingRequest;}
+
+	virtual const FENTAIData& GetLoadingData() const override {return LoadingData;}
 
 #pragma endregion
 };

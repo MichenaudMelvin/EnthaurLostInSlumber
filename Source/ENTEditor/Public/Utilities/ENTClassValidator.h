@@ -36,4 +36,7 @@ protected:
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "Path")
 	TArray<FDirectoryPath> ExcludedPaths;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Plugins")
+	bool bAllowPluginCheck = false;
 };

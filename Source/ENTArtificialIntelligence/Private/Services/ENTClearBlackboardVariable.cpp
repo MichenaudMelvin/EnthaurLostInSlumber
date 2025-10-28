@@ -42,6 +42,15 @@ void UENTClearBlackboardVariable::OnCeaseRelevant(UBehaviorTreeComponent& OwnerC
 	}
 }
 
+#if WITH_EDITOR
+FString UENTClearBlackboardVariable::GetStaticDescription() const
+{
+	FString KeyDesc = BlackboardKey.SelectedKeyName.ToString();
+
+	return FString::Printf(TEXT("Clear %s"), *KeyDesc);
+}
+#endif
+
 void UENTClearBlackboardVariable::ClearValue(UBehaviorTreeComponent& OwnerComp)
 {
 	UBlackboardComponent* CurrentBlackboard = OwnerComp.GetBlackboardComponent();

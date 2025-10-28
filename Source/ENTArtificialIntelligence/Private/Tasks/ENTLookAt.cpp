@@ -9,6 +9,11 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Rotator.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
+
+#if WITH_EDITORONLY_DATA
+#include "Debug/ENTArrowActor.h"
+#endif
 
 UENTLookAt::UENTLookAt()
 {
@@ -46,20 +51,48 @@ EBTNodeResult::Type UENTLookAt::ExecuteTask(UBehaviorTreeComponent& OwnerComp, u
 		return EBTNodeResult::Failed;
 	}
 
-	if(LookAtPosition.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
-	{
-		TargetRotation = UKismetMathLibrary::FindLookAtRotation(CurrentPawn->GetActorLocation(), CurrentBlackboard->GetValue<UBlackboardKeyType_Vector>(LookAtPosition.GetSelectedKeyID()));
-	}
-
-	else if(LookAtPosition.SelectedKeyType == UBlackboardKeyType_Rotator::StaticClass())
+	if(LookAtPosition.SelectedKeyType == UBlackboardKeyType_Rotator::StaticClass())
 	{
 		TargetRotation = CurrentBlackboard->GetValue<UBlackboardKeyType_Rotator>(LookAtPosition.GetSelectedKeyID()); 
 	}
-
-	else if(LookAtPosition.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	else
 	{
-		const AActor* ActorToLookAt = Cast<AActor>(CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(LookAtPosition.GetSelectedKeyID()));
-		TargetRotation = UKismetMathLibrary::FindLookAtRotation(CurrentPawn->GetActorLocation(), ActorToLookAt->GetActorLocation());
+		FVector TargetLookAt;
+		if(LookAtPosition.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+		{
+			TargetLookAt = CurrentBlackboard->GetValue<UBlackboardKeyType_Vector>(LookAtPosition.GetSelectedKeyID());
+		}
+		else if(LookAtPosition.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+		{
+			const AActor* ActorToLookAt = Cast<AActor>(CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(LookAtPosition.GetSelectedKeyID()));
+
+			if (!ActorToLookAt)
+			{
+				return EBTNodeResult::Failed;
+			}
+
+			TargetLookAt = ActorToLookAt->GetActorLocation();
+		}
+
+		FVector Direction = TargetLookAt - CurrentPawn->GetActorLocation();
+		TargetRotation = FRotationMatrix::MakeFromZX(CurrentPawn->GetActorUpVector(), Direction).Rotator();
+
+#if WITH_EDITORONLY_DATA
+		if (bDebugTask)
+		{
+			UKismetSystemLibrary::DrawDebugLine(this, CurrentPawn->GetActorLocation(), TargetLookAt, FLinearColor::Blue, 15.0f, 2.0f);
+
+			UWorld* World = CurrentPawn->GetWorld();
+			AENTArrowActor* ArrowActor = World->SpawnActor<AENTArrowActor>();
+
+			if (ArrowActor)
+			{
+				ArrowActor->SetActorLocation(CurrentPawn->GetActorLocation());
+				ArrowActor->SetArrowDirection(Direction);
+				ArrowActor->SetArrowDimensions(5.0f, 50.0f);
+			}
+		}
+#endif
 	}
 
 	if(bIgnorePitchRotation)
@@ -132,3 +165,16 @@ void UENTLookAt::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, 
 
 	FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 }
+
+#if WITH_EDITOR
+FString UENTLookAt::GetStaticDescription() const
+{
+	FString LookAtPositionKeyDesc("invalid");
+	if (LookAtPosition.SelectedKeyType == UBlackboardKeyType_Object::StaticClass() || LookAtPosition.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass() || LookAtPosition.SelectedKeyType == UBlackboardKeyType_Rotator::StaticClass())
+	{
+		LookAtPositionKeyDesc = LookAtPosition.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Look at %s"), *LookAtPositionKeyDesc);
+}
+#endif

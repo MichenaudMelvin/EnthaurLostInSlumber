@@ -247,10 +247,17 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 			continue;
 		}
 
-		FENTParaSiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(Actor->GetName());
+		FENTParasiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(Actor->GetName());
 		if (ParaSiteData)
 		{
 			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*ParaSiteData, CurrentWorldSave);
+			continue;
+		}
+
+		FETNScriptedAIElementData* ScriptedAIElementData = CurrentWorldSave->ScriptedAIElementsData.Find(Actor->GetName());
+		if (ScriptedAIElementData)
+		{
+			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*ScriptedAIElementData, CurrentWorldSave);
 			continue;
 		}
 
