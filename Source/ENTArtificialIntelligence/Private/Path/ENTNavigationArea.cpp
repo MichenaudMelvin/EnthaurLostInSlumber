@@ -243,51 +243,6 @@ FVector AENTNavigationArea::GetRandomPointInArea() const
 	return RandomPoint;
 }
 
-// void AENTNavigationArea::GetSquareTriangles(const TArray<Triangle>& Triangles, TArray<float>& SquareArray, float& FullSquare) const
-// {
-// 	for (const Triangle& Triangle : Triangles)
-// 	{
-// 		float Square = GetTriangleSquare(Triangle);
-// 		SquareArray.Add(Square);
-//
-// 		FullSquare += Square;
-// 	}
-// }
-//
-// float AENTNavigationArea::GetTriangleSquare(const Triangle& Triangle) const
-// {
-// 	float DistZeroOne = FVector::Distance(Triangle.Zero, Triangle.One);
-// 	float DistOneTwo = FVector::Distance(Triangle.One, Triangle.Two);
-// 	float DistZeroTwo = FVector::Distance(Triangle.Zero, Triangle.Two);
-//
-// 	float P = (DistZeroOne + DistOneTwo + DistZeroTwo) * 0.5f;
-//
-// 	return FMath::Sqrt((P - DistZeroOne) * (P - DistOneTwo) * (P - DistZeroTwo) * P);
-// }
-//
-// TArray<int32> AENTNavigationArea::SquareArrayToRandomInt(const TArray<float>& SquareArray, float SquareMain) const
-// {
-// 	TArray<int32> RandomInt;
-//
-// 	float FloatNow = FMath::FRandRange(0.0f, SquareMain);
-// 	float CheckFloat = 0.0f;
-//
-// 	for (int i = 0; i < SquareArray.Num(); i++)
-// 	{
-// 		RandomInt.Add(0);
-//
-// 		CheckFloat += SquareArray[i];
-//
-// 		if (CheckFloat > FloatNow)
-// 		{
-// 			RandomInt[i] = RandomInt[i] + 1;
-// 			break;
-// 		}
-// 	}
-//
-// 	return RandomInt;
-// }
-
 #pragma region Debug
 
 #if WITH_EDITORONLY_DATA
