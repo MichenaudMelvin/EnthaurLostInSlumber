@@ -24,6 +24,7 @@ void UENTWorldSaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	Super::Initialize(Collection);
 
 	WorldInitDelegateHandle = FWorldDelegates::OnWorldInitializedActors.AddUObject(this, &UENTWorldSaveSubsystem::OnNewWorldStarted);
+	WorldBeginTearDownDelegateHandle = FWorldDelegates::OnWorldBeginTearDown.AddUObject(this, &UENTWorldSaveSubsystem::OnWorldBeginTearDown);
 }
 
 void UENTWorldSaveSubsystem::Deinitialize()
@@ -31,6 +32,7 @@ void UENTWorldSaveSubsystem::Deinitialize()
 	Super::Deinitialize();
 
 	FWorldDelegates::OnWorldInitializedActors.Remove(WorldInitDelegateHandle);
+	FWorldDelegates::OnWorldCleanup.Remove(WorldBeginTearDownDelegateHandle);
 }
 
 UENTDefaultSave* UENTWorldSaveSubsystem::CreateSave(const int SaveIndex)
@@ -283,4 +285,9 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 
 	FENTGameElementData EmptyData;
 	Cast<IENTSaveGameElementInterface>(Character)->LoadGameElement(EmptyData, CurrentWorldSave);
+}
+
+void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)
+{
+	SaveToSlot(0);
 }
