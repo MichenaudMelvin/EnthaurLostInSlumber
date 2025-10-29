@@ -33,8 +33,17 @@ void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* 
 	TArray<AActor*> Actors;
 	Actors.Add(Pawn);
 
+	EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
+
+#if WITH_EDITORONLY_DATA
+if (bDebugTask)
+{
+	DrawDebugTrace = EDrawDebugTrace::ForOneFrame;
+}
+#endif
+
 	FHitResult HitResult;
-	UKismetSystemLibrary::LineTraceSingle(Pawn, PawnLocation, EndLocation, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, Actors, EDrawDebugTrace::None, HitResult, true);
+	UKismetSystemLibrary::LineTraceSingle(Pawn, PawnLocation, EndLocation, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, Actors, DrawDebugTrace, HitResult, true);
 
 	FVector ForwardVector = Pawn->GetMovementComponent()->Velocity;
 
