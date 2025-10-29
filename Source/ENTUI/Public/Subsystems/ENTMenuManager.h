@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CommonActivatableWidget.h"
+#include "Menus/Main/ENTCMainMenu.h"
 #include "UObject/Object.h"
 #include "ENTMenuManager.generated.h"
 
@@ -51,6 +53,7 @@ public:
 	TObjectPtr<UUserWidget> GetControlsMenu() const { return ControlsMenu; }
 	TObjectPtr<UUserWidget> GetMainMenuConfirmationMenu() const { return MainMenuConfirmationMenu; }
 	TObjectPtr<UUserWidget> GetRestartConfirmationMenu() const { return RestartConfirmationMenu; }
+	TObjectPtr<UCommonActivatableWidget> GetCMainMenu() const { return CMainMenu; }
 
 	EENTMenuState GetMenuState() const { return CurrentState; }
 
@@ -167,4 +170,14 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UENTWidgetBasics> BasicMenu;
+
+	#pragma region CommonUI
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "UI|CommonUI")
+	TObjectPtr<UCommonActivatableWidget> CMainMenu = nullptr;
+
+	#pragma endregion
 };
+
+

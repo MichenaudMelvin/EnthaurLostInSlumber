@@ -9,8 +9,10 @@ public class ENTUI : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
+                "CommonUI",
                 "Core",
-                "ENTCore"
+                "ENTCore",
+                "UMG"
             }
         );
 
@@ -25,7 +27,6 @@ public class ENTUI : ModuleRules
                 "InputCore",
                 "Slate",
                 "SlateCore",
-                "UMG",
                 "ENTSaves",
                 "ENTComponents"
             }

@@ -7,6 +7,8 @@
 #include "HUD/ENTDeathTransition.h"
 #include "HUD/ENTGameplayHUD.h"
 #include "HUD/ENTLevelEntering.h"
+#include "Menus/ENTCMainInterfaceLayout.h"
+#include "Menus/Main/ENTCMainMenu.h"
 #include "Menus/Main/ENTCreditsMenu.h"
 #include "Menus/Main/ENTMainMenu.h"
 #include "Menus/Main/ENTNewGameMenu.h"
@@ -95,6 +97,17 @@ public:
 	 */
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|HUD")
 	TSet<TSubclassOf<AGameModeBase>> AllowedHUDGameModes;
+
+#pragma endregion
+
+#pragma region CommonUI Main Menus
+
+public:
+	UPROPERTY(EditDefaultsOnly, Config, Category = "CommonUI|MainMenus")
+	TSubclassOf<UENTCMainInterfaceLayout> UMainLayer = UENTCMainInterfaceLayout::StaticClass();
+	
+	UPROPERTY(EditDefaultsOnly, Config, Category = "CommonUI|MainMenus")
+	TSubclassOf<UENTCMainMenu> CMainMenu = UENTCMainMenu::StaticClass();
 
 #pragma endregion
 

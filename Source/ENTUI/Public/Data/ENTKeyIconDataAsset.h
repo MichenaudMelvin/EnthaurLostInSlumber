@@ -18,7 +18,7 @@ struct FKeyIconRow : public FTableRowBase
 	TObjectPtr<UTexture2D> Icon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FText Text; // si vide on prend la conversion du FKey en texte par défaut
+	FText Text; // si vide, on prend la conversion du FKey en texte par défaut
 };
 
 /**

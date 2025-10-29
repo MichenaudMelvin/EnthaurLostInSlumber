@@ -65,6 +65,8 @@ void UENTMenuManager::CreateAllWidgets()
 	MainMenuConfirmationMenu = CreateWidget(CurrentController, UIConfig->MainMenuConfirmationMenuClass);
 	RestartConfirmationMenu = CreateWidget(CurrentController, UIConfig->RestartConfirmationMenuClass);
 
+	CMainMenu = CreateWidget(CurrentController, UIConfig->CMainMenu);
+
 	OnWidgetsCreated.Broadcast();
 
 	AENTDefaultPlayerController* FirstPersonController = Cast<AENTDefaultPlayerController>(CurrentController);
