@@ -54,31 +54,9 @@
 							<Position X="3" Y="2"/>
 						</Module>
 					</ModuleList>
-					<RTPCValueList ShowAll="true">
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_NerveStretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
-							<Value>86.7532467532468</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}"/>
-							<Value>100</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
-							<Value>100</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"/>
-							<Value>100</Value>
-						</RTPCValue>
-					</RTPCValueList>
-					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="None" ID="{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"/>
-					</CurrentStateList>
-					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
-						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
-					</CurrentSwitchList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 				<SoundcasterSession Name="AMB TEST" ID="{FD9DD7B6-D642-46FC-B38E-02D64FF06CDB}">
 					<ModuleList>
@@ -119,23 +97,24 @@
 							<Position X="4" Y="1"/>
 						</Module>
 					</ModuleList>
-					<RTPCValueList ShowAll="true">
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_PlayerDistance" ID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}"/>
-							<Value>100</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
-							<Value>100</Value>
-						</RTPCValue>
-					</RTPCValueList>
-					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
-					</CurrentStateList>
-					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
-						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
-					</CurrentSwitchList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+				<SoundcasterSession Name="New Soundcaster  test Wil" ID="{31C11317-F331-4A66-AAB3-D3F2C66106FB}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="AKE_WindSpeed" ID="{3C96E412-6FF6-4422-AEC6-34FD6AC5A1D5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_StopWindSpeed" ID="{3E4C03C5-C587-4630-B830-812310BDBFC5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>

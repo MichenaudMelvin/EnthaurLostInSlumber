@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{50B8E620-2F1F-5228-7741-83601D78E1C5}",
+    "Hash": "{50EB53B5-7852-2087-79B9-EE0FC597F937}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -159,6 +159,14 @@
       "Location": "Memory",
       "ShortName": "MC_FS_Walk_Muscle_02.wav",
       "CachePath": "BA/{BA16C7BC-6DB7-0442-D9DD-A8D4EA4E1D11}.wem"
+     },
+     {
+      "Id": "112381933",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Wind_Speed_Low.wav",
+      "CachePath": "AF/{AFC7A4B9-13AC-1709-5A22-04B262ED8D08}.wem"
      },
      {
       "Id": "117562544",
@@ -809,6 +817,14 @@
       "CachePath": "58/{58CFC810-6776-A3E6-6410-1CFD3BD73BB7}.wem"
      },
      {
+      "Id": "600164567",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Wind_Speed_High.wav",
+      "CachePath": "7F/{7FB9FF11-8699-5BEA-E563-391D7C2115BA}.wem"
+     },
+     {
       "Id": "603635966",
       "Language": "SFX",
       "Streaming": "false",
@@ -1103,6 +1119,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Elevator_Start_03.wav",
       "CachePath": "FC/{FCCFF5C6-29D9-E426-7B81-DBEE894918D5}.wem"
+     },
+     {
+      "Id": "918853460",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Wind_Woosh_01.wav",
+      "CachePath": "7C/{7CD0B091-C2BD-8390-8D6D-CE616050E94A}.wem"
      },
      {
       "Id": "926594296",
@@ -2114,6 +2138,70 @@
       "DurationMax": "0"
      },
      {
+      "Id": "2721947660",
+      "Name": "AKE_StopWindSpeed",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StopWindSpeed",
+      "GUID": "{3E4C03C5-C587-4630-B830-812310BDBFC5}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.1",
+      "DurationMax": "1.1",
+      "MediaRefs": [
+       {
+        "Id": "918853460"
+       }
+      ],
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "1104535692",
+         "Id": "1312110196",
+         "GUID": "{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "21354617"
+         },
+         {
+          "Id": "138498267"
+         },
+         {
+          "Id": "388414790"
+         },
+         {
+          "Id": "908600791"
+         },
+         {
+          "Id": "1053529806"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "1104535692",
+         "Id": "1744723399",
+         "GUID": "{181A0A9E-1350-4650-9A67-C81EA9235993}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "365271159"
+         },
+         {
+          "Id": "504541813"
+         },
+         {
+          "Id": "622659375"
+         },
+         {
+          "Id": "993353406"
+         }
+        ]
+       }
+      ]
+     },
+     {
       "Id": "1558507935",
       "Name": "AKE_TakeAmbrer",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_TakeAmbrer",
@@ -2127,6 +2215,22 @@
         "Id": "218825922"
        }
       ]
+     },
+     {
+      "Id": "2275903284",
+      "Name": "AKE_WindSpeed",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_WindSpeed",
+      "GUID": "{3C96E412-6FF6-4422-AEC6-34FD6AC5A1D5}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "112381933"
+       },
+       {
+        "Id": "600164567"
+       }
+      ]
      }
     ],
     "GameParameters": [
@@ -2135,6 +2239,12 @@
       "Name": "AKGP_NerveStretch",
       "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_NerveStretch",
       "GUID": "{31886D5C-1267-426C-A7AA-FC467CBBF581}"
+     },
+     {
+      "Id": "3631364164",
+      "Name": "AKGP_Speed",
+      "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_Speed",
+      "GUID": "{48B0803D-84D1-4AD9-914B-FB1814D27149}"
      }
     ],
     "SwitchGroups": [
@@ -2181,6 +2291,6 @@
     ]
    }
   ],
-  "FileHash": "{BDCEAA04-F384-F7EF-D74A-FFDAC70E2FE7}"
+  "FileHash": "{166CD848-E0F6-14E7-4DC8-DFEB400A8B75}"
  }
 }

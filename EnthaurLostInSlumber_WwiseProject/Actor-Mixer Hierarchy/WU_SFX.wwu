@@ -1925,35 +1925,6 @@
 								<ActiveSource Name="SFX_Plant_Growth" ID="{F9F63C10-3915-404B-A773-746BF5C1938D}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="AMB_Muscle" ID="{C3D9CD73-42C1-439F-B6B9-E9DD84149286}" ShortID="777212376">
-							<PropertyList>
-								<Property Name="3DSpatialization" Type="int16" Value="1"/>
-								<Property Name="OverridePositioning" Type="bool" Value="True"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Attenuation">
-									<ObjectRef Name="ATT_10m" ID="{4071E954-4A9E-41CD-8DCF-D6D59AC5EAE3}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
-								</Reference>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="AMB_Muscle" ID="{C13250C8-D76F-43F5-8246-71647C9353DD}">
-									<Language>SFX</Language>
-									<AudioFile>AMB_Muscle.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="433441082"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="AMB_Muscle" ID="{C13250C8-D76F-43F5-8246-71647C9353DD}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
 						<Sound Name="SFX_Elevator_Stop" ID="{6DB15B6C-C30A-479E-BF72-5D420434778F}" ShortID="648670547">
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="1"/>
@@ -1981,6 +1952,270 @@
 								<ActiveSource Name="SFX_Elevator_Stop" ID="{0E5C2806-3C50-4E45-8414-B2AFCD1DE445}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<Sound Name="SFX_Wind_Speed_High" ID="{14FC52F3-C117-4241-9642-DB12691945AA}" ShortID="622358937">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="amb_Wind_Speed" ID="{634A6497-ACB2-48A9-B9B7-1F83B8B36E40}">
+									<Language>SFX</Language>
+									<AudioFile>amb_Wind_Speed.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="916894672"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="SFX_Wind_Speed" ID="{2A92EF54-00DC-4395-BA9C-9F52D099B09A}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Wind_Speed.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="596802408"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="SFX_Wind_Speed_High" ID="{C9E52703-01D5-451C-9927-84AE71AE2D54}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Wind_Speed_High.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="600164567"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="RTPC">
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{88760322-6395-45E4-B40C-0FF096B96453}" ShortID="76789571">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Volume"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="AKGP_Speed" ID="{48B0803D-84D1-4AD9-914B-FB1814D27149}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{23438D28-DDDC-4522-8FC0-FBE7EA12EB8F}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>2246.44549</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>0</Flags>
+																		<SegmentShape>Exp3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>5000</XPos>
+																		<YPos>6.84845</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{A751D965-46AF-477D-BA96-3AD68403FC84}" ShortID="961345848">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Pitch"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="AKGP_Speed" ID="{48B0803D-84D1-4AD9-914B-FB1814D27149}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{7CE8B7EF-CD1B-404B-B3A9-9DCCD36EC49C}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="65537"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>0</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Exp3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>5000</XPos>
+																		<YPos>448</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Wind_Speed_High" ID="{C9E52703-01D5-451C-9927-84AE71AE2D54}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Wind_Speed_Low" ID="{84C659D7-AC4A-4A6F-A4F4-FFA734106B6F}" ShortID="533926268">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Wind_Speed_Low" ID="{3B988353-F865-4CE3-9792-46E7D968683E}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Wind_Speed_Low.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="112381933"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="RTPC">
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{7185E9E6-E167-4B5F-A06A-89CA7F6F43D2}" ShortID="104309860">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Volume"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="AKGP_Speed" ID="{48B0803D-84D1-4AD9-914B-FB1814D27149}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{C03C37B7-C7F5-4D1A-8E64-4E9B8773379D}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>2248.82629</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>0</Flags>
+																		<SegmentShape>Exp3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>5000</XPos>
+																		<YPos>10.54576</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{508A776D-66E2-4813-BF9B-8F1939A4D886}" ShortID="754440591">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Pitch"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="AKGP_Speed" ID="{48B0803D-84D1-4AD9-914B-FB1814D27149}" WorkUnitID="{5FE67B00-6D8E-4179-98F0-D27266FD9A1C}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{92D131D6-DC35-4CED-90B7-098FEFCF3143}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="65537"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>0</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Exp3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>5000</XPos>
+																		<YPos>350</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Wind_Speed_Low" ID="{3B988353-F865-4CE3-9792-46E7D968683E}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<RandomSequenceContainer Name="SFX_Woosh_Wind" ID="{B2BF122F-AEA1-4C7E-AD3D-2833A69E663B}" ShortID="793058782">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-6</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_Wind_Woosh_01" ID="{84A3AC1A-5D47-452D-BE19-84A5EE9F55FD}" ShortID="189413719">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Wind_Woosh_01" ID="{34C1F994-4591-4671-B5E4-FE6A90E0447F}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Wind_Woosh_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="918853460"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Wind_Woosh_01" ID="{34C1F994-4591-4671-B5E4-FE6A90E0447F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
 					</ChildrenList>
 				</ActorMixer>
 			</ChildrenList>

@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{50B8E620-2F1F-5228-7741-83601D78E1C5}",
+    "Hash": "{2C3195BB-6254-6DC6-CF55-D826994AE50B}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -159,6 +159,14 @@
       "Location": "Memory",
       "ShortName": "MC_FS_Walk_Muscle_02.wav",
       "CachePath": "BA/{BA16C7BC-6DB7-0442-D9DD-A8D4EA4E1D11}.wem"
+     },
+     {
+      "Id": "112381933",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Wind_Speed_Low.wav",
+      "CachePath": "AF/{AFC7A4B9-13AC-1709-5A22-04B262ED8D08}.wem"
      },
      {
       "Id": "117562544",
@@ -529,6 +537,14 @@
       "CachePath": "B0/{B09E6C93-78E4-13FD-1F61-8AE26C83DD3A}.wem"
      },
      {
+      "Id": "423694760",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Wind_Woosh_02.wav",
+      "CachePath": "F0/{F05D20E9-E01B-FE47-DEA0-D67A98FD2649}.wem"
+     },
+     {
       "Id": "429011309",
       "Language": "SFX",
       "Streaming": "false",
@@ -807,6 +823,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Electricity_Start_03.wav",
       "CachePath": "58/{58CFC810-6776-A3E6-6410-1CFD3BD73BB7}.wem"
+     },
+     {
+      "Id": "600164567",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Wind_Speed_High.wav",
+      "CachePath": "7F/{7FB9FF11-8699-5BEA-E563-391D7C2115BA}.wem"
      },
      {
       "Id": "603635966",
@@ -1103,6 +1127,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Elevator_Start_03.wav",
       "CachePath": "FC/{FCCFF5C6-29D9-E426-7B81-DBEE894918D5}.wem"
+     },
+     {
+      "Id": "918853460",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Wind_Woosh_01.wav",
+      "CachePath": "A9/{A954440B-8ADE-774D-9256-55C2313F4A45}.wem"
      },
      {
       "Id": "926594296",
@@ -2114,6 +2146,24 @@
       "DurationMax": "0"
      },
      {
+      "Id": "2721947660",
+      "Name": "AKE_StopWindSpeed",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StopWindSpeed",
+      "GUID": "{3E4C03C5-C587-4630-B830-812310BDBFC5}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.7",
+      "DurationMax": "0.73333335",
+      "MediaRefs": [
+       {
+        "Id": "423694760"
+       },
+       {
+        "Id": "918853460"
+       }
+      ]
+     },
+     {
       "Id": "1558507935",
       "Name": "AKE_TakeAmbrer",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_TakeAmbrer",
@@ -2127,6 +2177,22 @@
         "Id": "218825922"
        }
       ]
+     },
+     {
+      "Id": "2275903284",
+      "Name": "AKE_WindSpeed",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_WindSpeed",
+      "GUID": "{3C96E412-6FF6-4422-AEC6-34FD6AC5A1D5}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "112381933"
+       },
+       {
+        "Id": "600164567"
+       }
+      ]
      }
     ],
     "GameParameters": [
@@ -2135,6 +2201,12 @@
       "Name": "AKGP_NerveStretch",
       "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_NerveStretch",
       "GUID": "{31886D5C-1267-426C-A7AA-FC467CBBF581}"
+     },
+     {
+      "Id": "3631364164",
+      "Name": "AKGP_Speed",
+      "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_Speed",
+      "GUID": "{48B0803D-84D1-4AD9-914B-FB1814D27149}"
      }
     ],
     "SwitchGroups": [
@@ -2181,6 +2253,6 @@
     ]
    }
   ],
-  "FileHash": "{95EF4FA7-C65B-84B9-80B4-D6828B5B2F2C}"
+  "FileHash": "{57B2AD34-74D9-BBB8-B301-E6ABCFDFF66E}"
  }
 }
