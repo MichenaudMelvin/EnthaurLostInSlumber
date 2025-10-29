@@ -5,12 +5,13 @@
 #include "AkComponent.h"
 #include "AkGameplayStatics.h"
 #include "ENTCameraShakeComponent.h"
+#include "ENTElectricityComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "Interface/ENTActivation.h"
 #include "GameElements/ENTNerve.h"
 #include "Components/ENTPhysicConstraint.h"
-#include "Gamefeel/ENTElectricityFeedback.h"
+#include "ENTElectricityFeedback.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/ENTDefaultCharacter.h"
 
@@ -43,6 +44,8 @@ AENTNerveReceptacle::AENTNerveReceptacle()
 
 	NerveReceptaclesNoises = CreateDefaultSubobject<UAkComponent>(TEXT("NerveReceptaclesNoises"));
 	NerveReceptaclesNoises->SetupAttachment(NerveReceptacle);
+
+	ElectricityComponent = CreateDefaultSubobject<UENTElectricityComponent>(TEXT("Electricity Component"));
 }
 
 void AENTNerveReceptacle::BeginPlay()
@@ -53,43 +56,16 @@ void AENTNerveReceptacle::BeginPlay()
 
 	NerveEndTargetTransform *= GetActorTransform();
 
-	FOnTimelineFloat UpdateEvent;
-	FOnTimelineEvent FinishedEvent;
-
-	UpdateEvent.BindDynamic(this, &AENTNerveReceptacle::ElectricityRadiusUpdate);
-	FinishedEvent.BindDynamic(this, &AENTNerveReceptacle::ElectricityRadiusFinished);
-
-	ElectricityRadiusTimeline.AddInterpFloat(FirstElectricityRadiusCurve, UpdateEvent);
-	ElectricityRadiusTimeline.SetTimelineFinishedFunc(FinishedEvent);
-
-	UpdateEvent.Unbind();
-	FinishedEvent.Unbind();
-
-	UpdateEvent.BindDynamic(this, &AENTNerveReceptacle::ElectricityMovementUpdate);
-	FinishedEvent.BindDynamic(this, &AENTNerveReceptacle::ElectricityMovementFinished);
-
-	ElectricityMovementTimeline.SetPlayRate(1 / ElectricityMovementDuration);
-	ElectricityMovementTimeline.AddInterpFloat(ElectricityMovementCurve, UpdateEvent);
-	ElectricityMovementTimeline.SetTimelineFinishedFunc(FinishedEvent);
-
-	UpdateEvent.Unbind();
-	FinishedEvent.Unbind();
-
-	UpdateEvent.BindDynamic(this, &AENTNerveReceptacle::ElectricityOpacityUpdate);
-	FinishedEvent.BindDynamic(this, &AENTNerveReceptacle::ElectricityOpacityFinished);
-
-	ElectricityOpacityTimeline.SetPlayRate(1 / ElectricityOpacityDuration);
-	ElectricityOpacityTimeline.AddInterpFloat(ElectricityOpacityCurve, UpdateEvent);
-	ElectricityOpacityTimeline.SetTimelineFinishedFunc(FinishedEvent);
+	ElectricityComponent->OnElectricityAnimationStarted.AddDynamic(this, &AENTNerveReceptacle::OnElectricityAnimationStarted);
+	ElectricityComponent->OnElectricityRadiusFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityRadiusFinished);
+	ElectricityComponent->OnElectricityMovementUpdated.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementUpdated);
+	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementFinished);
+	ElectricityComponent->OnElectricityOpacityFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityOpacityFinished);
 }
 
 void AENTNerveReceptacle::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
-	ElectricityRadiusTimeline.TickTimeline(DeltaSeconds);
-	ElectricityMovementTimeline.TickTimeline(DeltaSeconds);
-	ElectricityOpacityTimeline.TickTimeline(DeltaSeconds);
 }
 
 #if WITH_EDITORONLY_DATA
@@ -129,86 +105,9 @@ void AENTNerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent,
 			}
 		}
 
-		PlayElectricityAnimation(Nerve);
+		ElectricityComponent->PlayElectricityAnimation(Nerve);
 	}
 }
-
-#pragma region Timelines
-
-void AENTNerveReceptacle::ElectricityRadiusUpdate(float Alpha)
-{
-	if (!NerveElectricityFeedback)
-	{
-		return;
-	}
-
-	float Radius = FMath::Lerp(StartRadiusTarget, EndRadiusTarget, Alpha);
-	NerveElectricityFeedback->SetRadius(Radius);
-}
-
-void AENTNerveReceptacle::ElectricityRadiusFinished()
-{
-	if (EndRadiusTarget != SecondRadiusTarget)
-	{
-		return;
-	}
-
-	OnNerveAnimationFinished.Broadcast();
-}
-
-void AENTNerveReceptacle::ElectricityMovementUpdate(float Alpha)
-{
-	if (!NerveElectricityFeedback)
-	{
-		return;
-	}
-
-	FVector TargetLocation = LinkedNerve->GetCablePosition(Alpha);
-	NerveElectricityFeedback->SetActorLocation(TargetLocation);
-}
-
-void AENTNerveReceptacle::ElectricityMovementFinished()
-{
-	if (NerveReceptaclesNoises)
-	{
-		NerveReceptaclesNoises->PostAkEvent(EnabledNoise);
-	}
-
-	TriggerLinkedObjects(LinkedNerve);
-
-	StartRadiusTarget = FirstRadiusTarget;
-	EndRadiusTarget = SecondRadiusTarget;
-	ElectricityRadiusTimeline.SetFloatCurve(SecondElectricityRadiusCurve, FirstElectricityRadiusCurve.GetFName());
-	ElectricityRadiusTimeline.SetPlayRate(1 / SecondElectricityRadiusDuration);
-	ElectricityRadiusTimeline.PlayFromStart();
-
-	ElectricityOpacityTimeline.PlayFromStart();
-}
-
-void AENTNerveReceptacle::ElectricityOpacityUpdate(float Alpha)
-{
-	if (!NerveElectricityFeedback)
-	{
-		return;
-	}
-
-	float ScalarParam = FMath::Lerp(1.0f, 0.0f, Alpha);
-	NerveElectricityFeedback->GetMaterial()->SetScalarParameterValue(ElectricityOpacityParam, ScalarParam);
-}
-
-void AENTNerveReceptacle::ElectricityOpacityFinished()
-{
-	if (!NerveElectricityFeedback)
-	{
-		return;
-	}
-
-	NerveElectricityFeedback->Destroy();
-	NerveElectricityFeedback = nullptr;
-	LinkedNerve = nullptr;
-}
-
-#pragma endregion
 
 void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)
 {
@@ -246,7 +145,7 @@ void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)
 
 bool AENTNerveReceptacle::CanTheNerveBeTaken() const
 {
-	return !IsValid(NerveElectricityFeedback);
+	return !ElectricityComponent->IsAnimRunning();
 }
 
 void AENTNerveReceptacle::DisableReceptacle()
@@ -254,30 +153,38 @@ void AENTNerveReceptacle::DisableReceptacle()
 	NerveReceptaclesNoises->PostAkEvent(DisabledNoise);
 }
 
-void AENTNerveReceptacle::PlayElectricityAnimation(AENTNerve* Nerve)
+#pragma region Electricity
+
+void AENTNerveReceptacle::OnElectricityAnimationStarted(AActor* LinkedActor)
 {
-	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	Player->GetCameraShake()->MakeSmallCameraShake();
-
-	if (!ElectricityFeedbackClass)
-	{
-		return;
-	}
-
-	NerveElectricityFeedback = GetWorld()->SpawnActor<AENTElectricityFeedback>(ElectricityFeedbackClass, Nerve->GetActorTransform());
-	LinkedNerve = Nerve;
-
-	if (!NerveElectricityFeedback)
-	{
-		return;
-	}
-
-	StartRadiusTarget = 0.0f;
-	EndRadiusTarget = FirstRadiusTarget;
-	ElectricityRadiusTimeline.SetFloatCurve(FirstElectricityRadiusCurve, SecondElectricityRadiusCurve.GetFName());
-	ElectricityRadiusTimeline.SetPlayRate(1 / FirstElectricityRadiusDuration);
-	ElectricityRadiusTimeline.PlayFromStart();
-
-	ElectricityMovementTimeline.PlayFromStart();
+	LinkedNerve = Cast<AENTNerve>(LinkedActor);
 }
+
+void AENTNerveReceptacle::OnElectricityRadiusFinished()
+{
+	OnNerveAnimationFinished.Broadcast();
+}
+
+void AENTNerveReceptacle::OnElectricityMovementUpdated(float Alpha)
+{
+	FVector TargetLocation = LinkedNerve->GetCablePosition(Alpha);
+	ElectricityComponent->GetElectricityFeedback()->SetActorLocation(TargetLocation);
+}
+
+void AENTNerveReceptacle::OnElectricityMovementFinished()
+{
+	if (NerveReceptaclesNoises)
+	{
+		NerveReceptaclesNoises->PostAkEvent(EnabledNoise);
+	}
+
+	TriggerLinkedObjects(LinkedNerve);
+}
+
+void AENTNerveReceptacle::OnElectricityOpacityFinished()
+{
+	LinkedNerve = nullptr;
+}
+
+#pragma endregion
 

@@ -1,7 +1,7 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Gamefeel/ENTElectricityFeedback.h"
+#include "ENTElectricityFeedback.h"
 #include "AkComponent.h"
 #include "Components/PostProcessComponent.h"
 

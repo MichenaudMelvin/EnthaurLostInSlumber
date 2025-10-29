@@ -10,7 +10,7 @@
 class UAkComponent;
 
 UCLASS()
-class ENTCORE_API AENTElectricityFeedback : public AActor
+class ENTCOMPONENTS_API AENTElectricityFeedback : public AActor
 {
 	GENERATED_BODY()
 
