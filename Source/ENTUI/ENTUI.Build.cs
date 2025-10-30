@@ -21,6 +21,8 @@ public class ENTUI : ModuleRules
                 "DeveloperSettings",
                 "Engine",
                 "EnhancedInput",
+                "GameplayTags",
+                "InputCore",
                 "Slate",
                 "SlateCore",
                 "UMG",

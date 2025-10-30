@@ -20,7 +20,7 @@ class USplineMeshComponent;
 class USplineComponent;
 class AENTDefaultPlayerController;
 class AENTNerveReceptacle;
-class UENTPropulsionConstraint;
+class UENTPhysicConstraint;
 class UENTInteractableComponent;
 
 UCLASS()
@@ -62,6 +62,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Cables", meta = (ClampMin = 0.0f, Units = "cm"))
 	float CableMaxExtension = 1000.0f;
 
+	bool bIsHolding = false;
+
 	void AddSplinePoint(const FVector& SpawnLocation, const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World, bool bAutoCorrect = true) const;
 
 	void RemoveLastSplinePoint() const;
@@ -94,11 +96,26 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Cables")
 	TArray<TEnumAsByte<EObjectTypeQuery>> CableColliders;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
-	TObjectPtr<UStaticMesh> CableMesh;
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UStaticMesh> NerveMesh;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
-	TObjectPtr<UMaterial> CableMaterial;
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UStaticMesh> LigamentMesh;
+
+	UPROPERTY()
+	TObjectPtr<UStaticMesh> TargetMesh;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> NerveMaterial;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> BaseLigamentMaterial;
+
+	UPROPERTY(EditAnywhere, Category = "Cables|Apperance")
+	TObjectPtr<UMaterial> StretchedLigamentMaterial;
+
+	UPROPERTY()
+	TObjectPtr<UMaterialInstanceDynamic> DynamicStretchedLigamentMaterial;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	TEnumAsByte<ESplineMeshAxis::Type> CableForwardAxis = ESplineMeshAxis::Z;
@@ -108,6 +125,12 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
 	FVector2D CableScale = FVector2D(1.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	float TransparencyDistance = 250.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cables|Apperance")
+	float MaxVibrationStrength = 1.5f;
 
 	/**
 	 * @brief 
@@ -140,11 +163,17 @@ public:
 
 	float GetCableMaxExtension() const {return CableMaxExtension;}
 
+	float GetMaxVibrationStrength() const {return MaxVibrationStrength;}
+
+	FVector GetStartCableLocation() const {return SplineCable->GetLocationAtSplinePoint(0, ESplineCoordinateSpace::World);}
+
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCableDirection() const;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Cables")
 	FVector GetCablePosition(float Percent, ESplineCoordinateSpace::Type CoordinateSpace = ESplineCoordinateSpace::World) const;
+
+	TObjectPtr<UMaterialInstanceDynamic> GetDynamicCableStretchedMaterial() const {return DynamicStretchedLigamentMaterial;}
 
 #pragma endregion
 
@@ -157,12 +186,19 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
+	UPROPERTY(EditDefaultsOnly, Category = "NerveBall|Apperance")
+	TObjectPtr<UStaticMesh> LigamentBallMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "NerveBall|Apperance")
+	TObjectPtr<UStaticMesh> NerveBallMesh;
+	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UAkComponent> NerveStretchComp;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UAkRtpc> NerveStretchRtpc;
-
+	
 	FVector DefaultNervePosition = FVector::ZeroVector;
 
 public:
@@ -192,6 +228,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> GrabNoise;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta=(ClampMin="-90.0", ClampMax="90.0", UIMin="-90", UIMax="90.0"))
+	float EjectionAngleBuff = 30.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta=(ClampMin="-90.0", ClampMax="90.0", UIMin="-90", UIMax="90.0"))
+	bool bIsLigament = false;
+
 	UFUNCTION()
 	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
@@ -204,13 +246,15 @@ protected:
 public:
 	TObjectPtr<UENTInteractableComponent> GetInteractable() const {return InteractableComponent;}
 
+	float GetEjectionAngleBuff() const {return EjectionAngleBuff;}
+
 #pragma endregion
 
 #pragma region Physics
 
 protected:
 	UPROPERTY()
-	TObjectPtr<UENTPropulsionConstraint> PhysicConstraint;
+	TObjectPtr<UENTPhysicConstraint> PhysicConstraint;
 
 	UPROPERTY(EditAnywhere, Category = "Physics", meta = (ClampMin = 0.0f, Units = "cm"))
 	float DistanceNeededToPropulsion = 500.0f;
@@ -245,7 +289,7 @@ protected:
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
 	bool IsLoaded() const {return bIsLoaded;}
 

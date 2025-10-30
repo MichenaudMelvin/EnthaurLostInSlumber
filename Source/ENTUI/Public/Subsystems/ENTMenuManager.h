@@ -6,6 +6,11 @@
 #include "UObject/Object.h"
 #include "ENTMenuManager.generated.h"
 
+class UENTWidgetBasics;
+class AENTAnyKeyController;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeCurrentController, AENTAnyKeyController*, CurrentController);
+
 UENUM(BlueprintType)
 enum class EENTMenuState : uint8
 {
@@ -64,13 +69,24 @@ protected:
 	void OnNewWorldStarted(UWorld* World, FWorldInitializationValues WorldInitializationValues);
 
 	FDelegateHandle CreateWidgetsDelegate;
-
 	FDelegateHandle PostWorldInitDelegateHandle;
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWidgetsCreated);
 
 	UPROPERTY(BlueprintAssignable)
 	FOnWidgetsCreated OnWidgetsCreated;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Controller")
+	TObjectPtr<AENTAnyKeyController> CurrentController;
+
+	UFUNCTION()
+	void HandleNewMenuDisplaying(UUserWidget* InMenu);
+
+public:
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Controller")
+	FOnChangeCurrentController OnChangeCurrentController;
+
+	TObjectPtr<AENTAnyKeyController> GetCurrentController() const {return CurrentController;}
 
 #pragma region UI State
 
@@ -118,6 +134,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "UI|PauseMenus")
 	TObjectPtr<UUserWidget> MainMenuConfirmationMenu = nullptr;
 
+	UPROPERTY()
 	TObjectPtr<UUserWidget> RestartConfirmationMenu = nullptr;
 
 #pragma endregion
@@ -142,6 +159,12 @@ protected:
 #pragma endregion
 
 private:
-	TArray<TWeakObjectPtr<UUserWidget>> MenuStack;
+	UPROPERTY()
+	TArray<TObjectPtr<UUserWidget>> MenuStack;
+
+	UPROPERTY()
 	TMap<FString, UUserWidget*> MenuClasses;
+
+	UPROPERTY()
+	TObjectPtr<UENTWidgetBasics> BasicMenu;
 };

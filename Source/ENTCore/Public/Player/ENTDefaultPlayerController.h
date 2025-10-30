@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ENTAnyKeyController.h"
 #include "InputMappingContext.h"
 #include "ENTControllerMappingContext.h"
-#include "GameFramework/PlayerController.h"
 #include "ENTDefaultPlayerController.generated.h"
 
 class AFirstPersonSpectator;
@@ -82,7 +82,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnResume);
 #pragma endregion
 
 UCLASS()
-class ENTCORE_API AENTDefaultPlayerController : public APlayerController, public IENTControllerMappingContext
+class ENTCORE_API AENTDefaultPlayerController : public AENTAnyKeyController, public IENTControllerMappingContext
 {
 	GENERATED_BODY()
 
@@ -107,7 +107,7 @@ public:
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction MoveAction;
 
@@ -129,9 +129,17 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction InteractTriggerAction;
 
+	float PressedDuration = 0.0f;
+
+	/**
+	 * @brief Due to the UE 5.6 migration, might be a temporary solution
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	float MaxPressedDuration = (1.0f/60.0f) * 2;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction PauseGameAction;
-	
+
 	UFUNCTION()
 	void OnInputMove(const FInputActionValue& InputActionValue);
 
@@ -232,4 +240,14 @@ private:
 #endif
 
 #pragma endregion
+
+protected:
+	UFUNCTION(BlueprintCallable)
+	void SwitchKeyBind();
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	TObjectPtr<UInputAction> NewIA;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	FKey NewKey;
 };

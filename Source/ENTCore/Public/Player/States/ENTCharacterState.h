@@ -102,9 +102,16 @@ public:
 
 #pragma region Camera
 
+public:
+	void SetAllowCameraMovement(const bool bInAllowCameraMovement){ bAllowCameraMovement = bInAllowCameraMovement;}
+
+	void SetAllowRollBobbing(const bool bInAllowRollBobbing){ bAllowRollBobbing = bInAllowRollBobbing;}
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Camera")
 	bool bAllowCameraMovement = true;
+	
+	bool bAllowRollBobbing = false;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera|ViewBobbing")
 	FWaveOscillator ViewBobbing;
@@ -119,6 +126,8 @@ private:
 	void CameraMovement(float DeltaTime);
 
 	void UpdateViewBobbing(float DeltaTime);
+
+	float LastMoveSpeed;
 
 #pragma endregion
 

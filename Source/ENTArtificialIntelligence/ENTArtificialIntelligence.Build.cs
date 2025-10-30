@@ -9,7 +9,7 @@ public class ENTArtificialIntelligence : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core", "AIModule",
+                "Core", "AIModule"
             }
         );
 
@@ -27,5 +27,16 @@ public class ENTArtificialIntelligence : ModuleRules
                 "ENTComponents"
             }
         );
+
+        if (Target.bBuildEditor)
+        {
+            PrivateDependencyModuleNames.AddRange(
+                new string[]
+                {
+                    "ENTEditor",
+                    "UnrealEd"
+                }
+            );
+        }
     }
 }

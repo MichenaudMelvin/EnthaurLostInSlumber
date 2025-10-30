@@ -171,7 +171,7 @@ FENTGameElementData& AENTRespawnTree::SaveGameElement(UENTWorldSave* CurrentWorl
 	return CurrentWorldSave->RespawnTreeData.Add(GetName(), Data);
 }
 
-void AENTRespawnTree::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTRespawnTree::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	const FENTRespawnTreeData& Data = static_cast<const FENTRespawnTreeData&>(GameElementData);
 	bIsActivated = Data.bIsActive;

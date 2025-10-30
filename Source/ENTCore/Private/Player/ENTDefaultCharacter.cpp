@@ -9,6 +9,10 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "ENTInteractableComponent.h"
+#include "ENTToolStatics.h"
+#include "Components/ENTLigamentPhysicConstraint.h"
+#include "Components/ENTNervePhysicConstraint.h"
+#include "Components/PostProcessComponent.h"
 #include "GameElements/ENTAmberOre.h"
 #include "GameElements/ENTRespawnTree.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -18,14 +22,18 @@
 #include "Player/States/ENTCharacterState.h"
 #include "Player/States/ENTCharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
 #include "Config/ENTCoreConfig.h"
+#include "GameElements/ENTWeakZone.h"
+#include "Kismet/KismetMaterialLibrary.h"
 #include "Player/States/ENTCharacterFallState.h"
 #include "Saves/ENTPlayerSave.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Subsystems/ENTPlayerSaveSubsystem.h"
+
+class UEnhancedInputLocalPlayerSubsystem;
 
 AENTDefaultCharacter::AENTDefaultCharacter()
 {
@@ -35,6 +43,10 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f));
 	CameraComponent->bUsePawnControlRotation = true;
+
+	PostProcessComp = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcess"));
+	PostProcessComp->SetupAttachment(CameraComponent);
+	PostProcessComp->bUnbound = true;
 
 	ShakeManager = CreateDefaultSubobject<UENTCameraShakeComponent>(TEXT("Shake Manager"));
 
@@ -57,9 +69,6 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 
 	HealthComponent = CreateDefaultSubobject<UENTHealthComponent>("Health");
 
-	AmberInventory.Add(EAmberType::NecroseAmber, 0);
-	AmberInventory.Add(EAmberType::WeakAmber, 0);
-
 	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 3);
 	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 1);
 }
@@ -71,6 +80,15 @@ void AENTDefaultCharacter::BeginPlay()
 	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
 	SpikeTargetTransform = SpikeRelativeTransform;
 	SpikeParent = SpikeMesh->GetAttachParent();
+
+	AmberInventory.Add(EAmberType::NecroseAmber, 0);
+	AmberInventory.Add(EAmberType::WeakAmber, 0);
+
+	if (PostProcessComp && SpeedEffectMaterialReference)
+	{
+		SpeedEffectMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, SpeedEffectMaterialReference);
+		PostProcessComp->Settings.AddBlendable(SpeedEffectMaterial, 1.0f);
+	}
 
 	if (HealthComponent)
 	{
@@ -102,7 +120,7 @@ void AENTDefaultCharacter::BeginPlay()
 		return;
 	}
 
-	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CoreConfig->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::World);
+	UCameraShakeBase* CameraShake = FirstPersonController->PlayerCameraManager->StartCameraShake(CoreConfig->ViewBobbingClass, 1.0f, ECameraShakePlaySpace::CameraLocal);
 	if (!CameraShake)
 	{
 		return;
@@ -136,6 +154,10 @@ void AENTDefaultCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	{
 		HealthComponent->OnHealthNull.RemoveDynamic(this, &AENTDefaultCharacter::OnPlayerDie);
 	}
+
+	OnRespawn.Clear();
+	OnAmberUpdate.Clear();
+	OnInteractionFeedback.Clear();
 }
 
 void AENTDefaultCharacter::Tick(float DeltaSeconds)
@@ -146,6 +168,7 @@ void AENTDefaultCharacter::Tick(float DeltaSeconds)
 	InteractionTrace();
 	GroundMovement();
 	UpdateSpikeLocation(DeltaSeconds);
+	UpdateSpeedEffect(DeltaSeconds);
 
 	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteractPressed)
 	{
@@ -154,6 +177,32 @@ void AENTDefaultCharacter::Tick(float DeltaSeconds)
 }
 
 #pragma region StateMachine
+
+void AENTDefaultCharacter::UpdateSpeedEffect(float DeltaSeconds)
+{
+	if (!SpeedEffectMaterialReference)
+	{
+		return;
+	}
+
+	float ParamValue;
+	SpeedEffectMaterial->GetScalarParameterValue(SpeedEffectParamName, ParamValue);
+
+	float NormalizeValue = UENTToolStatics::GetNormalizedFloatRange(GetVelocity().Length(), SpeedEffectVelocityRange);
+
+	ParamValue = FMath::Lerp(ParamValue, NormalizeValue, DeltaSeconds);
+	ParamValue = FMath::Clamp(ParamValue, 0.0f, 1.0f);
+
+#if WITH_EDITORONLY_DATA
+	if (bShowSpeedEffectValues)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("VelocityLength: %f"), GetVelocity().Length()));
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("SpeedEffectParamValue: %f"), ParamValue));
+	}
+#endif
+
+	SpeedEffectMaterial->SetScalarParameterValue(SpeedEffectParamName, ParamValue);
+}
 
 void AENTDefaultCharacter::InitStateMachine()
 {
@@ -424,7 +473,7 @@ void AENTDefaultCharacter::MineAmber(const EAmberType& AmberType, const int Amou
 	}
 
 	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Empty(AmberInventory.Num());
-	for (TTuple<EAmberType, int> Element : AmberInventory)
+	for (const TTuple<EAmberType, int>& Element : AmberInventory)
 	{
 		PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Add(static_cast<uint8>(Element.Key), Element.Value);
 	}
@@ -459,6 +508,28 @@ bool AENTDefaultCharacter::HasRequiredQuantity(const EAmberType& AmberType, cons
 
 	return *Count >= Quantity;
 }
+
+#if WITH_EDITOR
+void AENTDefaultCharacter::IgnoreWeakZone(bool bIgnore) const
+{
+	TArray<AActor*> WeakZones;
+	UGameplayStatics::GetAllActorsOfClass(this, AENTWeakZone::StaticClass(), WeakZones);
+
+	for (AActor* Actor : WeakZones)
+	{
+		if (!Actor)
+		{
+			continue;
+		}
+
+		AENTWeakZone* WeakZone = Cast<AENTWeakZone>(Actor);
+		if (WeakZone)
+		{
+			WeakZone->ActivateZone(!bIgnore);
+		}
+	}
+}
+#endif
 
 #pragma endregion
 
@@ -557,6 +628,13 @@ void AENTDefaultCharacter::EjectCharacter(const FVector ProjectionVelocity, bool
 	StateMachine->ChangeState(EENTCharacterStateID::Fall);
 }
 
+#if WITH_EDITOR
+void AENTDefaultCharacter::EjectCharacterForward(float Force) const
+{
+	EjectCharacter(CameraComponent->GetForwardVector() * Force, true);
+}
+#endif
+
 void AENTDefaultCharacter::StopCharacter() const
 {
 	if (!StateMachine)
@@ -576,25 +654,35 @@ bool AENTDefaultCharacter::IsStopped() const
 
 #pragma region Saves
 
+#if WITH_EDITOR
+void AENTDefaultCharacter::SavePlayer()
+{
+	SaveGameElement(nullptr);
+}
+#endif
+
 FENTGameElementData& AENTDefaultCharacter::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
 	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
-	if (!PlayerSaveSubsystem || !CurrentWorldSave)
+	if (!PlayerSaveSubsystem)
 	{
 		return EmptyData;
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->PlayerLocation = GetActorLocation();
-	PlayerSaveSubsystem->GetPlayerSave()->PlayerCameraRotation = GetControlRotation();
+	if (CurrentWorldSave)
+	{
+		CurrentWorldSave->PlayerLocation = GetActorLocation();
+		CurrentWorldSave->PlayerCameraRotation = GetControlRotation();
+		CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
+	}
+
 	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = static_cast<uint8>(StateMachine->GetCurrentStateID());
 	PlayerSaveSubsystem->SaveToSlot(0);
-
-	CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
 
 	return EmptyData;
 }
 
-void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem)
@@ -602,22 +690,25 @@ void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElemen
 		return;
 	}
 
-	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
-	SetActorLocation(SaveData->PlayerLocation);
-
-	if (GetPlayerController())
+	if (LoadedWorldSave)
 	{
-		APlayerController* PlayerController = Cast<APlayerController>(GetPlayerController());
-		if (PlayerController)
+		SetActorLocation(LoadedWorldSave->PlayerLocation);
+
+		if (GetPlayerController())
 		{
-			PlayerController->SetControlRotation(SaveData->PlayerCameraRotation);
+			APlayerController* PlayerController = Cast<APlayerController>(GetPlayerController());
+			if (PlayerController)
+			{
+				PlayerController->SetControlRotation(LoadedWorldSave->PlayerCameraRotation);
+			}
 		}
 	}
 
+	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
 	StateMachine->ChangeState(static_cast<EENTCharacterStateID>(SaveData->CurrentState));
 
 	AmberInventory.Empty(SaveData->AmberInventory.Num());
-	for (TTuple<uint8, int> Element : SaveData->AmberInventory)
+	for (const TTuple<uint8, int>& Element : SaveData->AmberInventory)
 	{
 		AmberInventory.Add(static_cast<EAmberType>(Element.Key), Element.Value);
 	}
@@ -693,15 +784,21 @@ void AENTDefaultCharacter::ResetFootStepsEvent() const
 	FootstepsSounds->AkAudioEvent = DefaultFootStepEvent;
 }
 
-UENTPropulsionConstraint* AENTDefaultCharacter::AddConstraint()
+UENTPhysicConstraint* AENTDefaultCharacter::AddConstraint(bool bIsLigament)
 {
-	UActorComponent* Comp = AddComponentByClass(UENTPropulsionConstraint::StaticClass(), false, FTransform::Identity, false);
+	// Choix de la classe à instancier
+	TSubclassOf<UENTPhysicConstraint> ConstraintClass = bIsLigament
+		? UENTLigamentPhysicConstraint::StaticClass()
+		: UENTNervePhysicConstraint::StaticClass();
+
+	// Création du composant
+	UActorComponent* Comp = AddComponentByClass(ConstraintClass, false, FTransform::Identity, false);
 	if (!Comp)
 	{
 		return nullptr;
 	}
 
-	UENTPropulsionConstraint* Constraint = Cast<UENTPropulsionConstraint>(Comp);
+	UENTPhysicConstraint* Constraint = Cast<UENTPhysicConstraint>(Comp);
 	OnConstraintAdded.Broadcast(Constraint);
 	return Constraint;
 }

@@ -21,6 +21,10 @@ private:
 
 	virtual void SetOwner(AActor* InActorOwner) override;
 
+#if WITH_EDITOR
+	virtual FString GetStaticDescription() const override;
+#endif
+
 	UPROPERTY(EditInstanceOnly, Category = "RandomLocation", meta = (DisplayName = "RandomLocation"))
 	FBlackboardKeySelector RandomLocationKey;
 

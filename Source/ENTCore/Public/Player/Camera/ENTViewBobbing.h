@@ -22,11 +22,17 @@ protected:
 	TObjectPtr<UWaveOscillatorCameraShakePattern> ShakePattern;
 
 public:
-	void SetOscillator(const FWaveOscillator& Oscillator, float InLocationAmplitudeMultiplier, float InLocationFrequencyMultiplier) const;
+	void SetLocationOscillator(const FWaveOscillator& Oscillator, float InLocationAmplitudeMultiplier, float InLocationFrequencyMultiplier) const;
 
+	void SetRollOscillator(const FWaveOscillator& Oscillator, float InRotationAmplitudeMultiplier, float InRotationFrequencyMultiplier) const;
+	
 	FWaveOscillator GetOscillator() const;
 
+	FWaveOscillator GetRollOscillator() const;
+
 	float GetLocationAmplitudeMultiplier() const;
+
+	float GetRotationAmplitudeMultiplier() const;
 
 	float GetLocationFrequencyMultiplier() const;
 

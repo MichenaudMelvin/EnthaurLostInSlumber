@@ -34,7 +34,7 @@ protected:
 	void SetRespawnPoint(AENTDefaultCharacter* Player, bool bSave);
 
 	UFUNCTION(BlueprintNativeEvent)
-	void SetActive();	
+	void SetActive();
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<USceneComponent> RootComp;
@@ -65,7 +65,7 @@ protected:
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
 	const FTransform& GetRespawnTransform() const {return RespawnTransform;}
 };

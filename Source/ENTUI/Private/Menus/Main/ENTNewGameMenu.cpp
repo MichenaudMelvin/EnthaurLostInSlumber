@@ -34,14 +34,14 @@ void UENTNewGameMenu::HandleNewGameInteraction()
 		return;
 	}
 
-	UENTMenuManager* UIManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	if (!IsValid(UIManager))
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
 
 	PlayerSaveSubsystem->StartNewGame();
 
-	UIManager->SetMenuState(EENTMenuState::Waiting);
-	UIManager->CloseAllMenus(EENTMenuState::Gameplay);
+	MenuManager->SetMenuState(EENTMenuState::Waiting);
+	MenuManager->CloseAllMenus(EENTMenuState::Gameplay);
 }

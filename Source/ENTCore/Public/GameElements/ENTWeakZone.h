@@ -62,9 +62,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
 	TObjectPtr<UPostProcessComponent> BlackAndWhiteShader;
 
-	UPROPERTY(BlueprintReadWrite, Category = "WeakZone")
-	TObjectPtr<UMaterialInstanceDynamic> MaterialBlackAndWhite;
-
 	UPROPERTY(EditDefaultsOnly, Category = "WeakZone")
 	TObjectPtr<UAkAudioEvent> GrowlNoise;
 
@@ -78,6 +75,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
+
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void ChangeZoneSize(const FVector& NewSize);
 
 #pragma region Cure
 
@@ -102,8 +102,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeakZone")
 	FVector ZoneSize = FVector(100.0f);
 
-	UPROPERTY(BlueprintReadWrite)
-	TObjectPtr<UMaterialInstanceDynamic> DynamicPPMaterial;
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
+	TObjectPtr<UMaterialInterface> ZoneMaterial;
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	TObjectPtr<UMaterialInstanceDynamic> DynamicZoneMaterial;
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	FName RadiusParamName = "Radius";
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	FName LocationParamName = "Position";
 
 	bool bIsZoneActive = true;
 
@@ -152,6 +161,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void CheckIfEveryInteractionsPointActive();
+
+public:
+	void ActivateZone(bool bActivateZone);
 
 #pragma region Foliage
 
@@ -210,5 +222,5 @@ protected:
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 };

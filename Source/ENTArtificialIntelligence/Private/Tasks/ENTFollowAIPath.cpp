@@ -41,6 +41,7 @@ void UENTFollowAIPath::InitializeFromAsset(UBehaviorTree& Asset)
 		AIPath.ResolveSelectedKey(*BBAsset);
 		PathIndex.ResolveSelectedKey(*BBAsset);
 		WalkOnFloor.ResolveSelectedKey(*BBAsset);
+		TargetKeyLocation.ResolveSelectedKey(*BBAsset);
 	}
 
 	if (!MovementCurve)
@@ -106,7 +107,7 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 
 	if (bWalkOnFloor)
 	{
-		BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(TargetKeyLocation.SelectedKeyName, TargetLocation);
+		BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(TargetKeyLocation.GetSelectedKeyID(), TargetLocation);
 		NodeResult = EBTNodeResult::Succeeded;
 	}
 	else
@@ -163,6 +164,19 @@ void UENTFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 		MovementTimeline.TickTimeline(DeltaSeconds);
 	}
 }
+
+#if WITH_EDITOR
+FString UENTFollowAIPath::GetStaticDescription() const
+{
+	FString KeyDesc("invalid");
+	if (AIPath.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	{
+		KeyDesc = AIPath.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Follow %s"), *KeyDesc);
+}
+#endif
 
 void UENTFollowAIPath::MovementUpdate(float Alpha)
 {

@@ -2,17 +2,27 @@
 
 
 #include "Utilities/ENTClassValidator.h"
+#include "PluginBlueprintLibrary.h"
 
 UENTClassValidator::UENTClassValidator()
 {
 	ExcludedPaths.Add(FDirectoryPath("/Engine"));
 	ExcludedPaths.Add(FDirectoryPath("/Script"));
 	ExcludedPaths.Add(FDirectoryPath("/Game/StarterContent"));
+	ExcludedPaths.Add(FDirectoryPath("/Game/Trash"));
 }
 
 bool UENTClassValidator::CanValidateAsset_Implementation(const FAssetData& InAssetData, UObject* InObject, FDataValidationContext& InContext) const
 {
 	Super::CanValidateAsset_Implementation(InAssetData, InObject, InContext);
+
+	FString PluginName;
+	bool bIsAPluginAsset = UPluginBlueprintLibrary::GetPluginNameForObjectPath(InAssetData.GetSoftObjectPath(), PluginName);
+
+	if (bIsAPluginAsset && !bAllowPluginCheck)
+	{
+		return false;
+	}
 
 	for (const FDirectoryPath& Path : ExcludedPaths)
 	{

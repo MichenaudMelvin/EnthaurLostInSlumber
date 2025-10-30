@@ -9,6 +9,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ENTParasiteController.h"
 #include "Path/ENTArtificialIntelligencePath.h"
+#include "Path/ENTNavigationArea.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 
@@ -58,20 +59,9 @@ void AENTParasitePawn::BeginPlay()
 
 	ParasiteDeathZone->OnComponentBeginOverlap.AddDynamic(this, &AENTParasitePawn::EnterDeathZone);
 
-	if (TargetPath && ParasiteController->GetBlackboardComponent())
+	if (TargetPath && !TargetPath->IsOnFloor())
 	{
-		ParasiteController->GetBlackboardComponent()->SetValueAsObject(PathKeyName, TargetPath);
-		ParasiteController->GetBlackboardComponent()->SetValueAsBool(WalkOnFloorKeyName, TargetPath->IsOnFloor());
-
-		if (!TargetPath->IsOnFloor())
-		{
-			MovementComponent->SetGravityScale(0.0f);
-		}
-	}
-
-	if (bLoadBlackboardData)
-	{
-		ParasiteController->LoadBlackboardValues(BlackboardData);
+		MovementComponent->SetGravityScale(0.0f);
 	}
 }
 
@@ -158,6 +148,7 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 	{
 		if (TargetPath)
 		{
+			NavigationArea = nullptr;
 			bool bIsAttached = TargetPath->AttachAI(this);
 
 			if (!bIsAttached)
@@ -166,10 +157,36 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 			}
 		}
 	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, NavigationArea))
+	{
+		if (NavigationArea)
+		{
+			TargetPath = nullptr;
+		}
+	}
 }
 #endif
 
-#pragma region Save
+void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
+{
+	IENTPawnAIInterface::OnBehaviorTreeStarted_Implementation();
+
+	if (!ParasiteController->GetBlackboardComponent())
+	{
+		return;
+	}
+
+	if (TargetPath)
+	{
+		ParasiteController->GetBlackboardComponent()->SetValueAsObject(PathKeyName, TargetPath);
+		ParasiteController->GetBlackboardComponent()->SetValueAsBool(WalkOnFloorKeyName, TargetPath->IsOnFloor());
+	}
+
+	if (NavigationArea)
+	{
+		ParasiteController->GetBlackboardComponent()->SetValueAsObject(NavAreaKeyName, NavigationArea);
+	}
+}
 
 void AENTParasitePawn::PossessedBy(AController* NewController)
 {
@@ -198,27 +215,67 @@ void AENTParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, 
 	ParasiteController->GetBlackboardComponent()->SetValueAsObject(AttackTargetKeyName, OtherActor);
 }
 
+#if WITH_EDITORONLY_DATA
+void AENTParasitePawn::DebugPawn() const
+{
+	if (!ParasiteController || !ParasiteController->GetBlackboardComponent())
+	{
+		return;
+	}
+
+	UObject* PathValue = ParasiteController->GetBlackboardComponent()->GetValueAsObject(PathKeyName);
+	FString PathValueName = "Nullptr";
+	if (PathValue)
+	{
+		PathValueName = PathValue->GetName();
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *PathKeyName.ToString(), *PathValueName));
+
+	UObject* NavAreaValue = ParasiteController->GetBlackboardComponent()->GetValueAsObject(NavAreaKeyName);
+	FString NavAreaValueName = "Nullptr";
+	if (NavAreaValue)
+	{
+		NavAreaValueName = NavAreaValue->GetName();
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *NavAreaKeyName.ToString(), *NavAreaValueName));
+
+
+	bool bWalkOnFloor = ParasiteController->GetBlackboardComponent()->GetValueAsBool(WalkOnFloorKeyName);
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *WalkOnFloorKeyName.ToString(), (bWalkOnFloor ? TEXT("true") : TEXT("false"))));
+
+	UObject* AttackTargetValue = ParasiteController->GetBlackboardComponent()->GetValueAsObject(AttackTargetKeyName);
+	FString AttackTargetValueName = "Nullptr";
+	if (AttackTargetValue)
+	{
+		AttackTargetValueName = PathValue->GetName();
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *AttackTargetKeyName.ToString(), *AttackTargetValueName));
+}
+#endif
+
+#pragma region Save
+
 FENTGameElementData& AENTParasitePawn::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FENTParaSiteData Data;
+	FENTParasiteData Data;
 	Data.PawnTransform = GetActorTransform();
 
 	if (ParasiteController)
 	{
-		ParasiteController->SaveBlackBoardValues(Data);
+		ParasiteController->SaveControllerData(Data);
 	}
 
 	return CurrentWorldSave->ParasiteData.Add(GetName(), Data);
 }
 
-void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
-	const FENTParaSiteData& Data = static_cast<const FENTParaSiteData&>(GameElementData);
+	const FENTParasiteData& Data = static_cast<const FENTParasiteData&>(GameElementData);
 
 	SetActorTransform(Data.PawnTransform);
 
-	bLoadBlackboardData = true;
-	BlackboardData = Data;
+	bHasReceivedLoadingRequest = true;
+	LoadingData = Data;
 }
 
 #pragma endregion

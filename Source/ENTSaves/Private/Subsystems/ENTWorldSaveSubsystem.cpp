@@ -24,6 +24,7 @@ void UENTWorldSaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	Super::Initialize(Collection);
 
 	WorldInitDelegateHandle = FWorldDelegates::OnWorldInitializedActors.AddUObject(this, &UENTWorldSaveSubsystem::OnNewWorldStarted);
+	WorldBeginTearDownDelegateHandle = FWorldDelegates::OnWorldBeginTearDown.AddUObject(this, &UENTWorldSaveSubsystem::OnWorldBeginTearDown);
 }
 
 void UENTWorldSaveSubsystem::Deinitialize()
@@ -31,6 +32,7 @@ void UENTWorldSaveSubsystem::Deinitialize()
 	Super::Deinitialize();
 
 	FWorldDelegates::OnWorldInitializedActors.Remove(WorldInitDelegateHandle);
+	FWorldDelegates::OnWorldCleanup.Remove(WorldBeginTearDownDelegateHandle);
 }
 
 UENTDefaultSave* UENTWorldSaveSubsystem::CreateSave(const int SaveIndex)
@@ -175,25 +177,29 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 {
 	LoadSave(0, false);
 
-	bool bCannotLoad = !CurrentWorldSave;
+	bool bCannotLoadWorld = !CurrentWorldSave;
 
 #if WITH_EDITOR
 	const UENTEditorSettings* EditorSettings = GetDefault<UENTEditorSettings>();
 
 	if (EditorSettings && !EditorSettings->bLoadLatestWorldSave)
 	{
-		bCannotLoad = true;
+		bCannotLoadWorld = true;
+	}
+	else
+	{
+#endif
+		if (GetWorld())
+		{
+			WorldBeginPlayDelegateHandle = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UENTWorldSaveSubsystem::OnNewWorldBeginPlay);
+		}
+#if WITH_EDITOR
 	}
 #endif
 
-	if (bCannotLoad)
+	if (bCannotLoadWorld)
 	{
 		return;
-	}
-
-	if (GetWorld())
-	{
-		WorldBeginPlayDelegateHandle = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UENTWorldSaveSubsystem::OnNewWorldBeginPlay);
 	}
 
 	TArray<AActor*> Actors;
@@ -211,42 +217,49 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		FENTMuscleData* MuscleDataPtr = CurrentWorldSave->MuscleData.Find(Actor->GetName());
 		if (MuscleDataPtr)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*MuscleDataPtr);
+			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*MuscleDataPtr, CurrentWorldSave);
 			continue;
 		}
 
 		FENTNerveData* NerveDataPtr = CurrentWorldSave->NerveData.Find(Actor->GetName());
 		if (NerveDataPtr)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*NerveDataPtr);
+			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*NerveDataPtr, CurrentWorldSave);
 			continue;
 		}
 
 		FENTAmberOreData* AmberOreDataPtr = CurrentWorldSave->AmberOreData.Find(Actor->GetName());
 		if (AmberOreDataPtr)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*AmberOreDataPtr);
+			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*AmberOreDataPtr, CurrentWorldSave);
 			continue;
 		}
 
 		FENTWeakZoneData* WeakZoneDataPtr = CurrentWorldSave->WeakZoneData.Find(Actor->GetName());
 		if (WeakZoneDataPtr)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*WeakZoneDataPtr);
+			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*WeakZoneDataPtr, CurrentWorldSave);
 			continue;
 		}
 
 		FENTRespawnTreeData* RespawnTreeData = CurrentWorldSave->RespawnTreeData.Find(Actor->GetName());
 		if (RespawnTreeData)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*RespawnTreeData);
+			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*RespawnTreeData, CurrentWorldSave);
 			continue;
 		}
 
-		FENTParaSiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(Actor->GetName());
+		FENTParasiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(Actor->GetName());
 		if (ParaSiteData)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*ParaSiteData);
+			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*ParaSiteData, CurrentWorldSave);
+			continue;
+		}
+
+		FETNScriptedAIElementData* ScriptedAIElementData = CurrentWorldSave->ScriptedAIElementsData.Find(Actor->GetName());
+		if (ScriptedAIElementData)
+		{
+			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*ScriptedAIElementData, CurrentWorldSave);
 			continue;
 		}
 
@@ -271,5 +284,10 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 	}
 
 	FENTGameElementData EmptyData;
-	Cast<IENTSaveGameElementInterface>(Character)->LoadGameElement(EmptyData);
+	Cast<IENTSaveGameElementInterface>(Character)->LoadGameElement(EmptyData, CurrentWorldSave);
+}
+
+void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)
+{
+	SaveToSlot(0);
 }

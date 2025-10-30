@@ -3,12 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ENTPropulsionConstraint.h"
+#include "InputMappingContext.h"
+#include "Components/ENTPhysicConstraint.h"
 #include "GameElements/ENTWeakZoneInterface.h"
 #include "GameFramework/Character.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTDefaultCharacter.generated.h"
 
+class UPostProcessComponent;
 class UAkAudioEvent;
 class AENTRespawnTree;
 class UAkComponent;
@@ -87,6 +90,36 @@ protected:
 
 public:
 	UENTViewBobbing* GetViewBobbingObject() const {return ViewBobbing;}
+
+#pragma endregion
+
+#pragma region PostProcess
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "PostProcess")
+	TObjectPtr<UPostProcessComponent> PostProcessComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
+	TObjectPtr<UMaterialInterface> SpeedEffectMaterialReference;
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	TObjectPtr<UMaterialInstanceDynamic> SpeedEffectMaterial;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "PostProcess")
+	FName SpeedEffectParamName = "BlurDistance";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "PostProcess")
+	FFloatRange SpeedEffectVelocityRange = FFloatRange(1000.0f, 5000.0f);
+
+	void UpdateSpeedEffect(float DeltaSeconds);
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Display related speed effect values at screen, editor only
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
+	bool bShowSpeedEffectValues = false;
+#endif
 
 #pragma endregion
 
@@ -201,6 +234,12 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
 	bool HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const;
 
+#if WITH_EDITOR
+private:
+	UFUNCTION(Exec)
+	void IgnoreWeakZone(bool bIgnore) const;
+#endif
+
 #pragma endregion
 
 #pragma region Spike
@@ -255,6 +294,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const;
 
+#if WITH_EDITOR
+	UFUNCTION(Exec)
+	void EjectCharacterForward(float Force = 5000.0f) const;
+#endif
+
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void StopCharacter() const;
 
@@ -270,10 +314,15 @@ public:
 private:
 	FENTGameElementData EmptyData;
 
+#if WITH_EDITOR
+	UFUNCTION(Exec)
+	void SavePlayer();
+#endif
+
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
-	virtual void LoadGameElement(const FENTGameElementData& GameElementData) override;
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
 #pragma endregion
 
@@ -320,12 +369,12 @@ public:
 #pragma region Temp
 
 public:
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConstraintAdded, UENTPropulsionConstraint*, Constraint);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConstraintAdded, UENTPhysicConstraint*, Constraint);
 
 	UPROPERTY(BlueprintAssignable, Category = "Constraints")
 	FOnConstraintAdded OnConstraintAdded;
 
-	UENTPropulsionConstraint* AddConstraint();
+	UENTPhysicConstraint* AddConstraint(bool bIsLigament);
 
 #pragma endregion
 };

@@ -11,6 +11,18 @@ void UENTArtificialIntelligenceSubsystem::PostInitialize()
 	Super::PostInitialize();
 }
 
+void UENTArtificialIntelligenceSubsystem::OnWorldBeginPlay(UWorld& InWorld)
+{
+	Super::OnWorldBeginPlay(InWorld);
+
+	NoiseActor = InWorld.SpawnActor(AActor::StaticClass());
+	NoiseActor->AddComponentByClass(USceneComponent::StaticClass(), false, FTransform::Identity, false);
+
+#if WITH_EDITOR
+	NoiseActor->SetActorLabel("NoiseActor", true);
+#endif
+}
+
 void UENTArtificialIntelligenceSubsystem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

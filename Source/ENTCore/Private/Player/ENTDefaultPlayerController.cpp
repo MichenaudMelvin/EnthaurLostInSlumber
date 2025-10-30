@@ -97,21 +97,25 @@ void AENTDefaultPlayerController::BeginPlay()
 		return;
 	}
 
-	Subsystem->AddMappingContext(DefaultMappingContext, 0);
+	FModifyContextOptions ModifyContextOptions;
+	ModifyContextOptions.bNotifyUserSettings = true;
 
-	// TODO check this
-	// UPRFUIManager* UIManager = GetGameInstance()->GetSubsystem<UPRFUIManager>();
-	// if (!IsValid(UIManager))
-	// {
-	// 	return;
-	// }
-	//
-	// UIManager->SetMenuState(EPRFUIState::Gameplay);
+	Subsystem->AddMappingContext(DefaultMappingContext, 0, ModifyContextOptions);
 }
 
 void AENTDefaultPlayerController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	if (PlayerInputs.bInputInteractPressed)
+	{
+		PressedDuration += DeltaSeconds;
+		if (PressedDuration >= MaxPressedDuration)
+		{
+			PressedDuration = 0.0f;
+			PlayerInputs.bInputInteractPressed = false;
+		}
+	}
 
 #if WITH_EDITORONLY_DATA
 	if (bDebugInputs)
@@ -232,3 +236,25 @@ void AENTDefaultPlayerController::DisplayInputs(bool bDisplay)
 #endif
 
 #pragma endregion
+
+void AENTDefaultPlayerController::SwitchKeyBind()
+{
+	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
+	if (!IsValid(LocalPlayer))
+	{
+		return;
+	}
+	
+	UEnhancedInputLocalPlayerSubsystem* Subsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+	if (Subsystem == nullptr)
+	{
+		return;
+	}
+
+	Subsystem->RemoveMappingContext(DefaultMappingContext);
+	
+	UInputMappingContext* NewIMC = DuplicateObject(DefaultMappingContext, this);
+	NewIMC->MapKey(NewIA,NewKey);
+
+	Subsystem->AddMappingContext(NewIMC, 0);
+}

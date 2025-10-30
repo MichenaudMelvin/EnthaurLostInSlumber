@@ -116,6 +116,13 @@ void UENTLerpMaterialParam::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* N
 	FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 }
 
+#if WITH_EDITOR
+FString UENTLerpMaterialParam::GetStaticDescription() const
+{
+	return FString::Printf(TEXT("Lerp material param %s to the color %s"), *ParamName.ToString(), *TargetColor.ToString());
+}
+#endif
+
 void UENTLerpMaterialParam::AddDynamicMaterial(UMeshComponent* MeshComponent, int32 InMaterialIndex)
 {
 	UMaterialInterface* Material = MeshComponent->GetMaterial(InMaterialIndex);

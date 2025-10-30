@@ -22,14 +22,9 @@ void UENTHealthComponent::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (!GetOwner())
-	{
-		return;
-	}
-
-	OnUpdateHealth.RemoveAll(GetOwner());
-	OnReceiveDamages.RemoveAll(GetOwner());
-	OnHealthNull.RemoveAll(GetOwner());
+	OnUpdateHealth.Clear();
+	OnReceiveDamages.Clear();
+	OnHealthNull.Clear();
 }
 
 void UENTHealthComponent::TakeDamages(const float DamagesAmount)

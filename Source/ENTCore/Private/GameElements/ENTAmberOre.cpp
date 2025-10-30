@@ -125,7 +125,7 @@ FENTGameElementData& AENTAmberOre::SaveGameElement(UENTWorldSave* CurrentWorldSa
 	return CurrentWorldSave->AmberOreData.Add(GetName(), Data);
 }
 
-void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData)
+void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	const FENTAmberOreData& Data = static_cast<const FENTAmberOreData&>(GameElementData);
 	OreAmount = Data.CurrentOreAmount;

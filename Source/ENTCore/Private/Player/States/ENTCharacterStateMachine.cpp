@@ -71,7 +71,10 @@ UENTCharacterState* UENTCharacterStateMachine::ChangeState(EENTCharacterStateID 
 	}
 
 	CurrentState->StateEnter(PreviousStateID);
-	return NextState;
+
+	OnChangeState.Broadcast(CurrentState, CurrentStateID);
+
+	return CurrentState;
 }
 
 UENTCharacterState* UENTCharacterStateMachine::FindState(EENTCharacterStateID StateID) const
@@ -110,6 +113,31 @@ void UENTCharacterStateMachine::LockAllStates(bool bLock)
 		State->LockState(bLock);
 	}
 }
+
+void UENTCharacterStateMachine::LockCameraMovements(bool bLock)
+{
+	for (UENTCharacterState* State : StateList)
+	{
+		if (!State)
+		{
+			continue;
+		}
+
+		State->SetAllowCameraMovement(!bLock);
+	}
+}
+
+void UENTCharacterStateMachine::LockRollBobbing(bool bLock)
+{
+	for (UENTCharacterState* State : StateList)
+	{
+		if (!State)
+			continue;
+
+		State->SetAllowRollBobbing(!bLock);
+	}
+}
+
 
 UENTCharacterState* UENTCharacterStateMachine::FindStateByClass(TSubclassOf<UENTCharacterState> StateClass)
 {

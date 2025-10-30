@@ -20,6 +20,8 @@ public:
 
 	virtual FString GetSlotName() const override {return WorldName + SlotName;}
 
+#pragma region MapData
+
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
 	TMap<FString, FENTMuscleData> MuscleData;
 
@@ -36,9 +38,20 @@ public:
 	TMap<FString, FENTRespawnTreeData> RespawnTreeData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FENTParaSiteData> ParasiteData;
+	TMap<FString, FENTParasiteData> ParasiteData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
+	TMap<FString, FETNScriptedAIElementData> ScriptedAIElementsData;
+
+#pragma endregion
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|Player")
+	FVector PlayerLocation = FVector::ZeroVector;
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|Player")
+	FRotator PlayerCameraRotation = FRotator::ZeroRotator;
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|Player")
 	FString LastCheckPointName;
 
 	void ClearMapData();

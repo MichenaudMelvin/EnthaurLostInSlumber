@@ -9,7 +9,7 @@
 class UENTLevelEntering;
 class UENTDeathTransition;
 class UENTGameplayHUD;
-class UENTPropulsionConstraint;
+class UENTPhysicConstraint;
 
 UCLASS()
 class ENTUI_API UENTHUDManager : public UGameInstanceSubsystem
@@ -73,6 +73,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "UI|HUD")
 	void HideHUD();
 
+	void RebindPlayerDelegates();
+
 public:
 	void SetHUDVisibility(const ESlateVisibility& Visibility);
 
@@ -82,10 +84,10 @@ public:
 
 protected:
 	UFUNCTION()
-	void BindConstraintDelegates(UENTPropulsionConstraint* Constraint);
+	void BindConstraintDelegates(UENTPhysicConstraint* Constraint);
 
 	UPROPERTY()
-	TObjectPtr<UENTPropulsionConstraint> CurrentConstraint;
+	TObjectPtr<UENTPhysicConstraint> CurrentConstraint;
 
 #pragma endregion
 
