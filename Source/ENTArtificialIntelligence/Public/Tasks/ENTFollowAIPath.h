@@ -60,6 +60,18 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Path|Wall")
 	TObjectPtr<UCurveFloat> MovementCurve;
 
+	/**
+	 * @brief Only when walking on wall otherwise check on the ENTMoveToWithRotation task
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Path|Wall|Traces")
+	TArray<TEnumAsByte<EObjectTypeQuery>> GroundObjects;
+
+	/**
+	 * @brief Only when walking on wall otherwise check on the ENTMoveToWithRotation task
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Path|Wall|Traces", meta = (ClampMin = 0.0f, Units = "cm"))
+	float GroundTraceLength = 150.0f;
+
 	FVector StartLocation;
 
 	FTimeline MovementTimeline;
