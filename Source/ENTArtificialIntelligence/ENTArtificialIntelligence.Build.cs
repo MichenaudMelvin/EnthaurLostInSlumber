@@ -24,7 +24,8 @@ public class ENTArtificialIntelligence : ModuleRules
                 "GameplayTasks",
                 "NavigationSystem",
                 "ENTSaves",
-                "ENTComponents"
+                "ENTComponents",
+                "ENTCore"
             }
         );
 
