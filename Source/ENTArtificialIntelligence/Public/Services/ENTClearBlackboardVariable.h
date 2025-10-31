@@ -10,6 +10,7 @@ UCLASS()
 class ENTARTIFICIALINTELLIGENCE_API UENTClearBlackboardVariable : public UBTService
 {
 	GENERATED_BODY()
+
 public:
 	UENTClearBlackboardVariable();
 

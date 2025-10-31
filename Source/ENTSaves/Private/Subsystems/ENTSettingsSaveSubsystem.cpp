@@ -36,12 +36,55 @@ void UENTSettingsSaveSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 
+	WorldInitDelegateHandle = FWorldDelegates::OnWorldInitializedActors.AddUObject(this, &UENTSettingsSaveSubsystem::OnNewWorldStarted);
+
 	LoadSave(0, true);
 	Settings = Cast<UENTSettingsSave>(SaveObject);
 
 	SetMasterVolume(Settings->MasterVolume);
 	SetMusicVolume(Settings->MusicVolume);
 	SetSFXVolume(Settings->SFXVolume);
+}
+
+void UENTSettingsSaveSubsystem::Deinitialize()
+{
+	Super::Deinitialize();
+
+	FWorldDelegates::OnWorldInitializedActors.Remove(WorldInitDelegateHandle);
+}
+
+void UENTSettingsSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams)
+{
+	AActor* Actor = UGameplayStatics::GetActorOfClass(this, APostProcessVolume::StaticClass());
+	if (!Actor)
+	{
+		return;
+	}
+
+	CurrentPostProcess = Cast<APostProcessVolume>(Actor);
+
+	SetGamma(Settings->Gamma);
+}
+
+void UENTSettingsSaveSubsystem::SetGamma(float Gamma) const
+{
+	Settings->Gamma = Gamma;
+
+	if (CurrentPostProcess)
+	{
+		CurrentPostProcess->Settings.bOverride_ColorGamma = true;
+		CurrentPostProcess->Settings.ColorGamma = FVector4(Settings->Gamma, Settings->Gamma, Settings->Gamma);
+	}
+
+#if WITH_EDITOR
+	else
+	{
+		const FString Message = FString::Printf(TEXT("No post process found in the current scene, cannot change the gamma"));
+
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+	}
+#endif
 }
 
 void UENTSettingsSaveSubsystem::SetMasterVolume(float Volume) const

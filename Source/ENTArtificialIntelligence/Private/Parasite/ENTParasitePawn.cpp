@@ -36,6 +36,18 @@ AENTParasitePawn::AENTParasitePawn()
 	ForwardDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("ForwardDirection"));
 	ForwardDirection->SetupAttachment(ParasiteCollision);
 	ForwardDirection->bIsEditorOnly = true;
+
+	LeftDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("LeftDirection"));
+	LeftDirection->SetupAttachment(ParasiteCollision);
+	LeftDirection->bIsEditorOnly = true;
+	LeftDirection->SetRelativeRotation(FRotator(0.0f, 90.0f, 0.0f));
+	LeftDirection->SetArrowColor(FLinearColor::Green);
+
+	UpDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("UpDirection"));
+	UpDirection->SetupAttachment(ParasiteCollision);
+	UpDirection->bIsEditorOnly = true;
+	UpDirection->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f));
+	UpDirection->SetArrowColor(FLinearColor::Blue);
 #endif
 
 	ParasiteDeathZone = CreateDefaultSubobject<UBoxComponent>(TEXT("ParasiteDeathZone"));

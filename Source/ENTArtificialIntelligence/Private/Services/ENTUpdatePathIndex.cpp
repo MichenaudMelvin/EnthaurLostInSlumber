@@ -61,7 +61,7 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
 	int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
 
-	if(PathOBJ->IsAtTheEndOfThePath(Index))
+	if(PathOBJ->IsAtTheEndOfThePath(Index, Direction))
 	{
 		if (PathOBJ->IsAClosedLoop())
 		{
