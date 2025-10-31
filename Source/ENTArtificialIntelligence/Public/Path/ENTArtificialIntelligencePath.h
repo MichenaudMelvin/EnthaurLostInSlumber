@@ -133,11 +133,11 @@ public:
 
 	FTransform GetLastPointTransform(const ESplineCoordinateSpace::Type& CoordinateSpace) const;
 
-	FTransform GetTransformAtAlpha(float Alpha) const;
+	FTransform GetTransformAtAlpha(float Alpha, int8 SplineDirection) const;
 
-	FTransform GetStartTransform() const {return GetTransformAtAlpha(0.0f);}
+	FTransform GetStartTransform(int8 SplineDirection) const {return GetTransformAtAlpha(0.0f, SplineDirection);}
 
-	FTransform GetEndTransform() const {return GetTransformAtAlpha(1.0f);}
+	FTransform GetEndTransform(int8 SplineDirection) const {return GetTransformAtAlpha(1.0f, SplineDirection);}
 
 	FVector GetNavLinkLocation(int32 PathDirection) const;
 
@@ -193,6 +193,9 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f, EditCondition = bShowDebugMesh))
 	float DebugSplineAlpha = 0.0f;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug", meta = (EditCondition = bShowDebugMesh))
+	bool DebugInvertMeshDirection = false;
 
 	UPROPERTY(EditDefaultsOnly, Transient)
 	TObjectPtr<USceneComponent> DebugMeshRootComp;

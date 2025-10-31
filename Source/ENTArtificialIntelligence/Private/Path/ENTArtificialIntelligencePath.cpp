@@ -218,7 +218,7 @@ void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 
 	DebugMeshComp->SetVisibility(true);
 
-	DebugMeshRootComp->SetWorldTransform(GetTransformAtAlpha(DebugSplineAlpha));
+	DebugMeshRootComp->SetWorldTransform(GetTransformAtAlpha(DebugSplineAlpha, (DebugInvertMeshDirection ? -1 : 1)));
 	DebugMeshComp->SetRelativeRotation(RotationOffset);
 #endif
 }
@@ -287,12 +287,12 @@ FTransform AENTArtificialIntelligencePath::GetLastPointTransform(const ESplineCo
 	return Spline->GetTransformAtSplinePoint(Index, CoordinateSpace);
 }
 
-FTransform AENTArtificialIntelligencePath::GetTransformAtAlpha(float Alpha) const
+FTransform AENTArtificialIntelligencePath::GetTransformAtAlpha(float Alpha, int8 SplineDirection) const
 {
 	float Distance = FMath::Lerp(0.0f, Spline->GetSplineLength(), Alpha);
 	FTransform TargetTransform = Spline->GetTransformAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::World);
 
-	float NextAlpha = FMath::Clamp(Alpha + 0.1f, 0.0f, 1.0f);
+	float NextAlpha = FMath::Clamp(Alpha + (0.1f * SplineDirection), 0.0f, 1.0f);
 	float NextDistance = FMath::Lerp(0.0f, Spline->GetSplineLength(), NextAlpha);
 	FVector NextLocation = Spline->GetLocationAtDistanceAlongSpline(NextDistance, ESplineCoordinateSpace::World);
 
@@ -321,8 +321,8 @@ bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index, int32 Pat
 
 bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(const FVector& ActorLocation, int32 PathDirection, float Tolerance) const
 {
-	FVector StartLocation = GetStartTransform().GetLocation();
-	FVector EndLocation = GetEndTransform().GetLocation();
+	FVector StartLocation = GetStartTransform(PathDirection).GetLocation();
+	FVector EndLocation = GetEndTransform(PathDirection).GetLocation();
 
 	StartLocation += GetDirection() * -1 * SplineHeight;
 	EndLocation += GetDirection() * -1 * SplineHeight;
@@ -395,15 +395,15 @@ void AENTArtificialIntelligencePath::NotifyLinkReached(UNavLinkCustomComponent* 
 
 	if (FVector2D(Destination) == WorldStartPoint)
 	{
-		BlackboardComp->SetValueAsInt(PathIndexKeyName, Spline->GetNumberOfSplinePoints() - 1);
+		BlackboardComp->SetValueAsInt(PathIndexKeyName, Spline->GetNumberOfSplinePoints() - 2);
 		BlackboardComp->SetValueAsInt(PathDirectionKeyName, -1);
-		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetEndTransform().GetLocation());
+		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetEndTransform(-1).GetLocation());
 	}
 	else if (FVector2D(Destination) == WorldEndPoint)
 	{
-		BlackboardComp->SetValueAsInt(PathIndexKeyName, 0);
+		BlackboardComp->SetValueAsInt(PathIndexKeyName, 1);
 		BlackboardComp->SetValueAsInt(PathDirectionKeyName, 1);
-		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetStartTransform().GetLocation());
+		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetStartTransform(1).GetLocation());
 	}
 	else
 	{
