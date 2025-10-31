@@ -11,6 +11,7 @@ namespace ESplineCoordinateSpace
 	enum Type : int;
 }
 
+class UNavLinkCustomComponent;
 class UNavLinkComponent;
 class USplineComponent;
 
@@ -36,9 +37,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<USplineComponent> Spline;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<UNavLinkComponent> LinkToAnotherPath;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(Transient)
@@ -83,12 +81,42 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Direction")
 	bool bInvertDirection = true;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Directon", meta = (ClampMin = 0.0f, Units = "cm"))
+	UPROPERTY(EditDefaultsOnly, Category = "Direction", meta = (ClampMin = 0.0f, Units = "cm"))
 	float WallPointsOffset = 1.0f;
 
 	void UpdatePoints(bool bInConstructionScript);
 
 	void UpdateNavLink();
+
+	/**
+	 * @brief Blackboard key for AI
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	FName AIPathKeyName = "AIPath";
+
+	/**
+	 * @brief Blackboard key for AI
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	FName PathIndexKeyName = "PathIndex";
+
+	/**
+	 * @brief Blackboard key for AI
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	FName PathDirectionKeyName = "PathDirection";
+
+	/**
+	 * @brief Blackboard key for AI
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	FName JumpKeyName = "RequestJump";
+
+	/**
+	 * @brief Blackboard key for AI
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	FName NextPathLocationKeyName = "NextPathLocation";
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(VisibleInstanceOnly, Transient, Category = "AI")
@@ -109,9 +137,15 @@ public:
 
 	FTransform GetStartTransform() const {return GetTransformAtAlpha(0.0f);}
 
+	FTransform GetEndTransform() const {return GetTransformAtAlpha(1.0f);}
+
+	FVector GetNavLinkLocation(int32 PathDirection) const;
+
 	bool IsAClosedLoop() const {return bIsAClosedLoop;}
 
-	bool IsAtTheEndOfThePath(uint16 Index) const;
+	bool IsAtTheEndOfThePath(uint16 Index, int32 PathDirection) const;
+
+	bool IsAtTheEndOfThePath(const FVector& ActorLocation, int32 PathDirection, float Tolerance) const;
 
 	USplineComponent* GetSpline() const {return Spline;}
 
@@ -132,6 +166,22 @@ public:
 
 	void DetachAI(APawn* AI);
 #endif
+
+#pragma region NavLinks
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "NavLink")
+	TObjectPtr<UNavLinkCustomComponent> PathLink;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "NavLink", meta = (MakeEditWidget))
+	FVector StartNavLinkLocation = FVector::ZeroVector;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "NavLink", meta = (MakeEditWidget))
+	FVector EndNavLinkLocation = FVector(500.0f, 0.0f, 0.0f);
+
+	void NotifyLinkReached(UNavLinkCustomComponent* NavLinkCustomComponent, UObject* PathingAgent, const UE::Math::TVector<double>& Destination);
+
+#pragma endregion
 
 #pragma region Debug
 

@@ -1,12 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Tasks/ENTJumpToNextPath.h"
+#include "Tasks/ENTJumpAI.h"
 
 #include "AIController.h"
 #include "ENTGravityPawnMovement.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
@@ -18,17 +19,17 @@
 #include "Debug/ENTArrowActor.h"
 #endif
 
-UENTJumpToNextPath::UENTJumpToNextPath()
+UENTJumpAI::UENTJumpAI()
 {
-	NodeName = "JumpToNextPath";
+	NodeName = "Jump";
 	bNotifyTick = true;
 
-	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpToNextPath, AIPath), AENTArtificialIntelligencePath::StaticClass());
-	AINextPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpToNextPath, AINextPath),  AENTArtificialIntelligencePath::StaticClass());
-	DoesWalkOnFloor.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpToNextPath, DoesWalkOnFloor));
+	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpAI, AIPath), AENTArtificialIntelligencePath::StaticClass());
+	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpAI, PathDirection));
+	DoesWalkOnFloor.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpAI, DoesWalkOnFloor));
 }
 
-void UENTJumpToNextPath::InitializeFromAsset(UBehaviorTree& Asset)
+void UENTJumpAI::InitializeFromAsset(UBehaviorTree& Asset)
 {
 	Super::InitializeFromAsset(Asset);
 
@@ -36,7 +37,7 @@ void UENTJumpToNextPath::InitializeFromAsset(UBehaviorTree& Asset)
 	if (ensure(BBAsset))
 	{
 		AIPath.ResolveSelectedKey(*BBAsset);
-		AINextPath.ResolveSelectedKey(*BBAsset);
+		PathDirection.ResolveSelectedKey(*BBAsset);
 		DoesWalkOnFloor.ResolveSelectedKey(*BBAsset);
 	}
 
@@ -47,14 +48,14 @@ void UENTJumpToNextPath::InitializeFromAsset(UBehaviorTree& Asset)
 
 	FOnTimelineFloat UpdateEvent;
 	FOnTimelineEvent FinishEvent;
-	UpdateEvent.BindDynamic(this, &UENTJumpToNextPath::MovementUpdate);
-	FinishEvent.BindDynamic(this, &UENTJumpToNextPath::FinishTask);
+	UpdateEvent.BindDynamic(this, &UENTJumpAI::MovementUpdate);
+	FinishEvent.BindDynamic(this, &UENTJumpAI::FinishTask);
 	JumpTimeline.AddInterpFloat(JumpCurve, UpdateEvent);
 	JumpTimeline.SetTimelineFinishedFunc(FinishEvent);
 	JumpTimeline.SetPlayRate(1 / JumpDuration);
 }
 
-EBTNodeResult::Type UENTJumpToNextPath::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+EBTNodeResult::Type UENTJumpAI::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	Super::ExecuteTask(OwnerComp, NodeMemory);
 
@@ -71,17 +72,13 @@ EBTNodeResult::Type UENTJumpToNextPath::ExecuteTask(UBehaviorTreeComponent& Owne
 	}
 
 	UObject* AIPathObject = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Object>(AIPath.GetSelectedKeyID());
-	UObject* AINextPathObject = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID());
-
-	if (!AIPathObject || !AINextPathObject)
+	if (!AIPathObject)
 	{
 		return EBTNodeResult::Failed;
 	}
 
 	AENTArtificialIntelligencePath* CurrentPath = Cast<AENTArtificialIntelligencePath>(AIPathObject);
-	AENTArtificialIntelligencePath* NextPath = Cast<AENTArtificialIntelligencePath>(AINextPathObject);
-
-	if (!CurrentPath || !NextPath)
+	if (!CurrentPath)
 	{
 		return EBTNodeResult::Failed;
 	}
@@ -92,8 +89,20 @@ EBTNodeResult::Type UENTJumpToNextPath::ExecuteTask(UBehaviorTreeComponent& Owne
 		return EBTNodeResult::Failed;
 	}
 
+	int32 Direction = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
+
 	StartTransform = CurrentPawn->GetActorTransform();
-	TargetTransform = NextPath->GetStartTransform();
+
+	if (bJumpOnTheGround)
+	{
+		TargetTransform.SetLocation(CurrentPath->GetNavLinkLocation(Direction));
+		TargetTransform.SetRotation(FQuat::Identity);
+		TargetTransform.SetScale3D(FVector::OneVector);
+	}
+	else
+	{
+		TargetTransform = Direction == 1 ? CurrentPath->GetStartTransform() : CurrentPath->GetEndTransform();
+	}
 
 	float PawnHeight = 0.0f;
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
@@ -102,7 +111,7 @@ EBTNodeResult::Type UENTJumpToNextPath::ExecuteTask(UBehaviorTreeComponent& Owne
 		PawnHeight = ParasitePawn->GetCollisionComp()->GetUnscaledBoxExtent().Z;
 	}
 
-	FVector HeightOffset = PawnHeight * (NextPath->GetDirection() * -1);
+	FVector HeightOffset = PawnHeight * (CurrentPath->GetDirection() * -1);
 	FVector TargetLocation = TargetTransform.GetLocation();
 	TargetLocation += HeightOffset;
 
@@ -136,7 +145,7 @@ EBTNodeResult::Type UENTJumpToNextPath::ExecuteTask(UBehaviorTreeComponent& Owne
 	return EBTNodeResult::InProgress;
 }
 
-void UENTJumpToNextPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+void UENTJumpAI::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	Super::TickTask(OwnerComp, NodeMemory, DeltaSeconds);
 
@@ -144,25 +153,19 @@ void UENTJumpToNextPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* Node
 }
 
 #if WITH_EDITOR
-FString UENTJumpToNextPath::GetStaticDescription() const
+FString UENTJumpAI::GetStaticDescription() const
 {
-	FString AIPathKeyDesc("invalid");
+	FString NextPathKeyDesc("invalid");
 	if (AIPath.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
 	{
-		AIPathKeyDesc = AIPath.SelectedKeyName.ToString();
+		NextPathKeyDesc = AIPath.SelectedKeyName.ToString();
 	}
 
-	FString NextPathKeyDesc("invalid");
-	if (AINextPath.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
-	{
-		NextPathKeyDesc = AINextPath.SelectedKeyName.ToString();
-	}
-
-	return FString::Printf(TEXT("Jump from %s to %s during %f seconds"), *AIPathKeyDesc, *NextPathKeyDesc, JumpDuration);
+	return FString::Printf(TEXT("Jump to %s during %f seconds"), *NextPathKeyDesc, JumpDuration);
 }
 #endif
 
-void UENTJumpToNextPath::MovementUpdate(float Alpha)
+void UENTJumpAI::MovementUpdate(float Alpha)
 {
 	FTransform ResultTransform;
 	ResultTransform.SetLocation(JumpSpline->GetLocationAtAlpha(Alpha));
@@ -175,7 +178,7 @@ void UENTJumpToNextPath::MovementUpdate(float Alpha)
 	CurrentPawn->SetActorTransform(ResultTransform);
 }
 
-void UENTJumpToNextPath::FinishTask()
+void UENTJumpAI::FinishTask()
 {
 	if (JumpSpline)
 	{
@@ -189,15 +192,15 @@ void UENTJumpToNextPath::FinishTask()
 #endif
 	}
 
-	UObject* NextAIPath = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID());
+	UObject* PathObject = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Object>(AIPath.GetSelectedKeyID());
 
-	if (!NextAIPath)
+	if (!PathObject)
 	{
 		FinishLatentTask(*CurrentOwnerComp, EBTNodeResult::Failed);
 		return;
 	}
 
-	AENTArtificialIntelligencePath* Path = Cast<AENTArtificialIntelligencePath>(NextAIPath);
+	AENTArtificialIntelligencePath* Path = Cast<AENTArtificialIntelligencePath>(PathObject);
 	if (!Path)
 	{
 		FinishLatentTask(*CurrentOwnerComp, EBTNodeResult::Failed);
@@ -207,12 +210,10 @@ void UENTJumpToNextPath::FinishTask()
 	UENTGravityPawnMovement* GravityPawnMovement = Cast<UENTGravityPawnMovement>(CurrentPawn->GetMovementComponent());
 	if (GravityPawnMovement)
 	{
-		Path->IsOnFloor() ? GravityPawnMovement->ResetGravityScale() : GravityPawnMovement->SetGravityScale(0.0f);
+		(Path->IsOnFloor() || bJumpOnTheGround) ? GravityPawnMovement->ResetGravityScale() : GravityPawnMovement->SetGravityScale(0.0f);
 	}
 
-	CurrentBlackboardComponent->SetValue<UBlackboardKeyType_Bool>(DoesWalkOnFloor.GetSelectedKeyID(), Path->IsOnFloor());
-	CurrentBlackboardComponent->SetValue<UBlackboardKeyType_Object>(AIPath.GetSelectedKeyID(), Path);
-	CurrentBlackboardComponent->SetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID(), nullptr);
+	CurrentBlackboardComponent->SetValue<UBlackboardKeyType_Bool>(DoesWalkOnFloor.GetSelectedKeyID(), (Path->IsOnFloor() || bJumpOnTheGround));
 
 	FinishLatentTask(*CurrentOwnerComp, EBTNodeResult::Succeeded);
 }
