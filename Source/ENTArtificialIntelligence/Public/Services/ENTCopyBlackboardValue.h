@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTService.h"
-#include "ENTClearBlackboardVariable.generated.h"
+#include "ENTCopyBlackboardValue.generated.h"
 
 UCLASS()
-class ENTARTIFICIALINTELLIGENCE_API UENTClearBlackboardVariable : public UBTService
+class ENTARTIFICIALINTELLIGENCE_API UENTCopyBlackboardValue : public UBTService
 {
 	GENERATED_BODY()
 
 public:
-	UENTClearBlackboardVariable();
+	UENTCopyBlackboardValue();
 
 protected:
 	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
@@ -25,14 +25,17 @@ protected:
 	virtual FString GetStaticDescription() const override;
 #endif
 
-	void ClearValue(UBehaviorTreeComponent& OwnerComp);
+	void CopyValue(UBehaviorTreeComponent& OwnerComp) const;
 
-	UPROPERTY(EditInstanceOnly, Category = "Bool")
-	FBlackboardKeySelector BlackboardKey;
+	UPROPERTY(EditInstanceOnly, Category = "Service")
+	FBlackboardKeySelector SourceBlackboardKey;
+
+	UPROPERTY(EditInstanceOnly, Category = "Service")
+	FBlackboardKeySelector DestinationBlackboardKey;
 
 	/**
 	 * @brief Select if the SetValue is executed at the start or at the end of the task attached
 	 */
-	UPROPERTY(EditInstanceOnly, Category = "Bool")
+	UPROPERTY(EditInstanceOnly, Category = "Service")
 	bool bExecuteAtStart = true;
 };

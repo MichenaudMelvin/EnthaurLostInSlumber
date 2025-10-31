@@ -3,10 +3,13 @@
 
 #include "Path/ENTArtificialIntelligencePath.h"
 
-#include "NavLinkComponent.h"
+#include "AIController.h"
+#include "NavLinkCustomComponent.h"
 #include "Components/SplineComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "BehaviorTree/BlackboardComponent.h"
+#include "Navigation/PathFollowingComponent.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/ArrowComponent.h"
@@ -23,8 +26,9 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 	Spline->SetupAttachment(Root);
 
-	LinkToAnotherPath = CreateDefaultSubobject<UNavLinkComponent>(TEXT("PathLink"));
-	LinkToAnotherPath->SetupAttachment(Root);
+	PathLink = CreateDefaultSubobject<UNavLinkCustomComponent>(TEXT("StartNavLink"));
+	PathLink->SetMoveReachedLink(this, &AENTArtificialIntelligencePath::NotifyLinkReached);
+	PathLink->SetNavigationRelevancy(true);
 
 #if WITH_EDITORONLY_DATA
 	DebugMeshRootComp = CreateDefaultSubobject<USceneComponent>(TEXT("DebugRoot"));
@@ -58,9 +62,9 @@ void AENTArtificialIntelligencePath::BeginPlay()
 	DebugMeshComp->DestroyComponent();
 #endif
 
-	if (bIsAClosedLoop)
+	if (bIsAClosedLoop || IsOnFloor())
 	{
-		LinkToAnotherPath->DestroyComponent();
+		PathLink->DestroyComponent();
 	}
 
 	UpdatePoints(false);
@@ -76,6 +80,8 @@ void AENTArtificialIntelligencePath::OnConstruction(const FTransform& Transform)
 	Spline->SetClosedLoop(bIsAClosedLoop);
 
 	UpdatePoints(true);
+
+	PathLink->SetLinkData(StartNavLinkLocation, EndNavLinkLocation, ENavLinkDirection::BothWays);
 
 #if WITH_EDITORONLY_DATA
 	if (AttachedAI)
@@ -219,8 +225,6 @@ void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 
 void AENTArtificialIntelligencePath::UpdateNavLink()
 {
-	LinkToAnotherPath->Links.Empty();
-
 	if (bIsAClosedLoop || !NextPath || NextPath == this)
 	{
 		return;
@@ -230,9 +234,6 @@ void AENTArtificialIntelligencePath::UpdateNavLink()
 	FVector LocalPosition = GetActorTransform().InverseTransformPosition(FirstTransform.GetLocation());
 
 	FTransform LastTransform = GetLastPointTransform(ESplineCoordinateSpace::Local);
-
-	FNavigationLink NavLink(LastTransform.GetLocation(), LocalPosition);
-	LinkToAnotherPath->Links.Add(NavLink);
 
 #if WITH_EDITORONLY_DATA
 	if (!NextPath->PreviousPaths.Contains(this))
@@ -303,9 +304,41 @@ FTransform AENTArtificialIntelligencePath::GetTransformAtAlpha(float Alpha) cons
 	return TargetTransform;
 }
 
-bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index) const
+FVector AENTArtificialIntelligencePath::GetNavLinkLocation(int32 PathDirection) const
 {
-	return Index == (Spline->GetNumberOfSplinePoints() - 1);
+	FVector StartPoint;
+	FVector EndPoint;
+	ENavLinkDirection::Type NavLinkDirection;
+
+	PathLink->GetLinkData(StartPoint, EndPoint, NavLinkDirection);
+	return PathDirection == 1 ? (EndPoint + GetActorLocation()) : (StartPoint + GetActorLocation());
+}
+
+bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index, int32 PathDirection) const
+{
+	return PathDirection == 1 ? Index == (Spline->GetNumberOfSplinePoints() - 1) : Index == 0;
+}
+
+bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(const FVector& ActorLocation, int32 PathDirection, float Tolerance) const
+{
+	FVector StartLocation = GetStartTransform().GetLocation();
+	FVector EndLocation = GetEndTransform().GetLocation();
+
+	StartLocation += GetDirection() * -1 * SplineHeight;
+	EndLocation += GetDirection() * -1 * SplineHeight;
+
+	if (PathDirection == -1 && ActorLocation.Equals(StartLocation, Tolerance))
+	{
+		return true;
+	}
+	else if (PathDirection == 1 && ActorLocation.Equals(EndLocation, Tolerance))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool AENTArtificialIntelligencePath::GetTracedPointLocation(int8 PointIndex, FHitResult& HitResult)
@@ -328,6 +361,68 @@ bool AENTArtificialIntelligencePath::IsOnFloor() const
 {
 	return Direction == EAxis::Z && bInvertDirection;
 }
+
+#pragma region NavLinks
+
+void AENTArtificialIntelligencePath::NotifyLinkReached(UNavLinkCustomComponent* NavLinkCustomComponent, UObject* PathingAgent, const UE::Math::TVector<double>& Destination)
+{
+	UPathFollowingComponent* PathComp = Cast<UPathFollowingComponent>(PathingAgent);
+	if (!PathComp)
+	{
+		return;
+	}
+
+	AActor* PathOwner = PathComp->GetOwner();
+	if (!PathOwner)
+	{
+		return;
+	}
+
+	AAIController* ControllerOwner = Cast<AAIController>(PathOwner);
+	if (!ControllerOwner)
+	{
+		return;
+	}
+
+	UBlackboardComponent* BlackboardComp = ControllerOwner->GetBlackboardComponent();
+	if (!BlackboardComp)
+	{
+		return;
+	}
+
+	FVector2D WorldStartPoint = FVector2D(StartNavLinkLocation + GetActorLocation());
+	FVector2D WorldEndPoint = FVector2D(EndNavLinkLocation + GetActorLocation());
+
+	if (FVector2D(Destination) == WorldStartPoint)
+	{
+		BlackboardComp->SetValueAsInt(PathIndexKeyName, Spline->GetNumberOfSplinePoints() - 1);
+		BlackboardComp->SetValueAsInt(PathDirectionKeyName, -1);
+		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetEndTransform().GetLocation());
+	}
+	else if (FVector2D(Destination) == WorldEndPoint)
+	{
+		BlackboardComp->SetValueAsInt(PathIndexKeyName, 0);
+		BlackboardComp->SetValueAsInt(PathDirectionKeyName, 1);
+		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetStartTransform().GetLocation());
+	}
+	else
+	{
+#if WITH_EDITOR
+		const FString Message = FString::Printf(TEXT("Failed to find destination"));
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+#endif
+		return;
+	}
+
+	BlackboardComp->SetValueAsBool(JumpKeyName, true);
+	BlackboardComp->SetValueAsObject(AIPathKeyName, this);
+}
+
+#pragma endregion
+
+#pragma region Debug
 
 #if WITH_EDITORONLY_DATA
 bool AENTArtificialIntelligencePath::AttachAI(APawn* AI)
@@ -359,3 +454,5 @@ void AENTArtificialIntelligencePath::DetachAI(APawn* AI)
 	AttachedAI = nullptr;
 }
 #endif
+
+#pragma endregion

@@ -22,5 +22,10 @@ protected:
 #endif
 
 	UPROPERTY(EditInstanceOnly, Category = "Ground", meta = (ClampMin = 0.0f, Units = "cm"))
-	float GroundTraceLength = 25.0f;
+	float GroundTraceLength = 150.0f;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDebugTask = false;
+#endif
 };

@@ -6,7 +6,7 @@
 
 UENTClearBlackboardVariable::UENTClearBlackboardVariable()
 {
-	NodeName = "ClearBlackboardVariable";
+	NodeName = "ClearBlackboardValue";
 	bNotifyBecomeRelevant = true;
 	bNotifyCeaseRelevant = true;
 }

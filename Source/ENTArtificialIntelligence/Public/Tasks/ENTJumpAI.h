@@ -5,17 +5,17 @@
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
 #include "Components/TimelineComponent.h"
-#include "ENTJumpToNextPath.generated.h"
+#include "ENTJumpAI.generated.h"
 
 class AENTJumpSpline;
 
 UCLASS()
-class ENTARTIFICIALINTELLIGENCE_API UENTJumpToNextPath : public UBTTaskNode
+class ENTARTIFICIALINTELLIGENCE_API UENTJumpAI : public UBTTaskNode
 {
 	GENERATED_BODY()
 
 public:
-	UENTJumpToNextPath();
+	UENTJumpAI();
 
 protected:
 	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
@@ -32,10 +32,13 @@ protected:
 	FBlackboardKeySelector AIPath;
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
-	FBlackboardKeySelector AINextPath;
+	FBlackboardKeySelector PathDirection;
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector DoesWalkOnFloor;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	bool bJumpOnTheGround = false;
 
 	FTransform StartTransform;
 

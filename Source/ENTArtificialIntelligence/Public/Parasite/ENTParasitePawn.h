@@ -50,6 +50,12 @@ protected:
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, Category = "Mesh")
 	TObjectPtr<class UArrowComponent> ForwardDirection;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Mesh")
+	TObjectPtr<class UArrowComponent> LeftDirection;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Mesh")
+	TObjectPtr<class UArrowComponent> UpDirection;
 #endif
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
