@@ -41,4 +41,6 @@ public:
 	void SetRadius(float InRadius) {Radius = InRadius;}
 
 	TObjectPtr<UMaterialInstanceDynamic> GetMaterial() const {return Material;}
+
+	void Init(const FLinearColor& Color) const;
 };

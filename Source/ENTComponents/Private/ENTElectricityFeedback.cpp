@@ -29,6 +29,11 @@ void AENTElectricityFeedback::BeginPlay()
 	ElectricityNoises->PostAssociatedAkEvent(static_cast<int32>(EAkCallbackType::EndOfEvent), CallBackEvent);
 }
 
+void AENTElectricityFeedback::Init(const FLinearColor& Color) const
+{
+	Material->SetVectorParameterValue("Color", Color);
+}
+
 void AENTElectricityFeedback::PlayNoise(EAkCallbackType CallbackType, UAkCallbackInfo* CallbackInfo)
 {
 	if (CallbackType != EAkCallbackType::EndOfEvent)

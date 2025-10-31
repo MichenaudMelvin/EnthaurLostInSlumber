@@ -22,7 +22,7 @@ void UENTElectricityComponent::BeginPlay()
 	UpdateEvent.BindDynamic(this, &UENTElectricityComponent::ElectricityRadiusUpdate);
 	FinishedEvent.BindDynamic(this, &UENTElectricityComponent::ElectricityRadiusFinished);
 
-	ElectricityRadiusTimeline.AddInterpFloat(FirstElectricityRadiusCurve, UpdateEvent);
+	ElectricityRadiusTimeline.AddInterpFloat(FirstElectricityRadiusCurve, UpdateEvent, "PropertyRadius", "TrackRadius");
 	ElectricityRadiusTimeline.SetTimelineFinishedFunc(FinishedEvent);
 
 	UpdateEvent.Unbind();
@@ -57,14 +57,19 @@ void UENTElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 
 void UENTElectricityComponent::PlayElectricityAnimation(AActor* LinkedActor)
 {
+	OnElectricityAnimationStarted.Broadcast(LinkedActor);
+	PlayElectricityAnimation(LinkedActor->GetTransform());
+}
+
+void UENTElectricityComponent::PlayElectricityAnimation(const FTransform& Transform)
+{
 	if (!ElectricityFeedbackClass)
 	{
 		return;
 	}
 
-	ElectricityFeedback = GetWorld()->SpawnActor<AENTElectricityFeedback>(ElectricityFeedbackClass, LinkedActor->GetActorTransform());
-
-	OnElectricityAnimationStarted.Broadcast(LinkedActor);
+	ElectricityFeedback = GetWorld()->SpawnActor<AENTElectricityFeedback>(ElectricityFeedbackClass, Transform);
+	ElectricityFeedback->Init(ElectricityColor);
 
 	if (!ElectricityFeedback)
 	{
@@ -73,7 +78,7 @@ void UENTElectricityComponent::PlayElectricityAnimation(AActor* LinkedActor)
 
 	StartRadiusTarget = 0.0f;
 	EndRadiusTarget = FirstRadiusTarget;
-	ElectricityRadiusTimeline.SetFloatCurve(FirstElectricityRadiusCurve, SecondElectricityRadiusCurve.GetFName());
+	ElectricityRadiusTimeline.SetFloatCurve(FirstElectricityRadiusCurve, "TrackRadius");
 	ElectricityRadiusTimeline.SetPlayRate(1 / FirstElectricityRadiusDuration);
 	ElectricityRadiusTimeline.PlayFromStart();
 
@@ -123,7 +128,7 @@ void UENTElectricityComponent::ElectricityMovementFinished()
 	
 	StartRadiusTarget = FirstRadiusTarget;
 	EndRadiusTarget = SecondRadiusTarget;
-	ElectricityRadiusTimeline.SetFloatCurve(SecondElectricityRadiusCurve, FirstElectricityRadiusCurve.GetFName());
+	ElectricityRadiusTimeline.SetFloatCurve(SecondElectricityRadiusCurve, "TrackRadius");
 	ElectricityRadiusTimeline.SetPlayRate(1 / SecondElectricityRadiusDuration);
 	ElectricityRadiusTimeline.PlayFromStart();
 

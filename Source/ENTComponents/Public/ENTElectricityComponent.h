@@ -28,6 +28,8 @@ public:
 
 	void PlayElectricityAnimation(AActor* LinkedActor = nullptr);
 
+	void PlayElectricityAnimation(const FTransform& Transform);
+
 	UPROPERTY(BlueprintAssignable, Category="Electricity|Events")
 	FOnElectricityAnimationStarted OnElectricityAnimationStarted;
 
@@ -56,12 +58,17 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Electricity", meta = (ClampMin = 1.0f, Units = "cm/s"))
 	float ElectricitySpeed = 750.0f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity")
+	FLinearColor ElectricityColor{FLinearColor::Blue};
+
 	UPROPERTY()
 	AActor* ElectricityFeedbackInstance;
 
 private:
 	UPROPERTY()
 	TObjectPtr<AENTElectricityFeedback> ElectricityFeedback;
+
+	
 
 #pragma region ElectricityRadius
 
@@ -89,7 +96,7 @@ protected:
 	float StartRadiusTarget = 0.0f;
 
 	float EndRadiusTarget = 0.0f;
-
+	
 	UFUNCTION()
 	void ElectricityRadiusUpdate(float Alpha);
 

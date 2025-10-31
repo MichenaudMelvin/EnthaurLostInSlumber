@@ -9,6 +9,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTWeakZone.generated.h"
 
+class UENTElectricityComponent;
 class UAkAudioEvent;
 
 USTRUCT(BlueprintType)
@@ -67,6 +68,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "WeakZone")
 	TObjectPtr<UAkAudioEvent> GrowlNoise;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Electricity")
+	TObjectPtr<UENTElectricityComponent> ElectricityComponent;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
@@ -211,4 +215,11 @@ public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
+
+#pragma region Electricity
+
+protected:
+	UFUNCTION()
+	void OnElectricityMovementFinished();
+#pragma endregion 
 };
