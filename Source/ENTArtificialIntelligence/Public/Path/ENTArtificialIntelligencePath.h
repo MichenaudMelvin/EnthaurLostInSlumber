@@ -171,15 +171,52 @@ public:
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "NavLink")
-	TObjectPtr<UNavLinkCustomComponent> PathLink;
+	TObjectPtr<UNavLinkCustomComponent> FirstNavLink;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "NavLink")
+	TObjectPtr<UNavLinkCustomComponent> SecondNavLink;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "NavLink", meta = (MakeEditWidget))
-	FVector StartNavLinkLocation = FVector::ZeroVector;
+	FVector FirstNavLinkLocation = FVector::ZeroVector;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "NavLink", meta = (MakeEditWidget))
-	FVector EndNavLinkLocation = FVector(500.0f, 0.0f, 0.0f);
+	FVector SecondNavLinkLocation = FVector(500.0f, 0.0f, 0.0f);
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Transient, Category = "NavLink")
+	bool bIgnoreGroundTrace = false;
+
+	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (Units = cm, ClampMin = 0.0f))
+	float GroundTraceLength = 500.0f;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UArrowComponent> FistNavLinkDebugArrow;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UArrowComponent> SecondNavLinkDebugArrow;
+#endif
+
+	/**
+	 * @brief This component is just used to build a navmesh and create a link between 2 nav meshes, it is destroyed at the beginplay
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "NavLink")
+	TObjectPtr<UStaticMeshComponent> NavLinkPlatform;
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink")
+	FVector PlatformOffset = FVector::ZeroVector;
+
+	/**
+	 * @brief PlatformScale * MeshSize.Y is the result you will see in the engine
+	 */
+	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (ClampMin = 0.0f))
+	float PlatformScale = 10.0f;
+
+	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (Units = cm, ClampMin = 0.0f))
+	float NavLinkOffset = 500.0f;
 
 	void NotifyLinkReached(UNavLinkCustomComponent* NavLinkCustomComponent, UObject* PathingAgent, const UE::Math::TVector<double>& Destination);
+
+	void BuildNavLinkPlatform();
 
 #pragma endregion
 
