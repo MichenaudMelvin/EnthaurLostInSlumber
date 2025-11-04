@@ -27,16 +27,6 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 	Spline->SetupAttachment(Root);
 
-	NavLinkPlatform = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("NavLinkPlatform"));
-	NavLinkPlatform->SetupAttachment(Root);
-	NavLinkPlatform->SetMobility(EComponentMobility::Static);
-	NavLinkPlatform->SetCollisionResponseToAllChannels(ECR_Ignore);
-	NavLinkPlatform->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
-	NavLinkPlatform->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	NavLinkPlatform->SetHiddenInGame(true);
-	NavLinkPlatform->SetVisibility(false);
-	NavLinkPlatform->CastShadow = false;
-
 	FirstNavLink = CreateDefaultSubobject<UNavLinkCustomComponent>(TEXT("FirstNavLink"));
 	FirstNavLink->SetMoveReachedLink(this, &AENTArtificialIntelligencePath::NotifyLinkReached);
 	FirstNavLink->SetNavigationRelevancy(true);
@@ -63,6 +53,17 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 	BillboardComponent = CreateDefaultSubobject<UBillboardComponent>("Billboard");
 	BillboardComponent->SetupAttachment(Root);
 	BillboardComponent->bIsEditorOnly = true;
+
+	NavLinkPlatform = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("NavLinkPlatform"));
+	NavLinkPlatform->SetupAttachment(Root);
+	NavLinkPlatform->SetMobility(EComponentMobility::Static);
+	NavLinkPlatform->SetCollisionResponseToAllChannels(ECR_Ignore);
+	NavLinkPlatform->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+	NavLinkPlatform->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	NavLinkPlatform->SetHiddenInGame(true);
+	NavLinkPlatform->SetVisibility(false);
+	NavLinkPlatform->CastShadow = false;
+	NavLinkPlatform->bIsEditorOnly = true;
 
 	FistNavLinkDebugArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("FistNavLinkDebugArrow"));
 	FistNavLinkDebugArrow->SetupAttachment(Root);
@@ -91,7 +92,10 @@ void AENTArtificialIntelligencePath::BeginPlay()
 		SecondNavLink->DestroyComponent();
 	}
 
+#if WITH_EDITORONLY_DATA
 	NavLinkPlatform->DestroyComponent();
+#endif
+
 	UpdatePoints(false);
 }
 
@@ -121,10 +125,11 @@ void AENTArtificialIntelligencePath::OnConstruction(const FTransform& Transform)
 			PathToUpdate->UpdateNavLink();
 		}
 	}
+
+	BuildNavLinkPlatform();
 #endif
 
 	UpdateNavLink();
-	BuildNavLinkPlatform();
 }
 
 #if WITH_EDITOR
@@ -484,7 +489,8 @@ void AENTArtificialIntelligencePath::NotifyLinkReached(UNavLinkCustomComponent* 
 	BlackboardComp->SetValueAsObject(AIPathKeyName, this);
 }
 
-void AENTArtificialIntelligencePath::BuildNavLinkPlatform()
+#if WITH_EDITORONLY_DATA
+void AENTArtificialIntelligencePath::BuildNavLinkPlatform() const
 {
 	if (!NavLinkPlatform)
 	{
@@ -517,6 +523,7 @@ void AENTArtificialIntelligencePath::BuildNavLinkPlatform()
 	FirstNavLink->SetLinkData(FirstNavLinkLocation, FirstNavLinkEndLocation, ENavLinkDirection::BothWays);
 	SecondNavLink->SetLinkData(SecondNavLinkLocation, SecondNavLinkEndLocation, ENavLinkDirection::BothWays);
 }
+#endif
 
 #pragma endregion
 

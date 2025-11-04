@@ -43,6 +43,16 @@ UENTDefaultSave* UENTWorldSaveSubsystem::CreateSave(const int SaveIndex)
 		return nullptr;
 	}
 
+	if (!GetWorld())
+	{
+		return nullptr;
+	}
+
+	if (!GetWorld()->GetAuthGameMode())
+	{
+		return nullptr;
+	}
+
 	if (!Config->AllowedGameModes.Contains(GetWorld()->GetAuthGameMode()->GetClass()))
 	{
 		return nullptr;
@@ -104,6 +114,16 @@ UENTDefaultSave* UENTWorldSaveSubsystem::LoadSave(const int SaveIndex, const boo
 {
 	const UENTSavesConfig* Config = GetDefault<UENTSavesConfig>();
 	if (!Config)
+	{
+		return nullptr;
+	}
+
+	if (!GetWorld())
+	{
+		return nullptr;
+	}
+
+	if (!GetWorld()->GetAuthGameMode())
 	{
 		return nullptr;
 	}
@@ -289,5 +309,16 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 
 void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)
 {
+	if (!World)
+	{
+		return;
+	}
+
+	if (!World->GetAuthGameMode())
+	{
+		return;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Valid authGameMode"));
 	SaveToSlot(0);
 }

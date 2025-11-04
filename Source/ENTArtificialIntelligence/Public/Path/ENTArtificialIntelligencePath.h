@@ -194,10 +194,9 @@ protected:
 
 	UPROPERTY(Transient)
 	TObjectPtr<UArrowComponent> SecondNavLinkDebugArrow;
-#endif
 
 	/**
-	 * @brief This component is just used to build a navmesh and create a link between 2 nav meshes, it is destroyed at the beginplay
+	 * @brief This component is just used to build a navmesh and create a link between 2 nav meshes, this is an EditorOnly component, (in editor the component is destroyed at the beginPlay)
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "NavLink")
 	TObjectPtr<UStaticMeshComponent> NavLinkPlatform;
@@ -214,9 +213,10 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (Units = cm, ClampMin = 0.0f))
 	float NavLinkOffset = 500.0f;
 
-	void NotifyLinkReached(UNavLinkCustomComponent* NavLinkCustomComponent, UObject* PathingAgent, const UE::Math::TVector<double>& Destination);
+	void BuildNavLinkPlatform() const;
+#endif
 
-	void BuildNavLinkPlatform();
+	void NotifyLinkReached(UNavLinkCustomComponent* NavLinkCustomComponent, UObject* PathingAgent, const UE::Math::TVector<double>& Destination);
 
 #pragma endregion
 
