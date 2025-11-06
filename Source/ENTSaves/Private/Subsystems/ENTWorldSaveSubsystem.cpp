@@ -319,6 +319,5 @@ void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)
 		return;
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Valid authGameMode"));
 	SaveToSlot(0);
 }
