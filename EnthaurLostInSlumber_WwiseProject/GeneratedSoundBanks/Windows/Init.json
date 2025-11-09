@@ -147,6 +147,12 @@
         "Name": "Bone",
         "ObjectPath": "\\Switches\\Gameplay\\AKSW_FootstepsSurface\\Bone",
         "GUID": "{181A0A9E-1350-4650-9A67-C81EA9235993}"
+       },
+       {
+        "Id": "3304933591",
+        "Name": "Vein",
+        "ObjectPath": "\\Switches\\Gameplay\\AKSW_FootstepsSurface\\Vein",
+        "GUID": "{15513C0C-22A3-403F-AA73-0773270B3E63}"
        }
       ]
      },
@@ -173,6 +179,6 @@
     ]
    }
   ],
-  "FileHash": "{D6AD977F-D68D-A204-17AF-AB5AAC0230A6}"
+  "FileHash": "{DF0A13D8-EADC-F0C9-C958-289858B32466}"
  }
 }

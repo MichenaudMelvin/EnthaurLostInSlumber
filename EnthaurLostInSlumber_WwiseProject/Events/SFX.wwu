@@ -66,7 +66,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="LPX_Nerve_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="LPX_Sinew_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -78,7 +78,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="LPX_Nerve_Stretch_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="LPX_Sinew_Strech_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -89,14 +89,14 @@
 								<Action Name="" ID="{4295B903-D009-4FC5-BD77-A6170AFEC7C5}" ShortID="531200954">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="LPX_Nerve_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="LPX_Sinew_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{852DAE5D-3900-4B10-B99B-31A55666C009}" ShortID="179194033">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="LPX_Nerve_Stretch_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="LPX_Sinew_Strech_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
