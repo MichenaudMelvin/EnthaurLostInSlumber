@@ -14,6 +14,8 @@ AENTArrowActor::AENTArrowActor()
 
 	ArrowComponent->SetHiddenInGame(false);
 	ArrowComponent->SetVisibility(true);
+
+	bIsEditorOnlyActor = true;
 }
 
 void AENTArrowActor::SetArrowDimensions(float Size, float Length) const

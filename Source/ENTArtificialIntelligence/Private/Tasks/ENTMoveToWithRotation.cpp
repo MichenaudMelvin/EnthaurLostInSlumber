@@ -77,6 +77,13 @@ if (bDebugTask)
 
 	FRotator TargetRotation(YZRotator.Pitch, XZRotator.Yaw, XZRotator.Roll);
 
+#if WITH_EDITORONLY_DATA
+	if (bDisableRotation)
+	{
+		return;
+	}
+#endif
+
 	Pawn->SetActorRotation(TargetRotation);
 }
 
