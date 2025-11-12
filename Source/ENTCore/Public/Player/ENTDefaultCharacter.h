@@ -77,6 +77,7 @@ public:
 
 	UENTHealthComponent* GetHealth() const {return HealthComponent;}
 
+	UFUNCTION(BlueprintCallable)
 	UENTCameraShakeComponent* GetCameraShake() const {return ShakeManager;}
 
 #pragma endregion
