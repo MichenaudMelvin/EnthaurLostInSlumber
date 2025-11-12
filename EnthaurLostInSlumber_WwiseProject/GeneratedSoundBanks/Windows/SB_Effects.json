@@ -1,0 +1,86 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "752427969",
+    "Type": "User",
+    "GUID": "{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}",
+    "Color": "11",
+    "Language": "SFX",
+    "Hash": "{B668D4F5-6C43-4953-572C-32D4C0FA219A}",
+    "ObjectPath": "\\SoundBanks\\Effects\\SB_Effects",
+    "ShortName": "SB_Effects",
+    "Path": "SB_Effects.bnk",
+    "Plugins": {
+     "ShareSets": [
+      {
+       "Id": "164825399",
+       "Name": "New_Reflect",
+       "ObjectPath": "\\Effects\\Factory Effects\\New_Reflect",
+       "GUID": "{67FADD73-FC10-4D2A-88D9-F172387587C0}",
+       "LibName": "Wwise Reflect",
+       "LibId": "11206659"
+      },
+      {
+       "Id": "3164629247",
+       "Name": "Holy",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Cathedrals\\Holy",
+       "GUID": "{CC7B8638-C670-4AD5-B3FB-331EA81037F6}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
+    "Busses": [
+     {
+      "Id": "4267419003",
+      "Name": "Master Audio Bus_01",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     }
+    ],
+    "AuxBusses": [
+     {
+      "Id": "243379636",
+      "Name": "Reflect",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
+      "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "164825399"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "348963605",
+      "Name": "Reverb",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+      "GUID": "{06B51433-C685-4945-9920-67B617503E73}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3164629247"
+        }
+       ]
+      }
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "896534061",
+      "Name": "AKGP_Master",
+      "ObjectPath": "\\Game Parameters\\Mix\\AKGP_Master",
+      "GUID": "{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{A7DECCBA-A4C3-C2E5-1B97-54EB3E033968}"
+ }
+}

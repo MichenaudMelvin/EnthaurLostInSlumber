@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{002D987D-BB0D-9FB4-2750-D87D0ED55C57}",
+    "Hash": "{B6829FA3-7A79-7CFB-B0B8-5BC5520ED05B}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -1073,6 +1073,26 @@
       "CachePath": "50/{50865F23-C9FA-C77D-9B14-6D89D2CFC3B5}.wem"
      }
     ],
+    "Plugins": {
+     "ShareSets": [
+      {
+       "Id": "164825399",
+       "Name": "New_Reflect",
+       "ObjectPath": "\\Effects\\Factory Effects\\New_Reflect",
+       "GUID": "{67FADD73-FC10-4D2A-88D9-F172387587C0}",
+       "LibName": "Wwise Reflect",
+       "LibId": "11206659"
+      },
+      {
+       "Id": "3164629247",
+       "Name": "Holy",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Cathedrals\\Holy",
+       "GUID": "{CC7B8638-C670-4AD5-B3FB-331EA81037F6}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
     "Events": [
      {
       "Id": "1067402118",
@@ -1123,6 +1143,14 @@
       "DurationType": "OneShot",
       "DurationMin": "0.237573",
       "DurationMax": "1.1387886",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1241,6 +1269,14 @@
       "DurationType": "OneShot",
       "DurationMin": "0",
       "DurationMax": "0.46666667",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1520,6 +1556,14 @@
       "DurationType": "OneShot",
       "DurationMin": "0.2",
       "DurationMax": "0.3",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1573,6 +1617,14 @@
       "DurationType": "OneShot",
       "DurationMin": "0.24610417",
       "DurationMax": "0.36666667",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1844,6 +1896,14 @@
         "Id": "918853460"
        }
       ],
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1907,6 +1967,17 @@
       ]
      },
      {
+      "Id": "2020078225",
+      "Name": "AKE_TEST_Obstruction_Oclusion",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_TEST_Obstruction_Oclusion",
+      "GUID": "{922BABEE-EE53-4991-B186-0D61FAD7D05D}",
+      "Color": "10",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "2275903284",
       "Name": "AKE_WindSpeed",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_WindSpeed",
@@ -1923,7 +1994,84 @@
       ]
      }
     ],
+    "Busses": [
+     {
+      "Id": "1162281553",
+      "Name": "Bus_Music",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Music",
+      "GUID": "{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}",
+      "Color": "19"
+     },
+     {
+      "Id": "2930365547",
+      "Name": "Bus_SFX_Amb_MC",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
+      "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
+      "Color": "9",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ]
+     },
+     {
+      "Id": "4267419003",
+      "Name": "Master Audio Bus_01",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     },
+     {
+      "Id": "4277214558",
+      "Name": "Bus_Voice",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Voice",
+      "GUID": "{CD73F8A7-017F-4EA3-8D48-0308F27769B2}",
+      "Color": "12"
+     }
+    ],
+    "AuxBusses": [
+     {
+      "Id": "243379636",
+      "Name": "Reflect",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
+      "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "164825399"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "348963605",
+      "Name": "Reverb",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+      "GUID": "{06B51433-C685-4945-9920-67B617503E73}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3164629247"
+        }
+       ]
+      }
+     }
+    ],
     "GameParameters": [
+     {
+      "Id": "471070440",
+      "Name": "AKGP_Music",
+      "ObjectPath": "\\Game Parameters\\Mix\\AKGP_Music",
+      "GUID": "{64D3E862-4D56-4AAF-8073-8D3F36C42250}"
+     },
+     {
+      "Id": "896534061",
+      "Name": "AKGP_Master",
+      "ObjectPath": "\\Game Parameters\\Mix\\AKGP_Master",
+      "GUID": "{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"
+     },
      {
       "Id": "2866023372",
       "Name": "AKGP_NerveStretch",
@@ -1935,6 +2083,12 @@
       "Name": "AKGP_Speed",
       "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_Speed",
       "GUID": "{48B0803D-84D1-4AD9-914B-FB1814D27149}"
+     },
+     {
+      "Id": "4013141432",
+      "Name": "AKGP_SFX",
+      "ObjectPath": "\\Game Parameters\\Mix\\AKGP_SFX",
+      "GUID": "{574BA7C8-4238-4960-B37D-088C81CCC1FC}"
      }
     ],
     "SwitchGroups": [
@@ -1987,6 +2141,6 @@
     ]
    }
   ],
-  "FileHash": "{2F2B0E4D-8E16-C8E4-9C06-755C75AC7E75}"
+  "FileHash": "{63C32026-E898-C2AE-4984-D534E99ABDB2}"
  }
 }

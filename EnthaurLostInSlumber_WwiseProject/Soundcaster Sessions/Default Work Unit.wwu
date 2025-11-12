@@ -111,6 +111,14 @@
 							<ObjectRef Name="AKE_StopWindSpeed" ID="{3E4C03C5-C587-4630-B830-812310BDBFC5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="1" Y="0"/>
 						</Module>
+						<Module>
+							<ObjectRef Name="SFX_NerveReceptacle_Activate" ID="{6D409423-B1F9-4103-8241-B07692B2A8A1}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="SW_MC_FS_Run_Material" ID="{A373E588-64E7-4062-BA06-19803858FFF4}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+							<Position X="3" Y="0"/>
+						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true"/>

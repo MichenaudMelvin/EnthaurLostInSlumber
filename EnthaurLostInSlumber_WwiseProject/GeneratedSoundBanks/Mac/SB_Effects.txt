@@ -1,0 +1,14 @@
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	896534061	AKGP_Master			\Mix\AKGP_Master	
+
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	4267419003	Master Audio Bus_01			\Default Work Unit\Master Audio Bus_01	
+
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	243379636	Reflect			\Default Work Unit\Master Audio Bus_01\Reflect	
+	348963605	Reverb			\Default Work Unit\Master Audio Bus_01\Reverb	
+
+Effect plug-ins	ID	Name	Type				Notes
+	164825399	New_Reflect	Wwise Reflect			
+	3164629247	Holy	Wwise RoomVerb			
+

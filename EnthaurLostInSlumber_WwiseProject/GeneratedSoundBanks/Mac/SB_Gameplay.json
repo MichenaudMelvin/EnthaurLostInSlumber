@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{54E98737-6557-A854-4B40-47FDDD2A28DD}",
+    "Hash": "{EBB78793-D81C-9EEC-74D0-888E5C1EA382}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -102,7 +102,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_04.wav",
-      "CachePath": "0A/{0AB3AF35-544A-40CD-F1E1-BE3927C6E362}.wem"
+      "CachePath": "6C/{6CD2EC24-F2CB-42DF-ABE0-1AD1465CE4D3}.wem"
      },
      {
       "Id": "63912307",
@@ -217,6 +217,14 @@
       "CachePath": "39/{390995E2-6BBF-A3C6-B318-6CE13E0A8281}.wem"
      },
      {
+      "Id": "174144215",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Bone_Jump_03.wav",
+      "CachePath": "85/{85FC8073-1CB9-D94D-06F2-1B46ACD745BD}.wem"
+     },
+     {
       "Id": "195657945",
       "Language": "SFX",
       "Streaming": "false",
@@ -254,7 +262,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_05.wav",
-      "CachePath": "81/{81A7239A-EAF7-F5E1-2867-0F08BAA6360C}.wem"
+      "CachePath": "91/{91584200-31A3-6FF9-E911-59676EF91E21}.wem"
      },
      {
       "Id": "232844466",
@@ -295,14 +303,6 @@
       "Location": "Memory",
       "ShortName": "MC_Cloth_Run_11.wav",
       "CachePath": "FB/{FB4DAB97-BE21-1B8A-80ED-8C4E1FBB2B44}.wem"
-     },
-     {
-      "Id": "272615866",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Jump_Bone_01.wav",
-      "CachePath": "8B/{8B1672B3-8E1B-48A8-BC58-0718C87D5B19}.wem"
      },
      {
       "Id": "294036953",
@@ -359,14 +359,6 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_08.wav",
       "CachePath": "B1/{B1C60212-0B42-3005-DDD1-CA2F2ED2EA6D}.wem"
-     },
-     {
-      "Id": "365271159",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Land_Bone_04.wav",
-      "CachePath": "7B/{7BB4014E-6216-0D17-CF85-620817C9A899}.wem"
      },
      {
       "Id": "388414790",
@@ -433,14 +425,6 @@
       "CachePath": "E3/{E3F13A27-8A42-7E89-A986-2BCA1C84B278}.wem"
      },
      {
-      "Id": "437799950",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Jump_Bone_03.wav",
-      "CachePath": "75/{751BF746-4991-5422-4BD1-7EAC39833416}.wem"
-     },
-     {
       "Id": "448243903",
       "Language": "SFX",
       "Streaming": "false",
@@ -470,7 +454,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_02.wav",
-      "CachePath": "39/{399EF523-493F-C205-68D0-B079967AA1AA}.wem"
+      "CachePath": "E3/{E3D95A9F-A7E6-9E5C-83C4-D2EC845A3A2C}.wem"
      },
      {
       "Id": "489955890",
@@ -494,7 +478,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_09.wav",
-      "CachePath": "94/{94F8E89D-9EFB-823C-CD71-36097EA7A28F}.wem"
+      "CachePath": "C9/{C9C8D648-8168-3ACC-6FAF-0D8606B06F8C}.wem"
      },
      {
       "Id": "503362199",
@@ -503,14 +487,6 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_18.wav",
       "CachePath": "77/{777F743F-F945-B6DC-F9EF-6CEEF667AE50}.wem"
-     },
-     {
-      "Id": "504541813",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Land_Bone_03.wav",
-      "CachePath": "AC/{AC9408D9-435A-2E7F-8A0B-4F2C6375FBBE}.wem"
      },
      {
       "Id": "515272845",
@@ -609,12 +585,12 @@
       "CachePath": "00/{000E1002-DACC-DA1B-A8AC-149366E6DC95}.wem"
      },
      {
-      "Id": "594511251",
+      "Id": "594128135",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
-      "ShortName": "MC_Jump_Bone_05.wav",
-      "CachePath": "9D/{9D5F95AA-CC5A-0D64-456B-DBC742D7E838}.wem"
+      "ShortName": "SFX_Bone_Jump_02.wav",
+      "CachePath": "BC/{BC7D8322-14D9-2395-6DC5-A1716CF25197}.wem"
      },
      {
       "Id": "595981696",
@@ -649,14 +625,6 @@
       "CachePath": "EC/{EC0702B6-44F7-9E54-70DC-0B6BC9E5F431}.wem"
      },
      {
-      "Id": "622659375",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Land_Bone_01.wav",
-      "CachePath": "86/{860565A0-5FED-93C4-4A74-C513FC513AAE}.wem"
-     },
-     {
       "Id": "628782229",
       "Language": "SFX",
       "Streaming": "false",
@@ -670,7 +638,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_10.wav",
-      "CachePath": "74/{74F9F851-8E9B-AF5C-E7F6-62C8A2B4EA95}.wem"
+      "CachePath": "6B/{6B285185-C28C-0FAF-7E07-D5DA5E167983}.wem"
+     },
+     {
+      "Id": "633561041",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Bone_Jump_01.wav",
+      "CachePath": "C8/{C81ADC3D-6053-2302-4F96-7988E828210F}.wem"
      },
      {
       "Id": "636957395",
@@ -694,7 +670,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_11.wav",
-      "CachePath": "C9/{C91CA761-7DE4-73F8-4B6A-C339B7F3FE75}.wem"
+      "CachePath": "17/{1794FA73-4FB5-99F7-136F-455B72BAA8E6}.wem"
      },
      {
       "Id": "654485317",
@@ -726,7 +702,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_07.wav",
-      "CachePath": "18/{18339786-48CC-BCC4-345E-F14B3504707F}.wem"
+      "CachePath": "E0/{E0E55673-BDA7-A7B5-E54F-4C8D26AFA211}.wem"
      },
      {
       "Id": "686669596",
@@ -774,7 +750,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_06.wav",
-      "CachePath": "02/{0263CE04-DCCF-3197-4A53-5629B97AD4EE}.wem"
+      "CachePath": "E6/{E67FB920-0654-8D2E-E9DB-DFCF7182C06A}.wem"
      },
      {
       "Id": "738632161",
@@ -825,14 +801,6 @@
       "CachePath": "C0/{C0A9786F-3240-FCC4-2E8B-79FA8188443F}.wem"
      },
      {
-      "Id": "789672449",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Jump_Bone_02.wav",
-      "CachePath": "8F/{8F264F06-23FA-A412-6D74-677C97258AF7}.wem"
-     },
-     {
       "Id": "794150962",
       "Language": "SFX",
       "Streaming": "false",
@@ -854,7 +822,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_03.wav",
-      "CachePath": "E1/{E1E05DCB-CAAE-3BFF-A099-A745E0ED05AD}.wem"
+      "CachePath": "38/{38C64037-211D-5F32-E74F-1A94457DF65B}.wem"
      },
      {
       "Id": "804146141",
@@ -863,6 +831,14 @@
       "Location": "Memory",
       "ShortName": "LPX_Nerve_Stretch_Gore_02.wav",
       "CachePath": "36/{36BE6117-2108-2C81-F38F-778E63176D97}.wem"
+     },
+     {
+      "Id": "806176668",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Bone_Land_03.wav",
+      "CachePath": "4E/{4E7992E0-4481-12B8-B5E5-B82C26448481}.wem"
      },
      {
       "Id": "809215488",
@@ -905,14 +881,6 @@
       "CachePath": "DE/{DE05FE22-F369-CBD0-5D2F-18495707F478}.wem"
      },
      {
-      "Id": "852098355",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Jump_Bone_04.wav",
-      "CachePath": "C6/{C66FE921-B890-5286-F07F-449AB7425D64}.wem"
-     },
-     {
       "Id": "861837351",
       "Language": "SFX",
       "Streaming": "false",
@@ -943,6 +911,14 @@
       "Location": "Memory",
       "ShortName": "LPX_Nerve_Stretch_04.wav",
       "CachePath": "F7/{F7D24825-AEF2-A6CD-0485-3934B48E028E}.wem"
+     },
+     {
+      "Id": "903601489",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Bone_Land_02.wav",
+      "CachePath": "99/{99410A2E-A0F7-B6F3-5B11-30ED55FDCE6F}.wem"
      },
      {
       "Id": "908600791",
@@ -982,7 +958,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_08.wav",
-      "CachePath": "DF/{DF885A23-AA44-767F-3999-9E4F4F8FA0CF}.wem"
+      "CachePath": "F7/{F707D039-4411-5692-B3E9-80C07A23C8DC}.wem"
      },
      {
       "Id": "941661665",
@@ -999,6 +975,14 @@
       "Location": "Memory",
       "ShortName": "MC_Jump_Muscle_04.wav",
       "CachePath": "18/{187FFAEC-831A-F352-FDB5-ABB73806203F}.wem"
+     },
+     {
+      "Id": "962823370",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Bone_Land_01.wav",
+      "CachePath": "F9/{F972F069-FF8D-1E5E-3F23-A80A2921303C}.wem"
      },
      {
       "Id": "974359147",
@@ -1031,14 +1015,6 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveReceptacle_Activate_03.wav",
       "CachePath": "44/{44FAEC2E-7EE8-6A9A-CFA8-6173281A977C}.wem"
-     },
-     {
-      "Id": "993353406",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Land_Bone_02.wav",
-      "CachePath": "F8/{F883E809-0A45-DA91-400B-4051C318B082}.wem"
      },
      {
       "Id": "1013574032",
@@ -1094,9 +1070,29 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_01.wav",
-      "CachePath": "D9/{D9BC3B88-48F6-C301-D185-DDD47AAAB774}.wem"
+      "CachePath": "50/{50865F23-C9FA-C77D-9B14-6D89D2CFC3B5}.wem"
      }
     ],
+    "Plugins": {
+     "ShareSets": [
+      {
+       "Id": "164825399",
+       "Name": "New_Reflect",
+       "ObjectPath": "\\Effects\\Factory Effects\\New_Reflect",
+       "GUID": "{67FADD73-FC10-4D2A-88D9-F172387587C0}",
+       "LibName": "Wwise Reflect",
+       "LibId": "11206659"
+      },
+      {
+       "Id": "3164629247",
+       "Name": "Holy",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Cathedrals\\Holy",
+       "GUID": "{CC7B8638-C670-4AD5-B3FB-331EA81037F6}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
     "Events": [
      {
       "Id": "1067402118",
@@ -1147,6 +1143,14 @@
       "DurationType": "OneShot",
       "DurationMin": "0.237573",
       "DurationMax": "1.1387886",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1264,7 +1268,15 @@
       "Color": "10",
       "DurationType": "OneShot",
       "DurationMin": "0",
-      "DurationMax": "0.4",
+      "DurationMax": "0.46666667",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1543,7 +1555,15 @@
       "Color": "10",
       "DurationType": "OneShot",
       "DurationMin": "0.2",
-      "DurationMax": "0.4",
+      "DurationMax": "0.3",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1576,19 +1596,13 @@
         },
         "MediaRefs": [
          {
-          "Id": "272615866"
+          "Id": "174144215"
          },
          {
-          "Id": "437799950"
+          "Id": "594128135"
          },
          {
-          "Id": "594511251"
-         },
-         {
-          "Id": "789672449"
-         },
-         {
-          "Id": "852098355"
+          "Id": "633561041"
          }
         ]
        }
@@ -1601,8 +1615,16 @@
       "GUID": "{27009C7D-31EB-42D4-BEA8-E873A733B256}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "0.16120833",
-      "DurationMax": "0.29941666",
+      "DurationMin": "0.24610417",
+      "DurationMax": "0.36666667",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1638,16 +1660,13 @@
         },
         "MediaRefs": [
          {
-          "Id": "365271159"
+          "Id": "806176668"
          },
          {
-          "Id": "504541813"
+          "Id": "903601489"
          },
          {
-          "Id": "622659375"
-         },
-         {
-          "Id": "993353406"
+          "Id": "962823370"
          }
         ]
        }
@@ -1877,6 +1896,14 @@
         "Id": "918853460"
        }
       ],
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ],
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1912,16 +1939,13 @@
         },
         "MediaRefs": [
          {
-          "Id": "365271159"
+          "Id": "806176668"
          },
          {
-          "Id": "504541813"
+          "Id": "903601489"
          },
          {
-          "Id": "622659375"
-         },
-         {
-          "Id": "993353406"
+          "Id": "962823370"
          }
         ]
        }
@@ -1943,6 +1967,17 @@
       ]
      },
      {
+      "Id": "2020078225",
+      "Name": "AKE_TEST_Obstruction_Oclusion",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_TEST_Obstruction_Oclusion",
+      "GUID": "{922BABEE-EE53-4991-B186-0D61FAD7D05D}",
+      "Color": "10",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "2275903284",
       "Name": "AKE_WindSpeed",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_WindSpeed",
@@ -1959,7 +1994,92 @@
       ]
      }
     ],
+    "Busses": [
+     {
+      "Id": "1162281553",
+      "Name": "Bus_Music",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Music",
+      "GUID": "{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}",
+      "Color": "19"
+     },
+     {
+      "Id": "2930365547",
+      "Name": "Bus_SFX_Amb_MC",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
+      "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
+      "Color": "9",
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ]
+     },
+     {
+      "Id": "4267419003",
+      "Name": "Master Audio Bus_01",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     },
+     {
+      "Id": "4277214558",
+      "Name": "Bus_Voice",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Voice",
+      "GUID": "{CD73F8A7-017F-4EA3-8D48-0308F27769B2}",
+      "Color": "12"
+     }
+    ],
+    "AuxBusses": [
+     {
+      "Id": "243379636",
+      "Name": "Reflect",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
+      "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "164825399"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "348963605",
+      "Name": "Reverb",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+      "GUID": "{06B51433-C685-4945-9920-67B617503E73}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3164629247"
+        }
+       ]
+      },
+      "AuxBusRefs": [
+       {
+        "Id": "243379636",
+        "Name": "Reflect",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
+        "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
+       }
+      ]
+     }
+    ],
     "GameParameters": [
+     {
+      "Id": "471070440",
+      "Name": "AKGP_Music",
+      "ObjectPath": "\\Game Parameters\\Mix\\AKGP_Music",
+      "GUID": "{64D3E862-4D56-4AAF-8073-8D3F36C42250}"
+     },
+     {
+      "Id": "896534061",
+      "Name": "AKGP_Master",
+      "ObjectPath": "\\Game Parameters\\Mix\\AKGP_Master",
+      "GUID": "{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"
+     },
      {
       "Id": "2866023372",
       "Name": "AKGP_NerveStretch",
@@ -1971,6 +2091,12 @@
       "Name": "AKGP_Speed",
       "ObjectPath": "\\Game Parameters\\Gameplay\\AKGP_Speed",
       "GUID": "{48B0803D-84D1-4AD9-914B-FB1814D27149}"
+     },
+     {
+      "Id": "4013141432",
+      "Name": "AKGP_SFX",
+      "ObjectPath": "\\Game Parameters\\Mix\\AKGP_SFX",
+      "GUID": "{574BA7C8-4238-4960-B37D-088C81CCC1FC}"
      }
     ],
     "SwitchGroups": [
@@ -2023,6 +2149,6 @@
     ]
    }
   ],
-  "FileHash": "{7177C762-8943-7322-F9A9-7F731390554B}"
+  "FileHash": "{562772C1-B41E-636F-F82E-59CC4EA19B9B}"
  }
 }

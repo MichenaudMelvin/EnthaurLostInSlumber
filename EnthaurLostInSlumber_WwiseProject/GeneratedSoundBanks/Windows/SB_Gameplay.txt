@@ -11,6 +11,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1550703898	AKE_NerveReceptacleActivate			\SFX\Gameplay\AKE_NerveReceptacleActivate	
 	1558507935	AKE_TakeAmbrer			\SFX\Gameplay\AKE_TakeAmbrer	
 	1975807336	AKE_RespawnTreeActivate			\SFX\Gameplay\AKE_RespawnTreeActivate	
+	2020078225	AKE_TEST_Obstruction_Oclusion			\SFX\Gameplay\AKE_TEST_Obstruction_Oclusion	
 	2137096898	AKE_MakeMuscleSoft			\SFX\Gameplay\AKE_MakeMuscleSoft	
 	2149707273	AKE_PlantGrowth			\SFX\Gameplay\AKE_PlantGrowth	
 	2275903284	AKE_WindSpeed			\SFX\Gameplay\AKE_WindSpeed	
@@ -36,8 +37,25 @@ Switch	ID	Name	Switch Group			Notes
 	2108779966	Walk	AKSW_FootstepsSpeed			
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
+	471070440	AKGP_Music			\Mix\AKGP_Music	
+	896534061	AKGP_Master			\Mix\AKGP_Master	
 	2866023372	AKGP_NerveStretch			\Gameplay\AKGP_NerveStretch	
 	3631364164	AKGP_Speed			\Gameplay\AKGP_Speed	
+	4013141432	AKGP_SFX			\Mix\AKGP_SFX	
+
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	1162281553	Bus_Music			\Default Work Unit\Master Audio Bus_01\Bus_Music	
+	2930365547	Bus_SFX_Amb_MC			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC	
+	4267419003	Master Audio Bus_01			\Default Work Unit\Master Audio Bus_01	
+	4277214558	Bus_Voice			\Default Work Unit\Master Audio Bus_01\Bus_Voice	
+
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	243379636	Reflect			\Default Work Unit\Master Audio Bus_01\Reflect	
+	348963605	Reverb			\Default Work Unit\Master Audio Bus_01\Reverb	
+
+Effect plug-ins	ID	Name	Type				Notes
+	164825399	New_Reflect	Wwise Reflect			
+	3164629247	Holy	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	8104921	SFX_Elevator_Start_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BB\{BB0A6E73-ABDD-609F-7BAE-8EDD1B3115A2}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Elevator_Start\SFX_Elevator_Start_01		122208
@@ -63,7 +81,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	148815722	SFX_FS_Bone_Run_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\DE\{DE3E4F5B-4775-1AF6-5DE0-DCAF2F4626D1}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Bone\SFX_FS_Bone_Run_03		28896
 	150421772	SFX_NerveDoor_Layer_Woosh_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\64\{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Woosh\SFX_NerveDoor_Layer_Woosh_01		70496
 	151884214	LPX_Nerve_Stretch_Gore_05	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\7D\{7D5A6079-3F85-2B96-84B0-92160236F58A}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_Sinew\AM_Sinew_Stretch\LPX_Sinew_Strech_Gore\LPX_Nerve_Stretch_Gore_05		80352
-	155549434	SFX_Electricity_Layer_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D4\{D4C263BE-0141-B0E9-41C7-FA926DC1CB4D}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Electricity\SFX_Electricity_Layer_03		464096
+	155549434	SFX_Nerve_Electricity_Layer_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D4\{D4C263BE-0141-B0E9-41C7-FA926DC1CB4D}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricity_Layer_03		464096
 	171841650	MC_Cloth_Run_12	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\39\{390995E2-6BBF-A3C6-B318-6CE13E0A8281}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Foley\MC_Cloth\MC_Cloth_Run\MC_Cloth_Run_12		35296
 	174144215	SFX_Bone_Jump_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\85\{85FC8073-1CB9-D94D-06F2-1B46ACD745BD}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\SW_MC_Jump_Material\MC_Jump_Bone\SFX_Bone_Jump_03		25696
 	195657945	SFX_FS_Bone_Run_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E1\{E169499D-E122-081F-D7C3-DF595F08D851}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Bone\SFX_FS_Bone_Run_02		20542
@@ -78,7 +96,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	262194432	MC_Cloth_Run_11	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\FB\{FB4DAB97-BE21-1B8A-80ED-8C4E1FBB2B44}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Foley\MC_Cloth\MC_Cloth_Run\MC_Cloth_Run_11		54496
 	294036953	SFX_Elevator	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\17\{17BCC5B2-84CA-C367-AD83-4D777E07FC90}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Elevator		5267296
 	303207830	SFX_NerveDoor_Layer_Gore02_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\EB\{EB0451B1-D6CB-EDF7-4BFC-D9F6118B8695}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore02\SFX_NerveDoor_Layer_Gore02_02		70496
-	310414559	SFX_Electricity_Layer_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0B\{0B7B879A-A451-12EF-184E-4A6AF4BC3BF6}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Electricity\SFX_Electricity_Layer_02		384096
+	310414559	SFX_Nerve_Electricity_Layer_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0B\{0B7B879A-A451-12EF-184E-4A6AF4BC3BF6}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricity_Layer_02		384096
 	317040080	MC_Cloth_Walk_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\81\{811D2405-2B7B-703B-EDB2-6480B02FB1D0}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Foley\MC_Cloth\MC_Cloth_Walk\MC_Cloth_Walk_03		64096
 	330044548	MC_Cloth_Walk_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\FE\{FE08EDD7-0993-1DC5-030A-5E7571D3DD1B}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Foley\MC_Cloth\MC_Cloth_Walk\MC_Cloth_Walk_01		57696
 	331087580	MC_Cloth_Run_10	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\FF\{FFAA78DA-3CEE-0979-B00F-C55049191365}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Foley\MC_Cloth\MC_Cloth_Run\MC_Cloth_Run_10		38496
@@ -89,7 +107,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	401531728	SFX_FS_Vein_Run_09	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C1\{C18E6E49-6DF9-F306-04A1-E9BAE465DB23}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Vein\SFX_FS_Vein_Run_09		25696
 	424464787	SFX_FS_Bone_Run_10	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\68\{68EB7A7F-31E1-97DD-7267-1FA4FBF10109}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Bone\SFX_FS_Bone_Run_10		16120
 	429011309	LPX_Nerve_Stretch_Gore_04	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\90\{90C4B611-1886-03D6-C5F3-24AAA89377CC}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_Sinew\AM_Sinew_Stretch\LPX_Sinew_Strech_Gore\LPX_Nerve_Stretch_Gore_04		83136
-	435354478	SFX_Electricity_Start_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3D\{3D52CD3A-A93D-0188-FF3E-83E712BCD6BD}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_Electricity_Start\SFX_Electricity_Start_02		128096
+	435354478	SFX_Electricity_Start_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3D\{3D52CD3A-A93D-0188-FF3E-83E712BCD6BD}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricity_Start\SFX_Electricity_Start_02		128096
 	435669612	MC_Cloth_Run_13	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E3\{E3F13A27-8A42-7E89-A986-2BCA1C84B278}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Foley\MC_Cloth\MC_Cloth_Run\MC_Cloth_Run_13		38496
 	448243903	SFX_FS_Vein_Run_12	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D5\{D5BEA786-7EFA-DACF-4349-7CF548C710F2}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Vein\SFX_FS_Vein_Run_12		22496
 	450151386	SFX_FS_Vein_Run_14	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\83\{830F7C3C-5964-1B9D-D625-64FDAA82A054}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Vein\SFX_FS_Vein_Run_14		17352
@@ -113,7 +131,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	592723353	SFX_RespawnTree_Activate	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\00\{000E1002-DACC-DA1B-A8AC-149366E6DC95}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_RespawnTree_Activate		352096
 	594128135	SFX_Bone_Jump_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BC\{BC7D8322-14D9-2395-6DC5-A1716CF25197}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\SW_MC_Jump_Material\MC_Jump_Bone\SFX_Bone_Jump_02		22496
 	595981696	SFX_NerveReceptacle_Activate_04	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D2\{D241FEEC-D72E-2C97-FF3F-BAF360BDEB3D}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_04		883296
-	597642928	SFX_Electricity_Start_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\58\{58CFC810-6776-A3E6-6410-1CFD3BD73BB7}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_Electricity_Start\SFX_Electricity_Start_03		128096
+	597642928	SFX_Electricity_Start_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\58\{58CFC810-6776-A3E6-6410-1CFD3BD73BB7}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricity_Start\SFX_Electricity_Start_03		128096
 	600164567	SFX_Wind_Speed_High	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\7F\{7FB9FF11-8699-5BEA-E563-391D7C2115BA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Wind_Speed_High		531296
 	611432390	SFX_FS_Vein_Run_04	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\EC\{EC0702B6-44F7-9E54-70DC-0B6BC9E5F431}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Vein\SFX_FS_Vein_Run_04		22496
 	628782229	SFX_Elevator_Stop	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\56\{563CF1E2-4DEA-7DAF-EC5C-746A78AEC450}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Elevator_Stop		364896
@@ -127,12 +145,12 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	660425283	MC_Cloth_Walk_06	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\02\{025754D1-C097-2BF8-7D54-AF6B6AD6E0E5}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Foley\MC_Cloth\MC_Cloth_Walk\MC_Cloth_Walk_06		64096
 	671171816	SFX_FS_Bone_Walk_07	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E0\{E0E55673-BDA7-A7B5-E54F-4C8D26AFA211}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Walk_Material\MC_FS_Walk_Bone\SFX_FS_Bone_Walk_07		32096
 	686669596	SFX_FS_Vein_Run_06	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\A5\{A5986033-8F4E-9DD6-DB94-FE7D5E1C8A04}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Vein\SFX_FS_Vein_Run_06		19296
-	695514868	SFX_Electricity_Layer_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\9F\{9F29435C-A346-997F-97FD-416A7F861D40}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Electricity\SFX_Electricity_Layer_01		320096
+	695514868	SFX_Nerve_Electricity_Layer_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\9F\{9F29435C-A346-997F-97FD-416A7F861D40}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricity_Layer_01		320096
 	697774580	MC_Cloth_Run_06	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\52\{52C74C93-E2E9-C67C-49FE-E46B70B1A660}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Foley\MC_Cloth\MC_Cloth_Run\MC_Cloth_Run_06		32096
 	708400597	SFX_NerveDoor_Layer_Gore02_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0C\{0C4F2FF8-84F9-5292-7664-9D39D5421D77}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Gore02\SFX_NerveDoor_Layer_Gore02_01		70496
 	725331003	LPX_Nerve_Stretch_Gore_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\97\{979F5FE9-078B-FAD9-2EFB-922BEFFE2D21}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_Sinew\AM_Sinew_Stretch\LPX_Sinew_Strech_Gore\LPX_Nerve_Stretch_Gore_03		70848
 	729596033	SFX_FS_Bone_Walk_06	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E6\{E67FB920-0654-8D2E-E9DB-DFCF7182C06A}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Walk_Material\MC_FS_Walk_Bone\SFX_FS_Bone_Walk_06		32096
-	738632161	SFX_Electricity_Start_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2E\{2E8A7C35-8144-3231-AA94-A3E80B311D35}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_Electricity_Start\SFX_Electricity_Start_01		128096
+	738632161	SFX_Electricity_Start_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2E\{2E8A7C35-8144-3231-AA94-A3E80B311D35}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\AM_SFX_Nerve_Electricity\SFX_Nerve_Electricity_Start\SFX_Electricity_Start_01		128096
 	738955104	SFX_Elevator_Start_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\98\{985720D3-FB06-5889-6DB2-BA9F3ACE3CC5}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Elevator_Start\SFX_Elevator_Start_02		144096
 	740159490	SFX_FS_Bone_Run_12	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D8\{D859E1C8-37F9-F7CC-531D-768D84489B0C}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Bone\SFX_FS_Bone_Run_12		19296
 	747871704	SFX_FS_Vein_Run_11	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B9\{B97827A7-26C7-FC78-455E-17264F431D77}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Vein\SFX_FS_Vein_Run_11		22496

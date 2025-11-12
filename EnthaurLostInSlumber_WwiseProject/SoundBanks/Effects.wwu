@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{4ED2160B-3710-4F6D-9DE5-4CBEC6EDB3DA}" SchemaVersion="123">
+	<SoundBanks>
+		<WorkUnit Name="Effects" ID="{4ED2160B-3710-4F6D-9DE5-4CBEC6EDB3DA}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="11"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<SoundBank Name="SB_Effects" ID="{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Reverb" ID="{06B51433-C685-4945-9920-67B617503E73}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Reflect" ID="{F394F660-B9B4-4A3A-9580-16D1E5E099B9}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

@@ -132,7 +132,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -143,7 +143,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -154,7 +154,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -205,28 +205,28 @@
 								<Action Name="" ID="{1BB20F7D-EAF0-41C7-8A4A-7E09ECD0E695}" ShortID="310297691">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{9D3464D2-0195-44E5-83E8-D00F2BCD74FB}" ShortID="881183275">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{2DBB1D54-8979-491A-ABA6-C6224BEE9A5A}" ShortID="720303419">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{CAEB9CD8-6FC1-4F0E-8E32-D0FBF9A7DC38}" ShortID="612409937">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -446,6 +446,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="SW_MC_Land_Material" ID="{DB871AA9-6A46-4727-B3CC-EE5984C3784C}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_TEST_Obstruction_Oclusion" ID="{922BABEE-EE53-4991-B186-0D61FAD7D05D}">
+							<ChildrenList>
+								<Action Name="" ID="{168F9A71-98B6-4B26-9D8B-FC3176B70E7E}" ShortID="811137837">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="TEST_Obstruction_Oclusion" ID="{4FB14830-D71B-4D31-9262-01BB77FC6EFB}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
