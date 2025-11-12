@@ -184,6 +184,12 @@ protected:
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Transient, Category = "NavLink")
+	bool bShowPlatform = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink")
+	bool bUsePlatform = true;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "NavLink")
 	bool bIgnoreGroundTrace = false;
 
 	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (Units = cm, ClampMin = 0.0f))
@@ -194,6 +200,12 @@ protected:
 
 	UPROPERTY(Transient)
 	TObjectPtr<UArrowComponent> SecondNavLinkDebugArrow;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UArrowComponent> FistNavLinkPlatformDebugArrow;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UArrowComponent> SecondNavLinkPlatformDebugArrow;
 
 	/**
 	 * @brief This component is just used to build a navmesh and create a link between 2 nav meshes, this is an EditorOnly component, (in editor the component is destroyed at the beginPlay)
@@ -212,6 +224,15 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (Units = cm, ClampMin = 0.0f))
 	float NavLinkOffset = 500.0f;
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink")
+	bool bPointPlatform = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink", DisplayName = "OverridenScale", meta = (EditCondition = bPointPlatform))
+	FVector2D OverridenNavLinkScale = FVector2D(10.0f);
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink", meta = (EditCondition = bPointPlatform))
+	TEnumAsByte<EAxis::Type> NavLinksPointAxis = EAxis::X;
 
 	void BuildNavLinkPlatform() const;
 #endif
