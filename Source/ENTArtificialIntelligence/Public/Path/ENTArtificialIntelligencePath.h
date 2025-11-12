@@ -116,7 +116,7 @@ protected:
 	 * @brief Blackboard key for AI
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
-	FName NextPathLocationKeyName = "NextPathLocation";
+	FName JumpLocationKeyName = "JumpLocation";
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(VisibleInstanceOnly, Transient, Category = "AI")

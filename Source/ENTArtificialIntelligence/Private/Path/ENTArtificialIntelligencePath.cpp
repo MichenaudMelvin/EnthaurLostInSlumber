@@ -475,13 +475,13 @@ void AENTArtificialIntelligencePath::NotifyLinkReached(UNavLinkCustomComponent* 
 	{
 		BlackboardComp->SetValueAsInt(PathIndexKeyName, 1);
 		BlackboardComp->SetValueAsInt(PathDirectionKeyName, 1);
-		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetStartTransform(1).GetLocation());
+		BlackboardComp->SetValueAsVector(JumpLocationKeyName, GetStartTransform(1).GetLocation());
 	}
 	else if (NavLinkCustomComponent == SecondNavLink)
 	{
 		BlackboardComp->SetValueAsInt(PathIndexKeyName, Spline->GetNumberOfSplinePoints() - 2);
 		BlackboardComp->SetValueAsInt(PathDirectionKeyName, -1);
-		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetEndTransform(-1).GetLocation());
+		BlackboardComp->SetValueAsVector(JumpLocationKeyName, GetEndTransform(-1).GetLocation());
 	}
 	else
 	{

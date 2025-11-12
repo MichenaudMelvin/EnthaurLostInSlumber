@@ -70,23 +70,35 @@ protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Path")
 	TObjectPtr<AENTNavigationArea> NavigationArea;
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName PathKeyName = "AIPath";
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName NavAreaKeyName = "NavigationArea";
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName WalkOnFloorKeyName = "WalkOnFloor";
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName AttackTargetKeyName = "AttackTarget";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName PatrolSpeedKeyName = "PatrolSpeed";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName ChaseSpeedKeyName = "ChaseSpeed";
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
 	bool bAutoStartBehavior = true;
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
 	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	float PatrolSpeed = 600.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	float ChaseSpeed = 1200.0f;
 
 	virtual bool DoesAutoStartBehaviorTree_Implementation() const override {return bAutoStartBehavior;}
 
