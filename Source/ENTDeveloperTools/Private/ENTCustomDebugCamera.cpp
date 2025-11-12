@@ -26,6 +26,8 @@ void InitializeCustomDebugCameraInputBindings()
 	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DecreaseSpeed", EKeys::Subtract));
 	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DecreaseSpeed", EKeys::MouseScrollDown));
 	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_DecreaseSpeed", EKeys::Gamepad_LeftShoulder));
+
+	UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("CustomDebugCamera_MakeNoise", EKeys::A));
 }
 
 AENTCustomDebugCamera::AENTCustomDebugCamera()
@@ -66,6 +68,8 @@ void AENTCustomDebugCamera::SetupInputComponent()
 
 	InputComponent->BindAction("CustomDebugCamera_IncreaseSpeed", IE_Pressed, this, &AENTCustomDebugCamera::CustomIncreaseCameraSpeed);
 	InputComponent->BindAction("CustomDebugCamera_DecreaseSpeed", IE_Pressed, this, &AENTCustomDebugCamera::CustomDecreaseCameraSpeed);
+
+	InputComponent->BindAction("CustomDebugCamera_MakeNoise", IE_Pressed, this, &AENTCustomDebugCamera::DebugNoise);
 }
 
 bool AENTCustomDebugCamera::Trace(FHitResult& HitResult) const
@@ -183,6 +187,19 @@ void AENTCustomDebugCamera::DestroyFacingActor()
 	}
 
 	HitResult.GetActor()->Destroy();
+}
+
+void AENTCustomDebugCamera::DebugNoise()
+{
+	FHitResult HitResult;
+	if(!Trace(HitResult))
+	{
+		return;
+	}
+
+	MakeNoise(INFINITY, GetPawn(), HitResult.Location, INFINITY);
+
+	UKismetSystemLibrary::DrawDebugSphere(this, HitResult.Location, 100.0f, 12, FLinearColor::Yellow, 15.0f, 1.0f);
 }
 
 void AENTCustomDebugCamera::CustomIncreaseCameraSpeed()

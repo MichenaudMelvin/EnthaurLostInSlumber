@@ -133,11 +133,11 @@ public:
 
 	FTransform GetLastPointTransform(const ESplineCoordinateSpace::Type& CoordinateSpace) const;
 
-	FTransform GetTransformAtAlpha(float Alpha) const;
+	FTransform GetTransformAtAlpha(float Alpha, int8 SplineDirection) const;
 
-	FTransform GetStartTransform() const {return GetTransformAtAlpha(0.0f);}
+	FTransform GetStartTransform(int8 SplineDirection) const {return GetTransformAtAlpha(0.0f, SplineDirection);}
 
-	FTransform GetEndTransform() const {return GetTransformAtAlpha(1.0f);}
+	FTransform GetEndTransform(int8 SplineDirection) const {return GetTransformAtAlpha(1.0f, SplineDirection);}
 
 	FVector GetNavLinkLocation(int32 PathDirection) const;
 
@@ -171,13 +171,71 @@ public:
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "NavLink")
-	TObjectPtr<UNavLinkCustomComponent> PathLink;
+	TObjectPtr<UNavLinkCustomComponent> FirstNavLink;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "NavLink")
+	TObjectPtr<UNavLinkCustomComponent> SecondNavLink;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "NavLink", meta = (MakeEditWidget))
-	FVector StartNavLinkLocation = FVector::ZeroVector;
+	FVector FirstNavLinkLocation = FVector::ZeroVector;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "NavLink", meta = (MakeEditWidget))
-	FVector EndNavLinkLocation = FVector(500.0f, 0.0f, 0.0f);
+	FVector SecondNavLinkLocation = FVector(500.0f, 0.0f, 0.0f);
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Transient, Category = "NavLink")
+	bool bShowPlatform = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink")
+	bool bUsePlatform = true;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "NavLink")
+	bool bIgnoreGroundTrace = false;
+
+	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (Units = cm, ClampMin = 0.0f))
+	float GroundTraceLength = 500.0f;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UArrowComponent> FistNavLinkDebugArrow;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UArrowComponent> SecondNavLinkDebugArrow;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UArrowComponent> FistNavLinkPlatformDebugArrow;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UArrowComponent> SecondNavLinkPlatformDebugArrow;
+
+	/**
+	 * @brief This component is just used to build a navmesh and create a link between 2 nav meshes, this is an EditorOnly component, (in editor the component is destroyed at the beginPlay)
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "NavLink")
+	TObjectPtr<UStaticMeshComponent> NavLinkPlatform;
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink")
+	FVector PlatformOffset = FVector::ZeroVector;
+
+	/**
+	 * @brief PlatformScale * MeshSize.Y is the result you will see in the engine
+	 */
+	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (ClampMin = 0.0f))
+	float PlatformScale = 10.0f;
+
+	UPROPERTY(EditAnywhere, Category = "NavLink", meta = (Units = cm, ClampMin = 0.0f))
+	float NavLinkOffset = 500.0f;
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink")
+	bool bPointPlatform = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink", DisplayName = "OverridenScale", meta = (EditCondition = bPointPlatform))
+	FVector2D OverridenNavLinkScale = FVector2D(10.0f);
+
+	UPROPERTY(EditInstanceOnly, Category = "NavLink", meta = (EditCondition = bPointPlatform))
+	TEnumAsByte<EAxis::Type> NavLinksPointAxis = EAxis::X;
+
+	void BuildNavLinkPlatform() const;
+#endif
 
 	void NotifyLinkReached(UNavLinkCustomComponent* NavLinkCustomComponent, UObject* PathingAgent, const UE::Math::TVector<double>& Destination);
 
@@ -193,6 +251,9 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f, EditCondition = bShowDebugMesh))
 	float DebugSplineAlpha = 0.0f;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug", meta = (EditCondition = bShowDebugMesh))
+	bool DebugInvertMeshDirection = false;
 
 	UPROPERTY(EditDefaultsOnly, Transient)
 	TObjectPtr<USceneComponent> DebugMeshRootComp;

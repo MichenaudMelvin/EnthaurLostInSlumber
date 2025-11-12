@@ -765,6 +765,14 @@ void AENTDefaultCharacter::Respawn()
 	OnRespawn.Broadcast();
 }
 
+void AENTDefaultCharacter::FellOutOfWorld(const UDamageType& dmgType)
+{
+	// Does not call the parent function because it destroys the actor
+	// Super::FellOutOfWorld(dmgType);
+
+	HealthComponent->TakeMaxDamages();
+}
+
 void AENTDefaultCharacter::OnPlayerDie()
 {
 	if (!FirstPersonController)

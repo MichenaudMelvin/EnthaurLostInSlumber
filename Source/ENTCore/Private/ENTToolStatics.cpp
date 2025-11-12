@@ -24,3 +24,62 @@ float UENTToolStatics::GetAnimLength(UAnimSequenceBase* Anim)
 
 	return Anim->GetPlayLength() / Anim->RateScale;
 }
+
+TArray<AActor*> UENTToolStatics::SortActorsByDistanceToActor(TArray<AActor*> Actors, AActor* Target)
+{
+	QuickSortByDistance(Actors, 0, Actors.Num() - 1, Target);
+	return Actors;
+}
+
+void UENTToolStatics::QuickSortByDistance(TArray<AActor*>& InArray, int low, int high, const AActor* Actor)
+{
+	if (!Actor)
+	{
+		return;
+	}
+
+	int i = low;
+	int j = high;
+
+	if (!InArray.IsValidIndex(j))
+	{
+		return;
+	}
+
+	// Select a pivot
+	double pivot = FVector::DistSquared(InArray[j]->GetActorLocation(), Actor->GetActorLocation());
+
+	while (i <= j)
+	{
+		if (!InArray.IsValidIndex(i) || !InArray.IsValidIndex(j))
+		{
+			break;
+		}
+
+		/* Find out first pointer, bigger than pivot */
+		while (FVector::DistSquared(InArray[i]->GetActorLocation(), Actor->GetActorLocation()) < pivot)
+		{
+			i++;
+		}
+
+		/* Find our second pointer, smaller than pivot */
+		while (FVector::DistSquared(InArray[j]->GetActorLocation(), Actor->GetActorLocation()) > pivot)
+		{
+			j--;
+		}
+		/* Swap the pointers, calculate new values*/
+		if (i <= j)
+		{
+			InArray.SwapMemory(i++, j--);
+		}
+	}
+	if (j > low)
+	{
+		QuickSortByDistance(InArray, low, j, Actor);
+	}
+	if (i < high)
+	{
+		QuickSortByDistance(InArray, i, high, Actor);
+	}
+}
+

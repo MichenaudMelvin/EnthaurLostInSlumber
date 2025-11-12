@@ -27,5 +27,11 @@ protected:
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
 	bool bDebugTask = false;
+
+	/**
+	 * @brief This is for debug purpose only
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDisableRotation = false;
 #endif
 };
