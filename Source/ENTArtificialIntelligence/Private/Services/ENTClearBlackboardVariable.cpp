@@ -6,7 +6,7 @@
 
 UENTClearBlackboardVariable::UENTClearBlackboardVariable()
 {
-	NodeName = "ClearBlackboardVariable";
+	NodeName = "ClearBlackboardValue";
 	bNotifyBecomeRelevant = true;
 	bNotifyCeaseRelevant = true;
 }
@@ -41,6 +41,15 @@ void UENTClearBlackboardVariable::OnCeaseRelevant(UBehaviorTreeComponent& OwnerC
 		ClearValue(OwnerComp);
 	}
 }
+
+#if WITH_EDITOR
+FString UENTClearBlackboardVariable::GetStaticDescription() const
+{
+	FString KeyDesc = BlackboardKey.SelectedKeyName.ToString();
+
+	return FString::Printf(TEXT("Clear %s"), *KeyDesc);
+}
+#endif
 
 void UENTClearBlackboardVariable::ClearValue(UBehaviorTreeComponent& OwnerComp)
 {

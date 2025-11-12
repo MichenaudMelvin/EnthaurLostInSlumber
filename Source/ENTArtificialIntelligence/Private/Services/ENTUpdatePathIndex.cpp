@@ -5,7 +5,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
-#include "Components/SplineComponent.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 
 UENTUpdatePathIndex::UENTUpdatePathIndex()
@@ -15,8 +15,25 @@ UENTUpdatePathIndex::UENTUpdatePathIndex()
 	bNotifyBecomeRelevant = true;
 
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, AIPath), AENTArtificialIntelligencePath::StaticClass());
+	AINextPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, AINextPath),  AENTArtificialIntelligencePath::StaticClass());
+	NextPathLocation.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, NextPathLocation));
 	PathIndex.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, PathIndex));
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTUpdatePathIndex, PathDirection));
+}
+
+void UENTUpdatePathIndex::InitializeFromAsset(UBehaviorTree& Asset)
+{
+	Super::InitializeFromAsset(Asset);
+
+	const UBlackboardData* BBAsset = GetBlackboardAsset();
+	if (ensure(BBAsset))
+	{
+		AIPath.ResolveSelectedKey(*BBAsset);
+		AINextPath.ResolveSelectedKey(*BBAsset);
+		NextPathLocation.ResolveSelectedKey(*BBAsset);
+		PathIndex.ResolveSelectedKey(*BBAsset);
+		PathDirection.ResolveSelectedKey(*BBAsset);
+	}
 }
 
 void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -29,8 +46,7 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 		return;
 	}
 
-	UObject* KeyObject = BlackboardComponent->GetValueAsObject("AIPath");
-	// UObject* KeyObject = BlackboardComponent->GetValue<UBlackboardKeyType_Object>(Path.GetSelectedKeyID());
+	UObject* KeyObject = BlackboardComponent->GetValue<UBlackboardKeyType_Object>(AIPath.GetSelectedKeyID());
 	if (!KeyObject)
 	{
 		return;
@@ -42,24 +58,39 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 		return;
 	}
 
-	int Index = BlackboardComponent->GetValueAsInt("PathIndex");
-	int Direction = BlackboardComponent->GetValueAsInt("PathDirection");
-	// int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
-	// int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
+	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
+	int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
 
-	if(Index == PathOBJ->GetSpline()->GetNumberOfSplinePoints() - 1)
+	if(PathOBJ->IsAtTheEndOfThePath(Index, Direction))
 	{
-		if (PathOBJ->GetSpline()->IsClosedLoop())
+		if (PathOBJ->IsAClosedLoop())
 		{
 			Index = 0;
 		}
 		else
 		{
-			Index -= 1;
-			Direction *= -1;
+			AENTArtificialIntelligencePath* NextPath = PathOBJ->GetNextPath();
+			if (NextPath)
+			{
+				FTransform StartTransform = NextPath->GetStartTransform();
+				Index = 1;
+				Direction = 1;
 
-			BlackboardComponent->SetValueAsInt("PathDirection", Direction);
-			// BlackboardComponent->SetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID(), Direction);
+				BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(NextPathLocation.GetSelectedKeyID(), StartTransform.GetLocation());
+				BlackboardComponent->SetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID(), NextPath);
+			}
+			else if (bCanStopBehaviorIfThePathDoesNotLoop)
+			{
+				OwnerComp.StopLogic("FinishAIPath");
+				return;
+			}
+			else
+			{
+				Index -= 1;
+				Direction *= -1;
+			}
+
+			BlackboardComponent->SetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID(), Direction);
 		}
 	}
 	else
@@ -67,6 +98,30 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 		Index += 1 * Direction;
 	}
 
-	BlackboardComponent->SetValueAsInt("PathIndex", Index);
-	// BlackboardComponent->SetValue<UBlackboardKeyType_Int>(AIPath.GetSelectedKeyID(), Index);
+	BlackboardComponent->SetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID(), Index);
 }
+
+#if WITH_EDITOR
+FString UENTUpdatePathIndex::GetStaticDescription() const
+{
+	FString PathKeyDesc("invalid");
+	if (AIPath.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	{
+		PathKeyDesc = AIPath.SelectedKeyName.ToString();
+	}
+
+	FString PathIndexKeyDesc("invalid");
+	if (PathIndex.SelectedKeyType == UBlackboardKeyType_Int::StaticClass())
+	{
+		PathIndexKeyDesc = PathIndex.SelectedKeyName.ToString();
+	}
+
+	FString PathDirectionKeyDesc("invalid");
+	if (PathDirection.SelectedKeyType == UBlackboardKeyType_Int::StaticClass())
+	{
+		PathDirectionKeyDesc = PathDirection.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Update %s (Index: %s, Direction %s)"), *PathKeyDesc, *PathIndexKeyDesc, *PathDirectionKeyDesc );
+}
+#endif

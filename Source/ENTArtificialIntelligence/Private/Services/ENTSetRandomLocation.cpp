@@ -73,3 +73,16 @@ void UENTSetRandomLocation::SetOwner(AActor* InActorOwner)
 
 	ActorOwner = InActorOwner;
 }
+
+#if WITH_EDITOR
+FString UENTSetRandomLocation::GetStaticDescription() const
+{
+	FString RandomLocationKeyDesc("invalid");
+	if (RandomLocationKey.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+	{
+		RandomLocationKeyDesc = RandomLocationKey.SelectedKeyName.ToString();
+	}
+
+	return FString::Printf(TEXT("Set %s as random location in radius of %f"), *RandomLocationKeyDesc, Radius);
+}
+#endif

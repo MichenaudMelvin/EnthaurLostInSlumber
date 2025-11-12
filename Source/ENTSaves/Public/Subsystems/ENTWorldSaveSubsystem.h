@@ -39,12 +39,16 @@ protected:
 
 	FDelegateHandle WorldBeginPlayDelegateHandle;
 
+	FDelegateHandle WorldBeginTearDownDelegateHandle;
+
 	UPROPERTY(BlueprintReadOnly, Category = "World")
 	TObjectPtr<UENTWorldSave> CurrentWorldSave;
 
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
 
 	void OnNewWorldBeginPlay();
+
+	void OnWorldBeginTearDown(UWorld* World);
 
 public:
 	TObjectPtr<UENTWorldSave> GetCurrentWorldSave() const {return CurrentWorldSave;}
