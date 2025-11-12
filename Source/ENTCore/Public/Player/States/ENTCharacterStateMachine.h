@@ -60,6 +60,8 @@ public:
 
 	void LockCameraMovements(bool bLock);
 
+	void LockRollBobbing(bool bLock);
+
 	EENTCharacterStateID GetCurrentStateID() const {return CurrentStateID;}
 
 	UENTCharacterState* GetCurrentState() const {return CurrentState;}

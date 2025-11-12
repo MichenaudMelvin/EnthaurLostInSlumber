@@ -46,6 +46,21 @@ void UENTSetBoolValue::OnCeaseRelevant(UBehaviorTreeComponent& OwnerComp, uint8*
 	}
 }
 
+#if WITH_EDITOR
+FString UENTSetBoolValue::GetStaticDescription() const
+{
+	FString KeyDesc("invalid");
+	if (BoolKey.SelectedKeyType == UBlackboardKeyType_Bool::StaticClass())
+	{
+		KeyDesc = BoolKey.SelectedKeyName.ToString();
+	}
+
+	FString boolValue = bBoolValue ? FString("true") : FString("false");
+	return FString::Printf(TEXT("Set %s as %s"), *KeyDesc, *boolValue);
+
+}
+#endif
+
 void UENTSetBoolValue::SetValue(UBehaviorTreeComponent& OwnerComp)
 {
 	UBlackboardComponent* CurrentBlackboard = OwnerComp.GetBlackboardComponent();

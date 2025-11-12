@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ENTGameElementData.h"
 #include "UObject/Interface.h"
 #include "ENTSaveGameElementInterface.generated.h"
 
+struct FENTGameElementData;
 class UENTWorldSave;
 
 // This class does not need to be modified.
@@ -16,6 +16,9 @@ class ENTSAVES_API UENTSaveGameElementInterface : public UInterface
 	GENERATED_BODY()
 };
 
+/**
+ * @brief Implement this interface to an actor class and create a struct derived from FENTGameElementData to save data 
+ */
 class ENTSAVES_API IENTSaveGameElementInterface
 {
 	GENERATED_BODY()

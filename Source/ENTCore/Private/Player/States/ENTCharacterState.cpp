@@ -4,9 +4,11 @@
 #include "Player/States/ENTCharacterState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Player/ENTDefaultCharacter.h"
 #include "Player/ENTDefaultPlayerController.h"
 #include "Player/Camera/ENTViewBobbing.h"
+#include "Player/States/ENTCharacterMoveState.h"
 #include "Player/States/ENTCharacterStateMachine.h"
 #include "Saves/ENTSettingsSave.h"
 #include "Subsystems/ENTSettingsSaveSubsystem.h"
@@ -129,18 +131,40 @@ void UENTCharacterState::UpdateViewBobbing(float DeltaTime)
 	const float CurrentLocationFrequencyMultiplier = Character->GetViewBobbingObject()->GetLocationFrequencyMultiplier();
 	const float TargetLocationFrequencyMultiplier = GetSettings()->bViewBobbing ? LocationFrequencyMultiplier : 0.0f;
 
-	float TargetAmplitude = FMath::Lerp(CurrentWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
-	float TargetFrequency = FMath::Lerp(CurrentWaveOscillator.Frequency, TargetWaveOscillator.Frequency, DeltaTime);
+	const float TargetAmplitude = FMath::Lerp(CurrentWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
+	const float TargetFrequency = FMath::Lerp(CurrentWaveOscillator.Frequency, TargetWaveOscillator.Frequency, DeltaTime);
 
-	float AmplitudeMultiplier = FMath::Lerp(CurrentLocationAmplitudeMultiplier, TargetLocationAmplitudeMultiplier, DeltaTime);
-	float FrequencyMultiplier = FMath::Lerp(CurrentLocationFrequencyMultiplier, TargetLocationFrequencyMultiplier, DeltaTime);
+	const float AmplitudeMultiplier = FMath::Lerp(CurrentLocationAmplitudeMultiplier, TargetLocationAmplitudeMultiplier, DeltaTime);
+	const float FrequencyMultiplier = FMath::Lerp(CurrentLocationFrequencyMultiplier, TargetLocationFrequencyMultiplier, DeltaTime);
 
 	FWaveOscillator Oscillator;
 	Oscillator.Amplitude = TargetAmplitude;
 	Oscillator.Frequency = TargetFrequency;
 	Oscillator.InitialOffsetType = ViewBobbing.InitialOffsetType;
 
-	Character->GetViewBobbingObject()->SetOscillator(Oscillator, AmplitudeMultiplier, FrequencyMultiplier);
+	Character->GetViewBobbingObject()->SetLocationOscillator(Oscillator, AmplitudeMultiplier, FrequencyMultiplier);
+	
+	const FWaveOscillator CurrentRollWaveOscillator = Character->GetViewBobbingObject()->GetRollOscillator();
+
+	const UENTCharacterMoveState* MoveState = Cast<UENTCharacterMoveState>(this);
+
+	if (MoveState) LastMoveSpeed = MoveState->GetMoveSpeed();
+
+	const float NormalizedSpeed = (LastMoveSpeed) ? UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->Velocity.Length(), 0.0f, (MoveState)? MoveState->GetMoveSpeed() : LastMoveSpeed) : 0.0f;
+
+	const float CurrentRotationAmplitudeMultiplier = Character->GetViewBobbingObject()-> GetRotationAmplitudeMultiplier();
+	const float TargetRotationAmplitudeMultiplier = GetSettings()->bViewBobbing ? LocationAmplitudeMultiplier *  NormalizedSpeed * bAllowRollBobbing * 150.f : 0.0f;
+
+	float TargetRotationAmplitude = FMath::Lerp(CurrentRollWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
+	
+	float RotationAmplitudeMultiplier = FMath::Lerp(CurrentRotationAmplitudeMultiplier, TargetRotationAmplitudeMultiplier, DeltaTime);
+	
+	FWaveOscillator RollOsc;
+	RollOsc.Frequency = TargetFrequency;
+	RollOsc.Amplitude = TargetRotationAmplitude;
+	RollOsc.InitialOffsetType = ViewBobbing.InitialOffsetType;
+
+	Character->GetViewBobbingObject()->SetRollOscillator(RollOsc, RotationAmplitudeMultiplier, FrequencyMultiplier / 8.f);
 }
 
 #pragma endregion
@@ -175,5 +199,3 @@ UENTSettingsSave* UENTCharacterState::GetSettings() const
 
 	return SettingsSubsystem->GetSettings();
 }
-
-

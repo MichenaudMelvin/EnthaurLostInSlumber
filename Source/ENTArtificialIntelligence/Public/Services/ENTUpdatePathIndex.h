@@ -16,14 +16,29 @@ public:
 	UENTUpdatePathIndex();
 
 protected:
+	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
+
 	virtual void OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
+#if WITH_EDITOR
+	virtual FString GetStaticDescription() const override;
+#endif
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector AIPath;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	FBlackboardKeySelector AINextPath;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	FBlackboardKeySelector NextPathLocation;
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector PathIndex;
 
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector PathDirection;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	bool bCanStopBehaviorIfThePathDoesNotLoop = true;
 };

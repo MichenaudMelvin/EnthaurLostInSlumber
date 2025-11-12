@@ -31,6 +31,8 @@ public:
 	virtual void Init(AENTNerve* vLinkedNerve, ACharacter* vPlayerCharacter) override;
 	
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	virtual void ReleasePlayer(const bool DetachFromPlayer = false) override;
 	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 };
