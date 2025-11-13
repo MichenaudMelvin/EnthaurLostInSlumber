@@ -16,7 +16,13 @@ public:
 	UENTAttackTarget();
 
 protected:
+	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
+
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
+#if WITH_EDITOR
+	virtual FString GetStaticDescription() const override;
+#endif
 
 	UPROPERTY(EditInstanceOnly, Category = "Attack")
 	FValueOrBBKey_Float Damages;

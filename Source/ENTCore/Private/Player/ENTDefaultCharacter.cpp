@@ -2,7 +2,6 @@
 
 #include "Player/ENTDefaultCharacter.h"
 #include "AkComponent.h"
-#include "EnhancedInputSubsystems.h"
 #include "Interface/ENTGroundAction.h"
 #include "Camera/CameraComponent.h"
 #include "ENTCameraShakeComponent.h"
@@ -23,9 +22,10 @@
 #include "Player/States/ENTCharacterState.h"
 #include "Player/States/ENTCharacterStateMachine.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Runtime/AIModule/Classes/Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Hearing.h"
 #include "Config/ENTCoreConfig.h"
+#include "GameElements/ENTWeakZone.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Player/States/ENTCharacterFallState.h"
 #include "Saves/ENTPlayerSave.h"
@@ -509,6 +509,28 @@ bool AENTDefaultCharacter::HasRequiredQuantity(const EAmberType& AmberType, cons
 	return *Count >= Quantity;
 }
 
+#if WITH_EDITOR
+void AENTDefaultCharacter::IgnoreWeakZone(bool bIgnore) const
+{
+	TArray<AActor*> WeakZones;
+	UGameplayStatics::GetAllActorsOfClass(this, AENTWeakZone::StaticClass(), WeakZones);
+
+	for (AActor* Actor : WeakZones)
+	{
+		if (!Actor)
+		{
+			continue;
+		}
+
+		AENTWeakZone* WeakZone = Cast<AENTWeakZone>(Actor);
+		if (WeakZone)
+		{
+			WeakZone->ActivateZone(!bIgnore);
+		}
+	}
+}
+#endif
+
 #pragma endregion
 
 #pragma region Spike
@@ -741,6 +763,14 @@ void AENTDefaultCharacter::Respawn()
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	OnRespawn.Broadcast();
+}
+
+void AENTDefaultCharacter::FellOutOfWorld(const UDamageType& dmgType)
+{
+	// Does not call the parent function because it destroys the actor
+	// Super::FellOutOfWorld(dmgType);
+
+	HealthComponent->TakeMaxDamages();
 }
 
 void AENTDefaultCharacter::OnPlayerDie()

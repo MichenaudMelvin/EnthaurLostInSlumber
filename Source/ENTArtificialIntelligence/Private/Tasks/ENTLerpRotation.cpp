@@ -39,3 +39,10 @@ void UENTLerpRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 	}
 }
+
+#if WITH_EDITOR
+FString UENTLerpRotation::GetStaticDescription() const
+{
+	return FString::Printf(TEXT("Lerp to %s during %s"), *TargetRotation.ToString(), *LerpSpeed.ToString());
+}
+#endif

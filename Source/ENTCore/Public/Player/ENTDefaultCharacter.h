@@ -7,6 +7,7 @@
 #include "Components/ENTPhysicConstraint.h"
 #include "GameElements/ENTWeakZoneInterface.h"
 #include "GameFramework/Character.h"
+#include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTDefaultCharacter.generated.h"
 
@@ -234,6 +235,12 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
 	bool HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const;
 
+#if WITH_EDITOR
+private:
+	UFUNCTION(Exec)
+	void IgnoreWeakZone(bool bIgnore) const;
+#endif
+
 #pragma endregion
 
 #pragma region Spike
@@ -326,9 +333,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
 	TObjectPtr<AENTRespawnTree> LastRespawnTree = nullptr;
 
-	UFUNCTION()
-	void OnPlayerDie();
-
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
 	FKOnRespawn OnRespawn;
@@ -338,6 +342,12 @@ public:
 	void SetRespawnTree(AENTRespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
 
 	void Respawn();
+
+protected:
+	virtual void FellOutOfWorld(const UDamageType& dmgType) override;
+
+	UFUNCTION()
+	void OnPlayerDie();
 
 #pragma endregion
 

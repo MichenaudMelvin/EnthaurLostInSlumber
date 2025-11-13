@@ -87,6 +87,11 @@
 SourceArt/**/*.png
 SourceArt/**/*.tga
 
+# Log files
+**/[Ll]ogs/
+*.log
+*.Log
+
 # Built data for maps
 *_BuiltData.uasset
 

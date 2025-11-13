@@ -21,11 +21,22 @@ protected:
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 
+	virtual void Deinitialize() override;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Settings")
 	TObjectPtr<UENTSettingsSave> Settings;
 
+	UPROPERTY()
+	TObjectPtr<APostProcessVolume> CurrentPostProcess;
+
+	FDelegateHandle WorldInitDelegateHandle;
+
+	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
+
 public:
 	UENTSettingsSave* GetSettings() const {return Settings;}
+
+	void SetGamma(float Gamma) const;
 
 	void SetMasterVolume(float Volume) const;
 

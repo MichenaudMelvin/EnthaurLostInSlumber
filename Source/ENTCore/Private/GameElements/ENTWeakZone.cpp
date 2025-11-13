@@ -15,6 +15,7 @@
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Components/InstancedStaticMeshComponent.h"
+#include "Kismet/KismetMaterialLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 #if WITH_EDITORONLY_DATA
@@ -122,7 +123,19 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	BoxComponent->SetBoxExtent(ZoneSize);
+	if (!DynamicZoneMaterial)
+	{
+		DynamicZoneMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, ZoneMaterial);
+	}
+
+	if (DynamicZoneMaterial)
+	{
+		BlackAndWhiteShader->Settings.RemoveBlendable(DynamicZoneMaterial);
+		BlackAndWhiteShader->Settings.AddBlendable(DynamicZoneMaterial, 1.0f);
+	}
+
+	ChangeZoneSize(ZoneSize);
+
 	Foliage->SetStaticMesh(FoliageMesh);
 	Foliage->ClearInstances();
 
@@ -299,10 +312,22 @@ void AENTWeakZone::DestroyZone()
 	BoxComponent->DestroyComponent();
 }
 
+void AENTWeakZone::ChangeZoneSize(const FVector& NewSize)
+{
+	BoxComponent->SetBoxExtent(NewSize);
+
+	if (DynamicZoneMaterial)
+	{
+		float Radius = FMath::Sqrt(FMath::Pow(NewSize.X, 2) + FMath::Pow(NewSize.Y, 2));
+		DynamicZoneMaterial->SetScalarParameterValue(RadiusParamName, Radius);
+		DynamicZoneMaterial->SetVectorParameterValue(LocationParamName, GetActorLocation());
+	}
+}
+
 void AENTWeakZone::CureUpdate(float Alpha)
 {
 	float ScalarParam = FMath::Lerp(1.0f, 0.0f, Alpha);
-	MaterialBlackAndWhite->SetScalarParameterValue(CureParam, ScalarParam);
+	DynamicZoneMaterial->SetScalarParameterValue(CureParam, ScalarParam);
 }
 
 void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -401,6 +426,18 @@ void AENTWeakZone::CheckIfEveryInteractionsPointActive()
 	}
 
 	DestroyZone();
+}
+
+void AENTWeakZone::ActivateZone(bool bActivateZone)
+{
+	if (bActivateZone)
+	{
+		ChangeZoneSize(ZoneSize);
+	}
+	else
+	{
+		ChangeZoneSize(FVector::ZeroVector);
+	}
 }
 
 void AENTWeakZone::FoliageGrowthUpdate(float Alpha)
