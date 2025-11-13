@@ -40,6 +40,12 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	bool bJumpOnTheGround = false;
 
+	/**
+	 * @brief This vector is used when jumping on the ground to make the pawn face the location they goes
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	FBlackboardKeySelector GroundLookAtLocation;
+
 	FTransform StartTransform;
 
 	FTransform TargetTransform;

@@ -9,6 +9,7 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
 #include "Parasite/ENTParasitePawn.h"
@@ -27,6 +28,8 @@ UENTJumpAI::UENTJumpAI()
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpAI, AIPath), AENTArtificialIntelligencePath::StaticClass());
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpAI, PathDirection));
 	DoesWalkOnFloor.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpAI, DoesWalkOnFloor));
+	GroundLookAtLocation.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpAI, GroundLookAtLocation));
+	GroundLookAtLocation.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpAI, GroundLookAtLocation), AActor::StaticClass());
 }
 
 void UENTJumpAI::InitializeFromAsset(UBehaviorTree& Asset)
@@ -39,6 +42,7 @@ void UENTJumpAI::InitializeFromAsset(UBehaviorTree& Asset)
 		AIPath.ResolveSelectedKey(*BBAsset);
 		PathDirection.ResolveSelectedKey(*BBAsset);
 		DoesWalkOnFloor.ResolveSelectedKey(*BBAsset);
+		GroundLookAtLocation.ResolveSelectedKey(*BBAsset);
 	}
 
 	if (!JumpCurve)
@@ -96,12 +100,35 @@ EBTNodeResult::Type UENTJumpAI::ExecuteTask(UBehaviorTreeComponent& OwnerComp, u
 	if (bJumpOnTheGround)
 	{
 		TargetTransform.SetLocation(CurrentPath->GetNavLinkLocation(Direction));
-		TargetTransform.SetRotation(FQuat::Identity);
+
+		FVector TargetLocation = FVector::ZeroVector;
+		if (GroundLookAtLocation.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+		{
+			TargetLocation = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Vector>(GroundLookAtLocation.GetSelectedKeyID());
+		}
+		else if (GroundLookAtLocation.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+		{
+			 UObject* LocationObject = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Object>(GroundLookAtLocation.GetSelectedKeyID());
+			if (LocationObject)
+			{
+				if (AActor* ActorPtr = Cast<AActor>(LocationObject))
+				{
+					TargetLocation = ActorPtr->GetActorLocation();
+				}
+			}
+		}
+
+		FVector ForwardVector = TargetLocation - TargetTransform.GetLocation();
+
+		ForwardVector.Normalize();
+
+		FQuat TargetRotation = FRotationMatrix::MakeFromXZ(ForwardVector, FVector::UpVector).ToQuat();
+		TargetTransform.SetRotation(TargetRotation);
 		TargetTransform.SetScale3D(FVector::OneVector);
 	}
 	else
 	{
-		TargetTransform = Direction == 1 ? CurrentPath->GetStartTransform() : CurrentPath->GetEndTransform();
+		TargetTransform = Direction == 1 ? CurrentPath->GetStartTransform(Direction) : CurrentPath->GetEndTransform(Direction);
 	}
 
 	float PawnHeight = 0.0f;
@@ -111,7 +138,8 @@ EBTNodeResult::Type UENTJumpAI::ExecuteTask(UBehaviorTreeComponent& OwnerComp, u
 		PawnHeight = ParasitePawn->GetCollisionComp()->GetUnscaledBoxExtent().Z;
 	}
 
-	FVector HeightOffset = PawnHeight * (CurrentPath->GetDirection() * -1);
+	FVector GroundDirection = bJumpOnTheGround ? FVector::UpVector : (CurrentPath->GetDirection() * -1);
+	FVector HeightOffset = PawnHeight * GroundDirection;
 	FVector TargetLocation = TargetTransform.GetLocation();
 	TargetLocation += HeightOffset;
 
