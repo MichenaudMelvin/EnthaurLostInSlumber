@@ -26,9 +26,13 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 	Spline->SetupAttachment(Root);
 
-	PathLink = CreateDefaultSubobject<UNavLinkCustomComponent>(TEXT("StartNavLink"));
-	PathLink->SetMoveReachedLink(this, &AENTArtificialIntelligencePath::NotifyLinkReached);
-	PathLink->SetNavigationRelevancy(true);
+	FirstNavLink = CreateDefaultSubobject<UNavLinkCustomComponent>(TEXT("FirstNavLink"));
+	FirstNavLink->SetMoveReachedLink(this, &AENTArtificialIntelligencePath::NotifyLinkReached);
+	FirstNavLink->SetNavigationRelevancy(true);
+
+	SecondNavLink = CreateDefaultSubobject<UNavLinkCustomComponent>(TEXT("SecondNavLink"));
+	SecondNavLink->SetMoveReachedLink(this, &AENTArtificialIntelligencePath::NotifyLinkReached);
+	SecondNavLink->SetNavigationRelevancy(true);
 
 #if WITH_EDITORONLY_DATA
 	DebugMeshRootComp = CreateDefaultSubobject<USceneComponent>(TEXT("DebugRoot"));
@@ -48,6 +52,32 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 	BillboardComponent = CreateDefaultSubobject<UBillboardComponent>("Billboard");
 	BillboardComponent->SetupAttachment(Root);
 	BillboardComponent->bIsEditorOnly = true;
+
+	NavLinkPlatform = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("NavLinkPlatform"));
+	NavLinkPlatform->SetupAttachment(Root);
+	NavLinkPlatform->SetMobility(EComponentMobility::Static);
+	NavLinkPlatform->SetCollisionResponseToAllChannels(ECR_Ignore);
+	NavLinkPlatform->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+	NavLinkPlatform->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	NavLinkPlatform->SetHiddenInGame(true);
+	NavLinkPlatform->CastShadow = false;
+	NavLinkPlatform->bIsEditorOnly = true;
+
+	FistNavLinkDebugArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("FistNavLinkDebugArrow"));
+	FistNavLinkDebugArrow->SetupAttachment(Root);
+	FistNavLinkDebugArrow->SetWorldRotation(FRotator(90.0f, 0.0f, 0.0f));
+
+	SecondNavLinkDebugArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("SecondNavLinkDebugArrow"));
+	SecondNavLinkDebugArrow->SetupAttachment(Root);
+	SecondNavLinkDebugArrow->SetWorldRotation(FRotator(90.0f, 0.0f, 0.0f));
+
+	FistNavLinkPlatformDebugArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("FistNavLinkPlatformDebugArrow"));
+	FistNavLinkPlatformDebugArrow->SetupAttachment(Root);
+	FistNavLinkPlatformDebugArrow->SetArrowColor(FLinearColor::Green);
+
+	SecondNavLinkPlatformDebugArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("SecondNavLinkPlatformDebugArrow"));
+	SecondNavLinkPlatformDebugArrow->SetupAttachment(Root);
+	SecondNavLinkPlatformDebugArrow->SetArrowColor(FLinearColor::Green);
 #endif
 
 	GroundObjectTypes.Add(ObjectTypeQuery1);
@@ -64,8 +94,13 @@ void AENTArtificialIntelligencePath::BeginPlay()
 
 	if (bIsAClosedLoop || IsOnFloor())
 	{
-		PathLink->DestroyComponent();
+		FirstNavLink->DestroyComponent();
+		SecondNavLink->DestroyComponent();
 	}
+
+#if WITH_EDITORONLY_DATA
+	NavLinkPlatform->DestroyComponent();
+#endif
 
 	UpdatePoints(false);
 }
@@ -80,8 +115,6 @@ void AENTArtificialIntelligencePath::OnConstruction(const FTransform& Transform)
 	Spline->SetClosedLoop(bIsAClosedLoop);
 
 	UpdatePoints(true);
-
-	PathLink->SetLinkData(StartNavLinkLocation, EndNavLinkLocation, ENavLinkDirection::BothWays);
 
 #if WITH_EDITORONLY_DATA
 	if (AttachedAI)
@@ -98,6 +131,16 @@ void AENTArtificialIntelligencePath::OnConstruction(const FTransform& Transform)
 			PathToUpdate->UpdateNavLink();
 		}
 	}
+
+	if (NavLinksPointAxis == EAxis::Z)
+	{
+		NavLinksPointAxis = EAxis::X;
+	}
+
+	FistNavLinkDebugArrow->SetRelativeLocation(FirstNavLinkLocation);
+	SecondNavLinkDebugArrow->SetRelativeLocation(SecondNavLinkLocation);
+
+	BuildNavLinkPlatform();
 #endif
 
 	UpdateNavLink();
@@ -129,6 +172,53 @@ void AENTArtificialIntelligencePath::PostEditChangeProperty(struct FPropertyChan
 			NextPath = nullptr;
 		}
 	}
+
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(AENTArtificialIntelligencePath, FirstNavLinkLocation) || PropertyName == GET_MEMBER_NAME_CHECKED(AENTArtificialIntelligencePath, bIgnoreGroundTrace))
+	{
+		if (!bIgnoreGroundTrace)
+		{
+			FVector StartLocation = FirstNavLinkLocation + GetActorLocation();
+			StartLocation.Z += GroundTraceLength;
+			FVector EndLocation = FirstNavLinkLocation + GetActorLocation();
+			EndLocation.Z -= GroundTraceLength;
+
+			TArray<AActor*> ActorToIgnore;
+			FHitResult HitResult;
+
+			bool bHit = UKismetSystemLibrary::LineTraceSingle(this, StartLocation, EndLocation, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, ActorToIgnore, EDrawDebugTrace::None, HitResult, true);
+
+			if (bHit)
+			{
+				FirstNavLinkLocation = HitResult.Location - GetActorLocation();
+			}
+
+		}
+
+		FistNavLinkDebugArrow->SetRelativeLocation(FirstNavLinkLocation);
+	}
+
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(AENTArtificialIntelligencePath, SecondNavLinkLocation) || PropertyName == GET_MEMBER_NAME_CHECKED(AENTArtificialIntelligencePath, bIgnoreGroundTrace))
+	{
+		if (!bIgnoreGroundTrace)
+		{
+			FVector StartLocation = SecondNavLinkLocation + GetActorLocation();
+			StartLocation.Z += GroundTraceLength;
+			FVector EndLocation = SecondNavLinkLocation + GetActorLocation();
+			EndLocation.Z -= GroundTraceLength;
+
+			TArray<AActor*> ActorToIgnore;
+			FHitResult HitResult;
+
+			bool bHit = UKismetSystemLibrary::LineTraceSingle(this, StartLocation, EndLocation, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, ActorToIgnore, EDrawDebugTrace::None, HitResult, true);
+
+			if (bHit)
+			{
+				SecondNavLinkLocation = HitResult.Location - GetActorLocation();
+			}
+		}
+
+		SecondNavLinkDebugArrow->SetRelativeLocation(SecondNavLinkLocation);
+	}
 }
 #endif
 
@@ -138,18 +228,14 @@ void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 	Arrows.Empty();
 #endif
 
-	for (int i = 0; i < Spline->GetNumberOfSplinePoints(); i++)
+	for (int32 i = 0; i < Spline->GetNumberOfSplinePoints(); i++)
 	{
 		Spline->SetTangentsAtSplinePoint(i, FVector::ZeroVector, FVector::ZeroVector, ESplineCoordinateSpace::World, true);
 
 		FHitResult HitResult;
 		bool bHit = GetTracedPointLocation(i, HitResult);
-		if (!bHit)
-		{
-			continue;
-		}
 
-		FVector TargetLocation = HitResult.Location;
+		FVector TargetLocation = bHit ? HitResult.Location : Spline->GetLocationAtSplinePoint(i, ESplineCoordinateSpace::World);
 		if (!IsOnFloor())
 		{
 			TargetLocation += HitResult.Normal * WallPointsOffset;
@@ -218,7 +304,7 @@ void AENTArtificialIntelligencePath::UpdatePoints(bool bInConstructionScript)
 
 	DebugMeshComp->SetVisibility(true);
 
-	DebugMeshRootComp->SetWorldTransform(GetTransformAtAlpha(DebugSplineAlpha));
+	DebugMeshRootComp->SetWorldTransform(GetTransformAtAlpha(DebugSplineAlpha, (DebugInvertMeshDirection ? -1 : 1)));
 	DebugMeshComp->SetRelativeRotation(RotationOffset);
 #endif
 }
@@ -229,11 +315,6 @@ void AENTArtificialIntelligencePath::UpdateNavLink()
 	{
 		return;
 	}
-
-	FTransform FirstTransform = NextPath->GetFirstPointTransform(ESplineCoordinateSpace::World);
-	FVector LocalPosition = GetActorTransform().InverseTransformPosition(FirstTransform.GetLocation());
-
-	FTransform LastTransform = GetLastPointTransform(ESplineCoordinateSpace::Local);
 
 #if WITH_EDITORONLY_DATA
 	if (!NextPath->PreviousPaths.Contains(this))
@@ -287,12 +368,12 @@ FTransform AENTArtificialIntelligencePath::GetLastPointTransform(const ESplineCo
 	return Spline->GetTransformAtSplinePoint(Index, CoordinateSpace);
 }
 
-FTransform AENTArtificialIntelligencePath::GetTransformAtAlpha(float Alpha) const
+FTransform AENTArtificialIntelligencePath::GetTransformAtAlpha(float Alpha, int8 SplineDirection) const
 {
 	float Distance = FMath::Lerp(0.0f, Spline->GetSplineLength(), Alpha);
 	FTransform TargetTransform = Spline->GetTransformAtDistanceAlongSpline(Distance, ESplineCoordinateSpace::World);
 
-	float NextAlpha = FMath::Clamp(Alpha + 0.1f, 0.0f, 1.0f);
+	float NextAlpha = FMath::Clamp(Alpha + (0.1f * SplineDirection), 0.0f, 1.0f);
 	float NextDistance = FMath::Lerp(0.0f, Spline->GetSplineLength(), NextAlpha);
 	FVector NextLocation = Spline->GetLocationAtDistanceAlongSpline(NextDistance, ESplineCoordinateSpace::World);
 
@@ -306,12 +387,7 @@ FTransform AENTArtificialIntelligencePath::GetTransformAtAlpha(float Alpha) cons
 
 FVector AENTArtificialIntelligencePath::GetNavLinkLocation(int32 PathDirection) const
 {
-	FVector StartPoint;
-	FVector EndPoint;
-	ENavLinkDirection::Type NavLinkDirection;
-
-	PathLink->GetLinkData(StartPoint, EndPoint, NavLinkDirection);
-	return PathDirection == 1 ? (EndPoint + GetActorLocation()) : (StartPoint + GetActorLocation());
+	return (PathDirection == 1 ? SecondNavLinkLocation : FirstNavLinkLocation) + GetActorLocation();
 }
 
 bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index, int32 PathDirection) const
@@ -321,8 +397,8 @@ bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index, int32 Pat
 
 bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(const FVector& ActorLocation, int32 PathDirection, float Tolerance) const
 {
-	FVector StartLocation = GetStartTransform().GetLocation();
-	FVector EndLocation = GetEndTransform().GetLocation();
+	FVector StartLocation = GetStartTransform(PathDirection).GetLocation();
+	FVector EndLocation = GetEndTransform(PathDirection).GetLocation();
 
 	StartLocation += GetDirection() * -1 * SplineHeight;
 	EndLocation += GetDirection() * -1 * SplineHeight;
@@ -366,6 +442,11 @@ bool AENTArtificialIntelligencePath::IsOnFloor() const
 
 void AENTArtificialIntelligencePath::NotifyLinkReached(UNavLinkCustomComponent* NavLinkCustomComponent, UObject* PathingAgent, const UE::Math::TVector<double>& Destination)
 {
+	if (!NavLinkCustomComponent)
+	{
+		return;
+	}
+
 	UPathFollowingComponent* PathComp = Cast<UPathFollowingComponent>(PathingAgent);
 	if (!PathComp)
 	{
@@ -390,20 +471,17 @@ void AENTArtificialIntelligencePath::NotifyLinkReached(UNavLinkCustomComponent* 
 		return;
 	}
 
-	FVector2D WorldStartPoint = FVector2D(StartNavLinkLocation + GetActorLocation());
-	FVector2D WorldEndPoint = FVector2D(EndNavLinkLocation + GetActorLocation());
-
-	if (FVector2D(Destination) == WorldStartPoint)
+	if (NavLinkCustomComponent == FirstNavLink)
 	{
-		BlackboardComp->SetValueAsInt(PathIndexKeyName, Spline->GetNumberOfSplinePoints() - 1);
-		BlackboardComp->SetValueAsInt(PathDirectionKeyName, -1);
-		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetEndTransform().GetLocation());
-	}
-	else if (FVector2D(Destination) == WorldEndPoint)
-	{
-		BlackboardComp->SetValueAsInt(PathIndexKeyName, 0);
+		BlackboardComp->SetValueAsInt(PathIndexKeyName, 1);
 		BlackboardComp->SetValueAsInt(PathDirectionKeyName, 1);
-		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetStartTransform().GetLocation());
+		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetStartTransform(1).GetLocation());
+	}
+	else if (NavLinkCustomComponent == SecondNavLink)
+	{
+		BlackboardComp->SetValueAsInt(PathIndexKeyName, Spline->GetNumberOfSplinePoints() - 2);
+		BlackboardComp->SetValueAsInt(PathDirectionKeyName, -1);
+		BlackboardComp->SetValueAsVector(NextPathLocationKeyName, GetEndTransform(-1).GetLocation());
 	}
 	else
 	{
@@ -419,6 +497,99 @@ void AENTArtificialIntelligencePath::NotifyLinkReached(UNavLinkCustomComponent* 
 	BlackboardComp->SetValueAsBool(JumpKeyName, true);
 	BlackboardComp->SetValueAsObject(AIPathKeyName, this);
 }
+
+#if WITH_EDITORONLY_DATA
+void AENTArtificialIntelligencePath::BuildNavLinkPlatform() const
+{
+	if (!NavLinkPlatform)
+	{
+		return;
+	}
+
+	if (!bUsePlatform || bIsAClosedLoop || IsOnFloor())
+	{
+		FirstNavLink->SetLinkData(FirstNavLinkLocation, SecondNavLinkLocation, ENavLinkDirection::BothWays);
+		SecondNavLink->SetLinkData(SecondNavLinkLocation, FirstNavLinkLocation, ENavLinkDirection::BothWays);
+
+		NavLinkPlatform->SetCanEverAffectNavigation(false);
+		NavLinkPlatform->SetVisibility(false);
+		FistNavLinkPlatformDebugArrow->SetVisibility(false);
+		SecondNavLinkPlatformDebugArrow->SetVisibility(false);
+		return;
+	}
+
+	if (!NavLinkPlatform->GetStaticMesh())
+	{
+		return;
+	}
+
+	NavLinkPlatform->SetCanEverAffectNavigation(true);
+	NavLinkPlatform->SetVisibility(bShowPlatform);
+	FistNavLinkPlatformDebugArrow->SetVisibility(true);
+	SecondNavLinkPlatformDebugArrow->SetVisibility(true);
+
+	FVector MeshSize = (NavLinkPlatform->GetStaticMesh()->GetBoundingBox().Max - NavLinkPlatform->GetStaticMesh()->GetBoundingBox().Min);
+
+	FVector FirstPoint = Spline->GetLocationAtSplinePoint(0, ESplineCoordinateSpace::Local) + PlatformOffset;
+	FVector SecondPoint = Spline->GetLocationAtSplinePoint(Spline->GetNumberOfSplinePoints() - 1, ESplineCoordinateSpace::Local) + PlatformOffset;
+
+	FVector Offset = (GetDirection() * -1) * (PlatformScale * (MeshSize.Y * 0.5f));
+	FVector OffsetFirstPoint = FirstPoint + Offset;
+	FVector OffsetSecondPoint = SecondPoint + Offset;
+
+	NavLinkPlatform->SetRelativeLocation(OffsetFirstPoint);
+
+	FVector FirstNavLinkEndLocation;
+	FVector SecondNavLinkEndLocation;
+
+	if (bPointPlatform)
+	{
+		NavLinkPlatform->SetWorldRotation(FRotator::ZeroRotator);
+		NavLinkPlatform->SetWorldScale3D(FVector(OverridenNavLinkScale.X, OverridenNavLinkScale.Y, 1.0f));
+
+		FirstNavLinkEndLocation = NavLinkPlatform->GetRelativeLocation();
+		SecondNavLinkEndLocation = NavLinkPlatform->GetRelativeLocation();
+
+		if (NavLinksPointAxis == EAxis::X)
+		{
+			float PointOffset = MeshSize.X * OverridenNavLinkScale.X * 0.5f;
+
+			FirstNavLinkEndLocation.X += PointOffset + NavLinkOffset;
+			SecondNavLinkEndLocation.X += PointOffset - NavLinkOffset;
+		}
+		else if (NavLinksPointAxis == EAxis::Y)
+		{
+			float PointOffset = (OverridenNavLinkScale.Y * 0.5f);
+
+			FirstNavLinkEndLocation.X += MeshSize.X * OverridenNavLinkScale.X * 0.5f;
+			SecondNavLinkEndLocation.X += MeshSize.X * OverridenNavLinkScale.X * 0.5f;
+
+			FirstNavLinkEndLocation.Y += PointOffset + NavLinkOffset;
+			SecondNavLinkEndLocation.Y -= PointOffset + NavLinkOffset;
+		}
+	}
+	else
+	{
+		float Distance = FVector::Dist(FirstPoint, SecondPoint);
+
+		NavLinkPlatform->SetRelativeRotation(UKismetMathLibrary::FindLookAtRotation(FirstPoint, SecondPoint));
+		NavLinkPlatform->SetWorldScale3D(FVector(Distance / MeshSize.X, PlatformScale, 1.0f));
+
+		FVector NavLinkPointOffset =(NavLinkPlatform->GetForwardVector() * NavLinkOffset);
+		FirstNavLinkEndLocation = OffsetFirstPoint + NavLinkPointOffset;
+		SecondNavLinkEndLocation = OffsetSecondPoint - NavLinkPointOffset;
+	}
+
+	FirstNavLink->SetLinkData(FirstNavLinkLocation, FirstNavLinkEndLocation, ENavLinkDirection::BothWays);
+	SecondNavLink->SetLinkData(SecondNavLinkLocation, SecondNavLinkEndLocation, ENavLinkDirection::BothWays);
+
+	FistNavLinkPlatformDebugArrow->SetRelativeLocation(FirstNavLinkEndLocation);
+	SecondNavLinkPlatformDebugArrow->SetRelativeLocation(SecondNavLinkEndLocation);
+
+	FistNavLinkPlatformDebugArrow->SetRelativeRotation(NavLinkPlatform->GetRelativeRotation() + FRotator(90.0f, 0.0f, 0.0f));
+	SecondNavLinkPlatformDebugArrow->SetRelativeRotation(NavLinkPlatform->GetRelativeRotation() + FRotator(90.0f, 0.0f, 0.0f));
+}
+#endif
 
 #pragma endregion
 

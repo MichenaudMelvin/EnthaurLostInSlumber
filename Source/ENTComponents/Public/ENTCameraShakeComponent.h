@@ -31,9 +31,9 @@ protected:
 	TObjectPtr<APlayerController> PlayerController;
 
 public:
-	UFUNCTION(BlueprintCallable, Category = "Shake")
+	UFUNCTION(CallInEditor, BlueprintCallable, Category = "Shake")
 	void MakeSmallCameraShake() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Shake")
+	UFUNCTION(CallInEditor, BlueprintCallable, Category = "Shake")
 	void MakeBigCameraShake() const;
 };

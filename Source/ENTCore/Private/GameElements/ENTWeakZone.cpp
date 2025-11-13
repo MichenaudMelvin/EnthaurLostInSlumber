@@ -3,6 +3,7 @@
 
 #include "GameElements/ENTWeakZone.h"
 #include "AkGameplayStatics.h"
+#include "ENTElectricityComponent.h"
 #include "Components/BoxComponent.h"
 #include "ENTInteractableComponent.h"
 #include "Components/PostProcessComponent.h"
@@ -46,6 +47,8 @@ AENTWeakZone::AENTWeakZone()
 	Foliage->SetupAttachment(BoxComponent);
 	Foliage->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	Foliage->SetMobility(EComponentMobility::Stationary);
+
+	ElectricityComponent = CreateDefaultSubobject<UENTElectricityComponent>(TEXT("Electricity Component"));
 }
 
 void AENTWeakZone::BeginPlay()
@@ -112,6 +115,8 @@ void AENTWeakZone::BeginPlay()
 	FoliageTimeline.SetPlayRate(1/GrowthDuration);
 
 	CheckIfEveryInteractionsPointActive();
+
+	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTWeakZone::OnElectricityMovementFinished);
 }
 
 void AENTWeakZone::OnConstruction(const FTransform& Transform)
@@ -174,6 +179,11 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 		InteractionPoint.AmberMeshComp->SetStaticMesh(AmberMesh);
 		InteractionPoint.InteractionBox->SetBoxExtent(InteractionBoxExtent, false);
 		InteractionPoint.InteractionBox->SetRelativeLocation(FVector(0.0f, 0.0f, InteractionBoxExtent.Z));
+
+		InteractionPoint.MeshComp->SetRenderCustomDepth(true);
+		InteractionPoint.MeshComp->SetCustomDepthStencilValue(1);
+		InteractionPoint.AmberMeshComp->SetRenderCustomDepth(true);
+		InteractionPoint.AmberMeshComp->SetCustomDepthStencilValue(1);
 
 		if (!Foliage)
 		{
@@ -409,11 +419,9 @@ void AENTWeakZone::CheckIfEveryInteractionsPointActive()
 		return;
 	}
 
-	CureTimeline.Play();
-	FoliageTimeline.Play();
-
 	for (const FENTInteractionPoints& InteractionPoint : InteractionPoints)
 	{
+		ElectricityComponent->PlayElectricityAnimation(InteractionPoints[0].Transform * GetActorTransform());
 		UAkGameplayStatics::PostEventAtLocation(FoliageGrowthNoise, InteractionPoint.Transform.GetLocation(), InteractionPoint.Transform.Rotator(), this);
 	}
 
@@ -485,4 +493,10 @@ void AENTWeakZone::LoadGameElement(const FENTGameElementData& GameElementData, U
 	{
 		InteractionPoints[i].bIsActive = Data.ActivatedInteractionPoints[i];
 	}
+}
+
+void AENTWeakZone::OnElectricityMovementFinished()
+{
+	CureTimeline.Play();
+	FoliageTimeline.Play();
 }

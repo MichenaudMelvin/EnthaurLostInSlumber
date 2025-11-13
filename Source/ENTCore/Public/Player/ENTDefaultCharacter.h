@@ -78,6 +78,7 @@ public:
 
 	UENTHealthComponent* GetHealth() const {return HealthComponent;}
 
+	UFUNCTION(BlueprintCallable)
 	UENTCameraShakeComponent* GetCameraShake() const {return ShakeManager;}
 
 #pragma endregion
@@ -332,9 +333,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
 	TObjectPtr<AENTRespawnTree> LastRespawnTree = nullptr;
 
-	UFUNCTION()
-	void OnPlayerDie();
-
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
 	FKOnRespawn OnRespawn;
@@ -344,6 +342,12 @@ public:
 	void SetRespawnTree(AENTRespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
 
 	void Respawn();
+
+protected:
+	virtual void FellOutOfWorld(const UDamageType& dmgType) override;
+
+	UFUNCTION()
+	void OnPlayerDie();
 
 #pragma endregion
 
