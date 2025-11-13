@@ -9,7 +9,8 @@ public class ENTComponents : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core",
+                "Core", 
+                "AkAudio",
             }
         );
 
