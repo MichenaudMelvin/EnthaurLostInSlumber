@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{A9E3B004-D324-CFB1-45AD-14D8A5EB5082}",
+    "Hash": "{B2ED26FF-E365-18E9-38C2-DF1A25046AF3}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -65,15 +65,7 @@
       "Name": "Bus_SFX_Amb_MC",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
       "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
-      "Color": "9",
-      "AuxBusRefs": [
-       {
-        "Id": "348963605",
-        "Name": "Reverb",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
-        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
-       }
-      ]
+      "Color": "9"
      },
      {
       "Id": "4267419003",
@@ -114,15 +106,7 @@
          "Id": "3164629247"
         }
        ]
-      },
-      "AuxBusRefs": [
-       {
-        "Id": "243379636",
-        "Name": "Reflect",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
-        "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
-       }
-      ]
+      }
      }
     ],
     "GameParameters": [
@@ -241,6 +225,6 @@
     ]
    }
   ],
-  "FileHash": "{B8BB83AB-46EC-BA42-1A29-F7CD96473E4F}"
+  "FileHash": "{15CF2DB0-64E4-B3CD-4E83-CADCCDE7D89C}"
  }
 }

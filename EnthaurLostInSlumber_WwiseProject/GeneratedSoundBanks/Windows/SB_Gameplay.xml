@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="154">
+	<SoundBanks>
+		<SoundBank Id="1430174393" Type="User" GUID="{32268D10-2C94-4BB7-BD2D-D4E674E631DA}" Color="10" Language="SFX" Hash="{6E9B2214-5241-DC7B-BCC0-7E3BB0C7CCF5}">
+			<ObjectPath>\SoundBanks\SFX\SB_Gameplay</ObjectPath>
+			<ShortName>SB_Gameplay</ShortName>
+			<Path>SB_Gameplay.bnk</Path>
+			<Media>
+				<File Id="8104921" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Elevator_Start_01.wav</ShortName>
+					<CachePath>BB/{BB0A6E73-ABDD-609F-7BAE-8EDD1B3115A2}.wem</CachePath>
+				</File>
+				<File Id="16378350" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Activate_01.wav</ShortName>
+					<CachePath>06/{06FB8849-73BC-D99A-3D7F-2F3F433BFAB6}.wem</CachePath>
+				</File>
+				<File Id="21354617" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_04.wav</ShortName>
+					<CachePath>A6/{A6294FF7-5AB4-B1DD-D89E-00F2BA62954C}.wem</CachePath>
+				</File>
+				<File Id="21974263" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_08.wav</ShortName>
+					<CachePath>5F/{5FA0F67A-87A6-402C-879C-F2B46465223F}.wem</CachePath>
+				</File>
+				<File Id="22207337" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_14.wav</ShortName>
+					<CachePath>1E/{1E309989-6A01-52DE-C8CF-F88E10C2CF8A}.wem</CachePath>
+				</File>
+				<File Id="22528093" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Activate_02.wav</ShortName>
+					<CachePath>7B/{7B252851-79A5-B3F1-A8D5-DF098A50B331}.wem</CachePath>
+				</File>
+				<File Id="32159369" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Muscle_02.wav</ShortName>
+					<CachePath>95/{95884507-24CE-44C9-9E6B-2F33181F835E}.wem</CachePath>
+				</File>
+				<File Id="43894004" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_Gore_01.wav</ShortName>
+					<CachePath>E3/{E3339A71-B018-DC4B-E60C-B913810188BE}.wem</CachePath>
+				</File>
+				<File Id="57626436" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_11.wav</ShortName>
+					<CachePath>CC/{CCEB31D6-08FF-A3CD-5FBE-B530258DB719}.wem</CachePath>
+				</File>
+				<File Id="58099252" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore_02.wav</ShortName>
+					<CachePath>62/{62FB46FA-D514-F090-FBC8-FB54CCAC0928}.wem</CachePath>
+				</File>
+				<File Id="61866964" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_04.wav</ShortName>
+					<CachePath>6C/{6CD2EC24-F2CB-42DF-ABE0-1AD1465CE4D3}.wem</CachePath>
+				</File>
+				<File Id="63912307" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_15.wav</ShortName>
+					<CachePath>86/{86A8D40C-9E3C-C7FE-5FDF-CD3AC4656727}.wem</CachePath>
+				</File>
+				<File Id="67202430" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Walk_02.wav</ShortName>
+					<CachePath>74/{7400DAF5-9ECD-1BF0-5D54-60B374FDA76B}.wem</CachePath>
+				</File>
+				<File Id="102806602" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Walk_07.wav</ShortName>
+					<CachePath>BE/{BE720D26-28A8-9134-71DD-9304DAAF74FE}.wem</CachePath>
+				</File>
+				<File Id="112381933" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Wind_Speed_Low.wav</ShortName>
+					<CachePath>AF/{AFC7A4B9-13AC-1709-5A22-04B262ED8D08}.wem</CachePath>
+				</File>
+				<File Id="119173871" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Grab_Nerve_02.wav</ShortName>
+					<CachePath>C9/{C9A37799-ABFC-8D16-1E95-3E4EECBCF240}.wem</CachePath>
+				</File>
+				<File Id="122346683" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_03.wav</ShortName>
+					<CachePath>EF/{EFCBD7B5-1FC7-4CB9-6B69-2EE485144E8A}.wem</CachePath>
+				</File>
+				<File Id="138498267" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_02.wav</ShortName>
+					<CachePath>8E/{8EACA651-8F61-C200-6B74-A678CDC2B6D8}.wem</CachePath>
+				</File>
+				<File Id="144740265" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_01.wav</ShortName>
+					<CachePath>62/{6262B2ED-50D2-1B80-1AEE-7FDFBF886CE5}.wem</CachePath>
+				</File>
+				<File Id="148441579" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Walk_05.wav</ShortName>
+					<CachePath>A6/{A6DBBF95-63EA-C8A9-1B30-CF9BE1411D09}.wem</CachePath>
+				</File>
+				<File Id="148815722" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_03.wav</ShortName>
+					<CachePath>DE/{DE3E4F5B-4775-1AF6-5DE0-DCAF2F4626D1}.wem</CachePath>
+				</File>
+				<File Id="150421772" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Woosh_01.wav</ShortName>
+					<CachePath>64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem</CachePath>
+				</File>
+				<File Id="151884214" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_Gore_05.wav</ShortName>
+					<CachePath>7D/{7D5A6079-3F85-2B96-84B0-92160236F58A}.wem</CachePath>
+				</File>
+				<File Id="155549434" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Electricity_Layer_03.wav</ShortName>
+					<CachePath>D4/{D4C263BE-0141-B0E9-41C7-FA926DC1CB4D}.wem</CachePath>
+				</File>
+				<File Id="171841650" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_12.wav</ShortName>
+					<CachePath>39/{390995E2-6BBF-A3C6-B318-6CE13E0A8281}.wem</CachePath>
+				</File>
+				<File Id="174144215" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Bone_Jump_03.wav</ShortName>
+					<CachePath>85/{85FC8073-1CB9-D94D-06F2-1B46ACD745BD}.wem</CachePath>
+				</File>
+				<File Id="195657945" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_02.wav</ShortName>
+					<CachePath>E1/{E169499D-E122-081F-D7C3-DF595F08D851}.wem</CachePath>
+				</File>
+				<File Id="197068285" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_01.wav</ShortName>
+					<CachePath>7D/{7DB56DDB-9C5A-C159-4C17-48C1F58C94ED}.wem</CachePath>
+				</File>
+				<File Id="208173442" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_10.wav</ShortName>
+					<CachePath>12/{12F082BB-D698-A19A-1AA1-042DDE7A34EA}.wem</CachePath>
+				</File>
+				<File Id="218825922" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Take_Ambre.wav</ShortName>
+					<CachePath>57/{576C412A-A9B2-0294-65BB-30411D7A64AB}.wem</CachePath>
+				</File>
+				<File Id="223357946" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_05.wav</ShortName>
+					<CachePath>91/{91584200-31A3-6FF9-E911-59676EF91E21}.wem</CachePath>
+				</File>
+				<File Id="232844466" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_19.wav</ShortName>
+					<CachePath>53/{53B850F3-4003-C3A2-1C66-BEAE860FDB5F}.wem</CachePath>
+				</File>
+				<File Id="239007564" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Muscle_03.wav</ShortName>
+					<CachePath>C5/{C5C5CEB7-8E6F-671E-56F2-0F32E611EEA3}.wem</CachePath>
+				</File>
+				<File Id="251580194" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore_01.wav</ShortName>
+					<CachePath>0D/{0D479D43-B41C-862C-76C2-72501D8A01DA}.wem</CachePath>
+				</File>
+				<File Id="256986239" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_13.wav</ShortName>
+					<CachePath>6D/{6DDF0565-90B9-1C63-2B43-AB024C671B14}.wem</CachePath>
+				</File>
+				<File Id="262194432" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_11.wav</ShortName>
+					<CachePath>FB/{FB4DAB97-BE21-1B8A-80ED-8C4E1FBB2B44}.wem</CachePath>
+				</File>
+				<File Id="294036953" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Elevator.wav</ShortName>
+					<CachePath>17/{17BCC5B2-84CA-C367-AD83-4D777E07FC90}.wem</CachePath>
+				</File>
+				<File Id="303207830" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore02_02.wav</ShortName>
+					<CachePath>EB/{EB0451B1-D6CB-EDF7-4BFC-D9F6118B8695}.wem</CachePath>
+				</File>
+				<File Id="310414559" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Electricity_Layer_02.wav</ShortName>
+					<CachePath>0B/{0B7B879A-A451-12EF-184E-4A6AF4BC3BF6}.wem</CachePath>
+				</File>
+				<File Id="317040080" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Walk_03.wav</ShortName>
+					<CachePath>81/{811D2405-2B7B-703B-EDB2-6480B02FB1D0}.wem</CachePath>
+				</File>
+				<File Id="330044548" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Walk_01.wav</ShortName>
+					<CachePath>FE/{FE08EDD7-0993-1DC5-030A-5E7571D3DD1B}.wem</CachePath>
+				</File>
+				<File Id="331087580" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_10.wav</ShortName>
+					<CachePath>FF/{FFAA78DA-3CEE-0979-B00F-C55049191365}.wem</CachePath>
+				</File>
+				<File Id="344427236" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_08.wav</ShortName>
+					<CachePath>B1/{B1C60212-0B42-3005-DDD1-CA2F2ED2EA6D}.wem</CachePath>
+				</File>
+				<File Id="388414790" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_01.wav</ShortName>
+					<CachePath>02/{02DADEB0-0FA6-43D0-D03E-F9337EE96A58}.wem</CachePath>
+				</File>
+				<File Id="389742043" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_15.wav</ShortName>
+					<CachePath>DA/{DAF9EADA-13F3-F400-55B3-282C393EF4B8}.wem</CachePath>
+				</File>
+				<File Id="399813874" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Grab_Nerve_01.wav</ShortName>
+					<CachePath>CA/{CA05ED8B-6924-9ECC-896B-6CFF1C247596}.wem</CachePath>
+				</File>
+				<File Id="401531728" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_09.wav</ShortName>
+					<CachePath>C1/{C18E6E49-6DF9-F306-04A1-E9BAE465DB23}.wem</CachePath>
+				</File>
+				<File Id="424464787" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_10.wav</ShortName>
+					<CachePath>68/{68EB7A7F-31E1-97DD-7267-1FA4FBF10109}.wem</CachePath>
+				</File>
+				<File Id="429011309" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_Gore_04.wav</ShortName>
+					<CachePath>90/{90C4B611-1886-03D6-C5F3-24AAA89377CC}.wem</CachePath>
+				</File>
+				<File Id="435354478" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Electricity_Start_02.wav</ShortName>
+					<CachePath>3D/{3D52CD3A-A93D-0188-FF3E-83E712BCD6BD}.wem</CachePath>
+				</File>
+				<File Id="435669612" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_13.wav</ShortName>
+					<CachePath>E3/{E3F13A27-8A42-7E89-A986-2BCA1C84B278}.wem</CachePath>
+				</File>
+				<File Id="448243903" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_12.wav</ShortName>
+					<CachePath>D5/{D5BEA786-7EFA-DACF-4349-7CF548C710F2}.wem</CachePath>
+				</File>
+				<File Id="450151386" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_14.wav</ShortName>
+					<CachePath>83/{830F7C3C-5964-1B9D-D625-64FDAA82A054}.wem</CachePath>
+				</File>
+				<File Id="459494553" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Walk_02.wav</ShortName>
+					<CachePath>2B/{2BB70A05-224F-D32E-B592-08466B6C5D2C}.wem</CachePath>
+				</File>
+				<File Id="475344315" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_02.wav</ShortName>
+					<CachePath>E3/{E3D95A9F-A7E6-9E5C-83C4-D2EC845A3A2C}.wem</CachePath>
+				</File>
+				<File Id="489955890" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Walk_05.wav</ShortName>
+					<CachePath>F4/{F47F317C-D8A6-97D4-64E9-D216C3EA46DE}.wem</CachePath>
+				</File>
+				<File Id="490354116" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_01.wav</ShortName>
+					<CachePath>F2/{F229BA79-CDD1-0F60-6ECB-6BDC6B3CF10F}.wem</CachePath>
+				</File>
+				<File Id="490771695" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_09.wav</ShortName>
+					<CachePath>C9/{C9C8D648-8168-3ACC-6FAF-0D8606B06F8C}.wem</CachePath>
+				</File>
+				<File Id="503362199" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_18.wav</ShortName>
+					<CachePath>77/{777F743F-F945-B6DC-F9EF-6CEEF667AE50}.wem</CachePath>
+				</File>
+				<File Id="515272845" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Woosh_03.wav</ShortName>
+					<CachePath>64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem</CachePath>
+				</File>
+				<File Id="523178003" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Plant_Growth.wav</ShortName>
+					<CachePath>70/{700725BF-50A0-A34D-0C47-D3FFE3CA86CA}.wem</CachePath>
+				</File>
+				<File Id="524436829" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_09.wav</ShortName>
+					<CachePath>D2/{D2DD304D-86CD-EF26-A0C2-DEC4F0181900}.wem</CachePath>
+				</File>
+				<File Id="525259507" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_09.wav</ShortName>
+					<CachePath>3F/{3F77088B-8AD5-B82E-9A29-C29CAB3A915C}.wem</CachePath>
+				</File>
+				<File Id="540850573" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_05.wav</ShortName>
+					<CachePath>8E/{8E5B414E-0787-31FF-6400-0EE57234FF98}.wem</CachePath>
+				</File>
+				<File Id="560687928" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_07.wav</ShortName>
+					<CachePath>B6/{B6886701-968D-F9EC-C9AE-82A0119A92A9}.wem</CachePath>
+				</File>
+				<File Id="566871023" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_14.wav</ShortName>
+					<CachePath>B5/{B5DCCDE3-FC40-E57E-17F4-19B7454693DE}.wem</CachePath>
+				</File>
+				<File Id="570499991" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Walk_08.wav</ShortName>
+					<CachePath>A2/{A2B9A493-16F1-BB6C-AC4C-3F502D442526}.wem</CachePath>
+				</File>
+				<File Id="581644863" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Walk_04.wav</ShortName>
+					<CachePath>5F/{5F1D13CA-1AC1-402D-E805-C6E0CFEB642B}.wem</CachePath>
+				</File>
+				<File Id="591463370" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Inject_Ambre.wav</ShortName>
+					<CachePath>E3/{E3303EBF-EA7B-18FA-D260-6B71B7BF53E8}.wem</CachePath>
+				</File>
+				<File Id="592647810" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_16.wav</ShortName>
+					<CachePath>4B/{4B892789-2514-4B4E-CB66-D3A0389834BC}.wem</CachePath>
+				</File>
+				<File Id="592723353" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_RespawnTree_Activate.wav</ShortName>
+					<CachePath>00/{000E1002-DACC-DA1B-A8AC-149366E6DC95}.wem</CachePath>
+				</File>
+				<File Id="594128135" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Bone_Jump_02.wav</ShortName>
+					<CachePath>BC/{BC7D8322-14D9-2395-6DC5-A1716CF25197}.wem</CachePath>
+				</File>
+				<File Id="595981696" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Activate_04.wav</ShortName>
+					<CachePath>D2/{D241FEEC-D72E-2C97-FF3F-BAF360BDEB3D}.wem</CachePath>
+				</File>
+				<File Id="597642928" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Electricity_Start_03.wav</ShortName>
+					<CachePath>58/{58CFC810-6776-A3E6-6410-1CFD3BD73BB7}.wem</CachePath>
+				</File>
+				<File Id="600164567" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Wind_Speed_High.wav</ShortName>
+					<CachePath>7F/{7FB9FF11-8699-5BEA-E563-391D7C2115BA}.wem</CachePath>
+				</File>
+				<File Id="611432390" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_04.wav</ShortName>
+					<CachePath>EC/{EC0702B6-44F7-9E54-70DC-0B6BC9E5F431}.wem</CachePath>
+				</File>
+				<File Id="628782229" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Elevator_Stop.wav</ShortName>
+					<CachePath>56/{563CF1E2-4DEA-7DAF-EC5C-746A78AEC450}.wem</CachePath>
+				</File>
+				<File Id="630490779" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_10.wav</ShortName>
+					<CachePath>6B/{6B285185-C28C-0FAF-7E07-D5DA5E167983}.wem</CachePath>
+				</File>
+				<File Id="633561041" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Bone_Jump_01.wav</ShortName>
+					<CachePath>C8/{C81ADC3D-6053-2302-4F96-7988E828210F}.wem</CachePath>
+				</File>
+				<File Id="636957395" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Walk_06.wav</ShortName>
+					<CachePath>B6/{B6A6BECF-0391-92DA-1645-D2B83E1DFEE1}.wem</CachePath>
+				</File>
+				<File Id="645664083" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_20.wav</ShortName>
+					<CachePath>4D/{4D290209-3391-1B68-ABF2-5F7C3294BE9B}.wem</CachePath>
+				</File>
+				<File Id="652806483" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_11.wav</ShortName>
+					<CachePath>17/{1794FA73-4FB5-99F7-136F-455B72BAA8E6}.wem</CachePath>
+				</File>
+				<File Id="654485317" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_16.wav</ShortName>
+					<CachePath>5D/{5D8B2E8F-1262-055A-4537-873DE1B6EC7A}.wem</CachePath>
+				</File>
+				<File Id="659827578" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Walk_09.wav</ShortName>
+					<CachePath>B5/{B572CBD0-B167-8302-5FFD-577101BEDC45}.wem</CachePath>
+				</File>
+				<File Id="660425283" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Walk_06.wav</ShortName>
+					<CachePath>02/{025754D1-C097-2BF8-7D54-AF6B6AD6E0E5}.wem</CachePath>
+				</File>
+				<File Id="671171816" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_07.wav</ShortName>
+					<CachePath>E0/{E0E55673-BDA7-A7B5-E54F-4C8D26AFA211}.wem</CachePath>
+				</File>
+				<File Id="686669596" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_06.wav</ShortName>
+					<CachePath>A5/{A5986033-8F4E-9DD6-DB94-FE7D5E1C8A04}.wem</CachePath>
+				</File>
+				<File Id="695514868" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Electricity_Layer_01.wav</ShortName>
+					<CachePath>9F/{9F29435C-A346-997F-97FD-416A7F861D40}.wem</CachePath>
+				</File>
+				<File Id="697774580" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_06.wav</ShortName>
+					<CachePath>52/{52C74C93-E2E9-C67C-49FE-E46B70B1A660}.wem</CachePath>
+				</File>
+				<File Id="708400597" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore02_01.wav</ShortName>
+					<CachePath>0C/{0C4F2FF8-84F9-5292-7664-9D39D5421D77}.wem</CachePath>
+				</File>
+				<File Id="725331003" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_Gore_03.wav</ShortName>
+					<CachePath>97/{979F5FE9-078B-FAD9-2EFB-922BEFFE2D21}.wem</CachePath>
+				</File>
+				<File Id="729596033" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_06.wav</ShortName>
+					<CachePath>E6/{E67FB920-0654-8D2E-E9DB-DFCF7182C06A}.wem</CachePath>
+				</File>
+				<File Id="738632161" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Electricity_Start_01.wav</ShortName>
+					<CachePath>2E/{2E8A7C35-8144-3231-AA94-A3E80B311D35}.wem</CachePath>
+				</File>
+				<File Id="738955104" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Elevator_Start_02.wav</ShortName>
+					<CachePath>98/{985720D3-FB06-5889-6DB2-BA9F3ACE3CC5}.wem</CachePath>
+				</File>
+				<File Id="740159490" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_12.wav</ShortName>
+					<CachePath>D8/{D859E1C8-37F9-F7CC-531D-768D84489B0C}.wem</CachePath>
+				</File>
+				<File Id="747871704" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_11.wav</ShortName>
+					<CachePath>B9/{B97827A7-26C7-FC78-455E-17264F431D77}.wem</CachePath>
+				</File>
+				<File Id="756656613" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Walk_01.wav</ShortName>
+					<CachePath>33/{33CC4805-BFD7-9C17-F390-2A362D3CBE8F}.wem</CachePath>
+				</File>
+				<File Id="776496901" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_05.wav</ShortName>
+					<CachePath>C0/{C0A9786F-3240-FCC4-2E8B-79FA8188443F}.wem</CachePath>
+				</File>
+				<File Id="794150962" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_02.wav</ShortName>
+					<CachePath>3A/{3AD7B48F-CD6A-64FC-8493-8889E09AD395}.wem</CachePath>
+				</File>
+				<File Id="801782534" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_02.wav</ShortName>
+					<CachePath>6C/{6C7F2423-BD2B-F3FE-A9BF-5284B3757FDA}.wem</CachePath>
+				</File>
+				<File Id="802931562" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_03.wav</ShortName>
+					<CachePath>38/{38C64037-211D-5F32-E74F-1A94457DF65B}.wem</CachePath>
+				</File>
+				<File Id="804146141" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_Gore_02.wav</ShortName>
+					<CachePath>36/{36BE6117-2108-2C81-F38F-778E63176D97}.wem</CachePath>
+				</File>
+				<File Id="806176668" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Bone_Land_03.wav</ShortName>
+					<CachePath>4E/{4E7992E0-4481-12B8-B5E5-B82C26448481}.wem</CachePath>
+				</File>
+				<File Id="809215488" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_07.wav</ShortName>
+					<CachePath>1D/{1D334F06-844C-73CE-7EAD-435C1FCCE884}.wem</CachePath>
+				</File>
+				<File Id="816685198" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_05.wav</ShortName>
+					<CachePath>5D/{5D83AA91-CE06-F99F-BC4A-B82F70A0370F}.wem</CachePath>
+				</File>
+				<File Id="817703743" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_03.wav</ShortName>
+					<CachePath>FB/{FB769AAB-ADA8-E685-4AFA-E2452485B160}.wem</CachePath>
+				</File>
+				<File Id="821434401" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore_03.wav</ShortName>
+					<CachePath>88/{88B8046C-0E94-4C92-730C-BF082D2A0FE6}.wem</CachePath>
+				</File>
+				<File Id="850557758" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_04.wav</ShortName>
+					<CachePath>DE/{DE05FE22-F369-CBD0-5D2F-18495707F478}.wem</CachePath>
+				</File>
+				<File Id="861837351" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Gore02_03.wav</ShortName>
+					<CachePath>05/{05362565-F73F-EC7B-365C-49076F99EAEA}.wem</CachePath>
+				</File>
+				<File Id="881039563" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Walk_07.wav</ShortName>
+					<CachePath>32/{3254FCC8-B77F-9D1A-E0ED-B0E017B78933}.wem</CachePath>
+				</File>
+				<File Id="889515880" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_04.wav</ShortName>
+					<CachePath>3B/{3B49911E-F170-DC4B-F3E4-30F2297FC728}.wem</CachePath>
+				</File>
+				<File Id="889954801" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_04.wav</ShortName>
+					<CachePath>F7/{F7D24825-AEF2-A6CD-0485-3934B48E028E}.wem</CachePath>
+				</File>
+				<File Id="903601489" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Bone_Land_02.wav</ShortName>
+					<CachePath>99/{99410A2E-A0F7-B6F3-5B11-30ED55FDCE6F}.wem</CachePath>
+				</File>
+				<File Id="908600791" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_05.wav</ShortName>
+					<CachePath>BF/{BF8018F3-852E-D811-D002-B9EB2ADB34A7}.wem</CachePath>
+				</File>
+				<File Id="910307899" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Elevator_Start_03.wav</ShortName>
+					<CachePath>FC/{FCCFF5C6-29D9-E426-7B81-DBEE894918D5}.wem</CachePath>
+				</File>
+				<File Id="918853460" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Wind_Woosh_01.wav</ShortName>
+					<CachePath>7C/{7CD0B091-C2BD-8390-8D6D-CE616050E94A}.wem</CachePath>
+				</File>
+				<File Id="926594296" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Desactivate.wav</ShortName>
+					<CachePath>BA/{BAD973E0-72E3-25DD-F23C-DEEAA8388BAA}.wem</CachePath>
+				</File>
+				<File Id="927480399" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_08.wav</ShortName>
+					<CachePath>F7/{F707D039-4411-5692-B3E9-80C07A23C8DC}.wem</CachePath>
+				</File>
+				<File Id="941661665" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_17.wav</ShortName>
+					<CachePath>52/{52E32CD9-CCAC-E542-B1C7-A44A850508CD}.wem</CachePath>
+				</File>
+				<File Id="957384073" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Muscle_04.wav</ShortName>
+					<CachePath>18/{187FFAEC-831A-F352-FDB5-ABB73806203F}.wem</CachePath>
+				</File>
+				<File Id="962823370" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_Bone_Land_01.wav</ShortName>
+					<CachePath>F9/{F972F069-FF8D-1E5E-3F23-A80A2921303C}.wem</CachePath>
+				</File>
+				<File Id="974359147" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Run_06.wav</ShortName>
+					<CachePath>E7/{E7ABFB2B-3AB2-EC96-07C6-DB0758DBB0F4}.wem</CachePath>
+				</File>
+				<File Id="985568594" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_02.wav</ShortName>
+					<CachePath>6A/{6A381926-1A56-0058-91FA-F38601146289}.wem</CachePath>
+				</File>
+				<File Id="992342674" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Jump_Muscle_01.wav</ShortName>
+					<CachePath>7D/{7D0D756E-7831-2FFD-8B60-1CC0FB115D21}.wem</CachePath>
+				</File>
+				<File Id="992978286" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveReceptacle_Activate_03.wav</ShortName>
+					<CachePath>44/{44FAEC2E-7EE8-6A9A-CFA8-6173281A977C}.wem</CachePath>
+				</File>
+				<File Id="1013574032" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Cloth_Run_01.wav</ShortName>
+					<CachePath>9D/{9DB03DA6-6CC6-80FE-C6FE-74D8AD282D37}.wem</CachePath>
+				</File>
+				<File Id="1021487410" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>LPX_Nerve_Stretch_05.wav</ShortName>
+					<CachePath>C6/{C670B7C1-D2A2-C6C0-AC3C-856F0981C6BB}.wem</CachePath>
+				</File>
+				<File Id="1040785902" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_NerveDoor_Layer_Woosh_02.wav</ShortName>
+					<CachePath>32/{324BC753-BD10-14C4-6ED0-6154433A111C}.wem</CachePath>
+				</File>
+				<File Id="1047419496" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Walk_03.wav</ShortName>
+					<CachePath>DA/{DA520519-AB47-7A94-5DAD-EB2C5AAD272E}.wem</CachePath>
+				</File>
+				<File Id="1052972106" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Vein_Run_13.wav</ShortName>
+					<CachePath>73/{73E9A2AF-4ADF-499B-C5CA-D7BA6E789259}.wem</CachePath>
+				</File>
+				<File Id="1053529806" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MC_Land_Muscle_03.wav</ShortName>
+					<CachePath>6B/{6B3DEE4E-8648-0A4D-31C5-CE278D4347BB}.wem</CachePath>
+				</File>
+				<File Id="1066500167" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SFX_FS_Bone_Walk_01.wav</ShortName>
+					<CachePath>50/{50865F23-C9FA-C77D-9B14-6D89D2CFC3B5}.wem</CachePath>
+				</File>
+			</Media>
+			<Plugins>
+				<ShareSets>
+					<Plugin Id="164825399" Name="New_Reflect" ObjectPath="\Effects\Factory Effects\New_Reflect" GUID="{67FADD73-FC10-4D2A-88D9-F172387587C0}" LibName="Wwise Reflect" LibId="11206659"/>
+					<Plugin Id="3164629247" Name="Holy" ObjectPath="\Effects\Factory Effects\RoomVerb\Cathedrals\Holy" GUID="{CC7B8638-C670-4AD5-B3FB-331EA81037F6}" LibName="Wwise RoomVerb" LibId="7733251"/>
+				</ShareSets>
+			</Plugins>
+			<Events>
+				<Event Id="1067402118" Name="AKE_AmberDoor" ObjectPath="\Events\SFX\Gameplay\AKE_AmberDoor" GUID="{058ED576-C9DC-436F-BC80-C460F36A2F0B}" Color="10" MaxAttenuation="2000" DurationType="OneShot" DurationMin="0.73333335" DurationMax="0.73333335">
+					<MediaRefs>
+						<MediaRef Id="58099252"/>
+						<MediaRef Id="150421772"/>
+						<MediaRef Id="251580194"/>
+						<MediaRef Id="303207830"/>
+						<MediaRef Id="515272845"/>
+						<MediaRef Id="708400597"/>
+						<MediaRef Id="821434401"/>
+						<MediaRef Id="861837351"/>
+						<MediaRef Id="1040785902"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1078345331" Name="AKE_Cloth" ObjectPath="\Events\SFX\Gameplay\AKE_Cloth" GUID="{69FE522F-23A7-4F90-9BC1-5A201A346C39}" Color="10" DurationType="OneShot" DurationMin="0.237573" DurationMax="1.1387886">
+					<AuxBusRefs>
+						<AuxBusRef Id="348963605" Name="Reverb" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reverb" GUID="{06B51433-C685-4945-9920-67B617503E73}"/>
+					</AuxBusRefs>
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2526360856" Id="1296465089" GUID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+							<MediaRefs>
+								<MediaRef Id="171841650"/>
+								<MediaRef Id="262194432"/>
+								<MediaRef Id="331087580"/>
+								<MediaRef Id="435669612"/>
+								<MediaRef Id="524436829"/>
+								<MediaRef Id="540850573"/>
+								<MediaRef Id="566871023"/>
+								<MediaRef Id="697774580"/>
+								<MediaRef Id="794150962"/>
+								<MediaRef Id="889515880"/>
+								<MediaRef Id="1013574032"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2526360856" Id="2108779966" GUID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"/>
+							<MediaRefs>
+								<MediaRef Id="317040080"/>
+								<MediaRef Id="330044548"/>
+								<MediaRef Id="459494553"/>
+								<MediaRef Id="489955890"/>
+								<MediaRef Id="570499991"/>
+								<MediaRef Id="659827578"/>
+								<MediaRef Id="660425283"/>
+								<MediaRef Id="881039563"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="1499966752" Name="AKE_Electricity" ObjectPath="\Events\SFX\Gameplay\AKE_Electricity" GUID="{3BD0B7D7-1E41-4BC9-BFCE-EB60634E0A08}" Color="10" MaxAttenuation="1500" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="155549434"/>
+						<MediaRef Id="310414559"/>
+						<MediaRef Id="435354478"/>
+						<MediaRef Id="597642928"/>
+						<MediaRef Id="695514868"/>
+						<MediaRef Id="738632161"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="717509662" Name="AKE_Footsteps" ObjectPath="\Events\SFX\Gameplay\AKE_Footsteps" GUID="{40C0DABC-E260-4BE7-9895-167ACF357472}" Color="10" DurationType="OneShot" DurationMin="0" DurationMax="0.46666667">
+					<AuxBusRefs>
+						<AuxBusRef Id="348963605" Name="Reverb" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reverb" GUID="{06B51433-C685-4945-9920-67B617503E73}"/>
+					</AuxBusRefs>
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2526360856" Id="1296465089" GUID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+							<Children>
+								<SwitchContainer>
+									<SwitchValue GroupType="Switch" GroupId="1104535692" Id="3304933591" GUID="{15513C0C-22A3-403F-AA73-0773270B3E63}"/>
+									<MediaRefs>
+										<MediaRef Id="21974263"/>
+										<MediaRef Id="144740265"/>
+										<MediaRef Id="208173442"/>
+										<MediaRef Id="389742043"/>
+										<MediaRef Id="401531728"/>
+										<MediaRef Id="448243903"/>
+										<MediaRef Id="450151386"/>
+										<MediaRef Id="560687928"/>
+										<MediaRef Id="611432390"/>
+										<MediaRef Id="654485317"/>
+										<MediaRef Id="686669596"/>
+										<MediaRef Id="747871704"/>
+										<MediaRef Id="776496901"/>
+										<MediaRef Id="817703743"/>
+										<MediaRef Id="985568594"/>
+										<MediaRef Id="1052972106"/>
+									</MediaRefs>
+								</SwitchContainer>
+								<SwitchContainer>
+									<SwitchValue GroupType="Switch" GroupId="1104535692" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}" Default="true"/>
+									<MediaRefs>
+										<MediaRef Id="22207337"/>
+										<MediaRef Id="57626436"/>
+										<MediaRef Id="63912307"/>
+										<MediaRef Id="148815722"/>
+										<MediaRef Id="195657945"/>
+										<MediaRef Id="232844466"/>
+										<MediaRef Id="256986239"/>
+										<MediaRef Id="344427236"/>
+										<MediaRef Id="424464787"/>
+										<MediaRef Id="490354116"/>
+										<MediaRef Id="503362199"/>
+										<MediaRef Id="525259507"/>
+										<MediaRef Id="592647810"/>
+										<MediaRef Id="645664083"/>
+										<MediaRef Id="740159490"/>
+										<MediaRef Id="809215488"/>
+										<MediaRef Id="816685198"/>
+										<MediaRef Id="850557758"/>
+										<MediaRef Id="941661665"/>
+										<MediaRef Id="974359147"/>
+									</MediaRefs>
+								</SwitchContainer>
+							</Children>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2526360856" Id="2108779966" GUID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}" Default="true"/>
+							<Children>
+								<SwitchContainer>
+									<SwitchValue GroupType="Switch" GroupId="1104535692" Id="3304933591" GUID="{15513C0C-22A3-403F-AA73-0773270B3E63}"/>
+									<MediaRefs>
+										<MediaRef Id="67202430"/>
+										<MediaRef Id="102806602"/>
+										<MediaRef Id="148441579"/>
+										<MediaRef Id="581644863"/>
+										<MediaRef Id="636957395"/>
+										<MediaRef Id="756656613"/>
+										<MediaRef Id="1047419496"/>
+									</MediaRefs>
+								</SwitchContainer>
+								<SwitchContainer>
+									<SwitchValue GroupType="Switch" GroupId="1104535692" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}" Default="true"/>
+									<MediaRefs>
+										<MediaRef Id="61866964"/>
+										<MediaRef Id="223357946"/>
+										<MediaRef Id="475344315"/>
+										<MediaRef Id="490771695"/>
+										<MediaRef Id="630490779"/>
+										<MediaRef Id="652806483"/>
+										<MediaRef Id="671171816"/>
+										<MediaRef Id="729596033"/>
+										<MediaRef Id="802931562"/>
+										<MediaRef Id="927480399"/>
+										<MediaRef Id="1066500167"/>
+									</MediaRefs>
+								</SwitchContainer>
+							</Children>
+						</SwitchContainer>
+					</SwitchContainers>
+					<ActionPostEvent>
+						<ActionPostEventEntry Id="1078345331" Name="AKE_Cloth" ObjectPath="\Events\SFX\Gameplay\AKE_Cloth" GUID="{69FE522F-23A7-4F90-9BC1-5A201A346C39}" Color="10"/>
+					</ActionPostEvent>
+				</Event>
+				<Event Id="1353732241" Name="AKE_GrabNerve" ObjectPath="\Events\SFX\Gameplay\AKE_GrabNerve" GUID="{B94FCB08-373F-4AB1-ACD3-52ECCEDF635F}" Color="10" DurationType="OneShot" DurationMin="0.15731238" DurationMax="0.24720807">
+					<MediaRefs>
+						<MediaRef Id="119173871"/>
+						<MediaRef Id="399813874"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2479692261" Name="AKE_InjectAmbrer" ObjectPath="\Events\SFX\Gameplay\AKE_InjectAmbrer" GUID="{14CA4FE7-8867-4283-AD24-5919B3F33532}" Color="10" DurationType="OneShot" DurationMin="0.9" DurationMax="0.9">
+					<MediaRefs>
+						<MediaRef Id="591463370"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3616748465" Name="AKE_Jump" ObjectPath="\Events\SFX\Gameplay\AKE_Jump" GUID="{84B16784-5C30-4EFA-A338-4ACE6DA19306}" Color="10" DurationType="OneShot" DurationMin="0.2" DurationMax="0.3">
+					<AuxBusRefs>
+						<AuxBusRef Id="348963605" Name="Reverb" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reverb" GUID="{06B51433-C685-4945-9920-67B617503E73}"/>
+					</AuxBusRefs>
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1104535692" Id="1312110196" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+							<MediaRefs>
+								<MediaRef Id="32159369"/>
+								<MediaRef Id="239007564"/>
+								<MediaRef Id="957384073"/>
+								<MediaRef Id="992342674"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1104535692" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+							<MediaRefs>
+								<MediaRef Id="174144215"/>
+								<MediaRef Id="594128135"/>
+								<MediaRef Id="633561041"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="3678819214" Name="AKE_Land" ObjectPath="\Events\SFX\Gameplay\AKE_Land" GUID="{27009C7D-31EB-42D4-BEA8-E873A733B256}" Color="10" DurationType="OneShot" DurationMin="0.24610417" DurationMax="0.36666667">
+					<AuxBusRefs>
+						<AuxBusRef Id="348963605" Name="Reverb" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reverb" GUID="{06B51433-C685-4945-9920-67B617503E73}"/>
+					</AuxBusRefs>
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1104535692" Id="1312110196" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+							<MediaRefs>
+								<MediaRef Id="21354617"/>
+								<MediaRef Id="138498267"/>
+								<MediaRef Id="388414790"/>
+								<MediaRef Id="908600791"/>
+								<MediaRef Id="1053529806"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1104535692" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+							<MediaRefs>
+								<MediaRef Id="806176668"/>
+								<MediaRef Id="903601489"/>
+								<MediaRef Id="962823370"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="2137096898" Name="AKE_MakeMuscleSoft" ObjectPath="\Events\SFX\Gameplay\AKE_MakeMuscleSoft" GUID="{C5A46045-32E9-48D9-8CB8-7B551A12DC12}" Color="10" DurationType="OneShot" DurationMin="1.13" DurationMax="1.13"/>
+				<Event Id="965724727" Name="AKE_MakeMuscleSolid" ObjectPath="\Events\SFX\Gameplay\AKE_MakeMuscleSolid" GUID="{E46499EB-6249-4DEE-B975-F44DD0E7AEC1}" Color="10" DurationType="OneShot" DurationMin="1.0934167" DurationMax="1.0934167"/>
+				<Event Id="683605796" Name="AKE_MuscleBounce" ObjectPath="\Events\SFX\Gameplay\AKE_MuscleBounce" GUID="{7E7C5F33-63F9-44F5-A0D3-1B6490437C3C}" Color="10" DurationType="OneShot" DurationMin="0.6666667" DurationMax="0.6932117"/>
+				<Event Id="1217229599" Name="AKE_MuscleSoftTransformation" ObjectPath="\Events\SFX\Gameplay\AKE_MuscleSoftTransformation" GUID="{F84BABDD-28BD-412A-95A6-5FDDB1D95432}" Color="10" DurationType="OneShot" DurationMin="0.8666667" DurationMax="0.8666667"/>
+				<Event Id="3900461410" Name="AKE_MuscleSolidTransformation" ObjectPath="\Events\SFX\Gameplay\AKE_MuscleSolidTransformation" GUID="{704DF249-C842-4399-A326-E93C5BDA66B8}" Color="10" DurationType="OneShot" DurationMin="0.6666667" DurationMax="0.6666667"/>
+				<Event Id="1550703898" Name="AKE_NerveReceptacleActivate" ObjectPath="\Events\SFX\Gameplay\AKE_NerveReceptacleActivate" GUID="{C50A7AE6-B738-460C-9E1C-A37F146D6BD2}" Color="10" MaxAttenuation="4000" DurationType="OneShot" DurationMin="4.5" DurationMax="4.8">
+					<MediaRefs>
+						<MediaRef Id="16378350"/>
+						<MediaRef Id="22528093"/>
+						<MediaRef Id="595981696"/>
+						<MediaRef Id="992978286"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3397936332" Name="AKE_NerveReceptacleDesactivate" ObjectPath="\Events\SFX\Gameplay\AKE_NerveReceptacleDesactivate" GUID="{A94B20D5-2A8E-4301-A951-C09D4C0A7716}" Color="10" DurationType="OneShot" DurationMin="0.8333333" DurationMax="0.8333333">
+					<MediaRefs>
+						<MediaRef Id="926594296"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2149707273" Name="AKE_PlantGrowth" ObjectPath="\Events\SFX\Gameplay\AKE_PlantGrowth" GUID="{EA587034-B04E-4D91-A9B1-4998FECBC59D}" Color="10" DurationType="OneShot" DurationMin="1.9" DurationMax="1.9">
+					<MediaRefs>
+						<MediaRef Id="523178003"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1975807336" Name="AKE_RespawnTreeActivate" ObjectPath="\Events\SFX\Gameplay\AKE_RespawnTreeActivate" GUID="{99E1A8F0-FB47-4839-860B-4D205E6B0F5D}" Color="10" DurationType="OneShot" DurationMin="3.6666667" DurationMax="3.6666667">
+					<MediaRefs>
+						<MediaRef Id="592723353"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3340684021" Name="AKE_StartElevator" ObjectPath="\Events\SFX\Gameplay\AKE_StartElevator" GUID="{859C566F-6B89-419E-B78B-2BAF354E01B4}" Color="10" DurationType="OneShot" DurationMin="54.866665" DurationMax="54.866665">
+					<MediaRefs>
+						<MediaRef Id="8104921"/>
+						<MediaRef Id="294036953"/>
+						<MediaRef Id="738955104"/>
+						<MediaRef Id="910307899"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2353577288" Name="AKE_StartNerveStretch" ObjectPath="\Events\SFX\Gameplay\AKE_StartNerveStretch" GUID="{86D55011-33D5-488E-A299-439AE1860B89}" Color="10" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="43894004"/>
+						<MediaRef Id="122346683"/>
+						<MediaRef Id="151884214"/>
+						<MediaRef Id="197068285"/>
+						<MediaRef Id="429011309"/>
+						<MediaRef Id="725331003"/>
+						<MediaRef Id="801782534"/>
+						<MediaRef Id="804146141"/>
+						<MediaRef Id="889954801"/>
+						<MediaRef Id="1021487410"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4291772511" Name="AKE_StopElevator" ObjectPath="\Events\SFX\Gameplay\AKE_StopElevator" GUID="{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}" Color="10" DurationType="OneShot" DurationMin="1.9" DurationMax="1.9">
+					<MediaRefs>
+						<MediaRef Id="628782229"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="521559902" Name="AKE_StopNerveStretch" ObjectPath="\Events\SFX\Gameplay\AKE_StopNerveStretch" GUID="{C2BCB29F-3574-4185-A670-2E3B736BB478}" Color="10" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="2721947660" Name="AKE_StopWindSpeed" ObjectPath="\Events\SFX\Gameplay\AKE_StopWindSpeed" GUID="{3E4C03C5-C587-4630-B830-812310BDBFC5}" Color="10" DurationType="OneShot" DurationMin="1.1" DurationMax="1.1">
+					<MediaRefs>
+						<MediaRef Id="918853460"/>
+					</MediaRefs>
+					<AuxBusRefs>
+						<AuxBusRef Id="348963605" Name="Reverb" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reverb" GUID="{06B51433-C685-4945-9920-67B617503E73}"/>
+					</AuxBusRefs>
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1104535692" Id="1312110196" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+							<MediaRefs>
+								<MediaRef Id="21354617"/>
+								<MediaRef Id="138498267"/>
+								<MediaRef Id="388414790"/>
+								<MediaRef Id="908600791"/>
+								<MediaRef Id="1053529806"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="1104535692" Id="1744723399" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+							<MediaRefs>
+								<MediaRef Id="806176668"/>
+								<MediaRef Id="903601489"/>
+								<MediaRef Id="962823370"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="1558507935" Name="AKE_TakeAmbrer" ObjectPath="\Events\SFX\Gameplay\AKE_TakeAmbrer" GUID="{98E20B7D-1940-43B9-B344-D1F205698516}" Color="10" DurationType="OneShot" DurationMin="0.73333335" DurationMax="0.73333335">
+					<MediaRefs>
+						<MediaRef Id="218825922"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2020078225" Name="AKE_TEST_Obstruction_Oclusion" ObjectPath="\Events\SFX\Gameplay\AKE_TEST_Obstruction_Oclusion" GUID="{922BABEE-EE53-4991-B186-0D61FAD7D05D}" Color="10" MaxAttenuation="5000" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="2275903284" Name="AKE_WindSpeed" ObjectPath="\Events\SFX\Gameplay\AKE_WindSpeed" GUID="{3C96E412-6FF6-4422-AEC6-34FD6AC5A1D5}" Color="10" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="112381933"/>
+						<MediaRef Id="600164567"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+			<Busses>
+				<Bus Id="1162281553" Name="Bus_Music" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Bus_Music" GUID="{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}" Color="19"/>
+				<Bus Id="2930365547" Name="Bus_SFX_Amb_MC" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC" GUID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" Color="9"/>
+				<Bus Id="4267419003" Name="Master Audio Bus_01" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01" GUID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+				<Bus Id="4277214558" Name="Bus_Voice" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Bus_Voice" GUID="{CD73F8A7-017F-4EA3-8D48-0308F27769B2}" Color="12"/>
+			</Busses>
+			<AuxBusses>
+				<AuxBus Id="243379636" Name="Reflect" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reflect" GUID="{F394F660-B9B4-4A3A-9580-16D1E5E099B9}">
+					<PluginRefs>
+						<ShareSets>
+							<PluginRef Id="164825399"/>
+						</ShareSets>
+					</PluginRefs>
+				</AuxBus>
+				<AuxBus Id="348963605" Name="Reverb" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reverb" GUID="{06B51433-C685-4945-9920-67B617503E73}">
+					<PluginRefs>
+						<ShareSets>
+							<PluginRef Id="3164629247"/>
+						</ShareSets>
+					</PluginRefs>
+				</AuxBus>
+			</AuxBusses>
+			<GameParameters>
+				<GameParameter Id="471070440" Name="AKGP_Music" ObjectPath="\Game Parameters\Mix\AKGP_Music" GUID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
+				<GameParameter Id="896534061" Name="AKGP_Master" ObjectPath="\Game Parameters\Mix\AKGP_Master" GUID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"/>
+				<GameParameter Id="2866023372" Name="AKGP_NerveStretch" ObjectPath="\Game Parameters\Gameplay\AKGP_NerveStretch" GUID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
+				<GameParameter Id="3631364164" Name="AKGP_Speed" ObjectPath="\Game Parameters\Gameplay\AKGP_Speed" GUID="{48B0803D-84D1-4AD9-914B-FB1814D27149}"/>
+				<GameParameter Id="4013141432" Name="AKGP_SFX" ObjectPath="\Game Parameters\Mix\AKGP_SFX" GUID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}"/>
+			</GameParameters>
+			<SwitchGroups>
+				<SwitchGroup Id="1104535692" Name="AKSW_FootstepsSurface" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSurface" GUID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}">
+					<Switches>
+						<Switch Id="1312110196" Name="Muscle" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSurface\Muscle" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+						<Switch Id="1744723399" Name="Bone" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSurface\Bone" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+						<Switch Id="3304933591" Name="Vein" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSurface\Vein" GUID="{15513C0C-22A3-403F-AA73-0773270B3E63}"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="2526360856" Name="AKSW_FootstepsSpeed" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSpeed" GUID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}">
+					<Switches>
+						<Switch Id="1296465089" Name="Sprint" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSpeed\Sprint" GUID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<Switch Id="2108779966" Name="Walk" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSpeed\Walk" GUID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{B0CCF96F-7EC4-2267-740E-90AE15711DBA}</FileHash>
+</SoundBanksInfo>

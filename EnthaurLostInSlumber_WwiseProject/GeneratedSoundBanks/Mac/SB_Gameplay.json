@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{EBB78793-D81C-9EEC-74D0-888E5C1EA382}",
+    "Hash": "{6E9B2214-5241-DC7B-BCC0-7E3BB0C7CCF5}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -2007,15 +2007,7 @@
       "Name": "Bus_SFX_Amb_MC",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
       "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
-      "Color": "9",
-      "AuxBusRefs": [
-       {
-        "Id": "348963605",
-        "Name": "Reverb",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
-        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
-       }
-      ]
+      "Color": "9"
      },
      {
       "Id": "4267419003",
@@ -2056,15 +2048,7 @@
          "Id": "3164629247"
         }
        ]
-      },
-      "AuxBusRefs": [
-       {
-        "Id": "243379636",
-        "Name": "Reflect",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
-        "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
-       }
-      ]
+      }
      }
     ],
     "GameParameters": [
@@ -2149,6 +2133,6 @@
     ]
    }
   ],
-  "FileHash": "{562772C1-B41E-636F-F82E-59CC4EA19B9B}"
+  "FileHash": "{0AD36ADD-D654-74EC-F42A-EBC790773AE5}"
  }
 }

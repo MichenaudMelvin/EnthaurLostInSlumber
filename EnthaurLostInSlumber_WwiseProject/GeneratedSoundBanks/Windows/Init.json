@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{4B062BC2-DE8A-D781-D094-B279127DCBA8}",
+    "Hash": "{B1E2A001-D503-88BA-4B36-22AB652E9E47}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -65,15 +65,7 @@
       "Name": "Bus_SFX_Amb_MC",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
       "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
-      "Color": "9",
-      "AuxBusRefs": [
-       {
-        "Id": "348963605",
-        "Name": "Reverb",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
-        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
-       }
-      ]
+      "Color": "9"
      },
      {
       "Id": "4267419003",
@@ -233,6 +225,6 @@
     ]
    }
   ],
-  "FileHash": "{2754E844-1916-935F-94E0-9BBF99164677}"
+  "FileHash": "{33BA1DD8-F4EF-949D-6B47-9F09F02B0A23}"
  }
 }

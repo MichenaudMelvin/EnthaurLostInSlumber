@@ -11,7 +11,7 @@
     "GUID": "{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}",
     "Color": "11",
     "Language": "SFX",
-    "Hash": "{6DB8E2B0-1DE9-049F-F5BD-599BC7DA6796}",
+    "Hash": "{B668D4F5-6C43-4953-572C-32D4C0FA219A}",
     "ObjectPath": "\\SoundBanks\\Effects\\SB_Effects",
     "ShortName": "SB_Effects",
     "Path": "SB_Effects.bnk",
@@ -68,15 +68,7 @@
          "Id": "3164629247"
         }
        ]
-      },
-      "AuxBusRefs": [
-       {
-        "Id": "243379636",
-        "Name": "Reflect",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
-        "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
-       }
-      ]
+      }
      }
     ],
     "GameParameters": [
@@ -89,6 +81,6 @@
     ]
    }
   ],
-  "FileHash": "{907C2855-8AC1-A17D-3A14-F5F3F7831D14}"
+  "FileHash": "{9CA9D35C-A3E6-939B-3E50-E227DD7F6BEE}"
  }
 }

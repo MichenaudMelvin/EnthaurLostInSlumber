@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Mac" BasePlatform="Mac" SchemaVersion="16" SoundBankVersion="154">
+	<SoundBanks>
+		<SoundBank Id="1355168291" Type="User" GUID="{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}" Language="SFX" Hash="{B2ED26FF-E365-18E9-38C2-DF1A25046AF3}">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<ShareSets>
+					<Plugin Id="164825399" Name="New_Reflect" ObjectPath="\Effects\Factory Effects\New_Reflect" GUID="{67FADD73-FC10-4D2A-88D9-F172387587C0}" LibName="Wwise Reflect" LibId="11206659"/>
+					<Plugin Id="3164629247" Name="Holy" ObjectPath="\Effects\Factory Effects\RoomVerb\Cathedrals\Holy" GUID="{CC7B8638-C670-4AD5-B3FB-331EA81037F6}" LibName="Wwise RoomVerb" LibId="7733251"/>
+				</ShareSets>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" ObjectPath="\Audio Devices\Default Work Unit\No_Output" GUID="{DF563AD4-AF16-4B95-87CD-5C1861D07C3E}" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" ObjectPath="\Audio Devices\Default Work Unit\System" GUID="{8EA8FBC0-75CB-480A-AF56-63363062FD17}" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="1162281553" Name="Bus_Music" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Bus_Music" GUID="{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}" Color="19"/>
+				<Bus Id="2930365547" Name="Bus_SFX_Amb_MC" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC" GUID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" Color="9"/>
+				<Bus Id="4267419003" Name="Master Audio Bus_01" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01" GUID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
+				<Bus Id="4277214558" Name="Bus_Voice" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Bus_Voice" GUID="{CD73F8A7-017F-4EA3-8D48-0308F27769B2}" Color="12"/>
+			</Busses>
+			<AuxBusses>
+				<AuxBus Id="243379636" Name="Reflect" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reflect" GUID="{F394F660-B9B4-4A3A-9580-16D1E5E099B9}">
+					<PluginRefs>
+						<ShareSets>
+							<PluginRef Id="164825399"/>
+						</ShareSets>
+					</PluginRefs>
+				</AuxBus>
+				<AuxBus Id="348963605" Name="Reverb" ObjectPath="\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus_01\Reverb" GUID="{06B51433-C685-4945-9920-67B617503E73}">
+					<PluginRefs>
+						<ShareSets>
+							<PluginRef Id="3164629247"/>
+						</ShareSets>
+					</PluginRefs>
+				</AuxBus>
+			</AuxBusses>
+			<GameParameters>
+				<GameParameter Id="56557789" Name="AKGP_PlayerDistance" ObjectPath="\Game Parameters\Gameplay\AKGP_PlayerDistance" GUID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}"/>
+				<GameParameter Id="471070440" Name="AKGP_Music" ObjectPath="\Game Parameters\Mix\AKGP_Music" GUID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
+				<GameParameter Id="896534061" Name="AKGP_Master" ObjectPath="\Game Parameters\Mix\AKGP_Master" GUID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"/>
+				<GameParameter Id="2866023372" Name="AKGP_NerveStretch" ObjectPath="\Game Parameters\Gameplay\AKGP_NerveStretch" GUID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
+				<GameParameter Id="3631364164" Name="AKGP_Speed" ObjectPath="\Game Parameters\Gameplay\AKGP_Speed" GUID="{48B0803D-84D1-4AD9-914B-FB1814D27149}"/>
+				<GameParameter Id="4013141432" Name="AKGP_SFX" ObjectPath="\Game Parameters\Mix\AKGP_SFX" GUID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}"/>
+			</GameParameters>
+			<StateGroups>
+				<StateGroup Id="3907450003" Name="AKST_WeakenedZone" ObjectPath="\States\Gameplay\AKST_WeakenedZone" GUID="{BE53788A-24ED-40A0-9285-BE9E6C56B454}">
+					<States>
+						<State Id="748895195" Name="None" ObjectPath="\States\Gameplay\AKST_WeakenedZone\None" GUID="{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"/>
+						<State Id="1160234136" Name="Normal" ObjectPath="\States\Gameplay\AKST_WeakenedZone\Normal" GUID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
+						<State Id="4120836511" Name="Weakened" ObjectPath="\States\Gameplay\AKST_WeakenedZone\Weakened" GUID="{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
+			<SwitchGroups>
+				<SwitchGroup Id="1104535692" Name="AKSW_FootstepsSurface" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSurface" GUID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}">
+					<Switches>
+						<Switch Id="1312110196" Name="Muscle" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSurface\Muscle" GUID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+						<Switch Id="1744723399" Name="Bone" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSurface\Bone" GUID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+						<Switch Id="3304933591" Name="Vein" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSurface\Vein" GUID="{15513C0C-22A3-403F-AA73-0773270B3E63}"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="2526360856" Name="AKSW_FootstepsSpeed" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSpeed" GUID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}">
+					<Switches>
+						<Switch Id="1296465089" Name="Sprint" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSpeed\Sprint" GUID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
+						<Switch Id="2108779966" Name="Walk" ObjectPath="\Switches\Gameplay\AKSW_FootstepsSpeed\Walk" GUID="{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{EBD97549-E41C-DC52-6FF9-A0D9778D7C02}</FileHash>
+</SoundBanksInfo>
