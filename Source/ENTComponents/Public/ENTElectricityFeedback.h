@@ -10,7 +10,7 @@
 class UAkComponent;
 
 UCLASS()
-class ENTCORE_API AENTElectricityFeedback : public AActor
+class ENTCOMPONENTS_API AENTElectricityFeedback : public AActor
 {
 	GENERATED_BODY()
 
@@ -41,4 +41,6 @@ public:
 	void SetRadius(float InRadius) {Radius = InRadius;}
 
 	TObjectPtr<UMaterialInstanceDynamic> GetMaterial() const {return Material;}
+
+	void Init(const FLinearColor& Color) const;
 };

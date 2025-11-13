@@ -50,6 +50,18 @@
 			"Type": "DynamicLibrary"
 		},
 		{
+			"Path": "$(EngineDir)/Binaries/Win64/OpenImageDenoise.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Binaries/Win64/OpenImageDenoise_core.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Binaries/Win64/OpenImageDenoise_device_cpu.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
 			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-AIGraph.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -5367,6 +5379,26 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Experimental/FullBodyIK/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Experimental/GPULightmass/Binaries/Win64/UnrealEditor-GPULightmass.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Experimental/GPULightmass/Binaries/Win64/UnrealEditor-GPULightmass.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Experimental/GPULightmass/Binaries/Win64/UnrealEditor-GPULightmassEditor.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Experimental/GPULightmass/Binaries/Win64/UnrealEditor-GPULightmassEditor.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Experimental/GPULightmass/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
 		{
@@ -28540,6 +28572,18 @@
 			"Type": "NonUFS"
 		},
 		{
+			"Path": "$(EngineDir)/Binaries/Win64/OpenImageDenoise.dll",
+			"Type": "NonUFS"
+		},
+		{
+			"Path": "$(EngineDir)/Binaries/Win64/OpenImageDenoise_core.dll",
+			"Type": "NonUFS"
+		},
+		{
+			"Path": "$(EngineDir)/Binaries/Win64/OpenImageDenoise_device_cpu.dll",
+			"Type": "NonUFS"
+		},
+		{
 			"Path": "$(EngineDir)/Binaries/Win64/UnrealBuildAccelerator/x64/UbaHost.dll",
 			"Type": "NonUFS"
 		},
@@ -32020,6 +32064,10 @@
 			"Type": "UFS"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Experimental/GPULightmass/GPULightmass.uplugin",
+			"Type": "UFS"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Experimental/GeometryCollectionPlugin/GeometryCollectionPlugin.uplugin",
 			"Type": "UFS"
 		},
@@ -32456,122 +32504,6 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/Ak3DAudioBedMixer.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkAudioInput.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkCompressor.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkDelay.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkExpander.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkFlanger.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkGain.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkGuitarDistortion.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkHarmonizer.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkMatrixReverb.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkParametricEQ.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkPeakLimiter.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkPitchShifter.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkRecorder.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkReflect.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkRoomVerb.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSilenceGenerator.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSineTone.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSoundEngineDLL.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSoundSeedAir.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkStereoDelay.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkSynthOne.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkTimeStretch.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkToneGen.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkTremolo.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/Auro.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/McDSP.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/WwiseProjectDatabase.dll",
-			"Type": "NonUFS"
-		},
-		{
-			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/iZotope.dll",
-			"Type": "NonUFS"
-		},
-		{
 			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/WwiseSoundEngine.uplugin",
 			"Type": "UFS"
 		},
@@ -32662,6 +32594,7 @@
 		"Fracture",
 		"FullBodyIK",
 		"GLTFExporter",
+		"GPULightmass",
 		"GameplayCameras",
 		"GameplayInsights",
 		"GameplayTagsEditor",
