@@ -1,7 +1,7 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Gamefeel/ENTElectricityFeedback.h"
+#include "ENTElectricityFeedback.h"
 #include "AkComponent.h"
 #include "Components/PostProcessComponent.h"
 
@@ -27,6 +27,11 @@ void AENTElectricityFeedback::BeginPlay()
 
 	// would prefer an infinite sound
 	ElectricityNoises->PostAssociatedAkEvent(static_cast<int32>(EAkCallbackType::EndOfEvent), CallBackEvent);
+}
+
+void AENTElectricityFeedback::Init(const FLinearColor& Color) const
+{
+	Material->SetVectorParameterValue("Color", Color);
 }
 
 void AENTElectricityFeedback::PlayNoise(EAkCallbackType CallbackType, UAkCallbackInfo* CallbackInfo)
