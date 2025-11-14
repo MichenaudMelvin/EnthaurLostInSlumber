@@ -23,8 +23,8 @@ public:
 
 	/**
 	 * @brief Return the anim length (duration in seconds) with the rate scale
-	 * @param Anim 
-	 * @return 
+	 * @param Anim The animation
+	 * @return The anim length
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Animation")
 	static float GetAnimLength(UAnimSequenceBase* Anim);

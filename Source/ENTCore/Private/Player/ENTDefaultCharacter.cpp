@@ -676,7 +676,11 @@ FENTGameElementData& AENTDefaultCharacter::SaveGameElement(UENTWorldSave* Curren
 		CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = static_cast<uint8>(StateMachine->GetCurrentStateID());
+	if (StateMachine)
+	{
+		PlayerSaveSubsystem->GetPlayerSave()->CurrentState = static_cast<uint8>(StateMachine->GetCurrentStateID());
+	}
+
 	PlayerSaveSubsystem->SaveToSlot(0);
 
 	return EmptyData;
