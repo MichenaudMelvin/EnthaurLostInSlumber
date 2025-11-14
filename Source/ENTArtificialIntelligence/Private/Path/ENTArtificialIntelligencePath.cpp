@@ -99,7 +99,10 @@ void AENTArtificialIntelligencePath::BeginPlay()
 	}
 
 #if WITH_EDITORONLY_DATA
-	NavLinkPlatform->DestroyComponent();
+	if (NavLinkPlatform)
+	{
+		NavLinkPlatform->DestroyComponent();
+	}
 #endif
 
 	UpdatePoints(false);

@@ -23,8 +23,6 @@ UENTJumpTask::UENTJumpTask()
 	bNotifyTick = true;
 
 	JumpLocationKey.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpTask, JumpLocationKey));
-	GroundLookAtLocation.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpTask, GroundLookAtLocation));
-	GroundLookAtLocation.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpTask, GroundLookAtLocation), AActor::StaticClass());
 }
 
 void UENTJumpTask::InitializeFromAsset(UBehaviorTree& Asset)
@@ -35,7 +33,6 @@ void UENTJumpTask::InitializeFromAsset(UBehaviorTree& Asset)
 	if (ensure(BBAsset))
 	{
 		JumpLocationKey.ResolveSelectedKey(*BBAsset);
-		GroundLookAtLocation.ResolveSelectedKey(*BBAsset);
 	}
 
 	if (!JumpCurve)
@@ -185,24 +182,8 @@ void UENTJumpTask::SetTargetTransform()
 
 FVector UENTJumpTask::GetTargetForwardVector() const
 {
-	FVector TargetLocation = FVector::ZeroVector;
-	if (GroundLookAtLocation.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
-	{
-		TargetLocation = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Vector>(GroundLookAtLocation.GetSelectedKeyID());
-	}
-	else if (GroundLookAtLocation.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
-	{
-		UObject* LocationObject = CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Object>(GroundLookAtLocation.GetSelectedKeyID());
-		if (LocationObject)
-		{
-			if (AActor* ActorPtr = Cast<AActor>(LocationObject))
-			{
-				TargetLocation = ActorPtr->GetActorLocation();
-			}
-		}
-	}
-
-	FVector ForwardVector = TargetLocation - TargetTransform.GetLocation();
+	FVector ForwardVector = TargetTransform.GetLocation() - StartTransform.GetLocation();
+	ForwardVector.Z = 0.0f;
 
 	ForwardVector.Normalize();
 

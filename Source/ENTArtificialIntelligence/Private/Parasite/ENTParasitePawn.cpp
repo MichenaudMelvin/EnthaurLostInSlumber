@@ -268,6 +268,33 @@ void AENTParasitePawn::DebugPawn() const
 }
 #endif
 
+void AENTParasitePawn::SetAnimToTrigger(UAnimSequenceBase* Anim)
+{
+	AnimToTrigger = Anim;
+	OnChangeAnimToTrigger.Broadcast(AnimToTrigger);
+}
+
+FVector AENTParasitePawn::GetVelocity() const
+{
+	if (bOverrideVelocity)
+	{
+		return OverridenVelocity;
+	}
+
+	return Super::GetVelocity();
+}
+
+void AENTParasitePawn::OverrideVelocity(bool bOverride)
+{
+	OverrideVelocity(bOverride ? FVector::ForwardVector : FVector::ZeroVector);
+}
+
+void AENTParasitePawn::OverrideVelocity(const FVector& NewVelocity)
+{
+	bOverrideVelocity = NewVelocity != FVector::ZeroVector;
+	OverridenVelocity = NewVelocity;
+}
+
 #pragma region Save
 
 FENTGameElementData& AENTParasitePawn::SaveGameElement(UENTWorldSave* CurrentWorldSave)

@@ -75,13 +75,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Trace")
 	TArray<TEnumAsByte<EObjectTypeQuery>> GroundObjectTypes;
 
-	UPROPERTY(EditInstanceOnly, Category = "Direction")
+	UPROPERTY(EditInstanceOnly, Category = "Spline")
 	TEnumAsByte<EAxis::Type> Direction = EAxis::Z;
 
-	UPROPERTY(EditInstanceOnly, Category = "Direction")
+	UPROPERTY(EditInstanceOnly, Category = "Spline")
 	bool bInvertDirection = true;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Direction", meta = (ClampMin = 0.0f, Units = "cm"))
+	UPROPERTY(EditAnywhere, Category = "Spline", meta = (ClampMin = 0.0f, Units = "cm"))
 	float WallPointsOffset = 1.0f;
 
 	void UpdatePoints(bool bInConstructionScript);
@@ -140,6 +140,8 @@ public:
 	FTransform GetEndTransform(int8 SplineDirection) const {return GetTransformAtAlpha(1.0f, SplineDirection);}
 
 	FVector GetNavLinkLocation(int32 PathDirection) const;
+
+	float GetWallOffset() const {return WallPointsOffset;}
 
 	bool IsAClosedLoop() const {return bIsAClosedLoop;}
 

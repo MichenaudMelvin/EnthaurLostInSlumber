@@ -18,6 +18,7 @@ AENTJumpLink::AENTJumpLink()
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(Root);
 
+#if WITH_EDITORONLY_DATA
 	FistNavLinkDebugArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("FistNavLinkDebugArrow"));
 	FistNavLinkDebugArrow->SetupAttachment(Root);
 	FistNavLinkDebugArrow->SetWorldRotation(FRotator(90.0f, 0.0f, 0.0f));
@@ -27,6 +28,7 @@ AENTJumpLink::AENTJumpLink()
 	SecondNavLinkDebugArrow->SetupAttachment(Root);
 	SecondNavLinkDebugArrow->SetWorldRotation(FRotator(90.0f, 0.0f, 0.0f));
 	SecondNavLinkDebugArrow->SetArrowColor(FLinearColor::White);
+#endif
 
 	NavLink = CreateDefaultSubobject<UNavLinkCustomComponent>(TEXT("NavLink"));
 	NavLink->SetMoveReachedLink(this, &AENTJumpLink::NotifyLinkReached);

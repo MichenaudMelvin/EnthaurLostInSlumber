@@ -45,6 +45,8 @@ public:
 
 	virtual const FENTAIData& GetLoadingData() const = 0;
 
+	virtual void SetAnimToTrigger(UAnimSequenceBase* Anim) = 0;
+
 #if WITH_EDITORONLY_DATA
 	virtual void DebugPawn() const = 0;
 #endif

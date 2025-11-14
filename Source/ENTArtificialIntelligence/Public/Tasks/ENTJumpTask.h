@@ -31,12 +31,6 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Jump")
 	FBlackboardKeySelector JumpLocationKey;
 
-	/**
-	 * @brief This vector is used when jumping on the ground to make the pawn face the location they goes
-	 */
-	UPROPERTY(EditInstanceOnly, Category = "Jump")
-	FBlackboardKeySelector GroundLookAtLocation;
-
 	FTransform StartTransform;
 
 	FTransform TargetTransform;

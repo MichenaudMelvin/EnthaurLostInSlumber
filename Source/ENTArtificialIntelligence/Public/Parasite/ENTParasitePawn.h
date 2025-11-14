@@ -18,6 +18,8 @@ class UAIPerceptionComponent;
 struct FENTAIData;
 struct FENTGameElementData;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeAnimToTrigger, UAnimSequenceBase*, AnimToTrigger);
+
 UCLASS()
 class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface, public IENTPawnAIInterface
 {
@@ -70,6 +72,8 @@ protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Path")
 	TObjectPtr<AENTNavigationArea> NavigationArea;
 
+#pragma region BlackboardKeys
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName PathKeyName = "AIPath";
 
@@ -87,6 +91,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName ChaseSpeedKeyName = "ChaseSpeed";
+
+#pragma endregion
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
 	bool bAutoStartBehavior = true;
@@ -117,6 +123,43 @@ protected:
 
 public:
 	UBoxComponent* GetCollisionComp() {return ParasiteCollision;}
+
+#pragma region Animations
+
+protected:
+	UPROPERTY()
+	TObjectPtr<UAnimSequenceBase> AnimToTrigger;
+
+	virtual void SetAnimToTrigger(UAnimSequenceBase* Anim) override;
+
+	UPROPERTY(BlueprintAssignable, Category = "Animation")
+	FOnChangeAnimToTrigger OnChangeAnimToTrigger;
+
+#pragma endregion
+
+#pragma region Velocity
+
+protected:
+	bool bOverrideVelocity = false;
+
+	FVector OverridenVelocity = FVector::ZeroVector;
+
+public:
+	virtual FVector GetVelocity() const override;
+
+	/**
+	 * @brief Use it to override the APawn::GetVelocity() function
+	 * @param bOverride if true OverridenVelocity is equal to FVector::ForwardVector, else will be FVector::ZeroVector
+	 */
+	void OverrideVelocity(bool bOverride);
+
+	/**
+	 * @brief Use AENTParasitePawn::OverrideVelocity(bool) for clarity purpose and if your don't care about the OverridenVelocity
+	 * @param NewVelocity if equal to FVector::ZeroVector bOverrideVelocity will become false
+	 */
+	void OverrideVelocity(const FVector& NewVelocity);
+
+#pragma endregion
 
 #pragma region Save
 
