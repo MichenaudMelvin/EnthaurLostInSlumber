@@ -64,36 +64,34 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 {
 	Super::ExecuteTask(OwnerComp, NodeMemory);
 
-	EBTNodeResult::Type NodeResult = EBTNodeResult::Failed;
-
 	UBlackboardComponent* BlackboardComponent = OwnerComp.GetBlackboardComponent();
 	if (!BlackboardComponent)
 	{
-		return NodeResult;
+		return EBTNodeResult::Failed;
 	}
 
 	UObject* KeyObject = BlackboardComponent->GetValue<UBlackboardKeyType_Object>(AIPath.GetSelectedKeyID());
 	if (!KeyObject)
 	{
-		return NodeResult;
+		return EBTNodeResult::Failed;
 	}
 
 	AENTArtificialIntelligencePath* Path = Cast<AENTArtificialIntelligencePath>(KeyObject);
 	if (!Path)
 	{
-		return NodeResult;
+		return EBTNodeResult::Failed;
 	}
 
 	AENTDefaultAIController* Controller = Cast<AENTDefaultAIController>(OwnerComp.GetAIOwner());
 	if (!Controller)
 	{
-		return NodeResult;
+		return EBTNodeResult::Failed;
 	}
 
 	CurrentPawn = Controller->GetPawn();
 	if (!CurrentPawn)
 	{
-		return NodeResult;
+		return EBTNodeResult::Failed;
 	}
 
 	float PawnHeight = 0.0f;
@@ -111,7 +109,6 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	if (bWalkOnFloor)
 	{
 		BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(TargetKeyLocation.GetSelectedKeyID(), TargetLocation);
-		NodeResult = EBTNodeResult::Succeeded;
 
 #if WITH_EDITORONLY_DATA
 		if (bDebugTask && CurrentPawn)
@@ -119,49 +116,52 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 			UKismetSystemLibrary::DrawDebugPoint(CurrentPawn, TargetLocation, DebugPointSize, FColor::Red, 10.0f);
 		}
 #endif
+		return EBTNodeResult::Succeeded;
 	}
-	else
+
+	CurrentOwnerComp = &OwnerComp;
+
+	if (ParasitePawn)
 	{
-		CurrentOwnerComp = &OwnerComp;
-		StartLocation = CurrentPawn->GetActorLocation();
+		ParasitePawn->OverrideVelocity(true);
+	}
 
-		FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(StartLocation, TargetLocation);
+	StartLocation = CurrentPawn->GetActorLocation();
 
-		FVector EndLocation = StartLocation;
+	FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(StartLocation, TargetLocation);
 
-		EndLocation += (Path->GetDirection() * GroundTraceLength);
+	FVector EndLocation = StartLocation;
 
-		TArray<AActor*> ActorsToIgnore;
-		ActorsToIgnore.Add(CurrentPawn);
+	EndLocation += (Path->GetDirection() * (GroundTraceLength + Path->GetWallOffset()));
 
-		FHitResult HitResult;
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(CurrentPawn);
 
-		EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
+	FHitResult HitResult;
+
+	EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
 
 #if WITH_EDITORONLY_DATA
-		if (bDebugTask)
-		{
-			DrawDebugTrace = EDrawDebugTrace::ForDuration;
-		}
+	if (bDebugTask)
+	{
+		DrawDebugTrace = EDrawDebugTrace::ForDuration;
+	}
 #endif
 
-		UKismetSystemLibrary::LineTraceSingleForObjects(CurrentPawn, StartLocation, EndLocation, GroundObjects, false, ActorsToIgnore, DrawDebugTrace, HitResult, false, FLinearColor::Red, FLinearColor::Green, 5.0f);
+	UKismetSystemLibrary::LineTraceSingleForObjects(CurrentPawn, StartLocation, EndLocation, GroundObjects, false, ActorsToIgnore, DrawDebugTrace, HitResult, false, FLinearColor::Red, FLinearColor::Green, 5.0f);
 
-		FRotator TargetRotation = FRotationMatrix::MakeFromZX(HitResult.ImpactNormal, ForwardDirection).Rotator();
-		CurrentPawn->SetActorRotation(TargetRotation);
+	FRotator TargetRotation = FRotationMatrix::MakeFromZX(HitResult.ImpactNormal, ForwardDirection).Rotator();
+	CurrentPawn->SetActorRotation(TargetRotation);
 
-		float Distance = FVector::Dist(StartLocation, TargetLocation);
-		float Speed = CurrentPawn->GetMovementComponent()->GetMaxSpeed();
+	float Distance = FVector::Dist(StartLocation, TargetLocation);
+	float Speed = CurrentPawn->GetMovementComponent()->GetMaxSpeed();
 
-		float Time = Distance/Speed;
+	float Time = Distance/Speed;
 
-		MovementTimeline.SetPlayRate(1/Time);
-		MovementTimeline.PlayFromStart();
+	MovementTimeline.SetPlayRate(1/Time);
+	MovementTimeline.PlayFromStart();
 
-		NodeResult = EBTNodeResult::InProgress;
-	}
-
-	return NodeResult;
+	return EBTNodeResult::InProgress;
 }
 
 void UENTFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -217,5 +217,11 @@ void UENTFollowAIPath::MovementUpdate(float Alpha)
 
 void UENTFollowAIPath::FinishTask()
 {
+	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
+	if (ParasitePawn)
+	{
+		ParasitePawn->OverrideVelocity(false);
+	}
+
 	FinishLatentTask(*CurrentOwnerComp, EBTNodeResult::Succeeded);
 }

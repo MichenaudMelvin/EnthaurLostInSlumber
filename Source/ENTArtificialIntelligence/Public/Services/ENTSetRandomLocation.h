@@ -48,4 +48,9 @@ private:
 
 	UPROPERTY(EditInstanceOnly, Category = "RandomLocation")
 	TObjectPtr<ANavigationData> NavData;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDebugService = false;
+#endif
 };
