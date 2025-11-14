@@ -39,6 +39,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Door")
 	TObjectPtr<UStaticMesh> InterMeshB;
 
+	UPROPERTY(EditAnywhere, Category="Door", meta = (Units = cm))
+	float DoorWidth = 200.f;
+
+	UPROPERTY(EditDefaultsOnly, Category="Door")
+	float SpacingFactor = 0.5f;
+
 	UPROPERTY()
 	TArray<TObjectPtr<UStaticMeshComponent>> InterMeshes;
 
@@ -65,11 +71,8 @@ protected:
 	UFUNCTION()
 	void DropTimelineFinished();
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Door|Animation", meta = (Units = "s"))
+	UPROPERTY(EditDefaultsOnly, Category = "Door", meta = (Units = "s"))
 	float MaxStagger = 0.4f;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "Door")
-	float MeshSpacingOverride = 0.f;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Door", meta = (Units = "s"))
 	float OpenDuration = 0.5f;
@@ -88,13 +91,10 @@ protected:
 	void GenerateInterMeshes();
 
 	void ClearInterMeshes();
-	
-	float GetDoorWidth() const;
 
 public:
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(CallInEditor, BlueprintCallable, Category="Door")
 	virtual void Trigger_Implementation() override;
 
 	virtual void SetLock_Implementation(bool bState) override;
