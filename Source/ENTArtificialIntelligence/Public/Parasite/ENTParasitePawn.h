@@ -18,6 +18,8 @@ class UAIPerceptionComponent;
 struct FENTAIData;
 struct FENTGameElementData;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeAnimToTrigger, UAnimSequenceBase*, AnimToTrigger);
+
 UCLASS()
 class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface, public IENTPawnAIInterface
 {
@@ -70,23 +72,39 @@ protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Path")
 	TObjectPtr<AENTNavigationArea> NavigationArea;
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+#pragma region BlackboardKeys
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName PathKeyName = "AIPath";
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName NavAreaKeyName = "NavigationArea";
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName WalkOnFloorKeyName = "WalkOnFloor";
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName AttackTargetKeyName = "AttackTarget";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName PatrolSpeedKeyName = "PatrolSpeed";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName ChaseSpeedKeyName = "ChaseSpeed";
+
+#pragma endregion
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
 	bool bAutoStartBehavior = true;
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
 	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	float PatrolSpeed = 600.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	float ChaseSpeed = 1200.0f;
 
 	virtual bool DoesAutoStartBehaviorTree_Implementation() const override {return bAutoStartBehavior;}
 
@@ -105,6 +123,43 @@ protected:
 
 public:
 	UBoxComponent* GetCollisionComp() {return ParasiteCollision;}
+
+#pragma region Animations
+
+protected:
+	UPROPERTY()
+	TObjectPtr<UAnimSequenceBase> AnimToTrigger;
+
+	virtual void SetAnimToTrigger(UAnimSequenceBase* Anim) override;
+
+	UPROPERTY(BlueprintAssignable, Category = "Animation")
+	FOnChangeAnimToTrigger OnChangeAnimToTrigger;
+
+#pragma endregion
+
+#pragma region Velocity
+
+protected:
+	bool bOverrideVelocity = false;
+
+	FVector OverridenVelocity = FVector::ZeroVector;
+
+public:
+	virtual FVector GetVelocity() const override;
+
+	/**
+	 * @brief Use it to override the APawn::GetVelocity() function
+	 * @param bOverride if true OverridenVelocity is equal to FVector::ForwardVector, else will be FVector::ZeroVector
+	 */
+	void OverrideVelocity(bool bOverride);
+
+	/**
+	 * @brief Use AENTParasitePawn::OverrideVelocity(bool) for clarity purpose and if your don't care about the OverridenVelocity
+	 * @param NewVelocity if equal to FVector::ZeroVector bOverrideVelocity will become false
+	 */
+	void OverrideVelocity(const FVector& NewVelocity);
+
+#pragma endregion
 
 #pragma region Save
 

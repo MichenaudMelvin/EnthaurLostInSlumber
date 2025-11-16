@@ -72,9 +72,9 @@ void UENTUpdatePathIndex::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, ui
 			AENTArtificialIntelligencePath* NextPath = PathOBJ->GetNextPath();
 			if (NextPath)
 			{
-				FTransform StartTransform = NextPath->GetStartTransform();
 				Index = 1;
 				Direction = 1;
+				FTransform StartTransform = NextPath->GetStartTransform(Direction);
 
 				BlackboardComponent->SetValue<UBlackboardKeyType_Vector>(NextPathLocation.GetSelectedKeyID(), StartTransform.GetLocation());
 				BlackboardComponent->SetValue<UBlackboardKeyType_Object>(AINextPath.GetSelectedKeyID(), NextPath);

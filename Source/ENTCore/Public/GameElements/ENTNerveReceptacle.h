@@ -20,7 +20,7 @@ class AENTNerve;
 class UAkAudioEvent;
 class IENTActivation;
 class USphereComponent;
-class AENTElectricityFeedback;
+class UENTElectricityComponent;
 
 UCLASS()
 class ENTCORE_API AENTNerveReceptacle : public AActor
@@ -33,6 +33,8 @@ public:
 	AENTNerveReceptacle();
 
 protected:
+	UFUNCTION()
+
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
@@ -62,8 +64,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> DisabledNoise;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity")
-	TSubclassOf<AActor> ElectricityFeedbackClass;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Electricity")
+	TObjectPtr<UENTElectricityComponent> ElectricityComponent;
 
 #if WITH_EDITORONLY_DATA
 	/**
@@ -76,99 +78,15 @@ protected:
 	UPROPERTY()
 	FTransform NerveEndTargetTransform;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity", meta = (ClampMin = 1.0f, Units = "cm/s"))
-	float ElectricitySpeed = 750.0f;
-
-	void PlayElectricityAnimation(AENTNerve* Nerve);
-
 	UFUNCTION()
 	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Nerve")
 	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
 
-#pragma region ElectricityRadius
-
-protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
-	TObjectPtr<UCurveFloat> FirstElectricityRadiusCurve;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
-	TObjectPtr<UCurveFloat> SecondElectricityRadiusCurve;
-
-	FTimeline ElectricityRadiusTimeline;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius", meta = (Units = s))
-	float FirstElectricityRadiusDuration = 0.25f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius", meta = (Units = s))
-	float SecondElectricityRadiusDuration = 1.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
-	float FirstRadiusTarget = 30.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
-	float SecondRadiusTarget = 200.0f;
-
-	float StartRadiusTarget = 0.0f;
-
-	float EndRadiusTarget = 0.0f;
-
-	UFUNCTION()
-	void ElectricityRadiusUpdate(float Alpha);
-
-	UFUNCTION()
-	void ElectricityRadiusFinished();
-
-#pragma endregion
-
-#pragma region ElectricityMovement
-
-protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Movement")
-	TObjectPtr<UCurveFloat> ElectricityMovementCurve;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Movement", meta = (Units = s))
-	float ElectricityMovementDuration = 1.5f;
-
-	FTimeline ElectricityMovementTimeline;
-
-	UFUNCTION()
-	void ElectricityMovementUpdate(float Alpha);
-
-	UFUNCTION()
-	void ElectricityMovementFinished();
-
-#pragma endregion
-
-#pragma region ElectricityOpacity
-
-protected:
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity")
-	TObjectPtr<UCurveFloat> ElectricityOpacityCurve;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity")
-	FName ElectricityOpacityParam = "Opacity";
-
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity", meta = (Units = s))
-	float ElectricityOpacityDuration = 2.0f;
-
-	FTimeline ElectricityOpacityTimeline;
-
-	UFUNCTION()
-	void ElectricityOpacityUpdate(float Alpha);
-
-	UFUNCTION()
-	void ElectricityOpacityFinished();
-
-#pragma endregion
-
 private:
 	UPROPERTY(EditAnywhere)
 	FName ConnectedShaderTag;
-
-	UPROPERTY()
-	TObjectPtr<AENTElectricityFeedback> NerveElectricityFeedback;
 
 	UPROPERTY()
 	TObjectPtr<AENTNerve> LinkedNerve;
@@ -193,4 +111,23 @@ public:
 	bool CanTheNerveBeTaken() const;
 
 	void DisableReceptacle();
+
+#pragma region Electricity
+
+	UFUNCTION()
+	void OnElectricityAnimationStarted(AActor* LinkedActor);
+
+	UFUNCTION()
+	void OnElectricityRadiusFinished();
+
+	UFUNCTION()
+	void OnElectricityMovementUpdated(float Alpha);
+
+	UFUNCTION()
+	void OnElectricityMovementFinished();
+
+	UFUNCTION()
+	void OnElectricityOpacityFinished();
+
+#pragma endregion 
 };

@@ -36,6 +36,8 @@ protected:
 
 	void DestroyFacingActor();
 
+	void DebugNoise();
+
 #pragma endregion
 
 protected:

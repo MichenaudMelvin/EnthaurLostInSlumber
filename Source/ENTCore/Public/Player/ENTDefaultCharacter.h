@@ -62,9 +62,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stimuli")
 	TObjectPtr<UAIPerceptionStimuliSourceComponent> HearingStimuli;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Spike")
-	TObjectPtr<USkeletalMeshComponent> SpikeMesh;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Health")
 	TObjectPtr<UENTHealthComponent> HealthComponent;
 
@@ -78,6 +75,7 @@ public:
 
 	UENTHealthComponent* GetHealth() const {return HealthComponent;}
 
+	UFUNCTION(BlueprintCallable)
 	UENTCameraShakeComponent* GetCameraShake() const {return ShakeManager;}
 
 #pragma endregion
@@ -242,35 +240,6 @@ private:
 
 #pragma endregion
 
-#pragma region Spike
-
-protected:
-	FTransform SpikeRelativeTransform;
-
-	UPROPERTY()
-	TObjectPtr<USceneComponent> SpikeParent;
-
-	FTransform SpikeTargetTransform;
-
-	bool bUseSpikeRelativeTransform = true;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Spike", meta = (UIMin = 0.0f))
-	float SpikeLerpSpeed = 2.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Spike", meta = (UIMin = 0.0f, Units = "cm"))
-	float SpikeChargingOffset = 25.0f;
-
-	void UpdateSpikeLocation(float DeltaTime) const;
-
-public:
-	void PlantSpike(const FVector& TargetLocation);
-
-	void ReGrabSpike();
-
-	void UpdateSpikeOffset(float Alpha) const;
-
-#pragma endregion
-
 #pragma region CharacterFunctions
 
 public:
@@ -332,9 +301,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
 	TObjectPtr<AENTRespawnTree> LastRespawnTree = nullptr;
 
-	UFUNCTION()
-	void OnPlayerDie();
-
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
 	FKOnRespawn OnRespawn;
@@ -344,6 +310,12 @@ public:
 	void SetRespawnTree(AENTRespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
 
 	void Respawn();
+
+protected:
+	virtual void FellOutOfWorld(const UDamageType& dmgType) override;
+
+	UFUNCTION()
+	void OnPlayerDie();
 
 #pragma endregion
 
