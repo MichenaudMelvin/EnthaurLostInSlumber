@@ -7,6 +7,7 @@
 #include "BehaviorTree/BTService.h"
 #include "NavFilters/NavigationQueryFilter.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 UENTSetRandomLocation::UENTSetRandomLocation()
 {
@@ -65,6 +66,13 @@ void UENTSetRandomLocation::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, 
 	}
 
 	CurrentBlackboard->SetValue<UBlackboardKeyType_Vector>(RandomLocationKey.GetSelectedKeyID(), RandomLocationResult.Location);
+
+#if WITH_EDITORONLY_DATA
+	if (bDebugService)
+	{
+		UKismetSystemLibrary::DrawDebugPoint(this, RandomLocationResult.Location, 15.0f, FLinearColor::Red, 10.0f);
+	}
+#endif
 }
 
 void UENTSetRandomLocation::SetOwner(AActor* InActorOwner)
