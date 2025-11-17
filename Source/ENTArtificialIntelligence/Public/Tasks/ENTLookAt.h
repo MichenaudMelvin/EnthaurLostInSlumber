@@ -28,6 +28,9 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "Rotation")
 	FBlackboardKeySelector LookAtPosition;
 
+	UPROPERTY(EditInstanceOnly, Category = "Ground")
+	FRotator RotationOffset;
+
 	UPROPERTY(EditInstanceOnly, Category = "Rotation")
 	bool bUseControlRotation = false;
 

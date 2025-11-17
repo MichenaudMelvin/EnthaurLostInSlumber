@@ -24,6 +24,9 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Ground", meta = (ClampMin = 0.0f, Units = "cm"))
 	float GroundTraceLength = 150.0f;
 
+	UPROPERTY(EditInstanceOnly, Category = "Ground")
+	FRotator RotationOffset;
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
 	bool bDebugTask = false;

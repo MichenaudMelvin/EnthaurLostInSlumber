@@ -82,11 +82,13 @@ void UENTSplineJumpTask::SetTargetTransform()
 		TargetTransform = Direction == 1 ? CurrentPath->GetStartTransform(Direction) : CurrentPath->GetEndTransform(Direction);
 	}
 
+	TargetTransform.SetRotation(TargetTransform.GetRotation() * RotationOffset.Quaternion());
+
 	float PawnHeight = 0.0f;
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
 	if (ParasitePawn)
 	{
-		PawnHeight = ParasitePawn->GetCollisionComp()->GetUnscaledBoxExtent().Z;
+		PawnHeight = ParasitePawn->GetHitBoxHeight();
 	}
 
 	FVector GroundDirection = bJumpOnTheGround ? FVector::UpVector : (CurrentPath->GetDirection() * -1);

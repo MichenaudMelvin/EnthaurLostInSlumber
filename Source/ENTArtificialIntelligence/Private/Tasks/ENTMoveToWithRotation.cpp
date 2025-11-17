@@ -77,6 +77,8 @@ if (bDebugTask)
 
 	FRotator TargetRotation(YZRotator.Pitch, XZRotator.Yaw, XZRotator.Roll);
 
+	FQuat Quat = TargetRotation.Quaternion() * RotationOffset.Quaternion();
+
 #if WITH_EDITORONLY_DATA
 	if (bDisableRotation)
 	{
@@ -84,7 +86,7 @@ if (bDebugTask)
 	}
 #endif
 
-	Pawn->SetActorRotation(TargetRotation);
+	Pawn->SetActorRotation(Quat);
 }
 
 #if WITH_EDITOR
