@@ -21,15 +21,24 @@ protected:
 	virtual FString GetStaticDescription() const override;
 #endif
 
-	UPROPERTY(EditInstanceOnly, Category = "Ground", meta = (ClampMin = 0.0f, Units = "cm"))
+	UPROPERTY(EditInstanceOnly, Category = "Ground", meta = (ClampMin = 0.0f, Units = cm))
 	float GroundTraceLength = 150.0f;
 
 	UPROPERTY(EditInstanceOnly, Category = "Ground")
 	FRotator RotationOffset;
 
+	UPROPERTY(EditInstanceOnly, Category = "Ground")
+	bool bLerpRotation = true;
+
+	UPROPERTY(EditInstanceOnly, Category = "Ground", meta = (Units = s, EditCondition = bLerpRotation))
+	float RotationSpeed = 5.0f;
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
 	bool bDebugTask = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "Debug", meta = (Units = cm))
+	float LineLength = 200.0f;
 
 	/**
 	 * @brief This is for debug purpose only

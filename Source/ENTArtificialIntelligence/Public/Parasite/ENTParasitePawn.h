@@ -38,6 +38,7 @@ protected:
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 #if WITH_EDITOR
+	virtual void PostLoad() override;
 	virtual void PreEditChange(FProperty* PropertyAboutToChange) override;
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
@@ -127,6 +128,21 @@ protected:
 #endif
 
 #pragma region MathFunctions
+
+protected:
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief This is an editor value, please use AENTParasitePawn::GetHitBoxHeight() instead
+	 */
+	UPROPERTY(VisibleDefaultsOnly, Category = "Transformation", meta = (Units = cm))
+	float ParasiteHeight = 0.0f;
+
+	/**
+	 * @brief This is an editor value, please use AENTParasitePawn::GetHitBoxWidth() instead
+	 */
+	UPROPERTY(VisibleDefaultsOnly, Category = "Transformation", meta = (Units = cm))
+	float ParasiteWidth = 0.0f;
+#endif
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Transformation")

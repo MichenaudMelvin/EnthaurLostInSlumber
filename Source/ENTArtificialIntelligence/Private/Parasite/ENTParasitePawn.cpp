@@ -139,6 +139,14 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 }
 
 #if WITH_EDITOR
+void AENTParasitePawn::PostLoad()
+{
+	Super::PostLoad();
+
+	ParasiteHeight = GetHitBoxHeight();
+	ParasiteWidth = GetHitBoxWidth();
+}
+
 void AENTParasitePawn::PreEditChange(FProperty* PropertyAboutToChange)
 {
 	Super::PreEditChange(PropertyAboutToChange);
@@ -182,6 +190,11 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 		{
 			TargetPath = nullptr;
 		}
+	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, ParasiteCollision))
+	{
+		ParasiteHeight = GetHitBoxHeight();
+		ParasiteWidth = GetHitBoxWidth();
 	}
 }
 #endif
