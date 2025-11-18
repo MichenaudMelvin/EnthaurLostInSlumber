@@ -7,6 +7,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+#include "Parasite/ENTParasitePawn.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 
 UENTHasReachedTheEndOfTheSpline::UENTHasReachedTheEndOfTheSpline()
@@ -96,9 +97,17 @@ bool UENTHasReachedTheEndOfTheSpline::CalculateRawConditionValue(UBehaviorTreeCo
 		return false;
 	}
 
+	float PawnHeight = 0.0f;
+
+	AENTParasitePawn* Parasite = Cast<AENTParasitePawn>(Pawn);
+	if (Parasite)
+	{
+		PawnHeight = Parasite->GetHitBoxHeight();
+	}
+
 	int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
 
-	return !PathOBJ->IsAtTheEndOfThePath(Pawn->GetActorLocation(), Direction, Tolerance);
+	return !PathOBJ->IsAtTheEndOfThePath(Pawn->GetActorLocation(), PawnHeight, Direction, Tolerance);
 }
 
 #if WITH_EDITOR

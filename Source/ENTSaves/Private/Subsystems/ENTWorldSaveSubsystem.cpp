@@ -105,6 +105,7 @@ UENTDefaultSave* UENTWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 		}
 
 		Cast<IENTSaveGameElementInterface>(Actor)->SaveGameElement(CurrentWorldSave);
+		IENTSaveGameElementInterface::Execute_SaveGameElementBP(Actor, CurrentWorldSave);
 	}
 
 	return Super::SaveToSlot(SaveIndex);
@@ -233,53 +234,67 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 			continue;
 		}
 
+		IENTSaveGameElementInterface* InterfaceActor = Cast<IENTSaveGameElementInterface>(Actor);
+
+		if (!InterfaceActor)
+		{
+			continue;
+		}
+
 		// TODO refactor
 		FENTMuscleData* MuscleDataPtr = CurrentWorldSave->MuscleData.Find(Actor->GetName());
 		if (MuscleDataPtr)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*MuscleDataPtr, CurrentWorldSave);
+			InterfaceActor->LoadGameElement(*MuscleDataPtr, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
 		FENTNerveData* NerveDataPtr = CurrentWorldSave->NerveData.Find(Actor->GetName());
 		if (NerveDataPtr)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*NerveDataPtr, CurrentWorldSave);
+			InterfaceActor->LoadGameElement(*NerveDataPtr, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
 		FENTAmberOreData* AmberOreDataPtr = CurrentWorldSave->AmberOreData.Find(Actor->GetName());
 		if (AmberOreDataPtr)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*AmberOreDataPtr, CurrentWorldSave);
+			InterfaceActor->LoadGameElement(*AmberOreDataPtr, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
 		FENTWeakZoneData* WeakZoneDataPtr = CurrentWorldSave->WeakZoneData.Find(Actor->GetName());
 		if (WeakZoneDataPtr)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*WeakZoneDataPtr, CurrentWorldSave);
+			InterfaceActor->LoadGameElement(*WeakZoneDataPtr, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
 		FENTRespawnTreeData* RespawnTreeData = CurrentWorldSave->RespawnTreeData.Find(Actor->GetName());
 		if (RespawnTreeData)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*RespawnTreeData, CurrentWorldSave);
+			InterfaceActor->LoadGameElement(*RespawnTreeData, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
 		FENTParasiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(Actor->GetName());
 		if (ParaSiteData)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*ParaSiteData, CurrentWorldSave);
+			InterfaceActor->LoadGameElement(*ParaSiteData, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
 		FETNScriptedAIElementData* ScriptedAIElementData = CurrentWorldSave->ScriptedAIElementsData.Find(Actor->GetName());
 		if (ScriptedAIElementData)
 		{
-			Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(*ScriptedAIElementData, CurrentWorldSave);
+			InterfaceActor->LoadGameElement(*ScriptedAIElementData, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -305,6 +320,7 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 
 	FENTGameElementData EmptyData;
 	Cast<IENTSaveGameElementInterface>(Character)->LoadGameElement(EmptyData, CurrentWorldSave);
+	IENTSaveGameElementInterface::Execute_LoadGameElementBP(Character, CurrentWorldSave);
 }
 
 void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)
