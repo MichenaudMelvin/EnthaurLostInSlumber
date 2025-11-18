@@ -23,9 +23,23 @@ public:
 
 	/**
 	 * @brief Return the anim length (duration in seconds) with the rate scale
-	 * @param Anim 
-	 * @return 
+	 * @param Anim The animation
+	 * @return The anim length
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Animation")
 	static float GetAnimLength(UAnimSequenceBase* Anim);
+
+
+	/**
+	 * @brief Sort actors by distance to an actor
+	 * @param Actors The actors you want to sort
+	 * @param Target The Target actor to compute the distance between other actors
+	 * @return The sorted list
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Sorting")
+	[[nodiscard]] static TArray<AActor*> SortActorsByDistanceToActor(TArray<AActor*> Actors, AActor* Target);
+
+	// https://dev.epicgames.com/community/snippets/xBY/unreal-engine-sort-actor-array-based-on-distance-from-target
+	UFUNCTION()
+	static void QuickSortByDistance(TArray<AActor*>& InArray, int low, int high, const AActor* Actor);
 };

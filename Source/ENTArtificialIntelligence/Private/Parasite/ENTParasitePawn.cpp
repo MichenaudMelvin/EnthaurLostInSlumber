@@ -198,6 +198,9 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 	{
 		ParasiteController->GetBlackboardComponent()->SetValueAsObject(NavAreaKeyName, NavigationArea);
 	}
+
+	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(PatrolSpeedKeyName, PatrolSpeed);
+	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(ChaseSpeedKeyName, ChaseSpeed);
 }
 
 void AENTParasitePawn::PossessedBy(AController* NewController)
@@ -264,6 +267,33 @@ void AENTParasitePawn::DebugPawn() const
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *AttackTargetKeyName.ToString(), *AttackTargetValueName));
 }
 #endif
+
+void AENTParasitePawn::SetAnimToTrigger(UAnimSequenceBase* Anim)
+{
+	AnimToTrigger = Anim;
+	OnChangeAnimToTrigger.Broadcast(AnimToTrigger);
+}
+
+FVector AENTParasitePawn::GetVelocity() const
+{
+	if (bOverrideVelocity)
+	{
+		return OverridenVelocity;
+	}
+
+	return Super::GetVelocity();
+}
+
+void AENTParasitePawn::OverrideVelocity(bool bOverride)
+{
+	OverrideVelocity(bOverride ? FVector::ForwardVector : FVector::ZeroVector);
+}
+
+void AENTParasitePawn::OverrideVelocity(const FVector& NewVelocity)
+{
+	bOverrideVelocity = NewVelocity != FVector::ZeroVector;
+	OverridenVelocity = NewVelocity;
+}
 
 #pragma region Save
 

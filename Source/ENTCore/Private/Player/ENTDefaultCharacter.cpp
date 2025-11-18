@@ -61,9 +61,6 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 	HearingStimuli->bAutoRegister = true;
 	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
 
-	SpikeMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SpikeMesh"));
-	SpikeMesh->SetupAttachment(CameraComponent);
-
 	FootstepsSounds = CreateDefaultSubobject<UAkComponent>(TEXT("FootstepsSounds"));
 	FootstepsSounds->SetupAttachment(RootComponent);
 
@@ -76,10 +73,6 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 void AENTDefaultCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	SpikeRelativeTransform = SpikeMesh->GetRelativeTransform();
-	SpikeTargetTransform = SpikeRelativeTransform;
-	SpikeParent = SpikeMesh->GetAttachParent();
 
 	AmberInventory.Add(EAmberType::NecroseAmber, 0);
 	AmberInventory.Add(EAmberType::WeakAmber, 0);
@@ -167,7 +160,6 @@ void AENTDefaultCharacter::Tick(float DeltaSeconds)
 	TickStateMachine(DeltaSeconds);
 	InteractionTrace();
 	GroundMovement();
-	UpdateSpikeLocation(DeltaSeconds);
 	UpdateSpeedEffect(DeltaSeconds);
 
 	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteractPressed)
@@ -533,53 +525,6 @@ void AENTDefaultCharacter::IgnoreWeakZone(bool bIgnore) const
 
 #pragma endregion
 
-#pragma region Spike
-
-void AENTDefaultCharacter::PlantSpike(const FVector& TargetLocation)
-{
-	SpikeMesh->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-	bUseSpikeRelativeTransform = false;
-	SpikeTargetTransform = FTransform(TargetLocation);
-}
-
-void AENTDefaultCharacter::ReGrabSpike()
-{
-	SpikeMesh->AttachToComponent(SpikeParent, FAttachmentTransformRules::KeepWorldTransform);
-	bUseSpikeRelativeTransform = true;
-	SpikeTargetTransform = SpikeRelativeTransform;
-}
-
-void AENTDefaultCharacter::UpdateSpikeOffset(float Alpha) const
-{
-	FVector DefaultLocation = SpikeRelativeTransform.GetLocation();
-	FVector OffsetLocation = DefaultLocation - (FVector::ForwardVector * SpikeChargingOffset);
-	FVector TargetLocation = UKismetMathLibrary::VLerp(DefaultLocation, OffsetLocation, Alpha);
-
-	SpikeMesh->SetRelativeLocation(TargetLocation);
-}
-
-void AENTDefaultCharacter::UpdateSpikeLocation(float DeltaTime) const
-{
-	float Alpha = DeltaTime * SpikeLerpSpeed;
-
-	FVector CurrentLocation = bUseSpikeRelativeTransform ? SpikeMesh->GetRelativeLocation() : SpikeMesh->GetComponentLocation();
-	FVector TargetLocation = UKismetMathLibrary::VLerp(CurrentLocation, SpikeTargetTransform.GetLocation(), Alpha);
-
-	if (bUseSpikeRelativeTransform)
-	{
-		FRotator TargetRotator = UKismetMathLibrary::RLerp(SpikeMesh->GetRelativeRotation(), SpikeTargetTransform.GetRotation().Rotator(), Alpha, true);
-
-		SpikeMesh->SetRelativeRotation(TargetRotator);
-		SpikeMesh->SetRelativeLocation(TargetLocation);
-	}
-	else
-	{
-		SpikeMesh->SetWorldLocation(TargetLocation);
-	}
-}
-
-#pragma endregion
-
 #pragma region CharacterFunctions
 
 FVector AENTDefaultCharacter::GetBottomLocation() const
@@ -676,7 +621,11 @@ FENTGameElementData& AENTDefaultCharacter::SaveGameElement(UENTWorldSave* Curren
 		CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->CurrentState = static_cast<uint8>(StateMachine->GetCurrentStateID());
+	if (StateMachine)
+	{
+		PlayerSaveSubsystem->GetPlayerSave()->CurrentState = static_cast<uint8>(StateMachine->GetCurrentStateID());
+	}
+
 	PlayerSaveSubsystem->SaveToSlot(0);
 
 	return EmptyData;
@@ -763,6 +712,14 @@ void AENTDefaultCharacter::Respawn()
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	OnRespawn.Broadcast();
+}
+
+void AENTDefaultCharacter::FellOutOfWorld(const UDamageType& dmgType)
+{
+	// Does not call the parent function because it destroys the actor
+	// Super::FellOutOfWorld(dmgType);
+
+	HealthComponent->TakeMaxDamages();
 }
 
 void AENTDefaultCharacter::OnPlayerDie()
