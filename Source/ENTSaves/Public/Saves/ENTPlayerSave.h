@@ -22,4 +22,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Amber")
 	TMap<uint8, int> AmberInventory;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Lantern")
+	bool bIsLanternActive = false;
 };
