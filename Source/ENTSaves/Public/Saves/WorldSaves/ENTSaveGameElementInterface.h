@@ -37,4 +37,18 @@ public:
 	 * @param LoadedWorldSave Ptr can be nullptr do a check before using it
 	 */
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) = 0;
+
+	/**
+	 * @brief Implement this function to an actor
+	 * @param CurrentWorldSave Ptr will always be valid
+	 */
+	UFUNCTION(BlueprintNativeEvent, Category = "Saves")
+	void SaveGameElementBP(UENTWorldSave* CurrentWorldSave);
+
+	/**
+	 * @brief Implement this function to an actor, This function is called before the beginPlay
+	 * @param LoadedWorldSave Ptr can be nullptr do a check before using it
+	 */
+	UFUNCTION(BlueprintNativeEvent, Category = "Saves")
+	void LoadGameElementBP(UENTWorldSave* LoadedWorldSave);
 };

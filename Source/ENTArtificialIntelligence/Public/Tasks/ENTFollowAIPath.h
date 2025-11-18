@@ -38,6 +38,9 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Path")
 	FBlackboardKeySelector WalkOnFloor;
 
+	UPROPERTY(EditInstanceOnly, Category = "Ground")
+	FRotator RotationOffset;
+
 	FVector TargetLocation;
 
 #pragma region WalkOnFloor
