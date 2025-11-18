@@ -29,9 +29,7 @@ void UENTCharacterFallState::StateEnter_Implementation(const EENTCharacterStateI
 	{
 		bCanDoCoyoteTime = false;
 	}
-
-	SpikeBrakePressedDuration = 0.0f;
-	SpikeBrakeTimer = 0.0f;
+	
 	bHasPressedInteraction = false;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
@@ -68,37 +66,6 @@ void UENTCharacterFallState::StateTick_Implementation(float DeltaTime)
 			StateMachine->ChangeState(EENTCharacterStateID::Jump);
 		}
 	}
-
-	SpikeBrakeTimer += DeltaTime;
-
-	if (Controller->GetPlayerInputs().bInputInteractTrigger && SpikeBrakeTimer >= SpikeBrakeDelay)
-	{
-		SpikeBrakePressedDuration += DeltaTime;
-
-		FVector StartLocation = Character->GetCamera()->GetComponentLocation();
-		FVector EndLocation = (Character->GetCamera()->GetForwardVector() * SpikeBrakeTraceLength) + StartLocation;
-
-		TArray<AActor*> ActorsToIgnore;
-		ActorsToIgnore.Add(Character);
-
-		FHitResult Hit;
-		bool bHit = UKismetSystemLibrary::LineTraceSingle(Character, StartLocation, EndLocation, SpikeBrakeTraceTypeQuery, false, ActorsToIgnore, EDrawDebugTrace::None, Hit, false);
-
-		if (bHit)
-		{
-			Character->PlantSpike(Hit.Location);
-			StateMachine->ChangeState(EENTCharacterStateID::Stop);
-			return;
-		}
-	}
-	else
-	{
-		SpikeBrakePressedDuration -= DeltaTime;
-	}
-
-	SpikeBrakePressedDuration = FMath::Clamp(SpikeBrakePressedDuration, 0.0f, SpikeBrakeMaxPressedDuration);
-	float Alpha = UKismetMathLibrary::NormalizeToRange(SpikeBrakePressedDuration, 0.0f, SpikeBrakeMaxPressedDuration);
-	Character->UpdateSpikeOffset(Alpha);
 
 	if(Character->GetCharacterMovement()->IsFalling())
 	{

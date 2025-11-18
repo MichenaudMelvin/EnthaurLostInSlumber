@@ -31,6 +31,12 @@ AENTSpikeDoor::AENTSpikeDoor()
 void AENTSpikeDoor::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
+
+	FVector Dir = FVector::RightVector;
+	FVector LeftPos = LeftFrame->GetRelativeLocation();
+	FVector NewRightPos = LeftPos + Dir * DoorWidth;
+
+	RightFrame->SetRelativeLocation(NewRightPos);
 	
 	ClearInterMeshes();
 	GenerateInterMeshes();
@@ -58,12 +64,6 @@ void AENTSpikeDoor::Tick(float DeltaTime)
 	DropTimeline.TickTimeline(DeltaTime);
 }
 
-float AENTSpikeDoor::GetDoorWidth() const
-{
-	if (!LeftFrame || !RightFrame) return 0.f;
-	return FVector::Dist(LeftFrame->GetRelativeLocation(), RightFrame->GetRelativeLocation());
-}
-
 void AENTSpikeDoor::GenerateInterMeshes()
 {
     ClearInterMeshes();
@@ -74,24 +74,9 @@ void AENTSpikeDoor::GenerateInterMeshes()
     const FVector LeftRel = LeftFrame->GetRelativeLocation();
     const FVector RightRel = RightFrame->GetRelativeLocation();
 
-    const float DoorWidth = FVector::Dist(LeftRel, RightRel);
-    if (DoorWidth <= KINDA_SMALL_NUMBER) return;
-
     FVector Direction = (RightRel - LeftRel).GetSafeNormal();
 	
-    float MeshWidth = MeshSpacingOverride > 0.f ? MeshSpacingOverride : 0.f;
-    if (MeshWidth <= KINDA_SMALL_NUMBER)
-    {
-        FVector SizeA = InterMeshA->GetBoundingBox().GetSize();
-        if (SizeA.X > KINDA_SMALL_NUMBER)
-        {
-            MeshWidth = SizeA.X;
-        }
-        else
-        {
-            MeshWidth = 100.f;
-        }
-    }
+    float MeshWidth = InterMeshA->GetBoundingBox().GetSize().X * SpacingFactor;
 
     int32 NumMeshes = FMath::FloorToInt(DoorWidth / MeshWidth);
     if (NumMeshes <= 0) return;

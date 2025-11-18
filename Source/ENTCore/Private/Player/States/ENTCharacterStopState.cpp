@@ -33,7 +33,6 @@ void UENTCharacterStopState::StateTick_Implementation(float DeltaTime)
 
 	if (!Controller->GetPlayerInputs().bInputInteractTrigger)
 	{
-		Character->ReGrabSpike();
 		Character->EjectCharacter(Character->GetActorForwardVector() * ImpulsionForce, true);
 	}
 }
