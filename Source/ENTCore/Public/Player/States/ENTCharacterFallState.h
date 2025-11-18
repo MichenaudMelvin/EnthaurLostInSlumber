@@ -37,26 +37,10 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Movement|Projection")
 	bool bOverrideCurrentVelocity = false;
 
-	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "s"))
-	float SpikeBrakeMaxPressedDuration = 0.75f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "cm"))
-	float SpikeBrakeTraceLength = 200.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake", meta = (ClampMin = 0.0f, Units = "s"))
-	float SpikeBrakeDelay = 0.5f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "SpikeBrake")
-	TEnumAsByte<ETraceTypeQuery> SpikeBrakeTraceTypeQuery;
-
 private:
 	bool bCanDoCoyoteTime = false;
 
 	float CoyoteTime = 0.0f;
-
-	float SpikeBrakePressedDuration = 0.0f;
-
-	float SpikeBrakeTimer = 0.0f;
 
 	bool bHasPressedInteraction = false;
 
