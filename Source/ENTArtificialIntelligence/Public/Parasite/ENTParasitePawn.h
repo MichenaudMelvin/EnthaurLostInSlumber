@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Interfaces/ENTPawnAIInterface.h"
+#include "Path/ENTArtificialIntelligencePath.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTParasitePawn.generated.h"
@@ -13,6 +14,7 @@ class AENTNavigationArea;
 class AENTParasiteController;
 class UENTGravityPawnMovement;
 class AENTArtificialIntelligencePath;
+class UCapsuleComponent;
 class UBoxComponent;
 class UAIPerceptionComponent;
 struct FENTAIData;
@@ -36,18 +38,22 @@ protected:
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 #if WITH_EDITOR
+	virtual void PostLoad() override;
 	virtual void PreEditChange(FProperty* PropertyAboutToChange) override;
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<UBoxComponent> ParasiteCollision;
+	TObjectPtr<UCapsuleComponent> ParasiteCollision;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UENTGravityPawnMovement> MovementComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> ParasiteMesh;
+
+	UPROPERTY(EditInstanceOnly, Category = "Mesh")
+	bool bOverrideDefaultRotation = false;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, Category = "Mesh")
@@ -121,8 +127,40 @@ protected:
 	virtual void DebugPawn() const override;
 #endif
 
+#pragma region MathFunctions
+
+protected:
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief This is an editor value, please use AENTParasitePawn::GetHitBoxHeight() instead
+	 */
+	UPROPERTY(VisibleDefaultsOnly, Category = "Transformation", meta = (Units = cm))
+	float ParasiteHeight = 0.0f;
+
+	/**
+	 * @brief This is an editor value, please use AENTParasitePawn::GetHitBoxWidth() instead
+	 */
+	UPROPERTY(VisibleDefaultsOnly, Category = "Transformation", meta = (Units = cm))
+	float ParasiteWidth = 0.0f;
+#endif
+
 public:
-	UBoxComponent* GetCollisionComp() {return ParasiteCollision;}
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	float GetHitBoxHeight() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	float GetHitBoxWidth() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	FVector GetParasiteForwardVector() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	FVector GetParasiteRightVector() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	FVector GetParasiteUpVector() const;
+
+#pragma endregion
 
 #pragma region Animations
 
