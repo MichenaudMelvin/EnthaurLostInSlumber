@@ -5,6 +5,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Components/BoxComponent.h"
 #include "ENTGravityPawnMovement.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ENTParasiteController.h"
@@ -22,7 +23,7 @@ AENTParasitePawn::AENTParasitePawn()
 	PrimaryActorTick.bCanEverTick = false;
 	PrimaryActorTick.bStartWithTickEnabled = false;
 
-	ParasiteCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("ParasiteHitBox"));
+	ParasiteCollision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("ParasiteHitBox"));
 	SetRootComponent(ParasiteCollision);
 
 	ParasiteCollision->SetCollisionObjectType(ECC_Pawn);
@@ -101,6 +102,12 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 		return;
 	}
 
+	if (!bOverrideDefaultRotation)
+	{
+		FRotator ActorRotation = GetActorRotation();
+		SetActorRotation(FRotator(-90.0f, ActorRotation.Yaw, 0.0f));
+	}
+
 	if (!TargetPath)
 	{
 		return;
@@ -124,7 +131,7 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	}
 
 	FVector ActorLocation = HitResult.Location;
-	ActorLocation += (TargetPath->GetDirection() * -1 * ParasiteCollision->GetUnscaledBoxExtent().Z);
+	ActorLocation += (TargetPath->GetDirection() * -1 * GetHitBoxHeight());
 	SetActorLocation(ActorLocation);
 
 	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.Normal);
@@ -132,6 +139,14 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 }
 
 #if WITH_EDITOR
+void AENTParasitePawn::PostLoad()
+{
+	Super::PostLoad();
+
+	ParasiteHeight = GetHitBoxHeight();
+	ParasiteWidth = GetHitBoxWidth();
+}
+
 void AENTParasitePawn::PreEditChange(FProperty* PropertyAboutToChange)
 {
 	Super::PreEditChange(PropertyAboutToChange);
@@ -175,6 +190,11 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 		{
 			TargetPath = nullptr;
 		}
+	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, ParasiteCollision))
+	{
+		ParasiteHeight = GetHitBoxHeight();
+		ParasiteWidth = GetHitBoxWidth();
 	}
 }
 #endif
@@ -267,6 +287,62 @@ void AENTParasitePawn::DebugPawn() const
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *AttackTargetKeyName.ToString(), *AttackTargetValueName));
 }
 #endif
+
+#pragma region MathFunctions
+
+float AENTParasitePawn::GetHitBoxHeight() const
+{
+	if (ParasiteCollision)
+	{
+		// due to the capsule rotation the height of the parasite is the capsule radius;
+		return ParasiteCollision->GetUnscaledCapsuleRadius();
+	}
+
+	return 0.0f;
+}
+
+float AENTParasitePawn::GetHitBoxWidth() const
+{
+	if (ParasiteCollision)
+	{
+		// due to the capsule rotation the width of the parasite is the capsule halfHeight;
+		return ParasiteCollision->GetUnscaledCapsuleHalfHeight();
+	}
+
+	return 0.0f;
+}
+
+FVector AENTParasitePawn::GetParasiteForwardVector() const
+{
+	if(ParasiteMesh)
+	{
+		return ParasiteMesh->GetForwardVector();
+	}
+
+	return FVector::ZeroVector;
+}
+
+FVector AENTParasitePawn::GetParasiteRightVector() const
+{
+	if(ParasiteMesh)
+	{
+		return ParasiteMesh->GetRightVector();
+	}
+
+	return FVector::ZeroVector;
+}
+
+FVector AENTParasitePawn::GetParasiteUpVector() const
+{
+	if(ParasiteMesh)
+	{
+		return ParasiteMesh->GetUpVector();
+	}
+
+	return FVector::ZeroVector;
+}
+
+#pragma endregion
 
 void AENTParasitePawn::SetAnimToTrigger(UAnimSequenceBase* Anim)
 {

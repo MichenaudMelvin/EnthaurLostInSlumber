@@ -41,6 +41,9 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Jump", meta = (Units = s, ClampMin = 0.0f))
 	float JumpDuration = 1.0f;
 
+	UPROPERTY(EditInstanceOnly, Category = "Jump")
+	FRotator RotationOffset;
+
 	FTimeline JumpTimeline;
 
 	UPROPERTY()
