@@ -398,19 +398,32 @@ bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(uint16 Index, int32 Pat
 	return PathDirection == 1 ? Index == (Spline->GetNumberOfSplinePoints() - 1) : Index == 0;
 }
 
-bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(const FVector& ActorLocation, int32 PathDirection, float Tolerance) const
+bool AENTArtificialIntelligencePath::IsAtTheEndOfThePath(const FVector& ActorLocation, float ActorHeight, int32 PathDirection, float Tolerance) const
 {
 	FVector StartLocation = GetStartTransform(PathDirection).GetLocation();
 	FVector EndLocation = GetEndTransform(PathDirection).GetLocation();
 
-	StartLocation += GetDirection() * -1 * SplineHeight;
-	EndLocation += GetDirection() * -1 * SplineHeight;
+	StartLocation += GetDirection() * -1;
+	EndLocation += GetDirection() * -1;
 
-	if (PathDirection == -1 && ActorLocation.Equals(StartLocation, Tolerance))
+	FVector ActorLocationCopy = ActorLocation;
+	ActorLocationCopy += GetDirection() * ActorHeight;
+
+#if WITH_EDITORONLY_DATA
+	if (bShowTraces)
+	{
+		UKismetSystemLibrary::DrawDebugPoint(this, StartLocation, 5.0f, FLinearColor::Blue, 0.0f);
+		UKismetSystemLibrary::DrawDebugPoint(this, EndLocation, 5.0f, FLinearColor::Blue, 0.0f);
+
+		UKismetSystemLibrary::DrawDebugPoint(this, ActorLocationCopy, 5.0f, FLinearColor::Yellow, 0.0f);
+	}
+#endif
+
+	if (PathDirection == -1 && ActorLocationCopy.Equals(StartLocation, Tolerance))
 	{
 		return true;
 	}
-	else if (PathDirection == 1 && ActorLocation.Equals(EndLocation, Tolerance))
+	else if (PathDirection == 1 && ActorLocationCopy.Equals(EndLocation, Tolerance))
 	{
 		return true;
 	}

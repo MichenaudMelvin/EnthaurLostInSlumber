@@ -147,7 +147,7 @@ public:
 
 	bool IsAtTheEndOfThePath(uint16 Index, int32 PathDirection) const;
 
-	bool IsAtTheEndOfThePath(const FVector& ActorLocation, int32 PathDirection, float Tolerance) const;
+	bool IsAtTheEndOfThePath(const FVector& ActorLocation, float ActorHeight, int32 PathDirection, float Tolerance) const;
 
 	USplineComponent* GetSpline() const {return Spline;}
 
@@ -248,6 +248,9 @@ protected:
 #if WITH_EDITORONLY_DATA
 
 protected:
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bShowTraces = false;
+
 	UPROPERTY(EditInstanceOnly, Transient, Category = "Debug")
 	bool bShowDebugMesh = false;
 

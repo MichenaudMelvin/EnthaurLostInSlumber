@@ -10,6 +10,7 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Parasite/ENTParasitePawn.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Debug/ENTArrowActor.h"
@@ -75,7 +76,15 @@ EBTNodeResult::Type UENTLookAt::ExecuteTask(UBehaviorTreeComponent& OwnerComp, u
 		}
 
 		FVector Direction = TargetLookAt - CurrentPawn->GetActorLocation();
-		TargetRotation = FRotationMatrix::MakeFromZX(CurrentPawn->GetActorUpVector(), Direction).Rotator();
+
+		FVector UpVector = CurrentPawn->GetActorUpVector();
+		AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
+		if (ParasitePawn)
+		{
+			UpVector = ParasitePawn->GetParasiteUpVector();
+		}
+
+		TargetRotation = FRotationMatrix::MakeFromZX(UpVector, Direction).Rotator();
 
 #if WITH_EDITORONLY_DATA
 		if (bDebugTask)
@@ -100,6 +109,9 @@ EBTNodeResult::Type UENTLookAt::ExecuteTask(UBehaviorTreeComponent& OwnerComp, u
 		TargetRotation.Pitch = 0;
 	}
 
+	FQuat Quat = TargetRotation.Quaternion() * RotationOffset.Quaternion();
+	TargetRotation = Quat.Rotator();
+
 	if (bInstantRotation)
 	{
 		if (bUseControlRotation)
@@ -108,7 +120,7 @@ EBTNodeResult::Type UENTLookAt::ExecuteTask(UBehaviorTreeComponent& OwnerComp, u
 		}
 		else
 		{
-			CurrentPawn->SetActorRotation(TargetRotation, ETeleportType::None);
+			CurrentPawn->SetActorRotation(TargetRotation);
 		}
 
 		return EBTNodeResult::Succeeded;
@@ -155,7 +167,7 @@ void UENTLookAt::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, 
 	}
 	else
 	{
-		CurrentPawn->SetActorRotation(ResultRotation, ETeleportType::None);
+		CurrentPawn->SetActorRotation(ResultRotation);
 	}
 
 	if (!TargetRotation.Equals(ResultRotation, RotationTolerance))
