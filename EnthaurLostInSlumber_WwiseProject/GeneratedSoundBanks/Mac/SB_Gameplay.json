@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{6E9B2214-5241-DC7B-BCC0-7E3BB0C7CCF5}",
+    "Hash": "{C422AA3F-D928-F60E-3E6C-3432B022F89E}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -207,6 +207,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Electricity_Layer_03.wav",
       "CachePath": "D4/{D4C263BE-0141-B0E9-41C7-FA926DC1CB4D}.wem"
+     },
+     {
+      "Id": "158492748",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Musical, Loop, Guitar And Bass Loop, Pop SND84988.wav",
+      "CachePath": "BD/{BD273072-03DA-4EB8-8430-FC86DEFFF9D9}.wem"
      },
      {
       "Id": "171841650",
@@ -1973,9 +1981,12 @@
       "GUID": "{922BABEE-EE53-4991-B186-0D61FAD7D05D}",
       "Color": "10",
       "MaxAttenuation": "5000",
-      "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "158492748"
+       }
+      ]
      },
      {
       "Id": "2275903284",
@@ -2133,6 +2144,6 @@
     ]
    }
   ],
-  "FileHash": "{0AD36ADD-D654-74EC-F42A-EBC790773AE5}"
+  "FileHash": "{98FBEFCA-1808-D4B2-D204-6E37BF83C421}"
  }
 }
