@@ -75,7 +75,10 @@ protected:
 	float AmberAnimSpeed = 1.5f;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Amber")
-	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
+	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactiveFull;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Amber")
+	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactiveEmpty;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
 	TObjectPtr<UAkAudioEvent> GrowlNoise;
@@ -130,7 +133,12 @@ protected:
 
 	FTimeline FoliageTimeline;
 
-	void TriggerLinkedObjects();
+	void TriggerLinkedObjects(TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive);
+
+	void TriggerFullLinkedObjects();
+	
+	void TriggerEmptyLinkedObjects();
+
 
 	UFUNCTION()
 	void FoliageGrowthUpdate(float Alpha);
