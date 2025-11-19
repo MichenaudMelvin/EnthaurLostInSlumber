@@ -6,6 +6,7 @@
 #include "AkGameplayStatics.h"
 #include "Components/BoxComponent.h"
 #include "ENTInteractableComponent.h"
+#include "IDetailTreeNode.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "GameElements/ENTNerveReceptacle.h"
 #include "GameElements/ENTWeakZone.h"
@@ -216,7 +217,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		if (!LinkedWeakZone) return;
 		LinkedWeakZone->CureZone(this);
 		FoliageTimeline.Play();
-		TriggerLinkedObjects();
+		TriggerFullLinkedObjects();
 		return;
 	}
 
@@ -234,7 +235,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 	AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 	Character->MineAmber(AmberType, 1);
 	TargetAmberHeight = EmptyAmberHeight;
-
+	TriggerEmptyLinkedObjects();
 	bIsEmpty = !bIsEmpty;
 
 }
@@ -260,7 +261,7 @@ void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
 	Foliage->MarkRenderStateDirty();
 }
 
-void AENTAmberOre::TriggerLinkedObjects()
+void AENTAmberOre::TriggerLinkedObjects(TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive)
 {
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
@@ -286,6 +287,16 @@ void AENTAmberOre::TriggerLinkedObjects()
 			}
 		}
 	}
+}
+
+void AENTAmberOre::TriggerFullLinkedObjects()
+{
+	TriggerLinkedObjects(ObjectReactiveFull);
+}
+
+void AENTAmberOre::TriggerEmptyLinkedObjects()
+{
+	TriggerLinkedObjects(ObjectReactiveEmpty);
 }
 
 FENTGameElementData& AENTAmberOre::SaveGameElement(UENTWorldSave* CurrentWorldSave)
