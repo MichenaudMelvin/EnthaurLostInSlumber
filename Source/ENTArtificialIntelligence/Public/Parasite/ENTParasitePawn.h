@@ -98,6 +98,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName ChaseSpeedKeyName = "ChaseSpeed";
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName DetectionRangeKeyName = "DetectionRange";
+
 #pragma endregion
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
@@ -120,8 +123,64 @@ protected:
 
 	virtual void PossessedBy(AController* NewController) override;
 
+#pragma region DetectionRange
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Detection Range", meta = (Units = cm, ClampMin = 0.0f))
+	float DefaultDetectionRange = 1000.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Detection Range", meta = (Units = cm, ClampMin = 0.0f))
+	float AugmentedDetectionRange = 5000.0f;
+
+#if WITH_EDITOR
+	bool bDebugDetectionRange;
+
+	/**
+	 * @brief Call this in a tick to display the detection range; Editor Only
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Detection Range", meta = (DevelopmentOnly))
+	void DrawDetectionRange() const;
+#endif
+
+public:
+	void ChangeDetectionRange(bool bDoesPlayerHaveAmber);
+
+#pragma endregion
+
+#pragma region ParasiteAttack
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Attack")
+	float AttackDamages = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	FVector AttackLocation = FVector(0.0f, 300.0f, 100.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	FVector AttackSize = FVector(100.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectsToAttack;
+
+#if WITH_EDITORONLY_DATA
+	static FVector DebugAttackLocation;
+
+	static FVector DebugAttackSize;
+#endif
+
+	UFUNCTION(BlueprintCallable, Category = "AI|Attack")
+	void Attack();
+
 	UFUNCTION()
 	void EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	/**
+	 * @brief For debug purposes only
+	 */
+	UFUNCTION(BlueprintCallable, Category = "AI|Attack", meta = (DevelopmentOnly))
+	static void DebugAttackZone(const UObject* WorldContextObject);
+
+#pragma endregion
 
 #if WITH_EDITORONLY_DATA
 	virtual void DebugPawn() const override;
@@ -214,6 +273,20 @@ public:
 	virtual bool HasReceivedLoadingRequest() const override {return bHasReceivedLoadingRequest;}
 
 	virtual const FENTAIData& GetLoadingData() const override {return LoadingData;}
+
+#pragma endregion
+
+#pragma region DebugSelection
+
+#if WITH_EDITORONLY_DATA
+protected:
+	void OnSelectionUpdate(UObject* Object);
+
+	void ClearDebugTraces() const;
+
+	bool SelectedInEditor = false;
+
+#endif
 
 #pragma endregion
 };

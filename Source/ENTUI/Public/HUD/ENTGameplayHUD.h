@@ -44,10 +44,8 @@ protected:
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Deletages")
 	FOnInteractionReady PlayInteractionReadyDelegate;
 
-	int AmberAmount = 0;
-
 	UFUNCTION()
-	void OnAmberUpdate(EAmberType AmberType, int InAmberAmount);
+	void OnAmberUpdate(bool bHasAmber);
 
 public:
 	UFUNCTION()

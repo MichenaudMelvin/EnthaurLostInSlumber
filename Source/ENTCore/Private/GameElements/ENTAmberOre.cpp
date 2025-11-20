@@ -6,7 +6,6 @@
 #include "AkGameplayStatics.h"
 #include "Components/BoxComponent.h"
 #include "ENTInteractableComponent.h"
-#include "IDetailTreeNode.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "GameElements/ENTNerveReceptacle.h"
 #include "GameElements/ENTWeakZone.h"
@@ -192,10 +191,10 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 	{
 		return;
 	}
-	
+
 	if (bIsEmpty)
 	{
-		if (!Character->HasRequiredQuantity(EAmberType::WeakAmber, 1))
+		if (!Character->HasAmber())
 		{
 			return;
 		}
@@ -207,7 +206,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		}
 
 		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
-		Character->UseAmber(AmberType, 1);
+		Character->UseAmber();
 
 		UAkGameplayStatics::PostEventAtLocation(InjectAmberNoise, GetTransform().GetLocation(), GetTransform().GetRotation().Rotator(), this);
 
@@ -220,28 +219,29 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		FoliageTimeline.Play();
 		TriggerFullLinkedObjects();
 		if (LinkedWeakZone) LinkedWeakZone->CureZone(this);
-		return;
 	}
-
-	if (Character->IsAmberTypeFilled(AmberType))
+	else
 	{
-		return;
-	}
+		if (Character->HasAmber())
+		{
+			return;
+		}
 
-	if (Character->GetStateMachine())
-	{
-		// play the spike animation
-		Character->GetStateMachine()->ChangeState(EENTCharacterStateID::Anim);
-	}
+		if (Character->GetStateMachine())
+		{
+			// play the spike animation
+			Character->GetStateMachine()->ChangeState(EENTCharacterStateID::Anim);
+		}
 
-	AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
-	Character->MineAmber(AmberType, 1);
-	TargetAmberHeight = EmptyAmberHeight;
-	Interactable->RemoveInteractable(MeshInteraction);
-	FillAmberTimeline.PlayFromStart();
-	FoliageTimeline.Reverse();
-	TriggerEmptyLinkedObjects();
-	bIsEmpty = !bIsEmpty;
+		AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+		Character->MineAmber();
+		TargetAmberHeight = EmptyAmberHeight;
+		TriggerEmptyLinkedObjects();
+		Interactable->RemoveInteractable(MeshInteraction);
+		FillAmberTimeline.PlayFromStart();
+		FoliageTimeline.Reverse();
+		bIsEmpty = !bIsEmpty;
+	}
 }
 
 void AENTAmberOre::FillAmberUpdate(float Alpha)

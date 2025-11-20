@@ -16,13 +16,6 @@ class UBoxComponent;
 
 class UENTInteractableComponent;
 
-UENUM()
-enum class EAmberType : uint8
-{
-	NecroseAmber,
-	WeakAmber
-};
-
 UCLASS()
 class ENTCORE_API AENTAmberOre : public AActor, public IENTSaveGameElementInterface
 {
@@ -58,9 +51,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UStaticMesh> SourceMesh;
-
-	UPROPERTY()
-	EAmberType AmberType = EAmberType::WeakAmber;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	float EmptyAmberHeight = 0.0f;
