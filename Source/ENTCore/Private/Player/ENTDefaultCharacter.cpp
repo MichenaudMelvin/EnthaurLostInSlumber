@@ -65,17 +65,11 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 	FootstepsSounds->SetupAttachment(RootComponent);
 
 	HealthComponent = CreateDefaultSubobject<UENTHealthComponent>("Health");
-
-	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 3);
-	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 1);
 }
 
 void AENTDefaultCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	AmberInventory.Add(EAmberType::NecroseAmber, 0);
-	AmberInventory.Add(EAmberType::WeakAmber, 0);
 
 	if (PostProcessComp && SpeedEffectMaterialReference)
 	{
@@ -430,8 +424,6 @@ void AENTDefaultCharacter::AboveActor(AActor* ActorBellow)
 
 #pragma endregion
 
-#pragma region Amber
-
 void AENTDefaultCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
@@ -442,21 +434,17 @@ void AENTDefaultCharacter::OnExitWeakZone_Implementation()
 	IENTWeakZoneInterface::OnExitWeakZone_Implementation();
 }
 
-void AENTDefaultCharacter::MineAmber(const EAmberType& AmberType, const int Amount)
-{
-	int* Count = AmberInventory.Find(AmberType);
-	int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
+#pragma region Amber
 
-	// Count == nullptr means AmberType key doesn't exist
-	if (!Count || !MaxCapacity)
+void AENTDefaultCharacter::MineAmber()
+{
+	if (bHasAmber)
 	{
 		return;
 	}
 
-	*Count += Amount;
-	*Count = FMath::Clamp(*Count, 0.0f, *MaxCapacity);
-
-	OnAmberUpdate.Broadcast(AmberType, *Count);
+	bHasAmber = true;
+	OnAmberUpdate.Broadcast(bHasAmber);
 
 	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
@@ -464,41 +452,26 @@ void AENTDefaultCharacter::MineAmber(const EAmberType& AmberType, const int Amou
 		return;
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Empty(AmberInventory.Num());
-	for (const TTuple<EAmberType, int>& Element : AmberInventory)
-	{
-		PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Add(static_cast<uint8>(Element.Key), Element.Value);
-	}
+	PlayerSaveSubsystem->GetPlayerSave()->bHasAmber = bHasAmber;
 }
 
-void AENTDefaultCharacter::UseAmber(const EAmberType& AmberType, const int Amount)
+void AENTDefaultCharacter::UseAmber()
 {
-	MineAmber(AmberType, -Amount);
-}
-
-bool AENTDefaultCharacter::IsAmberTypeFilled(const EAmberType& AmberType) const
-{
-	const int* Count = AmberInventory.Find(AmberType);
-	const int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
-
-	if (!Count || !MaxCapacity)
+	if (!bHasAmber)
 	{
-		return false;
+		return;
 	}
 
-	return *Count == *MaxCapacity;
-}
+	bHasAmber = false;
+	OnAmberUpdate.Broadcast(bHasAmber);
 
-bool AENTDefaultCharacter::HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const
-{
-	const int* Count = AmberInventory.Find(AmberType);
-
-	if (!Count)
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
 	{
-		return false;
+		return;
 	}
 
-	return *Count >= Quantity;
+	PlayerSaveSubsystem->GetPlayerSave()->bHasAmber = bHasAmber;
 }
 
 #if WITH_EDITOR
@@ -656,16 +629,8 @@ void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElemen
 	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
 	StateMachine->ChangeState(static_cast<EENTCharacterStateID>(SaveData->CurrentState));
 
-	AmberInventory.Empty(SaveData->AmberInventory.Num());
-	for (const TTuple<uint8, int>& Element : SaveData->AmberInventory)
-	{
-		AmberInventory.Add(static_cast<EAmberType>(Element.Key), Element.Value);
-	}
-
-	for (const TTuple<EAmberType, int>& Element : AmberInventory)
-	{
-		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
-	}
+	bHasAmber = SaveData->bHasAmber;
+	OnAmberUpdate.Broadcast(bHasAmber);
 }
 
 #pragma endregion
