@@ -52,7 +52,10 @@ void AENTNerveReceptacle::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Collision->OnComponentBeginOverlap.AddDynamic(this, &AENTNerveReceptacle::TriggerEnter);
+	if (!Collision->OnComponentBeginOverlap.IsAlreadyBound(this, &AENTNerveReceptacle::TriggerEnter))
+	{
+		Collision->OnComponentBeginOverlap.AddDynamic(this, &AENTNerveReceptacle::TriggerEnter);
+	}
 
 	NerveEndTargetTransform *= GetActorTransform();
 
