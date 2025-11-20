@@ -1127,11 +1127,6 @@ IR Pre-delay: 8ms
 IR Pre-delay: 6ms </Comment>
 							<PropertyList>
 								<Property Name="IRConvolutionStop" Type="Real64" Value="0.9055"/>
-								<Property Name="IRConvolutionThreshold" Type="Real32">
-									<ValueList>
-										<Value>-75</Value>
-									</ValueList>
-								</Property>
 								<Property Name="IRLRMix" Type="Real32">
 									<ValueList>
 										<Value>5</Value>

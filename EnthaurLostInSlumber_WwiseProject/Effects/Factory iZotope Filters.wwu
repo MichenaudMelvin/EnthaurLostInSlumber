@@ -2,6 +2,13 @@
 <WwiseDocument Type="WorkUnit" ID="{69E63F95-6DEA-446E-9EE0-8683389E45B4}" SchemaVersion="123">
 	<Effects>
 		<WorkUnit Name="Factory iZotope Filters" ID="{69E63F95-6DEA-446E-9EE0-8683389E45B4}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Inclusion" Type="bool">
+					<ValueList>
+						<Value>False</Value>
+					</ValueList>
+				</Property>
+			</PropertyList>
 			<ChildrenList>
 				<Effect Name="Next_Door" ID="{CFFD84D4-8C2A-43FD-A701-0E5524FD7C8C}" PluginName="iZotope Trash Filters" CompanyID="259" PluginID="6" PluginType="3">
 					<PropertyList>

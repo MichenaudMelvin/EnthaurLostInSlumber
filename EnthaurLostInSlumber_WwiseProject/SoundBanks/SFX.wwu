@@ -30,7 +30,6 @@
 						</Property>
 					</PropertyList>
 					<ObjectInclusionList>
-						<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Gameplay" ID="{F516DF05-C518-4EB3-B745-E735EF7FDCFE}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
