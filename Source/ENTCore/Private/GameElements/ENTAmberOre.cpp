@@ -81,12 +81,19 @@ void AENTAmberOre::BeginPlay()
 #endif
 
 	FOnTimelineFloat UpdateEvent;
+	FOnTimelineEvent FinishedEvent;
 
 	UpdateEvent.BindDynamic(this, &AENTAmberOre::FoliageGrowthUpdate);
 	FoliageTimeline.AddInterpFloat(FoliageGrowthCurve, UpdateEvent);
 	FoliageTimeline.SetPlayRate(1 / GrowthDuration);
 
 	UpdateEvent.Unbind();
+
+	UpdateEvent.BindDynamic(this, &AENTAmberOre::FillAmberUpdate);
+	FinishedEvent.BindDynamic(this, &AENTAmberOre::FillAmberFinished);
+	FillAmberTimeline.AddInterpFloat(FillAmberCurve, UpdateEvent);
+	FillAmberTimeline.SetPlayRate(1 / FillAmberDuration);
+	FillAmberTimeline.SetTimelineFinishedFunc(FinishedEvent);
 }
 
 void AENTAmberOre::OnConstruction(const FTransform& Transform)
@@ -169,14 +176,8 @@ void AENTAmberOre::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	FVector CurrentLocation = AmberMesh->GetRelativeLocation();
-	FVector TargetLocation = FVector(0.0f, 0.0f, TargetAmberHeight);
-	float Alpha = DeltaSeconds * AmberAnimSpeed;
-
-	FVector ResultLocation = UKismetMathLibrary::VLerp(CurrentLocation, TargetLocation, Alpha);
-	AmberMesh->SetRelativeLocation(ResultLocation);
-
 	FoliageTimeline.TickTimeline(DeltaSeconds);
+	FillAmberTimeline.TickTimeline(DeltaSeconds);
 }
 
 void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
@@ -211,13 +212,14 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		UAkGameplayStatics::PostEventAtLocation(InjectAmberNoise, GetTransform().GetLocation(), GetTransform().GetRotation().Rotator(), this);
 
 		TargetAmberHeight = FullAmberHeight;
+		Interactable->RemoveInteractable(MeshInteraction);
+		FillAmberTimeline.PlayFromStart();
 		bIsEmpty = !bIsEmpty;
 
 		UAkGameplayStatics::PostEventAtLocation(FoliageGrowthNoise, GetTransform().GetLocation(),GetTransform().Rotator(), this);
-		if (!LinkedWeakZone) return;
-		LinkedWeakZone->CureZone(this);
 		FoliageTimeline.Play();
 		TriggerFullLinkedObjects();
+		if (LinkedWeakZone) LinkedWeakZone->CureZone(this);
 		return;
 	}
 
@@ -235,10 +237,28 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 	AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 	Character->MineAmber(AmberType, 1);
 	TargetAmberHeight = EmptyAmberHeight;
+	Interactable->RemoveInteractable(MeshInteraction);
+	FillAmberTimeline.PlayFromStart();
+	FoliageTimeline.Reverse();
 	TriggerEmptyLinkedObjects();
 	bIsEmpty = !bIsEmpty;
-
 }
+
+void AENTAmberOre::FillAmberUpdate(float Alpha)
+{
+	FVector CurrentLocation = AmberMesh->GetRelativeLocation();
+	FVector TargetLocation = FVector(0.0f, 0.0f, TargetAmberHeight);
+
+	FVector ResultLocation = FMath::Lerp(CurrentLocation, TargetLocation, Alpha);
+	AmberMesh->SetRelativeLocation(ResultLocation);
+}
+
+void AENTAmberOre::FillAmberFinished()
+{
+	Interactable->AddInteractable(MeshInteraction);
+	return;
+}
+
 
 void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
 {

@@ -56,10 +56,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UAkComponent> AmberOreNoises;
 
-	UPROPERTY(EditAnywhere, Category = "Amber")
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UStaticMesh> SourceMesh;
 
-	UPROPERTY(EditAnywhere, Category = "Amber")
+	UPROPERTY()
 	EAmberType AmberType = EAmberType::WeakAmber;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
@@ -70,9 +70,6 @@ protected:
 
 	UPROPERTY()
 	float TargetAmberHeight;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Amber")
-	float AmberAnimSpeed = 1.5f;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Amber")
 	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactiveFull;
@@ -92,8 +89,22 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Weak Zone")
 	TObjectPtr<AENTWeakZone> LinkedWeakZone;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	TObjectPtr<UCurveFloat> FillAmberCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber", meta = (Units = s))
+	float FillAmberDuration = 1.5f;
+
+	FTimeline FillAmberTimeline;
+
 	UFUNCTION()
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
+	UFUNCTION()
+	void FillAmberUpdate(float Alpha);
+
+	UFUNCTION()
+	void FillAmberFinished();
 
 #pragma region Foliage
 
