@@ -27,7 +27,7 @@ class UENTCharacterState;
 enum class EENTCharacterStateID : uint8;
 class UCameraComponent;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberType, int, AmberAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKOnAmberUpdate, bool, bHasAmber);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKOnRespawn);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractionFeedback, bool, bCanInteract);
 
@@ -202,34 +202,29 @@ protected:
 
 #pragma endregion
 
+protected:
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
+
 #pragma region Amber
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Amber")
-	TMap<EAmberType, int> AmberInventory;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Amber")
-	TMap<EAmberType, int> AmberInventoryMaxCapacity;
+	bool bHasAmber = false;
 
 public:
 	UPROPERTY(BlueprintAssignable, Category = "Amber")
 	FKOnAmberUpdate OnAmberUpdate;
 
-	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+	UFUNCTION(BlueprintCallable, Category = "Amber")
+	void MineAmber();
 
-	virtual void OnExitWeakZone_Implementation() override;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
-	void MineAmber(const EAmberType& AmberType, const int Amount);
-
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
-	void UseAmber(const EAmberType& AmberType, const int Amount);
+	UFUNCTION(BlueprintCallable, Category = "Amber")
+	void UseAmber();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
-	bool IsAmberTypeFilled(const EAmberType& AmberType) const;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
-	bool HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const;
+	bool HasAmber() const {return bHasAmber;}
 
 #if WITH_EDITOR
 private:

@@ -49,10 +49,15 @@ void UENTOptionsMenu::NativeOnInitialized()
 	{
 		ViewBobbingCheckbox->OnCheckBoxStateChanged.AddDynamic(this, &UENTOptionsMenu::OnViewBobbingCheckBoxClicked);
 	}
-	if (ViewControlsButton && ViewControlsButton->GetCustomButton())
+	if (ControlsButton && ControlsButton->GetCustomButton())
 	{
-		ViewControlsButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnViewControlsButtonHovered);
-		ViewControlsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnViewControlsButtonClicked);
+		ControlsButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnViewControlsButtonHovered);
+		ControlsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnViewControlsButtonClicked);
+	}
+	if (GammaButton && GammaButton->GetCustomButton())
+	{
+		GammaButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnGammaButtonHovered);
+		GammaButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnGammaButtonClicked);
 	}
 
 	if (ResetButton && ResetButton->GetCustomButton())
@@ -120,10 +125,15 @@ void UENTOptionsMenu::BeginDestroy()
 	{
 		ViewBobbingCheckbox->OnCheckBoxStateChanged.RemoveDynamic(this, &UENTOptionsMenu::OnViewBobbingCheckBoxClicked);
 	}
-	if (ViewControlsButton && ViewControlsButton->GetCustomButton())
+	if (ControlsButton && ControlsButton->GetCustomButton())
 	{
-		ViewControlsButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnViewControlsButtonHovered);
-		ViewControlsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnViewControlsButtonClicked);
+		ControlsButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnViewControlsButtonHovered);
+		ControlsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnViewControlsButtonClicked);
+	}
+	if (GammaButton && GammaButton->GetCustomButton())
+	{
+		GammaButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnGammaButtonHovered);
+		GammaButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnGammaButtonClicked);
 	}
 
 	if (ResetButton && ResetButton->GetCustomButton())
@@ -187,7 +197,7 @@ void UENTOptionsMenu::OnViewControlsButtonHovered()
 	if (OptionTitle && OptionDescription)
 	{
 		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "View Controls"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "View the available control schemes."));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "View the current selected control schemes."));
 	}
 }
 
@@ -200,6 +210,26 @@ void UENTOptionsMenu::OnViewControlsButtonClicked()
 	}
 
 	MenuManager->OpenMenu(MenuManager->GetControlsMenu(), false);
+}
+
+void UENTOptionsMenu::OnGammaButtonHovered()
+{
+	if (OptionTitle && OptionDescription)
+	{
+		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Gamma"));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the displayed gamma intensity."));
+	}
+}
+
+void UENTOptionsMenu::OnGammaButtonClicked()
+{
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+	
+	MenuManager->OpenMenu(MenuManager->GetGammaMenu(), false);
 }
 
 void UENTOptionsMenu::OnOverallSliderChanged(float InValue)
