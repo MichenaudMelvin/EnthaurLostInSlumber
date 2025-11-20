@@ -190,10 +190,10 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 	{
 		return;
 	}
-	
+
 	if (bIsEmpty)
 	{
-		if (!Character->HasRequiredQuantity(EAmberType::WeakAmber, 1))
+		if (!Character->HasAmber())
 		{
 			return;
 		}
@@ -205,7 +205,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		}
 
 		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
-		Character->UseAmber(AmberType, 1);
+		Character->UseAmber();
 
 		UAkGameplayStatics::PostEventAtLocation(InjectAmberNoise, GetTransform().GetLocation(), GetTransform().GetRotation().Rotator(), this);
 
@@ -217,26 +217,26 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		LinkedWeakZone->CureZone(this);
 		FoliageTimeline.Play();
 		TriggerFullLinkedObjects();
-		return;
 	}
-
-	if (Character->IsAmberTypeFilled(AmberType))
+	else
 	{
-		return;
+		if (Character->HasAmber())
+		{
+			return;
+		}
+
+		if (Character->GetStateMachine())
+		{
+			// play the spike animation
+			Character->GetStateMachine()->ChangeState(EENTCharacterStateID::Anim);
+		}
+
+		AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+		Character->MineAmber();
+		TargetAmberHeight = EmptyAmberHeight;
+		TriggerEmptyLinkedObjects();
+		bIsEmpty = !bIsEmpty;
 	}
-
-	if (Character->GetStateMachine())
-	{
-		// play the spike animation
-		Character->GetStateMachine()->ChangeState(EENTCharacterStateID::Anim);
-	}
-
-	AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
-	Character->MineAmber(AmberType, 1);
-	TargetAmberHeight = EmptyAmberHeight;
-	TriggerEmptyLinkedObjects();
-	bIsEmpty = !bIsEmpty;
-
 }
 
 void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
