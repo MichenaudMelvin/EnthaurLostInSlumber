@@ -6,7 +6,6 @@
 #include "AkGameplayStatics.h"
 #include "Components/BoxComponent.h"
 #include "ENTInteractableComponent.h"
-#include "IDetailTreeNode.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "GameElements/ENTNerveReceptacle.h"
 #include "GameElements/ENTWeakZone.h"
