@@ -21,7 +21,7 @@ public:
 	uint8 CurrentState = 0;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Amber")
-	TMap<uint8, int> AmberInventory;
+	bool bHasAmber;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Lantern")
 	bool bIsLanternActive = false;

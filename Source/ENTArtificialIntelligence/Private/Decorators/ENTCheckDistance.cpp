@@ -136,6 +136,6 @@ FString UENTCheckDistance::GetStaticDescription() const
 		break;
 	}
 
-	return FString::Printf(TEXT("Is distance between OwnerPawn and %s is %s %scm"), *KeyDesc, *CheckMethodStr, *Distance.ToString());
+	return FString::Printf(TEXT("Is distance between OwnerPawn and %s is %s %s cm"), *KeyDesc, *CheckMethodStr, *Distance.ToString());
 }
 #endif
