@@ -11,7 +11,7 @@
     "GUID": "{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}",
     "Color": "11",
     "Language": "SFX",
-    "Hash": "{6901E3AB-76B6-E6C0-A1F8-D19B9E358DEE}",
+    "Hash": "{98D6E414-32BB-E3C8-D7F0-42CF4FAD3D9E}",
     "ObjectPath": "\\SoundBanks\\Effects\\SB_Effects",
     "ShortName": "SB_Effects",
     "Path": "SB_Effects.bnk",
@@ -134,7 +134,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
-      "CachePath": "D5/{D5F33872-699E-0093-2BA8-B9D6EF7E82C6}.wem"
+      "CachePath": "3F/{3F5D2936-B639-02BB-E5E1-557D92F48FB6}.wem"
      },
      {
       "Id": "101091315",
@@ -5607,7 +5607,14 @@
       "Id": "348963605",
       "Name": "Reverb",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
-      "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+      "GUID": "{06B51433-C685-4945-9920-67B617503E73}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3077109135"
+        }
+       ]
+      }
      }
     ],
     "GameParameters": [
@@ -5632,6 +5639,6 @@
     ]
    }
   ],
-  "FileHash": "{C9E0F911-C696-DD54-A897-061CAE97771E}"
+  "FileHash": "{45325FE8-51C6-C9E7-7E43-BF345E026623}"
  }
 }

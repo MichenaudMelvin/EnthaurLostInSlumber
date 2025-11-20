@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{6E427686-A9E5-3164-8A9F-CDB18831A498}",
+    "Hash": "{F1D0E417-2F35-A881-5E4C-85D088DFA9AF}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -25,12 +25,36 @@
       "CachePath": "BB/{BB0A6E73-ABDD-609F-7BAE-8EDD1B3115A2}.wem"
      },
      {
+      "Id": "11382112",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_07.wav",
+      "CachePath": "57/{57F04120-F0D7-AA67-FFA1-127ACBDCBB37}.wem"
+     },
+     {
       "Id": "16378350",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_NerveReceptacle_Activate_01.wav",
       "CachePath": "06/{06FB8849-73BC-D99A-3D7F-2F3F433BFAB6}.wem"
+     },
+     {
+      "Id": "20295217",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Detection_01.wav",
+      "CachePath": "4E/{4E9A646F-9297-8EC7-1BDE-CCFE7FBFF67D}.wem"
+     },
+     {
+      "Id": "20535296",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_12.wav",
+      "CachePath": "AB/{AB741B67-ACF9-CA90-3F78-7AE652F8ECB1}.wem"
      },
      {
       "Id": "21354617",
@@ -71,6 +95,14 @@
       "Location": "Memory",
       "ShortName": "MC_Jump_Muscle_02.wav",
       "CachePath": "95/{95884507-24CE-44C9-9E6B-2F33181F835E}.wem"
+     },
+     {
+      "Id": "36785829",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_09.wav",
+      "CachePath": "5F/{5F63E43A-D8AC-C77C-D33E-E04DFE4F7C7D}.wem"
      },
      {
       "Id": "43894004",
@@ -121,6 +153,38 @@
       "CachePath": "74/{7400DAF5-9ECD-1BF0-5D54-60B374FDA76B}.wem"
      },
      {
+      "Id": "71491815",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_12.wav",
+      "CachePath": "B0/{B0BA6D33-BCB5-FD6C-CBBE-6CF9DF654510}.wem"
+     },
+     {
+      "Id": "71602376",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Run_06.wav",
+      "CachePath": "D6/{D64A74B0-5F67-A787-2899-2A5EB57918B9}.wem"
+     },
+     {
+      "Id": "94886772",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_03.wav",
+      "CachePath": "22/{22391EF9-965B-72E0-2803-56A022EE3834}.wem"
+     },
+     {
+      "Id": "100845485",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_21.wav",
+      "CachePath": "E6/{E6C08014-E8A0-F436-D8F9-1F40B52F6D45}.wem"
+     },
+     {
       "Id": "102806602",
       "Language": "SFX",
       "Streaming": "false",
@@ -135,6 +199,22 @@
       "Location": "Memory",
       "ShortName": "SFX_Wind_Speed_Low.wav",
       "CachePath": "AF/{AFC7A4B9-13AC-1709-5A22-04B262ED8D08}.wem"
+     },
+     {
+      "Id": "116395768",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_02.wav",
+      "CachePath": "57/{57A99589-5546-F63D-3A84-19530A5A1AF6}.wem"
+     },
+     {
+      "Id": "118428179",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_03.wav",
+      "CachePath": "50/{50FEDF03-5FAD-7EE9-9ABC-FA6D0E7798AA}.wem"
      },
      {
       "Id": "119173871",
@@ -281,6 +361,14 @@
       "CachePath": "53/{53B850F3-4003-C3A2-1C66-BEAE860FDB5F}.wem"
      },
      {
+      "Id": "236700595",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Scream_Foley.wav",
+      "CachePath": "BD/{BDC85490-3488-D5DD-B1E0-8F01F92E2895}.wem"
+     },
+     {
       "Id": "239007564",
       "Language": "SFX",
       "Streaming": "false",
@@ -289,12 +377,36 @@
       "CachePath": "C5/{C5C5CEB7-8E6F-671E-56F2-0F32E611EEA3}.wem"
      },
      {
+      "Id": "239633529",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_14.wav",
+      "CachePath": "B1/{B1C8EC13-7A59-741B-0E0E-A33337ADF909}.wem"
+     },
+     {
       "Id": "251580194",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_NerveDoor_Layer_Gore_01.wav",
       "CachePath": "0D/{0D479D43-B41C-862C-76C2-72501D8A01DA}.wem"
+     },
+     {
+      "Id": "252236552",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_23.wav",
+      "CachePath": "61/{610BFCC7-96ED-CFEF-967B-71A182100625}.wem"
+     },
+     {
+      "Id": "253185703",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_08.wav",
+      "CachePath": "6B/{6B10963D-1642-DF5B-F6A7-0AE4FAB3E869}.wem"
      },
      {
       "Id": "256986239",
@@ -313,6 +425,14 @@
       "CachePath": "FB/{FB4DAB97-BE21-1B8A-80ED-8C4E1FBB2B44}.wem"
      },
      {
+      "Id": "264612751",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_09.wav",
+      "CachePath": "67/{67A8489B-5591-E783-0C56-912D3312246C}.wem"
+     },
+     {
       "Id": "294036953",
       "Language": "SFX",
       "Streaming": "false",
@@ -327,6 +447,14 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveDoor_Layer_Gore02_02.wav",
       "CachePath": "EB/{EB0451B1-D6CB-EDF7-4BFC-D9F6118B8695}.wem"
+     },
+     {
+      "Id": "309109281",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_27.wav",
+      "CachePath": "BE/{BE0096F6-0CD4-4562-6E81-F81FF8DB1A13}.wem"
      },
      {
       "Id": "310414559",
@@ -369,6 +497,22 @@
       "CachePath": "B1/{B1C60212-0B42-3005-DDD1-CA2F2ED2EA6D}.wem"
      },
      {
+      "Id": "359119428",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_06.wav",
+      "CachePath": "4E/{4E05C78F-AA06-FE50-6A06-F4AC9B787C91}.wem"
+     },
+     {
+      "Id": "368998509",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_05.wav",
+      "CachePath": "9D/{9DB1E9E9-8C99-D64E-A2EE-7389839E3024}.wem"
+     },
+     {
       "Id": "388414790",
       "Language": "SFX",
       "Streaming": "false",
@@ -385,6 +529,14 @@
       "CachePath": "DA/{DAF9EADA-13F3-F400-55B3-282C393EF4B8}.wem"
      },
      {
+      "Id": "399521567",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_05.wav",
+      "CachePath": "C7/{C7044B81-7F67-65CC-EFA9-DF12FAA06C4A}.wem"
+     },
+     {
       "Id": "399813874",
       "Language": "SFX",
       "Streaming": "false",
@@ -399,6 +551,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_09.wav",
       "CachePath": "C1/{C18E6E49-6DF9-F306-04A1-E9BAE465DB23}.wem"
+     },
+     {
+      "Id": "412221114",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_29.wav",
+      "CachePath": "84/{84A31265-4147-D1B0-BE13-E9DBC40E581E}.wem"
      },
      {
       "Id": "424464787",
@@ -457,12 +617,36 @@
       "CachePath": "2B/{2BB70A05-224F-D32E-B592-08466B6C5D2C}.wem"
      },
      {
+      "Id": "466718414",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_28.wav",
+      "CachePath": "05/{05BDAFB6-B721-3B27-220A-81F517560B69}.wem"
+     },
+     {
       "Id": "475344315",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_02.wav",
       "CachePath": "E3/{E3D95A9F-A7E6-9E5C-83C4-D2EC845A3A2C}.wem"
+     },
+     {
+      "Id": "478343558",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Run_05.wav",
+      "CachePath": "AF/{AF025AA6-4265-BCF2-BE4F-B9D9489093E7}.wem"
+     },
+     {
+      "Id": "484666369",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Run_04.wav",
+      "CachePath": "3D/{3D2AF41A-BC99-E874-E066-8FB121DE008A}.wem"
      },
      {
       "Id": "489955890",
@@ -489,6 +673,14 @@
       "CachePath": "C9/{C9C8D648-8168-3ACC-6FAF-0D8606B06F8C}.wem"
      },
      {
+      "Id": "500580022",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_15.wav",
+      "CachePath": "AC/{AC073533-D7B1-4D4E-69A2-C6CDE0A23528}.wem"
+     },
+     {
       "Id": "503362199",
       "Language": "SFX",
       "Streaming": "false",
@@ -503,6 +695,14 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveDoor_Layer_Woosh_03.wav",
       "CachePath": "64/{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem"
+     },
+     {
+      "Id": "515842823",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Run_03.wav",
+      "CachePath": "81/{810A665C-CA8C-FADA-7E01-07E200CADAB7}.wem"
      },
      {
       "Id": "523178003",
@@ -537,12 +737,52 @@
       "CachePath": "8E/{8E5B414E-0787-31FF-6400-0EE57234FF98}.wem"
      },
      {
+      "Id": "542035380",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_26.wav",
+      "CachePath": "43/{431B18C9-235C-F082-FB11-30612CDC637C}.wem"
+     },
+     {
+      "Id": "554243730",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_04.wav",
+      "CachePath": "A7/{A7E22C84-B1DC-4106-2545-A61748A19084}.wem"
+     },
+     {
+      "Id": "556495647",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_04.wav",
+      "CachePath": "3E/{3ED9FE83-277D-45E6-31A9-97195130A090}.wem"
+     },
+     {
+      "Id": "558502773",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_16.wav",
+      "CachePath": "8C/{8C9183CC-B617-D899-2653-18D4C3DE1709}.wem"
+     },
+     {
       "Id": "560687928",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_07.wav",
       "CachePath": "B6/{B6886701-968D-F9EC-C9AE-82A0119A92A9}.wem"
+     },
+     {
+      "Id": "565773879",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Move.wav",
+      "CachePath": "C5/{C504D417-AE28-295C-ABE9-AFB060A31264}.wem"
      },
      {
       "Id": "566871023",
@@ -561,12 +801,28 @@
       "CachePath": "A2/{A2B9A493-16F1-BB6C-AC4C-3F502D442526}.wem"
      },
      {
+      "Id": "571972322",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_22.wav",
+      "CachePath": "3B/{3B5DCDC9-21CC-FF60-20AD-2559241D108C}.wem"
+     },
+     {
       "Id": "581644863",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Walk_04.wav",
       "CachePath": "5F/{5F1D13CA-1AC1-402D-E805-C6E0CFEB642B}.wem"
+     },
+     {
+      "Id": "590805685",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Detection_02.wav",
+      "CachePath": "91/{918746D0-0B5E-56BF-FEA3-FA82ED6E6811}.wem"
      },
      {
       "Id": "591463370",
@@ -617,6 +873,22 @@
       "CachePath": "58/{58CFC810-6776-A3E6-6410-1CFD3BD73BB7}.wem"
      },
      {
+      "Id": "599646193",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_19.wav",
+      "CachePath": "3F/{3F7CBF75-23B8-5DC2-6AE4-F31AD79AAC0D}.wem"
+     },
+     {
+      "Id": "599836086",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_20.wav",
+      "CachePath": "3C/{3CFE5813-FBEF-FA1B-AA7F-53F676DF24E0}.wem"
+     },
+     {
       "Id": "600164567",
       "Language": "SFX",
       "Streaming": "false",
@@ -657,6 +929,14 @@
       "CachePath": "C8/{C81ADC3D-6053-2302-4F96-7988E828210F}.wem"
      },
      {
+      "Id": "634870331",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_10.wav",
+      "CachePath": "FB/{FBE783BF-8D4B-9C22-2A2D-EDA66023850F}.wem"
+     },
+     {
       "Id": "636957395",
       "Language": "SFX",
       "Streaming": "false",
@@ -671,6 +951,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_20.wav",
       "CachePath": "4D/{4D290209-3391-1B68-ABF2-5F7C3294BE9B}.wem"
+     },
+     {
+      "Id": "649901891",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_02.wav",
+      "CachePath": "22/{226127A6-3054-9985-252E-9283FB1DF0A4}.wem"
      },
      {
       "Id": "652806483",
@@ -689,6 +977,14 @@
       "CachePath": "5D/{5D8B2E8F-1262-055A-4537-873DE1B6EC7A}.wem"
      },
      {
+      "Id": "655447205",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_13.wav",
+      "CachePath": "5F/{5FB259EF-9B61-7CD3-E485-3FE6FC00B1D3}.wem"
+     },
+     {
       "Id": "659827578",
       "Language": "SFX",
       "Streaming": "false",
@@ -703,6 +999,14 @@
       "Location": "Memory",
       "ShortName": "MC_Cloth_Walk_06.wav",
       "CachePath": "02/{025754D1-C097-2BF8-7D54-AF6B6AD6E0E5}.wem"
+     },
+     {
+      "Id": "660804451",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_18.wav",
+      "CachePath": "45/{4563D13C-51E5-40C2-CD44-37A999EA0F50}.wem"
      },
      {
       "Id": "671171816",
@@ -721,6 +1025,14 @@
       "CachePath": "A5/{A5986033-8F4E-9DD6-DB94-FE7D5E1C8A04}.wem"
      },
      {
+      "Id": "691835590",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Run_02.wav",
+      "CachePath": "E3/{E3B40DF7-516C-BCC5-3BE1-0BFE1006D865}.wem"
+     },
+     {
       "Id": "695514868",
       "Language": "SFX",
       "Streaming": "false",
@@ -737,12 +1049,28 @@
       "CachePath": "52/{52C74C93-E2E9-C67C-49FE-E46B70B1A660}.wem"
      },
      {
+      "Id": "707409760",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_06.wav",
+      "CachePath": "B3/{B3E1E188-07FC-B67A-C0A1-15E6FD720F82}.wem"
+     },
+     {
       "Id": "708400597",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_NerveDoor_Layer_Gore02_01.wav",
       "CachePath": "0C/{0C4F2FF8-84F9-5292-7664-9D39D5421D77}.wem"
+     },
+     {
+      "Id": "721042527",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_01.wav",
+      "CachePath": "10/{10A88E13-FEA8-E99D-0019-973B6DC6B577}.wem"
      },
      {
       "Id": "725331003",
@@ -897,12 +1225,36 @@
       "CachePath": "05/{05362565-F73F-EC7B-365C-49076F99EAEA}.wem"
      },
      {
+      "Id": "863858004",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_11.wav",
+      "CachePath": "59/{59A640DC-DC2A-A8BC-13D1-73B3B29C469E}.wem"
+     },
+     {
+      "Id": "865855631",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_01.wav",
+      "CachePath": "FA/{FAFD30C1-562F-385D-2721-4551B5627799}.wem"
+     },
+     {
       "Id": "881039563",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MC_Cloth_Walk_07.wav",
       "CachePath": "32/{3254FCC8-B77F-9D1A-E0ED-B0E017B78933}.wem"
+     },
+     {
+      "Id": "883660353",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_11.wav",
+      "CachePath": "B8/{B8E3B1C7-FF2D-BB0A-EDB7-15C4E91D2DF3}.wem"
      },
      {
       "Id": "889515880",
@@ -969,12 +1321,28 @@
       "CachePath": "F7/{F707D039-4411-5692-B3E9-80C07A23C8DC}.wem"
      },
      {
+      "Id": "928710513",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_24.wav",
+      "CachePath": "4F/{4F84A5BD-9585-A6CA-1C26-83E3C5A0CB85}.wem"
+     },
+     {
       "Id": "941661665",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_17.wav",
       "CachePath": "52/{52E32CD9-CCAC-E542-B1C7-A44A850508CD}.wem"
+     },
+     {
+      "Id": "944026625",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Run_01.wav",
+      "CachePath": "90/{90A2AD45-0BCC-7217-FE41-1F70ABE86CA8}.wem"
      },
      {
       "Id": "957384073",
@@ -993,12 +1361,36 @@
       "CachePath": "F9/{F972F069-FF8D-1E5E-3F23-A80A2921303C}.wem"
      },
      {
+      "Id": "972526069",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_30.wav",
+      "CachePath": "9E/{9EDC76D4-5A7C-BC8C-0F54-2D32DDC7C7BC}.wem"
+     },
+     {
+      "Id": "972985862",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_17.wav",
+      "CachePath": "4B/{4BBF763B-2EDC-C30F-B379-D3C2536DCBB8}.wem"
+     },
+     {
       "Id": "974359147",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_06.wav",
       "CachePath": "E7/{E7ABFB2B-3AB2-EC96-07C6-DB0758DBB0F4}.wem"
+     },
+     {
+      "Id": "977726567",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_25.wav",
+      "CachePath": "AF/{AF10156C-9A40-1E87-60DA-5CB0B5AD9400}.wem"
      },
      {
       "Id": "985568594",
@@ -1025,6 +1417,14 @@
       "CachePath": "44/{44FAEC2E-7EE8-6A9A-CFA8-6173281A977C}.wem"
      },
      {
+      "Id": "999250646",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_08.wav",
+      "CachePath": "A7/{A7646CBA-4D30-B5CA-043A-B04936C03686}.wem"
+     },
+     {
       "Id": "1013574032",
       "Language": "SFX",
       "Streaming": "false",
@@ -1047,6 +1447,14 @@
       "Location": "Memory",
       "ShortName": "SFX_NerveDoor_Layer_Woosh_02.wav",
       "CachePath": "32/{324BC753-BD10-14C4-6ED0-6154433A111C}.wem"
+     },
+     {
+      "Id": "1044523271",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_10.wav",
+      "CachePath": "87/{87D85E58-9131-545E-6F7C-8C7CDAE96DE1}.wem"
      },
      {
       "Id": "1047419496",
@@ -1073,12 +1481,28 @@
       "CachePath": "6B/{6B3DEE4E-8648-0A4D-31C5-CE278D4347BB}.wem"
      },
      {
+      "Id": "1053847861",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Detection_03.wav",
+      "CachePath": "8E/{8E42DCE2-B271-0831-9687-954AC02FD428}.wem"
+     },
+     {
       "Id": "1066500167",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_01.wav",
       "CachePath": "50/{50865F23-C9FA-C77D-9B14-6D89D2CFC3B5}.wem"
+     },
+     {
+      "Id": "1067939987",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Foley_Walk_07.wav",
+      "CachePath": "15/{15A56705-07FE-4C75-9110-7F2C3B3360A9}.wem"
      }
     ],
     "Events": [
@@ -1128,6 +1552,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Cloth",
       "GUID": "{69FE522F-23A7-4F90-9BC1-5A201A346C39}",
       "Color": "10",
+      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "0.237573",
       "DurationMax": "1.1387886",
@@ -1246,6 +1671,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Footsteps",
       "GUID": "{40C0DABC-E260-4BE7-9895-167ACF357472}",
       "Color": "10",
+      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "0",
       "DurationMax": "0.46666667",
@@ -1525,6 +1951,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Jump",
       "GUID": "{84B16784-5C30-4EFA-A338-4ACE6DA19306}",
       "Color": "10",
+      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "0.2",
       "DurationMax": "0.3",
@@ -1578,6 +2005,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Land",
       "GUID": "{27009C7D-31EB-42D4-BEA8-E873A733B256}",
       "Color": "10",
+      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "0.24610417",
       "DurationMax": "0.36666667",
@@ -1719,6 +2147,19 @@
       ]
      },
      {
+      "Id": "587263245",
+      "Name": "AKE_ParasiteMove",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_ParasiteMove",
+      "GUID": "{1E57C905-1D55-4C7C-975C-E38D3AC36573}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "565773879"
+       }
+      ]
+     },
+     {
       "Id": "2149707273",
       "Name": "AKE_PlantGrowth",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PlantGrowth",
@@ -1730,6 +2171,212 @@
       "MediaRefs": [
        {
         "Id": "523178003"
+       }
+      ]
+     },
+     {
+      "Id": "3189312505",
+      "Name": "AKE_PR_Legs",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Legs",
+      "GUID": "{79F94C9C-AFF6-436B-99FA-59569A8F3218}",
+      "Color": "10",
+      "MaxAttenuation": "1500",
+      "DurationType": "OneShot",
+      "DurationMin": "0.019604167",
+      "DurationMax": "0.076125",
+      "MediaRefs": [
+       {
+        "Id": "11382112"
+       },
+       {
+        "Id": "36785829"
+       },
+       {
+        "Id": "71491815"
+       },
+       {
+        "Id": "94886772"
+       },
+       {
+        "Id": "100845485"
+       },
+       {
+        "Id": "116395768"
+       },
+       {
+        "Id": "239633529"
+       },
+       {
+        "Id": "252236552"
+       },
+       {
+        "Id": "309109281"
+       },
+       {
+        "Id": "368998509"
+       },
+       {
+        "Id": "412221114"
+       },
+       {
+        "Id": "466718414"
+       },
+       {
+        "Id": "500580022"
+       },
+       {
+        "Id": "542035380"
+       },
+       {
+        "Id": "556495647"
+       },
+       {
+        "Id": "558502773"
+       },
+       {
+        "Id": "571972322"
+       },
+       {
+        "Id": "599646193"
+       },
+       {
+        "Id": "599836086"
+       },
+       {
+        "Id": "634870331"
+       },
+       {
+        "Id": "655447205"
+       },
+       {
+        "Id": "660804451"
+       },
+       {
+        "Id": "707409760"
+       },
+       {
+        "Id": "863858004"
+       },
+       {
+        "Id": "865855631"
+       },
+       {
+        "Id": "928710513"
+       },
+       {
+        "Id": "972526069"
+       },
+       {
+        "Id": "972985862"
+       },
+       {
+        "Id": "977726567"
+       },
+       {
+        "Id": "999250646"
+       }
+      ]
+     },
+     {
+      "Id": "4139073118",
+      "Name": "AKE_PR_RunFoley",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_RunFoley",
+      "GUID": "{B425CC87-77AE-4B31-AFF7-FAE32D669FF7}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.3",
+      "DurationMax": "0.5",
+      "MediaRefs": [
+       {
+        "Id": "71602376"
+       },
+       {
+        "Id": "478343558"
+       },
+       {
+        "Id": "484666369"
+       },
+       {
+        "Id": "515842823"
+       },
+       {
+        "Id": "691835590"
+       },
+       {
+        "Id": "944026625"
+       }
+      ]
+     },
+     {
+      "Id": "436669465",
+      "Name": "AKE_PR_Scream",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Scream",
+      "GUID": "{55DBC8D0-3693-45AB-B125-A0531134C332}",
+      "Color": "10",
+      "MaxAttenuation": "6000",
+      "DurationType": "OneShot",
+      "DurationMin": "2.224",
+      "DurationMax": "2.224",
+      "MediaRefs": [
+       {
+        "Id": "20295217"
+       },
+       {
+        "Id": "236700595"
+       },
+       {
+        "Id": "590805685"
+       },
+       {
+        "Id": "1053847861"
+       }
+      ]
+     },
+     {
+      "Id": "3764348078",
+      "Name": "AKE_PR_WalkFoley",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_WalkFoley",
+      "GUID": "{7BCA8F02-4514-4085-9933-E039BB08A318}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.3",
+      "DurationMax": "0.43333334",
+      "MediaRefs": [
+       {
+        "Id": "20535296"
+       },
+       {
+        "Id": "118428179"
+       },
+       {
+        "Id": "253185703"
+       },
+       {
+        "Id": "264612751"
+       },
+       {
+        "Id": "359119428"
+       },
+       {
+        "Id": "399521567"
+       },
+       {
+        "Id": "554243730"
+       },
+       {
+        "Id": "649901891"
+       },
+       {
+        "Id": "721042527"
+       },
+       {
+        "Id": "883660353"
+       },
+       {
+        "Id": "1044523271"
+       },
+       {
+        "Id": "1067939987"
        }
       ]
      },
@@ -2009,6 +2656,6 @@
     ]
    }
   ],
-  "FileHash": "{A8B6D4C1-DB02-EF72-341B-2ABA697754F2}"
+  "FileHash": "{D1697874-5B0D-18F5-7350-B78DC1C0DC2B}"
  }
 }

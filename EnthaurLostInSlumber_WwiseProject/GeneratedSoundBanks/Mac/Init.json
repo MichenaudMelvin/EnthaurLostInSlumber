@@ -10,10 +10,20 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{9FAD9B89-7989-11FD-B2BD-7EE8EAE046F9}",
+    "Hash": "{B9CB94DF-9A14-C0F2-6C32-DBD4F83C1E26}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
+    "Media": [
+     {
+      "Id": "99990636",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "OtherBank",
+      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
+      "CachePath": "3F/{3F5D2936-B639-02BB-E5E1-557D92F48FB6}.wem"
+     }
+    ],
     "Plugins": {
      "ShareSets": [
       {
@@ -23,6 +33,19 @@
        "GUID": "{67FADD73-FC10-4D2A-88D9-F172387587C0}",
        "LibName": "Wwise Reflect",
        "LibId": "11206659"
+      },
+      {
+       "Id": "3077109135",
+       "Name": "Dark_Cathedral_Stereo",
+       "ObjectPath": "\\Effects\\Factory AK Convolution Reverb Effects Stereo\\Cathedrals and Churches\\Dark_Cathedral_Stereo",
+       "GUID": "{5D107457-F392-439F-AF71-8D0235D9C0F8}",
+       "LibName": "Wwise Convolution Reverb",
+       "LibId": "8323075",
+       "MediaRefs": [
+        {
+         "Id": "99990636"
+        }
+       ]
       }
      ],
      "AudioDevices": [
@@ -91,7 +114,14 @@
       "Id": "348963605",
       "Name": "Reverb",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
-      "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+      "GUID": "{06B51433-C685-4945-9920-67B617503E73}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "3077109135"
+        }
+       ]
+      }
      }
     ],
     "GameParameters": [
@@ -747,6 +777,6 @@
     ]
    }
   ],
-  "FileHash": "{48577BB7-D6E1-083F-ED12-B0610EA27F88}"
+  "FileHash": "{D56A327C-8317-A79D-0329-05099520C761}"
  }
 }

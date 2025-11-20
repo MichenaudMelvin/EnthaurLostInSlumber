@@ -37,6 +37,7 @@ Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 
 Effect plug-ins	ID	Name	Type				Notes
 	164825399	New_Reflect	Wwise Reflect			
+	3077109135	Dark_Cathedral_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  
 
 Audio Devices	ID	Name	Type				Notes
 	2317455096	No_Output	No Output			

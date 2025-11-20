@@ -462,6 +462,71 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_PR_Scream" ID="{55DBC8D0-3693-45AB-B125-A0531134C332}">
+							<ChildrenList>
+								<Action Name="" ID="{A11CA390-D184-447D-9CA5-31EBD42221C3}" ShortID="799024201">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Parasite_Scream_Foley" ID="{306A0691-FEB5-43FD-9031-0AE1A5543DD0}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{6CC7171B-493C-4728-8B1C-20D78E6AD1DD}" ShortID="374167094">
+									<PropertyList>
+										<Property Name="Delay" Type="Real64" Value="0.6"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_PR_Scream" ID="{50BAA4EB-8EE2-4E63-9F9F-61DC20917380}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_Legs" ID="{79F94C9C-AFF6-436B-99FA-59569A8F3218}">
+							<ChildrenList>
+								<Action Name="" ID="{233FAC6D-B9E4-4D97-AE58-D8893956970F}" ShortID="162688413">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Legs" ID="{D2D64B57-29B2-4894-8893-DB633930A651}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_ParasiteMove" ID="{1E57C905-1D55-4C7C-975C-E38D3AC36573}">
+							<ChildrenList>
+								<Action Name="" ID="{364C7611-4012-48A6-87CD-07FBA5BC360A}" ShortID="1042574442">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Parasite_Move" ID="{A6E3CD69-148E-4DD8-A9E5-5DA844BCC1E4}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_RunFoley" ID="{B425CC87-77AE-4B31-AFF7-FAE32D669FF7}">
+							<ChildrenList>
+								<Action Name="" ID="{CE0E307B-B237-492B-9034-0FACD63AB372}" ShortID="743811261">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Run_Foley" ID="{176FB61F-AA63-4259-8BBC-DDBBBAEF8429}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_WalkFoley" ID="{7BCA8F02-4514-4085-9933-E039BB08A318}">
+							<ChildrenList>
+								<Action Name="" ID="{E4095DF2-7724-4D77-8FD5-A57B2D6CB222}" ShortID="711877878">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Walk_Foley" ID="{DB6AF3CD-23ED-43AC-B156-3F6AA4725031}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">

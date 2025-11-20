@@ -108,6 +108,10 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="AKE_PR_Legs" ID="{79F94C9C-AFF6-436B-99FA-59569A8F3218}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="AKE_StopWindSpeed" ID="{3E4C03C5-C587-4630-B830-812310BDBFC5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="1" Y="0"/>
 						</Module>
@@ -118,6 +122,10 @@
 						<Module>
 							<ObjectRef Name="SW_MC_FS_Run_Material" ID="{A373E588-64E7-4062-BA06-19803858FFF4}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
 							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_PR_Scream" ID="{55DBC8D0-3693-45AB-B125-A0531134C332}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="4" Y="0"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
