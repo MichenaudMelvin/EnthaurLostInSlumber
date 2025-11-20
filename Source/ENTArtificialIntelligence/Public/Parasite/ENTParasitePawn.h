@@ -98,6 +98,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName ChaseSpeedKeyName = "ChaseSpeed";
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName DetectionRangeKeyName = "DetectionRange";
+
 #pragma endregion
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
@@ -119,6 +122,30 @@ protected:
 	virtual void OnBehaviorTreeStarted_Implementation() override;
 
 	virtual void PossessedBy(AController* NewController) override;
+
+#pragma region DetectionRange
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Detection Range", meta = (Units = cm, ClampMin = 0.0f))
+	float DefaultDetectionRange = 1000.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Detection Range", meta = (Units = cm, ClampMin = 0.0f))
+	float AugmentedDetectionRange = 5000.0f;
+
+#if WITH_EDITOR
+	bool bDebugDetectionRange;
+
+	/**
+	 * @brief Call this in a tick to display the detection range; Editor Only
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Detection Range", meta = (DevelopmentOnly))
+	void DrawDetectionRange() const;
+#endif
+
+public:
+	void ChangeDetectionRange(bool bDoesPlayerHaveAmber);
+
+#pragma endregion
 
 #pragma region ParasiteAttack
 
@@ -246,6 +273,20 @@ public:
 	virtual bool HasReceivedLoadingRequest() const override {return bHasReceivedLoadingRequest;}
 
 	virtual const FENTAIData& GetLoadingData() const override {return LoadingData;}
+
+#pragma endregion
+
+#pragma region DebugSelection
+
+#if WITH_EDITORONLY_DATA
+protected:
+	void OnSelectionUpdate(UObject* Object);
+
+	void ClearDebugTraces() const;
+
+	bool SelectedInEditor = false;
+
+#endif
 
 #pragma endregion
 };

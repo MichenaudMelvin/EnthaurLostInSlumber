@@ -118,6 +118,7 @@ void AENTWeakZone::InitZone()
 
 void AENTWeakZone::DestroyZone()
 {
+	if (!BoxComponent) return;
 	TArray<AActor*> OverlappingActors;
 	BoxComponent->GetOverlappingActors(OverlappingActors);
 
@@ -135,7 +136,7 @@ void AENTWeakZone::DestroyZone()
 	}
 
 	bIsZoneActive = false;
-	BoxComponent->DestroyComponent();
+	//BoxComponent->DestroyComponent();
 }
 
 void AENTWeakZone::ChangeZoneSize(const FVector& NewSize)
