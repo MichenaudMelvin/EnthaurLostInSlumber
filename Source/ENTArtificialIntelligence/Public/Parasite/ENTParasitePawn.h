@@ -120,8 +120,40 @@ protected:
 
 	virtual void PossessedBy(AController* NewController) override;
 
+#pragma region ParasiteAttack
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Attack")
+	float AttackDamages = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	FVector AttackLocation = FVector(0.0f, 300.0f, 100.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	FVector AttackSize = FVector(100.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectsToAttack;
+
+#if WITH_EDITORONLY_DATA
+	static FVector DebugAttackLocation;
+
+	static FVector DebugAttackSize;
+#endif
+
+	UFUNCTION(BlueprintCallable, Category = "AI|Attack")
+	void Attack();
+
 	UFUNCTION()
 	void EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	/**
+	 * @brief For debug purposes only
+	 */
+	UFUNCTION(BlueprintCallable, Category = "AI|Attack", meta = (DevelopmentOnly))
+	static void DebugAttackZone(const UObject* WorldContextObject);
+
+#pragma endregion
 
 #if WITH_EDITORONLY_DATA
 	virtual void DebugPawn() const override;

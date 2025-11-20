@@ -5,9 +5,11 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Components/BoxComponent.h"
 #include "ENTGravityPawnMovement.h"
+#include "ENTHealthComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Parasite/ENTParasiteController.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 #include "Path/ENTNavigationArea.h"
@@ -17,6 +19,9 @@
 #if WITH_EDITORONLY_DATA
 #include "Components/ArrowComponent.h"
 #endif
+
+FVector AENTParasitePawn::DebugAttackLocation;
+FVector AENTParasitePawn::DebugAttackSize;
 
 AENTParasitePawn::AENTParasitePawn()
 {
@@ -145,6 +150,9 @@ void AENTParasitePawn::PostLoad()
 
 	ParasiteHeight = GetHitBoxHeight();
 	ParasiteWidth = GetHitBoxWidth();
+
+	DebugAttackLocation = AttackLocation;
+	DebugAttackSize = AttackSize;
 }
 
 void AENTParasitePawn::PreEditChange(FProperty* PropertyAboutToChange)
@@ -196,6 +204,14 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 		ParasiteHeight = GetHitBoxHeight();
 		ParasiteWidth = GetHitBoxWidth();
 	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, AttackLocation))
+	{
+		DebugAttackLocation = AttackLocation;
+	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, AttackSize))
+	{
+		DebugAttackSize = AttackSize;
+	}
 }
 #endif
 
@@ -240,6 +256,51 @@ void AENTParasitePawn::PossessedBy(AController* NewController)
 #endif
 }
 
+void AENTParasitePawn::Attack()
+{
+	TArray<AActor*> Actors;
+
+	ParasiteDeathZone->GetOverlappingActors(Actors, AActor::StaticClass());
+
+	bool bHitSomething = false;
+
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(this);
+
+	TArray<FHitResult> HitResults;
+	bool bHit = UKismetSystemLibrary::BoxTraceMultiForObjects(this, AttackLocation, AttackLocation, AttackSize, FRotator::ZeroRotator, ObjectsToAttack, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResults, true);
+
+	if (!bHit)
+	{
+		// failed attack
+		return;
+	}
+
+	for (const FHitResult& HitResult : HitResults)
+	{
+		AActor* Actor = HitResult.GetActor();
+		if (!Actor)
+		{
+			continue;
+		}
+
+		UENTHealthComponent* HealthComponent = Actor->GetComponentByClass<UENTHealthComponent>();
+		if (!HealthComponent)
+		{
+			continue;
+		}
+
+		// succeed attack
+		HealthComponent->TakeDamages(AttackDamages);
+		bHitSomething = true;
+	}
+
+	if (!bHitSomething)
+	{
+		return;
+	}
+}
+
 void AENTParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (!ParasiteController || !ParasiteController->GetBlackboardComponent() || !OtherActor)
@@ -248,6 +309,13 @@ void AENTParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, 
 	}
 
 	ParasiteController->GetBlackboardComponent()->SetValueAsObject(AttackTargetKeyName, OtherActor);
+}
+
+void AENTParasitePawn::DebugAttackZone(const UObject* WorldContextObject)
+{
+#if WITH_EDITORONLY_DATA
+	UKismetSystemLibrary::DrawDebugBox(WorldContextObject, DebugAttackLocation, DebugAttackSize, FLinearColor::Red);
+#endif
 }
 
 #if WITH_EDITORONLY_DATA
