@@ -3,10 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTAmberOre.generated.h"
 
+enum class ENerveReactiveInteractionType : uint8;
+class UAkAudioEvent;
+class AENTWeakZone;
 class UAkComponent;
 class UBoxComponent;
 
@@ -56,19 +60,101 @@ protected:
 	TObjectPtr<UStaticMesh> SourceMesh;
 
 	UPROPERTY(EditAnywhere, Category = "Amber")
-	EAmberType AmberType = EAmberType::NecroseAmber;
+	EAmberType AmberType = EAmberType::WeakAmber;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
-	float TargetAmberHeight = 0.0f;
+	float EmptyAmberHeight = 0.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	float FullAmberHeight = 35.0f;
+
+	UPROPERTY()
+	float TargetAmberHeight;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	float AmberAnimSpeed = 1.5f;
 
-	UPROPERTY(EditInstanceOnly, Category = "Amber", meta = (ClampMin = 1))
-	uint8 OreAmount = 1;
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Amber")
+	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactiveFull;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Amber")
+	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactiveEmpty;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
+	TObjectPtr<UAkAudioEvent> GrowlNoise;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
+	TObjectPtr<UAkAudioEvent> InjectAmberNoise;
+
+	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	bool bIsEmpty;
+
+	UPROPERTY(EditInstanceOnly, Category = "Weak Zone")
+	TObjectPtr<AENTWeakZone> LinkedWeakZone;
 
 	UFUNCTION()
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
+
+#pragma region Foliage
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Foliage")
+	TObjectPtr<UInstancedStaticMeshComponent> Foliage;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	TObjectPtr<UStaticMesh> FoliageMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	FVector FoliageScale = FVector(0.1f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	FFloatRange FoliageOffsetRange = FFloatRange(250.0f, 500.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	uint16 MeshesNumberByInteractionsPoints = 75;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage|Trace")
+	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectsTypes;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage|Trace", meta = (Units = cm))
+	float TraceLength = 100.0f;
+
+	UPROPERTY(EditInstanceOnly, Category = "Foliage")
+	FRandomStream Seed;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	TObjectPtr<UCurveFloat> FoliageGrowthCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
+	TObjectPtr<UAkAudioEvent> FoliageGrowthNoise;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Foliage", meta = (Units = s))
+	float GrowthDuration = 3.0f;
+
+	FTimeline FoliageTimeline;
+
+	void TriggerLinkedObjects(TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive);
+
+	void TriggerFullLinkedObjects();
+	
+	void TriggerEmptyLinkedObjects();
+
+
+	UFUNCTION()
+	void FoliageGrowthUpdate(float Alpha);
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
+	bool bShowFoliage = false;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
+	bool bShowTraces = false;
+
+	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
+	float TracesSize = 15.0f;
+#endif
+
+#pragma endregion
 
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;

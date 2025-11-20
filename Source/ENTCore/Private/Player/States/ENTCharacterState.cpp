@@ -153,7 +153,7 @@ void UENTCharacterState::UpdateViewBobbing(float DeltaTime)
 	const float NormalizedSpeed = (LastMoveSpeed) ? UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->Velocity.Length(), 0.0f, (MoveState)? MoveState->GetMoveSpeed() : LastMoveSpeed) : 0.0f;
 
 	const float CurrentRotationAmplitudeMultiplier = Character->GetViewBobbingObject()-> GetRotationAmplitudeMultiplier();
-	const float TargetRotationAmplitudeMultiplier = GetSettings()->bViewBobbing ? LocationAmplitudeMultiplier *  NormalizedSpeed * bAllowRollBobbing * 70.f : 0.0f;
+	const float TargetRotationAmplitudeMultiplier = GetSettings()->bViewBobbing ? LocationAmplitudeMultiplier * NormalizedSpeed * bAllowRollBobbing * 70.0f : 0.0f;
 
 	float TargetRotationAmplitude = FMath::Lerp(CurrentRollWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
 	
