@@ -66,7 +66,7 @@ public:
 	 * @param SaveIndex The save index; this is different from the user index and allow to create multiple saves with a same name
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Saves")
-	void ResetSaveToDefault(const int SaveIndex);
+	virtual void ResetSaveToDefault(const int SaveIndex);
 
 #pragma endregion
 

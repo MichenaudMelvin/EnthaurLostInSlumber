@@ -52,7 +52,10 @@ protected:
 	TObjectPtr<UENTCustomCheckBox> ViewBobbingCheckbox;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomButton> ViewControlsButton;
+	TObjectPtr<UENTCustomButton> ControlsButton;
+	
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<UENTCustomButton> GammaButton;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> ResetButton;
@@ -80,9 +83,13 @@ protected:
 
 	UFUNCTION()
 	void OnViewControlsButtonHovered();
-
 	UFUNCTION()
 	void OnViewControlsButtonClicked();
+	
+	UFUNCTION()
+	void OnGammaButtonHovered();
+	UFUNCTION()
+	void OnGammaButtonClicked();
 
 	UFUNCTION()
 	void OnOverallSliderChanged(float InValue);
