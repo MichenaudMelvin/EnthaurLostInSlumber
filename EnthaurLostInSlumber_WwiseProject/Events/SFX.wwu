@@ -527,6 +527,28 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_PR_Attack" ID="{36453717-A40E-45A4-B022-A46DE120D98F}">
+							<ChildrenList>
+								<Action Name="" ID="{AEC6E6FF-4212-47E9-AB4C-DF2B2B5F8860}" ShortID="343800408">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Attack" ID="{B54D61B0-6D9E-4DC7-853F-1483DA70EC4B}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_Attack_Woosh" ID="{00EED944-7A14-44B9-993C-E65931128189}">
+							<ChildrenList>
+								<Action Name="" ID="{DC04C835-4E39-4CFC-8A97-ECAC7A8419A5}" ShortID="1065367349">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Attack_Woosh" ID="{C1B39DA9-9930-4DCA-94AD-F908BE356F41}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">
