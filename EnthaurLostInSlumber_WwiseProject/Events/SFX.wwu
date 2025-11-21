@@ -66,7 +66,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="LPX_Nerve_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="LPX_Sinew_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -78,7 +78,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="LPX_Nerve_Stretch_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="LPX_Sinew_Strech_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -89,14 +89,14 @@
 								<Action Name="" ID="{4295B903-D009-4FC5-BD77-A6170AFEC7C5}" ShortID="531200954">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="LPX_Nerve_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="LPX_Sinew_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{852DAE5D-3900-4B10-B99B-31A55666C009}" ShortID="179194033">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="LPX_Nerve_Stretch_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="LPX_Sinew_Strech_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -132,7 +132,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -143,7 +143,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -154,7 +154,7 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -205,28 +205,28 @@
 								<Action Name="" ID="{1BB20F7D-EAF0-41C7-8A4A-7E09ECD0E695}" ShortID="310297691">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Start" ID="{4647759A-A990-4736-99C5-33390A9B1531}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{9D3464D2-0195-44E5-83E8-D00F2BCD74FB}" ShortID="881183275">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_03" ID="{A549B488-B218-4D38-8D7C-562790F91986}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{2DBB1D54-8979-491A-ABA6-C6224BEE9A5A}" ShortID="720303419">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_02" ID="{8FBACCED-503A-43FE-8D5D-653F32FD456F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{CAEB9CD8-6FC1-4F0E-8E32-D0FBF9A7DC38}" ShortID="612409937">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Nerve_Electricity_Layer_01" ID="{55798979-3F5A-45F1-9364-23FFE8F135D0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -346,7 +346,8 @@
 								<Action Name="" ID="{ECF102C9-D6DA-4063-B6D8-9D43982E9486}" ShortID="376990303">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="2"/>
-										<Property Name="FadeTime" Type="Real64" Value="1"/>
+										<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
@@ -355,6 +356,9 @@
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{5251D9FA-374B-473E-8176-E8D69D90B41C}" ShortID="510275303">
+									<PropertyList>
+										<Property Name="FadeInCurve" Type="int16" Value="6"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="SFX_Elevator_Stop" ID="{6DB15B6C-C30A-479E-BF72-5D420434778F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
@@ -376,6 +380,148 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="SFX_Elevator" ID="{3F19CCE3-6437-4B77-BADB-25C5A1B7EA38}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_WindSpeed" ID="{3C96E412-6FF6-4422-AEC6-34FD6AC5A1D5}">
+							<ChildrenList>
+								<Action Name="" ID="{125B1A63-F5B7-46C2-9127-29213D69704B}" ShortID="270427365">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Wind_Speed_High" ID="{14FC52F3-C117-4241-9642-DB12691945AA}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{1C4D23E1-8726-4086-BFB0-66180B77AC06}" ShortID="731178289">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Wind_Speed_Low" ID="{84C659D7-AC4A-4A6F-A4F4-FFA734106B6F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_StopWindSpeed" ID="{3E4C03C5-C587-4630-B830-812310BDBFC5}">
+							<ChildrenList>
+								<Action Name="" ID="{83DAF16D-C502-4730-AD58-EBFAF621B395}" ShortID="151825836">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Wind_Speed_High" ID="{14FC52F3-C117-4241-9642-DB12691945AA}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{B6DCF1A7-80BA-4630-ABBF-41B4E5EDDAD4}" ShortID="753828858">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.3"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Wind_Speed_Low" ID="{84C659D7-AC4A-4A6F-A4F4-FFA734106B6F}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{0E7CCE5B-FEDE-4558-BBF0-5811658475AE}" ShortID="14440801">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Woosh_Wind" ID="{B2BF122F-AEA1-4C7E-AD3D-2833A69E663B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{E04AA85F-E3BB-4F7B-8636-5D70B5DF7F7C}" ShortID="430216350">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SW_MC_Land_Material" ID="{DB871AA9-6A46-4727-B3CC-EE5984C3784C}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_TEST_Obstruction_Oclusion" ID="{922BABEE-EE53-4991-B186-0D61FAD7D05D}">
+							<ChildrenList>
+								<Action Name="" ID="{168F9A71-98B6-4B26-9D8B-FC3176B70E7E}" ShortID="811137837">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="TEST_Obstruction_Oclusion" ID="{4FB14830-D71B-4D31-9262-01BB77FC6EFB}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_Scream" ID="{55DBC8D0-3693-45AB-B125-A0531134C332}">
+							<ChildrenList>
+								<Action Name="" ID="{A11CA390-D184-447D-9CA5-31EBD42221C3}" ShortID="799024201">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Parasite_Scream_Foley" ID="{306A0691-FEB5-43FD-9031-0AE1A5543DD0}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{6CC7171B-493C-4728-8B1C-20D78E6AD1DD}" ShortID="374167094">
+									<PropertyList>
+										<Property Name="Delay" Type="Real64" Value="0.6"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_PR_Scream" ID="{50BAA4EB-8EE2-4E63-9F9F-61DC20917380}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_Legs" ID="{79F94C9C-AFF6-436B-99FA-59569A8F3218}">
+							<ChildrenList>
+								<Action Name="" ID="{233FAC6D-B9E4-4D97-AE58-D8893956970F}" ShortID="162688413">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Legs" ID="{D2D64B57-29B2-4894-8893-DB633930A651}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_ParasiteMove" ID="{1E57C905-1D55-4C7C-975C-E38D3AC36573}">
+							<ChildrenList>
+								<Action Name="" ID="{364C7611-4012-48A6-87CD-07FBA5BC360A}" ShortID="1042574442">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Parasite_Move" ID="{A6E3CD69-148E-4DD8-A9E5-5DA844BCC1E4}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_RunFoley" ID="{B425CC87-77AE-4B31-AFF7-FAE32D669FF7}">
+							<ChildrenList>
+								<Action Name="" ID="{CE0E307B-B237-492B-9034-0FACD63AB372}" ShortID="743811261">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Run_Foley" ID="{176FB61F-AA63-4259-8BBC-DDBBBAEF8429}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_WalkFoley" ID="{7BCA8F02-4514-4085-9933-E039BB08A318}">
+							<ChildrenList>
+								<Action Name="" ID="{E4095DF2-7724-4D77-8FD5-A57B2D6CB222}" ShortID="711877878">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Walk_Foley" ID="{DB6AF3CD-23ED-43AC-B156-3F6AA4725031}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

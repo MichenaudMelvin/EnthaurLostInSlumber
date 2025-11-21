@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{4ED2160B-3710-4F6D-9DE5-4CBEC6EDB3DA}" SchemaVersion="123">
+	<SoundBanks>
+		<WorkUnit Name="Effects" ID="{4ED2160B-3710-4F6D-9DE5-4CBEC6EDB3DA}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="11"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
+			<ChildrenList>
+				<SoundBank Name="SB_Effects" ID="{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory Altiverb - Outdoor and More" ID="{C0E78DAA-768A-438F-8F7B-3701395185C3}" WorkUnitID="{C0E78DAA-768A-438F-8F7B-3701395185C3}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Default Work Unit" ID="{BD4A6828-7167-43CB-B4FB-11E3F2B10B50}" WorkUnitID="{BD4A6828-7167-43CB-B4FB-11E3F2B10B50}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory AK Convolution Reverb Effects Stereo" ID="{9D68BE5F-8CA6-43E0-BCE2-C7D59F63E582}" WorkUnitID="{9D68BE5F-8CA6-43E0-BCE2-C7D59F63E582}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory Effects" ID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory Reflect" ID="{923039AD-F8B4-46D4-BDA7-CB5A6EE595E0}" WorkUnitID="{923039AD-F8B4-46D4-BDA7-CB5A6EE595E0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory Mastering Suite" ID="{0D1C409E-A735-471E-A538-63B18D993BE9}" WorkUnitID="{0D1C409E-A735-471E-A538-63B18D993BE9}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory Reflect Physically-Based" ID="{9A5AAF13-8275-479B-8D44-4B723CE5B2F9}" WorkUnitID="{9A5AAF13-8275-479B-8D44-4B723CE5B2F9}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory McDSP Effects" ID="{C495E5B0-5DF1-4961-BC6A-4C9887E70704}" WorkUnitID="{C495E5B0-5DF1-4961-BC6A-4C9887E70704}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory Auro Headphone" ID="{B3C352EE-53F0-4C95-BAA9-B8ECC0034D25}" WorkUnitID="{B3C352EE-53F0-4C95-BAA9-B8ECC0034D25}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Factory AK Convolution Reverb Effects Ambisonics" ID="{1562D13C-41E8-4FA1-A341-D4CB726E2AEC}" WorkUnitID="{1562D13C-41E8-4FA1-A341-D4CB726E2AEC}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>
