@@ -139,6 +139,29 @@ void AENTWeakZone::DestroyZone()
 	//BoxComponent->DestroyComponent();
 }
 
+void AENTWeakZone::CreateZone()
+{
+	if (!BoxComponent) return;
+	TArray<AActor*> OverlappingActors;
+	BoxComponent->GetOverlappingActors(OverlappingActors);
+
+	for (AActor* OverlappingActor : OverlappingActors)
+	{
+		if (OverlappingActor == nullptr)
+		{
+			continue;
+		}
+
+		if (OverlappingActor->Implements<UENTWeakZoneInterface>())
+		{
+			IENTWeakZoneInterface::Execute_OnEnterWeakZone(OverlappingActor, true);
+		}
+	}
+
+	bIsZoneActive = true;
+}
+
+
 void AENTWeakZone::ChangeZoneSize(const FVector& NewSize)
 {
 	BoxComponent->SetBoxExtent(NewSize);
@@ -180,6 +203,7 @@ void AENTWeakZone::CureZone(AActor* StartCurePoint)
 {
 	if (StartCurePoint != nullptr)
 	{
+		ElectricityComponent->SetElectricityColor(ElectricityCureColor);
 		ElectricityComponent->PlayElectricityAnimation(StartCurePoint);
 	}
 	else
@@ -188,6 +212,21 @@ void AENTWeakZone::CureZone(AActor* StartCurePoint)
 	}
 	DestroyZone();
 }
+
+void AENTWeakZone::CorruptZone(AActor* StartCorruptPoint)
+{
+	if (StartCorruptPoint != nullptr)
+	{
+		ElectricityComponent->SetElectricityColor(ElectricityCorruptColor);
+		ElectricityComponent->PlayElectricityAnimation(StartCorruptPoint);
+	}
+	else
+	{
+		OnElectricityMovementFinished();
+	}
+	CreateZone();
+}
+
 
 void AENTWeakZone::ActivateZone(bool bActivateZone)
 {
@@ -216,5 +255,8 @@ void AENTWeakZone::LoadGameElement(const FENTGameElementData& GameElementData, U
 
 void AENTWeakZone::OnElectricityMovementFinished()
 {
-	CureTimeline.Play();
+	if (!bIsZoneActive)
+		CureTimeline.Play();
+	else
+		CureTimeline.Reverse();
 }
