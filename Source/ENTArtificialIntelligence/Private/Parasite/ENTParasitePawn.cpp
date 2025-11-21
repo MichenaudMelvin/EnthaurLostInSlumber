@@ -19,10 +19,10 @@
 #if WITH_EDITORONLY_DATA
 #include "Selection.h"
 #include "Components/ArrowComponent.h"
-#endif
 
 FVector AENTParasitePawn::DebugAttackLocation;
 FVector AENTParasitePawn::DebugAttackSize;
+#endif
 
 AENTParasitePawn::AENTParasitePawn()
 {
@@ -519,6 +519,7 @@ void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementDat
 
 #pragma region DebugSelection
 
+#if WITH_EDITORONLY_DATA
 void AENTParasitePawn::OnSelectionUpdate(UObject* Object)
 {
 	if (Object == this && !SelectedInEditor)
@@ -537,5 +538,6 @@ void AENTParasitePawn::ClearDebugTraces() const
 {
 	UKismetSystemLibrary::FlushPersistentDebugLines(this);
 }
+#endif
 
 #pragma endregion
