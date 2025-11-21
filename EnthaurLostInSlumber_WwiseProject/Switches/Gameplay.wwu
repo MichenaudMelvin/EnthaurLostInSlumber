@@ -7,6 +7,7 @@
 					<ChildrenList>
 						<Switch Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
 						<Switch Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+						<Switch Name="Vein" ID="{15513C0C-22A3-403F-AA73-0773270B3E63}"/>
 					</ChildrenList>
 				</SwitchGroup>
 				<SwitchGroup Name="AKSW_FootstepsSpeed" ID="{0BE9A4AC-F26F-442B-BACA-A05A63B871D5}">
