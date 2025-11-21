@@ -46,40 +46,37 @@ void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* 
 	EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
 
 #if WITH_EDITORONLY_DATA
-if (bDebugTask)
-{
-	DrawDebugTrace = EDrawDebugTrace::ForOneFrame;
-}
+	if (bDebugTask)
+	{
+		DrawDebugTrace = EDrawDebugTrace::ForOneFrame;
+	}
 #endif
 
 	FHitResult HitResult;
 	UKismetSystemLibrary::LineTraceSingle(Pawn, PawnLocation, EndLocation, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, Actors, DrawDebugTrace, HitResult, true);
 
-	FVector ForwardVector = Pawn->GetMovementComponent()->Velocity;
+	FVector Direction = Pawn->GetMovementComponent()->Velocity;
 
-	if (ForwardVector.Equals(FVector::ZeroVector, 0.0f))
-	{
-		FVector TargetLocation;
-		const UBlackboardComponent* CurrentBlackboard = OwnerComp.GetBlackboardComponent();
-		if (BlackboardKey.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
-		{
-			UObject* KeyValue = CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(BlackboardKey.GetSelectedKeyID());
-			AActor* TargetActor = Cast<AActor>(KeyValue);
-			if (TargetActor)
-			{
-				TargetLocation = TargetActor->GetActorLocation();
-			}
-		}
-		else if (BlackboardKey.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
-		{
-			TargetLocation = CurrentBlackboard->GetValue<UBlackboardKeyType_Vector>(BlackboardKey.GetSelectedKeyID());
-		}
+	float SlopePitch;
+	float SlopeRoll;
+	UKismetMathLibrary::GetSlopeDegreeAngles(FVector::RightVector, HitResult.Normal, FVector::UpVector, SlopePitch, SlopeRoll);
 
-		ForwardVector = TargetLocation - Pawn->GetActorLocation();
-		ForwardVector.Z = 0.0f;
-	}
+	SlopePitch *= -1;
+
+	FVector ForwardVector = UKismetMathLibrary::RotateAngleAxis(FVector::ForwardVector, SlopePitch, FVector::RightVector);
+
+	Direction.Normalize();
+	ForwardVector.Normalize();
+
+	float DotResult = FVector::DotProduct(Direction, ForwardVector);
+	float Angle = (180.0f)/UE_DOUBLE_PI * FMath::Acos(DotResult);
+
+	Angle *= Direction.Y > 0.0f ? 1.0f : -1.0f;
+
+	ForwardVector = UKismetMathLibrary::RotateAngleAxis(ForwardVector, Angle, HitResult.Normal);
 
 	FVector RightVector = UKismetMathLibrary::RotateAngleAxis(ForwardVector, 90.0f, HitResult.Normal);
+
 	ForwardVector.Normalize();
 	RightVector.Normalize();
 
@@ -91,18 +88,19 @@ if (bDebugTask)
 		FVector EndRightLocation = StartLocation + (RightVector * LineLength);
 		FVector EndUpLocation = StartLocation + (HitResult.Normal * LineLength);
 
-		UKismetSystemLibrary::DrawDebugLine(this, Pawn->GetActorLocation(), EndForwardLocation, FLinearColor::Red, 0.0f, 5.0f);
-		UKismetSystemLibrary::DrawDebugLine(this, Pawn->GetActorLocation(), EndRightLocation, FLinearColor::Green, 0.0f, 5.0f);
-		UKismetSystemLibrary::DrawDebugLine(this, Pawn->GetActorLocation(), EndUpLocation, FLinearColor::Blue, 0.0f, 5.0f);
+		FVector EndDirection = StartLocation + (Direction * LineLength);
+
+		UKismetSystemLibrary::DrawDebugLine(this, StartLocation, EndForwardLocation, FLinearColor::Red, 0.0f, 5.0f);
+		UKismetSystemLibrary::DrawDebugLine(this, StartLocation, EndRightLocation, FLinearColor::Green, 0.0f, 5.0f);
+		UKismetSystemLibrary::DrawDebugLine(this, StartLocation, EndUpLocation, FLinearColor::Blue, 0.0f, 5.0f);
+
+		UKismetSystemLibrary::DrawDebugLine(this, StartLocation, EndDirection, FLinearColor::White, 0.0f, 5.0f);
 	}
 #endif
 
-	FRotator XZRotator = FRotationMatrix::MakeFromXZ(ForwardVector, HitResult.Normal).Rotator();
-	FRotator YZRotator = FRotationMatrix::MakeFromYZ(RightVector, HitResult.Normal).Rotator();
+	FQuat ResultRotation = FRotationMatrix::MakeFromZX(HitResult.Normal, ForwardVector).ToQuat();
 
-	FRotator ResultRotation(YZRotator.Pitch, XZRotator.Yaw, XZRotator.Roll);
-
-	FQuat TargetRotation = ResultRotation.Quaternion() * RotationOffset.Quaternion();
+	FQuat TargetRotation = ResultRotation * RotationOffset.Quaternion();
 
 	if (bLerpRotation)
 	{

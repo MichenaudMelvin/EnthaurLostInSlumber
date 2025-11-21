@@ -62,6 +62,7 @@ void UENTMenuManager::CreateAllWidgets()
 	QuitMenu = CreateWidget(CurrentController, UIConfig->QuitMenuClass);
 	PauseMenu = CreateWidget(CurrentController, UIConfig->PauseMenuClass);
 	ControlsMenu = CreateWidget(CurrentController, UIConfig->ControlsMenuClass);
+	GammaMenu = CreateWidget(CurrentController, UIConfig->GammaMenuClass);
 	MainMenuConfirmationMenu = CreateWidget(CurrentController, UIConfig->MainMenuConfirmationMenuClass);
 	RestartConfirmationMenu = CreateWidget(CurrentController, UIConfig->RestartConfirmationMenuClass);
 
@@ -121,12 +122,12 @@ void UENTMenuManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	MenuStack.Add(InMenuClass);
 
 	InMenuClass->AddToViewport();
-	UE_LOG(LogTemp, Warning, TEXT("Opened menu: %s"), *InMenuClass->GetName());
-
-	for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
-	}
+	// UE_LOG(LogTemp, Warning, TEXT("Opened menu: %s"), *InMenuClass->GetName());
+	//
+	// for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	// }
 
 	if (MenuStack.Num() >= 2)
 	{
@@ -183,12 +184,12 @@ void UENTMenuManager::CloseCurrentMenu()
 	
 	MenuClasses.Remove(MenuKey);
 
-	UE_LOG(LogTemp, Warning, TEXT("Removed menu: %s"),  *Menu->GetClass()->GetName());
-
-	for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
-	}
+	// UE_LOG(LogTemp, Warning, TEXT("Removed menu: %s"),  *Menu->GetClass()->GetName());
+	//
+	// for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	// }
 
 	CheckMenuState();
 }
@@ -320,6 +321,20 @@ void UENTMenuManager::CheckMenuState()
 		}
 
 		FirstPersonController->ClearPlayerInputs();
+		
+		UGameInstance* GameInstance = GetGameInstance();
+		if (!GameInstance)
+		{
+			return;
+		}
+
+		UENTHUDManager* HUDManager = GameInstance->GetSubsystem<UENTHUDManager>();
+		if (!HUDManager)
+		{
+			return;
+		}
+		
+		HUDManager->SetHUDVisibility(ESlateVisibility::Visible);
 	}
 }
 
