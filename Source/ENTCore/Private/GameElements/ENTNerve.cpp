@@ -503,7 +503,7 @@ void AENTNerve::FinishRetractCable()
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
 	InteractableComponent->AddInteractable(NerveBall);
-	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))
+	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction) && !bIsInWeakZone)
 	{
 		InteractableComponent->OnInteract.AddDynamic(this, &AENTNerve::Interaction);
 	}
@@ -701,6 +701,21 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
 
+	bIsInWeakZone = true;
+	if (CurrentAttachedReceptacle != nullptr && bIsZoneActive)
+	{
+		if (!CurrentAttachedReceptacle->CanTheNerveBeTaken())
+		{
+			return;
+		}
+
+		CurrentAttachedReceptacle->DisableReceptacle();
+		CurrentAttachedReceptacle->TriggerLinkedObjects(this);
+		CurrentAttachedReceptacle = nullptr;
+
+		DetachNerveBall(false);
+	}
+
 	if (bIsZoneActive && InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))
 	{
 		InteractableComponent->OnInteract.RemoveDynamic(this, &AENTNerve::Interaction);
@@ -709,6 +724,7 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 
 void AENTNerve::OnExitWeakZone_Implementation()
 {
+	bIsInWeakZone = false;
 	IENTWeakZoneInterface::OnExitWeakZone_Implementation();
 
 	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))

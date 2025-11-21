@@ -243,6 +243,9 @@ protected:
 	UPROPERTY()
 	TObjectPtr<AENTDefaultCharacter> PlayerCharacter;
 
+	UPROPERTY()
+	bool bIsInWeakZone = false;
+
 public:
 	TObjectPtr<UENTInteractableComponent> GetInteractable() const {return InteractableComponent;}
 
