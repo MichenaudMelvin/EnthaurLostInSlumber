@@ -53,6 +53,18 @@ void UENTSettingsSaveSubsystem::Deinitialize()
 	FWorldDelegates::OnWorldInitializedActors.Remove(WorldInitDelegateHandle);
 }
 
+void UENTSettingsSaveSubsystem::ResetSaveToDefault(const int SaveIndex)
+{
+	Super::ResetSaveToDefault(SaveIndex);
+	
+	if (!Settings)
+	{
+		return;
+	}
+	
+	SetGamma(Settings->Gamma);
+}
+
 void UENTSettingsSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams)
 {
 	AActor* Actor = UGameplayStatics::GetActorOfClass(this, APostProcessVolume::StaticClass());

@@ -16,6 +16,8 @@ class ENTSAVES_API UENTSettingsSaveSubsystem : public UENTSaveSubsystem
 public:
 	UENTSettingsSaveSubsystem();
 
+	virtual void ResetSaveToDefault(const int SaveIndex) override;
+	
 protected:
 	virtual UENTDefaultSave* CreateSave(const int SaveIndex) override;
 
