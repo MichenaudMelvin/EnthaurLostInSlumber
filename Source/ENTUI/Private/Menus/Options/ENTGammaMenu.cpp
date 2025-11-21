@@ -47,8 +47,14 @@ void UENTGammaMenu::OnGammaSliderValueChanged(float InValue)
 	float floatA = GammaSlider->GetCustomSlider()->GetValue() - GammaSlider->GetCustomSlider()->GetMinValue();
 	float floatB = GammaSlider->GetCustomSlider()->GetMaxValue() - GammaSlider->GetCustomSlider()->GetMinValue();
 	
-	float normalizedVectorValue = floatA / floatB;
-	int normalizedVectorValueInt = FMath::Lerp(0, 255, normalizedVectorValue);
+	float normalizedVectorValue = (floatA / floatB);
+	int brightnessOffset = 80;
+	int normalizedVectorValueInt = FMath::Lerp(0, 255, normalizedVectorValue) - brightnessOffset;
+	
+	if (normalizedVectorValueInt < 0)
+	{
+		normalizedVectorValueInt = 0;
+	}
 	
 	FSlateColor UpdatedColor = FSlateColor(FColor(normalizedVectorValueInt, normalizedVectorValueInt, normalizedVectorValueInt, normalizedVectorValueInt));
 	GammaImage->SetBrushTintColor(UpdatedColor);
