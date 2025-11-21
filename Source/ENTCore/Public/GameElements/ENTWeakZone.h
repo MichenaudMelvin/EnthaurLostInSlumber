@@ -43,6 +43,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Electricity")
 	TObjectPtr<UENTElectricityComponent> ElectricityComponent;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity")
+	FLinearColor ElectricityCureColor;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity")
+	FLinearColor ElectricityCorruptColor;
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
 	TObjectPtr<UBillboardComponent> BillboardComponent;
@@ -53,6 +59,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
+
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void CreateZone();
 
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void ChangeZoneSize(const FVector& NewSize);
@@ -73,6 +82,14 @@ protected:
 
 	UFUNCTION()
 	void CureUpdate(float Alpha);
+
+public:
+	
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void CureZone(AActor* StartCurePoint);
+
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void CorruptZone(AActor* StartCorruptPoint);
 
 #pragma endregion
 
@@ -102,9 +119,6 @@ protected:
 
 public:
 	void ActivateZone(bool bActivateZone);
-
-	UFUNCTION(BlueprintCallable, Category = "WeakZone")
-	void CureZone(AActor* StartCurePoint);
 
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;

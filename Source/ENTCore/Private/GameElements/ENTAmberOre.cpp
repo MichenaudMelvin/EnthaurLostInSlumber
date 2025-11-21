@@ -241,6 +241,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		FillAmberTimeline.PlayFromStart();
 		FoliageTimeline.Reverse();
 		bIsEmpty = !bIsEmpty;
+		if (LinkedWeakZone)LinkedWeakZone->CorruptZone(this);
 	}
 }
 
