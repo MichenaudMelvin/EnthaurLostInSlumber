@@ -48,7 +48,7 @@ void UENTGammaMenu::OnGammaSliderValueChanged(float InValue)
 	float floatB = GammaSlider->GetCustomSlider()->GetMaxValue() - GammaSlider->GetCustomSlider()->GetMinValue();
 	
 	float normalizedVectorValue = (floatA / floatB);
-	int brightnessOffset = 120;
+	int brightnessOffset = 80;
 	int normalizedVectorValueInt = FMath::Lerp(0, 255, normalizedVectorValue) - brightnessOffset;
 	
 	if (normalizedVectorValueInt < 0)
