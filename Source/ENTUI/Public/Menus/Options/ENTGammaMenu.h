@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/Image.h"
+#include "Components/TextBlock.h"
 #include "Menus/ENTWidgetBasics.h"
 #include "Menus/Elements/ENTCustomSlider.h"
 #include "ENTGammaMenu.generated.h"
@@ -31,4 +32,7 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomSlider> GammaSlider;
+	
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<UTextBlock> GammaText;
 };
