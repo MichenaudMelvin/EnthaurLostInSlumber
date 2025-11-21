@@ -267,6 +267,16 @@ void AENTDefaultCharacter::DisplayStates(bool bDisplay)
 }
 #endif
 
+bool AENTDefaultCharacter::CompareCurrentState(EENTCharacterStateID Other) const
+{
+	if (!StateMachine)
+	{
+		return false;
+	}
+
+	return StateMachine->GetCurrentStateID() == Other;
+}
+
 #pragma endregion
 
 #pragma region Interaction

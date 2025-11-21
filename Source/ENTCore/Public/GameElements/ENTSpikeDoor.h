@@ -8,6 +8,7 @@
 #include "Interface/ENTActivation.h"
 #include "ENTSpikeDoor.generated.h"
 
+class UBoxComponent;
 class UAkComponent;
 
 UCLASS()
@@ -19,25 +20,33 @@ public:
 	AENTSpikeDoor();
 
 protected:
-	
 	virtual void BeginPlay() override;
-	
+
 	virtual void OnConstruction(const FTransform& Transform) override;
-	
+
 	UPROPERTY(EditDefaultsOnly, Category="Door")
 	TObjectPtr<USceneComponent> Root;
-	
+
+	/**
+	 * @brief To make this component works please check that the runtime generation of the navMesh is set to DynamicOnly
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "Door|Navigation")
+	TObjectPtr<UBoxComponent> DoorNavModifier;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Door|Navigation", meta = (Units = cm, ClampMin = 0.0f))
+	float NavModifierHeightOffset = 100.0f;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "Door|Navigation")
+	FVector NavModifierDefaultLocation;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "Door|Navigation")
+	FVector NavModifierOpenedLocation;
+
 	UPROPERTY(EditDefaultsOnly, Category="Door")
 	TObjectPtr<UStaticMeshComponent> LeftFrame;
 
 	UPROPERTY(EditDefaultsOnly, Category="Door")
 	TObjectPtr<UStaticMeshComponent> RightFrame;
-	
-	UPROPERTY(EditDefaultsOnly, Category="Door")
-	TObjectPtr<UStaticMesh> InterMeshA;
-
-	UPROPERTY(EditDefaultsOnly, Category="Door")
-	TObjectPtr<UStaticMesh> InterMeshB;
 
 	UPROPERTY(EditAnywhere, Category="Door", meta = (Units = cm))
 	float DoorWidth = 200.f;
@@ -45,8 +54,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Door")
 	float SpacingFactor = 0.5f;
 
-	UPROPERTY()
-	TArray<TObjectPtr<UStaticMeshComponent>> InterMeshes;
+	UPROPERTY(EditDefaultsOnly, Category = "Door")
+	TObjectPtr<UInstancedStaticMeshComponent> InterMeshesA;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Door")
+	TObjectPtr<UInstancedStaticMeshComponent> InterMeshesB;
 
 	UPROPERTY()
 	TArray<FVector> InterInitialRelativeLocations;
@@ -55,8 +67,11 @@ protected:
 	TArray<float> InterStartOffsets;
 
 	UPROPERTY()
+	TArray<bool> IsInterMeshA;
+
+	UPROPERTY()
 	TArray<FRotator> InterInitialRotations;
-	
+
 	UPROPERTY(EditDefaultsOnly, Category="Door")
 	TObjectPtr<UCurveFloat> DropCurve;
 
@@ -70,27 +85,36 @@ protected:
 
 	UFUNCTION()
 	void DropTimelineFinished();
-	
+
 	UPROPERTY(EditDefaultsOnly, Category = "Door", meta = (Units = "s"))
 	float MaxStagger = 0.4f;
-	
+
 	UPROPERTY(EditDefaultsOnly, Category = "Door", meta = (Units = "s"))
 	float OpenDuration = 0.5f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Door", meta = (Units = "s"))
 	float CloseDuration = 1.5f;
-	
+
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkComponent> NerveDoorNoises;
-	
+
 	bool bIsOpened = false;
 
 	UPROPERTY()
 	float DropHeight;
-	
+
 	void GenerateInterMeshes();
 
 	void ClearInterMeshes();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Door")
+	void ToggleDoorState();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Door")
+	void OpenDoor();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Door")
+	void CloseDoor();
 
 public:
 	virtual void Tick(float DeltaTime) override;

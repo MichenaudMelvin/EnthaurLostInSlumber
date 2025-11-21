@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Interface/ENTActivation.h"
 #include "Interfaces/ENTPawnAIInterface.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
@@ -23,7 +24,7 @@ struct FENTGameElementData;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeAnimToTrigger, UAnimSequenceBase*, AnimToTrigger);
 
 UCLASS()
-class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface, public IENTPawnAIInterface
+class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface, public IENTPawnAIInterface, public IENTActivation
 {
 	GENERATED_BODY()
 
@@ -32,6 +33,10 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+#if WITH_EDITOR
+	virtual void Tick(float DeltaSeconds) override;
+#endif
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
@@ -101,6 +106,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName DetectionRangeKeyName = "DetectionRange";
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName PlayerKeyName = "Player";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName DoesPlayerHaveAmberKeyName = "DoesPlayerHaveAmber";
+
 #pragma endregion
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
@@ -115,6 +126,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
 	float ChaseSpeed = 1200.0f;
 
+#pragma region BehaviorTree
+
+protected:
 	virtual bool DoesAutoStartBehaviorTree_Implementation() const override {return bAutoStartBehavior;}
 
 	virtual UBehaviorTree* GetOverridenBehaviorTree_Implementation() const override {return OverridenBehaviorTree;}
@@ -122,6 +136,13 @@ protected:
 	virtual void OnBehaviorTreeStarted_Implementation() override;
 
 	virtual void PossessedBy(AController* NewController) override;
+
+	UFUNCTION(BlueprintCallable, Category = "BehaviorTree")
+	void StartBehaviorTree();
+
+	virtual void Trigger_Implementation() override;
+
+#pragma endregion
 
 #pragma region DetectionRange
 
@@ -132,17 +153,18 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Detection Range", meta = (Units = cm, ClampMin = 0.0f))
 	float AugmentedDetectionRange = 5000.0f;
 
-#if WITH_EDITOR
-	bool bDebugDetectionRange;
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Category = "Detection Range")
+	bool bDebugDetectionRange = false;
 
 	/**
 	 * @brief Call this in a tick to display the detection range; Editor Only
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Detection Range", meta = (DevelopmentOnly))
 	void DrawDetectionRange() const;
 #endif
 
 public:
+	UFUNCTION()
 	void ChangeDetectionRange(bool bDoesPlayerHaveAmber);
 
 #pragma endregion
@@ -183,6 +205,7 @@ protected:
 #pragma endregion
 
 #if WITH_EDITORONLY_DATA
+protected:
 	virtual void DebugPawn() const override;
 #endif
 

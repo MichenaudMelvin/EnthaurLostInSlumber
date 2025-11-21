@@ -119,6 +119,13 @@ FString UENTHasReachedTheEndOfTheSpline::GetStaticDescription() const
 		KeyDesc = AIPath.SelectedKeyName.ToString();
 	}
 
-	return FString::Printf(TEXT("Has reached the end of %s"), *KeyDesc);
+	if (IsInversed())
+	{
+		return FString::Printf(TEXT("Hasn't reached the end of %s"), *KeyDesc);
+	}
+	else
+	{
+		return FString::Printf(TEXT("Has reached the end of %s"), *KeyDesc);
+	}
 }
 #endif

@@ -29,7 +29,7 @@ void UENTCharacterFallState::StateEnter_Implementation(const EENTCharacterStateI
 	{
 		bCanDoCoyoteTime = false;
 	}
-	
+
 	bHasPressedInteraction = false;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	Character->GetCharacterMovement()->GravityScale = GravityScale;

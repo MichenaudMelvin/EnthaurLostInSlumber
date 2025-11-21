@@ -157,6 +157,9 @@ public:
 
 	TObjectPtr<UENTCharacterStateMachine> GetStateMachine() const {return StateMachine;}
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
+	bool CompareCurrentState(EENTCharacterStateID Other) const;
+
 #pragma endregion
 
 #pragma region Interaction

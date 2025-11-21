@@ -4,15 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTDecorator.h"
-#include "ENTCanReachLocation.generated.h"
+#include "BehaviorTree/ValueOrBBKey.h"
+#include "Player/States/ENTCharacterState.h"
+#include "ENTCheckPlayerState.generated.h"
 
 UCLASS()
-class ENTARTIFICIALINTELLIGENCE_API UENTCanReachLocation : public UBTDecorator
+class ENTARTIFICIALINTELLIGENCE_API UENTCheckPlayerState : public UBTDecorator
 {
 	GENERATED_BODY()
 
 public:
-	UENTCanReachLocation();
+	UENTCheckPlayerState();
 
 protected:
 	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
@@ -28,15 +30,9 @@ private:
 	virtual FString GetStaticDescription() const override;
 #endif
 
-	UPROPERTY(EditInstanceOnly, Category = "Location")
-	FBlackboardKeySelector Location;
+	UPROPERTY(EditInstanceOnly, Category = "Player")
+	FBlackboardKeySelector Player;
 
-	UPROPERTY(EditInstanceOnly, Category = "Location")
-	bool bGroundLineTrace = true;
-
-	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace, Units = cm))
-	float GroundTraceLength = 100.0f;
-
-	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace))
-	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
+	UPROPERTY(EditInstanceOnly, Category = "Player")
+	EENTCharacterStateID TargetState;
 };
