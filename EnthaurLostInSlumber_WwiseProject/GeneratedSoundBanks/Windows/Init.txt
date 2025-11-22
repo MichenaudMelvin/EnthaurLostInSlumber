@@ -33,7 +33,8 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 
 Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 	243379636	Reflect			\Default Work Unit\Master Audio Bus_01\Reflect	
-	348963605	Reverb			\Default Work Unit\Master Audio Bus_01\Reverb	
+	933527613	Reverb_Small			\Default Work Unit\Master Audio Bus_01\Reverb_Small	
+	3387002570	Reverb_Big			\Default Work Unit\Master Audio Bus_01\Reverb_Big	
 
 Effect plug-ins	ID	Name	Type				Notes
 	164825399	New_Reflect	Wwise Reflect			
