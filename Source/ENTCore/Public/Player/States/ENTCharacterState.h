@@ -29,6 +29,10 @@ enum class EENTCharacterStateID : uint8
 	Anim,
 };
 
+#if WITH_EDITOR
+ENTCORE_API FString StateToString(EENTCharacterStateID State);
+#endif
+
 /**
  * @brief Base class for the character state machine
  */

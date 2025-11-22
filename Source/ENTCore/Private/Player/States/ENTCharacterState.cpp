@@ -15,6 +15,37 @@
 
 #pragma region States
 
+#if WITH_EDITOR
+FString StateToString(EENTCharacterStateID State)
+{
+	switch (State)
+	{
+		case EENTCharacterStateID::None:
+			return "None";
+		case EENTCharacterStateID::Idle:
+			return "Idle";
+		case EENTCharacterStateID::Walk:
+			return "Walk";
+		case EENTCharacterStateID::Sprint:
+			return "Sprint";
+		case EENTCharacterStateID::Crouch:
+			return "Crouch";
+		case EENTCharacterStateID::Jump:
+			return "Jump";
+		case EENTCharacterStateID::Fall:
+			return "Fall";
+		case EENTCharacterStateID::Interact:
+			return "Interact";
+		case EENTCharacterStateID::Stop:
+			return "Stop";
+		case EENTCharacterStateID::Anim:
+			return "Anim";
+	}
+
+	return "Unknow state; Please fill the StateToString function (Player/State/ENTCharacterState.h/.cpp)";
+}
+#endif
+
 UENTCharacterState::UENTCharacterState()
 {
 	ViewBobbing = UENTViewBobbing::GetEmptyOscillator();

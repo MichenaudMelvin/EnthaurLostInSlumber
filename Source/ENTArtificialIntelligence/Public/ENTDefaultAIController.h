@@ -44,7 +44,7 @@ protected:
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Navigation")
-	bool IsPointReachable(const FVector Point) const;
+	bool IsPointReachable(const FVector& Point, const FVector& Extent = FVector(5.0f)) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Behavior")
 	void RunCurrentBehaviorTree();
