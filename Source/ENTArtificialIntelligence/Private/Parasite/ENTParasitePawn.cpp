@@ -174,7 +174,7 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	}
 
 	FVector ActorLocation = HitResult.Location;
-	ActorLocation += (TargetPath->GetDirection() * -1 * GetHitBoxHeight());
+	ActorLocation += (TargetPath->GetDirection() * -1 * GetParasiteHalfHeight());
 	SetActorLocation(ActorLocation);
 
 	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.Normal);
@@ -186,8 +186,8 @@ void AENTParasitePawn::PostLoad()
 {
 	Super::PostLoad();
 
-	ParasiteHeight = GetHitBoxHeight();
-	ParasiteWidth = GetHitBoxWidth();
+	ParasiteHeight = GetParasiteHeight();
+	ParasiteWidth = GetParasiteWidth();
 
 	DebugAttackLocation = AttackLocation;
 	DebugAttackSize = AttackSize;
@@ -239,8 +239,8 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 	}
 	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, ParasiteCollision))
 	{
-		ParasiteHeight = GetHitBoxHeight();
-		ParasiteWidth = GetHitBoxWidth();
+		ParasiteHeight = GetParasiteHeight();
+		ParasiteWidth = GetParasiteWidth();
 	}
 	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, AttackLocation))
 	{
@@ -464,23 +464,23 @@ void AENTParasitePawn::DebugPawn() const
 
 #pragma region MathFunctions
 
-float AENTParasitePawn::GetHitBoxHeight() const
+float AENTParasitePawn::GetParasiteHeight() const
 {
 	if (ParasiteCollision)
 	{
 		// due to the capsule rotation the height of the parasite is the capsule radius;
-		return ParasiteCollision->GetUnscaledCapsuleRadius();
+		return ParasiteCollision->GetUnscaledCapsuleRadius() * 2;
 	}
 
 	return 0.0f;
 }
 
-float AENTParasitePawn::GetHitBoxWidth() const
+float AENTParasitePawn::GetParasiteWidth() const
 {
 	if (ParasiteCollision)
 	{
 		// due to the capsule rotation the width of the parasite is the capsule halfHeight;
-		return ParasiteCollision->GetUnscaledCapsuleHalfHeight();
+		return ParasiteCollision->GetUnscaledCapsuleHalfHeight() * 2;
 	}
 
 	return 0.0f;

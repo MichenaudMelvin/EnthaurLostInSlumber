@@ -102,7 +102,7 @@ bool UENTHasReachedTheEndOfTheSpline::CalculateRawConditionValue(UBehaviorTreeCo
 	AENTParasitePawn* Parasite = Cast<AENTParasitePawn>(Pawn);
 	if (Parasite)
 	{
-		PawnHeight = Parasite->GetHitBoxHeight();
+		PawnHeight = Parasite->GetParasiteHalfHeight();
 	}
 
 	int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());

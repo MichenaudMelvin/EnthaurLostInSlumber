@@ -172,7 +172,7 @@ void UENTJumpTask::SetTargetTransform()
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
 	if (ParasitePawn)
 	{
-		PawnHeight = ParasitePawn->GetHitBoxHeight();
+		PawnHeight = ParasitePawn->GetParasiteHalfHeight();
 	}
 
 	FVector TargetLocation = TargetTransform.GetLocation();

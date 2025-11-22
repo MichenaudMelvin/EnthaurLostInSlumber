@@ -63,7 +63,7 @@ void AENTSpikeDoor::OnConstruction(const FTransform& Transform)
 
 	DoorNavModifier->SetBoxExtent(BoxExtent);
 
-	NavModifierDefaultLocation = FVector(0.0f, HalfSize, BoxExtent.Z);
+	NavModifierDefaultLocation = FVector(0.0f, HalfSize, 0.0f);
 	DoorNavModifier->SetRelativeLocation(NavModifierDefaultLocation);
 
 	NavModifierOpenedLocation = NavModifierDefaultLocation;
@@ -306,3 +306,26 @@ void AENTSpikeDoor::SetLock_Implementation(bool bState)
 	Trigger_Implementation();
 }
 
+#if WITH_EDITORONLY_DATA
+void AENTSpikeDoor::ClearDoor()
+{
+	TSet<UActorComponent*> Components = GetComponents();
+
+	for (UActorComponent* Component : Components)
+	{
+		UStaticMeshComponent* StaticMeshComp = Cast<UStaticMeshComponent>(Component);
+
+		if (!StaticMeshComp)
+		{
+			continue;
+		}
+
+		if (StaticMeshComp == LeftFrame || StaticMeshComp == RightFrame || StaticMeshComp == InterMeshesA || StaticMeshComp == InterMeshesB)
+		{
+			continue;;
+		}
+
+		StaticMeshComp->DestroyComponent();
+	}
+}
+#endif

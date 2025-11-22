@@ -122,4 +122,14 @@ public:
 	virtual void Trigger_Implementation() override;
 
 	virtual void SetLock_Implementation(bool bState) override;
+
+#if WITH_EDITORONLY_DATA
+private:
+	/**
+	 * @brief Temp function, use it if the door insn't working correctly
+	 */
+	UFUNCTION(CallInEditor, Category = "Door")
+	void ClearDoor();
+
+#endif
 };

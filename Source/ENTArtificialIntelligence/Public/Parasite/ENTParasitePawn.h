@@ -214,24 +214,46 @@ protected:
 protected:
 #if WITH_EDITORONLY_DATA
 	/**
-	 * @brief This is an editor value, please use AENTParasitePawn::GetHitBoxHeight() instead
+	 * @brief This is an editor value, please use AENTParasitePawn::GetParasiteHeight() instead
 	 */
 	UPROPERTY(VisibleDefaultsOnly, Category = "Transformation", meta = (Units = cm))
 	float ParasiteHeight = 0.0f;
 
 	/**
-	 * @brief This is an editor value, please use AENTParasitePawn::GetHitBoxWidth() instead
+	 * @brief This is an editor value, please use AENTParasitePawn::GetParasiteWidth() instead
 	 */
 	UPROPERTY(VisibleDefaultsOnly, Category = "Transformation", meta = (Units = cm))
 	float ParasiteWidth = 0.0f;
 #endif
 
 public:
+	/**
+	 * @brief Return the height of the collision
+	 * @return Height of the parasite
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Transformation")
-	float GetHitBoxHeight() const;
+	float GetParasiteHeight() const;
 
+	/**
+	 * @brief Return the half height of the collision
+	 * @return Half height of the parasite
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Transformation")
-	float GetHitBoxWidth() const;
+	float GetParasiteHalfHeight() const {return GetParasiteHeight() * 0.5f;}
+
+	/**
+	 * @brief Return the width of the collision
+	 * @return Width of the parasite
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	float GetParasiteWidth() const;
+
+	/**
+	 * @brief Return the half width of the collision
+	 * @return Half width of the parasite
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	float GetParasiteHalfWidth() const {return GetParasiteWidth() * 0.5f;}
 
 	UFUNCTION(BlueprintCallable, Category = "Transformation")
 	FVector GetParasiteForwardVector() const;
