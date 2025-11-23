@@ -65,6 +65,7 @@ void UENTMenuManager::CreateAllWidgets()
 	GammaMenu = CreateWidget(CurrentController, UIConfig->GammaMenuClass);
 	MainMenuConfirmationMenu = CreateWidget(CurrentController, UIConfig->MainMenuConfirmationMenuClass);
 	RestartConfirmationMenu = CreateWidget(CurrentController, UIConfig->RestartConfirmationMenuClass);
+	Background = CreateWidget(CurrentController, UIConfig->BackgroundClass);
 
 	OnWidgetsCreated.Broadcast();
 
@@ -121,14 +122,6 @@ void UENTMenuManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	MenuClasses.Add(MenuKey, InMenuClass);
 	MenuStack.Add(InMenuClass);
 
-	InMenuClass->AddToViewport();
-	// UE_LOG(LogTemp, Warning, TEXT("Opened menu: %s"), *InMenuClass->GetName());
-	//
-	// for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
-	// {
-	// 	UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
-	// }
-
 	if (MenuStack.Num() >= 2)
 	{
 		if (!bIsSubMenu)
@@ -142,6 +135,14 @@ void UENTMenuManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	}
 
 	CheckMenuState();
+
+	InMenuClass->AddToViewport();
+	// UE_LOG(LogTemp, Warning, TEXT("Opened menu: %s"), *InMenuClass->GetName());
+	//
+	// for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	// }
 }
 
 void UENTMenuManager::CloseCurrentMenu()
@@ -288,6 +289,19 @@ void UENTMenuManager::CheckMenuState()
 			InputSubsystem->AddMappingContext(Cast<IENTControllerMappingContext>(Controller)->GetUIMappingContext(), 0);
 			SetUIInputMode();
 		}
+		if (CurrentState == EENTMenuState::MainMenu)
+		{
+			if (MenuStack.Num() >= 3 && !bIsBackgroundDisplayed)
+			{
+				Background->AddToViewport();
+				bIsBackgroundDisplayed = true;
+			}
+			else if (MenuStack.Num() < 3 && bIsBackgroundDisplayed)
+			{
+				Background->RemoveFromParent();
+				bIsBackgroundDisplayed = false;
+			}
+		}
 	}
 	else if (MenuStack.Num() == 1 && CurrentState == EENTMenuState::MainMenu)
 	{
@@ -305,6 +319,16 @@ void UENTMenuManager::CheckMenuState()
 		SetUIInputMode();
 		CenterCursor();
 		Controller->SetPause(true);
+
+		if (!bIsBackgroundDisplayed)
+		{
+			Background->AddToViewport();
+			bIsBackgroundDisplayed = true;
+		}
+	}
+	else if (MenuStack.Num() >= 1 && CurrentState == EENTMenuState::PauseMenu)
+	{
+
 	}
 	else if (MenuStack.IsEmpty())
 	{
@@ -335,6 +359,12 @@ void UENTMenuManager::CheckMenuState()
 		}
 		
 		HUDManager->SetHUDVisibility(ESlateVisibility::Visible);
+
+		if (bIsBackgroundDisplayed)
+		{
+			Background->RemoveFromParent();
+			bIsBackgroundDisplayed = false;
+		}
 	}
 }
 

@@ -30,4 +30,13 @@ private:
 
 	UPROPERTY(EditInstanceOnly, Category = "Location")
 	FBlackboardKeySelector Location;
+
+	UPROPERTY(EditInstanceOnly, Category = "Location")
+	bool bGroundLineTrace = true;
+
+	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace, Units = cm))
+	float GroundTraceLength = 100.0f;
+
+	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace))
+	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
 };

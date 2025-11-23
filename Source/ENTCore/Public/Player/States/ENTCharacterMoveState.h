@@ -28,7 +28,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (ClampMin = 0.0f))
 	float MoveAcceleration = 2048.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Movement", meta=(ClampMin="0.0", ClampMax="1.0", UIMin="0.0", UIMax="1.0"))
+	UPROPERTY(EditDefaultsOnly, Category = "Movement", meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))
 	float SlowDownFactor = 0.5f;
 
 	virtual void ApplyMovement(float DeltaTime);
