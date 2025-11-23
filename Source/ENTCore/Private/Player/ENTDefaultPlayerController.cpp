@@ -110,7 +110,8 @@ void AENTDefaultPlayerController::Tick(float DeltaSeconds)
 	if (PlayerInputs.bInputInteractPressed)
 	{
 		PressedDuration += DeltaSeconds;
-		if (PressedDuration >= MaxPressedDuration)
+
+		if (PressedDuration >= (MaxPressedFrames * DeltaSeconds))
 		{
 			PressedDuration = 0.0f;
 			PlayerInputs.bInputInteractPressed = false;
@@ -124,6 +125,29 @@ void AENTDefaultPlayerController::Tick(float DeltaSeconds)
 	}
 #endif
 }
+
+#if WITH_EDITORONLY_DATA
+
+void AENTDefaultPlayerController::PostLoad()
+{
+	Super::PostLoad();
+
+	ComputedPressedDuration = (1/FrameRate) * MaxPressedFrames;
+}
+
+void AENTDefaultPlayerController::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	const FName& ChangedProperty = PropertyChangedEvent.GetMemberPropertyName();
+
+	if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTDefaultPlayerController, FrameRate) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTDefaultPlayerController, MaxPressedFrames))
+	{
+		ComputedPressedDuration = (1/FrameRate) * MaxPressedFrames;
+	}
+}
+
+#endif
 
 #pragma region Inputs
 

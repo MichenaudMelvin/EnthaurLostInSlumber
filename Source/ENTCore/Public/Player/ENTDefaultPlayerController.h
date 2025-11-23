@@ -91,6 +91,11 @@ protected:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+#if WITH_EDITORONLY_DATA
+	virtual void PostLoad() override;
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+
 #pragma region Inputs
 
 protected:
@@ -129,16 +134,27 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction InteractTriggerAction;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
+	FAction PauseGameAction;
+
 	float PressedDuration = 0.0f;
 
 	/**
 	 * @brief Due to the UE 5.6 migration, might be a temporary solution
 	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
-	float MaxPressedDuration = (1.0f/60.0f) * 2;
+	int MaxPressedFrames = 2;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
-	FAction PauseGameAction;
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditDefaultsOnly, Transient, Category = "Inputs Default")
+	float FrameRate = 60.0f;
+
+	/**
+	 * @brief (1/FrameRate) * MaxPressedFrames
+	 */
+	UPROPERTY(VisibleDefaultsOnly, Transient, Category = "Inputs Default", meta = (Units = s))
+	float ComputedPressedDuration = 0.0f;
+#endif
 
 	UFUNCTION()
 	void OnInputMove(const FInputActionValue& InputActionValue);
