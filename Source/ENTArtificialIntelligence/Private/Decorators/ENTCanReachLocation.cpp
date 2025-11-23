@@ -7,6 +7,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 UENTCanReachLocation::UENTCanReachLocation()
 {
@@ -14,6 +15,9 @@ UENTCanReachLocation::UENTCanReachLocation()
 	Location.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTCanReachLocation, Location));
 	Location.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTCanReachLocation, Location), AActor::StaticClass());
 	bNotifyTick = true;
+
+	ObjectTypes.Add(ObjectTypeQuery1);
+	ObjectTypes.Add(ObjectTypeQuery2);
 }
 
 void UENTCanReachLocation::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -85,6 +89,23 @@ bool UENTCanReachLocation::CalculateRawConditionValue(UBehaviorTreeComponent& Ow
 		TargetLocation = CurrentBlackboard->GetValue<UBlackboardKeyType_Vector>(Location.SelectedKeyName);
 	}
 
+	if (bGroundLineTrace)
+	{
+		TArray<AActor*> ActorsToIgnore;
+		ActorsToIgnore.Add(Controller->GetPawn());
+
+		FVector EndLocation = TargetLocation;
+		EndLocation.Z -= GroundTraceLength;
+
+		FHitResult HitResult;
+		bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, TargetLocation, EndLocation, ObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, false);
+
+		if (bHit)
+		{
+			TargetLocation = HitResult.Location;
+		}
+	}
+
 	return Controller->IsPointReachable(TargetLocation);
 }
 
@@ -97,6 +118,13 @@ FString UENTCanReachLocation::GetStaticDescription() const
 		KeyDesc = Location.SelectedKeyName.ToString();
 	}
 
-	return FString::Printf(TEXT("Can reach: %s"), *KeyDesc);
+	if (IsInversed())
+	{
+		return FString::Printf(TEXT("Cannot reach: %s"), *KeyDesc);
+	}
+	else
+	{
+		return FString::Printf(TEXT("Can reach: %s"), *KeyDesc);
+	}
 }
 #endif

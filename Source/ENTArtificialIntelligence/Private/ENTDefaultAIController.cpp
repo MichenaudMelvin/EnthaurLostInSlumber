@@ -97,21 +97,21 @@ void AENTDefaultAIController::TickAI_Implementation(float DeltaTime)
 	}
 }
 
-bool AENTDefaultAIController::IsPointReachable(const FVector Point) const
+bool AENTDefaultAIController::IsPointReachable(const FVector& Point, const FVector& Extent) const
 {
-	FVector PathStart = GetPawn()->GetActorLocation();
-	UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(GetPawn(), PathStart, Point, NULL);
+	UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
 
-	if (!NavPath)
-	{
-		return false;
-	}
-
-	return !NavPath->IsPartial();
+	FNavLocation NavLocation;
+	return NavSys->ProjectPointToNavigation(Point, NavLocation, Extent, &GetNavAgentPropertiesRef());
 }
 
 void AENTDefaultAIController::RunCurrentBehaviorTree()
 {
+	if (bIsBehaviorTreeRunning)
+	{
+		return;
+	}
+
 	UBehaviorTree* PawnBehaviorTree = IENTPawnAIInterface::Execute_GetOverridenBehaviorTree(GetPawn());
 	UBehaviorTree* TargetBehaviorTree = PawnBehaviorTree ? PawnBehaviorTree : BehaviorTree.Get();
 

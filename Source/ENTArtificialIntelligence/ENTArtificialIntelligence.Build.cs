@@ -9,7 +9,9 @@ public class ENTArtificialIntelligence : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core", "AIModule"
+                "Core",
+                "AIModule",
+                "ENTCore"
             }
         );
 
@@ -25,7 +27,6 @@ public class ENTArtificialIntelligence : ModuleRules
                 "NavigationSystem",
                 "ENTSaves",
                 "ENTComponents",
-                "ENTCore"
             }
         );
 

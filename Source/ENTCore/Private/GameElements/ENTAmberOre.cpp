@@ -218,6 +218,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		UAkGameplayStatics::PostEventAtLocation(FoliageGrowthNoise, GetTransform().GetLocation(),GetTransform().Rotator(), this);
 		FoliageTimeline.Play();
 		TriggerFullLinkedObjects();
+		TriggerEmptyLinkedObjects();
 		if (LinkedWeakZone) LinkedWeakZone->CureZone(this);
 	}
 	else
@@ -237,6 +238,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		Character->MineAmber();
 		TargetAmberHeight = EmptyAmberHeight;
 		TriggerEmptyLinkedObjects();
+		TriggerFullLinkedObjects();
 		Interactable->RemoveInteractable(MeshInteraction);
 		FillAmberTimeline.PlayFromStart();
 		FoliageTimeline.Reverse();
@@ -257,7 +259,6 @@ void AENTAmberOre::FillAmberUpdate(float Alpha)
 void AENTAmberOre::FillAmberFinished()
 {
 	Interactable->AddInteractable(MeshInteraction);
-	return;
 }
 
 

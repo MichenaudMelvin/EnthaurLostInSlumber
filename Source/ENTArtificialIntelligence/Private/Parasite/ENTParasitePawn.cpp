@@ -8,11 +8,13 @@
 #include "ENTHealthComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Parasite/ENTParasiteController.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 #include "Path/ENTNavigationArea.h"
+#include "Player/ENTDefaultCharacter.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 
@@ -26,7 +28,7 @@ FVector AENTParasitePawn::DebugAttackSize;
 
 AENTParasitePawn::AENTParasitePawn()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = false; // tick is called by the AISubsystem
 	PrimaryActorTick.bStartWithTickEnabled = false;
 
 	ParasiteCollision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("ParasiteHitBox"));
@@ -89,9 +91,32 @@ void AENTParasitePawn::BeginPlay()
 	}
 }
 
+#if WITH_EDITOR
+void AENTParasitePawn::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (bDebugDetectionRange)
+	{
+		DrawDetectionRange();
+	}
+}
+#endif
+
 void AENTParasitePawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
+
+	AActor* ResultActor = UGameplayStatics::GetActorOfClass(this, AENTDefaultCharacter::StaticClass());
+
+	if (ResultActor)
+	{
+		AENTDefaultCharacter* Character = Cast<AENTDefaultCharacter>(ResultActor);
+		if (Character)
+		{
+			Character->OnAmberUpdate.RemoveDynamic(this, &AENTParasitePawn::ChangeDetectionRange);
+		}
+	}
 
 	if (!ParasiteDeathZone)
 	{
@@ -149,7 +174,7 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	}
 
 	FVector ActorLocation = HitResult.Location;
-	ActorLocation += (TargetPath->GetDirection() * -1 * GetHitBoxHeight());
+	ActorLocation += (TargetPath->GetDirection() * -1 * GetParasiteHalfHeight());
 	SetActorLocation(ActorLocation);
 
 	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.Normal);
@@ -161,8 +186,8 @@ void AENTParasitePawn::PostLoad()
 {
 	Super::PostLoad();
 
-	ParasiteHeight = GetHitBoxHeight();
-	ParasiteWidth = GetHitBoxWidth();
+	ParasiteHeight = GetParasiteHeight();
+	ParasiteWidth = GetParasiteWidth();
 
 	DebugAttackLocation = AttackLocation;
 	DebugAttackSize = AttackSize;
@@ -214,8 +239,8 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 	}
 	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, ParasiteCollision))
 	{
-		ParasiteHeight = GetHitBoxHeight();
-		ParasiteWidth = GetHitBoxWidth();
+		ParasiteHeight = GetParasiteHeight();
+		ParasiteWidth = GetParasiteWidth();
 	}
 	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, AttackLocation))
 	{
@@ -227,6 +252,8 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 	}
 }
 #endif
+
+#pragma region BehaviorTree
 
 void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 {
@@ -252,6 +279,18 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(ChaseSpeedKeyName, ChaseSpeed);
 
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(DetectionRangeKeyName, DefaultDetectionRange);
+
+	AActor* ResultActor = UGameplayStatics::GetActorOfClass(this, AENTDefaultCharacter::StaticClass());
+
+	if (ResultActor)
+	{
+		AENTDefaultCharacter* Character = Cast<AENTDefaultCharacter>(ResultActor);
+		if (Character)
+		{
+			Character->OnAmberUpdate.AddDynamic(this, &AENTParasitePawn::ChangeDetectionRange);
+			ParasiteController->GetBlackboardComponent()->SetValueAsObject(PlayerKeyName, Character);
+		}
+	}
 }
 
 void AENTParasitePawn::PossessedBy(AController* NewController)
@@ -271,9 +310,28 @@ void AENTParasitePawn::PossessedBy(AController* NewController)
 #endif
 }
 
+void AENTParasitePawn::StartBehaviorTree()
+{
+	if (!ParasiteController)
+	{
+		return;
+	}
+
+	ParasiteController->RunCurrentBehaviorTree();
+}
+
+void AENTParasitePawn::Trigger_Implementation()
+{
+	IENTActivation::Trigger_Implementation();
+
+	StartBehaviorTree();
+}
+
+#pragma endregion
+
 #pragma region DetectionRange
 
-#if WITH_EDITOR
+#if WITH_EDITORONLY_DATA
 void AENTParasitePawn::DrawDetectionRange() const
 {
 	ClearDebugTraces();
@@ -295,6 +353,7 @@ void AENTParasitePawn::DrawDetectionRange() const
 void AENTParasitePawn::ChangeDetectionRange(bool bDoesPlayerHaveAmber)
 {
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(DetectionRangeKeyName, bDoesPlayerHaveAmber ? AugmentedDetectionRange : DefaultDetectionRange);
+	ParasiteController->GetBlackboardComponent()->SetValueAsBool(DoesPlayerHaveAmberKeyName, bDoesPlayerHaveAmber);
 }
 
 #pragma endregion
@@ -405,23 +464,23 @@ void AENTParasitePawn::DebugPawn() const
 
 #pragma region MathFunctions
 
-float AENTParasitePawn::GetHitBoxHeight() const
+float AENTParasitePawn::GetParasiteHeight() const
 {
 	if (ParasiteCollision)
 	{
 		// due to the capsule rotation the height of the parasite is the capsule radius;
-		return ParasiteCollision->GetUnscaledCapsuleRadius();
+		return ParasiteCollision->GetUnscaledCapsuleRadius() * 2;
 	}
 
 	return 0.0f;
 }
 
-float AENTParasitePawn::GetHitBoxWidth() const
+float AENTParasitePawn::GetParasiteWidth() const
 {
 	if (ParasiteCollision)
 	{
 		// due to the capsule rotation the width of the parasite is the capsule halfHeight;
-		return ParasiteCollision->GetUnscaledCapsuleHalfHeight();
+		return ParasiteCollision->GetUnscaledCapsuleHalfHeight() * 2;
 	}
 
 	return 0.0f;
