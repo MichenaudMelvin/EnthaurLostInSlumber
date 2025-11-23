@@ -5,18 +5,12 @@
 #include "AkGameplayStatics.h"
 #include "ENTElectricityComponent.h"
 #include "Components/BoxComponent.h"
-#include "ENTInteractableComponent.h"
 #include "Components/PostProcessComponent.h"
-#include "GameElements/ENTAmberOre.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Config/ENTCoreConfig.h"
 #include "Player/ENTDefaultCharacter.h"
-#include "Player/States/ENTCharacterStateMachine.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
-#include "Components/InstancedStaticMeshComponent.h"
 #include "Kismet/KismetMaterialLibrary.h"
-#include "Kismet/KismetSystemLibrary.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/BillboardComponent.h"

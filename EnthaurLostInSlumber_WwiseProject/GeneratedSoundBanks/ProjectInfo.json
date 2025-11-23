@@ -3,7 +3,7 @@
   "Project": {
    "Name": "EnthaurLostInSlumber_WwiseProject",
    "GUID": "{B5DC1177-C412-4544-92EE-69C3E3E38429}",
-   "Generator": "2024.1.8.8893"
+   "Generator": "2024.1.8.8898"
   },
   "CacheRoot": "../.cache",
   "Platforms": [
@@ -31,6 +31,6 @@
     "UseAsStandIn": "true"
    }
   ],
-  "FileHash": "{65A39FAD-C8AD-DD37-9FE1-3924539E0951}"
+  "FileHash": "{83226ED0-290A-49C2-50C1-2F1EADC54DC9}"
  }
 }
