@@ -186,6 +186,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
 	TObjectPtr<UStaticMeshComponent> NerveBall;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Nerve")
+	TObjectPtr<UStaticMeshComponent> CorruptNerveBlocker;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Nerve")
+	TObjectPtr<UStaticMesh> CorruptNerveBlockerMesh;
+
 	UPROPERTY(EditDefaultsOnly, Category = "NerveBall|Apperance")
 	TObjectPtr<UStaticMesh> LigamentBallMesh;
 
@@ -281,6 +287,24 @@ private:
 	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
 
 	virtual void OnExitWeakZone_Implementation() override;
+
+	FTimeline EnterWeakZoneTimeline;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
+	TObjectPtr<UCurveFloat> EnterWeakZoneCurve;
+
+	UPROPERTY()
+	UMaterialInstanceDynamic* CorruptMID;
+
+	UFUNCTION()
+	void UpdateEnterWeakZone(float Alpha);
+
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
+	float RetractLigamentDuration = 1.5f;
+
+	UPROPERTY()
+	float StartZ;
 
 #pragma endregion
 
