@@ -11,7 +11,7 @@
     "GUID": "{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}",
     "Color": "11",
     "Language": "SFX",
-    "Hash": "{8B7ED207-AF32-778F-0CD9-839234FC2068}",
+    "Hash": "{BC1A65DC-CA02-1B8B-2AD0-E5D875DDC2FC}",
     "ObjectPath": "\\SoundBanks\\Effects\\SB_Effects",
     "ShortName": "SB_Effects",
     "Path": "SB_Effects.bnk",
@@ -134,7 +134,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
-      "CachePath": "F0/{F0063717-7A1A-F9CA-DB3A-1E951D6E9E85}.wem"
+      "CachePath": "8F/{8FBE8B0A-16F1-460E-3D51-82F27654E6EB}.wem"
      },
      {
       "Id": "101091315",
@@ -415,6 +415,14 @@
       "Location": "Memory",
       "ShortName": "AK_Factory_IR\\Halls\\AK Brasilien Halle.wav",
       "CachePath": "3F/{3FE2B111-9861-4BEA-BA71-6DED395C61B3}.wem"
+     },
+     {
+      "Id": "420614766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
+      "CachePath": "ED/{EDABBC9C-DF05-5B3C-2D1E-C21B5B51F324}.wem"
      },
      {
       "Id": "427082242",
@@ -1987,6 +1995,19 @@
        "GUID": "{A1F17D99-0801-4F32-B74E-ADB2D9ACC556}",
        "LibName": "Wwise Harmonizer",
        "LibId": "9043971"
+      },
+      {
+       "Id": "825401838",
+       "Name": "AK_Convolution_Reverb_Dark_Cathedrale_Small",
+       "ObjectPath": "\\Effects\\Default Work Unit\\AK_Convolution_Reverb_Dark_Cathedrale_Small",
+       "GUID": "{917384BE-AF40-4D98-BEFD-ADDE077A7A11}",
+       "LibName": "Wwise Convolution Reverb",
+       "LibId": "8323075",
+       "MediaRefs": [
+        {
+         "Id": "420614766"
+        }
+       ]
       },
       {
        "Id": "833756682",
@@ -5598,7 +5619,7 @@
       "PluginRefs": {
        "ShareSets": [
         {
-         "Id": "164825399"
+         "Id": "3399505373"
         }
        ]
       }
@@ -5611,7 +5632,7 @@
       "PluginRefs": {
        "ShareSets": [
         {
-         "Id": "3077109135"
+         "Id": "825401838"
         }
        ]
       }
@@ -5652,6 +5673,6 @@
     ]
    }
   ],
-  "FileHash": "{7E3B2C56-D760-7DA6-9472-8FA71F18FDF9}"
+  "FileHash": "{35B5F3E3-3BEB-895F-A17F-E8BA8B603100}"
  }
 }

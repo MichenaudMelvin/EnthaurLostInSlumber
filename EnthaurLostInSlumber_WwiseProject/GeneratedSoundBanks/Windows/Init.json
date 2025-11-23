@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{C224E78F-EE19-0D68-BBE7-F8E55E328AF7}",
+    "Hash": "{79C2133A-7A97-97F8-56AC-375A6EEA4B56}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -21,18 +21,31 @@
       "Streaming": "false",
       "Location": "OtherBank",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
-      "CachePath": "F0/{F0063717-7A1A-F9CA-DB3A-1E951D6E9E85}.wem"
+      "CachePath": "8F/{8FBE8B0A-16F1-460E-3D51-82F27654E6EB}.wem"
+     },
+     {
+      "Id": "420614766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "OtherBank",
+      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
+      "CachePath": "ED/{EDABBC9C-DF05-5B3C-2D1E-C21B5B51F324}.wem"
      }
     ],
     "Plugins": {
      "ShareSets": [
       {
-       "Id": "164825399",
-       "Name": "New_Reflect",
-       "ObjectPath": "\\Effects\\Factory Effects\\New_Reflect",
-       "GUID": "{67FADD73-FC10-4D2A-88D9-F172387587C0}",
-       "LibName": "Wwise Reflect",
-       "LibId": "11206659"
+       "Id": "825401838",
+       "Name": "AK_Convolution_Reverb_Dark_Cathedrale_Small",
+       "ObjectPath": "\\Effects\\Default Work Unit\\AK_Convolution_Reverb_Dark_Cathedrale_Small",
+       "GUID": "{917384BE-AF40-4D98-BEFD-ADDE077A7A11}",
+       "LibName": "Wwise Convolution Reverb",
+       "LibId": "8323075",
+       "MediaRefs": [
+        {
+         "Id": "420614766"
+        }
+       ]
       },
       {
        "Id": "3077109135",
@@ -46,6 +59,14 @@
          "Id": "99990636"
         }
        ]
+      },
+      {
+       "Id": "3399505373",
+       "Name": "Reflect_Physically_Based",
+       "ObjectPath": "\\Effects\\Factory Reflect Physically-Based\\Reflect_Physically_Based",
+       "GUID": "{C69F5865-C206-4B45-BC40-315F3F39151A}",
+       "LibName": "Wwise Reflect",
+       "LibId": "11206659"
       }
      ],
      "AudioDevices": [
@@ -105,7 +126,7 @@
       "PluginRefs": {
        "ShareSets": [
         {
-         "Id": "164825399"
+         "Id": "3399505373"
         }
        ]
       }
@@ -118,7 +139,7 @@
       "PluginRefs": {
        "ShareSets": [
         {
-         "Id": "3077109135"
+         "Id": "825401838"
         }
        ]
       }
@@ -790,6 +811,6 @@
     ]
    }
   ],
-  "FileHash": "{1163FC87-FCA6-C94E-722F-EEC33174D768}"
+  "FileHash": "{39DA9553-1A4B-9FAB-FEFB-2305C572E385}"
  }
 }

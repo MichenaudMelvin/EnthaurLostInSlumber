@@ -116,7 +116,7 @@
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AKE_PR_Move" ID="{FC7821CC-C3D3-43FC-B50F-81B908A653EE}" WorkUnitID="{3D8D7D91-3E91-4624-A905-8BF0B3D500AC}"/>
+							<ObjectRef Name="AKE_PR_Move" ID="{FC7821CC-C3D3-43FC-B50F-81B908A653EE}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="1" Y="1"/>
 						</Module>
 						<Module>
@@ -124,7 +124,7 @@
 							<Position X="2" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="_AKE_PR_Move_Stop" ID="{742F5950-5BF3-4E01-8223-17EB432505E5}" WorkUnitID="{3D8D7D91-3E91-4624-A905-8BF0B3D500AC}"/>
+							<ObjectRef Name="AKE_PR_Move_Stop" ID="{742F5950-5BF3-4E01-8223-17EB432505E5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="2" Y="1"/>
 						</Module>
 						<Module>
