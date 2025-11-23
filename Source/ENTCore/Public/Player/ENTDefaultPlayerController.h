@@ -143,7 +143,7 @@ protected:
 	 * @brief Due to the UE 5.6 migration, might be a temporary solution
 	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
-	int MaxPressedFrames = 2;
+	uint8 MaxPressedFrames = 2;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditDefaultsOnly, Transient, Category = "Inputs Default")
@@ -266,4 +266,13 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	FKey NewKey;
+
+#if WITH_EDITOR
+private:
+	/**
+	 * @brief Should only be used by a console command for debug
+	 */
+	UFUNCTION(Exec)
+	void RemoveAllWidgets();
+#endif
 };

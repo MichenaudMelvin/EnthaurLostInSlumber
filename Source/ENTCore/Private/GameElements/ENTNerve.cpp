@@ -394,6 +394,16 @@ void AENTNerve::ApplyCablesPhysics()
 		return;
 	}
 
+#if WITH_EDITORONLY_DATA
+	if (bDebugNerve && Hit.GetActor())
+	{
+		const FString Message = FString::Printf(TEXT("Hit: %s"), *Hit.GetActor()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, Message);
+		FMessageLog("BlueprintLog").Message(EMessageSeverity::Info, FText::FromString(Message));
+	}
+#endif
+
 	ImpactNormals.Add(Hit.Normal);
 
 	FVector Direction = UKismetMathLibrary::GetDirectionUnitVector(CableEndLocation, Hit.Location);

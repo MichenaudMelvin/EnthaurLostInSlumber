@@ -14,6 +14,10 @@
 UENTCharacterFallState::UENTCharacterFallState()
 {
 	StateID = EENTCharacterStateID::Fall;
+
+#if WITH_EDITORONLY_DATA
+	DrawDebugNoiseDuration = 10.0f;
+#endif
 }
 
 void UENTCharacterFallState::StateEnter_Implementation(const EENTCharacterStateID& PreviousStateID)
@@ -30,7 +34,7 @@ void UENTCharacterFallState::StateEnter_Implementation(const EENTCharacterStateI
 		bCanDoCoyoteTime = false;
 	}
 
-	bHasPressedInteraction = false;
+	bShouldEmitNoises = false;
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	Character->GetCharacterMovement()->GravityScale = GravityScale;
 	Character->GetCharacterMovement()->AirControl = AirControl;
@@ -69,14 +73,60 @@ void UENTCharacterFallState::StateTick_Implementation(float DeltaTime)
 
 	if(Character->GetCharacterMovement()->IsFalling())
 	{
+		CharacterVelocity = FMath::Abs(Character->GetCharacterMovement()->Velocity.Z);
 		return;
 	}
 
 	// emit noise on landing
+	bShouldEmitNoises = true;
 	EmitNoise();
 
 	SetProjectionVelocity(FVector::ZeroVector, false);
 	StateMachine->ChangeState(EENTCharacterStateID::Idle);
+}
+
+#if WITH_EDITORONLY_DATA
+void UENTCharacterFallState::PostLoad()
+{
+	Super::PostLoad();
+
+	DebugNoiseRange = VelocityNoiseFactor * CharacterVelocity;
+}
+
+void UENTCharacterFallState::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	const FName& ChangedProperty = PropertyChangedEvent.GetMemberPropertyName();
+
+	if (ChangedProperty == GET_MEMBER_NAME_CHECKED(UENTCharacterFallState, CharacterVelocity) || ChangedProperty == GET_MEMBER_NAME_CHECKED(UENTCharacterFallState, VelocityNoiseFactor) || ChangedProperty == GET_MEMBER_NAME_CHECKED(UENTCharacterFallState, NoiseRange))
+	{
+		DebugNoiseRange = VelocityNoiseFactor * CharacterVelocity;
+	}
+}
+
+#endif
+
+void UENTCharacterFallState::EmitNoise()
+{
+	if (!bDoesMakeNoise || !bShouldEmitNoises)
+	{
+		return;
+	}
+
+	NoiseRange = VelocityNoiseFactor * CharacterVelocity;
+
+	Super::EmitNoise();
+
+#if WITH_EDITORONLY_DATA
+	if (bDebugState)
+	{
+		const FString Message = FString::Printf(TEXT("Emitted a noise of loudness %f and a range of %fcm, Character velocity was %fcm/s"), Loudness, NoiseRange, CharacterVelocity);
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, Message);
+		FMessageLog("BlueprintLog").Message(EMessageSeverity::Info, FText::FromString(Message));
+	}
+#endif
 }
 
 void UENTCharacterFallState::SetProjectionVelocity(const FVector& Velocity, bool bOverrideVelocity)

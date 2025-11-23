@@ -301,4 +301,11 @@ protected:
 
 public:
 	void SetCurrentReceptacle(AENTNerveReceptacle* Receptacle);
+
+#if WITH_EDITORONLY_DATA
+protected:
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDebugNerve = false;
+
+#endif
 };

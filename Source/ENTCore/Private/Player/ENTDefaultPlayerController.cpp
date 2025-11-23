@@ -4,8 +4,10 @@
 #include "Player/ENTDefaultPlayerController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "Blueprint/UserWidget.h"
-#include "Player/ENTDefaultCharacter.h"
+
+#if WITH_EDITOR
+#include "Blueprint/WidgetLayoutLibrary.h"
+#endif
 
 FAction::FAction()
 {
@@ -268,7 +270,7 @@ void AENTDefaultPlayerController::SwitchKeyBind()
 	{
 		return;
 	}
-	
+
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
 	if (Subsystem == nullptr)
 	{
@@ -276,9 +278,16 @@ void AENTDefaultPlayerController::SwitchKeyBind()
 	}
 
 	Subsystem->RemoveMappingContext(DefaultMappingContext);
-	
+
 	UInputMappingContext* NewIMC = DuplicateObject(DefaultMappingContext, this);
 	NewIMC->MapKey(NewIA,NewKey);
 
 	Subsystem->AddMappingContext(NewIMC, 0);
 }
+
+#if WITH_EDITOR
+void AENTDefaultPlayerController::RemoveAllWidgets()
+{
+	UWidgetLayoutLibrary::RemoveAllWidgets(this);
+}
+#endif
