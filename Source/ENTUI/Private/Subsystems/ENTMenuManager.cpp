@@ -250,6 +250,11 @@ void UENTMenuManager::SetMenuState(EENTMenuState InUIState)
 	CurrentState = InUIState;
 }
 
+void UENTMenuManager::SetBackground(bool bIsBackgroundShown)
+{
+	bIsBackgroundDisplayed = bIsBackgroundShown;
+}
+
 void UENTMenuManager::CheckMenuState()
 {
 	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();

@@ -9,6 +9,8 @@ UENTLerpRotation::UENTLerpRotation()
 {
 	NodeName = "LerpRotation";
 	bNotifyTick = true;
+
+	ForceInstancing(true);
 }
 
 EBTNodeResult::Type UENTLerpRotation::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)

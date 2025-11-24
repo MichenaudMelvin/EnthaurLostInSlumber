@@ -8,6 +8,8 @@
 UENTChangePawnGravity::UENTChangePawnGravity()
 {
 	NodeName = "ChangePawnGravity";
+
+	ForceInstancing(true);
 }
 
 EBTNodeResult::Type UENTChangePawnGravity::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
