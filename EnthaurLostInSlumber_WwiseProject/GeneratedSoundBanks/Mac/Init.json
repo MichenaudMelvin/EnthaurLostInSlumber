@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{B9CB94DF-9A14-C0F2-6C32-DBD4F83C1E26}",
+    "Hash": "{8AEDA54D-C0E4-EE41-34F2-84C6DB78DEFC}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -21,18 +21,31 @@
       "Streaming": "false",
       "Location": "OtherBank",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
-      "CachePath": "3F/{3F5D2936-B639-02BB-E5E1-557D92F48FB6}.wem"
+      "CachePath": "14/{14BC57F2-623A-F546-F7A4-0B01EB8391FC}.wem"
+     },
+     {
+      "Id": "420614766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "OtherBank",
+      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
+      "CachePath": "9A/{9A4C6E7C-BC0C-A3E0-BCD9-A66441F50BBE}.wem"
      }
     ],
     "Plugins": {
      "ShareSets": [
       {
-       "Id": "164825399",
-       "Name": "New_Reflect",
-       "ObjectPath": "\\Effects\\Factory Effects\\New_Reflect",
-       "GUID": "{67FADD73-FC10-4D2A-88D9-F172387587C0}",
-       "LibName": "Wwise Reflect",
-       "LibId": "11206659"
+       "Id": "825401838",
+       "Name": "AK_Convolution_Reverb_Dark_Cathedrale_Small",
+       "ObjectPath": "\\Effects\\Default Work Unit\\AK_Convolution_Reverb_Dark_Cathedrale_Small",
+       "GUID": "{917384BE-AF40-4D98-BEFD-ADDE077A7A11}",
+       "LibName": "Wwise Convolution Reverb",
+       "LibId": "8323075",
+       "MediaRefs": [
+        {
+         "Id": "420614766"
+        }
+       ]
       },
       {
        "Id": "3077109135",
@@ -46,6 +59,14 @@
          "Id": "99990636"
         }
        ]
+      },
+      {
+       "Id": "3399505373",
+       "Name": "Reflect_Physically_Based",
+       "ObjectPath": "\\Effects\\Factory Reflect Physically-Based\\Reflect_Physically_Based",
+       "GUID": "{C69F5865-C206-4B45-BC40-315F3F39151A}",
+       "LibName": "Wwise Reflect",
+       "LibId": "11206659"
       }
      ],
      "AudioDevices": [
@@ -105,15 +126,28 @@
       "PluginRefs": {
        "ShareSets": [
         {
-         "Id": "164825399"
+         "Id": "3399505373"
         }
        ]
       }
      },
      {
-      "Id": "348963605",
-      "Name": "Reverb",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+      "Id": "933527613",
+      "Name": "Reverb_Small",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb_Small",
+      "GUID": "{0462E848-BED2-4D89-8492-8F751F587A55}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "825401838"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "3387002570",
+      "Name": "Reverb_Big",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb_Big",
       "GUID": "{06B51433-C685-4945-9920-67B617503E73}",
       "PluginRefs": {
        "ShareSets": [
@@ -777,6 +811,6 @@
     ]
    }
   ],
-  "FileHash": "{D56A327C-8317-A79D-0329-05099520C761}"
+  "FileHash": "{9A46950F-83FB-AD74-22C3-0F5C792CC08E}"
  }
 }
