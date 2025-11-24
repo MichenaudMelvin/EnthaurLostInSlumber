@@ -267,6 +267,16 @@ void AENTDefaultCharacter::DisplayStates(bool bDisplay)
 }
 #endif
 
+bool AENTDefaultCharacter::CompareCurrentState(EENTCharacterStateID Other) const
+{
+	if (!StateMachine)
+	{
+		return false;
+	}
+
+	return StateMachine->GetCurrentStateID() == Other;
+}
+
 #pragma endregion
 
 #pragma region Interaction
@@ -369,7 +379,7 @@ void AENTDefaultCharacter::Landed(const FHitResult& Hit)
 	ResetFootStepsEvent();
 }
 
-bool AENTDefaultCharacter::GroundTrace(FHitResult& HitResult) const
+bool AENTDefaultCharacter::GroundTrace(const FVector& StartLocation, float TraceLength, FHitResult& HitResult) const
 {
 	const UENTCoreConfig* CoreConfig =  GetDefault<UENTCoreConfig>();
 
@@ -378,19 +388,16 @@ bool AENTDefaultCharacter::GroundTrace(FHitResult& HitResult) const
 		return false;
 	}
 
-	FVector StartLocation = GetBottomLocation();
 	FVector EndLocation = StartLocation;
-	EndLocation.Z -= GroundTraceLength;
+	EndLocation.Z -= TraceLength;
 
 	FCollisionQueryParams CollisionQueryParams;
 	CollisionQueryParams.bReturnPhysicalMaterial = true;
 
-	// const FCollisionObjectQueryParams ObjectParams = ConfigureCollisionObjectParams(CoreConfig->GroundObjectTypes);
-
 	TArray<AActor*> ActorsToIgnore;
 
 	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, CoreConfig->GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
-	// return GetWorld()->LineTraceSingleByObjectType(HitResult, StartLocation, EndLocation, ObjectParams, CollisionQueryParams);
+
 }
 
 void AENTDefaultCharacter::GroundMovement()
@@ -510,10 +517,20 @@ FVector AENTDefaultCharacter::GetTopLocation() const
 	return GetPlayerLocation(true);
 }
 
+float AENTDefaultCharacter::GetCharacterHalfHeight() const
+{
+	if (GetCapsuleComponent())
+	{
+		return GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	}
+
+	return 0.0f;
+}
+
 FVector AENTDefaultCharacter::GetPlayerLocation(bool TopLocation) const
 {
 	FVector TargetLocation = GetActorLocation();
-	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight() * (TopLocation ? 1 : -1);
+	TargetLocation.Z += GetCharacterHalfHeight() * (TopLocation ? 1 : -1);
 	return TargetLocation;
 }
 
@@ -670,10 +687,28 @@ void AENTDefaultCharacter::Respawn()
 	RespawnRotation.Pitch = CurrentRotation.Pitch;
 	RespawnRotation.Roll = CurrentRotation.Roll;
 
-	RespawnTransform.SetRotation(RespawnRotation.Quaternion());
-	RespawnTransform.SetScale3D(FVector::OneVector);
+	FHitResult HitResult;
+	bool bHit = GroundTrace(RespawnTransform.GetLocation(), RespawnGroundTrace, HitResult);
 
-	SetActorTransform(RespawnTransform);
+	if (bHit)
+	{
+		HitResult.Location.Z += GetCharacterHalfHeight();
+		SetActorLocation(HitResult.Location);
+	}
+	else
+	{
+		SetActorLocation(RespawnTransform.GetLocation());
+	}
+
+	if (Controller)
+	{
+		Controller->SetControlRotation(RespawnRotation);
+	}
+	else
+	{
+		RespawnTransform.SetRotation(RespawnRotation.Quaternion());
+	}
+
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	OnRespawn.Broadcast();

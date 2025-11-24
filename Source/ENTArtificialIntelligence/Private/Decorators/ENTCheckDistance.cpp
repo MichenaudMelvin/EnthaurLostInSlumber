@@ -5,12 +5,16 @@
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 UENTCheckDistance::UENTCheckDistance()
 {
 	NodeName = "CheckDistance";
 	Actor.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTCheckDistance, Actor), AActor::StaticClass());
 	bNotifyTick = true;
+
+	ObjectTypes.Add(ObjectTypeQuery1);
+	ObjectTypes.Add(ObjectTypeQuery2);
 }
 
 void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -66,14 +70,33 @@ bool UENTCheckDistance::CalculateRawConditionValue(UBehaviorTreeComponent& Owner
 		return false;
 	}
 
-	const AActor* TargetActor = Cast<AActor>(CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(Actor.SelectedKeyName));
+	const UObject* Object = CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(Actor.SelectedKeyName);
+
+	if (!Object)
+	{
+		return false;
+	}
+
+	AAIController* Controller = OwnerComp.GetAIOwner();
+	if (!Controller)
+	{
+		return false;
+	}
+
+	APawn* Pawn = Controller->GetPawn();
+	if (!Pawn)
+	{
+		return false;
+	}
+
+	const AActor* TargetActor = Cast<AActor>(Object);
 
 	if (!TargetActor)
 	{
 		return false;
 	}
 
-	const float DistanceToActor = OwnerComp.GetAIOwner()->GetPawn()->GetDistanceTo(TargetActor);
+	const float DistanceToActor = Pawn->GetDistanceTo(TargetActor);
 
 	const float DistanceCheck = Distance.GetValue(OwnerComp);
 
@@ -101,12 +124,48 @@ bool UENTCheckDistance::CalculateRawConditionValue(UBehaviorTreeComponent& Owner
 			break;
 	}
 
-	return bResult;
+	if (!bResult)
+	{
+		return bResult;
+	}
+
+	bool bDoCollisionTest = CollisionTest.GetValue(OwnerComp);
+	if (bInverseCollisionTestValue)
+	{
+		bDoCollisionTest = !bDoCollisionTest;
+	}
+
+	if (!bDoCollisionTest)
+	{
+		return bResult;
+	}
+
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(Pawn);
+
+	EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
+
+#if WITH_EDITORONLY_DATA
+	if (bDebugTask)
+	{
+		DrawDebugTrace = EDrawDebugTrace::ForOneFrame;
+	}
+#endif
+
+	FHitResult HitResult;
+	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, Pawn->GetActorLocation(), TargetActor->GetActorLocation(), ObjectTypes, false, ActorsToIgnore, DrawDebugTrace, HitResult, false);
+
+	return !bHit && bResult;
 }
 
 #if WITH_EDITOR
 FString UENTCheckDistance::GetStaticDescription() const
 {
+	if (IsInversed())
+	{
+		return "Change the check method rather than inverting the decorator";
+	}
+
 	FString KeyDesc("invalid");
 	if (Actor.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
 	{

@@ -7,6 +7,7 @@
 #include "HUD/ENTDeathTransition.h"
 #include "HUD/ENTGameplayHUD.h"
 #include "HUD/ENTLevelEntering.h"
+#include "Menus/Elements/ENTBackground.h"
 #include "Menus/Main/ENTCreditsMenu.h"
 #include "Menus/Main/ENTMainMenu.h"
 #include "Menus/Main/ENTNewGameMenu.h"
@@ -53,6 +54,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
 	TSubclassOf<UENTQuitMenu> QuitMenuClass = UENTQuitMenu::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
+	TSubclassOf<UENTBackground> BackgroundClass = UENTBackground::StaticClass();
 
 #pragma endregion
 
