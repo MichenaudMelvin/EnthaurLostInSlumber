@@ -4,8 +4,10 @@
 #include "Player/ENTDefaultPlayerController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "Blueprint/UserWidget.h"
-#include "Player/ENTDefaultCharacter.h"
+
+#if WITH_EDITOR
+#include "Blueprint/WidgetLayoutLibrary.h"
+#endif
 
 FAction::FAction()
 {
@@ -110,7 +112,8 @@ void AENTDefaultPlayerController::Tick(float DeltaSeconds)
 	if (PlayerInputs.bInputInteractPressed)
 	{
 		PressedDuration += DeltaSeconds;
-		if (PressedDuration >= MaxPressedDuration)
+
+		if (PressedDuration >= (MaxPressedFrames * DeltaSeconds))
 		{
 			PressedDuration = 0.0f;
 			PlayerInputs.bInputInteractPressed = false;
@@ -124,6 +127,29 @@ void AENTDefaultPlayerController::Tick(float DeltaSeconds)
 	}
 #endif
 }
+
+#if WITH_EDITORONLY_DATA
+
+void AENTDefaultPlayerController::PostLoad()
+{
+	Super::PostLoad();
+
+	ComputedPressedDuration = (1/FrameRate) * MaxPressedFrames;
+}
+
+void AENTDefaultPlayerController::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	const FName& ChangedProperty = PropertyChangedEvent.GetMemberPropertyName();
+
+	if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTDefaultPlayerController, FrameRate) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTDefaultPlayerController, MaxPressedFrames))
+	{
+		ComputedPressedDuration = (1/FrameRate) * MaxPressedFrames;
+	}
+}
+
+#endif
 
 #pragma region Inputs
 
@@ -244,7 +270,7 @@ void AENTDefaultPlayerController::SwitchKeyBind()
 	{
 		return;
 	}
-	
+
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
 	if (Subsystem == nullptr)
 	{
@@ -252,9 +278,16 @@ void AENTDefaultPlayerController::SwitchKeyBind()
 	}
 
 	Subsystem->RemoveMappingContext(DefaultMappingContext);
-	
+
 	UInputMappingContext* NewIMC = DuplicateObject(DefaultMappingContext, this);
 	NewIMC->MapKey(NewIA,NewKey);
 
 	Subsystem->AddMappingContext(NewIMC, 0);
 }
+
+#if WITH_EDITOR
+void AENTDefaultPlayerController::RemoveAllWidgets()
+{
+	UWidgetLayoutLibrary::RemoveAllWidgets(this);
+}
+#endif

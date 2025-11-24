@@ -48,4 +48,21 @@ private:
 
 	UPROPERTY(EditInstanceOnly, Category = "Behavior")
 	EENTCheckMethod CheckMethod;
+
+	UPROPERTY(EditInstanceOnly, Category = "Distance")
+	FValueOrBBKey_Bool CollisionTest;
+
+	UPROPERTY(EditInstanceOnly, Category = "Distance")
+	bool bInverseCollisionTestValue;
+
+	/**
+	 * @brief Only used if CollisionTest is true 
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Distance")
+	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDebugTask = false;
+#endif
 };
