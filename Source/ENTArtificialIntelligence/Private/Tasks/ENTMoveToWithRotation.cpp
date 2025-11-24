@@ -14,6 +14,8 @@ UENTMoveToWithRotation::UENTMoveToWithRotation()
 {
 	NodeName = "MoveToWithRotation";
 	bNotifyTick = true;
+
+	ForceInstancing(true);
 }
 
 void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)

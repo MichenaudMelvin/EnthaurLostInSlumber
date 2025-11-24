@@ -58,6 +58,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void SetMenuState(EENTMenuState InUIState);
 
+	void SetBackground(bool bIsBackgroundShown);
+
 	void CheckMenuState();
 
 	void SetUIInputMode() const;
