@@ -14,6 +14,8 @@ UENTTriggerAnimation::UENTTriggerAnimation()
 	NodeName = "TriggerAnimation";
 	bNotifyTick = true;
 
+	ForceInstancing(true);
+
 	FinishCurrentTaskKey.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UENTTriggerAnimation, FinishCurrentTaskKey));
 }
 

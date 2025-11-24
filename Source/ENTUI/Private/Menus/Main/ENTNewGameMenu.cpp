@@ -44,4 +44,5 @@ void UENTNewGameMenu::HandleNewGameInteraction()
 
 	MenuManager->SetMenuState(EENTMenuState::Waiting);
 	MenuManager->CloseAllMenus(EENTMenuState::Gameplay);
+	MenuManager->SetBackground(false);
 }

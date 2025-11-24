@@ -9,6 +9,8 @@ UENTClearBlackboardVariable::UENTClearBlackboardVariable()
 	NodeName = "ClearBlackboardValue";
 	bNotifyBecomeRelevant = true;
 	bNotifyCeaseRelevant = true;
+
+	ForceInstancing(true);
 }
 
 void UENTClearBlackboardVariable::InitializeFromAsset(UBehaviorTree& Asset)

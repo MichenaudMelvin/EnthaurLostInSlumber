@@ -15,6 +15,8 @@ UENTFindPointInNavigationArea::UENTFindPointInNavigationArea()
 	bNotifyBecomeRelevant = true;
 	bCreateNodeInstance = true;
 
+	ForceInstancing(true);
+
 	NavigationArea.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTFindPointInNavigationArea, NavigationArea), AENTNavigationArea::StaticClass());
 	RandomLocationKey.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTFindPointInNavigationArea, RandomLocationKey));
 }
