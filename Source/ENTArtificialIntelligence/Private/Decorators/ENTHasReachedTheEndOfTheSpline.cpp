@@ -17,6 +17,8 @@ UENTHasReachedTheEndOfTheSpline::UENTHasReachedTheEndOfTheSpline()
 	PathIndex.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTHasReachedTheEndOfTheSpline, PathIndex));
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTHasReachedTheEndOfTheSpline, PathDirection));
 	bNotifyTick = true;
+
+	ForceInstancing(true);
 }
 
 void UENTHasReachedTheEndOfTheSpline::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)

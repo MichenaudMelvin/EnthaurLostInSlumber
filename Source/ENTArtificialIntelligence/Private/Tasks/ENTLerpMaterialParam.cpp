@@ -10,6 +10,8 @@ UENTLerpMaterialParam::UENTLerpMaterialParam()
 {
 	NodeName = "LerpMaterialParam";
 	bNotifyTick = true;
+
+	ForceInstancing(true);
 }
 
 void UENTLerpMaterialParam::InitializeFromAsset(UBehaviorTree& Asset)
