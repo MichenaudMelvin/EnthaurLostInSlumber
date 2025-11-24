@@ -11,7 +11,7 @@
     "GUID": "{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}",
     "Color": "11",
     "Language": "SFX",
-    "Hash": "{98D6E414-32BB-E3C8-D7F0-42CF4FAD3D9E}",
+    "Hash": "{2D77B950-A4D6-E822-F72C-D82D9A870034}",
     "ObjectPath": "\\SoundBanks\\Effects\\SB_Effects",
     "ShortName": "SB_Effects",
     "Path": "SB_Effects.bnk",
@@ -22,7 +22,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
-      "CachePath": "D6/{D6FED350-7142-0BAE-9E1E-8D39B6F2733D}.wem"
+      "CachePath": "C6/{C6722E53-7870-6DE5-7173-B959C0FD8CA5}.wem"
      },
      {
       "Id": "13000250",
@@ -134,7 +134,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
-      "CachePath": "3F/{3F5D2936-B639-02BB-E5E1-557D92F48FB6}.wem"
+      "CachePath": "14/{14BC57F2-623A-F546-F7A4-0B01EB8391FC}.wem"
      },
      {
       "Id": "101091315",
@@ -415,6 +415,14 @@
       "Location": "Memory",
       "ShortName": "AK_Factory_IR\\Halls\\AK Brasilien Halle.wav",
       "CachePath": "E2/{E2261EBA-F124-86DF-8C44-19E805EA5457}.wem"
+     },
+     {
+      "Id": "420614766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
+      "CachePath": "9A/{9A4C6E7C-BC0C-A3E0-BCD9-A66441F50BBE}.wem"
      },
      {
       "Id": "427082242",
@@ -774,7 +782,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AK_Factory_IR\\Halls\\AK Berlin Teldex.wav",
-      "CachePath": "08/{08676448-F56F-0B3C-1C80-BA1C65447441}.wem"
+      "CachePath": "73/{733CD45F-6766-99F5-D1C6-F70006E4FAA2}.wem"
      },
      {
       "Id": "702837950",
@@ -1987,6 +1995,19 @@
        "GUID": "{A1F17D99-0801-4F32-B74E-ADB2D9ACC556}",
        "LibName": "Wwise Harmonizer",
        "LibId": "9043971"
+      },
+      {
+       "Id": "825401838",
+       "Name": "AK_Convolution_Reverb_Dark_Cathedrale_Small",
+       "ObjectPath": "\\Effects\\Default Work Unit\\AK_Convolution_Reverb_Dark_Cathedrale_Small",
+       "GUID": "{917384BE-AF40-4D98-BEFD-ADDE077A7A11}",
+       "LibName": "Wwise Convolution Reverb",
+       "LibId": "8323075",
+       "MediaRefs": [
+        {
+         "Id": "420614766"
+        }
+       ]
       },
       {
        "Id": "833756682",
@@ -5598,15 +5619,28 @@
       "PluginRefs": {
        "ShareSets": [
         {
-         "Id": "164825399"
+         "Id": "3399505373"
         }
        ]
       }
      },
      {
-      "Id": "348963605",
-      "Name": "Reverb",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb",
+      "Id": "933527613",
+      "Name": "Reverb_Small",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb_Small",
+      "GUID": "{0462E848-BED2-4D89-8492-8F751F587A55}",
+      "PluginRefs": {
+       "ShareSets": [
+        {
+         "Id": "825401838"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "3387002570",
+      "Name": "Reverb_Big",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb_Big",
       "GUID": "{06B51433-C685-4945-9920-67B617503E73}",
       "PluginRefs": {
        "ShareSets": [
@@ -5639,6 +5673,6 @@
     ]
    }
   ],
-  "FileHash": "{45325FE8-51C6-C9E7-7E43-BF345E026623}"
+  "FileHash": "{943E449C-C385-7E43-22EE-82E1EA928859}"
  }
 }
