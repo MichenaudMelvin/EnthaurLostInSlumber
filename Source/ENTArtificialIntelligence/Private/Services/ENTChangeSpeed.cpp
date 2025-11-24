@@ -12,6 +12,8 @@ UENTChangeSpeed::UENTChangeSpeed()
 	NodeName = "ChangeSpeed";
 	bNotifyBecomeRelevant = true;
 	bNotifyCeaseRelevant = true;
+
+	ForceInstancing(true);
 }
 
 void UENTChangeSpeed::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)

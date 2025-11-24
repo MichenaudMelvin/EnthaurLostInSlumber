@@ -11,6 +11,8 @@ UENTCheckPlayerState::UENTCheckPlayerState()
 	NodeName = "CheckPlayerState";
 	Player.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTCheckPlayerState, Player), AActor::StaticClass());
 	bNotifyTick = true;
+
+	ForceInstancing(true);
 }
 
 void UENTCheckPlayerState::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)

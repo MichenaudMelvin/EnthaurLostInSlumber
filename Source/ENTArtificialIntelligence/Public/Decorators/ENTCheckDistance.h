@@ -49,20 +49,52 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "Behavior")
 	EENTCheckMethod CheckMethod;
 
-	UPROPERTY(EditInstanceOnly, Category = "Distance")
+	void ComputeDistance(UBehaviorTreeComponent& OwnerComp);
+
+	bool bDistanceResult = false;
+
+	UPROPERTY(EditInstanceOnly, Category = "Collision")
 	FValueOrBBKey_Bool CollisionTest;
 
-	UPROPERTY(EditInstanceOnly, Category = "Distance")
+	UPROPERTY(EditInstanceOnly, Category = "Collision")
 	bool bInverseCollisionTestValue;
+
+	/**
+	 * @brief How long the CollisionTest should succeed to allow decorator to pass, 0 means instant
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Collision", meta = (Units = s, ClampMin = 0.0f))
+	float CollisionTestDuration = 5.0f;
+
+	float CollisionTestTime = 0.0f;
+
+	bool bCollisionTestResult = false;
+
+	/**
+	 * @brief Start as true
+	 */
+	bool bHasTimerAlreadyFailed = true;
+
+	bool bHasTimerAlreadySucceed = false;
 
 	/**
 	 * @brief Only used if CollisionTest is true 
 	 */
-	UPROPERTY(EditInstanceOnly, Category = "Distance")
+	UPROPERTY(EditInstanceOnly, Category = "Collision")
 	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
+
+	bool DoCollisionTest(const UBehaviorTreeComponent& OwnerComp) const;
+
+	/**
+	 * @brief 
+	 * @param OwnerComp 
+	 * @return true if succeeded
+	 */
+	bool TraceCollisionTest(UBehaviorTreeComponent& OwnerComp) const;
+
+	void ComputeCollisionTestDuration(float DeltaTime, bool bSucceedCollisionTest);
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
-	bool bDebugTask = false;
+	bool bDebugDecorator = false;
 #endif
 };
