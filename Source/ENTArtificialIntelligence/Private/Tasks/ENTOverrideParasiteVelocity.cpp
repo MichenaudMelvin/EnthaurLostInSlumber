@@ -9,6 +9,8 @@
 UENTOverrideParasiteVelocity::UENTOverrideParasiteVelocity()
 {
 	NodeName = "OverrideParasiteVelocity";
+
+	ForceInstancing(true);
 }
 
 EBTNodeResult::Type UENTOverrideParasiteVelocity::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
