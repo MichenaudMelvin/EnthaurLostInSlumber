@@ -114,7 +114,7 @@
 								</ObjectList>
 							</ObjectLists>
 						</Bus>
-						<AuxBus Name="Reverb" ID="{06B51433-C685-4945-9920-67B617503E73}">
+						<AuxBus Name="Reverb_Big" ID="{06B51433-C685-4945-9920-67B617503E73}">
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="1"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
@@ -147,7 +147,24 @@
 											<EffectSlot Name="" ID="{01CE165A-4D43-4C18-8695-9D3DDC33C499}" ShortID="243708866">
 												<ReferenceList>
 													<Reference Name="Effect" PluginName="Wwise Reflect" CompanyID="0" PluginID="171" PluginType="3">
-														<ObjectRef Name="New_Reflect" ID="{67FADD73-FC10-4D2A-88D9-F172387587C0}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+														<ObjectRef Name="Reflect_Physically_Based" ID="{C69F5865-C206-4B45-BC40-315F3F39151A}" WorkUnitID="{9A5AAF13-8275-479B-8D44-4B723CE5B2F9}"/>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</AuxBus>
+						<AuxBus Name="Reverb_Small" ID="{0462E848-BED2-4D89-8492-8F751F587A55}">
+							<ObjectLists>
+								<ObjectList Name="Effects">
+									<Reference>
+										<Local>
+											<EffectSlot Name="" ID="{E5CA15F0-1420-4822-A60E-8C91F72003A8}" ShortID="146931927">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise Convolution Reverb" CompanyID="0" PluginID="127" PluginType="3">
+														<ObjectRef Name="AK_Convolution_Reverb_Dark_Cathedrale_Small" ID="{917384BE-AF40-4D98-BEFD-ADDE077A7A11}" WorkUnitID="{BD4A6828-7167-43CB-B4FB-11E3F2B10B50}"/>
 													</Reference>
 												</ReferenceList>
 											</EffectSlot>
