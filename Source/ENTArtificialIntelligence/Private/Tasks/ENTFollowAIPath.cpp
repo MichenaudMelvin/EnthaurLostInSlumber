@@ -98,7 +98,7 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
 	if (ParasitePawn)
 	{
-		PawnHeight = ParasitePawn->GetHitBoxHeight();
+		PawnHeight = ParasitePawn->GetParasiteHalfHeight();
 	}
 
 	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());

@@ -7,12 +7,14 @@
 #include "HUD/ENTDeathTransition.h"
 #include "HUD/ENTGameplayHUD.h"
 #include "HUD/ENTLevelEntering.h"
+#include "Menus/Elements/ENTBackground.h"
 #include "Menus/Main/ENTCreditsMenu.h"
 #include "Menus/Main/ENTMainMenu.h"
 #include "Menus/Main/ENTNewGameMenu.h"
 #include "Menus/Main/ENTPressAny.h"
 #include "Menus/Main/ENTQuitMenu.h"
 #include "Menus/Options/ENTControlsMenu.h"
+#include "Menus/Options/ENTGammaMenu.h"
 #include "Menus/Pause/ENTMainMenuConfirmationMenu.h"
 #include "Menus/Pause/ENTOptionsMenu.h"
 #include "Menus/Pause/ENTPauseMenu.h"
@@ -53,6 +55,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
 	TSubclassOf<UENTQuitMenu> QuitMenuClass = UENTQuitMenu::StaticClass();
 
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
+	TSubclassOf<UENTBackground> BackgroundClass = UENTBackground::StaticClass();
+
 #pragma endregion
 
 #pragma region Options Menus
@@ -72,6 +77,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
 	TSubclassOf<UENTRestartConfirmationMenu> RestartConfirmationMenuClass = UENTRestartConfirmationMenu::StaticClass();
+	
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
+	TSubclassOf<UENTGammaMenu> GammaMenuClass = UENTGammaMenu::StaticClass();
 
 #pragma endregion
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Interface/ENTActivation.h"
 #include "Interfaces/ENTPawnAIInterface.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
@@ -23,7 +24,7 @@ struct FENTGameElementData;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeAnimToTrigger, UAnimSequenceBase*, AnimToTrigger);
 
 UCLASS()
-class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface, public IENTPawnAIInterface
+class ENTARTIFICIALINTELLIGENCE_API AENTParasitePawn : public APawn, public IENTSaveGameElementInterface, public IENTPawnAIInterface, public IENTActivation
 {
 	GENERATED_BODY()
 
@@ -32,6 +33,10 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+#if WITH_EDITOR
+	virtual void Tick(float DeltaSeconds) override;
+#endif
 
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
@@ -98,6 +103,15 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName ChaseSpeedKeyName = "ChaseSpeed";
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName DetectionRangeKeyName = "DetectionRange";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName PlayerKeyName = "Player";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName DoesPlayerHaveAmberKeyName = "DoesPlayerHaveAmber";
+
 #pragma endregion
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
@@ -112,6 +126,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
 	float ChaseSpeed = 1200.0f;
 
+#pragma region BehaviorTree
+
+protected:
 	virtual bool DoesAutoStartBehaviorTree_Implementation() const override {return bAutoStartBehavior;}
 
 	virtual UBehaviorTree* GetOverridenBehaviorTree_Implementation() const override {return OverridenBehaviorTree;}
@@ -120,10 +137,75 @@ protected:
 
 	virtual void PossessedBy(AController* NewController) override;
 
+	UFUNCTION(BlueprintCallable, Category = "BehaviorTree")
+	void StartBehaviorTree();
+
+	virtual void Trigger_Implementation() override;
+
+#pragma endregion
+
+#pragma region DetectionRange
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Detection Range", meta = (Units = cm, ClampMin = 0.0f))
+	float DefaultDetectionRange = 1000.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Detection Range", meta = (Units = cm, ClampMin = 0.0f))
+	float AugmentedDetectionRange = 5000.0f;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Category = "Detection Range")
+	bool bDebugDetectionRange = false;
+
+	/**
+	 * @brief Call this in a tick to display the detection range; Editor Only
+	 */
+	void DrawDetectionRange() const;
+#endif
+
+public:
+	UFUNCTION()
+	void ChangeDetectionRange(bool bDoesPlayerHaveAmber);
+
+#pragma endregion
+
+#pragma region ParasiteAttack
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Attack")
+	float AttackDamages = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	FVector AttackLocation = FVector(0.0f, 300.0f, 100.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	FVector AttackSize = FVector(100.0f);
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
+	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectsToAttack;
+
+#if WITH_EDITORONLY_DATA
+	static FVector DebugAttackLocation;
+
+	static FVector DebugAttackSize;
+#endif
+
+	UFUNCTION(BlueprintCallable, Category = "AI|Attack")
+	void Attack();
+
 	UFUNCTION()
 	void EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+	/**
+	 * @brief For debug purposes only
+	 */
+	UFUNCTION(BlueprintCallable, Category = "AI|Attack", meta = (DevelopmentOnly))
+	static void DebugAttackZone(const UObject* WorldContextObject);
+
+#pragma endregion
+
 #if WITH_EDITORONLY_DATA
+protected:
 	virtual void DebugPawn() const override;
 #endif
 
@@ -132,24 +214,46 @@ protected:
 protected:
 #if WITH_EDITORONLY_DATA
 	/**
-	 * @brief This is an editor value, please use AENTParasitePawn::GetHitBoxHeight() instead
+	 * @brief This is an editor value, please use AENTParasitePawn::GetParasiteHeight() instead
 	 */
 	UPROPERTY(VisibleDefaultsOnly, Category = "Transformation", meta = (Units = cm))
 	float ParasiteHeight = 0.0f;
 
 	/**
-	 * @brief This is an editor value, please use AENTParasitePawn::GetHitBoxWidth() instead
+	 * @brief This is an editor value, please use AENTParasitePawn::GetParasiteWidth() instead
 	 */
 	UPROPERTY(VisibleDefaultsOnly, Category = "Transformation", meta = (Units = cm))
 	float ParasiteWidth = 0.0f;
 #endif
 
 public:
+	/**
+	 * @brief Return the height of the collision
+	 * @return Height of the parasite
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Transformation")
-	float GetHitBoxHeight() const;
+	float GetParasiteHeight() const;
 
+	/**
+	 * @brief Return the half height of the collision
+	 * @return Half height of the parasite
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Transformation")
-	float GetHitBoxWidth() const;
+	float GetParasiteHalfHeight() const {return GetParasiteHeight() * 0.5f;}
+
+	/**
+	 * @brief Return the width of the collision
+	 * @return Width of the parasite
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	float GetParasiteWidth() const;
+
+	/**
+	 * @brief Return the half width of the collision
+	 * @return Half width of the parasite
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Transformation")
+	float GetParasiteHalfWidth() const {return GetParasiteWidth() * 0.5f;}
 
 	UFUNCTION(BlueprintCallable, Category = "Transformation")
 	FVector GetParasiteForwardVector() const;
@@ -214,6 +318,20 @@ public:
 	virtual bool HasReceivedLoadingRequest() const override {return bHasReceivedLoadingRequest;}
 
 	virtual const FENTAIData& GetLoadingData() const override {return LoadingData;}
+
+#pragma endregion
+
+#pragma region DebugSelection
+
+#if WITH_EDITORONLY_DATA
+protected:
+	void OnSelectionUpdate(UObject* Object);
+
+	void ClearDebugTraces() const;
+
+	bool SelectedInEditor = false;
+
+#endif
 
 #pragma endregion
 };

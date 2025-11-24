@@ -19,6 +19,11 @@ protected:
 
 	virtual void StateTick_Implementation(float DeltaTime) override;
 
+#if WITH_EDITORONLY_DATA
+	virtual void PostLoad() override;
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+
 	UPROPERTY(EditDefaultsOnly, Category = "Movement|Fall", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f))
 	float AirControl = 1.0f;
 
@@ -37,12 +42,32 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Movement|Projection")
 	bool bOverrideCurrentVelocity = false;
 
+	/**
+	 * @brief Will multiply the character velocity and then added to the noise range
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise", meta = (ClampMin = 0.0f, EditCondition = bDoesMakeNoise))
+	float VelocityNoiseFactor = 1.0f;
+
+	/**
+	 * @brief EditDefaultsOnly is for debug purpose only
+	 */
+	UPROPERTY(EditDefaultsOnly, Transient, Category = "Noise", meta = (Units = "cm/s", ClampMin = 0.0f, EditCondition = bDoesMakeNoise))
+	float CharacterVelocity = 200.0f;
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Debug purpose only, Calculation is VelocityNoiseFactor * CharacterVelocity;
+	 */
+	UPROPERTY(VisibleDefaultsOnly, Transient, Category = "Noise|Debug", meta = (Units = cm))
+	float DebugNoiseRange = 0.0f;
+#endif
+
+	virtual void EmitNoise() override;
+
 private:
 	bool bCanDoCoyoteTime = false;
 
 	float CoyoteTime = 0.0f;
-
-	bool bHasPressedInteraction = false;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Movement|Projection")

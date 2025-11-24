@@ -12,16 +12,9 @@ void UENTGameplayHUD::NativeConstruct()
 	RebindDelegates();
 }
 
-void UENTGameplayHUD::OnAmberUpdate(EAmberType AmberType, int InAmberAmount)
+void UENTGameplayHUD::OnAmberUpdate(bool bHasAmber)
 {
-	if (AmberType == EAmberType::WeakAmber)
-	{
-		if (AmberAmount != InAmberAmount)
-		{
-			AmberAmount = InAmberAmount;
-			AmberAmount > 0 ? OnAmberPickUp.Broadcast() : OnAmberUsed.Broadcast();
-		}
-	}
+	bHasAmber ? OnAmberPickUp.Broadcast() : OnAmberUsed.Broadcast();
 }
 
 void UENTGameplayHUD::RebindDelegates()

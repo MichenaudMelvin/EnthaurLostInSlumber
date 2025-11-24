@@ -88,7 +88,7 @@ void UENTSplineJumpTask::SetTargetTransform()
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
 	if (ParasitePawn)
 	{
-		PawnHeight = ParasitePawn->GetHitBoxHeight();
+		PawnHeight = ParasitePawn->GetParasiteHalfHeight();
 	}
 
 	FVector GroundDirection = bJumpOnTheGround ? FVector::UpVector : (CurrentPath->GetDirection() * -1);

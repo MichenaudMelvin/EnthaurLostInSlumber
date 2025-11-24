@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{6D0C2A31-52AB-E491-353E-F7D25AB6A204}",
+    "Hash": "{71A5E869-A5A1-72D2-C0F8-92B8A2914E75}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -214,6 +214,6 @@
     ]
    }
   ],
-  "FileHash": "{763FAD98-EFF2-BD92-4595-827574D0A59B}"
+  "FileHash": "{981342D7-B9AD-29BD-29E6-6AD7F22120F3}"
  }
 }

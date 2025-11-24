@@ -49,6 +49,8 @@ public:
 
 	bool IsAnimRunning() const;
 
+	void SetElectricityColor(FLinearColor NewColor){ElectricityColor = NewColor;}
+
 protected:
 	virtual void BeginPlay() override;
 

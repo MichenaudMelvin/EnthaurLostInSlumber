@@ -39,6 +39,9 @@ AENTNerve::AENTNerve()
 	SplineMesh->SetGenerateOverlapEvents(false);
 	SplineMeshes.Add(SplineMesh);
 
+	CorruptNerveBlocker = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Corruption"));
+	CorruptNerveBlocker->SetupAttachment(RootComponent);
+
 	NerveBall = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Sphere"));
 	NerveBall->SetupAttachment(RootComponent);
 
@@ -59,14 +62,33 @@ void AENTNerve::BeginPlay()
 	InteractableComponent->AddInteractable(NerveBall);
 	DefaultNervePosition = NerveBall->GetComponentLocation();
 
-	TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
+	if (CorruptNerveBlocker)
+	{
+		UMaterialInterface* Mat = CorruptNerveBlocker->GetMaterial(0);
+		if (Mat)
+		{
+			CorruptMID = UMaterialInstanceDynamic::Create(Mat, this);
+			CorruptNerveBlocker->SetMaterial(0, CorruptMID);
+		}
+	}
+
+	//TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
 
 	FOnTimelineFloat UpdateEvent;
 	FOnTimelineEvent FinishEvent;
+	
 	UpdateEvent.BindDynamic(this, &AENTNerve::RetractCable);
 	FinishEvent.BindDynamic(this, &AENTNerve::FinishRetractCable);
 	RetractTimeline.AddInterpFloat(RetractionCurve, UpdateEvent);
 	RetractTimeline.SetTimelineFinishedFunc(FinishEvent);
+
+	UpdateEvent.Unbind();
+
+	UpdateEvent.BindDynamic(this, &AENTNerve::UpdateEnterWeakZone);
+	EnterWeakZoneTimeline.AddInterpFloat(EnterWeakZoneCurve, UpdateEvent);
+	EnterWeakZoneTimeline.SetPlayRate(1 / RetractLigamentDuration);
+
+	UpdateEvent.Unbind();
 
 	if (StretchedLigamentMaterial)
 	{
@@ -82,6 +104,15 @@ void AENTNerve::OnConstruction(const FTransform& Transform)
 	TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
 
 	NerveBall -> SetStaticMesh((bIsLigament) ? LigamentBallMesh : NerveBallMesh);
+
+	if (bIsLigament)
+	{
+		CorruptNerveBlocker->SetVisibility(false);
+	}
+	else
+	{
+		CorruptNerveBlocker -> SetStaticMesh(CorruptNerveBlockerMesh);
+	}
 
 	FVector CableMeshSize = TargetMesh->GetBoundingBox().Max - TargetMesh->GetBoundingBox().Min;
 	switch (CableForwardAxis)
@@ -146,6 +177,7 @@ void AENTNerve::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	ApplyCablesPhysics();
+	EnterWeakZoneTimeline.TickTimeline(DeltaSeconds);
 	if (RetractTimeline.IsPlaying())
 	{
 		RetractTimeline.TickTimeline(DeltaSeconds);
@@ -394,6 +426,16 @@ void AENTNerve::ApplyCablesPhysics()
 		return;
 	}
 
+#if WITH_EDITORONLY_DATA
+	if (bDebugNerve && Hit.GetActor())
+	{
+		const FString Message = FString::Printf(TEXT("Hit: %s"), *Hit.GetActor()->GetName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, Message);
+		FMessageLog("BlueprintLog").Message(EMessageSeverity::Info, FText::FromString(Message));
+	}
+#endif
+
 	ImpactNormals.Add(Hit.Normal);
 
 	FVector Direction = UKismetMathLibrary::GetDirectionUnitVector(CableEndLocation, Hit.Location);
@@ -503,7 +545,7 @@ void AENTNerve::FinishRetractCable()
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
 	InteractableComponent->AddInteractable(NerveBall);
-	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))
+	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction) && !bIsInWeakZone)
 	{
 		InteractableComponent->OnInteract.AddDynamic(this, &AENTNerve::Interaction);
 	}
@@ -516,6 +558,8 @@ void AENTNerve::FinishRetractCable()
 	NerveBallRotator += NerveBallRotationDelta;
 	NerveBall->SetWorldRotation(NerveBallRotator);
 }
+
+
 
 FVector AENTNerve::GetLastCableLocation(const ESplineCoordinateSpace::Type& CoordinateSpace) const
 {
@@ -701,6 +745,27 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
 
+	bIsInWeakZone = true;
+
+	if (!bIsLigament)
+	{
+		if (CurrentAttachedReceptacle != nullptr && bIsZoneActive)
+		{
+			if (!CurrentAttachedReceptacle->CanTheNerveBeTaken())
+			{
+				return;
+			}
+
+			CurrentAttachedReceptacle->DisableReceptacle();
+			CurrentAttachedReceptacle->TriggerLinkedObjects(this);
+			CurrentAttachedReceptacle = nullptr;
+
+			DetachNerveBall(false);
+		}
+	}
+
+	EnterWeakZoneTimeline.Play();
+
 	if (bIsZoneActive && InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))
 	{
 		InteractableComponent->OnInteract.RemoveDynamic(this, &AENTNerve::Interaction);
@@ -709,11 +774,31 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 
 void AENTNerve::OnExitWeakZone_Implementation()
 {
+	bIsInWeakZone = false;
 	IENTWeakZoneInterface::OnExitWeakZone_Implementation();
+	
+	EnterWeakZoneTimeline.Reverse();
+
 
 	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))
 	{
 		InteractableComponent->OnInteract.AddDynamic(this, &AENTNerve::Interaction);
+	}
+}
+
+void AENTNerve::UpdateEnterWeakZone(float Alpha)
+{
+	if (bIsLigament)
+	{
+		float ZOffset = (3.f * StartCableLength) / 4.f;
+		FVector TargetPos = DefaultNervePosition + FVector(0.f, 0.f, ZOffset);
+		FVector NewPos = FMath::Lerp(DefaultNervePosition, TargetPos, Alpha);
+		NerveBall->SetWorldLocation(NewPos);
+		UpdateSplineMeshes(true, false);
+	}else
+	{
+		float Value = FMath::Lerp(0.7f, 0.45f, Alpha);
+		CorruptMID->SetScalarParameterValue("Progress", Value);
 	}
 }
 
