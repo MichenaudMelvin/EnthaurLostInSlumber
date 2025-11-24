@@ -16,6 +16,8 @@ UENTCanReachLocation::UENTCanReachLocation()
 	Location.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTCanReachLocation, Location), AActor::StaticClass());
 	bNotifyTick = true;
 
+	ForceInstancing(true);
+
 	ObjectTypes.Add(ObjectTypeQuery1);
 	ObjectTypes.Add(ObjectTypeQuery2);
 }

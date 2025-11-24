@@ -21,6 +21,8 @@ UENTLookAt::UENTLookAt()
 	NodeName = "LookAt";
 	bNotifyTick = true;
 
+	ForceInstancing(true);
+
 	LookAtPosition.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTLookAt, LookAtPosition));
 	LookAtPosition.AddRotatorFilter(this, GET_MEMBER_NAME_CHECKED(UENTLookAt, LookAtPosition));
 	LookAtPosition.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTLookAt, LookAtPosition), AActor::StaticClass());

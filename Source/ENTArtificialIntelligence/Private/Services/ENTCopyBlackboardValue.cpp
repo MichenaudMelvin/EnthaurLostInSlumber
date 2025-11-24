@@ -17,6 +17,8 @@ UENTCopyBlackboardValue::UENTCopyBlackboardValue()
 	bNotifyBecomeRelevant = true;
 	bNotifyCeaseRelevant = true;
 
+	ForceInstancing(true);
+
 	SourceBlackboardKey.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UENTCopyBlackboardValue, SourceBlackboardKey));
 	SourceBlackboardKey.AddFloatFilter(this, GET_MEMBER_NAME_CHECKED(UENTCopyBlackboardValue, SourceBlackboardKey));
 	SourceBlackboardKey.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTCopyBlackboardValue, SourceBlackboardKey));

@@ -22,6 +22,8 @@ UENTJumpTask::UENTJumpTask()
 	NodeName = "Jump";
 	bNotifyTick = true;
 
+	ForceInstancing(true);
+
 	JumpLocationKey.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpTask, JumpLocationKey));
 }
 
