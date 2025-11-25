@@ -82,9 +82,15 @@ void UENTLigamentPhysicConstraint::TickComponent(float DeltaTime, ELevelTick Tic
 	const FQuat RotationQuat = FQuat(RotationAxis, FMath::DegreesToRadians(AngleBuff));
 
 	const FVector JumpDirection = RotationQuat.RotateVector(CableDirection).GetSafeNormal();
+	
+	FVector JumpHorizontalDirection = JumpDirection;
+	JumpHorizontalDirection.Z = 0.f;
+	JumpHorizontalDirection = JumpHorizontalDirection.GetSafeNormal();
+
+	FVector CameraDirection = (JumpHorizontalDirection + JumpDirection).GetSafeNormal();
 
 	//on dirige la caméra vers le point d'attache si c'est un ligament
-	const FRotator TargetCameraRotation = JumpDirection.Rotation();
+	const FRotator TargetCameraRotation = CameraDirection.Rotation();
 
 	AENTDefaultPlayerController* PC = PlayerCharacter->GetPlayerController();
 	if (PC)
