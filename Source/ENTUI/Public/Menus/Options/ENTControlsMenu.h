@@ -21,9 +21,8 @@ public:
 
 protected:
 	virtual void NativeOnInitialized() override;
-
 	virtual void NativeConstruct() override;
-	virtual void NativeDestruct() override;
+	virtual void BeginDestroy() override;
 
 	TObjectPtr<UEnhancedInputLocalPlayerSubsystem> GetEnhancedInputLocalPlayerSubsystem();
 	void AddInputRows();
@@ -44,4 +43,10 @@ protected:
 
 	UFUNCTION()
 	void UpdateAnyKeyBind(AENTAnyKeyController* CurrentController);
+
+	UFUNCTION()
+	void OpenResetSettingsMenu();
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<UENTCustomButton> ResetButton;
 };
