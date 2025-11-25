@@ -18,35 +18,14 @@ class ENTUI_API UENTOptionsMenu : public UENTWidgetBasics
 
 protected:
 	virtual void NativeOnInitialized() override;
-
-	virtual void NativeConstruct() override;
-
 	virtual void NativeDestruct() override;
-
 	virtual void BeginDestroy() override;
-
-	void UpdateWidgetValues(bool bSkipAnim);
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> VolumeButton;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomButton> MouseSensitivityButton;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomSlider> MouseSensitivitySlider;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomButton> InvertMouseAxisButton;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomCheckBox> InvertMouseAxisCheckBox;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomButton> ViewBobbingButton;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomCheckBox> ViewBobbingCheckbox;
+	TObjectPtr<UENTCustomButton> AccessibilityButton;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> ControlsButton;
@@ -64,14 +43,5 @@ protected:
 	void OnGammaButtonClicked();
 
 	UFUNCTION()
-	void OnViewBobbingCheckBoxClicked(bool bIsChecked, bool bSkip);
-
-	UFUNCTION()
-	void OnMouseYAxisCheckBoxClicked(bool bIsChecked, bool bSkip);
-
-	UFUNCTION()
-	void OnMouseSensitivitySliderChanged(float InValue);
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UTextBlock> MouseSensitivityValue;
+	void OnAccessibilityButtonClicked();
 };

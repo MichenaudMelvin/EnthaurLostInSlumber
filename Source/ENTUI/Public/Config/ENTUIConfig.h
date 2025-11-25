@@ -13,6 +13,7 @@
 #include "Menus/Main/ENTNewGameMenu.h"
 #include "Menus/Main/ENTPressAny.h"
 #include "Menus/Main/ENTQuitMenu.h"
+#include "Menus/Options/ENTAccessibilityMenu.h"
 #include "Menus/Options/ENTControlsMenu.h"
 #include "Menus/Options/ENTGammaMenu.h"
 #include "Menus/Options/ENTResetConfirmationMenu.h"
@@ -88,6 +89,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
 	TSubclassOf<UENTResetConfirmationMenu> ResetConfirmationMenuClass = UENTResetConfirmationMenu::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
+	TSubclassOf<UENTAccessibilityMenu> AccessibilityMenuClass = UENTAccessibilityMenu::StaticClass();
 
 #pragma endregion
 
