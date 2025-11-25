@@ -42,7 +42,7 @@ struct ENTSAVES_API FENTAmberOreData : public FENTGameElementData
 	GENERATED_BODY()
 
 	UPROPERTY(BlueprintReadWrite, Category = "AmberOre")
-	uint8 CurrentOreAmount = 0;
+	bool bIsEmpty = false;
 };
 
 USTRUCT(BlueprintType, Category = "SaveData")
@@ -51,7 +51,7 @@ struct ENTSAVES_API FENTWeakZoneData : public FENTGameElementData
 	GENERATED_BODY()
 
 	UPROPERTY(BlueprintReadWrite, Category = "WeakZone")
-	TArray<bool> ActivatedInteractionPoints;
+	bool bIsActive = true;
 };
 
 USTRUCT(BlueprintType)

@@ -62,8 +62,10 @@ void UENTMenuManager::CreateAllWidgets()
 	QuitMenu = CreateWidget(CurrentController, UIConfig->QuitMenuClass);
 	PauseMenu = CreateWidget(CurrentController, UIConfig->PauseMenuClass);
 	ControlsMenu = CreateWidget(CurrentController, UIConfig->ControlsMenuClass);
+	GammaMenu = CreateWidget(CurrentController, UIConfig->GammaMenuClass);
 	MainMenuConfirmationMenu = CreateWidget(CurrentController, UIConfig->MainMenuConfirmationMenuClass);
 	RestartConfirmationMenu = CreateWidget(CurrentController, UIConfig->RestartConfirmationMenuClass);
+	Background = CreateWidget(CurrentController, UIConfig->BackgroundClass);
 
 	OnWidgetsCreated.Broadcast();
 
@@ -120,14 +122,6 @@ void UENTMenuManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	MenuClasses.Add(MenuKey, InMenuClass);
 	MenuStack.Add(InMenuClass);
 
-	InMenuClass->AddToViewport();
-	UE_LOG(LogTemp, Warning, TEXT("Opened menu: %s"), *InMenuClass->GetName());
-
-	for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
-	}
-
 	if (MenuStack.Num() >= 2)
 	{
 		if (!bIsSubMenu)
@@ -141,6 +135,14 @@ void UENTMenuManager::OpenMenu(UUserWidget* InMenuClass, bool bIsSubMenu)
 	}
 
 	CheckMenuState();
+
+	InMenuClass->AddToViewport();
+	// UE_LOG(LogTemp, Warning, TEXT("Opened menu: %s"), *InMenuClass->GetName());
+	//
+	// for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	// }
 }
 
 void UENTMenuManager::CloseCurrentMenu()
@@ -183,12 +185,12 @@ void UENTMenuManager::CloseCurrentMenu()
 	
 	MenuClasses.Remove(MenuKey);
 
-	UE_LOG(LogTemp, Warning, TEXT("Removed menu: %s"),  *Menu->GetClass()->GetName());
-
-	for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
-	}
+	// UE_LOG(LogTemp, Warning, TEXT("Removed menu: %s"),  *Menu->GetClass()->GetName());
+	//
+	// for (TObjectPtr<UUserWidget> MenuToDisplay : MenuStack)
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("%s"),  *MenuToDisplay->GetName());
+	// }
 
 	CheckMenuState();
 }
@@ -248,6 +250,11 @@ void UENTMenuManager::SetMenuState(EENTMenuState InUIState)
 	CurrentState = InUIState;
 }
 
+void UENTMenuManager::SetBackground(bool bIsBackgroundShown)
+{
+	bIsBackgroundDisplayed = bIsBackgroundShown;
+}
+
 void UENTMenuManager::CheckMenuState()
 {
 	ULocalPlayer* LocalPlayer = GetGameInstance()->GetFirstGamePlayer();
@@ -287,6 +294,19 @@ void UENTMenuManager::CheckMenuState()
 			InputSubsystem->AddMappingContext(Cast<IENTControllerMappingContext>(Controller)->GetUIMappingContext(), 0);
 			SetUIInputMode();
 		}
+		if (CurrentState == EENTMenuState::MainMenu)
+		{
+			if (MenuStack.Num() >= 3 && !bIsBackgroundDisplayed)
+			{
+				Background->AddToViewport();
+				bIsBackgroundDisplayed = true;
+			}
+			else if (MenuStack.Num() < 3 && bIsBackgroundDisplayed)
+			{
+				Background->RemoveFromParent();
+				bIsBackgroundDisplayed = false;
+			}
+		}
 	}
 	else if (MenuStack.Num() == 1 && CurrentState == EENTMenuState::MainMenu)
 	{
@@ -304,6 +324,16 @@ void UENTMenuManager::CheckMenuState()
 		SetUIInputMode();
 		CenterCursor();
 		Controller->SetPause(true);
+
+		if (!bIsBackgroundDisplayed)
+		{
+			Background->AddToViewport();
+			bIsBackgroundDisplayed = true;
+		}
+	}
+	else if (MenuStack.Num() >= 1 && CurrentState == EENTMenuState::PauseMenu)
+	{
+
 	}
 	else if (MenuStack.IsEmpty())
 	{
@@ -320,6 +350,26 @@ void UENTMenuManager::CheckMenuState()
 		}
 
 		FirstPersonController->ClearPlayerInputs();
+		
+		UGameInstance* GameInstance = GetGameInstance();
+		if (!GameInstance)
+		{
+			return;
+		}
+
+		UENTHUDManager* HUDManager = GameInstance->GetSubsystem<UENTHUDManager>();
+		if (!HUDManager)
+		{
+			return;
+		}
+		
+		HUDManager->SetHUDVisibility(ESlateVisibility::Visible);
+
+		if (bIsBackgroundDisplayed)
+		{
+			Background->RemoveFromParent();
+			bIsBackgroundDisplayed = false;
+		}
 	}
 }
 

@@ -9,6 +9,8 @@
 UENTIgnoreFloorCollisions::UENTIgnoreFloorCollisions()
 {
 	NodeName = "IgnoreFloorCollisions";
+
+	ForceInstancing(true);
 }
 
 EBTNodeResult::Type UENTIgnoreFloorCollisions::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)

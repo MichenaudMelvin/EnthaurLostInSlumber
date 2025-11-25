@@ -12,6 +12,7 @@
 #include "GameElements/ENTNerve.h"
 #include "Components/ENTPhysicConstraint.h"
 #include "ENTElectricityFeedback.h"
+#include "ENTInteractableComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/ENTDefaultCharacter.h"
 
@@ -38,9 +39,8 @@ AENTNerveReceptacle::AENTNerveReceptacle()
 	NerveEndEditorMesh->bIsEditorOnly = true;
 #endif
 
-	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
-	Collision->SetupAttachment(NerveReceptacle);
-	Collision->SetMobility(EComponentMobility::Static);
+	InteractableComponent = CreateDefaultSubobject<UENTInteractableComponent>(TEXT("Interaction"));
+	InteractableComponent->OnInteract.AddDynamic(this, &AENTNerveReceptacle::Interaction);
 
 	NerveReceptaclesNoises = CreateDefaultSubobject<UAkComponent>(TEXT("NerveReceptaclesNoises"));
 	NerveReceptaclesNoises->SetupAttachment(NerveReceptacle);
@@ -52,15 +52,20 @@ void AENTNerveReceptacle::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Collision->OnComponentBeginOverlap.AddDynamic(this, &AENTNerveReceptacle::TriggerEnter);
-
 	NerveEndTargetTransform *= GetActorTransform();
 
-	ElectricityComponent->OnElectricityAnimationStarted.AddDynamic(this, &AENTNerveReceptacle::OnElectricityAnimationStarted);
-	ElectricityComponent->OnElectricityRadiusFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityRadiusFinished);
-	ElectricityComponent->OnElectricityMovementUpdated.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementUpdated);
-	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementFinished);
-	ElectricityComponent->OnElectricityOpacityFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityOpacityFinished);
+	InteractableComponent->AddInteractable(NerveReceptacle);
+
+	ElectricityComponent->OnElectricityAnimationStarted.AddDynamic(
+		this, &AENTNerveReceptacle::OnElectricityAnimationStarted);
+	ElectricityComponent->OnElectricityRadiusFinished.AddDynamic(
+		this, &AENTNerveReceptacle::OnElectricityRadiusFinished);
+	ElectricityComponent->OnElectricityMovementUpdated.AddDynamic(
+		this, &AENTNerveReceptacle::OnElectricityMovementUpdated);
+	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(
+		this, &AENTNerveReceptacle::OnElectricityMovementFinished);
+	ElectricityComponent->OnElectricityOpacityFinished.AddDynamic(
+		this, &AENTNerveReceptacle::OnElectricityOpacityFinished);
 }
 
 void AENTNerveReceptacle::Tick(float DeltaSeconds)
@@ -84,29 +89,25 @@ void AENTNerveReceptacle::OnConstruction(const FTransform& Transform)
 
 #endif
 
-void AENTNerveReceptacle::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AENTNerveReceptacle::Interaction(APlayerController* Controller, APawn* Pawn,UPrimitiveComponent* InteractionComponent)
 {
-	if (OtherActor->IsA(AENTNerve::StaticClass()))
-	{
-		AENTNerve* Nerve = Cast<AENTNerve>(OtherActor);
-		Nerve->SetCurrentReceptacle(this);
+	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+	if (!Character) return;
 
-		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
-		OnNerveConnect();
+	UENTPhysicConstraint* Constraint = Character->GetComponentByClass<UENTPhysicConstraint>();
+	if (!Constraint) return;
 
-		ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
-		if (Character)
-		{
-			UENTPhysicConstraint* Constraint = Character->GetComponentByClass<UENTPhysicConstraint>();
+	AENTNerve* Nerve = Constraint->GetLinkedNerve();
+	if (!Nerve) return;
+	
+	Nerve->SetCurrentReceptacle(this);
 
-			if (Constraint)
-			{
-				Constraint->ReleasePlayer();
-			}
-		}
+	UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
+	OnNerveConnect();
+	
+	Constraint->ReleasePlayer();
 
-		ElectricityComponent->PlayElectricityAnimation(Nerve);
-	}
+	ElectricityComponent->PlayElectricityAnimation(Nerve);
 }
 
 void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)
@@ -134,7 +135,8 @@ void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)
 				if (ObjectReactive[Actor] == ENerveReactiveInteractionType::ForceDefaultState)
 				{
 					IENTActivation::Execute_SetLock(Actor, true);
-				} else
+				}
+				else
 				{
 					IENTActivation::Execute_Trigger(Actor);
 				}
@@ -187,4 +189,3 @@ void AENTNerveReceptacle::OnElectricityOpacityFinished()
 }
 
 #pragma endregion
-

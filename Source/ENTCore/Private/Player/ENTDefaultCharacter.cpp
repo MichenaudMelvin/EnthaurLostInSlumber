@@ -65,17 +65,11 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 	FootstepsSounds->SetupAttachment(RootComponent);
 
 	HealthComponent = CreateDefaultSubobject<UENTHealthComponent>("Health");
-
-	AmberInventoryMaxCapacity.Add(EAmberType::NecroseAmber, 3);
-	AmberInventoryMaxCapacity.Add(EAmberType::WeakAmber, 1);
 }
 
 void AENTDefaultCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	AmberInventory.Add(EAmberType::NecroseAmber, 0);
-	AmberInventory.Add(EAmberType::WeakAmber, 0);
 
 	if (PostProcessComp && SpeedEffectMaterialReference)
 	{
@@ -273,6 +267,16 @@ void AENTDefaultCharacter::DisplayStates(bool bDisplay)
 }
 #endif
 
+bool AENTDefaultCharacter::CompareCurrentState(EENTCharacterStateID Other) const
+{
+	if (!StateMachine)
+	{
+		return false;
+	}
+
+	return StateMachine->GetCurrentStateID() == Other;
+}
+
 #pragma endregion
 
 #pragma region Interaction
@@ -375,7 +379,7 @@ void AENTDefaultCharacter::Landed(const FHitResult& Hit)
 	ResetFootStepsEvent();
 }
 
-bool AENTDefaultCharacter::GroundTrace(FHitResult& HitResult) const
+bool AENTDefaultCharacter::GroundTrace(const FVector& StartLocation, float TraceLength, FHitResult& HitResult) const
 {
 	const UENTCoreConfig* CoreConfig =  GetDefault<UENTCoreConfig>();
 
@@ -384,19 +388,16 @@ bool AENTDefaultCharacter::GroundTrace(FHitResult& HitResult) const
 		return false;
 	}
 
-	FVector StartLocation = GetBottomLocation();
 	FVector EndLocation = StartLocation;
-	EndLocation.Z -= GroundTraceLength;
+	EndLocation.Z -= TraceLength;
 
 	FCollisionQueryParams CollisionQueryParams;
 	CollisionQueryParams.bReturnPhysicalMaterial = true;
 
-	// const FCollisionObjectQueryParams ObjectParams = ConfigureCollisionObjectParams(CoreConfig->GroundObjectTypes);
-
 	TArray<AActor*> ActorsToIgnore;
 
 	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, CoreConfig->GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
-	// return GetWorld()->LineTraceSingleByObjectType(HitResult, StartLocation, EndLocation, ObjectParams, CollisionQueryParams);
+
 }
 
 void AENTDefaultCharacter::GroundMovement()
@@ -430,8 +431,6 @@ void AENTDefaultCharacter::AboveActor(AActor* ActorBellow)
 
 #pragma endregion
 
-#pragma region Amber
-
 void AENTDefaultCharacter::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
@@ -442,21 +441,17 @@ void AENTDefaultCharacter::OnExitWeakZone_Implementation()
 	IENTWeakZoneInterface::OnExitWeakZone_Implementation();
 }
 
-void AENTDefaultCharacter::MineAmber(const EAmberType& AmberType, const int Amount)
-{
-	int* Count = AmberInventory.Find(AmberType);
-	int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
+#pragma region Amber
 
-	// Count == nullptr means AmberType key doesn't exist
-	if (!Count || !MaxCapacity)
+void AENTDefaultCharacter::MineAmber()
+{
+	if (bHasAmber)
 	{
 		return;
 	}
 
-	*Count += Amount;
-	*Count = FMath::Clamp(*Count, 0.0f, *MaxCapacity);
-
-	OnAmberUpdate.Broadcast(AmberType, *Count);
+	bHasAmber = true;
+	OnAmberUpdate.Broadcast(bHasAmber);
 
 	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
@@ -464,41 +459,26 @@ void AENTDefaultCharacter::MineAmber(const EAmberType& AmberType, const int Amou
 		return;
 	}
 
-	PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Empty(AmberInventory.Num());
-	for (const TTuple<EAmberType, int>& Element : AmberInventory)
-	{
-		PlayerSaveSubsystem->GetPlayerSave()->AmberInventory.Add(static_cast<uint8>(Element.Key), Element.Value);
-	}
+	PlayerSaveSubsystem->GetPlayerSave()->bHasAmber = bHasAmber;
 }
 
-void AENTDefaultCharacter::UseAmber(const EAmberType& AmberType, const int Amount)
+void AENTDefaultCharacter::UseAmber()
 {
-	MineAmber(AmberType, -Amount);
-}
-
-bool AENTDefaultCharacter::IsAmberTypeFilled(const EAmberType& AmberType) const
-{
-	const int* Count = AmberInventory.Find(AmberType);
-	const int* MaxCapacity = AmberInventoryMaxCapacity.Find(AmberType);
-
-	if (!Count || !MaxCapacity)
+	if (!bHasAmber)
 	{
-		return false;
+		return;
 	}
 
-	return *Count == *MaxCapacity;
-}
+	bHasAmber = false;
+	OnAmberUpdate.Broadcast(bHasAmber);
 
-bool AENTDefaultCharacter::HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const
-{
-	const int* Count = AmberInventory.Find(AmberType);
-
-	if (!Count)
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
 	{
-		return false;
+		return;
 	}
 
-	return *Count >= Quantity;
+	PlayerSaveSubsystem->GetPlayerSave()->bHasAmber = bHasAmber;
 }
 
 #if WITH_EDITOR
@@ -537,10 +517,20 @@ FVector AENTDefaultCharacter::GetTopLocation() const
 	return GetPlayerLocation(true);
 }
 
+float AENTDefaultCharacter::GetCharacterHalfHeight() const
+{
+	if (GetCapsuleComponent())
+	{
+		return GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	}
+
+	return 0.0f;
+}
+
 FVector AENTDefaultCharacter::GetPlayerLocation(bool TopLocation) const
 {
 	FVector TargetLocation = GetActorLocation();
-	TargetLocation.Z += GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight() * (TopLocation ? 1 : -1);
+	TargetLocation.Z += GetCharacterHalfHeight() * (TopLocation ? 1 : -1);
 	return TargetLocation;
 }
 
@@ -656,16 +646,8 @@ void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElemen
 	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
 	StateMachine->ChangeState(static_cast<EENTCharacterStateID>(SaveData->CurrentState));
 
-	AmberInventory.Empty(SaveData->AmberInventory.Num());
-	for (const TTuple<uint8, int>& Element : SaveData->AmberInventory)
-	{
-		AmberInventory.Add(static_cast<EAmberType>(Element.Key), Element.Value);
-	}
-
-	for (const TTuple<EAmberType, int>& Element : AmberInventory)
-	{
-		OnAmberUpdate.Broadcast(Element.Key, Element.Value);
-	}
+	bHasAmber = SaveData->bHasAmber;
+	OnAmberUpdate.Broadcast(bHasAmber);
 }
 
 #pragma endregion
@@ -705,10 +687,28 @@ void AENTDefaultCharacter::Respawn()
 	RespawnRotation.Pitch = CurrentRotation.Pitch;
 	RespawnRotation.Roll = CurrentRotation.Roll;
 
-	RespawnTransform.SetRotation(RespawnRotation.Quaternion());
-	RespawnTransform.SetScale3D(FVector::OneVector);
+	FHitResult HitResult;
+	bool bHit = GroundTrace(RespawnTransform.GetLocation(), RespawnGroundTrace, HitResult);
 
-	SetActorTransform(RespawnTransform);
+	if (bHit)
+	{
+		HitResult.Location.Z += GetCharacterHalfHeight();
+		SetActorLocation(HitResult.Location);
+	}
+	else
+	{
+		SetActorLocation(RespawnTransform.GetLocation());
+	}
+
+	if (Controller)
+	{
+		Controller->SetControlRotation(RespawnRotation);
+	}
+	else
+	{
+		RespawnTransform.SetRotation(RespawnRotation.Quaternion());
+	}
+
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	OnRespawn.Broadcast();

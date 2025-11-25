@@ -54,31 +54,9 @@
 							<Position X="3" Y="2"/>
 						</Module>
 					</ModuleList>
-					<RTPCValueList ShowAll="true">
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_NerveStretch" ID="{31886D5C-1267-426C-A7AA-FC467CBBF581}"/>
-							<Value>86.7532467532468</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_SFX" ID="{574BA7C8-4238-4960-B37D-088C81CCC1FC}"/>
-							<Value>100</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
-							<Value>100</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_Master" ID="{46B84529-E1EE-4F50-8C7E-69B7DDDC2BCE}"/>
-							<Value>100</Value>
-						</RTPCValue>
-					</RTPCValueList>
-					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="None" ID="{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"/>
-					</CurrentStateList>
-					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
-						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
-					</CurrentSwitchList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 				<SoundcasterSession Name="AMB TEST" ID="{FD9DD7B6-D642-46FC-B38E-02D64FF06CDB}">
 					<ModuleList>
@@ -119,23 +97,48 @@
 							<Position X="4" Y="1"/>
 						</Module>
 					</ModuleList>
-					<RTPCValueList ShowAll="true">
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_PlayerDistance" ID="{37237315-CD20-4606-9F4F-AC73D0C27BE4}"/>
-							<Value>100</Value>
-						</RTPCValue>
-						<RTPCValue>
-							<GameParameterRef Name="AKGP_Music" ID="{64D3E862-4D56-4AAF-8073-8D3F36C42250}"/>
-							<Value>100</Value>
-						</RTPCValue>
-					</RTPCValueList>
-					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
-					</CurrentStateList>
-					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Sprint" ID="{37199D4B-2906-4A43-ADE9-1164C8E55247}"/>
-						<CurrentSwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
-					</CurrentSwitchList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+				<SoundcasterSession Name="New Soundcaster  test Wil" ID="{31C11317-F331-4A66-AAB3-D3F2C66106FB}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="AKE_WindSpeed" ID="{3C96E412-6FF6-4422-AEC6-34FD6AC5A1D5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_PR_Legs" ID="{79F94C9C-AFF6-436B-99FA-59569A8F3218}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_StopWindSpeed" ID="{3E4C03C5-C587-4630-B830-812310BDBFC5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_PR_Move" ID="{FC7821CC-C3D3-43FC-B50F-81B908A653EE}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="SFX_NerveReceptacle_Activate" ID="{6D409423-B1F9-4103-8241-B07692B2A8A1}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_PR_Move_Stop" ID="{742F5950-5BF3-4E01-8223-17EB432505E5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="SW_MC_FS_Run_Material" ID="{A373E588-64E7-4062-BA06-19803858FFF4}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_PR_Scream" ID="{55DBC8D0-3693-45AB-B125-A0531134C332}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="4" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>

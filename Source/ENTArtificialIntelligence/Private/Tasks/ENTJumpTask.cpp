@@ -8,7 +8,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
-#include "Components/BoxComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ENTParasitePawn.h"
 #include "Path/ENTJumpSpline.h"
 
@@ -21,6 +21,8 @@ UENTJumpTask::UENTJumpTask()
 {
 	NodeName = "Jump";
 	bNotifyTick = true;
+
+	ForceInstancing(true);
 
 	JumpLocationKey.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpTask, JumpLocationKey));
 }
@@ -164,14 +166,15 @@ void UENTJumpTask::SetTargetTransform()
 	TargetTransform.SetLocation(CurrentBlackboardComponent->GetValue<UBlackboardKeyType_Vector>(JumpLocationKey.GetSelectedKeyID()));
 
 	FQuat TargetRotation = FRotationMatrix::MakeFromXZ(GetTargetForwardVector(), FVector::UpVector).ToQuat();
-	TargetTransform.SetRotation(TargetRotation);
+
+	TargetTransform.SetRotation(TargetRotation * RotationOffset.Quaternion());
 	TargetTransform.SetScale3D(FVector::OneVector);
 
 	float PawnHeight = 0.0f;
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
 	if (ParasitePawn)
 	{
-		PawnHeight = ParasitePawn->GetCollisionComp()->GetUnscaledBoxExtent().Z;
+		PawnHeight = ParasitePawn->GetParasiteHalfHeight();
 	}
 
 	FVector TargetLocation = TargetTransform.GetLocation();

@@ -12,6 +12,8 @@ UENTSetBoolValue::UENTSetBoolValue()
 	bNotifyBecomeRelevant = true;
 	bNotifyCeaseRelevant = true;
 
+	ForceInstancing(true);
+
 	BoolKey.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UENTSetBoolValue, BoolKey));
 }
 

@@ -5,24 +5,33 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Components/BoxComponent.h"
 #include "ENTGravityPawnMovement.h"
+#include "ENTHealthComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Parasite/ENTParasiteController.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 #include "Path/ENTNavigationArea.h"
+#include "Player/ENTDefaultCharacter.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 
 #if WITH_EDITORONLY_DATA
+#include "Selection.h"
 #include "Components/ArrowComponent.h"
+
+FVector AENTParasitePawn::DebugAttackLocation;
+FVector AENTParasitePawn::DebugAttackSize;
 #endif
 
 AENTParasitePawn::AENTParasitePawn()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = false; // tick is called by the AISubsystem
 	PrimaryActorTick.bStartWithTickEnabled = false;
 
-	ParasiteCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("ParasiteHitBox"));
+	ParasiteCollision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("ParasiteHitBox"));
 	SetRootComponent(ParasiteCollision);
 
 	ParasiteCollision->SetCollisionObjectType(ECC_Pawn);
@@ -58,6 +67,11 @@ AENTParasitePawn::AENTParasitePawn()
 	MovementComponent->MaxSpeed = 400.0f;
 
 	AIControllerClass = AENTParasiteController::StaticClass();
+
+#if WITH_EDITORONLY_DATA
+	USelection::SelectObjectEvent.AddUObject(this, &AENTParasitePawn::OnSelectionUpdate);
+	USelection::SelectionChangedEvent.AddUObject(this, &AENTParasitePawn::OnSelectionUpdate);
+#endif
 }
 
 void AENTParasitePawn::BeginPlay()
@@ -77,9 +91,32 @@ void AENTParasitePawn::BeginPlay()
 	}
 }
 
+#if WITH_EDITOR
+void AENTParasitePawn::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (bDebugDetectionRange)
+	{
+		DrawDetectionRange();
+	}
+}
+#endif
+
 void AENTParasitePawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
+
+	AActor* ResultActor = UGameplayStatics::GetActorOfClass(this, AENTDefaultCharacter::StaticClass());
+
+	if (ResultActor)
+	{
+		AENTDefaultCharacter* Character = Cast<AENTDefaultCharacter>(ResultActor);
+		if (Character)
+		{
+			Character->OnAmberUpdate.RemoveDynamic(this, &AENTParasitePawn::ChangeDetectionRange);
+		}
+	}
 
 	if (!ParasiteDeathZone)
 	{
@@ -99,6 +136,19 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	if (!ParasiteCollision)
 	{
 		return;
+	}
+
+#if WITH_EDITORONLY_DATA
+	if (SelectedInEditor)
+	{
+		DrawDetectionRange();
+	}
+#endif
+
+	if (!bOverrideDefaultRotation)
+	{
+		FRotator ActorRotation = GetActorRotation();
+		SetActorRotation(FRotator(-90.0f, ActorRotation.Yaw, 0.0f));
 	}
 
 	if (!TargetPath)
@@ -124,7 +174,7 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	}
 
 	FVector ActorLocation = HitResult.Location;
-	ActorLocation += (TargetPath->GetDirection() * -1 * ParasiteCollision->GetUnscaledBoxExtent().Z);
+	ActorLocation += (TargetPath->GetDirection() * -1 * GetParasiteHalfHeight());
 	SetActorLocation(ActorLocation);
 
 	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.Normal);
@@ -132,6 +182,17 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 }
 
 #if WITH_EDITOR
+void AENTParasitePawn::PostLoad()
+{
+	Super::PostLoad();
+
+	ParasiteHeight = GetParasiteHeight();
+	ParasiteWidth = GetParasiteWidth();
+
+	DebugAttackLocation = AttackLocation;
+	DebugAttackSize = AttackSize;
+}
+
 void AENTParasitePawn::PreEditChange(FProperty* PropertyAboutToChange)
 {
 	Super::PreEditChange(PropertyAboutToChange);
@@ -176,8 +237,23 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 			TargetPath = nullptr;
 		}
 	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, ParasiteCollision))
+	{
+		ParasiteHeight = GetParasiteHeight();
+		ParasiteWidth = GetParasiteWidth();
+	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, AttackLocation))
+	{
+		DebugAttackLocation = AttackLocation;
+	}
+	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, AttackSize))
+	{
+		DebugAttackSize = AttackSize;
+	}
 }
 #endif
+
+#pragma region BehaviorTree
 
 void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 {
@@ -201,6 +277,20 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(PatrolSpeedKeyName, PatrolSpeed);
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(ChaseSpeedKeyName, ChaseSpeed);
+
+	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(DetectionRangeKeyName, DefaultDetectionRange);
+
+	AActor* ResultActor = UGameplayStatics::GetActorOfClass(this, AENTDefaultCharacter::StaticClass());
+
+	if (ResultActor)
+	{
+		AENTDefaultCharacter* Character = Cast<AENTDefaultCharacter>(ResultActor);
+		if (Character)
+		{
+			Character->OnAmberUpdate.AddDynamic(this, &AENTParasitePawn::ChangeDetectionRange);
+			ParasiteController->GetBlackboardComponent()->SetValueAsObject(PlayerKeyName, Character);
+		}
+	}
 }
 
 void AENTParasitePawn::PossessedBy(AController* NewController)
@@ -220,6 +310,101 @@ void AENTParasitePawn::PossessedBy(AController* NewController)
 #endif
 }
 
+void AENTParasitePawn::StartBehaviorTree()
+{
+	if (!ParasiteController)
+	{
+		return;
+	}
+
+	ParasiteController->RunCurrentBehaviorTree();
+}
+
+void AENTParasitePawn::Trigger_Implementation()
+{
+	IENTActivation::Trigger_Implementation();
+
+	StartBehaviorTree();
+}
+
+#pragma endregion
+
+#pragma region DetectionRange
+
+#if WITH_EDITORONLY_DATA
+void AENTParasitePawn::DrawDetectionRange() const
+{
+	ClearDebugTraces();
+
+	if (ParasiteController && ParasiteController->GetBlackboardComponent())
+	{
+		float CurrentRadius = ParasiteController->GetBlackboardComponent()->GetValueAsFloat(DetectionRangeKeyName);
+
+		UKismetSystemLibrary::DrawDebugCylinder(this, GetActorLocation(), GetActorLocation(), CurrentRadius, 12, FLinearColor::Red, INFINITY, 10.0f);
+	}
+	else
+	{
+		UKismetSystemLibrary::DrawDebugCylinder(this, GetActorLocation(), GetActorLocation(), DefaultDetectionRange, 12, FLinearColor::Red, INFINITY, 10.0f);
+		UKismetSystemLibrary::DrawDebugCylinder(this, GetActorLocation(), GetActorLocation(), AugmentedDetectionRange, 12, FLinearColor::Yellow, INFINITY, 10.0f);
+	}
+}
+#endif
+
+void AENTParasitePawn::ChangeDetectionRange(bool bDoesPlayerHaveAmber)
+{
+	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(DetectionRangeKeyName, bDoesPlayerHaveAmber ? AugmentedDetectionRange : DefaultDetectionRange);
+	ParasiteController->GetBlackboardComponent()->SetValueAsBool(DoesPlayerHaveAmberKeyName, bDoesPlayerHaveAmber);
+}
+
+#pragma endregion
+
+#pragma region ParasiteAttack
+
+void AENTParasitePawn::Attack()
+{
+	TArray<AActor*> Actors;
+
+	ParasiteDeathZone->GetOverlappingActors(Actors, AActor::StaticClass());
+
+	bool bHitSomething = false;
+
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(this);
+
+	TArray<FHitResult> HitResults;
+	bool bHit = UKismetSystemLibrary::BoxTraceMultiForObjects(this, AttackLocation, AttackLocation, AttackSize, FRotator::ZeroRotator, ObjectsToAttack, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResults, true);
+
+	if (!bHit)
+	{
+		// failed attack
+		return;
+	}
+
+	for (const FHitResult& HitResult : HitResults)
+	{
+		AActor* Actor = HitResult.GetActor();
+		if (!Actor)
+		{
+			continue;
+		}
+
+		UENTHealthComponent* HealthComponent = Actor->GetComponentByClass<UENTHealthComponent>();
+		if (!HealthComponent)
+		{
+			continue;
+		}
+
+		// succeed attack
+		HealthComponent->TakeDamages(AttackDamages);
+		bHitSomething = true;
+	}
+
+	if (!bHitSomething)
+	{
+		return;
+	}
+}
+
 void AENTParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (!ParasiteController || !ParasiteController->GetBlackboardComponent() || !OtherActor)
@@ -229,6 +414,15 @@ void AENTParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, 
 
 	ParasiteController->GetBlackboardComponent()->SetValueAsObject(AttackTargetKeyName, OtherActor);
 }
+
+void AENTParasitePawn::DebugAttackZone(const UObject* WorldContextObject)
+{
+#if WITH_EDITORONLY_DATA
+	UKismetSystemLibrary::DrawDebugBox(WorldContextObject, DebugAttackLocation, DebugAttackSize, FLinearColor::Red);
+#endif
+}
+
+#pragma endregion
 
 #if WITH_EDITORONLY_DATA
 void AENTParasitePawn::DebugPawn() const
@@ -268,11 +462,69 @@ void AENTParasitePawn::DebugPawn() const
 }
 #endif
 
+#pragma region MathFunctions
+
+float AENTParasitePawn::GetParasiteHeight() const
+{
+	if (ParasiteCollision)
+	{
+		// due to the capsule rotation the height of the parasite is the capsule radius;
+		return ParasiteCollision->GetUnscaledCapsuleRadius() * 2;
+	}
+
+	return 0.0f;
+}
+
+float AENTParasitePawn::GetParasiteWidth() const
+{
+	if (ParasiteCollision)
+	{
+		// due to the capsule rotation the width of the parasite is the capsule halfHeight;
+		return ParasiteCollision->GetUnscaledCapsuleHalfHeight() * 2;
+	}
+
+	return 0.0f;
+}
+
+FVector AENTParasitePawn::GetParasiteForwardVector() const
+{
+	if(ParasiteMesh)
+	{
+		return ParasiteMesh->GetForwardVector();
+	}
+
+	return FVector::ZeroVector;
+}
+
+FVector AENTParasitePawn::GetParasiteRightVector() const
+{
+	if(ParasiteMesh)
+	{
+		return ParasiteMesh->GetRightVector();
+	}
+
+	return FVector::ZeroVector;
+}
+
+FVector AENTParasitePawn::GetParasiteUpVector() const
+{
+	if(ParasiteMesh)
+	{
+		return ParasiteMesh->GetUpVector();
+	}
+
+	return FVector::ZeroVector;
+}
+
+#pragma endregion
+
 void AENTParasitePawn::SetAnimToTrigger(UAnimSequenceBase* Anim)
 {
 	AnimToTrigger = Anim;
 	OnChangeAnimToTrigger.Broadcast(AnimToTrigger);
 }
+
+#pragma region Velocity
 
 FVector AENTParasitePawn::GetVelocity() const
 {
@@ -294,6 +546,8 @@ void AENTParasitePawn::OverrideVelocity(const FVector& NewVelocity)
 	bOverrideVelocity = NewVelocity != FVector::ZeroVector;
 	OverridenVelocity = NewVelocity;
 }
+
+#pragma endregion
 
 #pragma region Save
 
@@ -319,5 +573,30 @@ void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementDat
 	bHasReceivedLoadingRequest = true;
 	LoadingData = Data;
 }
+
+#pragma endregion
+
+#pragma region DebugSelection
+
+#if WITH_EDITORONLY_DATA
+void AENTParasitePawn::OnSelectionUpdate(UObject* Object)
+{
+	if (Object == this && !SelectedInEditor)
+	{
+		SelectedInEditor = true;
+		DrawDetectionRange();
+	}
+	else if (SelectedInEditor && !IsSelected())
+	{
+		SelectedInEditor = false;
+		ClearDebugTraces();
+	}
+}
+
+void AENTParasitePawn::ClearDebugTraces() const
+{
+	UKismetSystemLibrary::FlushPersistentDebugLines(this);
+}
+#endif
 
 #pragma endregion

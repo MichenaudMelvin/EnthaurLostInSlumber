@@ -53,7 +53,7 @@ namespace AK
 			/// <summary>
 			/// Wwise SDK build number
 			/// </summary>
-            public const int Build = 8893;
+            public const int Build = 8898;
 
 			/// <summary>
 			/// Wwise SDK build nickname
@@ -78,7 +78,7 @@ namespace AK
             /// <summary>
             /// String representing the Wwise SDK version
             /// </summary>
-            public const string AssemblyVersion = "2024.1.8.8893";
+            public const string AssemblyVersion = "2024.1.8.8898";
 
 			/// <summary>
 			/// String representing the Wwise SDK copyright notice

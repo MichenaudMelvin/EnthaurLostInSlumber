@@ -8,14 +8,38 @@ State	ID	Name	State Group			Notes
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	471070440	AKGP_Music			\Mix\AKGP_Music	
+	504532776	Brick			\Factory Acoustic Textures\Textures\Brick	
+	513139656	Mountain			\Factory Acoustic Textures\Textures\Mountain	
+	841620460	Concrete			\Factory Acoustic Textures\Textures\Concrete	
 	896534061	AKGP_Master			\Mix\AKGP_Master	
+	1755085759	Wood_Deep			\Factory Acoustic Textures\Textures\Wood_Deep	
+	1873957695	Anechoic			\Factory Acoustic Textures\Textures\Anechoic	
+	1970351858	Fabric			\Factory Acoustic Textures\Textures\Fabric	
+	2058049674	Wood			\Factory Acoustic Textures\Textures\Wood	
+	2412606308	Carpet			\Factory Acoustic Textures\Textures\Carpet	
+	2637588553	Tile			\Factory Acoustic Textures\Textures\Tile	
+	2928161104	Curtains			\Factory Acoustic Textures\Textures\Curtains	
+	3195498748	Cork_Tiles			\Factory Acoustic Textures\Textures\Cork_Tiles	
+	3670307564	Drywall			\Factory Acoustic Textures\Textures\Drywall	
 	4013141432	AKGP_SFX			\Mix\AKGP_SFX	
+	4168643977	Acoustic_Banner			\Factory Acoustic Textures\Textures\Acoustic_Banner	
+	4262522749	Wood_Bright			\Factory Acoustic Textures\Textures\Wood_Bright	
 
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	1162281553	Bus_Music			\Default Work Unit\Master Audio Bus_01\Bus_Music	
 	2930365547	Bus_SFX_Amb_MC			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC	
 	4267419003	Master Audio Bus_01			\Default Work Unit\Master Audio Bus_01	
 	4277214558	Bus_Voice			\Default Work Unit\Master Audio Bus_01\Bus_Voice	
+
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	243379636	Reflect			\Default Work Unit\Master Audio Bus_01\Reflect	
+	933527613	Reverb_Small			\Default Work Unit\Master Audio Bus_01\Reverb_Small	
+	3387002570	Reverb_Big			\Default Work Unit\Master Audio Bus_01\Reverb_Big	
+
+Effect plug-ins	ID	Name	Type				Notes
+	825401838	AK_Convolution_Reverb_Dark_Cathedrale_Small	Wwise Convolution Reverb			
+	3077109135	Dark_Cathedral_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  
+	3399505373	Reflect_Physically_Based	Wwise Reflect			
 
 Audio Devices	ID	Name	Type				Notes
 	2317455096	No_Output	No Output			

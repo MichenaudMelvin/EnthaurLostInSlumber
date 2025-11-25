@@ -12,29 +12,6 @@
 class UENTElectricityComponent;
 class UAkAudioEvent;
 
-USTRUCT(BlueprintType)
-struct FENTInteractionPoints
-{
-	GENERATED_BODY()
-
-	UPROPERTY(VisibleInstanceOnly, Category = "InteractionsPoints")
-	TObjectPtr<UStaticMeshComponent> MeshComp;
-
-	UPROPERTY(VisibleInstanceOnly, Category = "InteractionsPoints")
-	TObjectPtr<UStaticMeshComponent> AmberMeshComp;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "InteractionsPoints")
-	TObjectPtr<UBoxComponent> InteractionBox;
-
-	UPROPERTY(EditAnywhere, Category = "InteractionsPoints")
-	TObjectPtr<UStaticMesh> Mesh;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "InteractionsPoints", meta = (MakeEditWidget))
-	FTransform Transform;
-
-	bool bIsActive = false;
-};
-
 class UENTInteractableComponent;
 class UBoxComponent;
 class UPostProcessComponent;
@@ -63,11 +40,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
 	TObjectPtr<UPostProcessComponent> BlackAndWhiteShader;
 
-	UPROPERTY(EditDefaultsOnly, Category = "WeakZone")
-	TObjectPtr<UAkAudioEvent> GrowlNoise;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Electricity")
 	TObjectPtr<UENTElectricityComponent> ElectricityComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity")
+	FLinearColor ElectricityCureColor;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity")
+	FLinearColor ElectricityCorruptColor;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
@@ -79,6 +59,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
+
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void CreateZone();
 
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void ChangeZoneSize(const FVector& NewSize);
@@ -100,6 +83,14 @@ protected:
 	UFUNCTION()
 	void CureUpdate(float Alpha);
 
+public:
+	
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void CureZone(AActor* StartCurePoint);
+
+	UFUNCTION(BlueprintCallable, Category = "WeakZone")
+	void CorruptZone(AActor* StartCorruptPoint);
+
 #pragma endregion
 
 protected:
@@ -120,108 +111,14 @@ protected:
 
 	bool bIsZoneActive = true;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interactable")
-	TObjectPtr<UENTInteractableComponent> Interactable;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
-	TObjectPtr<UStaticMesh> DefaultInteractionPointMesh;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
-	TObjectPtr<UStaticMesh> AmberMesh;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
-	float TargetAmberHeight = 35.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
-	float AmberAnimSpeed = 1.5f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Interactable")
-	FVector InteractionBoxExtent = FVector(100.0f, 100.0f, 30.0f);
-
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Interactable")
-	TArray<FENTInteractionPoints> InteractionPoints;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Amber")
-	EAmberType AmberType = EAmberType::WeakAmber;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Amber", meta = (ClampMin = 0))
-	int CostByPoint = 1;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Amber")
-	TObjectPtr<UAkAudioEvent> InjectAmberNoise;
-
 	UFUNCTION()
 	void OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
 	void OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	UFUNCTION()
-	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
-
-	FENTInteractionPoints* FindInteractionPoint(TObjectPtr<UPrimitiveComponent> StaticMeshComponent);
-
-	bool IsEveryInteractionPointsActive() const;
-
-	UFUNCTION(BlueprintCallable, Category = "WeakZone")
-	void CheckIfEveryInteractionsPointActive();
-
 public:
 	void ActivateZone(bool bActivateZone);
-
-#pragma region Foliage
-
-protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Foliage")
-	TObjectPtr<UInstancedStaticMeshComponent> Foliage;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
-	TObjectPtr<UStaticMesh> FoliageMesh;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
-	FVector FoliageScale = FVector(0.1f);
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
-	FFloatRange FoliageOffsetRange = FFloatRange(250.0f, 500.0f);
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
-	uint16 MeshesNumberByInteractionsPoints = 75;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage|Trace")
-	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectsTypes;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage|Trace", meta = (Units = cm))
-	float TraceLength = 100.0f;
-
-	UPROPERTY(EditInstanceOnly, Category = "Foliage")
-	FRandomStream Seed;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
-	TObjectPtr<UCurveFloat> FoliageGrowthCurve;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage")
-	TObjectPtr<UAkAudioEvent> FoliageGrowthNoise;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Foliage", meta = (Units = s))
-	float GrowthDuration = 3.0f;
-
-	FTimeline FoliageTimeline;
-
-	UFUNCTION()
-	void FoliageGrowthUpdate(float Alpha);
-
-#if WITH_EDITORONLY_DATA
-	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
-	bool bShowFoliage = false;
-
-	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
-	bool bShowTraces = false;
-
-	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")
-	float TracesSize = 15.0f;
-#endif
-
-#pragma endregion
 
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;

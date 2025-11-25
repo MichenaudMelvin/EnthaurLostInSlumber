@@ -15,6 +15,37 @@
 
 #pragma region States
 
+#if WITH_EDITOR
+FString StateToString(EENTCharacterStateID State)
+{
+	switch (State)
+	{
+		case EENTCharacterStateID::None:
+			return "None";
+		case EENTCharacterStateID::Idle:
+			return "Idle";
+		case EENTCharacterStateID::Walk:
+			return "Walk";
+		case EENTCharacterStateID::Sprint:
+			return "Sprint";
+		case EENTCharacterStateID::Crouch:
+			return "Crouch";
+		case EENTCharacterStateID::Jump:
+			return "Jump";
+		case EENTCharacterStateID::Fall:
+			return "Fall";
+		case EENTCharacterStateID::Interact:
+			return "Interact";
+		case EENTCharacterStateID::Stop:
+			return "Stop";
+		case EENTCharacterStateID::Anim:
+			return "Anim";
+	}
+
+	return "Unknow state; Please fill the StateToString function (Player/State/ENTCharacterState.h/.cpp)";
+}
+#endif
+
 UENTCharacterState::UENTCharacterState()
 {
 	ViewBobbing = UENTViewBobbing::GetEmptyOscillator();
@@ -67,7 +98,23 @@ void UENTCharacterState::StateInit(UENTCharacterStateMachine* InStateMachine)
 #endif
 }
 
-void UENTCharacterState::StateEnter_Implementation(const EENTCharacterStateID& PreviousStateID) {}
+void UENTCharacterState::StateEnter_Implementation(const EENTCharacterStateID& PreviousStateID)
+{
+#if WITH_EDITOR
+	if (!StateMachine || !Character || !Controller)
+	{
+		const FString Message = FString::Printf(TEXT("Cannot start state %s (StateID is %d)"), *GetClass()->GetName(), StateID);
+
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
+		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
+
+		if (StateMachine)
+		{
+			StateMachine->ChangeState(EENTCharacterStateID::None);
+		}
+	}
+#endif
+}
 
 void UENTCharacterState::StateTick_Implementation(float DeltaTime)
 {
@@ -153,7 +200,7 @@ void UENTCharacterState::UpdateViewBobbing(float DeltaTime)
 	const float NormalizedSpeed = (LastMoveSpeed) ? UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->Velocity.Length(), 0.0f, (MoveState)? MoveState->GetMoveSpeed() : LastMoveSpeed) : 0.0f;
 
 	const float CurrentRotationAmplitudeMultiplier = Character->GetViewBobbingObject()-> GetRotationAmplitudeMultiplier();
-	const float TargetRotationAmplitudeMultiplier = GetSettings()->bViewBobbing ? LocationAmplitudeMultiplier *  NormalizedSpeed * bAllowRollBobbing * 70.f : 0.0f;
+	const float TargetRotationAmplitudeMultiplier = GetSettings()->bViewBobbing ? LocationAmplitudeMultiplier * NormalizedSpeed * bAllowRollBobbing * 70.0f : 0.0f;
 
 	float TargetRotationAmplitude = FMath::Lerp(CurrentRollWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
 	
@@ -171,14 +218,22 @@ void UENTCharacterState::UpdateViewBobbing(float DeltaTime)
 
 #pragma region Noise
 
-void UENTCharacterState::EmitNoise() const
+void UENTCharacterState::EmitNoise()
 {
-	if (!bDoesMakeNoise)
+	if (!bDoesMakeNoise || !bShouldEmitNoises)
 	{
 		return;
 	}
 
-	Character->MakeNoise(Loudness, Character, Character->GetActorLocation(), NoiseRange, NoiseTag);
+	FVector NoiseLocation = Character->GetActorLocation();
+	Character->MakeNoise(Loudness, Character, NoiseLocation, NoiseRange, NoiseTag);
+
+#if WITH_EDITORONLY_DATA
+	if (bDebugState)
+	{
+		UKismetSystemLibrary::DrawDebugCylinder(Character, NoiseLocation, NoiseLocation, NoiseRange, 12, FLinearColor::Red, DrawDebugNoiseDuration);
+	}
+#endif
 }
 
 #pragma endregion

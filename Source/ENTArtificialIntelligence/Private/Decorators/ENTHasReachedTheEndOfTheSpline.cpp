@@ -7,6 +7,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+#include "Parasite/ENTParasitePawn.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 
 UENTHasReachedTheEndOfTheSpline::UENTHasReachedTheEndOfTheSpline()
@@ -16,6 +17,8 @@ UENTHasReachedTheEndOfTheSpline::UENTHasReachedTheEndOfTheSpline()
 	PathIndex.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTHasReachedTheEndOfTheSpline, PathIndex));
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTHasReachedTheEndOfTheSpline, PathDirection));
 	bNotifyTick = true;
+
+	ForceInstancing(true);
 }
 
 void UENTHasReachedTheEndOfTheSpline::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -96,9 +99,17 @@ bool UENTHasReachedTheEndOfTheSpline::CalculateRawConditionValue(UBehaviorTreeCo
 		return false;
 	}
 
+	float PawnHeight = 0.0f;
+
+	AENTParasitePawn* Parasite = Cast<AENTParasitePawn>(Pawn);
+	if (Parasite)
+	{
+		PawnHeight = Parasite->GetParasiteHalfHeight();
+	}
+
 	int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
 
-	return !PathOBJ->IsAtTheEndOfThePath(Pawn->GetActorLocation(), Direction, Tolerance);
+	return !PathOBJ->IsAtTheEndOfThePath(Pawn->GetActorLocation(), PawnHeight, Direction, Tolerance);
 }
 
 #if WITH_EDITOR
@@ -110,6 +121,13 @@ FString UENTHasReachedTheEndOfTheSpline::GetStaticDescription() const
 		KeyDesc = AIPath.SelectedKeyName.ToString();
 	}
 
-	return FString::Printf(TEXT("Has reached the end of %s"), *KeyDesc);
+	if (IsInversed())
+	{
+		return FString::Printf(TEXT("Hasn't reached the end of %s"), *KeyDesc);
+	}
+	else
+	{
+		return FString::Printf(TEXT("Has reached the end of %s"), *KeyDesc);
+	}
 }
 #endif

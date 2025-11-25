@@ -98,7 +98,7 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
 	if (ParasitePawn)
 	{
-		PawnHeight = ParasitePawn->GetCollisionComp()->GetUnscaledBoxExtent().Z;
+		PawnHeight = ParasitePawn->GetParasiteHalfHeight();
 	}
 
 	int Index = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathIndex.GetSelectedKeyID());
@@ -151,7 +151,9 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	UKismetSystemLibrary::LineTraceSingleForObjects(CurrentPawn, StartLocation, EndLocation, GroundObjects, false, ActorsToIgnore, DrawDebugTrace, HitResult, false, FLinearColor::Red, FLinearColor::Green, 5.0f);
 
 	FRotator TargetRotation = FRotationMatrix::MakeFromZX(HitResult.ImpactNormal, ForwardDirection).Rotator();
+
 	CurrentPawn->SetActorRotation(TargetRotation);
+	CurrentPawn->AddActorLocalRotation(RotationOffset);
 
 	float Distance = FVector::Dist(StartLocation, TargetLocation);
 	float Speed = CurrentPawn->GetMovementComponent()->GetMaxSpeed();

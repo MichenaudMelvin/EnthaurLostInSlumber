@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "InputMappingContext.h"
 #include "Components/ENTPhysicConstraint.h"
 #include "GameElements/ENTWeakZoneInterface.h"
 #include "GameFramework/Character.h"
@@ -28,7 +27,7 @@ class UENTCharacterState;
 enum class EENTCharacterStateID : uint8;
 class UCameraComponent;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FKOnAmberUpdate, EAmberType, AmberType, int, AmberAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKOnAmberUpdate, bool, bHasAmber);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKOnRespawn);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractionFeedback, bool, bCanInteract);
 
@@ -158,6 +157,9 @@ public:
 
 	TObjectPtr<UENTCharacterStateMachine> GetStateMachine() const {return StateMachine;}
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
+	bool CompareCurrentState(EENTCharacterStateID Other) const;
+
 #pragma endregion
 
 #pragma region Interaction
@@ -188,7 +190,13 @@ protected:
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ground")
-	bool GroundTrace(FHitResult& HitResult) const;
+	bool GroundTrace(const FVector& StartLocation, float TraceLength, FHitResult& HitResult) const;
+
+	bool GroundTrace(FHitResult& HitResult) const {return GroundTrace(GetBottomLocation(), GroundTraceLength, HitResult);}
+
+	bool GroundTrace(const FVector& StartLocation, FHitResult& HitResult) const {return GroundTrace(StartLocation, GroundTraceLength, HitResult);}
+
+	bool GroundTrace(float TraceLength, FHitResult& HitResult) const {return GroundTrace(GetBottomLocation(), TraceLength, HitResult);}
 
 protected:
 	void GroundMovement();
@@ -203,34 +211,29 @@ protected:
 
 #pragma endregion
 
+protected:
+	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+
+	virtual void OnExitWeakZone_Implementation() override;
+
 #pragma region Amber
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Amber")
-	TMap<EAmberType, int> AmberInventory;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Amber")
-	TMap<EAmberType, int> AmberInventoryMaxCapacity;
+	bool bHasAmber = false;
 
 public:
 	UPROPERTY(BlueprintAssignable, Category = "Amber")
 	FKOnAmberUpdate OnAmberUpdate;
 
-	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
+	UFUNCTION(BlueprintCallable, Category = "Amber")
+	void MineAmber();
 
-	virtual void OnExitWeakZone_Implementation() override;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
-	void MineAmber(const EAmberType& AmberType, const int Amount);
-
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
-	void UseAmber(const EAmberType& AmberType, const int Amount);
+	UFUNCTION(BlueprintCallable, Category = "Amber")
+	void UseAmber();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
-	bool IsAmberTypeFilled(const EAmberType& AmberType) const;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")
-	bool HasRequiredQuantity(const EAmberType& AmberType, const int Quantity) const;
+	bool HasAmber() const {return bHasAmber;}
 
 #if WITH_EDITOR
 private:
@@ -248,6 +251,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	float GetCharacterHalfHeight() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	float GetCharacterHeight() const {return GetCharacterHalfHeight() * 2.0f;}
 
 	/**
 	 * @brief 
@@ -300,6 +309,9 @@ public:
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
 	TObjectPtr<AENTRespawnTree> LastRespawnTree = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Respawn", meta = (Units = cm, ClampMin = 0.0f))
+	float RespawnGroundTrace = 500.0f;
 
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
