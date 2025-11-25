@@ -39,4 +39,12 @@ private:
 
 	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace))
 	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
+
+	UPROPERTY(EditInstanceOnly, Category = "Location")
+	bool bInverseCheck = false;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditInstanceOnly, Category = "Debug")
+	bool bDebugDecorator = false;
+#endif
 };

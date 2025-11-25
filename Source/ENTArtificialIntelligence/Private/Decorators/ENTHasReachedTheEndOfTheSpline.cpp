@@ -109,7 +109,7 @@ bool UENTHasReachedTheEndOfTheSpline::CalculateRawConditionValue(UBehaviorTreeCo
 
 	int Direction = BlackboardComponent->GetValue<UBlackboardKeyType_Int>(PathDirection.GetSelectedKeyID());
 
-	return !PathOBJ->IsAtTheEndOfThePath(Pawn->GetActorLocation(), PawnHeight, Direction, Tolerance);
+	return bInverseCheck != !PathOBJ->IsAtTheEndOfThePath(Pawn->GetActorLocation(), PawnHeight, Direction, Tolerance);
 }
 
 #if WITH_EDITOR
@@ -121,7 +121,7 @@ FString UENTHasReachedTheEndOfTheSpline::GetStaticDescription() const
 		KeyDesc = AIPath.SelectedKeyName.ToString();
 	}
 
-	if (IsInversed())
+	if (bInverseCheck)
 	{
 		return FString::Printf(TEXT("Hasn't reached the end of %s"), *KeyDesc);
 	}
