@@ -15,6 +15,8 @@ UENTSetRandomLocation::UENTSetRandomLocation()
 	bNotifyBecomeRelevant = true;
 	bCreateNodeInstance = true;
 
+	ForceInstancing(true);
+
 	RandomLocationKey.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTSetRandomLocation, RandomLocationKey));
 	Origin.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTSetRandomLocation, Origin));
 }

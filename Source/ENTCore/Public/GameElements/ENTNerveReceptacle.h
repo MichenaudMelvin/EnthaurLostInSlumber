@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "ENTNerveReceptacle.generated.h"
 
+class UENTInteractableComponent;
 class UAkComponent;
 
 UENUM(BlueprintType)
@@ -49,9 +50,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Components")
 	TObjectPtr<UStaticMeshComponent> NerveReceptacle;
 
-	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
-	TObjectPtr<USphereComponent> Collision;
-
 	UPROPERTY(EditDefaultsOnly, Category = "Components")
 	TObjectPtr<UAkComponent> NerveReceptaclesNoises;
 
@@ -77,9 +75,12 @@ protected:
 
 	UPROPERTY()
 	FTransform NerveEndTargetTransform;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
+	TObjectPtr<UENTInteractableComponent> InteractableComponent;
 
 	UFUNCTION()
-	void TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Nerve")
 	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive;
