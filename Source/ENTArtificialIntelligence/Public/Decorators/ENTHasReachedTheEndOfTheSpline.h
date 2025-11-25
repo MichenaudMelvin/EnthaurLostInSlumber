@@ -39,4 +39,7 @@ private:
 
 	UPROPERTY(EditInstanceOnly, Category = "Path", meta = (Units = cm))
 	float Tolerance = 5.0f;
+
+	UPROPERTY(EditInstanceOnly, Category = "Path")
+	bool bInverseCheck = false;
 };
