@@ -23,14 +23,13 @@ void UENTControlsMenu::NativeOnInitialized()
 
 	UpdateAnyKeyBind(MenuManager->GetCurrentController());
 	MenuManager->OnChangeCurrentController.AddDynamic(this, &UENTControlsMenu::UpdateAnyKeyBind);
-
-	AddInputRows();
 }
 
 void UENTControlsMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
 
+	AddInputRows();
 }
 
 void UENTControlsMenu::NativeDestruct()

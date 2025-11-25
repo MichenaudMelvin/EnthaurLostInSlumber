@@ -196,8 +196,8 @@ void UENTOptionsMenu::OnViewControlsButtonHovered()
 {
 	if (OptionTitle && OptionDescription)
 	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "View Controls"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "View the current selected control schemes."));
+		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Controls"));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "View the current selected control keys."));
 	}
 }
 
