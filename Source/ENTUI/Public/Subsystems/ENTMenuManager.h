@@ -50,6 +50,7 @@ public:
 	TObjectPtr<UUserWidget> GetNewGameMenu() const { return NewGameMenu; }
 	TObjectPtr<UUserWidget> GetControlsMenu() const { return ControlsMenu; }
 	TObjectPtr<UUserWidget> GetGammaMenu() const { return GammaMenu; }
+	TObjectPtr<UUserWidget> GetSoundMenu() const { return SoundMenu; }
 	TObjectPtr<UUserWidget> GetMainMenuConfirmationMenu() const { return MainMenuConfirmationMenu; }
 	TObjectPtr<UUserWidget> GetRestartConfirmationMenu() const { return RestartConfirmationMenu; }
 
@@ -156,6 +157,9 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, Category = "UI|GammaMenu")
 	TObjectPtr<UUserWidget> GammaMenu = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI|GammaMenu")
+	TObjectPtr<UUserWidget> SoundMenu = nullptr;
 
 #pragma endregion
 

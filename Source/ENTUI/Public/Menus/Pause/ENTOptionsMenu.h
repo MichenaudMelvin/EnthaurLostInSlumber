@@ -28,13 +28,10 @@ protected:
 	void UpdateWidgetValues(bool bSkipAnim);
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomButton> OverallVolumeButton;
+	TObjectPtr<UENTCustomButton> VolumeButton;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> MouseSensitivityButton;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UENTCustomSlider> OverallVolumeSlider;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomSlider> MouseSensitivitySlider;
@@ -70,7 +67,7 @@ protected:
 	TObjectPtr<UTextBlock> OptionDescription;
 
 	UFUNCTION()
-	void OnOverallButtonHovered();
+	void OnVolumeButtonClicked();
 	
 	UFUNCTION()
 	void OnMouseSensButtonHovered();
@@ -92,9 +89,6 @@ protected:
 	void OnGammaButtonClicked();
 
 	UFUNCTION()
-	void OnOverallSliderChanged(float InValue);
-
-	UFUNCTION()
 	void OnViewBobbingCheckBoxClicked(bool bIsChecked, bool bSkip);
 
 	UFUNCTION()
@@ -105,9 +99,6 @@ protected:
 
 	UFUNCTION()
 	void ResetSettings();
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UTextBlock> OverallVolumeValue;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UTextBlock> MouseSensitivityValue;

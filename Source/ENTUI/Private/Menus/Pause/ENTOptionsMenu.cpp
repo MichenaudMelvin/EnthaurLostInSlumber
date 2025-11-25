@@ -16,14 +16,9 @@ void UENTOptionsMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	if (OverallVolumeSlider && OverallVolumeSlider->GetCustomSlider())
+	if (VolumeButton && VolumeButton->GetCustomButton())
 	{
-		OverallVolumeSlider->GetCustomSlider()->OnValueChanged.AddDynamic(this, &UENTOptionsMenu::OnOverallSliderChanged);
-	}
-
-	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
-	{
-		OverallVolumeButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnOverallButtonHovered);
+		VolumeButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnVolumeButtonClicked);
 	}
 	if (MouseSensitivityButton && MouseSensitivityButton->GetCustomButton())
 	{
@@ -70,8 +65,6 @@ void UENTOptionsMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	OnOverallButtonHovered();
-
 	UpdateWidgetValues(true);
 }
 
@@ -92,14 +85,9 @@ void UENTOptionsMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (OverallVolumeSlider && OverallVolumeSlider->GetCustomSlider())
+	if (VolumeButton && VolumeButton->GetCustomButton())
 	{
-		OverallVolumeSlider->GetCustomSlider()->OnValueChanged.RemoveDynamic(this, &UENTOptionsMenu::OnOverallSliderChanged);
-	}
-
-	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
-	{
-		OverallVolumeButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnOverallButtonHovered);
+		VolumeButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnVolumeButtonClicked);
 	}
 	if (MouseSensitivityButton && MouseSensitivityButton->GetCustomButton())
 	{
@@ -149,20 +137,21 @@ void UENTOptionsMenu::UpdateWidgetValues(bool bSkipAnim)
 	{
 		return;
 	}
-
-	OverallVolumeSlider->GetCustomSlider()->SetValue(SettingsSubsystem->GetSettings()->MasterVolume);
+	
 	MouseSensitivitySlider->GetCustomSlider()->SetValue(SettingsSubsystem->GetSettings()->MouseSensitivity);
 	InvertMouseAxisCheckBox->SetIsOn(SettingsSubsystem->GetSettings()->bInvertYAxis, bSkipAnim);
 	ViewBobbingCheckbox->SetIsOn(SettingsSubsystem->GetSettings()->bViewBobbing, bSkipAnim);
 }
 
-void UENTOptionsMenu::OnOverallButtonHovered()
+void UENTOptionsMenu::OnVolumeButtonClicked()
 {
-	if (OptionTitle && OptionDescription)
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Overall Volume"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the volume of all audio."));
+		return;
 	}
+	
+	MenuManager->OpenMenu(MenuManager->GetSoundMenu(), false);
 }
 
 void UENTOptionsMenu::OnMouseSensButtonHovered()
@@ -197,7 +186,16 @@ void UENTOptionsMenu::OnViewControlsButtonHovered()
 	if (OptionTitle && OptionDescription)
 	{
 		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Controls"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "View the current selected control keys."));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Edit the current selected control keys."));
+	}
+}
+
+void UENTOptionsMenu::OnGammaButtonHovered()
+{
+	if (OptionTitle && OptionDescription)
+	{
+		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Gamma"));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the displayed gamma intensity."));
 	}
 }
 
@@ -212,15 +210,6 @@ void UENTOptionsMenu::OnViewControlsButtonClicked()
 	MenuManager->OpenMenu(MenuManager->GetControlsMenu(), false);
 }
 
-void UENTOptionsMenu::OnGammaButtonHovered()
-{
-	if (OptionTitle && OptionDescription)
-	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Gamma"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the displayed gamma intensity."));
-	}
-}
-
 void UENTOptionsMenu::OnGammaButtonClicked()
 {
 	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
@@ -230,18 +219,6 @@ void UENTOptionsMenu::OnGammaButtonClicked()
 	}
 	
 	MenuManager->OpenMenu(MenuManager->GetGammaMenu(), false);
-}
-
-void UENTOptionsMenu::OnOverallSliderChanged(float InValue)
-{
-	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
-	if (!SettingsSubsystem)
-	{
-		return;
-	}
-
-	SettingsSubsystem->SetMasterVolume(InValue);
-	OverallVolumeValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 3, 0, 0));
 }
 
 void UENTOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked, bool bSkip)
