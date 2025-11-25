@@ -82,7 +82,7 @@ bool UENTCheckPlayerState::CalculateRawConditionValue(UBehaviorTreeComponent& Ow
 		return false;
 	}
 
-	return Character->CompareCurrentState(TargetState);
+	return bInverseCheck != Character->CompareCurrentState(TargetState);
 }
 
 #if WITH_EDITOR
@@ -94,7 +94,7 @@ FString UENTCheckPlayerState::GetStaticDescription() const
 		KeyDesc = Player.SelectedKeyName.ToString();
 	}
 
-	if (IsInversed())
+	if (bInverseCheck)
 	{
 		return FString::Printf(TEXT("Is CurrentState of %s != %s"), *KeyDesc, *StateToString(TargetState));
 	}
