@@ -12,6 +12,11 @@
 						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+						<Property Name="UserAuxSendVolume0" Type="Real64">
+							<ValueList>
+								<Value>-96</Value>
+							</ValueList>
+						</Property>
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Attenuation">
@@ -130,6 +135,9 @@
 								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+								<Reference Name="ReflectionsAuxSend">
+									<ObjectRef Name="Reflect" ID="{F394F660-B9B4-4A3A-9580-16D1E5E099B9}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1533,655 +1541,873 @@
 										</GroupingList>
 									</GroupingInfo>
 								</SwitchContainer>
+								<SwitchContainer Name="SW_MC_Jump_Material" ID="{7010AB05-F651-499E-B89B-EBA9F63EDAAA}" ShortID="51962492">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="UserAuxSendVolume0" Type="Real64">
+											<ValueList>
+												<Value>-96</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<Custom>
+												<Attenuation Name="Attenuation (Custom)" ID="{A2C8072B-34BE-49BF-A66B-0A0D72C6926A}" ShortID="960129689">
+													<CurveUsageInfoList>
+														<VolumeDryUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																<Curve Name="VolumeDry" ID="{A97B7156-6FD3-4787-B27B-5B49126FE5FD}">
+																	<PropertyList>
+																		<Property Name="Flags" Type="int32" Value="3"/>
+																	</PropertyList>
+																	<PointList>
+																		<Point>
+																			<XPos>0</XPos>
+																			<YPos>0</YPos>
+																			<Flags>5</Flags>
+																		</Point>
+																		<Point>
+																			<XPos>100</XPos>
+																			<YPos>-200</YPos>
+																			<Flags>37</Flags>
+																		</Point>
+																	</PointList>
+																</Curve>
+															</CurveUsageInfo>
+														</VolumeDryUsage>
+														<VolumeWetGameUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																<Curve Name="VolumeWetGame" ID="{ED642556-CD4A-4443-8DF1-71EA4A49671F}">
+																	<PropertyList>
+																		<Property Name="Flags" Type="int32" Value="3"/>
+																	</PropertyList>
+																	<PointList>
+																		<Point>
+																			<XPos>0</XPos>
+																			<YPos>-5</YPos>
+																			<Flags>5</Flags>
+																		</Point>
+																		<Point>
+																			<XPos>100</XPos>
+																			<YPos>-5</YPos>
+																			<Flags>37</Flags>
+																		</Point>
+																	</PointList>
+																</Curve>
+															</CurveUsageInfo>
+														</VolumeWetGameUsage>
+														<VolumeWetUserUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+														</VolumeWetUserUsage>
+														<LowPassFilterUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</LowPassFilterUsage>
+														<HighPassFilterUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</HighPassFilterUsage>
+														<SpreadUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</SpreadUsage>
+														<FocusUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</FocusUsage>
+														<ObstructionVolumeUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</ObstructionVolumeUsage>
+														<ObstructionLPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</ObstructionLPFUsage>
+														<ObstructionHPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</ObstructionHPFUsage>
+														<OcclusionVolumeUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</OcclusionVolumeUsage>
+														<OcclusionLPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</OcclusionLPFUsage>
+														<OcclusionHPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</OcclusionHPFUsage>
+														<DiffractionVolumeUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</DiffractionVolumeUsage>
+														<DiffractionLPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</DiffractionLPFUsage>
+														<DiffractionHPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</DiffractionHPFUsage>
+														<TransmissionVolumeUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</TransmissionVolumeUsage>
+														<TransmissionLPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</TransmissionLPFUsage>
+														<TransmissionHPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</TransmissionHPFUsage>
+													</CurveUsageInfoList>
+												</Attenuation>
+											</Custom>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="MC_Jump_Bone" ID="{ED5B6AA3-EB2F-40F9-A0B9-0DDEBA0B3E6E}" ShortID="921616285">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_Bone_Jump_01" ID="{AA4D6F69-8BF5-4BF9-8022-4759C10DFE21}" ShortID="861247003">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Bone_Jump_01" ID="{CFCEB687-E803-4945-BC84-BDC4F0A27245}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Bone_Jump_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="633561041"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Bone_Jump_01" ID="{CFCEB687-E803-4945-BC84-BDC4F0A27245}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Bone_Jump_02" ID="{A8AC88B0-AFBE-4F06-B73B-EAD36DD3777F}" ShortID="648701029">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Bone_Jump_02" ID="{5E2BCEF9-C5E0-4BF3-BB66-580708DA4697}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Bone_Jump_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="594128135"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Bone_Jump_02" ID="{5E2BCEF9-C5E0-4BF3-BB66-580708DA4697}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Bone_Jump_03" ID="{E975ABFF-D7BB-4CE7-8CEC-920686EE68E3}" ShortID="53728576">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Bone_Jump_03" ID="{3FFDA620-CAFD-461B-B76D-7DD1C5725A21}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Bone_Jump_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="174144215"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Bone_Jump_03" ID="{3FFDA620-CAFD-461B-B76D-7DD1C5725A21}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}" ShortID="169721243">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="MC_Jump_Muscle_01" ID="{848F431B-32B2-4776-ADBE-E63F2302C5F2}" ShortID="605811062">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Jump_Muscle_01" ID="{4C1DE9DC-EC20-49AF-9F15-BC2ECE86FA7B}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Jump_Muscle_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="992342674"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Jump_Muscle_01" ID="{4C1DE9DC-EC20-49AF-9F15-BC2ECE86FA7B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Jump_Muscle_02" ID="{9D5DB2FD-7046-47E5-9A8D-A3DE2CA85B4A}" ShortID="485254936">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Jump_Muscle_02" ID="{3669C6D3-9589-4A67-B973-43454038BA28}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Jump_Muscle_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="32159369"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Jump_Muscle_02" ID="{3669C6D3-9589-4A67-B973-43454038BA28}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Jump_Muscle_03" ID="{D62008DA-25D2-408C-853C-D8B65BE2D269}" ShortID="761339219">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Jump_Muscle_03" ID="{D06F23C5-7191-4B79-9E30-C8B5A1D1F102}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Jump_Muscle_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="239007564"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Jump_Muscle_03" ID="{D06F23C5-7191-4B79-9E30-C8B5A1D1F102}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Jump_Muscle_04" ID="{7DABFDAB-62AC-4962-AEE8-FECE01FE39AA}" ShortID="643466142">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Jump_Muscle_04" ID="{2082FE6F-53D7-4A04-B829-CE99C28AF3B4}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Jump_Muscle_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="957384073"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Jump_Muscle_04" ID="{2082FE6F-53D7-4A04-B829-CE99C28AF3B4}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="MC_Jump_Vein" ID="{85865891-FC1B-47CD-9B2A-C695058689EE}" ShortID="302909321">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_Vein_Jump_01" ID="{2AC79DC6-62EB-40E5-8BE1-31038C4B6144}" ShortID="174872773">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Vein_Jump_01" ID="{BFC727E5-37CD-4E8C-94BE-F264DDB1F0CD}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Vein_Jump_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="685050445"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Vein_Jump_01" ID="{BFC727E5-37CD-4E8C-94BE-F264DDB1F0CD}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Vein_Jump_02" ID="{B239F189-AFC0-4CE7-ACE8-63A24CCCE523}" ShortID="956184799">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Vein_Jump_02" ID="{E09E52B0-5170-4B23-8083-9F09007EA2AE}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Vein_Jump_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="389877700"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Vein_Jump_02" ID="{E09E52B0-5170-4B23-8083-9F09007EA2AE}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Vein_Jump_03" ID="{5C498F3B-BC12-42CA-97BB-132E194DC896}" ShortID="23055719">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Vein_Jump_03" ID="{8B35A0CE-9DC1-45F8-91A3-4E785CB48B82}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Vein_Jump_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="695386164"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Vein_Jump_03" ID="{8B35A0CE-9DC1-45F8-91A3-4E785CB48B82}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Vein_Jump_04" ID="{785785AA-0275-43BB-8EBC-AAFB272F39DB}" ShortID="647883457">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Vein_Jump_04" ID="{A50033B4-5645-4F54-BE2A-9BBC1EA26FA9}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Vein_Jump_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="491010247"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Vein_Jump_04" ID="{A50033B4-5645-4F54-BE2A-9BBC1EA26FA9}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="MC_Jump_Vein" ID="{85865891-FC1B-47CD-9B2A-C695058689EE}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="MC_Jump_Bone" ID="{ED5B6AA3-EB2F-40F9-A0B9-0DDEBA0B3E6E}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+												<ItemList>
+													<ItemRef Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+												<ItemList>
+													<ItemRef Name="MC_Jump_Bone" ID="{ED5B6AA3-EB2F-40F9-A0B9-0DDEBA0B3E6E}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
+									</GroupingInfo>
+								</SwitchContainer>
+								<SwitchContainer Name="SW_MC_Land_Material" ID="{DB871AA9-6A46-4727-B3CC-EE5984C3784C}" ShortID="448081641">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="UserAuxSendVolume0" Type="Real64">
+											<ValueList>
+												<Value>-96</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<Custom>
+												<Attenuation Name="Attenuation (Custom)" ID="{BF29628C-9BB1-43A4-BA1C-35C835492761}" ShortID="706031712">
+													<CurveUsageInfoList>
+														<VolumeDryUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																<Curve Name="VolumeDry" ID="{46761568-F4D1-4632-889E-273741D22D47}">
+																	<PropertyList>
+																		<Property Name="Flags" Type="int32" Value="3"/>
+																	</PropertyList>
+																	<PointList>
+																		<Point>
+																			<XPos>0</XPos>
+																			<YPos>0</YPos>
+																			<Flags>5</Flags>
+																		</Point>
+																		<Point>
+																			<XPos>100</XPos>
+																			<YPos>-200</YPos>
+																			<Flags>37</Flags>
+																		</Point>
+																	</PointList>
+																</Curve>
+															</CurveUsageInfo>
+														</VolumeDryUsage>
+														<VolumeWetGameUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																<Curve Name="VolumeWetGame" ID="{EFB26DC9-5AE9-47F1-A140-48BFB60BFB8F}">
+																	<PropertyList>
+																		<Property Name="Flags" Type="int32" Value="3"/>
+																	</PropertyList>
+																	<PointList>
+																		<Point>
+																			<XPos>0</XPos>
+																			<YPos>-5</YPos>
+																			<Flags>5</Flags>
+																		</Point>
+																		<Point>
+																			<XPos>100</XPos>
+																			<YPos>-5</YPos>
+																			<Flags>37</Flags>
+																		</Point>
+																	</PointList>
+																</Curve>
+															</CurveUsageInfo>
+														</VolumeWetGameUsage>
+														<VolumeWetUserUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+														</VolumeWetUserUsage>
+														<LowPassFilterUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</LowPassFilterUsage>
+														<HighPassFilterUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</HighPassFilterUsage>
+														<SpreadUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</SpreadUsage>
+														<FocusUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+														</FocusUsage>
+														<ObstructionVolumeUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</ObstructionVolumeUsage>
+														<ObstructionLPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</ObstructionLPFUsage>
+														<ObstructionHPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</ObstructionHPFUsage>
+														<OcclusionVolumeUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</OcclusionVolumeUsage>
+														<OcclusionLPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</OcclusionLPFUsage>
+														<OcclusionHPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</OcclusionHPFUsage>
+														<DiffractionVolumeUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</DiffractionVolumeUsage>
+														<DiffractionLPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</DiffractionLPFUsage>
+														<DiffractionHPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</DiffractionHPFUsage>
+														<TransmissionVolumeUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</TransmissionVolumeUsage>
+														<TransmissionLPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</TransmissionLPFUsage>
+														<TransmissionHPFUsage>
+															<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+														</TransmissionHPFUsage>
+													</CurveUsageInfoList>
+												</Attenuation>
+											</Custom>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+										<Reference Name="SwitchGroupOrStateGroup">
+											<ObjectRef Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="MC_Land_Bone" ID="{79C89DC9-5BD9-4A50-887C-C5C10741E876}" ShortID="472703652">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_Bone_Land_01" ID="{D8CC366D-979E-404E-BEAC-014C3BF44ECF}" ShortID="399219237">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Bone_Land_01" ID="{45578A27-0B7F-40B9-9036-F630A50B0B24}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Bone_Land_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="962823370"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Bone_Land_01" ID="{45578A27-0B7F-40B9-9036-F630A50B0B24}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Bone_Land_02" ID="{673CB104-CB93-4062-8DB1-E99E01ABACE4}" ShortID="839553107">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Bone_Land_02" ID="{821644C1-07DA-4D5C-8056-406E1E46A9BF}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Bone_Land_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="903601489"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Bone_Land_02" ID="{821644C1-07DA-4D5C-8056-406E1E46A9BF}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Bone_Land_03" ID="{B8EAA8EA-740D-430B-BC8B-AF45F1D41134}" ShortID="619545845">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Bone_Land_03" ID="{3F73E1DE-AD58-46D4-9D29-851B9DBD7416}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Bone_Land_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="806176668"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Bone_Land_03" ID="{3F73E1DE-AD58-46D4-9D29-851B9DBD7416}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="MC_Land_Muscle" ID="{6E291A9C-8B51-462C-8962-9896B67504DC}" ShortID="793883030">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="MC_Land_Muscle_01" ID="{548D2315-5B23-4495-88E8-1EC069D517AF}" ShortID="217989829">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Land_Muscle_01" ID="{D007E8EC-478F-4846-A33A-9C43B0AE9F52}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Land_Muscle_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="388414790"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Land_Muscle_01" ID="{D007E8EC-478F-4846-A33A-9C43B0AE9F52}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Land_Muscle_02" ID="{94173288-81D1-464B-A105-9D07E9C46985}" ShortID="954918136">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Land_Muscle_02" ID="{05CAFB8C-F904-405E-AEDB-D15F5C1038C4}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Land_Muscle_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="138498267"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Land_Muscle_02" ID="{05CAFB8C-F904-405E-AEDB-D15F5C1038C4}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Land_Muscle_03" ID="{FDF115E1-5B6B-443D-837C-5F580AD24791}" ShortID="298379507">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Land_Muscle_03" ID="{F582D7E6-26EF-44E7-82B7-A74BD148A975}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Land_Muscle_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1053529806"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Land_Muscle_03" ID="{F582D7E6-26EF-44E7-82B7-A74BD148A975}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Land_Muscle_04" ID="{740BC4DF-DF51-4E9D-8064-FEB8F868108B}" ShortID="266064081">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Land_Muscle_04" ID="{7B8E5F0F-BFFF-4626-916A-409745CEC7C1}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Land_Muscle_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="21354617"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Land_Muscle_04" ID="{7B8E5F0F-BFFF-4626-916A-409745CEC7C1}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MC_Land_Muscle_05" ID="{E610AA65-55D8-4DEB-84DC-D51A514A9142}" ShortID="727027484">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MC_Land_Muscle_05" ID="{0C3CC407-014C-41C6-932F-DFE6BABDD543}">
+															<Language>SFX</Language>
+															<AudioFile>MC_Land_Muscle_05.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="908600791"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MC_Land_Muscle_05" ID="{0C3CC407-014C-41C6-932F-DFE6BABDD543}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="MC_Land_Vein" ID="{5FB149A3-7D27-4961-B7AB-B10A9E45727E}" ShortID="633067070">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_Vein_Land_01" ID="{EF2EAFD9-75D7-4656-A424-A66811467014}" ShortID="424223270">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Vein_Land_01" ID="{9DFACB84-1EC2-4BAB-AE95-082882B56F99}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Vein_Land_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="611831111"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Vein_Land_01" ID="{9DFACB84-1EC2-4BAB-AE95-082882B56F99}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Vein_Land_02" ID="{72422BA4-E015-45E9-96A9-C568B04793E1}" ShortID="275025217">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Vein_Land_02" ID="{9B086231-3594-40E2-A48D-B1D14103671F}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Vein_Land_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="473046086"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Vein_Land_02" ID="{9B086231-3594-40E2-A48D-B1D14103671F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Vein_Land_03" ID="{386A131F-44A3-4766-9795-D6A46F1591F9}" ShortID="577523695">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Vein_Land_03" ID="{9735FB11-FD21-4B09-8CF0-B190C350D936}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Vein_Land_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="327066233"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Vein_Land_03" ID="{9735FB11-FD21-4B09-8CF0-B190C350D936}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+									<GroupingInfo>
+										<GroupingBehaviorList>
+											<GroupingBehavior>
+												<ItemRef Name="MC_Land_Muscle" ID="{6E291A9C-8B51-462C-8962-9896B67504DC}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="MC_Land_Vein" ID="{5FB149A3-7D27-4961-B7AB-B10A9E45727E}"/>
+											</GroupingBehavior>
+											<GroupingBehavior>
+												<ItemRef Name="MC_Land_Bone" ID="{79C89DC9-5BD9-4A50-887C-C5C10741E876}"/>
+											</GroupingBehavior>
+										</GroupingBehaviorList>
+										<GroupingList>
+											<Grouping>
+												<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
+												<ItemList>
+													<ItemRef Name="MC_Land_Muscle" ID="{6E291A9C-8B51-462C-8962-9896B67504DC}"/>
+												</ItemList>
+											</Grouping>
+											<Grouping>
+												<SwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
+												<ItemList>
+													<ItemRef Name="MC_Land_Bone" ID="{79C89DC9-5BD9-4A50-887C-C5C10741E876}"/>
+												</ItemList>
+											</Grouping>
+										</GroupingList>
+									</GroupingInfo>
+								</SwitchContainer>
 							</ChildrenList>
 						</ActorMixer>
-						<SwitchContainer Name="SW_MC_Jump_Material" ID="{7010AB05-F651-499E-B89B-EBA9F63EDAAA}" ShortID="51962492">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-								<Reference Name="SwitchGroupOrStateGroup">
-									<ObjectRef Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<RandomSequenceContainer Name="MC_Jump_Bone" ID="{ED5B6AA3-EB2F-40F9-A0B9-0DDEBA0B3E6E}" ShortID="921616285">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="SFX_Bone_Jump_01" ID="{AA4D6F69-8BF5-4BF9-8022-4759C10DFE21}" ShortID="861247003">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Bone_Jump_01" ID="{CFCEB687-E803-4945-BC84-BDC4F0A27245}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Bone_Jump_01.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="633561041"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Bone_Jump_01" ID="{CFCEB687-E803-4945-BC84-BDC4F0A27245}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Bone_Jump_02" ID="{A8AC88B0-AFBE-4F06-B73B-EAD36DD3777F}" ShortID="648701029">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Bone_Jump_02" ID="{5E2BCEF9-C5E0-4BF3-BB66-580708DA4697}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Bone_Jump_02.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="594128135"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Bone_Jump_02" ID="{5E2BCEF9-C5E0-4BF3-BB66-580708DA4697}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Bone_Jump_03" ID="{E975ABFF-D7BB-4CE7-8CEC-920686EE68E3}" ShortID="53728576">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Bone_Jump_03" ID="{3FFDA620-CAFD-461B-B76D-7DD1C5725A21}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Bone_Jump_03.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="174144215"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Bone_Jump_03" ID="{3FFDA620-CAFD-461B-B76D-7DD1C5725A21}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}" ShortID="169721243">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="MC_Jump_Muscle_01" ID="{848F431B-32B2-4776-ADBE-E63F2302C5F2}" ShortID="605811062">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Jump_Muscle_01" ID="{4C1DE9DC-EC20-49AF-9F15-BC2ECE86FA7B}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Jump_Muscle_01.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="992342674"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Jump_Muscle_01" ID="{4C1DE9DC-EC20-49AF-9F15-BC2ECE86FA7B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="MC_Jump_Muscle_02" ID="{9D5DB2FD-7046-47E5-9A8D-A3DE2CA85B4A}" ShortID="485254936">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Jump_Muscle_02" ID="{3669C6D3-9589-4A67-B973-43454038BA28}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Jump_Muscle_02.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="32159369"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Jump_Muscle_02" ID="{3669C6D3-9589-4A67-B973-43454038BA28}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="MC_Jump_Muscle_03" ID="{D62008DA-25D2-408C-853C-D8B65BE2D269}" ShortID="761339219">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Jump_Muscle_03" ID="{D06F23C5-7191-4B79-9E30-C8B5A1D1F102}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Jump_Muscle_03.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="239007564"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Jump_Muscle_03" ID="{D06F23C5-7191-4B79-9E30-C8B5A1D1F102}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="MC_Jump_Muscle_04" ID="{7DABFDAB-62AC-4962-AEE8-FECE01FE39AA}" ShortID="643466142">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Jump_Muscle_04" ID="{2082FE6F-53D7-4A04-B829-CE99C28AF3B4}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Jump_Muscle_04.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="957384073"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Jump_Muscle_04" ID="{2082FE6F-53D7-4A04-B829-CE99C28AF3B4}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="MC_Jump_Vein" ID="{85865891-FC1B-47CD-9B2A-C695058689EE}" ShortID="302909321">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="SFX_Vein_Jump_01" ID="{2AC79DC6-62EB-40E5-8BE1-31038C4B6144}" ShortID="174872773">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Vein_Jump_01" ID="{BFC727E5-37CD-4E8C-94BE-F264DDB1F0CD}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Vein_Jump_01.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="685050445"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Vein_Jump_01" ID="{BFC727E5-37CD-4E8C-94BE-F264DDB1F0CD}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Vein_Jump_02" ID="{B239F189-AFC0-4CE7-ACE8-63A24CCCE523}" ShortID="956184799">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Vein_Jump_02" ID="{E09E52B0-5170-4B23-8083-9F09007EA2AE}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Vein_Jump_02.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="389877700"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Vein_Jump_02" ID="{E09E52B0-5170-4B23-8083-9F09007EA2AE}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Vein_Jump_03" ID="{5C498F3B-BC12-42CA-97BB-132E194DC896}" ShortID="23055719">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Vein_Jump_03" ID="{8B35A0CE-9DC1-45F8-91A3-4E785CB48B82}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Vein_Jump_03.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="695386164"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Vein_Jump_03" ID="{8B35A0CE-9DC1-45F8-91A3-4E785CB48B82}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Vein_Jump_04" ID="{785785AA-0275-43BB-8EBC-AAFB272F39DB}" ShortID="647883457">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Vein_Jump_04" ID="{A50033B4-5645-4F54-BE2A-9BBC1EA26FA9}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Vein_Jump_04.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="491010247"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Vein_Jump_04" ID="{A50033B4-5645-4F54-BE2A-9BBC1EA26FA9}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-							</ChildrenList>
-							<GroupingInfo>
-								<GroupingBehaviorList>
-									<GroupingBehavior>
-										<ItemRef Name="MC_Jump_Vein" ID="{85865891-FC1B-47CD-9B2A-C695058689EE}"/>
-									</GroupingBehavior>
-									<GroupingBehavior>
-										<ItemRef Name="MC_Jump_Bone" ID="{ED5B6AA3-EB2F-40F9-A0B9-0DDEBA0B3E6E}"/>
-									</GroupingBehavior>
-									<GroupingBehavior>
-										<ItemRef Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}"/>
-									</GroupingBehavior>
-								</GroupingBehaviorList>
-								<GroupingList>
-									<Grouping>
-										<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
-										<ItemList>
-											<ItemRef Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}"/>
-										</ItemList>
-									</Grouping>
-									<Grouping>
-										<SwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
-										<ItemList>
-											<ItemRef Name="MC_Jump_Bone" ID="{ED5B6AA3-EB2F-40F9-A0B9-0DDEBA0B3E6E}"/>
-										</ItemList>
-									</Grouping>
-								</GroupingList>
-							</GroupingInfo>
-						</SwitchContainer>
-						<SwitchContainer Name="SW_MC_Land_Material" ID="{DB871AA9-6A46-4727-B3CC-EE5984C3784C}" ShortID="448081641">
-							<PropertyList>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>1</Value>
-									</ValueList>
-								</Property>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-								<Reference Name="SwitchGroupOrStateGroup">
-									<ObjectRef Name="AKSW_FootstepsSurface" ID="{983C266D-D7D3-4883-95CD-0BAE399BC4C5}" WorkUnitID="{8204F101-F9A5-47F3-8DC8-48AAA48341FA}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<RandomSequenceContainer Name="MC_Land_Bone" ID="{79C89DC9-5BD9-4A50-887C-C5C10741E876}" ShortID="472703652">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="SFX_Bone_Land_01" ID="{D8CC366D-979E-404E-BEAC-014C3BF44ECF}" ShortID="399219237">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Bone_Land_01" ID="{45578A27-0B7F-40B9-9036-F630A50B0B24}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Bone_Land_01.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="962823370"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Bone_Land_01" ID="{45578A27-0B7F-40B9-9036-F630A50B0B24}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Bone_Land_02" ID="{673CB104-CB93-4062-8DB1-E99E01ABACE4}" ShortID="839553107">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Bone_Land_02" ID="{821644C1-07DA-4D5C-8056-406E1E46A9BF}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Bone_Land_02.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="903601489"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Bone_Land_02" ID="{821644C1-07DA-4D5C-8056-406E1E46A9BF}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Bone_Land_03" ID="{B8EAA8EA-740D-430B-BC8B-AF45F1D41134}" ShortID="619545845">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Bone_Land_03" ID="{3F73E1DE-AD58-46D4-9D29-851B9DBD7416}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Bone_Land_03.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="806176668"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Bone_Land_03" ID="{3F73E1DE-AD58-46D4-9D29-851B9DBD7416}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="MC_Land_Muscle" ID="{6E291A9C-8B51-462C-8962-9896B67504DC}" ShortID="793883030">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="MC_Land_Muscle_01" ID="{548D2315-5B23-4495-88E8-1EC069D517AF}" ShortID="217989829">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Land_Muscle_01" ID="{D007E8EC-478F-4846-A33A-9C43B0AE9F52}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Land_Muscle_01.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="388414790"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Land_Muscle_01" ID="{D007E8EC-478F-4846-A33A-9C43B0AE9F52}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="MC_Land_Muscle_02" ID="{94173288-81D1-464B-A105-9D07E9C46985}" ShortID="954918136">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Land_Muscle_02" ID="{05CAFB8C-F904-405E-AEDB-D15F5C1038C4}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Land_Muscle_02.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="138498267"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Land_Muscle_02" ID="{05CAFB8C-F904-405E-AEDB-D15F5C1038C4}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="MC_Land_Muscle_03" ID="{FDF115E1-5B6B-443D-837C-5F580AD24791}" ShortID="298379507">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Land_Muscle_03" ID="{F582D7E6-26EF-44E7-82B7-A74BD148A975}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Land_Muscle_03.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1053529806"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Land_Muscle_03" ID="{F582D7E6-26EF-44E7-82B7-A74BD148A975}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="MC_Land_Muscle_04" ID="{740BC4DF-DF51-4E9D-8064-FEB8F868108B}" ShortID="266064081">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Land_Muscle_04" ID="{7B8E5F0F-BFFF-4626-916A-409745CEC7C1}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Land_Muscle_04.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="21354617"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Land_Muscle_04" ID="{7B8E5F0F-BFFF-4626-916A-409745CEC7C1}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="MC_Land_Muscle_05" ID="{E610AA65-55D8-4DEB-84DC-D51A514A9142}" ShortID="727027484">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="MC_Land_Muscle_05" ID="{0C3CC407-014C-41C6-932F-DFE6BABDD543}">
-													<Language>SFX</Language>
-													<AudioFile>MC_Land_Muscle_05.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="908600791"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="MC_Land_Muscle_05" ID="{0C3CC407-014C-41C6-932F-DFE6BABDD543}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="MC_Land_Vein" ID="{5FB149A3-7D27-4961-B7AB-B10A9E45727E}" ShortID="633067070">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="SFX_Vein_Land_01" ID="{EF2EAFD9-75D7-4656-A424-A66811467014}" ShortID="424223270">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Vein_Land_01" ID="{9DFACB84-1EC2-4BAB-AE95-082882B56F99}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Vein_Land_01.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="611831111"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Vein_Land_01" ID="{9DFACB84-1EC2-4BAB-AE95-082882B56F99}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Vein_Land_02" ID="{72422BA4-E015-45E9-96A9-C568B04793E1}" ShortID="275025217">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Vein_Land_02" ID="{9B086231-3594-40E2-A48D-B1D14103671F}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Vein_Land_02.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="473046086"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Vein_Land_02" ID="{9B086231-3594-40E2-A48D-B1D14103671F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="SFX_Vein_Land_03" ID="{386A131F-44A3-4766-9795-D6A46F1591F9}" ShortID="577523695">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="SFX_Vein_Land_03" ID="{9735FB11-FD21-4B09-8CF0-B190C350D936}">
-													<Language>SFX</Language>
-													<AudioFile>SFX_Vein_Land_03.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="327066233"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="SFX_Vein_Land_03" ID="{9735FB11-FD21-4B09-8CF0-B190C350D936}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-							</ChildrenList>
-							<GroupingInfo>
-								<GroupingBehaviorList>
-									<GroupingBehavior>
-										<ItemRef Name="MC_Land_Muscle" ID="{6E291A9C-8B51-462C-8962-9896B67504DC}"/>
-									</GroupingBehavior>
-									<GroupingBehavior>
-										<ItemRef Name="MC_Land_Vein" ID="{5FB149A3-7D27-4961-B7AB-B10A9E45727E}"/>
-									</GroupingBehavior>
-									<GroupingBehavior>
-										<ItemRef Name="MC_Land_Bone" ID="{79C89DC9-5BD9-4A50-887C-C5C10741E876}"/>
-									</GroupingBehavior>
-								</GroupingBehaviorList>
-								<GroupingList>
-									<Grouping>
-										<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
-										<ItemList>
-											<ItemRef Name="MC_Land_Muscle" ID="{6E291A9C-8B51-462C-8962-9896B67504DC}"/>
-										</ItemList>
-									</Grouping>
-									<Grouping>
-										<SwitchRef Name="Bone" ID="{181A0A9E-1350-4650-9A67-C81EA9235993}"/>
-										<ItemList>
-											<ItemRef Name="MC_Land_Bone" ID="{79C89DC9-5BD9-4A50-887C-C5C10741E876}"/>
-										</ItemList>
-									</Grouping>
-								</GroupingList>
-							</GroupingInfo>
-						</SwitchContainer>
 						<ActorMixer Name="AM_MC_Foley" ID="{0F5AF532-ADFD-4FAA-8660-7B2A1F5333EA}" ShortID="420868986">
 							<ReferenceList>
 								<Reference Name="Conversion">

@@ -8,6 +8,8 @@
 UENTAttackTarget::UENTAttackTarget()
 {
 	NodeName = "AttackTarget";
+
+	ForceInstancing(true);
 	Target.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTAttackTarget, Target), AActor::StaticClass());
 }
 

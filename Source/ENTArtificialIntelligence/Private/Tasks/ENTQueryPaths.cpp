@@ -15,6 +15,8 @@ UENTQueryPaths::UENTQueryPaths()
 {
 	NodeName = "QueryPaths";
 
+	ForceInstancing(true);
+
 	AIPathKey.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTQueryPaths, AIPathKey), AENTArtificialIntelligencePath::StaticClass());
 	NavAreaKey.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTQueryPaths, NavAreaKey), AENTNavigationArea::StaticClass());
 }

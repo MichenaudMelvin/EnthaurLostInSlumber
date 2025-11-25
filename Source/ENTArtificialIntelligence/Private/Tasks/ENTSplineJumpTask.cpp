@@ -17,6 +17,8 @@ UENTSplineJumpTask::UENTSplineJumpTask()
 {
 	NodeName = "SplineJump";
 
+	ForceInstancing(true);
+
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTSplineJumpTask, AIPath), AENTArtificialIntelligencePath::StaticClass());
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTSplineJumpTask, PathDirection));
 	DoesWalkOnFloor.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UENTSplineJumpTask, DoesWalkOnFloor));
