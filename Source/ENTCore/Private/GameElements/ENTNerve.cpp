@@ -745,6 +745,8 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
 
+	if (!bIsZoneActive) return;
+
 	bIsInWeakZone = true;
 
 	if (!bIsLigament)
