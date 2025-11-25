@@ -306,7 +306,7 @@ void AENTSpikeDoor::SetLock_Implementation(bool bState)
 	Trigger_Implementation();
 }
 
-#if WITH_EDITORONLY_DATA
+#if WITH_EDITOR
 void AENTSpikeDoor::ClearDoor()
 {
 	TSet<UActorComponent*> Components = GetComponents();
