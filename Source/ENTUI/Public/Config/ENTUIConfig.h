@@ -15,6 +15,7 @@
 #include "Menus/Main/ENTQuitMenu.h"
 #include "Menus/Options/ENTControlsMenu.h"
 #include "Menus/Options/ENTGammaMenu.h"
+#include "Menus/Options/ENTResetConfirmationMenu.h"
 #include "Menus/Options/ENTSoundMenu.h"
 #include "Menus/Pause/ENTMainMenuConfirmationMenu.h"
 #include "Menus/Pause/ENTOptionsMenu.h"
@@ -84,6 +85,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
 	TSubclassOf<UENTSoundMenu> SoundMenuClass = UENTSoundMenu::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
+	TSubclassOf<UENTResetConfirmationMenu> ResetConfirmationMenuClass = UENTResetConfirmationMenu::StaticClass();
 
 #pragma endregion
 

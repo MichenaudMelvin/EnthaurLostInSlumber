@@ -54,37 +54,12 @@ protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> GammaButton;
 
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UENTCustomButton> ResetButton;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UVerticalBox> InformationVerticalBox;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UTextBlock> OptionTitle;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<UTextBlock> OptionDescription;
-
 	UFUNCTION()
 	void OnVolumeButtonClicked();
 	
 	UFUNCTION()
-	void OnMouseSensButtonHovered();
-
-	UFUNCTION()
-	void OnMouseInvertButtonHovered();
-
-	UFUNCTION()
-	void OnViewBobbingButtonHovered();
-
-	UFUNCTION()
-	void OnViewControlsButtonHovered();
-	UFUNCTION()
 	void OnViewControlsButtonClicked();
 	
-	UFUNCTION()
-	void OnGammaButtonHovered();
 	UFUNCTION()
 	void OnGammaButtonClicked();
 
@@ -96,9 +71,6 @@ protected:
 
 	UFUNCTION()
 	void OnMouseSensitivitySliderChanged(float InValue);
-
-	UFUNCTION()
-	void ResetSettings();
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UTextBlock> MouseSensitivityValue;

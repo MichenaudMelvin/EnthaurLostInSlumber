@@ -64,6 +64,7 @@ void UENTMenuManager::CreateAllWidgets()
 	ControlsMenu = CreateWidget(CurrentController, UIConfig->ControlsMenuClass);
 	GammaMenu = CreateWidget(CurrentController, UIConfig->GammaMenuClass);
 	SoundMenu = CreateWidget(CurrentController, UIConfig->SoundMenuClass);
+	ResetConfirmationMenu = CreateWidget(CurrentController, UIConfig->ResetConfirmationMenuClass);
 	MainMenuConfirmationMenu = CreateWidget(CurrentController, UIConfig->MainMenuConfirmationMenuClass);
 	RestartConfirmationMenu = CreateWidget(CurrentController, UIConfig->RestartConfirmationMenuClass);
 	Background = CreateWidget(CurrentController, UIConfig->BackgroundClass);

@@ -7,6 +7,7 @@
 #include "Menus/Elements/ENTCustomButton.h"
 #include "Menus/Elements/ENTCustomSlider.h"
 #include "Saves/ENTSettingsSave.h"
+#include "Subsystems/ENTMenuManager.h"
 #include "Subsystems/ENTSettingsSaveSubsystem.h"
 
 void UENTSoundMenu::NativeOnInitialized()
@@ -37,6 +38,10 @@ void UENTSoundMenu::NativeOnInitialized()
 	if (SfxVolumeButton && SfxVolumeButton->GetCustomButton())
 	{
 		SfxVolumeButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTSoundMenu::OnSfxButtonHovered);
+	}
+	if (ResetButton && ResetButton->GetCustomButton())
+	{
+		ResetButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTSoundMenu::OpenResetSettingsMenu);
 	}
 }
 
@@ -90,6 +95,10 @@ void UENTSoundMenu::BeginDestroy()
 	if (SfxVolumeButton && SfxVolumeButton->GetCustomButton())
 	{
 		SfxVolumeButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTSoundMenu::OnSfxButtonHovered);
+	}
+	if (ResetButton && ResetButton->GetCustomButton())
+	{
+		ResetButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTSoundMenu::OpenResetSettingsMenu);
 	}
 }
 
@@ -154,4 +163,15 @@ void UENTSoundMenu::OnSfxButtonHovered()
 		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "SFX Volume"));
 		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the volume of the sound effects."));
 	}
+}
+
+void UENTSoundMenu::OpenResetSettingsMenu()
+{
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
 }

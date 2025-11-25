@@ -40,6 +40,9 @@ protected:
 	UFUNCTION()
 	void OnSfxButtonHovered();
 
+	UFUNCTION()
+	void OpenResetSettingsMenu();
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> OverallVolumeButton;
 	
@@ -72,4 +75,7 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UTextBlock> OptionDescription;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<UENTCustomButton> ResetButton;
 };
