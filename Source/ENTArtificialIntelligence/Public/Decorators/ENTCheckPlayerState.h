@@ -35,4 +35,7 @@ private:
 
 	UPROPERTY(EditInstanceOnly, Category = "Player")
 	EENTCharacterStateID TargetState;
+
+	UPROPERTY(EditInstanceOnly, Category = "Player")
+	bool bInverseCheck = false;
 };
