@@ -764,6 +764,9 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 
 			DetachNerveBall(false);
 		}
+
+		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		CorruptNerveBlocker->SetCastShadow(true);
 	}
 
 	EnterWeakZoneTimeline.Play();
@@ -776,8 +779,14 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 
 void AENTNerve::OnExitWeakZone_Implementation()
 {
-	bIsInWeakZone = false;
 	IENTWeakZoneInterface::OnExitWeakZone_Implementation();
+	bIsInWeakZone = false;
+
+	if (!bIsLigament)
+	{
+		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		CorruptNerveBlocker->SetCastShadow(false);
+	}
 	
 	EnterWeakZoneTimeline.Reverse();
 
