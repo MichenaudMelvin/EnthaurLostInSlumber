@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{E9ED3873-0665-0B07-E2CA-EBAB10D2E21A}",
+    "Hash": "{E22F01FD-3F1C-680D-D08C-AA4387A90C04}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -2979,6 +2979,6 @@
     ]
    }
   ],
-  "FileHash": "{CC07EF56-367E-E9E0-0139-4D0BCD01516F}"
+  "FileHash": "{16977E59-020F-D2CD-E473-C894427D3BC3}"
  }
 }
