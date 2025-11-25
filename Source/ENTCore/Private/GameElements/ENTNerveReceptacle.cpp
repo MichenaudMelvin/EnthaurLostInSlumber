@@ -108,6 +108,8 @@ void AENTNerveReceptacle::Interaction(APlayerController* Controller, APawn* Pawn
 	Constraint->ReleasePlayer();
 
 	ElectricityComponent->PlayElectricityAnimation(Nerve);
+
+	InteractableComponent->RemoveInteractable(NerveReceptacle);
 }
 
 void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)
@@ -153,6 +155,7 @@ bool AENTNerveReceptacle::CanTheNerveBeTaken() const
 void AENTNerveReceptacle::DisableReceptacle()
 {
 	NerveReceptaclesNoises->PostAkEvent(DisabledNoise);
+	InteractableComponent->AddInteractable(NerveReceptacle);
 }
 
 #pragma region Electricity
