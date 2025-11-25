@@ -16,63 +16,22 @@ void UENTOptionsMenu::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	if (OverallVolumeSlider && OverallVolumeSlider->GetCustomSlider())
+	if (VolumeButton && VolumeButton->GetCustomButton())
 	{
-		OverallVolumeSlider->GetCustomSlider()->OnValueChanged.AddDynamic(this, &UENTOptionsMenu::OnOverallSliderChanged);
-	}
-
-	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
-	{
-		OverallVolumeButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnOverallButtonHovered);
-	}
-	if (MouseSensitivityButton && MouseSensitivityButton->GetCustomButton())
-	{
-		MouseSensitivityButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnMouseSensButtonHovered);
-	}
-	if (MouseSensitivitySlider && MouseSensitivitySlider->GetCustomSlider())
-	{
-		MouseSensitivitySlider->GetCustomSlider()->OnValueChanged.AddDynamic(this, &UENTOptionsMenu::OnMouseSensitivitySliderChanged);
-	}
-	if (InvertMouseAxisButton && InvertMouseAxisButton->GetCustomButton())
-	{
-		InvertMouseAxisButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnMouseInvertButtonHovered);
-	}
-	if (InvertMouseAxisCheckBox)
-	{
-		InvertMouseAxisCheckBox->OnCheckBoxStateChanged.AddDynamic(this, &UENTOptionsMenu::OnMouseYAxisCheckBoxClicked);
-	}
-	if (ViewBobbingButton && ViewBobbingButton->GetCustomButton())
-	{
-		ViewBobbingButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnViewBobbingButtonHovered);
-	}
-	if (ViewBobbingCheckbox)
-	{
-		ViewBobbingCheckbox->OnCheckBoxStateChanged.AddDynamic(this, &UENTOptionsMenu::OnViewBobbingCheckBoxClicked);
+		VolumeButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnVolumeButtonClicked);
 	}
 	if (ControlsButton && ControlsButton->GetCustomButton())
 	{
-		ControlsButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnViewControlsButtonHovered);
 		ControlsButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnViewControlsButtonClicked);
 	}
 	if (GammaButton && GammaButton->GetCustomButton())
 	{
-		GammaButton->GetCustomButton()->OnHovered.AddDynamic(this, &UENTOptionsMenu::OnGammaButtonHovered);
 		GammaButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnGammaButtonClicked);
 	}
-
-	if (ResetButton && ResetButton->GetCustomButton())
+	if (AccessibilityButton && AccessibilityButton->GetCustomButton())
 	{
-		ResetButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::ResetSettings);
+		AccessibilityButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnAccessibilityButtonClicked);
 	}
-}
-
-void UENTOptionsMenu::NativeConstruct()
-{
-	Super::NativeConstruct();
-
-	OnOverallButtonHovered();
-
-	UpdateWidgetValues(true);
 }
 
 void UENTOptionsMenu::NativeDestruct()
@@ -92,113 +51,34 @@ void UENTOptionsMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	if (OverallVolumeSlider && OverallVolumeSlider->GetCustomSlider())
+	if (VolumeButton && VolumeButton->GetCustomButton())
 	{
-		OverallVolumeSlider->GetCustomSlider()->OnValueChanged.RemoveDynamic(this, &UENTOptionsMenu::OnOverallSliderChanged);
+		VolumeButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnVolumeButtonClicked);
 	}
-
-	if (OverallVolumeButton && OverallVolumeButton->GetCustomButton())
-	{
-		OverallVolumeButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnOverallButtonHovered);
-	}
-	if (MouseSensitivityButton && MouseSensitivityButton->GetCustomButton())
-	{
-		MouseSensitivityButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnMouseSensButtonHovered);
-	}
-	if (MouseSensitivitySlider && MouseSensitivitySlider->GetCustomSlider())
-	{
-		MouseSensitivitySlider->GetCustomSlider()->OnValueChanged.RemoveDynamic(this, &UENTOptionsMenu::OnMouseSensitivitySliderChanged);
-	}
-	if (InvertMouseAxisButton && InvertMouseAxisButton->GetCustomButton())
-	{
-		InvertMouseAxisButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnMouseInvertButtonHovered);
-	}
-	if (InvertMouseAxisCheckBox)
-	{
-		InvertMouseAxisCheckBox->OnCheckBoxStateChanged.RemoveDynamic(this, &UENTOptionsMenu::OnMouseYAxisCheckBoxClicked);
-	}
-	if (ViewBobbingButton && ViewBobbingButton->GetCustomButton())
-	{
-		ViewBobbingButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnViewBobbingButtonHovered);
-	}
-	if (ViewBobbingCheckbox)
-	{
-		ViewBobbingCheckbox->OnCheckBoxStateChanged.RemoveDynamic(this, &UENTOptionsMenu::OnViewBobbingCheckBoxClicked);
-	}
+	
 	if (ControlsButton && ControlsButton->GetCustomButton())
 	{
-		ControlsButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnViewControlsButtonHovered);
 		ControlsButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnViewControlsButtonClicked);
 	}
 	if (GammaButton && GammaButton->GetCustomButton())
 	{
-		GammaButton->GetCustomButton()->OnHovered.RemoveDynamic(this, &UENTOptionsMenu::OnGammaButtonHovered);
 		GammaButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnGammaButtonClicked);
 	}
-
-	if (ResetButton && ResetButton->GetCustomButton())
+	if (AccessibilityButton && AccessibilityButton->GetCustomButton())
 	{
-		ResetButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::ResetSettings);
+		AccessibilityButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnAccessibilityButtonClicked);
 	}
 }
 
-void UENTOptionsMenu::UpdateWidgetValues(bool bSkipAnim)
+void UENTOptionsMenu::OnVolumeButtonClicked()
 {
-	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
-	if (!IsValid(SettingsSubsystem))
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
-
-	OverallVolumeSlider->GetCustomSlider()->SetValue(SettingsSubsystem->GetSettings()->MasterVolume);
-	MouseSensitivitySlider->GetCustomSlider()->SetValue(SettingsSubsystem->GetSettings()->MouseSensitivity);
-	InvertMouseAxisCheckBox->SetIsOn(SettingsSubsystem->GetSettings()->bInvertYAxis, bSkipAnim);
-	ViewBobbingCheckbox->SetIsOn(SettingsSubsystem->GetSettings()->bViewBobbing, bSkipAnim);
-}
-
-void UENTOptionsMenu::OnOverallButtonHovered()
-{
-	if (OptionTitle && OptionDescription)
-	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Overall Volume"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the volume of all audio."));
-	}
-}
-
-void UENTOptionsMenu::OnMouseSensButtonHovered()
-{
-	if (OptionTitle && OptionDescription)
-	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Mouse Sensitivity"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the aiming speed of the camera."));
-	}
-}
-
-void UENTOptionsMenu::OnMouseInvertButtonHovered()
-{
-	if (OptionTitle && OptionDescription)
-	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Invert Mouse Y Axis"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Invert the vertical rotation direction of the camera."));
-	}
-}
-
-void UENTOptionsMenu::OnViewBobbingButtonHovered()
-{
-	if (OptionTitle && OptionDescription)
-	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "View Bobbing"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Enable or disable view bobbing."));
-	}
-}
-
-void UENTOptionsMenu::OnViewControlsButtonHovered()
-{
-	if (OptionTitle && OptionDescription)
-	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "View Controls"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "View the current selected control schemes."));
-	}
+	
+	MenuManager->OpenMenu(MenuManager->GetSoundMenu(), false);
 }
 
 void UENTOptionsMenu::OnViewControlsButtonClicked()
@@ -212,15 +92,6 @@ void UENTOptionsMenu::OnViewControlsButtonClicked()
 	MenuManager->OpenMenu(MenuManager->GetControlsMenu(), false);
 }
 
-void UENTOptionsMenu::OnGammaButtonHovered()
-{
-	if (OptionTitle && OptionDescription)
-	{
-		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Gamma"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust the displayed gamma intensity."));
-	}
-}
-
 void UENTOptionsMenu::OnGammaButtonClicked()
 {
 	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
@@ -232,60 +103,13 @@ void UENTOptionsMenu::OnGammaButtonClicked()
 	MenuManager->OpenMenu(MenuManager->GetGammaMenu(), false);
 }
 
-void UENTOptionsMenu::OnOverallSliderChanged(float InValue)
+void UENTOptionsMenu::OnAccessibilityButtonClicked()
 {
-	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
-	if (!SettingsSubsystem)
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
 	{
 		return;
 	}
-
-	SettingsSubsystem->SetMasterVolume(InValue);
-	OverallVolumeValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 3, 0, 0));
-}
-
-void UENTOptionsMenu::OnViewBobbingCheckBoxClicked(bool bIsChecked, bool bSkip)
-{
-	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
-	if (!SettingsSubsystem)
-	{
-		return;
-	}
-
-	SettingsSubsystem->GetSettings()->bViewBobbing = bIsChecked;
-}
-
-void UENTOptionsMenu::OnMouseYAxisCheckBoxClicked(bool bIsChecked, bool bSkip)
-{
-	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
-	if (!SettingsSubsystem)
-	{
-		return;
-	}
-
-	SettingsSubsystem->GetSettings()->bInvertYAxis = bIsChecked;
-}
-
-void UENTOptionsMenu::OnMouseSensitivitySliderChanged(float InValue)
-{
-	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
-	if (!SettingsSubsystem)
-	{
-		return;
-	}
-
-	SettingsSubsystem->GetSettings()->MouseSensitivity = InValue;
-	MouseSensitivityValue->SetText(UKismetTextLibrary::Conv_DoubleToText(InValue, HalfToEven, false, true, 1, 2, 1, 1));
-}
-
-void UENTOptionsMenu::ResetSettings()
-{
-	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
-	if (!SettingsSubsystem)
-	{
-		return;
-	}
-
-	SettingsSubsystem->ResetSaveToDefault(0);
-	UpdateWidgetValues(false);
+	
+	MenuManager->OpenMenu(MenuManager->GetAccessibilityMenu(), false);
 }
