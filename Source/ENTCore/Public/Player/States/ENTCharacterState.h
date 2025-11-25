@@ -29,6 +29,10 @@ enum class EENTCharacterStateID : uint8
 	Anim,
 };
 
+#if WITH_EDITOR
+ENTCORE_API FString StateToString(EENTCharacterStateID State);
+#endif
+
 /**
  * @brief Base class for the character state machine
  */
@@ -53,7 +57,7 @@ protected:
 	bool bLockState = false;
 
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Debug", meta = (ToolTip = "Enable debug features for the current state"))
+	UPROPERTY(EditDefaultsOnly, Transient, Category = "Debug", meta = (ToolTip = "Enable debug features for the current state"))
 	bool bDebugState = false;
 #endif
 
@@ -140,6 +144,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise")
 	bool bDoesMakeNoise = false;
 
+	/**
+	 * @brief Use this bool to override when you call the EmitNoise function
+	 */
+	UPROPERTY(BlueprintReadWrite, Category = "Noises")
+	bool bShouldEmitNoises = true;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise", meta = (EditCondition = bDoesMakeNoise, ClampMin = 0.0f, Units = "cm"))
 	float NoiseRange = 500.0f;
 
@@ -149,7 +159,15 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise", meta = (EditCondition = bDoesMakeNoise))
 	FName NoiseTag;
 
-	void EmitNoise() const;
+	virtual void EmitNoise();
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief if called in a tick set the value to 0
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise|Debug", meta = (Units = s, EditCondition = bDoesMakeNoise))
+	float DrawDebugNoiseDuration = 0.0f;
+#endif
 
 #pragma endregion
 

@@ -8,7 +8,7 @@
 
 // This class does not need to be modified.
 UINTERFACE()
-class UENTActivation : public UInterface
+class ENTCORE_API UENTActivation : public UInterface
 {
 	GENERATED_BODY()
 };

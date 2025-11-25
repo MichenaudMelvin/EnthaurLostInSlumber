@@ -157,6 +157,9 @@ public:
 
 	TObjectPtr<UENTCharacterStateMachine> GetStateMachine() const {return StateMachine;}
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "CharacterStateMachine")
+	bool CompareCurrentState(EENTCharacterStateID Other) const;
+
 #pragma endregion
 
 #pragma region Interaction
@@ -187,7 +190,13 @@ protected:
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ground")
-	bool GroundTrace(FHitResult& HitResult) const;
+	bool GroundTrace(const FVector& StartLocation, float TraceLength, FHitResult& HitResult) const;
+
+	bool GroundTrace(FHitResult& HitResult) const {return GroundTrace(GetBottomLocation(), GroundTraceLength, HitResult);}
+
+	bool GroundTrace(const FVector& StartLocation, FHitResult& HitResult) const {return GroundTrace(StartLocation, GroundTraceLength, HitResult);}
+
+	bool GroundTrace(float TraceLength, FHitResult& HitResult) const {return GroundTrace(GetBottomLocation(), TraceLength, HitResult);}
 
 protected:
 	void GroundMovement();
@@ -243,6 +252,12 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	FVector GetTopLocation() const;
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	float GetCharacterHalfHeight() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	float GetCharacterHeight() const {return GetCharacterHalfHeight() * 2.0f;}
+
 	/**
 	 * @brief 
 	 * @param TopLocation true will return the top location of the player, false will return the bottom location
@@ -294,6 +309,9 @@ public:
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
 	TObjectPtr<AENTRespawnTree> LastRespawnTree = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Respawn", meta = (Units = cm, ClampMin = 0.0f))
+	float RespawnGroundTrace = 500.0f;
 
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")

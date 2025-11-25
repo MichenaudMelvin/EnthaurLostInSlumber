@@ -8,6 +8,8 @@
 UENTResetIgnoredCollisions::UENTResetIgnoredCollisions()
 {
 	NodeName = "ResetIgnoredCollisions";
+
+	ForceInstancing(true);
 }
 
 EBTNodeResult::Type UENTResetIgnoredCollisions::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)

@@ -28,6 +28,9 @@ public:
 	UFUNCTION()
 	virtual void UpdateDefaultMaxSpeed(UENTCharacterState* State, const EENTCharacterStateID& StateID);
 
+	UFUNCTION()
+	AENTNerve* GetLinkedNerve(){ return LinkedNerve; }
+
 protected:
 	virtual void BeginPlay() override;
 

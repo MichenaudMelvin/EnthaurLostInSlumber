@@ -58,6 +58,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void SetMenuState(EENTMenuState InUIState);
 
+	void SetBackground(bool bIsBackgroundShown);
+
 	void CheckMenuState();
 
 	void SetUIInputMode() const;
@@ -82,6 +84,9 @@ protected:
 
 	UFUNCTION()
 	void HandleNewMenuDisplaying(UUserWidget* InMenu);
+
+private:
+	bool bIsBackgroundDisplayed = false;
 
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Controller")
@@ -120,6 +125,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "UI|MainMenus")
 	TObjectPtr<UUserWidget> QuitMenu = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI|MainMenus")
+	TObjectPtr<UUserWidget> Background = nullptr;
 
 #pragma endregion
 

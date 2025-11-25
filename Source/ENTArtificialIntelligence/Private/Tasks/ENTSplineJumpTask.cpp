@@ -17,6 +17,8 @@ UENTSplineJumpTask::UENTSplineJumpTask()
 {
 	NodeName = "SplineJump";
 
+	ForceInstancing(true);
+
 	AIPath.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTSplineJumpTask, AIPath), AENTArtificialIntelligencePath::StaticClass());
 	PathDirection.AddIntFilter(this, GET_MEMBER_NAME_CHECKED(UENTSplineJumpTask, PathDirection));
 	DoesWalkOnFloor.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UENTSplineJumpTask, DoesWalkOnFloor));
@@ -88,7 +90,7 @@ void UENTSplineJumpTask::SetTargetTransform()
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
 	if (ParasitePawn)
 	{
-		PawnHeight = ParasitePawn->GetHitBoxHeight();
+		PawnHeight = ParasitePawn->GetParasiteHalfHeight();
 	}
 
 	FVector GroundDirection = bJumpOnTheGround ? FVector::UpVector : (CurrentPath->GetDirection() * -1);

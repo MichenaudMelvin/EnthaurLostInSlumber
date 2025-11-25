@@ -22,6 +22,8 @@ UENTJumpTask::UENTJumpTask()
 	NodeName = "Jump";
 	bNotifyTick = true;
 
+	ForceInstancing(true);
+
 	JumpLocationKey.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UENTJumpTask, JumpLocationKey));
 }
 
@@ -172,7 +174,7 @@ void UENTJumpTask::SetTargetTransform()
 	AENTParasitePawn* ParasitePawn = Cast<AENTParasitePawn>(CurrentPawn);
 	if (ParasitePawn)
 	{
-		PawnHeight = ParasitePawn->GetHitBoxHeight();
+		PawnHeight = ParasitePawn->GetParasiteHalfHeight();
 	}
 
 	FVector TargetLocation = TargetTransform.GetLocation();
