@@ -75,6 +75,9 @@ void AENTNerve::BeginPlay()
 	if (bIsLigament)
 	{
 		CorruptNerveBlocker->DestroyComponent();
+	}else
+	{
+		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	//TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
