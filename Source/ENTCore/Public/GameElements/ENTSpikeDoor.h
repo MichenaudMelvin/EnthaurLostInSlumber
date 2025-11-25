@@ -123,7 +123,7 @@ public:
 
 	virtual void SetLock_Implementation(bool bState) override;
 
-#if WITH_EDITORONLY_DATA
+#if WITH_EDITOR
 private:
 	/**
 	 * @brief Temp function, use it if the door insn't working correctly
