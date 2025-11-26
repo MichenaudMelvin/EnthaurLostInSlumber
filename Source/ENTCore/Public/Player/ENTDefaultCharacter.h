@@ -358,7 +358,7 @@ public:
 	 * @param NoiseLocation if equal FVector::ZeroVector will take the pawn location
 	 * @param NoiseTag 
 	 */
-	UFUNCTION(Exec, Category = "Sounds")
+	UFUNCTION(BlueprintCallable, Exec, Category = "Noise")
 	void EmitNoise(float NoiseRange = 1000.0f, float Loudness = 1.0f, FVector NoiseLocation = FVector::ZeroVector, const FName& NoiseTag = NAME_None);
 
 #pragma endregion
