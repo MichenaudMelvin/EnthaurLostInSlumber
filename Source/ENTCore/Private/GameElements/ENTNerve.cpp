@@ -75,6 +75,9 @@ void AENTNerve::BeginPlay()
 	if (bIsLigament)
 	{
 		CorruptNerveBlocker->DestroyComponent();
+	}else
+	{
+		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	//TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
@@ -744,6 +747,8 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
 
+	if (!bIsZoneActive) return;
+
 	bIsInWeakZone = true;
 
 	if (!bIsLigament)
@@ -761,6 +766,9 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 
 			DetachNerveBall(false);
 		}
+
+		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		CorruptNerveBlocker->SetCastShadow(true);
 	}
 
 	EnterWeakZoneTimeline.Play();
@@ -773,8 +781,14 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 
 void AENTNerve::OnExitWeakZone_Implementation()
 {
-	bIsInWeakZone = false;
 	IENTWeakZoneInterface::OnExitWeakZone_Implementation();
+	bIsInWeakZone = false;
+
+	if (!bIsLigament)
+	{
+		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		CorruptNerveBlocker->SetCastShadow(false);
+	}
 	
 	EnterWeakZoneTimeline.Reverse();
 

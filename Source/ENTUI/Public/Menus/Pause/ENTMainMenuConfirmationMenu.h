@@ -12,8 +12,7 @@ class ENTUI_API UENTMainMenuConfirmationMenu : public UENTWidgetBasics
 	GENERATED_BODY()
 
 protected:
-	virtual void NativeConstruct() override;
-
+	virtual void NativeOnInitialized() override;
 	virtual void BeginDestroy() override;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))

@@ -7,6 +7,7 @@
 #include "Components/VerticalBox.h"
 #include "Components/VerticalBoxSlot.h"
 #include "Engine/LocalPlayer.h"
+#include "Menus/Elements/ENTCustomButton.h"
 #include "Menus/Elements/ENTInputSlot.h"
 #include "Subsystems/ENTMenuManager.h"
 #include "UserSettings/EnhancedInputUserSettings.h"
@@ -24,18 +25,27 @@ void UENTControlsMenu::NativeOnInitialized()
 	UpdateAnyKeyBind(MenuManager->GetCurrentController());
 	MenuManager->OnChangeCurrentController.AddDynamic(this, &UENTControlsMenu::UpdateAnyKeyBind);
 
-	AddInputRows();
+	if (ResetButton && ResetButton->GetCustomButton())
+	{
+		ResetButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTControlsMenu::OpenResetSettingsMenu);
+	}
 }
 
 void UENTControlsMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
-
+	
+	AddInputRows();
 }
 
-void UENTControlsMenu::NativeDestruct()
+void UENTControlsMenu::BeginDestroy()
 {
-	Super::NativeDestruct();
+	Super::BeginDestroy();
+
+	if (ResetButton && ResetButton->GetCustomButton())
+	{
+		ResetButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTControlsMenu::OpenResetSettingsMenu);
+	}
 }
 
 TObjectPtr<UEnhancedInputLocalPlayerSubsystem> UENTControlsMenu::GetEnhancedInputLocalPlayerSubsystem()
@@ -223,4 +233,15 @@ void UENTControlsMenu::UpdateAnyKeyBind(AENTAnyKeyController* CurrentController)
 void UENTControlsMenu::OnKeyButton(UENTInputSlot* InInputSlot)
 {
 	ActiveInputSlot = InInputSlot;
+}
+
+void UENTControlsMenu::OpenResetSettingsMenu()
+{
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
 }
