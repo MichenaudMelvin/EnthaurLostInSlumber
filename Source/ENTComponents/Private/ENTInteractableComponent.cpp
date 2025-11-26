@@ -28,7 +28,7 @@ void UENTInteractableComponent::AddInteractable(UPrimitiveComponent* ComponentTo
 	{
 		return;
 	}
-
+	
 	InteractableComponentSet.Add(ComponentToAdd);
 }
 

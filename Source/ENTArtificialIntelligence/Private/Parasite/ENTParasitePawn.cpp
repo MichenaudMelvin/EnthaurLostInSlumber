@@ -3,7 +3,6 @@
 
 #include "Parasite/ENTParasitePawn.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Components/BoxComponent.h"
 #include "ENTGravityPawnMovement.h"
 #include "ENTHealthComponent.h"
 #include "Components/CapsuleComponent.h"

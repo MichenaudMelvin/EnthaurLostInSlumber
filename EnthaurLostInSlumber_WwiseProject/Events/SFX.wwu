@@ -82,6 +82,18 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
+								<Action Name="" ID="{DD31B2B2-55DE-4F2A-B709-9BB4894C5684}" ShortID="1031035130">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Nerve_Energy" ID="{6A9150FC-4A30-4A1F-AFA8-B9D7CA5F76F2}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
 							</ChildrenList>
 						</Event>
 						<Event Name="AKE_StartNerveStretch" ID="{86D55011-33D5-488E-A299-439AE1860B89}">
@@ -97,6 +109,13 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="LPX_Sinew_Strech_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{CF05A2F1-C18B-4C27-82D6-575AAF0A8FB5}" ShortID="861282259">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Nerve_Energy" ID="{6A9150FC-4A30-4A1F-AFA8-B9D7CA5F76F2}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
