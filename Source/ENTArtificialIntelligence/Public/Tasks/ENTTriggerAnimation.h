@@ -30,6 +30,9 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Animation")
 	TObjectPtr<UAnimSequenceBase> AnimationToTrigger;
 
+	UPROPERTY(EditInstanceOnly, Category = "Animation", meta = (Units = s, ClampMin = 0.0f))
+	float AdditionalDuration = 0.0f;
+
 	UPROPERTY()
 	TObjectPtr<UBehaviorTreeComponent> CurrentOwnerComp;
 
