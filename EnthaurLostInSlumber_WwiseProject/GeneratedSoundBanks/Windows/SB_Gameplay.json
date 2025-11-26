@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{4E33B52F-FE52-E5A9-9E06-BD0EC046F7C5}",
+    "Hash": "{1DEAB699-8BE5-DE60-36E8-CC2DFCE83ACE}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -169,6 +169,14 @@
       "CachePath": "D6/{D64A74B0-5F67-A787-2899-2A5EB57918B9}.wem"
      },
      {
+      "Id": "88949178",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Energy_04.wav",
+      "CachePath": "7D/{7D4A3A6D-39BE-5F60-B7FF-4E09AFD173C0}.wem"
+     },
+     {
       "Id": "94886772",
       "Language": "SFX",
       "Streaming": "false",
@@ -321,6 +329,14 @@
       "CachePath": "A1/{A1C8FAD5-449A-B728-5A94-C35AC22D11A8}.wem"
      },
      {
+      "Id": "165671155",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Energy_01.wav",
+      "CachePath": "BF/{BF9D26A6-8E05-B988-E007-1EBAD1706703}.wem"
+     },
+     {
       "Id": "171841650",
       "Language": "SFX",
       "Streaming": "false",
@@ -343,6 +359,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Idle_01.wav",
       "CachePath": "90/{90E4B91A-38B2-1E82-425C-2A846ED74291}.wem"
+     },
+     {
+      "Id": "180319933",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Energy_02.wav",
+      "CachePath": "35/{35AB1C2B-498D-35DF-C5F2-268AAAAAC6AF}.wem"
      },
      {
       "Id": "195657945",
@@ -551,6 +575,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Foley_Walk_06.wav",
       "CachePath": "4E/{4E05C78F-AA06-FE50-6A06-F4AC9B787C91}.wem"
+     },
+     {
+      "Id": "359994660",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Energy_06.wav",
+      "CachePath": "45/{45FFC29F-E406-9702-5AE9-C21E51A93822}.wem"
      },
      {
       "Id": "368998509",
@@ -775,6 +807,14 @@
       "Location": "Memory",
       "ShortName": "MC_Cloth_Run_09.wav",
       "CachePath": "D2/{D2DD304D-86CD-EF26-A0C2-DEC4F0181900}.wem"
+     },
+     {
+      "Id": "524658258",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Energy_05.wav",
+      "CachePath": "A6/{A65E8D5D-7DB4-27FE-2F5A-FE5CA3F4E82C}.wem"
      },
      {
       "Id": "525259507",
@@ -1313,6 +1353,14 @@
       "CachePath": "DE/{DE05FE22-F369-CBD0-5D2F-18495707F478}.wem"
      },
      {
+      "Id": "857548694",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Energy_03.wav",
+      "CachePath": "07/{0756B026-9A81-2B01-7BB8-A67592E66FB0}.wem"
+     },
+     {
       "Id": "861837351",
       "Language": "SFX",
       "Streaming": "false",
@@ -1343,6 +1391,14 @@
       "Location": "Memory",
       "ShortName": "MC_Cloth_Walk_07.wav",
       "CachePath": "32/{3254FCC8-B77F-9D1A-E0ED-B0E017B78933}.wem"
+     },
+     {
+      "Id": "881759984",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Nerve_Energy_07.wav",
+      "CachePath": "3C/{3C276D5C-64D6-952B-7736-8E1251B7AA0D}.wem"
      },
      {
       "Id": "883660353",
@@ -2677,16 +2733,31 @@
         "Id": "43894004"
        },
        {
+        "Id": "88949178"
+       },
+       {
         "Id": "122346683"
        },
        {
         "Id": "151884214"
        },
        {
+        "Id": "165671155"
+       },
+       {
+        "Id": "180319933"
+       },
+       {
         "Id": "197068285"
        },
        {
+        "Id": "359994660"
+       },
+       {
         "Id": "429011309"
+       },
+       {
+        "Id": "524658258"
        },
        {
         "Id": "725331003"
@@ -2696,6 +2767,12 @@
        },
        {
         "Id": "804146141"
+       },
+       {
+        "Id": "857548694"
+       },
+       {
+        "Id": "881759984"
        },
        {
         "Id": "889954801"
@@ -2902,6 +2979,6 @@
     ]
    }
   ],
-  "FileHash": "{CEE20E42-C0FC-5B42-66BA-135B1BDA42A0}"
+  "FileHash": "{F7710791-C170-1D59-7916-8EC6EA97C0B6}"
  }
 }
