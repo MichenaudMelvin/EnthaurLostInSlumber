@@ -225,13 +225,12 @@ void UENTCharacterState::EmitNoise()
 		return;
 	}
 
-	FVector NoiseLocation = Character->GetActorLocation();
-	Character->MakeNoise(Loudness, Character, NoiseLocation, NoiseRange, NoiseTag);
+	Character->EmitNoise(NoiseRange, Loudness, Character->GetActorLocation(), NoiseTag);
 
 #if WITH_EDITORONLY_DATA
 	if (bDebugState)
 	{
-		UKismetSystemLibrary::DrawDebugCylinder(Character, NoiseLocation, NoiseLocation, NoiseRange, 12, FLinearColor::Red, DrawDebugNoiseDuration);
+		UKismetSystemLibrary::DrawDebugCylinder(Character, Character->GetActorLocation(), Character->GetActorLocation(), NoiseRange, 12, FLinearColor::Red, DrawDebugNoiseDuration);
 	}
 #endif
 }

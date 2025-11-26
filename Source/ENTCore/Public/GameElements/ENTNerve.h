@@ -237,10 +237,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> GrabNoise;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta=(ClampMin="-90.0", ClampMax="90.0", UIMin="-90", UIMax="90.0"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise", meta = (ClampMin = 0.0f, Units = cm))
+	float NoiseRange = 2500.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta = (ClampMin = -90.0f, ClampMax = 90.0f, UIMin = -90.0f, UIMax = 90.0f))
 	float EjectionAngleBuff = 30.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta=(ClampMin="-90.0", ClampMax="90.0", UIMin="-90", UIMax="90.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta = (ClampMin = -90.0f, ClampMax = 90.0f, UIMin = -90.0f, UIMax = 90.0f))
 	bool bIsLigament = false;
 
 	UPROPERTY()
