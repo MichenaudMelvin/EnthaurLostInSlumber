@@ -93,9 +93,6 @@ protected:
 	UFUNCTION()
 	void FillAmberUpdate(float Alpha);
 
-	UFUNCTION()
-	void FillAmberFinished();
-
 #pragma region Foliage
 
 protected:
@@ -143,6 +140,9 @@ protected:
 
 	UFUNCTION()
 	void FoliageGrowthUpdate(float Alpha);
+
+	UFUNCTION()
+	void FoliageGrowthFinished();
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Transient, Category = "Foliage|Debug")

@@ -14,11 +14,6 @@ void UENTWidgetBasics::NativeOnInitialized()
 	{
 		BackButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTWidgetBasics::HandleBackAction);
 	}
-
-	// if (FadeAnimation)
-	// {
-	// 	OnFadeAnimationFinishedHandle.AddDynamic(this,&UENTWidgetBasics::RemoveMenuAfterAnim);
-	// }
 }
 
 void UENTWidgetBasics::NativeConstruct()
@@ -39,10 +34,6 @@ void UENTWidgetBasics::BeginDestroy()
 	{
 		BackButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTWidgetBasics::HandleBackAction);
 	}
-	// if (FadeAnimation)
-	// {
-	// 	OnFadeAnimationFinishedHandle.RemoveDynamic(this, &UENTWidgetBasics::RemoveMenuAfterAnim);
-	// }
 }
 
 void UENTWidgetBasics::PlayFadeAnimation(bool bIsReverse)
