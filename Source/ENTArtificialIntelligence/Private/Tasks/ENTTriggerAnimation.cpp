@@ -113,7 +113,6 @@ FString UENTTriggerAnimation::GetStaticDescription() const
 
 void UENTTriggerAnimation::FinishTask()
 {
-
 	GetWorld()->GetTimerManager().ClearTimer(AnimationTimerHandle);
 
 	if (CurrentPawn)

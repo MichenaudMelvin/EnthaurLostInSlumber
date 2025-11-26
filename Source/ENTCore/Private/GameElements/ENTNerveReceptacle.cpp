@@ -95,21 +95,25 @@ void AENTNerveReceptacle::Interaction(APlayerController* Controller, APawn* Pawn
 	if (!Character) return;
 
 	UENTPhysicConstraint* Constraint = Character->GetComponentByClass<UENTPhysicConstraint>();
-	if (!Constraint) return;
+	if (Constraint)
+	{
+		AENTNerve* Nerve = Constraint->GetLinkedNerve();
+		if (!Nerve) return;
 
-	AENTNerve* Nerve = Constraint->GetLinkedNerve();
-	if (!Nerve) return;
-	
-	Nerve->SetCurrentReceptacle(this);
+		if (LinkedNerve != nullptr) return;
 
-	UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
-	OnNerveConnect();
-	
-	Constraint->ReleasePlayer();
-
-	ElectricityComponent->PlayElectricityAnimation(Nerve);
-
-	InteractableComponent->RemoveInteractable(NerveReceptacle);
+		LinkedNerve = Nerve;
+		Nerve->SetCurrentReceptacle(this);
+		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
+		OnNerveConnect();
+		Constraint->ReleasePlayer();
+		ElectricityComponent->PlayElectricityAnimation(Nerve);
+	}
+	else
+	{
+		if (LinkedNerve == nullptr) return;
+		LinkedNerve->Interaction(Controller, Pawn, InteractionComponent);
+	}
 }
 
 void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)
@@ -155,14 +159,14 @@ bool AENTNerveReceptacle::CanTheNerveBeTaken() const
 void AENTNerveReceptacle::DisableReceptacle()
 {
 	NerveReceptaclesNoises->PostAkEvent(DisabledNoise);
-	InteractableComponent->AddInteractable(NerveReceptacle);
+	LinkedNerve = nullptr;
 }
 
 #pragma region Electricity
 
 void AENTNerveReceptacle::OnElectricityAnimationStarted(AActor* LinkedActor)
 {
-	LinkedNerve = Cast<AENTNerve>(LinkedActor);
+	//LinkedNerve = Cast<AENTNerve>(LinkedActor);
 }
 
 void AENTNerveReceptacle::OnElectricityRadiusFinished()
@@ -188,7 +192,7 @@ void AENTNerveReceptacle::OnElectricityMovementFinished()
 
 void AENTNerveReceptacle::OnElectricityOpacityFinished()
 {
-	LinkedNerve = nullptr;
+	//LinkedNerve = nullptr;
 }
 
 #pragma endregion
