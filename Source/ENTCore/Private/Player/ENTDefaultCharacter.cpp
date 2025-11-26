@@ -743,6 +743,16 @@ void AENTDefaultCharacter::ResetFootStepsEvent() const
 	FootstepsSounds->AkAudioEvent = DefaultFootStepEvent;
 }
 
+void AENTDefaultCharacter::EmitNoise(float Loudness, float NoiseRange, FVector NoiseLocation, const FName& NoiseTag)
+{
+	if (NoiseLocation == FVector::ZeroVector)
+	{
+		NoiseLocation = GetActorLocation();
+	}
+
+	MakeNoise(Loudness, this, NoiseLocation, NoiseRange, NoiseTag);
+}
+
 UENTPhysicConstraint* AENTDefaultCharacter::AddConstraint(bool bIsLigament)
 {
 	// Choix de la classe à instancier

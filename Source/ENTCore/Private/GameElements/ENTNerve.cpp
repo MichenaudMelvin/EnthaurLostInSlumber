@@ -212,7 +212,6 @@ void AENTNerve::RemoveLastSplinePoint() const
 
 void AENTNerve::AddSplineMesh(bool bMakeNoise)
 {
-	
 	UActorComponent* Comp = AddComponentByClass(USplineMeshComponent::StaticClass(), false, FTransform::Identity, false);
 	if (!Comp)
 	{
@@ -389,6 +388,7 @@ void AENTNerve::ApplyCablesPhysics()
 			}
 			else if (!bIsStretchSoundPlayed)
 			{
+				PlayerCharacter->EmitNoise(NoiseRange);
 				bIsStretchSoundPlayed = true;
 				NerveStretchComp->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 			}

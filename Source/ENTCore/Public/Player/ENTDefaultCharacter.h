@@ -351,6 +351,16 @@ public:
 
 	void ResetFootStepsEvent() const;
 
+	/**
+	 * @brief 
+	 * @param Loudness 
+	 * @param NoiseRange 
+	 * @param NoiseLocation if equal FVector::ZeroVector will take the pawn location
+	 * @param NoiseTag 
+	 */
+	UFUNCTION(Exec, Category = "Sounds")
+	void EmitNoise(float NoiseRange = 1000.0f, float Loudness = 1.0f, FVector NoiseLocation = FVector::ZeroVector, const FName& NoiseTag = NAME_None);
+
 #pragma endregion
 
 #pragma region Temp

@@ -89,9 +89,9 @@ void AENTNerveReceptacle::OnConstruction(const FTransform& Transform)
 
 #endif
 
-void AENTNerveReceptacle::Interaction(APlayerController* Controller, APawn* Pawn,UPrimitiveComponent* InteractionComponent)
+void AENTNerveReceptacle::Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
-	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+	AENTDefaultCharacter* Character = Cast<AENTDefaultCharacter>(Pawn);
 	if (!Character) return;
 
 	UENTPhysicConstraint* Constraint = Character->GetComponentByClass<UENTPhysicConstraint>();
@@ -104,6 +104,7 @@ void AENTNerveReceptacle::Interaction(APlayerController* Controller, APawn* Pawn
 
 		LinkedNerve = Nerve;
 		Nerve->SetCurrentReceptacle(this);
+		Character->EmitNoise(NoiseRange);
 		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
 		OnNerveConnect();
 		Constraint->ReleasePlayer();
