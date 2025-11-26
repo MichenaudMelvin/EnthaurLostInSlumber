@@ -6,7 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Menus/Elements/ENTCustomButton.h"
 
-void UENTMainMenuConfirmationMenu::NativeConstruct()
+void UENTMainMenuConfirmationMenu::NativeOnInitialized()
 {
 	Super::NativeConstruct();
 
