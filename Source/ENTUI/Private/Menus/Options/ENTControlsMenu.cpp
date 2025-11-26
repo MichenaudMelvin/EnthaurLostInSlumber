@@ -38,6 +38,13 @@ void UENTControlsMenu::NativeConstruct()
 	AddInputRows();
 }
 
+void UENTControlsMenu::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+	VBox->ClearChildren();
+}
+
 void UENTControlsMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
@@ -178,6 +185,7 @@ void UENTControlsMenu::RebindKey(const FKey& InKey)
 	}
 
 	ActiveInputSlot->SetButtonKeyName(InKey.GetDisplayName());
+	EnhancedInputUserSettings->SaveSettings();
 
 	ActiveInputSlot = nullptr;
 }
@@ -237,11 +245,32 @@ void UENTControlsMenu::OnKeyButton(UENTInputSlot* InInputSlot)
 
 void UENTControlsMenu::OpenResetSettingsMenu()
 {
-	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	if (!IsValid(MenuManager))
+	// UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	// if (!IsValid(MenuManager))
+	// {
+	// 	return;
+	// }
+	//
+	// MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
+
+	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
+	if (!InputLocalPlayerSubsystem)
 	{
 		return;
 	}
 
-	MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
+	UEnhancedInputUserSettings* EnhancedInputUserSettings = InputLocalPlayerSubsystem->GetUserSettings();
+	if (!EnhancedInputUserSettings)
+	{
+		return;
+	}
+
+	UEnhancedPlayerMappableKeyProfile* Profile = EnhancedInputUserSettings->GetActiveKeyProfile();
+
+	Profile->ResetToDefault();
+	EnhancedInputUserSettings->SaveSettings();
+	VBox->ClearChildren();
+	AddInputRows();
+
+	UE_LOG(LogTemp, Warning, TEXT("Reset keys!"));
 }
