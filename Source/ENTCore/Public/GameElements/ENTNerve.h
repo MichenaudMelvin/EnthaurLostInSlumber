@@ -240,9 +240,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta=(ClampMin="-90.0", ClampMax="90.0", UIMin="-90", UIMax="90.0"))
 	bool bIsLigament = false;
 
-	UFUNCTION()
-	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
-
 	UPROPERTY()
 	TObjectPtr<AENTDefaultPlayerController> PlayerController;
 
@@ -256,6 +253,9 @@ public:
 	TObjectPtr<UENTInteractableComponent> GetInteractable() const {return InteractableComponent;}
 
 	float GetEjectionAngleBuff() const {return EjectionAngleBuff;}
+
+	UFUNCTION()
+	void Interaction(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
 
 #pragma endregion
 
