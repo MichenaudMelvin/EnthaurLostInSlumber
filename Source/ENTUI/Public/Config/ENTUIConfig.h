@@ -13,8 +13,11 @@
 #include "Menus/Main/ENTNewGameMenu.h"
 #include "Menus/Main/ENTPressAny.h"
 #include "Menus/Main/ENTQuitMenu.h"
+#include "Menus/Options/ENTAccessibilityMenu.h"
 #include "Menus/Options/ENTControlsMenu.h"
 #include "Menus/Options/ENTGammaMenu.h"
+#include "Menus/Options/ENTResetConfirmationMenu.h"
+#include "Menus/Options/ENTSoundMenu.h"
 #include "Menus/Pause/ENTMainMenuConfirmationMenu.h"
 #include "Menus/Pause/ENTOptionsMenu.h"
 #include "Menus/Pause/ENTPauseMenu.h"
@@ -80,6 +83,15 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
 	TSubclassOf<UENTGammaMenu> GammaMenuClass = UENTGammaMenu::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
+	TSubclassOf<UENTSoundMenu> SoundMenuClass = UENTSoundMenu::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
+	TSubclassOf<UENTResetConfirmationMenu> ResetConfirmationMenuClass = UENTResetConfirmationMenu::StaticClass();
+
+	UPROPERTY(EditDefaultsOnly, Config, Category = "UI|Widgets")
+	TSubclassOf<UENTAccessibilityMenu> AccessibilityMenuClass = UENTAccessibilityMenu::StaticClass();
 
 #pragma endregion
 

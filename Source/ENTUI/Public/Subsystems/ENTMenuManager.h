@@ -50,6 +50,9 @@ public:
 	TObjectPtr<UUserWidget> GetNewGameMenu() const { return NewGameMenu; }
 	TObjectPtr<UUserWidget> GetControlsMenu() const { return ControlsMenu; }
 	TObjectPtr<UUserWidget> GetGammaMenu() const { return GammaMenu; }
+	TObjectPtr<UUserWidget> GetSoundMenu() const { return SoundMenu; }
+	TObjectPtr<UUserWidget> GetAccessibilityMenu() const { return AccessibilityMenu; }
+	TObjectPtr<UUserWidget> GetResetConfirmationMenu() const { return ResetConfirmationMenu; }
 	TObjectPtr<UUserWidget> GetMainMenuConfirmationMenu() const { return MainMenuConfirmationMenu; }
 	TObjectPtr<UUserWidget> GetRestartConfirmationMenu() const { return RestartConfirmationMenu; }
 
@@ -156,6 +159,15 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, Category = "UI|GammaMenu")
 	TObjectPtr<UUserWidget> GammaMenu = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI|SoundMenu")
+	TObjectPtr<UUserWidget> SoundMenu = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI|ResetConfirmationMenu")
+	TObjectPtr<UUserWidget> ResetConfirmationMenu = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI|AccessibilityMenu")
+	TObjectPtr<UUserWidget> AccessibilityMenu = nullptr;
 
 #pragma endregion
 

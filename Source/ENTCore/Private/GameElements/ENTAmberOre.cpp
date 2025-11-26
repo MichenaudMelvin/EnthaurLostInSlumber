@@ -83,16 +83,16 @@ void AENTAmberOre::BeginPlay()
 	FOnTimelineEvent FinishedEvent;
 
 	UpdateEvent.BindDynamic(this, &AENTAmberOre::FoliageGrowthUpdate);
+	FinishedEvent.BindDynamic(this, &AENTAmberOre::FoliageGrowthFinished);
 	FoliageTimeline.AddInterpFloat(FoliageGrowthCurve, UpdateEvent);
 	FoliageTimeline.SetPlayRate(1 / GrowthDuration);
+	FoliageTimeline.SetTimelineFinishedFunc(FinishedEvent);
 
 	UpdateEvent.Unbind();
 
 	UpdateEvent.BindDynamic(this, &AENTAmberOre::FillAmberUpdate);
-	FinishedEvent.BindDynamic(this, &AENTAmberOre::FillAmberFinished);
 	FillAmberTimeline.AddInterpFloat(FillAmberCurve, UpdateEvent);
 	FillAmberTimeline.SetPlayRate(1 / FillAmberDuration);
-	FillAmberTimeline.SetTimelineFinishedFunc(FinishedEvent);
 }
 
 void AENTAmberOre::OnConstruction(const FTransform& Transform)
@@ -256,11 +256,6 @@ void AENTAmberOre::FillAmberUpdate(float Alpha)
 	AmberMesh->SetRelativeLocation(ResultLocation);
 }
 
-void AENTAmberOre::FillAmberFinished()
-{
-	Interactable->AddInteractable(MeshInteraction);
-}
-
 
 void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
 {
@@ -281,6 +276,11 @@ void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
 	}
 	
 	Foliage->MarkRenderStateDirty();
+}
+
+void AENTAmberOre::FoliageGrowthFinished()
+{
+	Interactable->AddInteractable(MeshInteraction);
 }
 
 void AENTAmberOre::TriggerLinkedObjects(TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive)

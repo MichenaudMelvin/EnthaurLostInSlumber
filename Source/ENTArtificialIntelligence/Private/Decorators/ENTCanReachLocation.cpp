@@ -99,16 +99,32 @@ bool UENTCanReachLocation::CalculateRawConditionValue(UBehaviorTreeComponent& Ow
 		FVector EndLocation = TargetLocation;
 		EndLocation.Z -= GroundTraceLength;
 
+		EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
+#if WITH_EDITORONLY_DATA
+		if (bDebugDecorator)
+		{
+			DrawDebugTrace = EDrawDebugTrace::ForOneFrame;
+		}
+#endif
+
 		FHitResult HitResult;
-		bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, TargetLocation, EndLocation, ObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, false);
+		bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(this, TargetLocation, EndLocation, ObjectTypes, false, ActorsToIgnore, DrawDebugTrace, HitResult, false);
 
 		if (bHit)
 		{
 			TargetLocation = HitResult.Location;
 		}
+
+#if WITH_EDITORONLY_DATA
+		if (bDebugDecorator)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow,FString::Printf(TEXT("TraceSucceed: %s"), (bHit ? TEXT("true") : TEXT("false"))));
+			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow,FString::Printf(TEXT("CanReach: %s"), (Controller->IsPointReachable(TargetLocation) ? TEXT("true") : TEXT("false"))));
+		}
+#endif
 	}
 
-	return Controller->IsPointReachable(TargetLocation);
+	return bInverseCheck != Controller->IsPointReachable(TargetLocation);
 }
 
 #if WITH_EDITOR
@@ -120,7 +136,7 @@ FString UENTCanReachLocation::GetStaticDescription() const
 		KeyDesc = Location.SelectedKeyName.ToString();
 	}
 
-	if (IsInversed())
+	if (bInverseCheck)
 	{
 		return FString::Printf(TEXT("Cannot reach: %s"), *KeyDesc);
 	}
