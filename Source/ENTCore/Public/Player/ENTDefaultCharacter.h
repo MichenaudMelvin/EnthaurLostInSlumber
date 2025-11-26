@@ -168,6 +168,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
 	float InteractionTraceLength = 100.0f;
 
+	UPROPERTY()
+	float InteractionCoolDown = 0.0f;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UENTInteractableComponent> CurrentInteractable;
 
