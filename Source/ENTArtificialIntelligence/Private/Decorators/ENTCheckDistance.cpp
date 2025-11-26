@@ -12,11 +12,31 @@ UENTCheckDistance::UENTCheckDistance()
 	NodeName = "CheckDistance";
 	Actor.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UENTCheckDistance, Actor), AActor::StaticClass());
 	bNotifyTick = true;
+	bNotifyProcessed = true;
 
 	ForceInstancing(true);
 
 	ObjectTypes.Add(ObjectTypeQuery1);
 	ObjectTypes.Add(ObjectTypeQuery2);
+}
+
+void UENTCheckDistance::OnNodeProcessed(FBehaviorTreeSearchData& SearchData, EBTNodeResult::Type& NodeResult)
+{
+	Super::OnNodeProcessed(SearchData, NodeResult);
+
+	FTimespan ElapsedTime;
+	if (bHasTriggerAlreadyOnce)
+	{
+		ElapsedTime = FDateTime::Now() - LastTimeTriggered;
+	}
+	else
+	{
+		ElapsedTime = 0.0f;
+	}
+
+	ComputeDistance(SearchData.OwnerComp);
+	bool bSucceed = TraceCollisionTest(SearchData.OwnerComp);
+	ComputeCollisionTestDuration(ElapsedTime.GetSeconds(), bSucceed);
 }
 
 void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -26,7 +46,6 @@ void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 	ComputeDistance(OwnerComp);
 	bool bSucceed = TraceCollisionTest(OwnerComp);
 	ComputeCollisionTestDuration(DeltaSeconds, bSucceed);
-
 	CheckAbort(OwnerComp, NodeMemory);
 }
 
@@ -214,7 +233,7 @@ bool UENTCheckDistance::TraceCollisionTest(UBehaviorTreeComponent& OwnerComp) co
 
 	if (!DoCollisionTest(OwnerComp))
 	{
-		return false; // might be true tho
+		return false;
 	}
 
 	const UBlackboardComponent* CurrentBlackboard = OwnerComp.GetBlackboardComponent();
@@ -265,6 +284,22 @@ bool UENTCheckDistance::TraceCollisionTest(UBehaviorTreeComponent& OwnerComp) co
 
 void UENTCheckDistance::ComputeCollisionTestDuration(float DeltaTime, bool bSucceedCollisionTest)
 {
+	if (CollisionTestDuration <= 0.0f)
+	{
+		bCollisionTestResult = bSucceedCollisionTest;
+		return;
+	}
+
+#if WITH_EDITORONLY_DATA
+	if (bDebugDecorator)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("DeltaTime: %f"), DeltaTime);
+	}
+#endif
+
+	LastTimeTriggered = FDateTime::Now();
+	bHasTriggerAlreadyOnce = true;
+
 	CollisionTestTime += DeltaTime * (bSucceedCollisionTest ? 1 : -1);
 	CollisionTestTime = FMath::Clamp(CollisionTestTime, 0.0f, CollisionTestDuration);
 
