@@ -9,6 +9,8 @@
 			<ChildrenList>
 				<ActorMixer Name="AM_Parasite" ID="{D7E49C83-A9D6-4B46-8435-7818AF34EE1D}" ShortID="360349559">
 					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="2"/>
+						<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 						<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 					</PropertyList>
 					<ReferenceList>
