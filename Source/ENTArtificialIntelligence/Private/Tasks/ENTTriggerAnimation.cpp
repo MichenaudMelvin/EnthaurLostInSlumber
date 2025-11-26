@@ -63,6 +63,7 @@ EBTNodeResult::Type UENTTriggerAnimation::ExecuteTask(UBehaviorTreeComponent& Ow
 	Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(AnimationToTrigger);
 
 	float AnimLength = UENTToolStatics::GetAnimLength(AnimationToTrigger);
+	AnimLength += AdditionalDuration;
 	GetWorld()->GetTimerManager().SetTimer(AnimationTimerHandle, this, &UENTTriggerAnimation::FinishTask, 1.0f, false, AnimLength);
 
 	return EBTNodeResult::InProgress;
@@ -102,18 +103,20 @@ EBTNodeResult::Type UENTTriggerAnimation::AbortTask(UBehaviorTreeComponent& Owne
 FString UENTTriggerAnimation::GetStaticDescription() const
 {
 	FString AnimName("invalid");
+	float AnimDuration = 0.0f;
 	if (AnimationToTrigger)
 	{
 		AnimName = AnimationToTrigger.GetName();
+		AnimDuration = UENTToolStatics::GetAnimLength(AnimationToTrigger);
+		AnimDuration += AdditionalDuration;
 	}
 
-	return FString::Printf(TEXT("Trigger %s"), *AnimName);
+	return FString::Printf(TEXT("Trigger %s (Task will last for %fs)"), *AnimName, AnimDuration);
 }
 #endif
 
 void UENTTriggerAnimation::FinishTask()
 {
-
 	GetWorld()->GetTimerManager().ClearTimer(AnimationTimerHandle);
 
 	if (CurrentPawn)
