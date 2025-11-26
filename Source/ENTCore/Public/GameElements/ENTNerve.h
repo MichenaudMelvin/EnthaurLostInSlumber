@@ -232,6 +232,9 @@ protected:
 	TObjectPtr<UENTInteractableComponent> InteractableComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
+	TEnumAsByte<ECollisionChannel> InteractionChannel;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UAkAudioEvent> GrabNoise;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta=(ClampMin="-90.0", ClampMax="90.0", UIMin="-90", UIMax="90.0"))
