@@ -63,7 +63,8 @@ void AENTSpikeDoor::OnConstruction(const FTransform& Transform)
 
 	DoorNavModifier->SetBoxExtent(BoxExtent);
 
-	NavModifierDefaultLocation = FVector(0.0f, HalfSize, 0.0f);
+	FVector RelativeLocation = DoorNavModifier->GetRelativeLocation();
+	NavModifierDefaultLocation = FVector(RelativeLocation.X, HalfSize, RelativeLocation.Z);
 	DoorNavModifier->SetRelativeLocation(NavModifierDefaultLocation);
 
 	NavModifierOpenedLocation = NavModifierDefaultLocation;
@@ -275,6 +276,11 @@ void AENTSpikeDoor::DropTimelineFinished()
 
 		InterMeshesA->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		InterMeshesB->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		OnDoorOpened.Broadcast();
+	}
+	else
+	{
+		OnDoorClosed.Broadcast();
 	}
 
 	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
