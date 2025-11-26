@@ -144,21 +144,11 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	}
 #endif
 
-	FHitResult HitResult;
-	bool bHit = TargetPath->GetTracedPointLocation(0, HitResult);
+	FTransform TargetTransform = TargetPath->GetStartTransform(1);
+	FQuat Rotation = TargetTransform.GetRotation() * FRotator(-90.0f, 0.0f, 0.0f).Quaternion();
+	TargetTransform.SetRotation(Rotation);
 
-	if (!bHit)
-	{
-		return;
-	}
-
-	FVector ActorLocation = HitResult.Location;
-	ActorLocation += (TargetPath->GetDirection() * -1 * GetParasiteHalfHeight());
-	SetActorLocation(ActorLocation);
-
-	FQuat Rotation = FRotationMatrix::MakeFromZ(HitResult.Normal).ToQuat();
-	Rotation = Rotation * FRotator(-90.0f, 0.0f, 0.0f).Quaternion();
-	SetActorRotation(Rotation);
+	SetActorTransform(TargetTransform);
 }
 
 #if WITH_EDITOR
