@@ -11,6 +11,9 @@
 class UBoxComponent;
 class UAkComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorOpened);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorClosed);
+
 UCLASS()
 class ENTCORE_API AENTSpikeDoor : public AActor, public IENTActivation
 {
@@ -59,6 +62,12 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Door")
 	TObjectPtr<UInstancedStaticMeshComponent> InterMeshesB;
+
+	UPROPERTY(BlueprintAssignable, Category = "Door")
+	FOnDoorOpened OnDoorOpened;
+
+	UPROPERTY(BlueprintAssignable, Category = "Door")
+	FOnDoorClosed OnDoorClosed;
 
 	UPROPERTY()
 	TArray<FVector> InterInitialRelativeLocations;

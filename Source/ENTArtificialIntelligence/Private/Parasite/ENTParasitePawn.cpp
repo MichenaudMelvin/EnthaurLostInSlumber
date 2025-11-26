@@ -157,7 +157,8 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	ActorLocation += (TargetPath->GetDirection() * -1 * GetParasiteHalfHeight());
 	SetActorLocation(ActorLocation);
 
-	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.Normal);
+	FQuat Rotation = FRotationMatrix::MakeFromZ(HitResult.Normal).ToQuat();
+	Rotation = Rotation * FRotator(-90.0f, 0.0f, 0.0f).Quaternion();
 	SetActorRotation(Rotation);
 }
 
@@ -232,6 +233,8 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 	{
 		return;
 	}
+
+	ParasiteController->GetBlackboardComponent()->SetValueAsBool(UseNavMeshKeyName, bUseNavMesh);
 
 	if (TargetPath)
 	{
