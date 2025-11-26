@@ -111,7 +111,7 @@ void AENTNerveReceptacle::Interaction(APlayerController* Controller, APawn* Pawn
 	}
 	else
 	{
-		if (LinkedNerve == nullptr) return;
+		if (LinkedNerve == nullptr || ElectricityComponent->IsAnimRunning()) return;
 		LinkedNerve->Interaction(Controller, Pawn, InteractionComponent);
 	}
 }
