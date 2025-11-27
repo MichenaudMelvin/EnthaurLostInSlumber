@@ -50,13 +50,6 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 
 	ShakeManager = CreateDefaultSubobject<UENTCameraShakeComponent>(TEXT("Shake Manager"));
 
-	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("First Person Mesh"));
-	CharacterMesh->SetOnlyOwnerSee(true);
-	CharacterMesh->SetupAttachment(CameraComponent);
-	CharacterMesh->bCastDynamicShadow = false;
-	CharacterMesh->CastShadow = false;
-	CharacterMesh->SetRelativeLocation(FVector(-30.0f, 0.0f, -150.0f));
-
 	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
 	HearingStimuli->bAutoRegister = true;
 	HearingStimuli->RegisterForSense(UAISense_Hearing::StaticClass());
