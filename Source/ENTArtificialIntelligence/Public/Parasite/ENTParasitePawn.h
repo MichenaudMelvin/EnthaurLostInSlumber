@@ -115,19 +115,19 @@ protected:
 
 #pragma endregion
 
-	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
 	bool bAutoStartBehavior = true;
 
-	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
 	bool bUseNavMesh = true;
 
-	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
 	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Behavior", meta = (Units = "cm/s"))
 	float PatrolSpeed = 600.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Behavior", meta = (Units = "cm/s"))
 	float ChaseSpeed = 1200.0f;
 
 #pragma region BehaviorTree
