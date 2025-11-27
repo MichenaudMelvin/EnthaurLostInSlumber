@@ -20,6 +20,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void StartupActions();
+
 #if WITH_EDITORONLY_DATA
 	virtual void Tick(float DeltaSeconds) override;
 #endif

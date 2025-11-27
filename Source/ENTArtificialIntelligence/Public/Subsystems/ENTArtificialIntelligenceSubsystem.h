@@ -6,6 +6,8 @@
 #include "Subsystems/WorldSubsystem.h"
 #include "ENTArtificialIntelligenceSubsystem.generated.h"
 
+class UBlackboardComponent;
+
 UCLASS()
 class ENTARTIFICIALINTELLIGENCE_API UENTArtificialIntelligenceSubsystem : public UTickableWorldSubsystem
 {
@@ -33,15 +35,25 @@ protected:
 	/**
 	 * @brief This actor is used for AI to track a moving noise
 	 */
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "Noise")
 	TObjectPtr<AActor> NoiseActor;
+
+	bool bIsNoiseActorAttached = false;
 
 public:
 	void AddAI(UObject* AIObject);
 
 	void RemoveAI(UObject* AIObject);
 
-	AActor* GetNoiseActor() const {return NoiseActor;}
+	void AddNoiseActorToBlackboard(UBlackboardComponent* BlackboardComponent, const FName& KeyName) const;
+
+	void UpdateNoiseActorLocation(const FVector& NewLocation) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Noise")
+	void AttachNoiseActor(AActor* OtherActor);
+
+	UFUNCTION(BlueprintCallable, Category = "Noise")
+	void DetachNoiseActor();
 
 #pragma endregion
 };
