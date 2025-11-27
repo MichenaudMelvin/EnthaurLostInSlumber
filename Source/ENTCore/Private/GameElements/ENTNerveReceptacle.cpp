@@ -56,6 +56,11 @@ void AENTNerveReceptacle::BeginPlay()
 
 	InteractableComponent->AddInteractable(NerveReceptacle);
 
+	if (!ElectricityComponent)
+	{
+		return;
+	}
+
 	ElectricityComponent->OnElectricityAnimationStarted.AddDynamic(
 		this, &AENTNerveReceptacle::OnElectricityAnimationStarted);
 	ElectricityComponent->OnElectricityRadiusFinished.AddDynamic(
