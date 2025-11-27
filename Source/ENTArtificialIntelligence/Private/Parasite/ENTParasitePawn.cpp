@@ -236,6 +236,7 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 		ParasiteController->GetBlackboardComponent()->SetValueAsObject(NavAreaKeyName, NavigationArea);
 	}
 
+	MovementComponent->MaxSpeed = PatrolSpeed;
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(PatrolSpeedKeyName, PatrolSpeed);
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(ChaseSpeedKeyName, ChaseSpeed);
 
