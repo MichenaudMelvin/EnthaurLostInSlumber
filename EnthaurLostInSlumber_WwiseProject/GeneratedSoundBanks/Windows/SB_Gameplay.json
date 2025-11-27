@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{1DEAB699-8BE5-DE60-36E8-CC2DFCE83ACE}",
+    "Hash": "{91939139-9175-4B65-D5E9-A0957FAAA751}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -1145,6 +1145,14 @@
       "CachePath": "52/{52C74C93-E2E9-C67C-49FE-E46B70B1A660}.wem"
      },
      {
+      "Id": "698408162",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic_Without_Reverb.wav",
+      "CachePath": "33/{330865D3-5A22-A273-0FF0-158BEF46EC7B}.wem"
+     },
+     {
       "Id": "707409760",
       "Language": "SFX",
       "Streaming": "false",
@@ -1665,6 +1673,14 @@
       "CachePath": "8E/{8E42DCE2-B271-0831-9687-954AC02FD428}.wem"
      },
      {
+      "Id": "1063071181",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic.wav",
+      "CachePath": "D5/{D514D03B-F4A2-B2C4-4A81-2652A90AA890}.wem"
+     },
+     {
       "Id": "1066500167",
       "Language": "SFX",
       "Streaming": "false",
@@ -1719,6 +1735,32 @@
        },
        {
         "Id": "1040785902"
+       }
+      ]
+     },
+     {
+      "Id": "3147051080",
+      "Name": "AKE_Cinematic",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Cinematic",
+      "GUID": "{4541716E-0E4E-4CF5-972E-D926CBA15137}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "27",
+      "DurationMax": "27",
+      "MediaRefs": [
+       {
+        "Id": "698408162"
+       },
+       {
+        "Id": "1063071181"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "3387002570",
+        "Name": "Reverb_Big",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb_Big",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
        }
       ]
      },
@@ -2979,6 +3021,6 @@
     ]
    }
   ],
-  "FileHash": "{F7710791-C170-1D59-7916-8EC6EA97C0B6}"
+  "FileHash": "{677B4BA9-1374-2117-D0E9-6F267BB31EC7}"
  }
 }
