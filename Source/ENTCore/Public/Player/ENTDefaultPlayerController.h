@@ -242,6 +242,8 @@ protected:
 public:
 	const FPlayerInputs& GetPlayerInputs() const {return PlayerInputs;}
 
+	FPlayerInputs& GetPlayerInputs() {return PlayerInputs;}
+
 	void ClearPlayerInputs() { PlayerInputs = FPlayerInputs(); }
 
 #if WITH_EDITORONLY_DATA

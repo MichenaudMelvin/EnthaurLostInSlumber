@@ -27,6 +27,8 @@ public:
 	UENTCheckDistance();
 
 protected:
+	virtual void OnNodeProcessed(FBehaviorTreeSearchData& SearchData, EBTNodeResult::Type& NodeResult) override;
+
 	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
 	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
@@ -48,6 +50,10 @@ private:
 
 	UPROPERTY(EditInstanceOnly, Category = "Behavior")
 	EENTCheckMethod CheckMethod;
+
+	FDateTime LastTimeTriggered;
+
+	bool bHasTriggerAlreadyOnce = false;
 
 	void ComputeDistance(UBehaviorTreeComponent& OwnerComp);
 

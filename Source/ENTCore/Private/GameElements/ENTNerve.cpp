@@ -212,7 +212,6 @@ void AENTNerve::RemoveLastSplinePoint() const
 
 void AENTNerve::AddSplineMesh(bool bMakeNoise)
 {
-	
 	UActorComponent* Comp = AddComponentByClass(USplineMeshComponent::StaticClass(), false, FTransform::Identity, false);
 	if (!Comp)
 	{
@@ -389,6 +388,7 @@ void AENTNerve::ApplyCablesPhysics()
 			}
 			else if (!bIsStretchSoundPlayed)
 			{
+				PlayerCharacter->EmitNoise(NoiseRange);
 				bIsStretchSoundPlayed = true;
 				NerveStretchComp->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
 			}
@@ -545,6 +545,7 @@ void AENTNerve::RetractCable(float Alpha)
 void AENTNerve::FinishRetractCable()
 {
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	NerveBall->SetCollisionResponseToChannel(InteractionChannel, ECR_Block);
 
 	InteractableComponent->AddInteractable(NerveBall);
 	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction) && !bIsInWeakZone)
@@ -631,6 +632,7 @@ void AENTNerve::ForceDetachNerveBallFromPlayer()
 void AENTNerve::AttachNerveBall(AActor* ActorToAttach)
 {
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	NerveBall->SetCollisionResponseToChannel(InteractionChannel, ECR_Block);
 
 	bShouldApplyCablePhysics = true;
 
@@ -755,11 +757,6 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 	{
 		if (CurrentAttachedReceptacle != nullptr && bIsZoneActive)
 		{
-			if (!CurrentAttachedReceptacle->CanTheNerveBeTaken())
-			{
-				return;
-			}
-
 			CurrentAttachedReceptacle->DisableReceptacle();
 			CurrentAttachedReceptacle->TriggerLinkedObjects(this);
 			CurrentAttachedReceptacle = nullptr;
@@ -884,5 +881,5 @@ void AENTNerve::SetCurrentReceptacle(AENTNerveReceptacle* Receptacle)
 	NerveStretchComp->Stop();
 	UpdateLastSplinePointLocation(AttachTransform.GetLocation());
 	UpdateSplineMeshes(false, false);
-	InteractableComponent->AddInteractable(NerveBall);
+	NerveBall->SetCollisionResponseToChannel(InteractionChannel, ECR_Ignore);
 }

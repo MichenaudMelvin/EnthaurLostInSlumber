@@ -150,10 +150,9 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 
 	UKismetSystemLibrary::LineTraceSingleForObjects(CurrentPawn, StartLocation, EndLocation, GroundObjects, false, ActorsToIgnore, DrawDebugTrace, HitResult, false, FLinearColor::Red, FLinearColor::Green, 5.0f);
 
-	FRotator TargetRotation = FRotationMatrix::MakeFromZX(HitResult.ImpactNormal, ForwardDirection).Rotator();
+	FQuat ResultRotation = FRotationMatrix::MakeFromZX(HitResult.ImpactNormal, ForwardDirection).ToQuat();
 
-	CurrentPawn->SetActorRotation(TargetRotation);
-	CurrentPawn->AddActorLocalRotation(RotationOffset);
+	TargetRotation = (ResultRotation * RotationOffset.Quaternion()).Rotator();
 
 	float Distance = FVector::Dist(StartLocation, TargetLocation);
 	float Speed = CurrentPawn->GetMovementComponent()->GetMaxSpeed();
@@ -195,6 +194,9 @@ void UENTFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 	else
 	{
 		MovementTimeline.TickTimeline(DeltaSeconds);
+
+		FRotator Rotator = UKismetMathLibrary::RLerp(CurrentPawn->GetActorRotation(), TargetRotation, (DeltaSeconds * RotationSpeed), true);
+		CurrentPawn->SetActorRotation(Rotator);
 	}
 }
 

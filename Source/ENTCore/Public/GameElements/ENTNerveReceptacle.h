@@ -65,6 +65,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Electricity")
 	TObjectPtr<UENTElectricityComponent> ElectricityComponent;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Noise", meta = (ClampMin = 0.0f, Units = cm))
+	float NoiseRange = 2500.0f;
+
 #if WITH_EDITORONLY_DATA
 	/**
 	 * @brief Set visibility to true if you want to edit it

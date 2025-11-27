@@ -11,6 +11,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTParasitePawn.generated.h"
 
+class UENTHealthComponent;
 class AENTNavigationArea;
 class AENTParasiteController;
 class UENTGravityPawnMovement;
@@ -71,9 +72,6 @@ protected:
 	TObjectPtr<class UArrowComponent> UpDirection;
 #endif
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<UBoxComponent> ParasiteDeathZone;
-
 	UPROPERTY(BlueprintReadOnly, Category = "AI");
 	TObjectPtr<AENTParasiteController> ParasiteController;
 
@@ -112,18 +110,24 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName DoesPlayerHaveAmberKeyName = "DoesPlayerHaveAmber";
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName UseNavMeshKeyName = "UseNavMesh";
+
 #pragma endregion
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
 	bool bAutoStartBehavior = true;
 
 	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	bool bUseNavMesh = true;
+
+	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
 	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
 	float PatrolSpeed = 600.0f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
 	float ChaseSpeed = 1200.0f;
 
 #pragma region BehaviorTree
@@ -176,31 +180,27 @@ protected:
 	float AttackDamages = 100.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
-	FVector AttackLocation = FVector(0.0f, 300.0f, 100.0f);
-
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
-	FVector AttackSize = FVector(100.0f);
-
-	UPROPERTY(EditDefaultsOnly, Category = "AI|Attack")
 	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectsToAttack;
 
 #if WITH_EDITORONLY_DATA
-	static FVector DebugAttackLocation;
-
-	static FVector DebugAttackSize;
+	UPROPERTY(EditInstanceOnly, Category = "AI|Attack")
+	bool bDebugAttack = false;
 #endif
+
+	UPROPERTY()
+	TSet<TObjectPtr<UENTHealthComponent>> FoundedHealthComp;
+
+	UFUNCTION(BlueprintCallable, Category = "AI|Attack")
+	void QueryForAttack(const FVector& AttackLocation, const FVector& AttackExtent);
 
 	UFUNCTION(BlueprintCallable, Category = "AI|Attack")
 	void Attack();
-
-	UFUNCTION()
-	void EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	/**
 	 * @brief For debug purposes only
 	 */
 	UFUNCTION(BlueprintCallable, Category = "AI|Attack", meta = (DevelopmentOnly))
-	static void DebugAttackZone(const UObject* WorldContextObject);
+	static void DebugAttackZone(const UObject* WorldContextObject, const FVector& AttackLocation, const FVector& AttackExtent, const FRotator& Rotation, float Duration = 0);
 
 #pragma endregion
 

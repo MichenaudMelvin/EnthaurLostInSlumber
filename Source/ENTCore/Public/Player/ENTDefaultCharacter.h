@@ -168,6 +168,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction", meta = (Units = "cm"))
 	float InteractionTraceLength = 100.0f;
 
+	UPROPERTY()
+	float InteractionCoolDown = 0.0f;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UENTInteractableComponent> CurrentInteractable;
 
@@ -347,6 +350,16 @@ public:
 	TObjectPtr<UAkComponent> GetFootstepsSoundComp() const {return FootstepsSounds;}
 
 	void ResetFootStepsEvent() const;
+
+	/**
+	 * @brief 
+	 * @param Loudness 
+	 * @param NoiseRange 
+	 * @param NoiseLocation if equal FVector::ZeroVector will take the pawn location
+	 * @param NoiseTag 
+	 */
+	UFUNCTION(BlueprintCallable, Exec, Category = "Noise")
+	void EmitNoise(float NoiseRange = 1000.0f, float Loudness = 1.0f, FVector NoiseLocation = FVector::ZeroVector, const FName& NoiseTag = NAME_None);
 
 #pragma endregion
 

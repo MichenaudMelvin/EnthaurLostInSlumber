@@ -156,10 +156,12 @@ void AENTDefaultCharacter::Tick(float DeltaSeconds)
 	GroundMovement();
 	UpdateSpeedEffect(DeltaSeconds);
 
-	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteractPressed)
+	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteractPressed && InteractionCoolDown <= 0.0f)
 	{
 		CurrentInteractable->Interact(GetPlayerController(), this);
+		InteractionCoolDown = 0.2f;
 	}
+	InteractionCoolDown -= DeltaSeconds;
 }
 
 #pragma region StateMachine
@@ -739,6 +741,16 @@ void AENTDefaultCharacter::OnPlayerDie()
 void AENTDefaultCharacter::ResetFootStepsEvent() const
 {
 	FootstepsSounds->AkAudioEvent = DefaultFootStepEvent;
+}
+
+void AENTDefaultCharacter::EmitNoise(float Loudness, float NoiseRange, FVector NoiseLocation, const FName& NoiseTag)
+{
+	if (NoiseLocation == FVector::ZeroVector)
+	{
+		NoiseLocation = GetActorLocation();
+	}
+
+	MakeNoise(Loudness, this, NoiseLocation, NoiseRange, NoiseTag);
 }
 
 UENTPhysicConstraint* AENTDefaultCharacter::AddConstraint(bool bIsLigament)

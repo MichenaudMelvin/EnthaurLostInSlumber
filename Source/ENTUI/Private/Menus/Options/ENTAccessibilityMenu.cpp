@@ -115,7 +115,7 @@ void UENTAccessibilityMenu::OnMouseSensitivityButtonHovered()
 	if (OptionTitle && OptionDescription)
 	{
 		OptionTitle->SetText(NSLOCTEXT("UI", "OptionTitleText", "Mouse Sensitivity"));
-		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust X & Y axis mouse sensitivity."));
+		OptionDescription->SetText(NSLOCTEXT("UI", "OptionDescriptionText", "Adjust mouse sensitivity for the X and Y axes."));
 	}
 }
 

@@ -3,13 +3,11 @@
 
 #include "Parasite/ENTParasitePawn.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Components/BoxComponent.h"
 #include "ENTGravityPawnMovement.h"
 #include "ENTHealthComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Kismet/GameplayStatics.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Parasite/ENTParasiteController.h"
 #include "Path/ENTArtificialIntelligencePath.h"
@@ -21,9 +19,6 @@
 #if WITH_EDITORONLY_DATA
 #include "Selection.h"
 #include "Components/ArrowComponent.h"
-
-FVector AENTParasitePawn::DebugAttackLocation;
-FVector AENTParasitePawn::DebugAttackSize;
 #endif
 
 AENTParasitePawn::AENTParasitePawn()
@@ -59,10 +54,6 @@ AENTParasitePawn::AENTParasitePawn()
 	UpDirection->SetArrowColor(FLinearColor::Blue);
 #endif
 
-	ParasiteDeathZone = CreateDefaultSubobject<UBoxComponent>(TEXT("ParasiteDeathZone"));
-	ParasiteDeathZone->SetupAttachment(ParasiteMesh);
-	ParasiteDeathZone->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
-
 	MovementComponent = CreateDefaultSubobject<UENTGravityPawnMovement>(TEXT("Movement"));
 	MovementComponent->MaxSpeed = 400.0f;
 
@@ -82,8 +73,6 @@ void AENTParasitePawn::BeginPlay()
 	{
 		return;
 	}
-
-	ParasiteDeathZone->OnComponentBeginOverlap.AddDynamic(this, &AENTParasitePawn::EnterDeathZone);
 
 	if (TargetPath && !TargetPath->IsOnFloor())
 	{
@@ -116,16 +105,6 @@ void AENTParasitePawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		{
 			Character->OnAmberUpdate.RemoveDynamic(this, &AENTParasitePawn::ChangeDetectionRange);
 		}
-	}
-
-	if (!ParasiteDeathZone)
-	{
-		return;
-	}
-
-	if (ParasiteDeathZone->OnComponentBeginOverlap.IsAlreadyBound(this, &AENTParasitePawn::EnterDeathZone))
-	{
-		ParasiteDeathZone->OnComponentBeginOverlap.RemoveDynamic(this, &AENTParasitePawn::EnterDeathZone);
 	}
 }
 
@@ -165,20 +144,11 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	}
 #endif
 
-	FHitResult HitResult;
-	bool bHit = TargetPath->GetTracedPointLocation(0, HitResult);
+	FTransform TargetTransform = TargetPath->GetStartTransform(1);
+	FQuat Rotation = TargetTransform.GetRotation() * FRotator(-90.0f, 0.0f, 0.0f).Quaternion();
+	TargetTransform.SetRotation(Rotation);
 
-	if (!bHit)
-	{
-		return;
-	}
-
-	FVector ActorLocation = HitResult.Location;
-	ActorLocation += (TargetPath->GetDirection() * -1 * GetParasiteHalfHeight());
-	SetActorLocation(ActorLocation);
-
-	FRotator Rotation = UKismetMathLibrary::MakeRotFromZ(HitResult.Normal);
-	SetActorRotation(Rotation);
+	SetActorTransform(TargetTransform);
 }
 
 #if WITH_EDITOR
@@ -188,9 +158,6 @@ void AENTParasitePawn::PostLoad()
 
 	ParasiteHeight = GetParasiteHeight();
 	ParasiteWidth = GetParasiteWidth();
-
-	DebugAttackLocation = AttackLocation;
-	DebugAttackSize = AttackSize;
 }
 
 void AENTParasitePawn::PreEditChange(FProperty* PropertyAboutToChange)
@@ -242,14 +209,6 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 		ParasiteHeight = GetParasiteHeight();
 		ParasiteWidth = GetParasiteWidth();
 	}
-	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, AttackLocation))
-	{
-		DebugAttackLocation = AttackLocation;
-	}
-	else if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTParasitePawn, AttackSize))
-	{
-		DebugAttackSize = AttackSize;
-	}
 }
 #endif
 
@@ -263,6 +222,8 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 	{
 		return;
 	}
+
+	ParasiteController->GetBlackboardComponent()->SetValueAsBool(UseNavMeshKeyName, bUseNavMesh);
 
 	if (TargetPath)
 	{
@@ -360,26 +321,30 @@ void AENTParasitePawn::ChangeDetectionRange(bool bDoesPlayerHaveAmber)
 
 #pragma region ParasiteAttack
 
-void AENTParasitePawn::Attack()
+void AENTParasitePawn::QueryForAttack(const FVector& AttackLocation, const FVector& AttackExtent)
 {
-	TArray<AActor*> Actors;
+	FTransform RelativeTransform = FTransform(FRotator::ZeroRotator, AttackLocation, FVector::OneVector);
+	FTransform WorldTransform = RelativeTransform * ParasiteMesh->GetComponentTransform();
 
-	ParasiteDeathZone->GetOverlappingActors(Actors, AActor::StaticClass());
-
-	bool bHitSomething = false;
+#if WITH_EDITORONLY_DATA
+	if (bDebugAttack)
+	{
+		DebugAttackZone(this, WorldTransform.GetLocation(), AttackExtent, WorldTransform.GetRotation().Rotator(),15.0f);
+	}
+#endif
 
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
 
 	TArray<FHitResult> HitResults;
-	bool bHit = UKismetSystemLibrary::BoxTraceMultiForObjects(this, AttackLocation, AttackLocation, AttackSize, FRotator::ZeroRotator, ObjectsToAttack, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResults, true);
-
+	bool bHit = UKismetSystemLibrary::BoxTraceMultiForObjects(this, WorldTransform.GetLocation(), WorldTransform.GetLocation(), AttackExtent, WorldTransform.GetRotation().Rotator(), ObjectsToAttack, false, ActorsToIgnore, EDrawDebugTrace::None, HitResults, true);
 	if (!bHit)
 	{
 		// failed attack
 		return;
 	}
 
+	FoundedHealthComp.Empty();
 	for (const FHitResult& HitResult : HitResults)
 	{
 		AActor* Actor = HitResult.GetActor();
@@ -394,31 +359,30 @@ void AENTParasitePawn::Attack()
 			continue;
 		}
 
-		// succeed attack
-		HealthComponent->TakeDamages(AttackDamages);
-		bHitSomething = true;
-	}
-
-	if (!bHitSomething)
-	{
-		return;
+		FoundedHealthComp.Add(HealthComponent);
 	}
 }
 
-void AENTParasitePawn::EnterDeathZone(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AENTParasitePawn::Attack()
 {
-	if (!ParasiteController || !ParasiteController->GetBlackboardComponent() || !OtherActor)
+	if (FoundedHealthComp.IsEmpty())
 	{
+		// failed attack
 		return;
 	}
 
-	ParasiteController->GetBlackboardComponent()->SetValueAsObject(AttackTargetKeyName, OtherActor);
+	for (TObjectPtr<UENTHealthComponent> HealthComp : FoundedHealthComp)
+	{
+		HealthComp->TakeDamages(AttackDamages);
+	}
+
+	FoundedHealthComp.Empty();
 }
 
-void AENTParasitePawn::DebugAttackZone(const UObject* WorldContextObject)
+void AENTParasitePawn::DebugAttackZone(const UObject* WorldContextObject, const FVector& AttackLocation, const FVector& AttackExtent, const FRotator& Rotation, float Duration)
 {
 #if WITH_EDITORONLY_DATA
-	UKismetSystemLibrary::DrawDebugBox(WorldContextObject, DebugAttackLocation, DebugAttackSize, FLinearColor::Red);
+	UKismetSystemLibrary::DrawDebugBox(WorldContextObject, AttackLocation, AttackExtent, FLinearColor::Red, Rotation, Duration);
 #endif
 }
 
