@@ -2,6 +2,8 @@
 
 
 #include "Subsystems/ENTArtificialIntelligenceSubsystem.h"
+#include "BehaviorTree/BlackboardComponent.h"
+#include "Debug/ENTArrowActor.h"
 #include "Interfaces/ENTArtificialIntelligenceInterface.h"
 
 #pragma region Defaults
@@ -36,6 +38,10 @@ void UENTArtificialIntelligenceSubsystem::Tick(float DeltaTime)
 	}
 }
 
+#pragma endregion
+
+#pragma region AI
+
 void UENTArtificialIntelligenceSubsystem::AddAI(UObject* AIObject)
 {
 	if (!AIObject)
@@ -60,6 +66,48 @@ void UENTArtificialIntelligenceSubsystem::RemoveAI(UObject* AIObject)
 	{
 		AIList.Remove(AIObject);
 	}
+}
+
+void UENTArtificialIntelligenceSubsystem::AddNoiseActorToBlackboard(UBlackboardComponent* BlackboardComponent, const FName& KeyName) const
+{
+	if (!BlackboardComponent)
+	{
+		return;
+	}
+
+	BlackboardComponent->SetValueAsObject(KeyName, NoiseActor);
+}
+
+void UENTArtificialIntelligenceSubsystem::UpdateNoiseActorLocation(const FVector& NewLocation) const
+{
+	if (!NoiseActor || bIsNoiseActorAttached)
+	{
+		return;
+	}
+
+	NoiseActor->SetActorLocation(NewLocation);
+}
+
+void UENTArtificialIntelligenceSubsystem::AttachNoiseActor(AActor* OtherActor)
+{
+	if (!NoiseActor || !OtherActor)
+	{
+		return;
+	}
+
+	NoiseActor->AttachToActor(OtherActor, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, false));
+	bIsNoiseActorAttached = true;
+}
+
+void UENTArtificialIntelligenceSubsystem::DetachNoiseActor()
+{
+	if (NoiseActor)
+	{
+		return;
+	}
+
+	NoiseActor->DetachFromActor(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
+	bIsNoiseActorAttached = false;
 }
 
 #pragma endregion
