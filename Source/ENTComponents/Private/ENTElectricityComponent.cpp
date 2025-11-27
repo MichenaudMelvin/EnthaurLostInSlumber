@@ -125,7 +125,7 @@ void UENTElectricityComponent::ElectricityMovementUpdate(float Alpha)
 void UENTElectricityComponent::ElectricityMovementFinished()
 {
 	OnElectricityMovementFinished.Broadcast();
-	
+
 	StartRadiusTarget = FirstRadiusTarget;
 	EndRadiusTarget = SecondRadiusTarget;
 	ElectricityRadiusTimeline.SetFloatCurve(SecondElectricityRadiusCurve, "TrackRadius");
