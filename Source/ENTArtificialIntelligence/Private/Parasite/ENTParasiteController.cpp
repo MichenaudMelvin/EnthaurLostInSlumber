@@ -37,19 +37,19 @@ void AENTParasiteController::Tick(float DeltaSeconds)
 		return;
 	}
 
-	int PathIndexValue = GetBlackboardComponent()->GetValueAsInt(PathIndexKeyName);
+	int PathIndexValue = Blackboard->GetValueAsInt(PathIndexKeyName);
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %d"), *PathIndexKeyName.ToString(), PathIndexValue));
 
-	bool bWalkOnFloor = GetBlackboardComponent()->GetValueAsBool(WalkOnFloorKeyName);
+	bool bWalkOnFloor = Blackboard->GetValueAsBool(WalkOnFloorKeyName);
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *WalkOnFloorKeyName.ToString(), (bWalkOnFloor ? TEXT("true") : TEXT("false"))));
 
-	FVector MoveLocationValue = GetBlackboardComponent()->GetValueAsVector(MoveLocationKeyName);
+	FVector MoveLocationValue = Blackboard->GetValueAsVector(MoveLocationKeyName);
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *MoveLocationKeyName.ToString(), *MoveLocationValue.ToString()));
 
-	bool bHeardNoiseValue = GetBlackboardComponent()->GetValueAsBool(HeardNoiseKeyName);
+	bool bHeardNoiseValue = Blackboard->GetValueAsBool(HeardNoiseKeyName);
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *WalkOnFloorKeyName.ToString(), (bHeardNoiseValue ? TEXT("true") : TEXT("false"))));
 
-	UObject* NoiseLocationValue = GetBlackboardComponent()->GetValueAsObject(NoiseLocationKeyName);
+	UObject* NoiseLocationValue = Blackboard->GetValueAsObject(NoiseLocationKeyName);
 	FString NoiseLocationValueName = "Nullptr";
 	if (NoiseLocationValue)
 	{
@@ -57,7 +57,7 @@ void AENTParasiteController::Tick(float DeltaSeconds)
 	}
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *NoiseLocationKeyName.ToString(), *NoiseLocationValueName));
 
-	UObject* NoiseInverstigator = GetBlackboardComponent()->GetValueAsObject(NoiseInvestigatorKeyName);
+	UObject* NoiseInverstigator = Blackboard->GetValueAsObject(NoiseInvestigatorKeyName);
 	FString NoiseInverstigatorName = "Nullptr";
 	if (NoiseInverstigator)
 	{
@@ -101,7 +101,7 @@ void AENTParasiteController::OnTargetPerceptionUpdated(AActor* Actor, FAIStimulu
 
 void AENTParasiteController::OnHearTarget(AActor* Actor, const FAIStimulus& Stimulus)
 {
-	if (!GetBlackboardComponent())
+	if (!Blackboard)
 	{
 		return;
 	}
@@ -117,66 +117,66 @@ void AENTParasiteController::OnHearTarget(AActor* Actor, const FAIStimulus& Stim
 		return;
 	}
 
-	GetBlackboardComponent()->SetValueAsBool(HeardNoiseKeyName, true);
-	GetBlackboardComponent()->SetValueAsObject(NoiseInvestigatorKeyName, Actor);
+	Blackboard->SetValueAsBool(HeardNoiseKeyName, true);
+	Blackboard->SetValueAsObject(NoiseInvestigatorKeyName, Actor);
 
 	UENTArtificialIntelligenceSubsystem* AISubsystem = GetWorld()->GetSubsystem<UENTArtificialIntelligenceSubsystem>();
-	if (AISubsystem && AISubsystem->GetNoiseActor())
+	if (AISubsystem)
 	{
-		AISubsystem->GetNoiseActor()->SetActorLocation(HitResult.Location);
-		GetBlackboardComponent()->SetValueAsObject(NoiseLocationKeyName, AISubsystem->GetNoiseActor());
+		AISubsystem->UpdateNoiseActorLocation(HitResult.Location);
+		AISubsystem->AddNoiseActorToBlackboard(Blackboard, NoiseLocationKeyName);
 	}
 }
 
 void AENTParasiteController::OnUnheardTarget(AActor* Actor)
 {
-	if (!GetBlackboardComponent())
+	if (!Blackboard)
 	{
 		return;
 	}
 
-	UObject* ObjectPtr = GetBlackboardComponent()->GetValueAsObject(NoiseInvestigatorKeyName);
+	UObject* ObjectPtr = Blackboard->GetValueAsObject(NoiseInvestigatorKeyName);
 
 	if (ObjectPtr != Actor)
 	{
 		return;
 	}
 
-	GetBlackboardComponent()->SetValueAsBool(HeardNoiseKeyName, false);
-	GetBlackboardComponent()->SetValueAsObject(NoiseLocationKeyName, nullptr);
-	GetBlackboardComponent()->SetValueAsObject(NoiseInvestigatorKeyName, nullptr);
+	Blackboard->SetValueAsBool(HeardNoiseKeyName, false);
+	Blackboard->SetValueAsObject(NoiseLocationKeyName, nullptr);
+	Blackboard->SetValueAsObject(NoiseInvestigatorKeyName, nullptr);
 }
 
 void AENTParasiteController::SaveControllerData(FENTAIData& AIData)
 {
 	Super::SaveControllerData(AIData);
 
-	if (!GetBlackboardComponent())
+	if (!Blackboard)
 	{
 		return;
 	}
 
 	FENTParasiteData& ParaSiteData = static_cast<FENTParasiteData&>(AIData);
-	ParaSiteData.PathIndex = GetBlackboardComponent()->GetValueAsInt(PathIndexKeyName);
-	ParaSiteData.PathDirection = GetBlackboardComponent()->GetValueAsInt(PathDirectionKeyName);
-	ParaSiteData.bWalkOnFloor = GetBlackboardComponent()->GetValueAsBool(WalkOnFloorKeyName);
-	ParaSiteData.MoveToLocation = GetBlackboardComponent()->GetValueAsVector(MoveLocationKeyName);
-	ParaSiteData.bHeardNoise = GetBlackboardComponent()->GetValueAsBool(HeardNoiseKeyName);
+	ParaSiteData.PathIndex = Blackboard->GetValueAsInt(PathIndexKeyName);
+	ParaSiteData.PathDirection = Blackboard->GetValueAsInt(PathDirectionKeyName);
+	ParaSiteData.bWalkOnFloor = Blackboard->GetValueAsBool(WalkOnFloorKeyName);
+	ParaSiteData.MoveToLocation = Blackboard->GetValueAsVector(MoveLocationKeyName);
+	ParaSiteData.bHeardNoise = Blackboard->GetValueAsBool(HeardNoiseKeyName);
 }
 
 void AENTParasiteController::LoadControllerData(const FENTAIData& AIData)
 {
 	Super::LoadControllerData(AIData);
 
-	if (!GetBlackboardComponent())
+	if (!Blackboard)
 	{
 		return;
 	}
 
 	const FENTParasiteData& ParaSiteData = static_cast<const FENTParasiteData&>(AIData);
-	GetBlackboardComponent()->SetValueAsInt(PathIndexKeyName, ParaSiteData.PathIndex);
-	GetBlackboardComponent()->SetValueAsInt(PathDirectionKeyName, ParaSiteData.PathDirection);
-	GetBlackboardComponent()->SetValueAsBool(WalkOnFloorKeyName, ParaSiteData.bWalkOnFloor);
-	GetBlackboardComponent()->SetValueAsVector(MoveLocationKeyName, ParaSiteData.MoveToLocation);
-	GetBlackboardComponent()->SetValueAsBool(HeardNoiseKeyName, ParaSiteData.bHeardNoise);
+	Blackboard->SetValueAsInt(PathIndexKeyName, ParaSiteData.PathIndex);
+	Blackboard->SetValueAsInt(PathDirectionKeyName, ParaSiteData.PathDirection);
+	Blackboard->SetValueAsBool(WalkOnFloorKeyName, ParaSiteData.bWalkOnFloor);
+	Blackboard->SetValueAsVector(MoveLocationKeyName, ParaSiteData.MoveToLocation);
+	Blackboard->SetValueAsBool(HeardNoiseKeyName, ParaSiteData.bHeardNoise);
 }
