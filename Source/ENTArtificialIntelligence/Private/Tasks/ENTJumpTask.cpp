@@ -125,8 +125,32 @@ void UENTJumpTask::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory
 	JumpTimeline.TickTimeline(DeltaSeconds);
 }
 
+void UENTJumpTask::SetCurrentAnim(float CurrentTaskDuration)
+{
+	if (CurrentTaskDuration < 0.5f)
+	{
+		if (!CurrentPawn->Implements<UENTPawnAIInterface>() && FirstHalfAnim)
+		{
+			return;
+		}
+
+		Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(FirstHalfAnim);
+	}
+	else
+	{
+		if (!CurrentPawn->Implements<UENTPawnAIInterface>() && SecondHalfAnim)
+		{
+			return;
+		}
+
+		Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(SecondHalfAnim);
+	}
+}
+
 void UENTJumpTask::MovementUpdate(float Alpha)
 {
+	SetCurrentAnim(Alpha);
+
 	FTransform ResultTransform;
 	ResultTransform.SetLocation(JumpSpline->GetLocationAtAlpha(Alpha));
 
