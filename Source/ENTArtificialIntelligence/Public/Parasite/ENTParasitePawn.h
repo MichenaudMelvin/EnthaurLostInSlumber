@@ -49,6 +49,9 @@ protected:
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 
+	UFUNCTION(BlueprintCallable, Category = "Respawn")
+	void RespawnParasite();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UCapsuleComponent> ParasiteCollision;
 
@@ -82,6 +85,9 @@ protected:
 	TObjectPtr<AENTNavigationArea> NavigationArea;
 
 #pragma region BlackboardKeys
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName SpawnLocationKeyName = "SpawnLocation";
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName PathKeyName = "AIPath";
@@ -120,6 +126,9 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
 	bool bUseNavMesh = true;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
+	bool bAllowRespawn = true;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
 	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;

@@ -28,6 +28,7 @@
 #include "GameElements/ENTWeakZone.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Player/States/ENTCharacterFallState.h"
+#include "Player/States/ENTCharacterLookAtState.h"
 #include "Saves/ENTPlayerSave.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
@@ -49,13 +50,6 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 	PostProcessComp->bUnbound = true;
 
 	ShakeManager = CreateDefaultSubobject<UENTCameraShakeComponent>(TEXT("Shake Manager"));
-
-	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("First Person Mesh"));
-	CharacterMesh->SetOnlyOwnerSee(true);
-	CharacterMesh->SetupAttachment(CameraComponent);
-	CharacterMesh->bCastDynamicShadow = false;
-	CharacterMesh->CastShadow = false;
-	CharacterMesh->SetRelativeLocation(FVector(-30.0f, 0.0f, -150.0f));
 
 	HearingStimuli = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("Hearing");
 	HearingStimuli->bAutoRegister = true;
@@ -571,6 +565,18 @@ void AENTDefaultCharacter::EjectCharacter(const FVector ProjectionVelocity, bool
 
 	FallState->SetProjectionVelocity(ProjectionVelocity, bOverrideCurrentVelocity);
 	StateMachine->ChangeState(EENTCharacterStateID::Fall);
+}
+
+void AENTDefaultCharacter::LookAtLocation(const FVector Location, float Duration, UCurveFloat* CurveFloat)
+{
+	UENTCharacterLookAtState* LookAtState = FindState<UENTCharacterLookAtState>(StateMachine);
+	if (!LookAtState)
+	{
+		return;
+	}
+
+	LookAtState->SetLookAtLocation(Location, Duration, CurveFloat);
+	StateMachine->ChangeState(EENTCharacterStateID::LookAt);
 }
 
 #if WITH_EDITOR

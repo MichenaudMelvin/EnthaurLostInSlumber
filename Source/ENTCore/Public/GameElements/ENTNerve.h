@@ -256,8 +256,6 @@ protected:
 	bool bIsInWeakZone = false;
 
 public:
-	TObjectPtr<UENTInteractableComponent> GetInteractable() const {return InteractableComponent;}
-
 	float GetEjectionAngleBuff() const {return EjectionAngleBuff;}
 
 	UFUNCTION()
