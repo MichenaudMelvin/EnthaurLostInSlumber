@@ -29,7 +29,7 @@ public class ENTCore : ModuleRules
             "OnlineSubsystem",
             "OnlineSubsystemSteam",
             "NavigationSystem", 
-            "Niagara"
+            "Niagara",
         });
 
         if (Target.bBuildEditor)
