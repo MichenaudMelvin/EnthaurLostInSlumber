@@ -15,6 +15,7 @@ class UAkComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorOpened);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorClosed);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnTransitioningState, bool, bIsOpenning, float, Alpha);
 
 UCLASS()
 class ENTCORE_API AENTSpikeDoor : public AActor, public IENTActivation
@@ -79,6 +80,9 @@ protected:
 
 	UPROPERTY(BlueprintAssignable, Category = "Door")
 	FOnDoorClosed OnDoorClosed;
+
+	UPROPERTY(BlueprintAssignable, Category = "Door")
+	FOnTransitioningState OnTransitioningState;
 
 	UPROPERTY()
 	TArray<FVector> InterInitialRelativeLocations;
