@@ -121,22 +121,22 @@ protected:
 
 #pragma endregion
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior", meta = (ExposeOnSpawn = true))
 	bool bAutoStartBehavior = true;
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior", meta = (ExposeOnSpawn = true))
 	bool bUseNavMesh = true;
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior", meta = (ExposeOnSpawn = true))
 	bool bAllowRespawn = true;
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior", meta = (ExposeOnSpawn = true))
 	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Behavior", meta = (Units = "cm/s", ExposeOnSpawn = true))
 	float PatrolSpeed = 600.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Behavior", meta = (Units = "cm/s", ExposeOnSpawn = true))
 	float ChaseSpeed = 1200.0f;
 
 #pragma region BehaviorTree
