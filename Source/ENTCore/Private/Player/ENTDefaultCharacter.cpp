@@ -157,6 +157,14 @@ void AENTDefaultCharacter::Tick(float DeltaSeconds)
 	InteractionCoolDown -= DeltaSeconds;
 }
 
+void AENTDefaultCharacter::IgnoreDamages(bool bIgnore)
+{
+	if (HealthComponent)
+	{
+		HealthComponent->SetCanTakeDamages(!bIgnore);
+	}
+}
+
 #pragma region StateMachine
 
 void AENTDefaultCharacter::UpdateSpeedEffect(float DeltaSeconds)

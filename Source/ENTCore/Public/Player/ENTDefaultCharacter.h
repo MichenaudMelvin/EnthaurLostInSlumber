@@ -69,6 +69,9 @@ public:
 
 	UENTHealthComponent* GetHealth() const {return HealthComponent;}
 
+	UFUNCTION(BlueprintCallable, Exec, Category = "Health")
+	void IgnoreDamages(bool bIgnore = true);
+
 	UFUNCTION(BlueprintCallable)
 	UENTCameraShakeComponent* GetCameraShake() const {return ShakeManager;}
 

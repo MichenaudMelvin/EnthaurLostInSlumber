@@ -131,7 +131,10 @@ void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)
 	ObjectReactive.GetKeys(Actors);
 
 	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
-	Player->GetCameraShake()->MakeBigCameraShake();
+	if (Player)
+	{
+		Player->GetCameraShake()->MakeBigCameraShake();
+	}
 
 	for (auto Actor : Actors)
 	{
