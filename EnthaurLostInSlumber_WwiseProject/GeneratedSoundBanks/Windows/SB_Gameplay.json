@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{91939139-9175-4B65-D5E9-A0957FAAA751}",
+    "Hash": "{DB1D7E86-1825-484E-ECD5-561ED2B8EEDB}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -103,6 +103,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Legs_09.wav",
       "CachePath": "5F/{5F63E43A-D8AC-C77C-D33E-E04DFE4F7C7D}.wem"
+     },
+     {
+      "Id": "40395295",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic_Parasite_Scream_Background.wav",
+      "CachePath": "F7/{F78FE35C-16AB-ABD2-FEAC-0E4B98385DCD}.wem"
      },
      {
       "Id": "43894004",
@@ -535,6 +543,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Electricity_Layer_02.wav",
       "CachePath": "0B/{0B7B879A-A451-12EF-184E-4A6AF4BC3BF6}.wem"
+     },
+     {
+      "Id": "311687286",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic_Parasite_Background.wav",
+      "CachePath": "42/{42A7C470-7351-4D89-B6D6-E30CD996029D}.wem"
      },
      {
       "Id": "317040080",
@@ -1748,6 +1764,12 @@
       "DurationMin": "27",
       "DurationMax": "27",
       "MediaRefs": [
+       {
+        "Id": "40395295"
+       },
+       {
+        "Id": "311687286"
+       },
        {
         "Id": "698408162"
        },
@@ -3021,6 +3043,6 @@
     ]
    }
   ],
-  "FileHash": "{677B4BA9-1374-2117-D0E9-6F267BB31EC7}"
+  "FileHash": "{65E7DE07-0CA9-BE5D-23C5-6B545EFB3265}"
  }
 }

@@ -620,6 +620,20 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
+								<Action Name="" ID="{2BCBF6DE-52BB-43D1-BBB1-AD84EA785D85}" ShortID="148526820">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Parasite_Background" ID="{1E63305F-B85E-4D63-A0D0-A88F451B7A9B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{6FDA2598-C406-4D39-B3EC-B3FFED2208D4}" ShortID="530238931">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Parasite_Scream_Background" ID="{3121352F-4849-4154-B989-8CC91E29AB71}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
 							</ChildrenList>
 						</Event>
 					</ChildrenList>
