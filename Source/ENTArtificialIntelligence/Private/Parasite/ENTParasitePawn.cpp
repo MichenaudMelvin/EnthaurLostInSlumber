@@ -212,6 +212,27 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 }
 #endif
 
+void AENTParasitePawn::RespawnParasite()
+{
+	if (!bAllowRespawn)
+	{
+		return;
+	}
+
+	if (!ParasiteController)
+	{
+		return;
+	}
+
+	if (!ParasiteController->GetBlackboardComponent())
+	{
+		return;
+	}
+
+	FVector SpawnLocation = ParasiteController->GetBlackboardComponent()->GetValueAsVector(SpawnLocationKeyName);
+	SetActorLocation(SpawnLocation);
+}
+
 #pragma region BehaviorTree
 
 void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
@@ -250,6 +271,7 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 		if (Character)
 		{
 			Character->OnAmberUpdate.AddDynamic(this, &AENTParasitePawn::ChangeDetectionRange);
+			Character->OnRespawn.AddDynamic(this, &AENTParasitePawn::RespawnParasite);
 			ParasiteController->GetBlackboardComponent()->SetValueAsObject(PlayerKeyName, Character);
 		}
 	}
