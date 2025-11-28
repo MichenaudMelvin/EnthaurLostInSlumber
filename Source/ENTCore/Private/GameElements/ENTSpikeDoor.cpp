@@ -210,6 +210,8 @@ void AENTSpikeDoor::CloseDoor()
 
 void AENTSpikeDoor::DropTimelineUpdate(float Alpha)
 {
+	OnTransitioningState.Broadcast(bIsOpened, Alpha);
+
 	if (InterMeshesA->GetNumInstances() == 0 || InterMeshesB->GetNumInstances() == 0) return;
 
 	int32 IndexA = 0;

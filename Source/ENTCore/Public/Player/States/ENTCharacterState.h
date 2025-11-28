@@ -27,6 +27,7 @@ enum class EENTCharacterStateID : uint8
 	Interact,
 	Stop,
 	Anim,
+	LookAt,
 };
 
 #if WITH_EDITOR

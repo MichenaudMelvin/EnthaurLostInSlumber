@@ -28,6 +28,7 @@
 #include "GameElements/ENTWeakZone.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Player/States/ENTCharacterFallState.h"
+#include "Player/States/ENTCharacterLookAtState.h"
 #include "Saves/ENTPlayerSave.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
@@ -571,6 +572,18 @@ void AENTDefaultCharacter::EjectCharacter(const FVector ProjectionVelocity, bool
 
 	FallState->SetProjectionVelocity(ProjectionVelocity, bOverrideCurrentVelocity);
 	StateMachine->ChangeState(EENTCharacterStateID::Fall);
+}
+
+void AENTDefaultCharacter::LookAtLocation(const FVector Location, float Duration, UCurveFloat* CurveFloat)
+{
+	UENTCharacterLookAtState* LookAtState = FindState<UENTCharacterLookAtState>(StateMachine);
+	if (!LookAtState)
+	{
+		return;
+	}
+
+	LookAtState->SetLookAtLocation(Location, Duration, CurveFloat);
+	StateMachine->ChangeState(EENTCharacterStateID::LookAt);
 }
 
 #if WITH_EDITOR
