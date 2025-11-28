@@ -604,6 +604,38 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_Cinematic" ID="{4541716E-0E4E-4CF5-972E-D926CBA15137}">
+							<ChildrenList>
+								<Action Name="" ID="{0B31DB3F-9D78-479C-BE98-0BDB1D04BBF4}" ShortID="393113963">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic" ID="{CC99FB39-852D-4141-AE43-7F2A11F9556E}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{55F2C9AC-77B9-48E2-947A-4A9413169896}" ShortID="1072107447">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Without_Reverb" ID="{2BDBD25B-7BEE-488A-9F10-B426D41F5E3E}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{2BCBF6DE-52BB-43D1-BBB1-AD84EA785D85}" ShortID="148526820">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Parasite_Background" ID="{1E63305F-B85E-4D63-A0D0-A88F451B7A9B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{6FDA2598-C406-4D39-B3EC-B3FFED2208D4}" ShortID="530238931">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Parasite_Scream_Background" ID="{3121352F-4849-4154-B989-8CC91E29AB71}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">

@@ -11,7 +11,7 @@
     "GUID": "{13465604-2D0A-476E-980D-31B04FA1E95E}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{3A256583-BD98-FB39-8497-8CE488F18352}",
+    "Hash": "{04B443CB-659D-9FEC-431A-0BDD02BB35FA}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_UI",
     "ShortName": "SB_UI",
     "Path": "SB_UI.bnk",
@@ -136,6 +136,6 @@
     ]
    }
   ],
-  "FileHash": "{E0EBC69A-D6D8-F9FF-B5DF-6D2EDE04DE2A}"
+  "FileHash": "{5CD44C25-1B93-0FE3-498D-4796FD7CA336}"
  }
 }
