@@ -55,9 +55,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UENTCameraShakeComponent> ShakeManager;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
-	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stimuli")
 	TObjectPtr<UAIPerceptionStimuliSourceComponent> HearingStimuli;
 
@@ -69,8 +66,6 @@ protected:
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
-
-	USkeletalMeshComponent* GetCharacterMesh() const {return CharacterMesh;}
 
 	UENTHealthComponent* GetHealth() const {return HealthComponent;}
 
@@ -277,6 +272,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const;
+
+	/**
+	 * @brief 
+	 * @param Location 
+	 * @param Duration Duration in seconds
+	 * @param CurveFloat 
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Character")
+	void LookAtLocation(const FVector Location = FVector::ZeroVector, float Duration = 1.0f, UCurveFloat* CurveFloat = nullptr);
 
 #if WITH_EDITOR
 	UFUNCTION(Exec)

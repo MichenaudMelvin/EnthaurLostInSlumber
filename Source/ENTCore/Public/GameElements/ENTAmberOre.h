@@ -76,7 +76,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
 	TObjectPtr<UAkAudioEvent> InjectAmberNoise;
 
-	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Amber")
 	bool bIsEmpty;
 
 	UPROPERTY(EditInstanceOnly, Category = "Weak Zone")
