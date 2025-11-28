@@ -227,10 +227,10 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Amber")
 	FKOnAmberUpdate OnAmberUpdate;
 
-	UFUNCTION(BlueprintCallable, Category = "Amber")
+	UFUNCTION(BlueprintCallable, Exec, Category = "Amber")
 	void MineAmber();
 
-	UFUNCTION(BlueprintCallable, Category = "Amber")
+	UFUNCTION(BlueprintCallable, Exec, Category = "Amber")
 	void UseAmber();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Amber")

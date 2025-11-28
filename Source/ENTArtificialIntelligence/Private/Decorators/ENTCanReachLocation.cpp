@@ -129,7 +129,7 @@ bool UENTCanReachLocation::CalculateRawConditionValue(UBehaviorTreeComponent& Ow
 #endif
 	}
 
-	return bInverseCheck != Controller->IsPointReachable(TargetLocation);
+	return bInverseCheck != Controller->IsPointReachable(TargetLocation, FVector(GroundQueryExtent));
 }
 
 #if WITH_EDITOR
