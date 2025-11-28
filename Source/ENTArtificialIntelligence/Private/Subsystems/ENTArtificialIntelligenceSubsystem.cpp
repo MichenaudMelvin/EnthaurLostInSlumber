@@ -3,7 +3,6 @@
 
 #include "Subsystems/ENTArtificialIntelligenceSubsystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Debug/ENTArrowActor.h"
 #include "Interfaces/ENTArtificialIntelligenceInterface.h"
 
 #pragma region Defaults
