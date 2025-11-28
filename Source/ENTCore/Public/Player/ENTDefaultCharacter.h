@@ -55,9 +55,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UENTCameraShakeComponent> ShakeManager;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mesh")
-	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stimuli")
 	TObjectPtr<UAIPerceptionStimuliSourceComponent> HearingStimuli;
 
@@ -69,8 +66,6 @@ protected:
 
 public:
 	UCameraComponent* GetCamera() const {return CameraComponent;}
-
-	USkeletalMeshComponent* GetCharacterMesh() const {return CharacterMesh;}
 
 	UENTHealthComponent* GetHealth() const {return HealthComponent;}
 
