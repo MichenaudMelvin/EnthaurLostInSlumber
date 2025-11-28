@@ -28,7 +28,8 @@ public class ENTCore : ModuleRules
             "ENTComponents",
             "OnlineSubsystem",
             "OnlineSubsystemSteam",
-            "NavigationSystem"
+            "NavigationSystem", 
+            "Niagara"
         });
 
         if (Target.bBuildEditor)
