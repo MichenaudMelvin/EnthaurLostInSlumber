@@ -11,19 +11,11 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{DB1D7E86-1825-484E-ECD5-561ED2B8EEDB}",
+    "Hash": "{B264F786-1F30-7913-2C69-8D5EE22D13E5}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
     "Media": [
-     {
-      "Id": "8104921",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Elevator_Start_01.wav",
-      "CachePath": "BB/{BB0A6E73-ABDD-609F-7BAE-8EDD1B3115A2}.wem"
-     },
      {
       "Id": "11382112",
       "Language": "SFX",
@@ -401,20 +393,20 @@
       "CachePath": "BC/{BC6811F1-F8D0-9FB4-90F9-767E305C9615}.wem"
      },
      {
+      "Id": "206521461",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Release_Amber.wav",
+      "CachePath": "35/{35DC24C0-88DC-AAEA-0F12-5A2EBBDBBFB5}.wem"
+     },
+     {
       "Id": "208173442",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_10.wav",
       "CachePath": "12/{12F082BB-D698-A19A-1AA1-042DDE7A34EA}.wem"
-     },
-     {
-      "Id": "218825922",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Take_Ambre.wav",
-      "CachePath": "57/{576C412A-A9B2-0294-65BB-30411D7A64AB}.wem"
      },
      {
       "Id": "223357946",
@@ -511,14 +503,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Foley_Walk_09.wav",
       "CachePath": "67/{67A8489B-5591-E783-0C56-912D3312246C}.wem"
-     },
-     {
-      "Id": "294036953",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Elevator.wav",
-      "CachePath": "17/{17BCC5B2-84CA-C367-AD83-4D777E07FC90}.wem"
      },
      {
       "Id": "303207830",
@@ -937,14 +921,6 @@
       "CachePath": "91/{918746D0-0B5E-56BF-FEA3-FA82ED6E6811}.wem"
      },
      {
-      "Id": "591463370",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Inject_Ambre.wav",
-      "CachePath": "E3/{E3303EBF-EA7B-18FA-D260-6B71B7BF53E8}.wem"
-     },
-     {
       "Id": "592647810",
       "Language": "SFX",
       "Streaming": "false",
@@ -1015,14 +991,6 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_04.wav",
       "CachePath": "EC/{EC0702B6-44F7-9E54-70DC-0B6BC9E5F431}.wem"
-     },
-     {
-      "Id": "628782229",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Elevator_Stop.wav",
-      "CachePath": "56/{563CF1E2-4DEA-7DAF-EC5C-746A78AEC450}.wem"
      },
      {
       "Id": "630490779",
@@ -1217,14 +1185,6 @@
       "CachePath": "2E/{2E8A7C35-8144-3231-AA94-A3E80B311D35}.wem"
      },
      {
-      "Id": "738955104",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Elevator_Start_02.wav",
-      "CachePath": "98/{985720D3-FB06-5889-6DB2-BA9F3ACE3CC5}.wem"
-     },
-     {
       "Id": "740159490",
       "Language": "SFX",
       "Streaming": "false",
@@ -1239,6 +1199,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_11.wav",
       "CachePath": "B9/{B97827A7-26C7-FC78-455E-17264F431D77}.wem"
+     },
+     {
+      "Id": "750568288",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX8bridge_Fall.wav",
+      "CachePath": "AE/{AE5E974A-47DF-C649-1B37-7ED899734702}.wem"
      },
      {
       "Id": "756656613",
@@ -1457,6 +1425,14 @@
       "CachePath": "BA/{BAF19B6C-B33C-5B4E-3ACD-55972CA90C1E}.wem"
      },
      {
+      "Id": "896413163",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PickUp_Lantern.wav",
+      "CachePath": "2B/{2B02AE46-50A4-F260-8896-0F0BFAC06A65}.wem"
+     },
+     {
       "Id": "903601489",
       "Language": "SFX",
       "Streaming": "false",
@@ -1471,14 +1447,6 @@
       "Location": "Memory",
       "ShortName": "MC_Land_Muscle_05.wav",
       "CachePath": "BF/{BF8018F3-852E-D811-D002-B9EB2ADB34A7}.wem"
-     },
-     {
-      "Id": "910307899",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Elevator_Start_03.wav",
-      "CachePath": "FC/{FCCFF5C6-29D9-E426-7B81-DBEE894918D5}.wem"
      },
      {
       "Id": "918853460",
@@ -1625,6 +1593,14 @@
       "CachePath": "9D/{9DB03DA6-6CC6-80FE-C6FE-74D8AD282D37}.wem"
      },
      {
+      "Id": "1021385064",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PickUp_Amber.wav",
+      "CachePath": "BB/{BB0F6FA9-6CC7-72BC-FEF8-6B69444473B6}.wem"
+     },
+     {
       "Id": "1021487410",
       "Language": "SFX",
       "Streaming": "false",
@@ -1751,6 +1727,30 @@
        },
        {
         "Id": "1040785902"
+       }
+      ]
+     },
+     {
+      "Id": "3796924081",
+      "Name": "AKE_bridgeFall",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_bridgeFall",
+      "GUID": "{6A947A41-E519-43D1-B07A-0BE9422D1542}",
+      "Color": "10",
+      "MaxAttenuation": "6000",
+      "DurationType": "OneShot",
+      "DurationMin": "6.1666665",
+      "DurationMax": "6.1666665",
+      "MediaRefs": [
+       {
+        "Id": "750568288"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "3387002570",
+        "Name": "Reverb_Big",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb_Big",
+        "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
        }
       ]
      },
@@ -2177,11 +2177,11 @@
       "GUID": "{14CA4FE7-8867-4283-AD24-5919B3F33532}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "0.9",
-      "DurationMax": "0.9",
+      "DurationMin": "1.1333333",
+      "DurationMax": "1.1333333",
       "MediaRefs": [
        {
-        "Id": "591463370"
+        "Id": "206521461"
        }
       ]
      },
@@ -2396,6 +2396,21 @@
       "MediaRefs": [
        {
         "Id": "565773879"
+       }
+      ]
+     },
+     {
+      "Id": "2064960672",
+      "Name": "AKE_PickUp_Lantern",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PickUp_Lantern",
+      "GUID": "{9355424F-E3B7-45F8-BA36-21EEA99150D3}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "4.372",
+      "DurationMax": "4.372",
+      "MediaRefs": [
+       {
+        "Id": "896413163"
        }
       ]
      },
@@ -2768,22 +2783,8 @@
       "GUID": "{859C566F-6B89-419E-B78B-2BAF354E01B4}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "54.866665",
-      "DurationMax": "54.866665",
-      "MediaRefs": [
-       {
-        "Id": "8104921"
-       },
-       {
-        "Id": "294036953"
-       },
-       {
-        "Id": "738955104"
-       },
-       {
-        "Id": "910307899"
-       }
-      ]
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "2353577288",
@@ -2853,13 +2854,8 @@
       "GUID": "{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "1.9",
-      "DurationMax": "1.9",
-      "MediaRefs": [
-       {
-        "Id": "628782229"
-       }
-      ]
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "521559902",
@@ -2940,11 +2936,11 @@
       "GUID": "{98E20B7D-1940-43B9-B344-D1F205698516}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "0.73333335",
-      "DurationMax": "0.73333335",
+      "DurationMin": "1.32",
+      "DurationMax": "1.32",
       "MediaRefs": [
        {
-        "Id": "218825922"
+        "Id": "1021385064"
        }
       ]
      },
@@ -3043,6 +3039,6 @@
     ]
    }
   ],
-  "FileHash": "{65E7DE07-0CA9-BE5D-23C5-6B545EFB3265}"
+  "FileHash": "{497067A1-13E7-50F6-275B-2D1EF21E562A}"
  }
 }

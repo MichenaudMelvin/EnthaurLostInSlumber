@@ -181,10 +181,10 @@
 						</Event>
 						<Event Name="AKE_InjectAmbrer" ID="{14CA4FE7-8867-4283-AD24-5919B3F33532}">
 							<ChildrenList>
-								<Action Name="" ID="{0F0CB869-5B15-4946-8C24-002E10FE2C51}" ShortID="799406113">
+								<Action Name="" ID="{C91E4FEC-7475-47F8-B97B-CD0939E178CD}" ShortID="646840798">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Inject_Ambre" ID="{E1B7188B-98A6-4C2B-BF1F-8B261A83B649}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_Release_Amber" ID="{FD767604-8FE0-4C14-9A24-8E99BCDDAEAD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -351,10 +351,10 @@
 						</Event>
 						<Event Name="AKE_TakeAmbrer" ID="{98E20B7D-1940-43B9-B344-D1F205698516}">
 							<ChildrenList>
-								<Action Name="" ID="{68926E15-F8AE-4EE9-BB4A-CDB0706E2B1E}" ShortID="558593910">
+								<Action Name="" ID="{A030952D-48AC-42AB-A4AC-61776FA4417B}" ShortID="1039189672">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX_Take_Ambre" ID="{04BC95ED-F12E-4618-912B-B689052358FA}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_PickUp_Amber" ID="{D8FBD4E9-5D24-4A18-A5F5-3F6DEF694ED8}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -631,6 +631,28 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="SFX_Cinematic_Parasite_Scream_Background" ID="{3121352F-4849-4154-B989-8CC91E29AB71}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PickUp_Lantern" ID="{9355424F-E3B7-45F8-BA36-21EEA99150D3}">
+							<ChildrenList>
+								<Action Name="" ID="{E91EE9AB-9A8D-482A-AE57-462AA49EAD60}" ShortID="331909114">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_PickUp_Lantern" ID="{96D936A9-FD62-4A78-B233-DC179D2EE9B0}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_bridgeFall" ID="{6A947A41-E519-43D1-B07A-0BE9422D1542}">
+							<ChildrenList>
+								<Action Name="" ID="{18715069-49E3-40A9-ABE9-C126D5FA72DB}" ShortID="979302621">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX8bridge_Fall" ID="{86B9659F-2F08-417B-BC6C-ACEE3A501CDD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
