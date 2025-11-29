@@ -234,7 +234,7 @@ void AENTSpikeDoor::CloseDoor()
 	{
 		Comp->Activate();
 	}
-	
+
 	bIsOpened = !bIsOpened;
 }
 
