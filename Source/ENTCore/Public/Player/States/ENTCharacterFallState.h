@@ -6,6 +6,8 @@
 #include "ENTCharacterMoveState.h"
 #include "ENTCharacterFallState.generated.h"
 
+class UAkRtpc;
+
 UCLASS()
 class ENTCORE_API UENTCharacterFallState : public UENTCharacterMoveState
 {
@@ -18,6 +20,8 @@ protected:
 	virtual void StateEnter_Implementation(const EENTCharacterStateID& PreviousStateID) override;
 
 	virtual void StateTick_Implementation(float DeltaTime) override;
+
+	virtual void StateExit_Implementation(const EENTCharacterStateID& NextStateID) override;
 
 #if WITH_EDITORONLY_DATA
 	virtual void PostLoad() override;
@@ -63,6 +67,25 @@ protected:
 #endif
 
 	virtual void EmitNoise() override;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkRtpc> SpeedVolume;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> StartWindEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> StopWindEvent;
+
+	/**
+	 * @brief Inclusive value
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "Noise", meta = (Units = "cm/s"))
+	float WindRequiredVelocity = 2000.0f;
+
+	bool bIsWindSFXPlaying = false;
+
+	void ManageWindSFX();
 
 private:
 	bool bCanDoCoyoteTime = false;

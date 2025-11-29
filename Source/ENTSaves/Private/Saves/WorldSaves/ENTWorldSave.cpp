@@ -17,4 +17,5 @@ void UENTWorldSave::ClearMapData()
 	RespawnTreeData.Empty();
 	ParasiteData.Empty();
 	ScriptedAIElementsData.Empty();
+	OtherElements.Empty();
 }
