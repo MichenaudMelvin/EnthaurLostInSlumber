@@ -633,15 +633,9 @@
 												</GroupingBehaviorList>
 												<GroupingList>
 													<Grouping>
-														<SwitchRef Name="Vein" ID="{15513C0C-22A3-403F-AA73-0773270B3E63}"/>
-														<ItemList>
-															<ItemRef Name="MC_FS_Walk_Vein" ID="{B27A3AA3-E7BF-4516-B4F8-51337900A127}"/>
-														</ItemList>
-													</Grouping>
-													<Grouping>
 														<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
 														<ItemList>
-															<ItemRef Name="MC_FS_Walk_Muscle" ID="{8647FA32-F5E5-4683-9F62-4D37664A2943}"/>
+															<ItemRef Name="MC_FS_Walk_Vein" ID="{B27A3AA3-E7BF-4516-B4F8-51337900A127}"/>
 														</ItemList>
 													</Grouping>
 													<Grouping>
@@ -1525,15 +1519,9 @@
 												</GroupingBehaviorList>
 												<GroupingList>
 													<Grouping>
-														<SwitchRef Name="Vein" ID="{15513C0C-22A3-403F-AA73-0773270B3E63}"/>
-														<ItemList>
-															<ItemRef Name="MC_FS_Run_Vein" ID="{77EF9D02-2E64-49A3-83D5-1065BE5E8F21}"/>
-														</ItemList>
-													</Grouping>
-													<Grouping>
 														<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
 														<ItemList>
-															<ItemRef Name="MC_FS_Run_Muscle" ID="{08743CD1-7536-45A9-8AF2-AB77975612B3}"/>
+															<ItemRef Name="MC_FS_Run_Vein" ID="{77EF9D02-2E64-49A3-83D5-1065BE5E8F21}"/>
 														</ItemList>
 													</Grouping>
 													<Grouping>
@@ -1989,7 +1977,7 @@
 											<Grouping>
 												<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
 												<ItemList>
-													<ItemRef Name="MC_Jump_Muscle" ID="{42DBC2E4-56DD-4E63-920A-C9E6C7CB9B24}"/>
+													<ItemRef Name="MC_Jump_Vein" ID="{85865891-FC1B-47CD-9B2A-C695058689EE}"/>
 												</ItemList>
 											</Grouping>
 											<Grouping>
@@ -2424,7 +2412,7 @@
 											<Grouping>
 												<SwitchRef Name="Muscle" ID="{9B90C70F-0CB4-4A4C-9270-275B0E1416DB}"/>
 												<ItemList>
-													<ItemRef Name="MC_Land_Muscle" ID="{6E291A9C-8B51-462C-8962-9896B67504DC}"/>
+													<ItemRef Name="MC_Land_Vein" ID="{5FB149A3-7D27-4961-B7AB-B10A9E45727E}"/>
 												</ItemList>
 											</Grouping>
 											<Grouping>
