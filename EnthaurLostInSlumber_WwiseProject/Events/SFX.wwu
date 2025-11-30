@@ -486,6 +486,16 @@
 						</Event>
 						<Event Name="AKE_PR_Scream" ID="{55DBC8D0-3693-45AB-B125-A0531134C332}">
 							<ChildrenList>
+								<Action Name="" ID="{60207599-BFD5-4284-901E-8F330EC964CC}" ShortID="877044218">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Idle" ID="{E4C4B7A4-52F5-4D50-943C-C0A008B36157}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
 								<Action Name="" ID="{A11CA390-D184-447D-9CA5-31EBD42221C3}" ShortID="799024201">
 									<ReferenceList>
 										<Reference Name="Target">
@@ -511,6 +521,16 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="PR_Legs" ID="{D2D64B57-29B2-4894-8893-DB633930A651}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{45BEAED9-9787-49DC-855E-04CC464518B8}" ShortID="847057296">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Idle" ID="{E4C4B7A4-52F5-4D50-943C-C0A008B36157}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -544,6 +564,16 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="PR_Walk_Foley" ID="{DB6AF3CD-23ED-43AC-B156-3F6AA4725031}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{DC2C1D38-F354-4CB9-BD54-496DB9D0F893}" ShortID="698736576">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Idle" ID="{E4C4B7A4-52F5-4D50-943C-C0A008B36157}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -598,7 +628,7 @@
 						</Event>
 						<Event Name="AKE_PR_Idle" ID="{0F689179-1F7D-48D5-8183-20C1F32E091E}">
 							<ChildrenList>
-								<Action Name="" ID="{C3B1A7FB-D209-456D-970E-C96C9A80E61B}" ShortID="776527708">
+								<Action Name="" ID="{4CC2CB80-46CC-4B73-9CBC-E87EEE96307B}" ShortID="207086675">
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="PR_Idle" ID="{E4C4B7A4-52F5-4D50-943C-C0A008B36157}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
