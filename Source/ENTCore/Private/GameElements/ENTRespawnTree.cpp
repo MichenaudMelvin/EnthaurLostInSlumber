@@ -39,7 +39,12 @@ void AENTRespawnTree::BeginPlay()
 
 	RespawnTransform *= GetActorTransform();
 
-	Material = TreeModel->CreateDynamicMaterialInstance(0, TreeModel->GetMaterial(0));
+	if(!Material)
+	{
+		Material = TreeModel->CreateDynamicMaterialInstance(0, TreeModel->GetMaterial(0));
+		Material->SetScalarParameterValue("Emissive", DefaultEmissive);
+	}
+
 	if (bIsActivated)
 	{
 		SetActive();
@@ -86,6 +91,21 @@ void AENTRespawnTree::OnConstruction(const FTransform& Transform)
 
 	FVector RelativeLocation = TriggerBox->GetRelativeLocation();
 	TriggerBox->SetRelativeLocation(FVector(RelativeLocation.X, RelativeLocation.Y, TriggerBox->GetUnscaledBoxExtent().Z));
+
+	if(!Material)
+	{
+		Material = TreeModel->CreateDynamicMaterialInstance(0, TreeModel->GetMaterial(0));
+
+		float TargetValue = DefaultEmissive;
+#if WITH_EDITORONLY_DATA
+		if (bUseActivationEmissive)
+		{
+			TargetValue = ActivationEmissive;
+		}
+#endif
+
+		Material->SetScalarParameterValue("Emissive", TargetValue);
+	}
 }
 
 void AENTRespawnTree::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
