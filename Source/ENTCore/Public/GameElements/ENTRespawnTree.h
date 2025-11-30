@@ -40,13 +40,27 @@ protected:
 	TObjectPtr<USceneComponent> RootComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
-	TObjectPtr<UBoxComponent> TriggerBox;	
+	TObjectPtr<UBoxComponent> TriggerBox;
 
 	UPROPERTY(EditDefaultsOnly, Category = "RespawnTree")
 	TObjectPtr<UStaticMeshComponent> TreeModel;
 
 	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<UMaterialInstanceDynamic> Material;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "RespawnTree")
+	float DefaultEmissive = 0.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "RespawnTree")
+	float ActivationEmissive = 1.0f;
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Debug Only
+	 */
+	UPROPERTY(EditInstanceOnly, Transient, Category = "RespawnTree")
+	bool bUseActivationEmissive = false;
+#endif
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkComponent> RespawnTreeNoises;
