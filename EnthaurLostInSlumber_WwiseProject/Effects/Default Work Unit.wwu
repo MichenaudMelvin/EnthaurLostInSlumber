@@ -5,21 +5,9 @@
 			<ChildrenList>
 				<Effect Name="AK_Convolution_Reverb_Dark_Cathedrale_Small" ID="{917384BE-AF40-4D98-BEFD-ADDE077A7A11}" PluginName="Wwise Convolution Reverb" CompanyID="0" PluginID="127" PluginType="3">
 					<PropertyList>
-						<Property Name="IRConvolutionStop" Type="Real64">
-							<ValueList>
-								<Value>2.80972748056699</Value>
-							</ValueList>
-						</Property>
-						<Property Name="IRLevel" Type="Real32">
-							<ValueList>
-								<Value>-35</Value>
-							</ValueList>
-						</Property>
-						<Property Name="IRStretch" Type="Real32">
-							<ValueList>
-								<Value>80</Value>
-							</ValueList>
-						</Property>
+						<Property Name="IRConvolutionStop" Type="Real64" Value="2.80972748056699"/>
+						<Property Name="IRLevel" Type="Real32" Value="-35"/>
+						<Property Name="IRStretch" Type="Real32" Value="80"/>
 					</PropertyList>
 					<ChildrenList>
 						<PluginMediaSource Name="AK St-Katharinen" ID="{4C25F145-9DB8-4161-A921-B47891CAD464}">
@@ -28,11 +16,13 @@
 								<Property Name="DataFileName" Type="string" Value="AK_Factory_IR\Churches\AK St-Katharinen.wav"/>
 							</PropertyList>
 							<MediaIDList>
-								<MediaID ID="8071170"/>
+								<MediaID ID="535111107"/>
+								<MediaID Platform="Windows" ID="420614766"/>
 							</MediaIDList>
 						</PluginMediaSource>
 					</ChildrenList>
-					<PluginData><ConvolutionData>
+					<PluginData>
+	<ConvolutionData>
 		<CurveList Version="1">
 			<CurveInfo Name="IRGraphicEQ">
 				<Curve Name="">
@@ -97,7 +87,8 @@
 				</Curve>
 			</CurveInfo>
 		</CurveList>
-	</ConvolutionData></PluginData>
+	</ConvolutionData>
+</PluginData>
 				</Effect>
 			</ChildrenList>
 		</WorkUnit>

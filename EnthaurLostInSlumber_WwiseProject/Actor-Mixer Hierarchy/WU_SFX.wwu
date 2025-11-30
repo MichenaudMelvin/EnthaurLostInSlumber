@@ -1584,6 +1584,13 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="SFX_Take_Ambre" ID="{04BC95ED-F12E-4618-912B-B689052358FA}" ShortID="654355998">
+							<PropertyList>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -2474,6 +2481,216 @@
 												</ObjectList>
 											</ObjectLists>
 										</RandomSequenceContainer>
+									</ChildrenList>
+								</ActorMixer>
+								<RandomSequenceContainer Name="SFX_Sinew_Release" ID="{34EB92C2-D4F2-4DC8-AC12-F405C97FC0FB}" ShortID="344093295">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="SFX_Sinew_Release_01" ID="{806B4790-ECFD-4BB7-AC31-75E3358985CD}" ShortID="643342976">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_Sinew_Release_01" ID="{E65704E8-0304-4ED8-A744-37C7FEE60011}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_Sinew_Release_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="620373117"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_Sinew_Release_01" ID="{E65704E8-0304-4ED8-A744-37C7FEE60011}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SFX_Sinew_Release_02" ID="{C916B15A-AF06-4E6F-BD6A-D13F0CD7C618}" ShortID="345303629">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_Sinew_Release_02" ID="{380669D7-CB7B-4F91-A975-B8B2EEF74E70}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_Sinew_Release_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="677590440"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_Sinew_Release_02" ID="{380669D7-CB7B-4F91-A975-B8B2EEF74E70}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="SFX_Sinew_Release_03" ID="{ADC17D30-5B5E-4A4F-858E-CCB1D15929AD}" ShortID="786768081">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="1"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_Sinew_Release_03" ID="{810CF875-A484-4E87-9205-4B1C96B699E9}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_Sinew_Release_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="801569341"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_Sinew_Release_03" ID="{810CF875-A484-4E87-9205-4B1C96B699E9}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<ActorMixer Name="AM_Sinew_Tense" ID="{E6201516-7002-446C-B36A-F9D3D4F238F9}" ShortID="689067707">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="SFX_Sinew_Tense" ID="{72C69E25-20E8-4F13-8332-0C58C3E80753}" ShortID="684628897">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="SFX_Sinew_Tense_01" ID="{6246330C-247C-4EC4-81B5-4EBB9EEC88F9}" ShortID="1001553206">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Sinew_Tense_01" ID="{BC0FD3EF-3A0C-4A6A-828B-F10DF66A6596}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Sinew_Tense_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="778778069"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Sinew_Tense_01" ID="{BC0FD3EF-3A0C-4A6A-828B-F10DF66A6596}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Sinew_Tense_02" ID="{63D2DA9A-FCDD-46DD-8368-E54B36EFAFD2}" ShortID="371665125">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Sinew_Tense_02" ID="{7B3964CF-5EE6-4BB6-B1F4-695CF1ECB1AF}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Sinew_Tense_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="5271368"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Sinew_Tense_02" ID="{7B3964CF-5EE6-4BB6-B1F4-695CF1ECB1AF}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="SFX_Sinew_Tense_03" ID="{6D89E70E-2BB7-4CF6-8A89-772E6D57FD7E}" ShortID="733322577">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="SFX_Sinew_Tense_03" ID="{9C46C792-27AA-477D-B67F-907CBC323DC2}">
+															<Language>SFX</Language>
+															<AudioFile>SFX_Sinew_Tense_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="419188619"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="SFX_Sinew_Tense_03" ID="{9C46C792-27AA-477D-B67F-907CBC323DC2}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="SFX_Sinew_Tense_Wobbling" ID="{2743BA88-31F7-4CDF-9F3D-54E98D8E4F65}" ShortID="431851625">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-12</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="SFX_Sinew_Tense_Wobbling" ID="{61093AD6-85D9-486C-95AA-034E5E1ABBEB}">
+													<Language>SFX</Language>
+													<AudioFile>SFX_Sinew_Tense_Wobbling.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="998170531"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="SFX_Sinew_Tense_Wobbling" ID="{61093AD6-85D9-486C-95AA-034E5E1ABBEB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 								</ActorMixer>
 							</ChildrenList>

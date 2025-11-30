@@ -799,6 +799,35 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_SinewRelease" ID="{241DA2BA-0BA7-4AC7-B0D8-58234A6EB6FE}">
+							<ChildrenList>
+								<Action Name="" ID="{0FF1483D-5CBC-4700-A5B7-1031D6B3FDBA}" ShortID="55718454">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Sinew_Release" ID="{34EB92C2-D4F2-4DC8-AC12-F405C97FC0FB}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_SinewTense" ID="{8251B621-D354-4B79-95B5-C4470C71F2BA}">
+							<ChildrenList>
+								<Action Name="" ID="{36838D5E-D70E-4019-95C2-9F9C2C16DFB8}" ShortID="594991779">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Sinew_Tense" ID="{72C69E25-20E8-4F13-8332-0C58C3E80753}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{6BCC20BB-82F3-43B9-93F1-027279F7B863}" ShortID="202881607">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Sinew_Tense_Wobbling" ID="{2743BA88-31F7-4CDF-9F3D-54E98D8E4F65}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">
