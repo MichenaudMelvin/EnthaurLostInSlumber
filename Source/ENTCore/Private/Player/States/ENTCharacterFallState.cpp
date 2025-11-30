@@ -2,6 +2,9 @@
 
 
 #include "Player/States/ENTCharacterFallState.h"
+
+#include "AkGameplayStatics.h"
+#include "AkRtpc.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/ENTDefaultCharacter.h"
@@ -46,6 +49,8 @@ void UENTCharacterFallState::StateTick_Implementation(float DeltaTime)
 {
 	Super::StateTick_Implementation(DeltaTime);
 
+	ManageWindSFX();
+
 	if(bCanDoCoyoteTime)
 	{
 		CoyoteTime += DeltaTime;
@@ -83,6 +88,17 @@ void UENTCharacterFallState::StateTick_Implementation(float DeltaTime)
 
 	SetProjectionVelocity(FVector::ZeroVector, false);
 	StateMachine->ChangeState(EENTCharacterStateID::Idle);
+}
+
+void UENTCharacterFallState::StateExit_Implementation(const EENTCharacterStateID& NextStateID)
+{
+	Super::StateExit_Implementation(NextStateID);
+
+	if (bIsWindSFXPlaying)
+	{
+		UAkGameplayStatics::PostEvent(StopWindEvent, Character, 0, FOnAkPostEventCallback());
+		bIsWindSFXPlaying = false;
+	}
 }
 
 #if WITH_EDITORONLY_DATA
@@ -127,6 +143,24 @@ void UENTCharacterFallState::EmitNoise()
 		FMessageLog("BlueprintLog").Message(EMessageSeverity::Info, FText::FromString(Message));
 	}
 #endif
+}
+
+void UENTCharacterFallState::ManageWindSFX()
+{
+	float VelocityLength = Character->GetVelocity().Length();
+
+	UAkGameplayStatics::SetRTPCValue(SpeedVolume, VelocityLength, 0, Character);
+
+	if (VelocityLength >= WindRequiredVelocity && !bIsWindSFXPlaying)
+	{
+		UAkGameplayStatics::PostEvent(StartWindEvent, Character, 0, FOnAkPostEventCallback());
+		bIsWindSFXPlaying = true;
+	}
+	else if (VelocityLength < WindRequiredVelocity && bIsWindSFXPlaying)
+	{
+		UAkGameplayStatics::PostEvent(StopWindEvent, Character, 0, FOnAkPostEventCallback());
+		bIsWindSFXPlaying = false;
+	}
 }
 
 void UENTCharacterFallState::SetProjectionVelocity(const FVector& Velocity, bool bOverrideVelocity)

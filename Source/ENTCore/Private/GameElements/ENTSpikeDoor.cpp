@@ -199,8 +199,12 @@ void AENTSpikeDoor::OpenDoor()
 
 	for (UNiagaraComponent* Comp : InterMeshFXComponents)
 	{
-		Comp->Activate();
+		if (Comp)
+		{
+			Comp->Activate();
+		}
 	}
+
 	bIsOpened = !bIsOpened;
 }
 
@@ -230,7 +234,7 @@ void AENTSpikeDoor::CloseDoor()
 	{
 		Comp->Activate();
 	}
-	
+
 	bIsOpened = !bIsOpened;
 }
 

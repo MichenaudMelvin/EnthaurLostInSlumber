@@ -150,7 +150,7 @@ public:
 #if WITH_EDITOR
 private:
 	/**
-	 * @brief Temp function, use it if the door insn't working correctly
+	 * @brief Editor Only function, Use it if the door isn't working correctly
 	 */
 	UFUNCTION(CallInEditor, Category = "Door")
 	void ClearDoor();
