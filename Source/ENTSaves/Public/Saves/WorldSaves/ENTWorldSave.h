@@ -43,6 +43,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
 	TMap<FString, FETNScriptedAIElementData> ScriptedAIElementsData;
 
+	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
+	TMap<FString, FENTGameElementData> OtherElements;
+
 #pragma endregion
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|Player")
