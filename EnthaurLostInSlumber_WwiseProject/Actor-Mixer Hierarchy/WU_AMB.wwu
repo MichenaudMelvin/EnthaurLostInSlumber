@@ -815,6 +815,230 @@
 								<ActiveSource Name="AMB_VILLAGE_HEARTBEAT" ID="{E3C9110F-31C2-4818-A5DB-5E39A51FB02A}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<RandomSequenceContainer Name="AMB_FleshWall" ID="{92102F59-E468-4AD5-B9B6-DB17A03B1223}" ShortID="731930704">
+							<PropertyList>
+								<Property Name="GlobalOrPerObject" Type="int16" Value="0"/>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="1.5"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-2</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="AMB_FleshWall_01_LP" ID="{3D43AA84-736A-45B6-A884-F11D38FAFE44}" ShortID="631782049">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{83A07C2A-E7AC-4729-AF40-A449119B5392}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-300"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{44D5D0A1-5196-46EF-8F1B-CB491C02D8F4}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_FleshWall_01_LP" ID="{C05D779C-F47C-4483-BAAE-983D50DC377C}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_FleshWall_01_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1066587594"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_FleshWall_01_LP" ID="{C05D779C-F47C-4483-BAAE-983D50DC377C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_FleshWall_02_LP" ID="{EBEF1307-E139-4D7E-8969-B7FA8801444C}" ShortID="1011510005">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D1262DB1-E55F-4CFC-BE64-BCE2AC62A92A}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-300"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D6DEC6E7-CF09-4264-BD8B-3ABA731BFE4F}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_FleshWall_02_LP" ID="{0C100C04-C997-41D7-B50A-8BECF0C53C69}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_FleshWall_02_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="659478804"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_FleshWall_02_LP" ID="{0C100C04-C997-41D7-B50A-8BECF0C53C69}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_FleshWall_03_LP" ID="{2965517E-0DA1-4EC3-B04E-76C690816FEB}" ShortID="1068376690">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{ABE740F4-0614-4C87-983D-16D4739BB073}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-300"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{6DE59485-9A23-4AA9-BF6F-DA82EDE5C320}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_FleshWall_03_LP" ID="{A9B3D8DD-201C-4624-B023-73EFD71BB037}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_FleshWall_03_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="540471279"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_FleshWall_03_LP" ID="{A9B3D8DD-201C-4624-B023-73EFD71BB037}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="AMB_FleshWall_04_LP" ID="{1EE2E717-7B96-456B-870D-3191DBCCAF5D}" ShortID="215093961">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7226B43C-2223-48E2-BD85-8B870D20BA9C}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-300"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{996C5AD8-6B46-46A3-981E-B115C9A2DBFF}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="AMB_FleshWall_04_LP" ID="{B874B505-8C22-4E6F-B79D-ADDACBEC7741}">
+											<Language>SFX</Language>
+											<AudioFile>AMB_FleshWall_04_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="237539604"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="AMB_FleshWall_04_LP" ID="{B874B505-8C22-4E6F-B79D-ADDACBEC7741}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
 					</ChildrenList>
 				</ActorMixer>
 				<Sound Name="AMB_Muscle" ID="{C3D9CD73-42C1-439F-B6B9-E9DD84149286}" ShortID="777212376">

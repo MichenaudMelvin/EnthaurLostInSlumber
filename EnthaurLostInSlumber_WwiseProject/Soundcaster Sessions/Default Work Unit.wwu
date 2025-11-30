@@ -140,6 +140,29 @@
 					<CurrentStateList ShowAll="true"/>
 					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
+				<SoundcasterSession Name="TEST DOOR" ID="{977DD559-0F6A-4237-B926-FC167C79817A}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="AKE_Door_Open_Start" ID="{88AAFD6E-67FC-4ADF-9D7D-03B85C905647}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_Door_Open_End" ID="{ED1DB3E2-80E0-4CCD-B2E5-8C3DE5CC6776}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_Door_Close_Start" ID="{76AD9494-A071-4C11-8765-FF1DC0AB315C}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_Door_Close_End" ID="{E582D912-9111-4A49-ADA1-C474EC722BAE}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundcasterSessions>

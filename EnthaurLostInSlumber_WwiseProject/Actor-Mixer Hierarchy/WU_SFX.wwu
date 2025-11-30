@@ -2894,6 +2894,624 @@
 								<ActiveSource Name="SFX8bridge_Fall" ID="{70503318-D2A7-4FE4-AA12-A9601F3DF3EE}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<RandomSequenceContainer Name="SFX_Door_Open" ID="{544B8CFB-74C2-4115-ABAC-BB1A0568BB64}" ShortID="535652467">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="6"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+						</RandomSequenceContainer>
+						<BlendContainer Name="SFX_Door_Open_LP" ID="{1D31C73A-B398-4B84-B3E9-088E2C80CC23}" ShortID="906424034">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Ancient_Game_Stone_Door_Slide_2-glued" ID="{CE7CE756-3C18-4178-97BF-4C4484CFB8E6}" ShortID="377947297">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Ancient_Game_Stone_Door_Slide_2-glued" ID="{61C61175-DE21-409E-A2AD-C6EFCD069C86}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Ancient_Game_Stone_Door_Slide_2-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="190922830"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Ancient_Game_Stone_Door_Slide_2-glued" ID="{61C61175-DE21-409E-A2AD-C6EFCD069C86}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Bloody Guts Squish Movement 6-glued" ID="{F078831F-B32A-42A3-BCA4-2D1135709186}" ShortID="250418142">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-7</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Bloody Guts Squish Movement 6-glued" ID="{B1934A46-FB45-48AD-8404-B895976974D1}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Bloody Guts Squish Movement 6-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1015140072"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Bloody Guts Squish Movement 6-glued" ID="{B1934A46-FB45-48AD-8404-B895976974D1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 1-glued" ID="{17DD0D1E-8529-4750-ADFA-ADD0F73DB1F9}" ShortID="315208342">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 1-glued" ID="{66374D88-0BEA-4141-8F5F-23F845E92BE7}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 1-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1036467249"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 1-glued" ID="{66374D88-0BEA-4141-8F5F-23F845E92BE7}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 2-glued" ID="{852EC7CD-C060-4D0B-9D56-62775D8FFFB6}" ShortID="158996818">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 2-glued" ID="{FA019761-7392-48F9-B313-3583047D00A5}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 2-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="970356254"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 2-glued" ID="{FA019761-7392-48F9-B313-3583047D00A5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411-glued" ID="{D0A953FE-17D3-4B82-A5AE-90FA8108A44B}" ShortID="813241535">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411-glued" ID="{5B06A1CE-B070-417A-9387-4CF3EA5D95A2}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="495223518"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411-glued" ID="{5B06A1CE-B070-417A-9387-4CF3EA5D95A2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Leather   Creak, Heavy Jacket by Vrymaa Id-734549-glued" ID="{E79E6748-7389-42E1-8198-8F856ECA62F4}" ShortID="403354267">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Leather   Creak, Heavy Jacket by Vrymaa Id-734549-glued" ID="{42B6BA9C-626A-4E3D-AB99-7367B2C525B4}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Leather   Creak, Heavy Jacket by Vrymaa Id-734549-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="318641243"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Leather   Creak, Heavy Jacket by Vrymaa Id-734549-glued" ID="{42B6BA9C-626A-4E3D-AB99-7367B2C525B4}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Leather, Creak, Leather Crackles, Stretching, Pulling, Retract SND89307-glued" ID="{89784315-19B6-4140-AB03-6875B893DBCA}" ShortID="195410363">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Leather, Creak, Leather Crackles, Stretching, Pulling, Retract SND89307-glued" ID="{6F832EA3-58C7-4681-9992-53F82E77CDC9}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Leather, Creak, Leather Crackles, Stretching, Pulling, Retract SND89307-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="341469609"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Leather, Creak, Leather Crackles, Stretching, Pulling, Retract SND89307-glued" ID="{6F832EA3-58C7-4681-9992-53F82E77CDC9}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Wood, Movement, Low Rumble, Slow Rumble, Deep Subtle Impacts, Massive, Bass, Cinematic Texture  SND59039-glued" ID="{0679720D-B00B-4BA1-98A7-A6F7F12B984E}" ShortID="813802524">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Wood, Movement, Low Rumble, Slow Rumble, Deep Subtle Impacts, Massive, Bass, Cinematic Texture  SND59039-glued" ID="{5111B926-13F4-4898-B4DC-7DF1377BFB53}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Wood, Movement, Low Rumble, Slow Rumble, Deep Subtle Impacts, Massive, Bass, Cinematic Texture  SND59039-glued.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="101105012"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Wood, Movement, Low Rumble, Slow Rumble, Deep Subtle Impacts, Massive, Bass, Cinematic Texture  SND59039-glued" ID="{5111B926-13F4-4898-B4DC-7DF1377BFB53}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</BlendContainer>
+						<Sound Name="SFX_Door_End" ID="{30FAF17F-7F6D-4808-B60A-E6BC646DD77B}" ShortID="739874259">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Door_Open_End" ID="{14F628CB-EA7D-4A07-9147-B42ECCAD40D5}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Door_Open_End.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="1011658714"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Door_Open_End" ID="{14F628CB-EA7D-4A07-9147-B42ECCAD40D5}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Door_Start" ID="{14206155-922C-473F-A8FA-7247B3681CDB}" ShortID="1005514342">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Door_Open_Start" ID="{A78082BE-1AC3-4E36-ADFD-F959FC775F7A}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Door_Open_Start.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="590728733"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Door_Open_Start" ID="{A78082BE-1AC3-4E36-ADFD-F959FC775F7A}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<BlendContainer Name="SFX_Door_Close_LP" ID="{315C8AA6-5F05-4D91-A793-D12D9D43FB47}" ShortID="582925165">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_Door_Close_01_LP" ID="{917D270F-F747-46AE-AB8D-935F96CDA51D}" ShortID="471920252">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Door_Close_01_LP" ID="{A02D7329-395D-484B-A432-3E01F9785853}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Door_Close_01_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="131865017"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Door_Close_01_LP" ID="{A02D7329-395D-484B-A432-3E01F9785853}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Door_Close_02_LP" ID="{0B88A3AB-FCF9-45D2-9B20-AD59C843EE96}" ShortID="745672424">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-7</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Door_Close_02_LP" ID="{621097A3-EE26-4481-9C01-9A955965F23C}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Door_Close_02_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="281892925"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Door_Close_02_LP" ID="{621097A3-EE26-4481-9C01-9A955965F23C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Door_Close_03_LP" ID="{3772595D-31B8-407A-9808-FC747558F0FF}" ShortID="208856189">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Door_Close_03_LP" ID="{26D3F3D2-FA64-4849-A36A-9C3A2A0CDA30}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Door_Close_03_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="997788374"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Door_Close_03_LP" ID="{26D3F3D2-FA64-4849-A36A-9C3A2A0CDA30}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Door_Close_04_LP" ID="{C604CBD1-0533-4209-866D-BA2C46CF88DF}" ShortID="198445766">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Door_Close_04_LP" ID="{806DD9C8-5631-4874-B3C2-8F659CB1A12E}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Door_Close_04_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="198318550"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Door_Close_04_LP" ID="{806DD9C8-5631-4874-B3C2-8F659CB1A12E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Door_Close_05_LP" ID="{7FACE97C-589C-492E-BB15-89BD120F6D38}" ShortID="284755525">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Door_Close_05_LP" ID="{8C7D772A-37DF-401D-951C-2CBAF6D99FAD}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Door_Close_05_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="640979561"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Door_Close_05_LP" ID="{8C7D772A-37DF-401D-951C-2CBAF6D99FAD}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Door_Close_06_LP" ID="{765D689E-561D-4AC7-8EEC-44989E266563}" ShortID="473085664">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Door_Close_06_LP" ID="{25E59628-D9A7-4B60-AF7E-43CB9D31DB19}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Door_Close_06_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="480834173"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Door_Close_06_LP" ID="{25E59628-D9A7-4B60-AF7E-43CB9D31DB19}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Door_Close_07_LP" ID="{C2E93AD4-1C60-47CB-8F84-3F8C3842BCB4}" ShortID="814493933">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Door_Close_07_LP" ID="{A223508E-9A6A-4FFC-AF23-27F161F4C7B5}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Door_Close_07_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="726730770"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Door_Close_07_LP" ID="{A223508E-9A6A-4FFC-AF23-27F161F4C7B5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Door_Close_08_LP" ID="{37683E42-FCCA-4335-85A1-B8B236CBD307}" ShortID="571237074">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-7</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX_Amb_MC" ID="{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Door_Close_08_LP" ID="{25E4A614-A6A2-4BC0-8241-0574B573C946}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Door_Close_08_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="436815233"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Door_Close_08_LP" ID="{25E4A614-A6A2-4BC0-8241-0574B573C946}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</BlendContainer>
 					</ChildrenList>
 				</ActorMixer>
 			</ChildrenList>

@@ -691,6 +691,114 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_Door_Close_Start" ID="{76AD9494-A071-4C11-8765-FF1DC0AB315C}">
+							<ChildrenList>
+								<Action Name="" ID="{2ACB37C2-1F65-48DC-8B81-40953C115FC7}" ShortID="623306143">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_Open_LP" ID="{1D31C73A-B398-4B84-B3E9-088E2C80CC23}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{692AFF98-DB28-470B-84B0-1FA476DD6AA5}" ShortID="500506097">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_Start" ID="{14206155-922C-473F-A8FA-7247B3681CDB}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{BDF54698-697B-40B3-87A5-F86E0DAC58A6}" ShortID="466476014">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="0.8"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_Close_LP" ID="{315C8AA6-5F05-4D91-A793-D12D9D43FB47}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Door_Close_End" ID="{E582D912-9111-4A49-ADA1-C474EC722BAE}">
+							<ChildrenList>
+								<Action Name="" ID="{EE8D97FE-9E4D-4147-B1E9-8C1ED5A94F5F}" ShortID="534195197">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_Close_LP" ID="{315C8AA6-5F05-4D91-A793-D12D9D43FB47}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{F49F2BBD-0117-4AB8-9179-313D21800A79}" ShortID="517124685">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_End" ID="{30FAF17F-7F6D-4808-B60A-E6BC646DD77B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Door_Open_Start" ID="{88AAFD6E-67FC-4ADF-9D7D-03B85C905647}">
+							<ChildrenList>
+								<Action Name="" ID="{8AB5FD74-D582-4A99-B616-18858E16CADC}" ShortID="108366275">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_Close_LP" ID="{315C8AA6-5F05-4D91-A793-D12D9D43FB47}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{4D4C488F-7D5A-45C8-BDBE-98CEF7678CD4}" ShortID="207265238">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_Start" ID="{14206155-922C-473F-A8FA-7247B3681CDB}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{DBB67DA3-BD6B-4421-B3F1-4A1DD1D441BC}" ShortID="467092263">
+									<PropertyList>
+										<Property Name="FadeTime" Type="Real64" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_Open_LP" ID="{1D31C73A-B398-4B84-B3E9-088E2C80CC23}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Door_Open_End" ID="{ED1DB3E2-80E0-4CCD-B2E5-8C3DE5CC6776}">
+							<ChildrenList>
+								<Action Name="" ID="{68FFD527-9169-4E52-A2E3-D05174BAC1D1}" ShortID="840572785">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.8"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_Open_LP" ID="{1D31C73A-B398-4B84-B3E9-088E2C80CC23}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{F9B0B155-2891-43F1-B128-FA460BDE0301}" ShortID="717229392">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Door_End" ID="{30FAF17F-7F6D-4808-B60A-E6BC646DD77B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">
@@ -821,6 +929,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="AMB_Breath" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_FleshWall" ID="{40EFE9DA-B2E9-495A-B7B8-F5D45E38BB8D}">
+							<ChildrenList>
+								<Action Name="" ID="{4DB7B183-1DA2-4B10-AB06-5C65A34C6038}" ShortID="933819156">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_FleshWall" ID="{92102F59-E468-4AD5-B9B6-DB17A03B1223}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
