@@ -222,6 +222,49 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="AKE_Music" ID="{C09CA8DA-D4F5-4FCE-8AF5-65FDEEC3CA9E}">
+					<ChildrenList>
+						<Action Name="" ID="{8FA226A8-5F42-4D51-90C0-21D5A65A517A}" ShortID="573082125">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SC_Lvl1_2" ID="{60DEDBE0-ADC5-4DAA-9B45-2E4FE69AA8A5}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Lvl1_2" ID="{D9842495-74DF-429A-BDFD-2A2AFD96DD85}">
+					<ChildrenList>
+						<Action Name="" ID="{7AF2596B-644B-4D99-8DBD-FB45AA40B8B1}" ShortID="11166282">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SC_Lvl1_2" ID="{60DEDBE0-ADC5-4DAA-9B45-2E4FE69AA8A5}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{34DF3AC3-8DB9-4FAC-A699-2C5687BC2322}" ShortID="672860285">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Lvl4" ID="{F7562D55-07D3-4467-AC90-7E844FE35CB6}">
+					<ChildrenList>
+						<Action Name="" ID="{EDCF8635-B7C4-4FFA-9A60-B4103B9CB394}" ShortID="350392076">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SC_Lvl4" ID="{853D8270-42F5-45D0-88CD-6E2C1D909425}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

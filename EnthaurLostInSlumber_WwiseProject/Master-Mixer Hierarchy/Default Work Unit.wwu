@@ -22,6 +22,11 @@
 								<Property Name="Color" Type="int16" Value="9"/>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
 							</PropertyList>
+							<ChildrenList>
+								<Bus Name="Bus_SFX" ID="{C45C5D65-0B57-449D-92AB-6BF606EB105E}"/>
+								<Bus Name="Bus_AMB" ID="{314C3F6A-64CF-4BE6-9D36-325408D0DCFF}"/>
+								<Bus Name="Bus_UI" ID="{A4E934B4-9A21-4FAC-8929-1EFF27EB3FDC}"/>
+							</ChildrenList>
 							<ObjectLists>
 								<ObjectList Name="RTPC">
 									<Reference>
@@ -67,7 +72,7 @@
 								<Property Name="Color" Type="int16" Value="19"/>
 								<Property Name="OutputBusVolume" Type="Real64">
 									<ValueList>
-										<Value>-96</Value>
+										<Value>-10</Value>
 									</ValueList>
 								</Property>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
