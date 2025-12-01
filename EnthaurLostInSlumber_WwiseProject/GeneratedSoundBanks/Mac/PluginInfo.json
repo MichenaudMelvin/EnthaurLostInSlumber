@@ -4,13 +4,6 @@
   "BasePlatform": "Mac",
   "PluginLibs": [
    {
-    "LibName": "McDSP ML1",
-    "LibId": "6754307",
-    "Type": "Effect",
-    "DLL": "McDSP",
-    "StaticLib": "McDSPLimiterFX"
-   },
-   {
     "LibName": "Wwise Parametric EQ",
     "LibId": "6881283",
     "Type": "Effect",
@@ -44,13 +37,6 @@
     "Type": "Effect",
     "DLL": "AkPeakLimiter",
     "StaticLib": "AkPeakLimiterFX"
-   },
-   {
-    "LibName": "McDSP FutzBox",
-    "LibId": "7213059",
-    "Type": "Effect",
-    "DLL": "McDSP",
-    "StaticLib": "McDSPFutzBoxFX"
    },
    {
     "LibName": "Wwise Matrix Reverb",
@@ -131,15 +117,8 @@
     "Type": "Effect",
     "DLL": "MasteringSuite",
     "StaticLib": "MasteringSuiteFX"
-   },
-   {
-    "LibName": "Auro Headphone",
-    "LibId": "72093811",
-    "Type": "Effect",
-    "DLL": "Auro",
-    "StaticLib": "AuroHeadphoneFX"
    }
   ],
-  "FileHash": "{5C05B8C7-87DD-4017-E47D-2DE7891D8BE4}"
+  "FileHash": "{DF6919B9-8DE9-FBC2-D722-5B53828E2C64}"
  }
 }

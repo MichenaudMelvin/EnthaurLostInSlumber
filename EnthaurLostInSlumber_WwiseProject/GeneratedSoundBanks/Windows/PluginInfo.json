@@ -4,13 +4,6 @@
   "BasePlatform": "Windows",
   "PluginLibs": [
    {
-    "LibName": "McDSP ML1",
-    "LibId": "6754307",
-    "Type": "Effect",
-    "DLL": "McDSP",
-    "StaticLib": "McDSPLimiterFX"
-   },
-   {
     "LibName": "Wwise Parametric EQ",
     "LibId": "6881283",
     "Type": "Effect",
@@ -44,13 +37,6 @@
     "Type": "Effect",
     "DLL": "AkPeakLimiter",
     "StaticLib": "AkPeakLimiterFX"
-   },
-   {
-    "LibName": "McDSP FutzBox",
-    "LibId": "7213059",
-    "Type": "Effect",
-    "DLL": "McDSP",
-    "StaticLib": "McDSPFutzBoxFX"
    },
    {
     "LibName": "Wwise Matrix Reverb",
@@ -131,15 +117,8 @@
     "Type": "Effect",
     "DLL": "MasteringSuite",
     "StaticLib": "MasteringSuiteFX"
-   },
-   {
-    "LibName": "Auro Headphone",
-    "LibId": "72093811",
-    "Type": "Effect",
-    "DLL": "Auro",
-    "StaticLib": "AuroHeadphoneFX"
    }
   ],
-  "FileHash": "{1616D97F-FD26-54B4-AFA7-7BD70DB83495}"
+  "FileHash": "{62A8D966-E64D-0470-B2A4-C583683120F9}"
  }
 }
