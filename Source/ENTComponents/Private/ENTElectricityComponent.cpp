@@ -145,7 +145,7 @@ void UENTElectricityComponent::ElectricityOpacityUpdate(float Alpha)
 		return;
 	}
 
-	float ScalarParam = FMath::Lerp(1.0f, 0.0f, Alpha);
+	float ScalarParam = FMath::Lerp(MaxOpacity, MinOpacity, Alpha);
 	ElectricityFeedback->GetMaterial()->SetScalarParameterValue(ElectricityOpacityParam, ScalarParam);
 }
 
