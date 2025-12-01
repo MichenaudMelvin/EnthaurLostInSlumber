@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	48176644	AKE_PRLand			\SFX\Gameplay\AKE_PRLand	
 	88206927	AKE_PR_Attack_Woosh			\SFX\Gameplay\AKE_PR_Attack_Woosh	
 	316633605	AKE_Door_Open_Start			\SFX\Gameplay\AKE_Door_Open_Start	
 	436669465	AKE_PR_Scream			\SFX\Gameplay\AKE_PR_Scream	
@@ -30,6 +31,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2192633050	AKE_SinewTense			\SFX\Gameplay\AKE_SinewTense	
 	2275903284	AKE_WindSpeed			\SFX\Gameplay\AKE_WindSpeed	
 	2353577288	AKE_StartNerveStretch			\SFX\Gameplay\AKE_StartNerveStretch	
+	2405795183	AKE_PRJump			\SFX\Gameplay\AKE_PRJump	
 	2479692261	AKE_InjectAmbrer			\SFX\Gameplay\AKE_InjectAmbrer	
 	2721947660	AKE_StopWindSpeed			\SFX\Gameplay\AKE_StopWindSpeed	
 	3147051080	AKE_Cinematic			\SFX\Gameplay\AKE_Cinematic	
@@ -166,6 +168,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	495223518	Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411-glued	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\43\{433BA4CF-B26A-F48B-16BF-669B2B13366D}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Door_Open_LP\Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411-glued		480820
 	500580022	SFX_Parasite_Legs_15	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AC\{AC073533-D7B1-4D4E-69A2-C6CDE0A23528}.wem		\Actor-Mixer Hierarchy\WU_Parasite\AM_Parasite\PR_Movement\PR_Legs\SFX_Parasite_Legs_15		4660
 	503362199	SFX_FS_Bone_Run_18	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\77\{777F743F-F945-B6DC-F9EF-6CEEF667AE50}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Bone\SFX_FS_Bone_Run_18		32096
+	508697626	SFX_Parasite_Land	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8C\{8C135E64-0D8D-CF60-89E5-6DDC7995AB6E}.wem		\Actor-Mixer Hierarchy\WU_Parasite\AM_Parasite\PR_Jump_Land\SFX_Parasite_Land		49920
 	515272845	SFX_NerveDoor_Layer_Woosh_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\64\{644475EC-75D5-F867-99FD-D0B1E870A32E}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_NerveDoor\SFX_NerveDoor_Layer_Woosh\SFX_NerveDoor_Layer_Woosh_03		70496
 	515842823	SFX_Parasite_Foley_Run_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\81\{810A665C-CA8C-FADA-7E01-07E200CADAB7}.wem		\Actor-Mixer Hierarchy\WU_Parasite\AM_Parasite\PR_Movement\PR_Run_Foley\SFX_Parasite_Foley_Run_03		38496
 	523178003	SFX_Plant_Growth	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\70\{700725BF-50A0-A34D-0C47-D3FFE3CA86CA}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Plant_Growth		364896
@@ -271,6 +274,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	974359147	SFX_FS_Bone_Run_06	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E7\{E7ABFB2B-3AB2-EC96-07C6-DB0758DBB0F4}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Bone\SFX_FS_Bone_Run_06		32096
 	977726567	SFX_Parasite_Legs_25	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AF\{AF10156C-9A40-1E87-60DA-5CB0B5AD9400}.wem		\Actor-Mixer Hierarchy\WU_Parasite\AM_Parasite\PR_Movement\PR_Legs\SFX_Parasite_Legs_25		5856
 	985568594	SFX_FS_Vein_Run_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\6A\{6A381926-1A56-0058-91FA-F38601146289}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Vein\SFX_FS_Vein_Run_02		25696
+	987594267	SFX_Parasite_Jump	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E0\{E0139ABE-632B-B276-02F1-FD36A3B0A45F}.wem		\Actor-Mixer Hierarchy\WU_Parasite\AM_Parasite\PR_Jump_Land\SFX_Parasite_Jump		89696
 	992978286	SFX_NerveReceptacle_Activate_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\44\{44FAEC2E-7EE8-6A9A-CFA8-6173281A977C}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_NerveReceptacle_Activate\SFX_NerveReceptacle_Activate_03		864096
 	997788374	SFX_Door_Close_03_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\5B\{5BD764E8-98F0-A949-B6FA-1C4295331C88}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\SFX_Door_Close_LP\SFX_Door_Close_03_LP		496868
 	998170531	SFX_Sinew_Tense_Wobbling	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\CF\{CF3B960F-EF97-9039-2A59-277A614CBC91}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_Sinew\AM_Sinew_Tense\SFX_Sinew_Tense_Wobbling		464096

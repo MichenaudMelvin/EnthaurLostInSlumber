@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{97EBA94E-9453-DCDB-AF29-DBADC566C9DE}",
+    "Hash": "{FDC54029-73CB-6629-E422-DDAB432F3448}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -847,6 +847,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_18.wav",
       "CachePath": "77/{777F743F-F945-B6DC-F9EF-6CEEF667AE50}.wem"
+     },
+     {
+      "Id": "508697626",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Land.wav",
+      "CachePath": "8C/{8C135E64-0D8D-CF60-89E5-6DDC7995AB6E}.wem"
      },
      {
       "Id": "515272845",
@@ -1687,6 +1695,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_02.wav",
       "CachePath": "6A/{6A381926-1A56-0058-91FA-F38601146289}.wem"
+     },
+     {
+      "Id": "987594267",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Jump.wav",
+      "CachePath": "E0/{E0139ABE-632B-B276-02F1-FD36A3B0A45F}.wem"
      },
      {
       "Id": "992978286",
@@ -2989,6 +3005,36 @@
       ]
      },
      {
+      "Id": "2405795183",
+      "Name": "AKE_PRJump",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PRJump",
+      "GUID": "{AF524C70-1B07-4D30-AF81-DCE44777FA02}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.93333334",
+      "DurationMax": "0.93333334",
+      "MediaRefs": [
+       {
+        "Id": "987594267"
+       }
+      ]
+     },
+     {
+      "Id": "48176644",
+      "Name": "AKE_PRLand",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PRLand",
+      "GUID": "{E2704CCC-659C-4110-8785-691E777B51AF}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.519",
+      "DurationMax": "0.519",
+      "MediaRefs": [
+       {
+        "Id": "508697626"
+       }
+      ]
+     },
+     {
       "Id": "1975807336",
       "Name": "AKE_RespawnTreeActivate",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_RespawnTreeActivate",
@@ -3354,6 +3400,6 @@
     ]
    }
   ],
-  "FileHash": "{052D7061-1FEB-AC00-4FA7-45127D899458}"
+  "FileHash": "{822333BF-D78E-37BC-8302-C46F38CE0198}"
  }
 }

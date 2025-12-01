@@ -874,6 +874,28 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_PRLand" ID="{E2704CCC-659C-4110-8785-691E777B51AF}">
+							<ChildrenList>
+								<Action Name="" ID="{F52A6AB7-67F2-4502-8045-C1DDDEF8B7B4}" ShortID="390051740">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Parasite_Land" ID="{C330AD2E-4618-4550-AE4E-AA5A9A464A85}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PRJump" ID="{AF524C70-1B07-4D30-AF81-DCE44777FA02}">
+							<ChildrenList>
+								<Action Name="" ID="{D8DF391F-42D8-4FFF-B155-6CAEFF3920CA}" ShortID="455393338">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Parasite_Jump" ID="{E7AEA079-C2EB-43F4-BF77-A6FDAB1714D2}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">
