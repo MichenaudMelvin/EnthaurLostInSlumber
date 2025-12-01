@@ -70,8 +70,6 @@ private:
 	UPROPERTY()
 	TObjectPtr<AENTElectricityFeedback> ElectricityFeedback;
 
-	
-
 #pragma region ElectricityRadius
 
 protected:
@@ -89,10 +87,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius", meta = (Units = s))
 	float SecondElectricityRadiusDuration = 1.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius", meta = (Units = cm))
 	float FirstRadiusTarget = 30.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius")
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Radius", meta = (Units = cm))
 	float SecondRadiusTarget = 200.0f;
 
 	float StartRadiusTarget = 0.0f;
@@ -137,6 +135,12 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity", meta = (Units = s))
 	float ElectricityOpacityDuration = 2.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f))
+	float MinOpacity = 0.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Electricity|Opacity", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f))
+	float MaxOpacity = 1.0f;
 
 	FTimeline ElectricityOpacityTimeline;
 
