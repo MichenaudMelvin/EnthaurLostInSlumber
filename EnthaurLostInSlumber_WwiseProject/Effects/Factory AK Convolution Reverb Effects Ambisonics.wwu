@@ -2,6 +2,13 @@
 <WwiseDocument Type="WorkUnit" ID="{1562D13C-41E8-4FA1-A341-D4CB726E2AEC}" SchemaVersion="123">
 	<Effects>
 		<WorkUnit Name="Factory AK Convolution Reverb Effects Ambisonics" ID="{1562D13C-41E8-4FA1-A341-D4CB726E2AEC}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Inclusion" Type="bool">
+					<ValueList>
+						<Value>False</Value>
+					</ValueList>
+				</Property>
+			</PropertyList>
 			<ChildrenList>
 				<Folder Name="Cathedrals and Churches" ID="{907144BF-29AB-4B16-A839-8F3423EDF0D6}" ShortID="672852685">
 					<ChildrenList>
@@ -31,7 +38,8 @@ IR Pre-delay: 20ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Churches\AK Amb St-Katharinen.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="872300933"/>
+										<MediaID ID="792360875"/>
+										<MediaID Platform="Windows" ID="872300933"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -307,7 +315,8 @@ IR Pre-delay: 20ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Churches\AK Amb St-Katharinen.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="792360875"/>
+										<MediaID ID="872300933"/>
+										<MediaID Platform="Windows" ID="591410993"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -400,7 +409,7 @@ IR Pre-delay: 5ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Churches\AK Amb Medium Church.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="470537586"/>
+										<MediaID ID="414572835"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -493,7 +502,8 @@ IR Pre-delay: 5ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Churches\AK Amb Medium Church.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="414572835"/>
+										<MediaID ID="223163010"/>
+										<MediaID Platform="Mac" ID="470537586"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -585,6 +595,7 @@ IR Pre-delay: 5ms </Comment>
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="223163010"/>
+										<MediaID Platform="Windows" ID="470537586"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -681,6 +692,7 @@ IR Pre-delay: 20ms </Comment>
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="591410993"/>
+										<MediaID Platform="Windows" ID="792360875"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -778,6 +790,7 @@ IR Pre-delay: 4ms
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="216221817"/>
+										<MediaID Platform="Windows" ID="326278810"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -876,6 +889,7 @@ IR Pre-delay: 7ms
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="242975716"/>
+										<MediaID Platform="Mac" ID="625141396"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -968,7 +982,8 @@ IR Pre-delay: 7ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Large Spaces\AK Amb Stair Way Hall.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="1064209159"/>
+										<MediaID ID="242975716"/>
+										<MediaID Platform="Windows" ID="1064209159"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -1062,6 +1077,7 @@ IR Pre-delay: 0ms
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="456875588"/>
+										<MediaID Platform="Mac" ID="531628645"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -1158,7 +1174,8 @@ IR Pre-delay: 7ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Large Spaces\AK Amb Stair Way Hall.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="625141396"/>
+										<MediaID ID="1064209159"/>
+										<MediaID Platform="Windows" ID="625141396"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -1250,7 +1267,8 @@ IR Pre-delay: 4ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Large Spaces\AK Amb Hamburg Parkhaus.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="326278810"/>
+										<MediaID ID="216221817"/>
+										<MediaID Platform="Mac" ID="326278810"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -1345,7 +1363,8 @@ IR Pre-delay: 0ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Large Spaces\AK Amb Hamburg Fabrik SCOUT.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="531628645"/>
+										<MediaID ID="456875588"/>
+										<MediaID Platform="Windows" ID="531628645"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -1535,7 +1554,7 @@ IR Pre-delay: 6ms</Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Halls\AK Amb Berlin Teldex.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="1040532611"/>
+										<MediaID ID="306701854"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -1627,7 +1646,8 @@ IR Pre-delay: 6ms</Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Halls\AK Amb Berlin Teldex.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="352265224"/>
+										<MediaID ID="1016049244"/>
+										<MediaID Platform="Windows" ID="685264471"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -1720,7 +1740,8 @@ IR Pre-delay: 6ms</Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Halls\AK Amb Berlin Teldex.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="1016049244"/>
+										<MediaID ID="1040532611"/>
+										<MediaID Platform="Windows" ID="352265224"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -1824,6 +1845,7 @@ IR Pre-delay: 6ms</Comment>
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="685264471"/>
+										<MediaID Platform="Windows" ID="1040532611"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -2124,7 +2146,8 @@ IR Pre-delay: 6ms</Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Halls\AK Amb Berlin Teldex.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="306701854"/>
+										<MediaID ID="352265224"/>
+										<MediaID Platform="Windows" ID="1016049244"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -2316,7 +2339,7 @@ IR Pre-delay: 4ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Rooms\AK Amb Hamburg Echo Chamber.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="512577206"/>
+										<MediaID ID="44100582"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -2410,7 +2433,8 @@ IR Pre-delay: 4ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Rooms\AK Amb Hamburg Echo Chamber.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="44100582"/>
+										<MediaID ID="894434445"/>
+										<MediaID Platform="Windows" ID="512577206"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -2501,7 +2525,7 @@ IR Pre-delay: 8ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Rooms\AK Amb Blue Noise Room 01.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="134859353"/>
+										<MediaID ID="884303024"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -2699,7 +2723,8 @@ IR Pre-delay: 6ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Rooms\AK Amb Blue Noise Room 02.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="507165728"/>
+										<MediaID ID="358577337"/>
+										<MediaID Platform="Mac" ID="507165728"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -2798,6 +2823,7 @@ IR Pre-delay: 8ms
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="614801275"/>
+										<MediaID Platform="Windows" ID="878966322"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -2890,6 +2916,7 @@ IR Pre-delay: 8ms
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="393877766"/>
+										<MediaID Platform="Mac" ID="878966322"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -3149,11 +3176,6 @@ IR Pre-delay: 6ms </Comment>
 							<PropertyList>
 								<Property Name="CenterLevel" Type="Real32" Value="-12"/>
 								<Property Name="IRConvolutionStop" Type="Real64" Value="1.70133333333333"/>
-								<Property Name="IRConvolutionThreshold" Type="Real32">
-									<ValueList>
-										<Value>-75</Value>
-									</ValueList>
-								</Property>
 								<Property Name="IRLRMix" Type="Real32">
 									<ValueList>
 										<Value>5</Value>
@@ -3170,6 +3192,7 @@ IR Pre-delay: 6ms </Comment>
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="358577337"/>
+										<MediaID Platform="Windows" ID="507165728"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -3266,7 +3289,8 @@ IR Pre-delay: 4ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Rooms\AK Amb Hamburg Echo Chamber.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="894434445"/>
+										<MediaID ID="512577206"/>
+										<MediaID Platform="Windows" ID="894434445"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -3352,7 +3376,7 @@ IR Pre-delay: 8ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Rooms\AK Amb Blue Noise Room 01.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="884303024"/>
+										<MediaID ID="134859353"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -3721,7 +3745,8 @@ IR Pre-delay: 8ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Rooms\AK Amb Luna Studio.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="878966322"/>
+										<MediaID ID="393877766"/>
+										<MediaID Platform="Windows" ID="614801275"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -3818,7 +3843,7 @@ IR Pre-delay: 2ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Exteriors\AK Amb Hamburg Harburger See.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="245359029"/>
+										<MediaID ID="29232257"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -3912,7 +3937,7 @@ IR Pre-delay: 2ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Exteriors\AK Amb Hamburg Harburger See.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="966657340"/>
+										<MediaID ID="245359029"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -4004,7 +4029,8 @@ IR Pre-delay: 8ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Exteriors\AK Amb Hamburg Stadtpark 01.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="535840714"/>
+										<MediaID ID="723690630"/>
+										<MediaID Platform="Windows" ID="822076648"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -4097,7 +4123,8 @@ IR Pre-delay: 9ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Exteriors\AK Amb Hamburg Volksdorfer Wald.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="337245058"/>
+										<MediaID ID="276568308"/>
+										<MediaID Platform="Mac" ID="337245058"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -4198,7 +4225,8 @@ IR Pre-delay: 8ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Exteriors\AK Amb Hamburg Stadtpark 01.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="822076648"/>
+										<MediaID ID="535840714"/>
+										<MediaID Platform="Mac" ID="822076648"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -4396,7 +4424,8 @@ IR Pre-delay: 3ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Exteriors\AK Amb Hamburg Stadtpark 02.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="685455980"/>
+										<MediaID ID="531719186"/>
+										<MediaID Platform="Mac" ID="685455980"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -4487,7 +4516,8 @@ IR Pre-delay: 8ms
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Exteriors\AK Amb Hamburg Stadtpark 01.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="723690630"/>
+										<MediaID ID="535840714"/>
+										<MediaID Platform="Windows" ID="723690630"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -4581,7 +4611,7 @@ IR Pre-delay: 2ms </Comment>
 										<Property Name="DataFileName" Type="string" Value="AK_Factory_IR_Amb\Exteriors\AK Amb Hamburg Harburger See.wav"/>
 									</PropertyList>
 									<MediaIDList>
-										<MediaID ID="29232257"/>
+										<MediaID ID="966657340"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -4676,6 +4706,7 @@ IR Pre-delay: 9ms
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="276568308"/>
+										<MediaID Platform="Windows" ID="337245058"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>
@@ -4772,6 +4803,7 @@ IR Pre-delay: 3ms
 									</PropertyList>
 									<MediaIDList>
 										<MediaID ID="531719186"/>
+										<MediaID Platform="Windows" ID="685455980"/>
 									</MediaIDList>
 								</PluginMediaSource>
 							</ChildrenList>

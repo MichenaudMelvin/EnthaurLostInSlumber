@@ -5,6 +5,7 @@
 
 #include "AIController.h"
 #include "ENTGravityPawnMovement.h"
+#include "ENTToolStatics.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
@@ -45,7 +46,7 @@ void UENTJumpTask::InitializeFromAsset(UBehaviorTree& Asset)
 	FOnTimelineFloat UpdateEvent;
 	FOnTimelineEvent FinishEvent;
 	UpdateEvent.BindDynamic(this, &UENTJumpTask::MovementUpdate);
-	FinishEvent.BindDynamic(this, &UENTJumpTask::FinishTask);
+	FinishEvent.BindDynamic(this, &UENTJumpTask::FinishJumpTimeline);
 	JumpTimeline.AddInterpFloat(JumpCurve, UpdateEvent);
 	JumpTimeline.SetTimelineFinishedFunc(FinishEvent);
 	JumpTimeline.SetPlayRate(1 / JumpDuration);
@@ -114,7 +115,12 @@ EBTNodeResult::Type UENTJumpTask::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 	}
 #endif
 
-	JumpTimeline.PlayFromStart();
+	SetPawnAnimToTrigger(StartJumpAnim);
+
+	float AnimLength = UENTToolStatics::GetAnimLength(StartJumpAnim);
+	AnimLength += StartJumpInitialDelay;
+	GetWorld()->GetTimerManager().SetTimer(StartJumpAnimTimerHandle, this, &UENTJumpTask::StartJump, 1.0f, false, AnimLength);
+
 	return EBTNodeResult::InProgress;
 }
 
@@ -125,26 +131,48 @@ void UENTJumpTask::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory
 	JumpTimeline.TickTimeline(DeltaSeconds);
 }
 
+EBTNodeResult::Type UENTJumpTask::AbortTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	GetWorld()->GetTimerManager().ClearTimer(StartJumpAnimTimerHandle);
+	GetWorld()->GetTimerManager().ClearTimer(LandingAnimEndDelayTimerHandle);
+
+	if (CurrentPawn)
+	{
+		Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(nullptr);
+	}
+
+	return Super::AbortTask(OwnerComp, NodeMemory);
+}
+
 void UENTJumpTask::SetCurrentAnim(float CurrentTaskDuration)
 {
-	if (CurrentTaskDuration < 0.5f)
+	if (CurrentTaskDuration < SecondAnimAlpha)
 	{
-		if (!CurrentPawn->Implements<UENTPawnAIInterface>() && FirstHalfAnim)
-		{
-			return;
-		}
-
-		Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(FirstHalfAnim);
+		SetPawnAnimToTrigger(FirstHalfAnim);
 	}
-	else
+	else if (CurrentTaskDuration >= LandingAnimAlpha)
 	{
-		if (!CurrentPawn->Implements<UENTPawnAIInterface>() && SecondHalfAnim)
-		{
-			return;
-		}
-
-		Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(SecondHalfAnim);
+		SetPawnAnimToTrigger(LandingAnim);
 	}
+	else if (CurrentTaskDuration >= SecondAnimAlpha)
+	{
+		SetPawnAnimToTrigger(SecondHalfAnim);
+	}
+}
+
+void UENTJumpTask::StartJump()
+{
+	JumpTimeline.PlayFromStart();
+}
+
+void UENTJumpTask::SetPawnAnimToTrigger(UAnimSequenceBase* Anim) const
+{
+	if (!CurrentPawn->Implements<UENTPawnAIInterface>())
+	{
+		return;
+	}
+
+	Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(Anim);
 }
 
 void UENTJumpTask::MovementUpdate(float Alpha)
@@ -162,7 +190,7 @@ void UENTJumpTask::MovementUpdate(float Alpha)
 	CurrentPawn->SetActorTransform(ResultTransform);
 }
 
-void UENTJumpTask::FinishTask()
+void UENTJumpTask::FinishJumpTimeline()
 {
 	if (JumpSpline)
 	{
@@ -175,6 +203,13 @@ void UENTJumpTask::FinishTask()
 		}
 #endif
 	}
+
+	GetWorld()->GetTimerManager().SetTimer(LandingAnimEndDelayTimerHandle, this, &UENTJumpTask::FinishTask, 1.0f, false, LandingDelay);
+}
+
+void UENTJumpTask::FinishTask()
+{
+	SetPawnAnimToTrigger(nullptr);
 
 	UENTGravityPawnMovement* GravityPawnMovement = Cast<UENTGravityPawnMovement>(CurrentPawn->GetMovementComponent());
 	if (GravityPawnMovement)

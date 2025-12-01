@@ -4,8 +4,11 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	4013141432	AKGP_SFX			\Mix\AKGP_SFX	
 
 Audio Bus	ID	Name			Wwise Object Path	Notes
+	17439960	Bus_AMB			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC\Bus_AMB	
 	1162281553	Bus_Music			\Default Work Unit\Master Audio Bus_01\Bus_Music	
+	1746463750	Bus_UI			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC\Bus_UI	
 	2930365547	Bus_SFX_Amb_MC			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC	
+	3895923845	Bus_SFX			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC\Bus_SFX	
 	4267419003	Master Audio Bus_01			\Default Work Unit\Master Audio Bus_01	
 	4277214558	Bus_Voice			\Default Work Unit\Master Audio Bus_01\Bus_Voice	
 
@@ -16,192 +19,70 @@ Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 
 Effect plug-ins	ID	Name	Type				Notes
 	4496003	Dirty_Washing_Machine	Wwise RoomVerb			
-	12200851	Dirty_Mother	McDSP FutzBox			
-	16119108	Dry_AHP	Auro Headphone			
-	16854635	Mason_Jar	McDSP FutzBox			
-	45967670	Intercom_Far	McDSP FutzBox			
 	48620415	Have_U_Ever_Been_Outside	Wwise RoomVerb			
-	56174514	Resonant_Room_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms   
 	59662939	Dialog_Too_Quiet	Wwise Compressor			
-	81463525	Sputter_Butter	McDSP FutzBox			
 	86245554	Attack_Remover	Wwise Compressor			
-	101186172	Lost_In_Noise	McDSP FutzBox			
 	109045632	Vibrato	Wwise Flanger			
-	112859681	HamburgHarburgerSee_Slap_02_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 
 	131511410	Let_The_Power_Fall	Wwise Stereo Delay			
 	136714882	_500ms_Per_Hour	Wwise Stereo Delay			
-	140220686	Short_Hall_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
 	145028528	Static_Sibilance_Remover_Female	Wwise Parametric EQ			
-	147717240	LongDeepAlley	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	157136568	LivingRoom_02	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	157136571	LivingRoom_01	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	163151502	Crowded_Hall_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 10ms 
-	163894461	The_Negotiator	McDSP FutzBox			
 	164825399	New_Reflect	Wwise Reflect			
 	176439046	Caught_in_a_loop	Wwise Stereo Delay			
-	184063449	Find_A_Station	McDSP FutzBox			
-	188676667	EquallySpacedEchoes	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	192462624	Dark_Hall_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
 	199095971	Dialog_Through_AC_Vents	Wwise Parametric EQ			
-	241751098	Turn_Off_The_Radio	McDSP FutzBox			
-	241826432	Dirtier_Mother	McDSP FutzBox			
-	243379636	Reflect	Wwise Reflect			
-	259313001	Master_Dynamic	McDSP ML1			
-	265638814	Dark_Hall_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
-	266383236	Beetle	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	270226430	Medium_Room_AHP	Auro Headphone			
-	280400564	HamburgHarburgerSee_Slap_01_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 
-	287670102	BlueNoise_Room_02_Org_Ambisonics	Wwise Convolution Reverb			NOTE: Sounds filtered    Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms 
-	319664383	HamburgParkhaus_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  
-	321269102	Buss_Clean	McDSP ML1			
-	328189932	Stinky_Baby	McDSP FutzBox			
-	335857323	MediumChurch_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 
-	354871512	Bassy_Phone	McDSP FutzBox			
-	355853687	Space_Ship_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  
-	361504441	Large_Bright_Space_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
-	369343119	SlapsEchoClose	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	380213756	Buss_Gentle	McDSP ML1			
 	389252396	Next_Room	Wwise Parametric EQ			
 	400317747	Hall_Large_TooBright	Wwise RoomVerb			
-	403168485	WideWithCars	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	403558130	Foley_FX_Loud	McDSP ML1			
 	415841907	Space_Garage	Wwise RoomVerb			
 	418265525	Gentle_Program_Compressor_Minus_14dB_RMS	Wwise Compressor			
-	443144232	Loosy_Robot	McDSP FutzBox			
-	457689462	Lecture_Hall_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
-	457883327	Noisy_Whisperer	McDSP FutzBox			
-	471009845	Lost_in_a_Cathedral_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 
 	484890516	Church_Small_Wood	Wwise RoomVerb			
-	502771456	ForestAuterlitz_WideOpen	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	506891147	Plate_Small	Wwise RoomVerb			
 	535667444	Bathroom1	Wwise Matrix Reverb			
-	561646240	Hamburg_Fabrik_SCOUT_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms 
-	565573866	Burnt_to_a_Crisp	McDSP FutzBox			
 	602546716	Room_Large	Wwise RoomVerb			
-	608103065	Master_Smart	McDSP ML1			
-	628031306	Live_Room_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
-	646657713	Intercom_Near	McDSP FutzBox			
 	654807232	Chipmunk	Wwise Pitch Shifter			
 	701863527	Inside_My_Head	Wwise RoomVerb			
 	702543456	Tunnel1	Wwise Matrix Reverb			
-	712780283	Intimate_Room_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms  
-	756136927	Dialog_Dynamic	McDSP ML1			
-	767494898	Damped_Chamber_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms 
 	776837744	Born_In_1950	Wwise Parametric EQ			
-	777687596	OpenThreeEchoes	Wwise Convolution Reverb			Impulse response created by AudioEase.   © 2011 AudioEase.  All rights reserved.
-	802244248	BlueNoise_Room_02_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
-	803467813	Petite_Room_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
 	819943492	Fear_no_Evil	Wwise Harmonizer			
 	825401838	AK_Convolution_Reverb_Dark_Cathedrale_Small	Wwise Convolution Reverb			
-	833756682	HamburgHarburgerSee_Slap_01_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 
-	863670792	Cellular_Overdrive	McDSP FutzBox			
-	867808496	Emergency	McDSP FutzBox			
 	880395932	Headphones	Mastering Suite			
-	917825808	Mister_Evil	McDSP FutzBox			
-	921191769	BlueNoise_Room_03_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms  
 	927250686	Rhythmic_Talk	Wwise Tremolo			
 	930712164	Off	Mastering Suite			
-	943866016	Hamburg_Stadtpark_01_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
 	949863463	Many_Even_Harm_Notches	Wwise Flanger			
-	953102928	Stair_Way_Hall_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  
-	976499795	Crappy_Call	McDSP FutzBox			
-	992612203	MI6_Headquarters	McDSP FutzBox			
 	992902880	Small_Tiled_Room1	Wwise Matrix Reverb			
-	998958365	Hello_Mr_Bell	McDSP FutzBox			
 	1008402193	Low_Pass_20KHz	Wwise Parametric EQ			
-	1050597209	MediumChurch_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 
-	1052577282	HamburgStadtpark_Stage_Reflections_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms 
-	1077275123	HamburgHarburgerSee_Slap_02_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 
-	1095846606	LongAndComplex	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	1096258038	ForestAuterlitz_DenseClose	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	1108222942	Classic_Baseball	McDSP FutzBox			
 	1110677034	Underwater_Echoes	Wwise Stereo Delay			
 	1125262053	Blue_Distant_Echoes	Wwise Stereo Delay			
-	1139053157	DistantBuilding_MicsClose	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	1144018367	Plate_Large	Wwise RoomVerb			
-	1152728233	Brasilien_Halle_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 10ms  
 	1159390747	Room_Medium_Tiled	Wwise RoomVerb			
-	1165124324	Emergency_Channel	McDSP FutzBox			
-	1176195720	Beam_Me_Uo	McDSP FutzBox			
-	1182031195	Hail_to_the_Chief	McDSP FutzBox			
 	1182561210	Cut_3dB_10KHz	Wwise Parametric EQ			
 	1198215643	Boomerang	Wwise Tremolo			
 	1203617187	Machine_Gun_Hangar	Wwise RoomVerb			
-	1206840828	Annoying_Caller	McDSP FutzBox			
-	1213168650	Hamburg_Volksdorfer_Wald_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 9ms  
-	1218058898	Peugeot_PartnerBackClosed	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	1232017842	LR_Slap_with_CrossFeed	Wwise Stereo Delay			
 	1237275451	Octave_Up	Wwise Pitch Shifter			
 	1252796875	Light_Expander	Wwise Expander			
-	1256896915	Hamburg_Parkhaus_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  
-	1262298293	Bright_Echo_Chamber_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms 
-	1284463276	Industrial_Noize	McDSP FutzBox			
-	1285995230	Into_Thin_Air	McDSP FutzBox			
 	1291433344	Bass	Wwise Flanger			
 	1293178626	In_My_Car	Wwise Parametric EQ			
-	1297179092	Under_Pillow_Snooze	McDSP FutzBox			
-	1306053829	Hamburg_Pinguin_Buro_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  
-	1310797273	Master_Clean	McDSP ML1			
-	1311551109	Vocal_Smooth	McDSP ML1			
-	1311557695	Lost_in_a_Cathedral_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 
-	1326106763	BlueNoise_Room_03_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms  
 	1396549701	SoundBar	Mastering Suite			
-	1403632385	Dialing_For_Dollars	McDSP FutzBox			
-	1409120697	Noisy_Neighbors	McDSP FutzBox			
-	1410098599	Get_What_You_Pay_For	McDSP FutzBox			
 	1416967478	All_Buttons_IN	Wwise Compressor			
-	1422441488	Telemarkets_Standard_Issue	McDSP FutzBox			
 	1431209347	One_Tap_One_Second	Wwise Delay			
 	1431265797	Monsterize	Wwise Pitch Shifter			
-	1434847377	Ma_Bell	McDSP FutzBox			
-	1437280139	Large_Warehouse_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  
 	1443902288	_1_Second_Delay	Wwise Stereo Delay			
-	1451936678	Thumb_Knob_Tuning	McDSP FutzBox			
-	1459179808	Good_Buddy_10_4	McDSP FutzBox			
 	1459522457	Brick_Wall_Minus_1dB_Peak_Fast_Release	Wwise Peak Limiter			
-	1463676659	Family_Meeting	McDSP FutzBox			
-	1480706943	Bright_Echo_Chamber_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms 
-	1503531868	HamburgStadtpark_Stage_Reflections_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms 
-	1516512741	Ballpark_Far_Away	McDSP FutzBox			
 	1520064353	Hall_Medium_Bright	Wwise RoomVerb			
-	1521978093	Big_Church_AHP	Auro Headphone			
-	1522157149	Hamburg_Stadtpark_02_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms  
-	1525857904	Call_Before_Curfew	McDSP FutzBox			
-	1541110787	DistantEcho	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	1551236760	Small_Wooden_Room1	Wwise Matrix Reverb			
-	1566318828	Filtered_Cathedral_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 
 	1568083719	TV	Mastering Suite			
-	1572586297	Large_Warehouse_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  
-	1572628435	Phone_Home	McDSP FutzBox			
 	1588715066	Echoes_Linear	Wwise Delay			
 	1590660382	Nearly_Forever	Wwise Delay			
-	1608695667	Vocal_Louder_n_Dynamic	McDSP ML1			
-	1609411046	OpenShortTwoEchoes	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	1634225668	Hamburg_Volksdorfer_Wald_Org_Ambisonics	Wwise Convolution Reverb			NOTE: Does not sound as open as stereo version.    Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 9ms  
 	1655770832	High_Freq_Cut_11	Wwise Parametric EQ			
 	1655770833	High_Freq_Cut_10	Wwise Parametric EQ			
 	1674078407	Chorus_Like	Wwise Flanger			
 	1675424737	Extreme_Limiting_1	Wwise Peak Limiter			
 	1675424738	Extreme_Limiting_2	Wwise Peak Limiter			
 	1675424739	Extreme_Limiting_3	Wwise Peak Limiter			
-	1692375042	Look_Ma_No_Hands	McDSP FutzBox			
-	1695985725	Famous_Church_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 
 	1706684651	Plate_Medium	Wwise RoomVerb			
 	1711423976	Many_Odd_Harm_Notches	Wwise Flanger			
-	1721929831	LongSixWideEchoes	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	1726449784	Large_Hall_AHP	Auro Headphone			
 	1735130781	Aliasing	Wwise Tremolo			
-	1753698311	Famous_Church_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 
-	1756167208	Staircase	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	1759944409	Cut_3dB_100Hz	Wwise Parametric EQ			
-	1766891717	Sign_of_the_Times	McDSP FutzBox			
-	1782142158	DistantBuilding_MicsFar	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	1786655400	Snake_TV	McDSP FutzBox			
 	1820854077	Noise_Gate_Fast_Attack	Wwise Expander			
-	1824661933	Big_Room_AHP	Auro Headphone			
-	1831461191	Bathroom	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	1842579981	Reflect_Simplified	Wwise Reflect			
-	1861883076	Whats_Your_Number	McDSP FutzBox			
 	1863245162	Noise_Gate_Slow_Attack	Wwise Expander			
 	1866712626	High_Freq_Cut_8	Wwise Parametric EQ			
 	1866712627	High_Freq_Cut_9	Wwise Parametric EQ			
@@ -212,134 +93,48 @@ Effect plug-ins	ID	Name	Type				Notes
 	1866712637	High_Freq_Cut_7	Wwise Parametric EQ			
 	1866712638	High_Freq_Cut_4	Wwise Parametric EQ			
 	1866712639	High_Freq_Cut_5	Wwise Parametric EQ			
-	1870980652	Blue_Reflective_Room_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
-	1889683967	Drums_Loud	McDSP ML1			
 	1904434771	Medium_Room1	Wwise Matrix Reverb			
-	1922795580	ComplexEcho	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	1927045426	Luna_Studio_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
-	1954826754	Filtered_Cathedral_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 
-	1970344361	Medium_Church_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 
-	1972729069	Prank_Caller	McDSP FutzBox			
-	1975157802	Calling_the_Shoe_Phone	McDSP FutzBox			
 	1976939195	Deep	Wwise Flanger			
 	1990128658	Room_Medium	Wwise RoomVerb			
-	2006155104	SmoothIntimate	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	2019867529	HamburgStadtpark_Dense_Reflections_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms 
-	2022941723	HamburgStadtpark_Dense_Reflections_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms 
-	2027554746	Bright_Room_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms  
-	2036127921	Breaker_One_Niner	McDSP FutzBox			
 	2038996943	Plate_Sizzle	Wwise RoomVerb			
-	2039080384	Dialog_Maximizer_1	McDSP ML1			
-	2039080386	Dialog_Maximizer_3	McDSP ML1			
-	2039080387	Dialog_Maximizer_2	McDSP ML1			
-	2065495031	Something_Old_Something_New	McDSP FutzBox			
 	2080872166	Brick_Wall_Minus_6dB_Peak_Fast_Release	Wwise Peak Limiter			
 	2098638826	Underground_Parking1	Wwise Matrix Reverb			
-	2108510837	In_Your_Imagination	McDSP FutzBox			
-	2119457811	HamburgVolksdorferWald_Diffusion_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 9ms  
 	2135883084	Nasty_Radio	Wwise Peak Limiter			
-	2164542717	Golden_Gate_Phone	McDSP FutzBox			
 	2171127646	Hall_Conversation	Wwise RoomVerb			
 	2171939413	Dialog_Leveler_Hard	Wwise Compressor			
 	2180422931	One_Tap_Quarter_Second	Wwise Delay			
-	2183853359	Hamburg_Pinguin_Buro_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  
-	2198133169	Hallway	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	2202047219	Few_Even_Notches	Wwise Flanger			
-	2206420588	Luna_Studio_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
 	2214924486	New_AK_Convolution_Reverb	Wwise Convolution Reverb			
 	2230265344	Very_Bad_Connection	Wwise Tremolo			
-	2245396720	Gibberish	McDSP FutzBox			
 	2258521792	Brick_Wall_Minus_1dB_Peak_Slow_Release	Wwise Peak Limiter			
 	2265839006	Not_A_Yellow_Submarine	Wwise RoomVerb			
-	2301205192	Dialing_Long_Distance	McDSP FutzBox			
 	2301880513	Many_Even_Harm_Peaks	Wwise Flanger			
-	2306983855	Message_in_a_Bottle	McDSP FutzBox			
-	2323937604	Live_Room_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
-	2326579992	Hiss_Me_With_Your_Best_Shot	McDSP FutzBox			
-	2332408587	Large_Bright_Space_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
-	2336333712	Home_Movies	McDSP FutzBox			
-	2345198125	Hamburg_Fabrik_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  
-	2352968372	Foley_FX_Transparent	McDSP ML1			
-	2358985440	Peugeot_PartnerFront	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	2373816053	HamburgParkhaus_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  
-	2389409386	Vocal_Dynamic	McDSP ML1			
 	2394809124	Very_Slow_Modulation	Wwise Tremolo			
-	2420937077	NarrowShortAlley	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	2444352864	NightMode	Mastering Suite			
-	2447951448	Small_Room_AHP	Auro Headphone			
-	2474412339	Chips_n_Dip	McDSP FutzBox			
-	2501399612	Resonant_Room_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms   
-	2510930675	Hamburg_Karl_Schneider_Halle_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 
-	2511817218	Locked_In_a_Cell	McDSP FutzBox			
 	2513915904	Hall_Large	Wwise RoomVerb			
-	2514884055	Inspector_Gadget	McDSP FutzBox			
-	2518477014	As_Good_as_it_Gets	McDSP FutzBox			
-	2530182247	FireDepartment	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	2539557199	Treble	Wwise Flanger			
-	2539660297	Super_Duper	McDSP FutzBox			
 	2547645744	Boost_3dB_100Hz	Wwise Parametric EQ			
-	2556283191	StKatharinen_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 
-	2561769505	Your_Conscience	McDSP FutzBox			
-	2565621323	Cold_Caller	McDSP FutzBox			
 	2568359573	Secret_message	Wwise Harmonizer			
-	2586115183	Glassy_Chamber	McDSP FutzBox			
-	2607782584	Lecture_Hall_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
-	2616252188	Can_You_Hear_Me_Now_1	McDSP FutzBox			
-	2616252191	Can_You_Hear_Me_Now_2	McDSP FutzBox			
-	2617090757	BerlinTeldex_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
-	2619342215	Drums_Crushed	McDSP ML1			
-	2638055041	Bright_Metallic_Space_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  
 	2648499661	Hall_Medium_Dark	Wwise RoomVerb			
 	2652646462	Dialog_Leveler_Soft	Wwise Compressor			
 	2653529179	Three_Voices	Wwise Harmonizer			
 	2656259783	PA_Announcement1	Wwise Matrix Reverb			
 	2662085913	Large_Church1	Wwise Matrix Reverb			
-	2665107315	Bright_Metallic_Space_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  
 	2667647788	Single_Band_1Khz_Wide	Wwise Parametric EQ			
-	2676551150	High_School_PA	McDSP FutzBox			
-	2689042248	Attic_01	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	2689042251	Attic_02	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	2706001549	Space_Ship_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  
-	2724604034	Talk_Me_Back	McDSP FutzBox			
-	2726648993	Hamburg_Parkhaus_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  
-	2737052752	Attention_All_Shoppers	McDSP FutzBox			
 	2755291684	Pumping_and_Breathing_1	Wwise Compressor			
 	2755291686	Pumping_and_Breathing_3	Wwise Compressor			
 	2755291687	Pumping_and_Breathing_2	Wwise Compressor			
-	2770672812	Church_AHP	Auro Headphone			
-	2773775470	Double_Double	McDSP FutzBox			
-	2774187880	Mind_The_Gap	McDSP FutzBox			
-	2781002665	Hit_the_Road_Jack	McDSP FutzBox			
 	2781261543	Brick_Wall_Minus_6dB_Peak_Slow_Release	Wwise Peak Limiter			
 	2791153688	Hall_Small	Wwise RoomVerb			
-	2793905659	Family_Classics	McDSP FutzBox			
 	2805769450	Special_Effect_1	Wwise Flanger			
-	2824294167	Hamburg_Fabrik_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  
 	2849147824	Medium	Wwise RoomVerb			
-	2851955642	Vocal_Louder	McDSP ML1			
-	2864638196	Small_Standard_Room_AHP	Auro Headphone			
-	2874313760	Double_the_Distortion	McDSP FutzBox			
-	2881277415	Hamburg_Stadtpark_02_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms  
 	2891462749	Room_Medium_High_Absorbtion	Wwise RoomVerb			
 	2900412812	Robotic_Trash	Wwise RoomVerb			
-	2901222554	When_Phones_Attack	McDSP FutzBox			
-	2928304598	Gated_Metallic_Reflections_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  
 	2945072214	My_Closet	Wwise RoomVerb			
 	2949243095	Hall_Small_Bright	Wwise RoomVerb			
 	2952825346	Dual_Filters_Radio_Comm	Wwise Parametric EQ			
-	2953734959	BerlinTeldex_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
-	2955757691	Into_Thinner_Air	McDSP FutzBox			
-	2955946001	ComplexDistantEcho	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	2956205901	StKatharinen_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 
-	2957683562	Classroom	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	2976146303	TwoFarBuildings	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	2976941864	Smal_Reflection_Room_AHP	Auro Headphone			
-	2981956133	Dark_Cathedral_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  
-	2993824568	PheeeewEcho_02	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	2993824571	PheeeewEcho_01	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	2995775460	Room_Small	Wwise RoomVerb			
 	2998002419	Boost_3dB_10KHz	Wwise Parametric EQ			
-	3008492597	DistantSlaps	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	3013737254	Bass_Remover_8	Wwise Parametric EQ			
 	3013737255	Bass_Remover_9	Wwise Parametric EQ			
 	3013737256	Bass_Remover_6	Wwise Parametric EQ			
@@ -349,272 +144,56 @@ Effect plug-ins	ID	Name	Type				Notes
 	3013737260	Bass_Remover_2	Wwise Parametric EQ			
 	3013737261	Bass_Remover_3	Wwise Parametric EQ			
 	3013737263	Bass_Remover_1	Wwise Parametric EQ			
-	3017059376	Crowded_Hall_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 10ms 
-	3020876761	Teleconference_Today	McDSP FutzBox			
 	3025917178	Standard	Wwise Flanger			
 	3036946058	Inside_Your_Head	Wwise RoomVerb			
-	3041976937	Intimate_Room_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms  
 	3043085106	High_Impact	Wwise Compressor			
-	3054266423	Ford_TransitVanRear	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3059984139	Tunnel	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3065144097	Hamburg_Karl_Schneider_Halle_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 
-	3075486160	HamburgStadtpark_ER_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
 	3077109135	Dark_Cathedral_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  
-	3115551164	HamburgStadtpark_Stage_Reflections_Gated_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms 
 	3157398371	Few_Odd_Harm_Notches	Wwise Flanger			
 	3164629247	Holy	Wwise RoomVerb			
 	3198919469	NightModeStrong	Mastering Suite			
 	3209444191	Static_Sibilance_Remover_Male	Wwise Parametric EQ			
 	3216246379	Space_Dreaming	Wwise RoomVerb			
-	3233208835	Buss_Loud	McDSP ML1			
-	3235663592	Engine_Grime	McDSP FutzBox			
-	3247707937	ForestAuterlitz_DenseFar	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	3250156175	Say_what	Wwise Tremolo			
-	3250495146	Honda_ElementRear	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3270965175	Train_BlueAngel	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3289372100	Noisy_Phone	McDSP FutzBox			
 	3290519051	Aluminium_Tank	Wwise RoomVerb			
 	3332138788	Few_Even_Harm_Peaks	Wwise Flanger			
-	3340219128	Gated_Metallic_Reflections_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  
 	3354577677	Fast_LF_Tremolo	Wwise Tremolo			
-	3361485787	Brasilien_Halle_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 10ms  
-	3380986947	Colossal_Cathedral_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 
-	3382838400	Bucket_Head	McDSP FutzBox			
-	3383185710	HamburgStadtpark_ER_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
 	3395979371	Straight_Delay	Wwise Stereo Delay			
-	3399505373	Reflect_Physically_Based	Wwise Reflect			
 	3407225994	Phone_Booth	Wwise RoomVerb			
 	3442768367	Hall_Large_Dark	Wwise RoomVerb			
 	3451596814	Hall_Medium	Wwise RoomVerb			
-	3465783835	WideEcho	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	3487820010	One_Tap_Half_Second	Wwise Delay			
 	3491912472	Club_Music_Distant_02	Wwise Parametric EQ			
 	3491912473	Club_Music_Distant_03	Wwise Parametric EQ			
 	3491912475	Club_Music_Distant_01	Wwise Parametric EQ			
 	3491912478	Club_Music_Distant_04	Wwise Parametric EQ			
-	3494518574	LoudEcho	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3495314524	Lets_Do_Lunch	McDSP FutzBox			
 	3497757918	Fast_LF_Tremolo_No_Smoothing	Wwise Tremolo			
-	3507681338	Helicopter_Sikorski	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3514816286	Hamburg_Fabrik_SCOUT_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms 
-	3534777302	Keep_yer_Quarter	McDSP FutzBox			
 	3546444380	Big_Garage1	Wwise Matrix Reverb			
-	3547870212	Bright_Room_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms  
 	3559982155	Hall_Stop_Screaming	Wwise RoomVerb			
 	3563901164	Halfway_There	Wwise Tremolo			
-	3565857266	Blue_Reflective_Room_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
-	3587323186	HamburgStadtpark_Stage_Reflections_Gated_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms 
-	3602899718	Crowd_Control	McDSP FutzBox			
 	3604890626	High_Pass_60Hz	Wwise Parametric EQ			
 	3614057183	_1_Frame_Delay	Wwise Stereo Delay			
-	3632432029	LongNoEchoes	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3661650139	Medium_Church_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 
-	3672549550	Master_Soft	McDSP ML1			
 	3673681183	Large_Bright_Chamber1	Wwise Matrix Reverb			
-	3689158329	Berlin_Stadtbad_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms  
 	3701691487	Hall_Large_Bright	Wwise RoomVerb			
-	3706629458	Hamburg_Harburger_See_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 
-	3711597390	Dont_Cry_For_Me	McDSP FutzBox			
-	3725018352	Short_Hall_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms
-	3751907213	Charlie	McDSP FutzBox			
-	3763172438	Hamburg_Echo_Chamber_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  
 	3786719785	HomeCinemaHeightBoost	Mastering Suite			
-	3788459820	CloseEcho	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3788924735	Bedroom	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	3793055006	Hamburg_Stadtpark_01_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
 	3796564934	Hard_Knee_Minus_3dB_RMS	Wwise Compressor			
-	3805599527	Progressing_Backwards	McDSP FutzBox			
-	3839317109	BlueNoise_Room_01_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms 
 	3851006675	Secret_message_Distant	Wwise Harmonizer			
-	3866164289	HamburgVolksdorferWald_Diffusion_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 9ms  
-	3869805701	Ponch_and_John	McDSP FutzBox			
 	3900114836	Metal_Hangar	Wwise RoomVerb			
-	3912753292	Hamburg_Harburger_See_Org_Ambisonics	Wwise Convolution Reverb			NOTE SA: Sounds tiny and filtered compared to stereo version.    Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 
-	3919466111	BlueNoise_Room_01_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
-	3928039743	Buzz_Me_In	McDSP FutzBox			
 	3948262040	Octave_Down	Wwise Pitch Shifter			
-	3957217068	Damped_Chamber_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms 
-	3977809774	Stair_Way_Hall_Org_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  
-	4033730959	Petite_Room_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  
-	4063189299	Corridor	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	4085211115	Berlin_Stadtbad_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms  
-	4103555700	Duckin_The_Rain	McDSP FutzBox			
-	4109114357	MusicBed_Limiter_2	McDSP ML1			
-	4109114358	MusicBed_Limiter_1	McDSP ML1			
 	4113267698	Hall_Guns	Wwise RoomVerb			
-	4130597784	Hamburg_Echo_Chamber_Org_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  
 	4131355637	HomeCinema	Mastering Suite			
 	4136714357	Few_Odd_Harm_Peaks	Wwise Flanger			
 	4143868620	Bass_Remover_11	Wwise Parametric EQ			
 	4143868621	Bass_Remover_10	Wwise Parametric EQ			
-	4156197984	Digital_Breakup	McDSP FutzBox			
-	4161719729	Colossal_Cathedral_Ambisonics	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 
 	4185773483	Dual_Filters_Reset	Wwise Parametric EQ			
-	4186896960	Honda_Element	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	4190220820	Voice_CenterOnly_Lowered	Wwise Pitch Shifter			
 	4202347640	Repeat_after_me	Wwise Harmonizer			
 	4212217734	Personnel_Advisor	Wwise Stereo Delay			
-	4213309952	SchoolHall	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	4236290354	Many_Odd_Harm_Peaks	Wwise Flanger			
 	4239446561	Dual_Filters_Narrow_Bandwidth	Wwise Parametric EQ			
-	4252409404	Need_a_Land_Line	McDSP FutzBox			
-	4266099036	Alley_Intimate	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
 	4269441574	Heavy_Metal	Wwise Flanger			
-	4273684962	ForestAuterlitz_BetweenTrees	Wwise Convolution Reverb			Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.
-	4279410238	Buss_Dynamic	McDSP ML1			
 	4286906788	Gentle_Program_Compressor_Minus_20dB_RMS	Wwise Compressor			
 
 Plug-in Media	ID	Name	Source file	Type	Wwise Object Path	Notes	Data Size
-	8071170	Filtered_Cathedral_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\5B\{5BDB9F10-2D89-7F92-4A04-1363E0D16CFC}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\Filtered_Cathedral_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 	846992
-	13000250	Hamburg_Volksdorfer_Wald_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\6B\{6BD50738-87EE-4980-010D-5434DC9477DF}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\Hamburg_Volksdorfer_Wald_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 9ms  	475776
-	13019290	Ford_TransitVanRear	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\CE\{CE1010A9-1709-A360-027E-0E6F87052B0A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Transport\Ford_TransitVanRear	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	122128
-	13682022	Train_BlueAngel	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\58\{585995B9-CDBA-132D-00E8-F04F27EF9BFE}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Transport\Train_BlueAngel	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	213424
-	29232257	Hamburg_Harburger_See_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\A9\{A9F7BF00-2BAE-256D-76BA-E0EBBEA25CB6}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\Hamburg_Harburger_See_Org_Ambisonics	NOTE SA: Sounds tiny and filtered compared to stereo version.    Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 	1310976
-	30489455	ForestAuterlitz_WideOpen	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\FE\{FE9DF0F7-EA78-C530-3A34-59DDCCD8630B}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Forest\ForestAuterlitz_WideOpen	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	366032
-	31744546	Honda_Element	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8A\{8A7ED0DE-E0C0-9A1E-E222-F43842BF50A4}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Transport\Honda_Element	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	6384
-	42240585	LongSixWideEchoes	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\46\{46C1FA3A-826F-B78A-0C42-A1849D1B6AAE}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\LongSixWideEchoes	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	249616
-	44100582	Damped_Chamber_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\13\{13469863-6B69-A40E-DC78-EC20D33C7596}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Damped_Chamber_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms 	239040
-	46969464	Stair_Way_Hall_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AF\{AF2523DD-3FB3-3C09-3C30-7C4107E51F29}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Large Spaces\Stair_Way_Hall_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  	507136
-	58924823	Alley_Intimate	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\66\{6610A620-B432-C404-2B4C-D861564C6B91}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Alley\Alley_Intimate	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	152496
-	60907913	Attic_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\52\{52B3D12A-FD88-8E78-BAE1-6E2E63FF2717}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\Attic_02	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	57360
-	88530504	Berlin_Stadtbad_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\EE\{EE2238E9-EAE8-1348-AE35-B1262D4B116D}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Halls\Berlin_Stadtbad_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms  	578144
-	92795692	LongNoEchoes	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8D\{8D63048E-8C90-9308-03EC-7BEA53CEA7A6}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\LongNoEchoes	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	332272
-	99990636	Dark_Cathedral_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8F\{8FBE8B0A-16F1-460E-3D51-82F27654E6EB}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\Dark_Cathedral_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  	712784
-	101091315	Colossal_Cathedral_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BA\{BAFE2104-E8FF-F0A6-9A62-F9BB08041028}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\Colossal_Cathedral_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 	816992
-	134859353	Blue_Reflective_Room_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\97\{97F5E019-6BAF-EC5E-91A1-E73C4B32CB63}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Blue_Reflective_Room_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	274352
-	145606015	Bedroom	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\95\{95A5EDBB-40ED-A760-2A54-4B4E41F13285}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\Bedroom	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	130576
-	152920738	HamburgStadtpark_ER_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\42\{4202EFE7-4E73-90A7-E1EA-162C363593BB}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\HamburgStadtpark_ER_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	8688
-	162018684	Short_Hall_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BB\{BB798581-9467-1D4A-98BE-6425AE17E0C2}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Halls\Short_Hall_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	434832
-	185425062	Bright_Echo_Chamber_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0B\{0B186F7D-4A9E-0715-0D26-4732E0E6E2F8}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Bright_Echo_Chamber_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms 	236096
-	195840689	HamburgStadtpark_Stage_Reflections_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\A7\{A7D27C99-0C63-CEEC-83F8-099C66F76B65}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\HamburgStadtpark_Stage_Reflections_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms 	177968
-	198373678	LongDeepAlley	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2A\{2AE0D736-0454-4534-4A56-F6C5B520414A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Alley\LongDeepAlley	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	119632
-	203809616	Hamburg_Fabrik_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AF\{AFBC9B2D-BD16-9722-7324-2B96BAD447A8}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Large Spaces\Hamburg_Fabrik_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  	840208
-	209885183	PheeeewEcho_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\F4\{F4DF1BF6-B262-06E4-C07C-B04A5E746C1A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\PheeeewEcho_02	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	149712
-	215921002	Lost_in_a_Cathedral_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3C\{3C1B4ED1-1CFF-5199-3154-0DABC34A5DD3}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Cathedrals and Churches\Lost_in_a_Cathedral_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 	1705728
-	216221817	HamburgParkhaus_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E8\{E8B0DAFA-BCAA-2767-5F2E-9CC467F72D07}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Large Spaces\HamburgParkhaus_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  	1689344
-	217396452	Honda_ElementRear	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\51\{5134E569-7FCF-466F-0AA6-BFE9BBB283DD}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Transport\Honda_ElementRear	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	6640
-	223163010	MediumChurch_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B6\{B68922B5-D2D3-DCC2-D8D3-E4B3C04B1F56}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Cathedrals and Churches\MediumChurch_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 	1081904
-	227649971	BlueNoise_Room_03_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\DF\{DFEBDB95-B4CC-03C3-9384-FF03C7B793C6}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\BlueNoise_Room_03_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms  	168336
-	237532661	Intimate_Room_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D2\{D2E83619-F731-F383-1475-8BF71F394FBE}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Intimate_Room_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms  	164512
-	238341605	BlueNoise_Room_01_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\F3\{F313C4DB-7E6A-7964-30C7-8FDE0913B8FC}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\BlueNoise_Room_01_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms 	114864
-	240375163	ForestAuterlitz_BetweenTrees	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\60\{603C01A2-1487-8339-2299-E20BF442BFAA}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Forest\ForestAuterlitz_BetweenTrees	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	421104
-	242975716	Space_Ship_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\6A\{6AA7B7D1-3474-4E2C-3614-08FF2E633E1F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Large Spaces\Space_Ship_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  	850992
-	245359029	HamburgHarburgerSee_Slap_01_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8A\{8A0B21E8-688F-1E53-15BC-F5A4D757D191}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\HamburgHarburgerSee_Slap_01_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 	315616
-	276568308	Hamburg_Volksdorfer_Wald_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\4E\{4E902C52-1EA4-F302-6F1D-83AF7341035F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\Hamburg_Volksdorfer_Wald_Org_Ambisonics	NOTE: Does not sound as open as stereo version.    Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 9ms  	997120
-	294815814	SmoothIntimate	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B9\{B9150FA0-5BCC-31CE-DE1A-EE7FFCBAAFCC}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\SmoothIntimate	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	258624
-	299482527	HamburgVolksdorferWald_Diffusion_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\07\{07C3EF4B-E1B6-B18F-6784-F1C10012758F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\HamburgVolksdorferWald_Diffusion_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 9ms  	220224
-	304471121	Gated_Metallic_Reflections_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\31\{31EDCC81-71B3-885D-06C3-683F9A04C442}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Gated_Metallic_Reflections_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  	416640
-	306701854	BerlinTeldex_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\96\{96382B3B-3E2D-C8F9-0458-1B20F599495F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Halls\BerlinTeldex_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	1070400
-	326278810	Hamburg_Parkhaus_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C1\{C1DC5C88-6A97-C0C1-A7FC-AFE017BDA6FD}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Large Spaces\Hamburg_Parkhaus_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  	1058080
-	335771893	Bathroom	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3E\{3E630325-16A8-14D1-935C-D432D67735D0}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\Bathroom	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	120512
-	337245058	HamburgVolksdorferWald_Diffusion_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8A\{8A15E1AE-E4D7-ED93-4F73-6409CAE89F98}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\HamburgVolksdorferWald_Diffusion_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 9ms  	454400
-	352265224	Lecture_Hall_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B0\{B0BB8D21-74E3-F048-23C4-A4024D527F25}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Halls\Lecture_Hall_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	1676288
-	358577337	BlueNoise_Room_02_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\67\{67574FC4-8CB9-4E19-D086-38985FCCEFDF}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\BlueNoise_Room_02_Org_Ambisonics	NOTE: Sounds filtered    Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms 	550384
-	358895006	Blue_Reflective_Room_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\A7\{A7AD6F6A-F46D-32E8-EA40-FA09D71F6552}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Blue_Reflective_Room_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	131616
-	364607080	LongAndComplex	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\4E\{4E38125D-EC96-8D0A-B607-E389E3C8FF74}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\LongAndComplex	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	208624
-	393877766	Petite_Room_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\51\{51DA1272-5D37-4457-B935-70572C6441D7}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Petite_Room_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	437696
-	414572835	Medium_Church_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\5C\{5C552931-AEEA-B278-E348-AB80E2558D4F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Cathedrals and Churches\Medium_Church_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 	989232
-	417701481	Brasilien_Halle_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3F\{3FE2B111-9861-4BEA-BA71-6DED395C61B3}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Halls\Brasilien_Halle_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 10ms  	495776
 	420614766	AK_Convolution_Reverb_Dark_Cathedrale_Small	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\ED\{EDABBC9C-DF05-5B3C-2D1E-C21B5B51F324}.wem	Wwise Convolution Reverb (Shared)	\Effects\Default Work Unit\AK_Convolution_Reverb_Dark_Cathedrale_Small		189888
-	427082242	EquallySpacedEchoes	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\26\{26103D60-36E1-B1E2-FC9D-950B18098035}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\EquallySpacedEchoes	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	210288
-	432605131	OpenShortTwoEchoes	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\76\{761E481E-F3A3-53C9-5F39-35CB483B86BD}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\OpenShortTwoEchoes	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	195808
-	433739779	HamburgStadtpark_Stage_Reflections_Gated_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\58\{58A447CB-D449-A65C-6319-6D14EB5EF4F0}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\HamburgStadtpark_Stage_Reflections_Gated_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms 	82576
-	435591620	LivingRoom_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\DA\{DA8E7B1E-75C6-DB01-C545-BF0A428EFAC9}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\LivingRoom_01	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	139792
-	442790649	Hamburg_Karl_Schneider_Halle_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\98\{98F4993D-A9FF-DEF3-6508-C18E67C70187}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Hamburg_Karl_Schneider_Halle_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 	784624
-	456875588	Large_Warehouse_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\A3\{A3ED006C-FB9D-253A-B427-A12D7C475830}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Large Spaces\Large_Warehouse_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  	1191536
-	470537586	Famous_Church_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\06\{069D3BBB-E616-C454-3D73-BE93A82706DB}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Cathedrals and Churches\Famous_Church_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 	1395360
-	477192351	Resonant_Room_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\FE\{FE73ACA8-C525-688D-CEAC-FFE7A84D3E93}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Resonant_Room_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms   	47888
-	480496863	Hallway	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3C\{3CF8572B-7386-91AD-5C15-0A162303FFE6}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\Hallway	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	172096
-	507160656	ForestAuterlitz_DenseFar	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\58\{583CC76A-C3B1-AF37-6F99-AB3CCB0E7AE3}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Forest\ForestAuterlitz_DenseFar	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	564848
-	507165728	Bright_Room_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3B\{3BB7FCCE-EBBB-5157-8D86-59F703458948}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Bright_Room_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms  	494592
-	512577206	Bright_Echo_Chamber_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D8\{D86F9216-F983-47FB-8DD5-8DAF8CBE8DD9}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Bright_Echo_Chamber_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms 	511968
-	512867118	WideWithCars	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\24\{24FF4EEC-45F1-C4A5-4C33-BF463D4E0614}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\WideWithCars	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	122288
-	522077337	SchoolHall	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C3\{C3FCB250-3ACA-79A9-BC2B-D2617188F4CF}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\SchoolHall	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	515568
-	531628645	Hamburg_Fabrik_SCOUT_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\26\{26C89FBC-A8EE-F45A-C450-7A79DD2CBC07}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Large Spaces\Hamburg_Fabrik_SCOUT_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms 	767248
-	531719186	Hamburg_Stadtpark_02_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AF\{AF2ACFC7-B14D-AF1B-C17A-7ABA75ADBBA4}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\Hamburg_Stadtpark_02_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms  	576720
-	535111107	Lost_in_a_Cathedral_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\ED\{ED079503-B7E2-8E54-C4B2-E1D5AAA39F81}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\Lost_in_a_Cathedral_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 	884256
-	535840714	HamburgStadtpark_Dense_Reflections_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C3\{C357792C-D7EF-5AA9-C3C9-4686E8263ECE}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\HamburgStadtpark_Dense_Reflections_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms 	295600
-	536838777	SlapsEchoClose	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AA\{AA9F6FBB-A11C-83A0-96A4-4A778714CA09}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\SlapsEchoClose	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	137792
-	538281099	Damped_Chamber_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\33\{33F50D8F-CF3C-4AA5-5744-DE97F0EED554}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Damped_Chamber_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms 	96384
-	539027192	Space_Ship_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\68\{68AADE8D-F1E5-F5D7-6FD2-D98567ABA711}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Large Spaces\Space_Ship_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  	459280
-	569254387	Tunnel	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3B\{3BAB79FB-A378-D68D-1499-D51D5E21DF78}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Tunnel\Tunnel	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	250992
-	569393832	Peugeot_PartnerFront	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\55\{5596E8FE-486D-4042-6132-61E5DA5C9E7C}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Transport\Peugeot_PartnerFront	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	62720
-	584011173	Peugeot_PartnerBackClosed	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BB\{BBD289E2-B0CC-C4A7-EFF5-8355E915F127}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Transport\Peugeot_PartnerBackClosed	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	59648
-	584321412	Hamburg_Stadtpark_01_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E9\{E9F671D4-5809-7E5F-3AC0-66AFE980C0AD}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\Hamburg_Stadtpark_01_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	201264
-	591410993	StKatharinen_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0B\{0B27CA07-1020-4DC1-E9C8-2A1676E3E4E9}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Cathedrals and Churches\StKatharinen_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 	1826896
-	596456986	TwoFarBuildings	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\90\{90CA8892-0A5B-935A-A4DE-13BE6CD0A0D9}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\TwoFarBuildings	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	99536
-	601506560	Berlin_Stadtbad_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\49\{49D0A43F-27E4-8333-1D36-EA648115906D}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Halls\Berlin_Stadtbad_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms  	1071120
-	602284699	FireDepartment	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\DB\{DB6C04A2-A0CE-EB29-BB2E-84445A2DC062}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Misc\FireDepartment	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	156832
-	609174261	Crowded_Hall_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\02\{021ED0AF-01F1-B832-22B1-7FFF09E52884}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Halls\Crowded_Hall_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 10ms 	545120
-	612082618	HamburgHarburgerSee_Slap_02_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\EB\{EBC701F6-14E2-1691-1C68-E8D0AD3625E1}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\HamburgHarburgerSee_Slap_02_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 	228912
-	614801275	Live_Room_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\60\{60E87E7F-4489-9A07-23F7-DFD6F14C6E99}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Live_Room_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	642048
-	625141396	Stair_Way_Hall_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\99\{99A0487D-3ABB-718C-F3C1-21475DC9CC27}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Large Spaces\Stair_Way_Hall_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  	995008
-	634339356	Hamburg_Karl_Schneider_Halle_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D0\{D07F5519-5C43-BEB3-DD9F-B0C71BC53A0C}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Hamburg_Karl_Schneider_Halle_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 	355936
-	637171648	Intimate_Room_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D4\{D49B12C2-9D27-59ED-C067-1BA30941358F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Intimate_Room_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms  	340384
-	647831537	Corridor	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\7D\{7D3497B6-6C1F-D0C7-2302-C51C55DFAD2C}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\Corridor	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	151200
-	654850748	BerlinTeldex_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B4\{B4AEF919-C966-39C8-AC13-571242DE23A9}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Halls\BerlinTeldex_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	508192
-	659069708	Famous_Church_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\79\{797F8E9B-56ED-4FFF-B851-9FDFF23291E3}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\Famous_Church_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 	700992
-	667537848	Hamburg_Echo_Chamber_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8A\{8AB51B84-EBEB-D3C6-6BB2-E85B2E7BE579}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Hamburg_Echo_Chamber_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  	206384
-	680452062	BlueNoise_Room_03_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\99\{992F5F06-34F4-D8F1-403E-E00AF9C2437E}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\BlueNoise_Room_03_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms  	78480
-	685264471	Short_Hall_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\9C\{9C2F1794-D661-B166-3E58-0FDDCD2AF4BE}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Halls\Short_Hall_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	907040
-	685400320	Helicopter_Sikorski	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B7\{B743C579-0BEB-2A60-9F61-82A571FC1F74}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Transport\Helicopter_Sikorski	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	16384
-	685455980	HamburgStadtpark_Stage_Reflections_Gated_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0E\{0E93B27B-AD12-490F-577B-ACA1B12468ED}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\HamburgStadtpark_Stage_Reflections_Gated_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms 	158096
-	689311070	Crowded_Hall_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C0\{C0D0C936-4ED1-0F1B-EE6B-21E58BFA9E07}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Halls\Crowded_Hall_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 10ms 	1054064
-	689379105	Dark_Hall_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AD\{AD89CE7B-8229-E523-EDAF-609034B0220D}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Halls\Dark_Hall_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	665488
-	702837950	NarrowShortAlley	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\1B\{1BD1494B-C4C9-0669-D563-EB8300E68471}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Alley\NarrowShortAlley	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	143696
-	723690630	Hamburg_Stadtpark_01_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\01\{014DF54C-0E36-E63C-455D-8D21B8AA8815}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\Hamburg_Stadtpark_01_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	394416
-	726190851	ComplexEcho	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\A7\{A7B6AD3C-1AC7-64D3-900C-EC5BAC5BB928}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\ComplexEcho	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	204512
-	733994131	Large_Bright_Space_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\27\{27F98E63-A30C-6141-D552-DD0AD76367D6}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Halls\Large_Bright_Space_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	505376
-	734720824	Hamburg_Fabrik_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8B\{8B81C880-6D42-AC52-059C-D96AF964219B}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Large Spaces\Hamburg_Fabrik_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  	378352
-	749103418	Live_Room_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\39\{39AEDF1A-52B6-9C77-51F1-F55259EA0A59}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Live_Room_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	320624
-	757112749	DistantSlaps	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E7\{E735F19B-7D7C-D7C9-670B-3264D7168F99}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\DistantSlaps	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	160496
-	765420740	Luna_Studio_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\67\{67C5E986-F069-4D3B-0906-EB91D8B3745F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Luna_Studio_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	290384
-	765520478	Large_Warehouse_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8B\{8B991B54-C249-2793-74AC-51ED282A6273}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Large Spaces\Large_Warehouse_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  	441376
-	766552005	Staircase	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\F1\{F1CB0461-B48E-8B59-8A29-DA94B6D4FA7E}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\Staircase	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	444176
-	767661235	HamburgStadtpark_Stage_Reflections_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\9A\{9A9B8F5D-DF51-66B9-EB0F-6D1968029DB0}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\HamburgStadtpark_Stage_Reflections_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms 	342192
-	768857212	Gated_Metallic_Reflections_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8A\{8ACFC734-5C2E-6CDD-63B9-765623517011}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Gated_Metallic_Reflections_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  	815152
-	783448466	PheeeewEcho_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D3\{D3683BA9-71A0-7048-D2E2-1692B360B778}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\PheeeewEcho_01	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	131040
-	784884764	WideEcho	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\22\{2214073B-C329-D2A5-65F2-A1338F873685}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\WideEcho	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	148176
-	785966779	HamburgParkhaus_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\23\{23D6ADF9-8FD7-3640-4159-1872D2584450}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Large Spaces\HamburgParkhaus_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  	833664
-	789847363	DistantEcho	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\CA\{CA7469D7-F3A7-52D4-ACF2-30590873E65E}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\DistantEcho	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	136240
-	792360875	Filtered_Cathedral_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\25\{25472975-DB91-C9BE-B11A-AECB7783E83A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Cathedrals and Churches\Filtered_Cathedral_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 	1239360
-	803100438	OpenThreeEchoes	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8D\{8D405D6D-CBC5-14E2-48D2-226ED15E8304}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\OpenThreeEchoes	Impulse response created by AudioEase.   © 2011 AudioEase.  All rights reserved.	227280
-	811934406	Bright_Metallic_Space_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8D\{8DAF2FE9-7C7F-D752-C956-E29FCE902BF2}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Large Spaces\Bright_Metallic_Space_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  	533504
-	822076648	HamburgStadtpark_ER_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C0\{C00513D1-9193-13D0-4CD1-38E5091DDDF5}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\HamburgStadtpark_ER_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	20608
-	825862339	Hamburg_Fabrik_SCOUT_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\36\{36CD8CD1-49DA-DA58-111F-6CEC1C8ECF3A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Large Spaces\Hamburg_Fabrik_SCOUT_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms 	267344
-	828807711	Bright_Room_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3B\{3B3C5FD3-3BF6-E074-80F2-44B1EC5D7FCB}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Bright_Room_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms  	265056
-	830379118	BlueNoise_Room_02_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E7\{E7576FD5-3A36-9C66-CF37-935E27BEC145}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\BlueNoise_Room_02_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	299136
-	832296042	CloseEcho	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\46\{4657A03C-270A-D233-EC5E-BD8FDCA71B6A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\CloseEcho	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	142832
-	841364558	Colossal_Cathedral_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E3\{E30BD8C6-0B87-86FD-ED24-BE592F9BCA2F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Cathedrals and Churches\Colossal_Cathedral_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 	1591104
-	847080287	ComplexDistantEcho	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\4A\{4A966FAE-01B1-E370-6052-AC61A9A50969}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\ComplexDistantEcho	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	173296
-	867122333	LivingRoom_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E4\{E47EDE4B-BCFC-7148-F030-C18371EE9D83}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\LivingRoom_02	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	145184
-	872300933	Dark_Cathedral_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AF\{AFA04E44-FBB3-E56F-F0F0-AD89A275EC5A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Cathedrals and Churches\Dark_Cathedral_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  	1291376
-	873684731	ForestAuterlitz_DenseClose	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B0\{B02BA79D-16B2-481C-B966-3C3056C6F552}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Forest\ForestAuterlitz_DenseClose	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	415456
-	878966322	Luna_Studio_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\EF\{EF400409-39D4-E2A1-6B2B-EBE50CD7842C}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Luna_Studio_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	605696
-	879974926	Hamburg_Pinguin_Buro_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0B\{0B1AAF0D-68A1-78B1-AC98-3A322B20BE4D}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Hamburg_Pinguin_Buro_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  	48768
-	884303024	BlueNoise_Room_01_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\44\{442E4651-53C0-9CAA-AF39-723DC523E7B2}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\BlueNoise_Room_01_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	255920
-	894434445	Hamburg_Echo_Chamber_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8D\{8D0AC1F1-A9C1-040F-C7BE-D5C3292208C7}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Hamburg_Echo_Chamber_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  	453600
-	901100412	Resonant_Room_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\88\{88C08C14-6C61-BA5E-99BC-4B92BA315F48}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Resonant_Room_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms   	109456
-	926581161	Hamburg_Harburger_See_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\F9\{F9387801-C334-F6BF-2C2A-A2B95CA57898}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\Hamburg_Harburger_See_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 	210096
-	930622549	HamburgHarburgerSee_Slap_01_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\EC\{ECCA88FA-0B94-E3C6-3205-4523507E6FCC}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\HamburgHarburgerSee_Slap_01_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 	122928
-	932825353	DistantBuilding_MicsClose	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2C\{2CF61173-3DBA-C38A-398B-B550CB812F7C}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Field\DistantBuilding_MicsClose	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	272224
-	941961704	DistantBuilding_MicsFar	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\5D\{5DB23C5D-30E5-2BA3-55AC-3880BDDC62E1}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Field\DistantBuilding_MicsFar	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	354912
-	966657340	HamburgHarburgerSee_Slap_02_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\F6\{F613070A-C1D4-68C3-0333-90122F0F4D59}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Exteriors\HamburgHarburgerSee_Slap_02_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 2ms 	555280
-	1002455079	Hamburg_Stadtpark_02_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\EE\{EE243500-C953-BEBE-96CC-4D2E67A5321E}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\Hamburg_Stadtpark_02_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 3ms  	292288
-	1005069349	StKatharinen_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\12\{1280A31A-0F91-718D-E633-F60AE7D8122E}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\StKatharinen_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms 	940768
-	1005512506	Hamburg_Pinguin_Buro_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\EC\{EC89148C-262D-C615-B838-F1E3E498F80F}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Rooms\Hamburg_Pinguin_Buro_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 0ms  	96640
-	1010311289	Hamburg_Parkhaus_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\5C\{5CFF676A-332D-9EC7-1BBB-11CAF5AF81CB}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Large Spaces\Hamburg_Parkhaus_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 4ms  	571136
-	1010865615	MediumChurch_Org_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B0\{B02E45D4-3535-17F5-0E63-82D018E55103}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\MediumChurch_Org_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 	513056
-	1012937349	Petite_Room_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\95\{959A6873-0707-5BAA-E843-B092B8E2610C}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Rooms\Petite_Room_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms  	210480
-	1016049244	Dark_Hall_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\20\{203F9003-719F-E70A-1BCA-B02F6E989C50}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Halls\Dark_Hall_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	1766672
-	1035327887	Medium_Church_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\16\{163CECB5-2746-8A04-7FFA-811F6BADC262}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\Medium_Church_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 5ms 	517184
-	1036228012	Brasilien_Halle_Org_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\6C\{6CFFD41E-300A-BC23-3C26-0966033C7A52}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Halls\Brasilien_Halle_Org_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 10ms  	969024
-	1036982009	Attic_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\DD\{DD4774D2-8DF0-A13A-A1E7-3E0FC66013A5}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\Attic_01	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	57088
-	1037099072	LoudEcho	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\52\{52925BE1-DD57-D4B1-2283-3007424ADCEC}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Outdoor Street\LoudEcho	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	105056
-	1040532611	Large_Bright_Space_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\A3\{A3085997-7D0F-E9DF-3285-4711BCE4E757}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Halls\Large_Bright_Space_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	1111120
-	1045271282	Lecture_Hall_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\4E\{4E399FFF-692A-BC5C-31D2-41EDFA730B3B}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Halls\Lecture_Hall_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 6ms	803456
-	1051291759	HamburgStadtpark_Dense_Reflections_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D8\{D87F0674-764A-7D0C-5DA2-97EE481E349A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Exteriors\HamburgStadtpark_Dense_Reflections_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 8ms 	150704
-	1054055703	Beetle	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\92\{92B59997-5C18-6470-28D6-49EC329AB85B}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Transport\Beetle	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	18800
-	1064209159	Bright_Metallic_Space_Ambisonics	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\45\{45FFD707-B420-45EB-FBAB-CE48174C7897}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Ambisonics\Large Spaces\Bright_Metallic_Space_Ambisonics	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 7ms  	1059792
-	1065017050	Classroom	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AD\{ADEA3F23-9499-7460-D980-07E85A26C46A}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory Altiverb - Outdoor and More\Altiverb - Outdoor and More\Domestic\Classroom	Impulse response created by AudioEase. © 2011 AudioEase.  All rights reserved.	111888
+	1005069349	Dark_Cathedral_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8F\{8FBE8B0A-16F1-460E-3D51-82F27654E6EB}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\Dark_Cathedral_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  	712784
 
