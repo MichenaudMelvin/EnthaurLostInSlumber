@@ -3301,6 +3301,24 @@
 									</MultiSwitchEntry>
 								</Local>
 							</Reference>
+							<Reference>
+								<Local>
+									<MultiSwitchEntry Name="" ID="{1ECC8B91-D398-4820-9B1A-5C08DAD15392}">
+										<ReferenceList>
+											<Reference Name="AudioNode">
+												<ObjectRef Name="PC_Lvl1" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+											</Reference>
+										</ReferenceList>
+										<ObjectLists>
+											<ObjectList Name="EntryPath">
+												<Reference>
+													<ObjectRef Name="SW_To_Lv1" ID="{C81D7507-C218-4A58-ACE7-D1CD450154B6}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
+												</Reference>
+											</ObjectList>
+										</ObjectLists>
+									</MultiSwitchEntry>
+								</Local>
+							</Reference>
 						</ObjectList>
 					</ObjectLists>
 				</MusicSwitchContainer>

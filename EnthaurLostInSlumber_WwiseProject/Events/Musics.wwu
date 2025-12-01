@@ -222,12 +222,12 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="AKE_Lvl1" ID="{C09CA8DA-D4F5-4FCE-8AF5-65FDEEC3CA9E}">
+				<Event Name="AKE_Music" ID="{C09CA8DA-D4F5-4FCE-8AF5-65FDEEC3CA9E}">
 					<ChildrenList>
-						<Action Name="" ID="{D29FA593-003C-4112-A659-4AD5E173C628}" ShortID="792167312">
+						<Action Name="" ID="{8FA226A8-5F42-4D51-90C0-21D5A65A517A}" ShortID="573082125">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="PC_Lvl1" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+									<ObjectRef Name="New Music Switch Container" ID="{60DEDBE0-ADC5-4DAA-9B45-2E4FE69AA8A5}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
