@@ -96,6 +96,9 @@ protected:
 	UPROPERTY()
 	TArray<FRotator> InterInitialRotations;
 
+	UPROPERTY()
+	TArray<UInstancedStaticMeshComponent*> MeshesToUse;
+
 	UPROPERTY(EditDefaultsOnly, Category="Door")
 	TObjectPtr<UCurveFloat> DropCurve;
 
