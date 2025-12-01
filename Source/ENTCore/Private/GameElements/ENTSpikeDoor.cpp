@@ -77,6 +77,18 @@ void AENTSpikeDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	float MeshWidth = InterMeshesA->GetStaticMesh()->GetBoundingBox().GetSize().X * SpacingFactor;
+	int32 NumMeshes = FMath::FloorToInt(DoorWidth / MeshWidth);
+	for (int32 i = 0; i < NumMeshes; ++i)
+	{
+		if (InterMeshFX)
+		{
+			FVector FXPos = InterInitialRelativeLocations[i] + FVector(-FXHeight, 0, 0);
+			UNiagaraComponent* FX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshesToUse[i], NAME_None, FXPos,InterInitialRotations[i],EAttachLocation::KeepRelativeOffset,false, false);
+			InterMeshFXComponents.Add(FX);
+		}
+	}
+
 	if (DropCurve)
 	{
 		FOnTimelineFloat UpdateEvent;
@@ -141,15 +153,9 @@ void AENTSpikeDoor::GenerateInterMeshes()
 
 		MeshToUse->AddInstance(FTransform(RandRot, PosRel, FVector::OneVector), false);
 
-		if (InterMeshFX)
-		{
-			FVector FXPos = PosRel + FVector(-FXHeight, 0, 0);
-			UNiagaraComponent* FX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshToUse, NAME_None, FXPos,RandRot,EAttachLocation::KeepRelativeOffset,false, false);
-			InterMeshFXComponents.Add(FX);
-		}
-
 		InterInitialRotations.Add(RandRot);
 		InterInitialRelativeLocations.Add(PosRel);
+		MeshesToUse.Add(MeshToUse);
 
 		float DistToCenter = FVector::Dist(PosRel, Center);
 		float Weight = 1.f - FMath::Clamp(DistToCenter / MaxDist, 0.f, 1.f);
@@ -232,7 +238,10 @@ void AENTSpikeDoor::CloseDoor()
 
 	for (UNiagaraComponent* Comp : InterMeshFXComponents)
 	{
-		Comp->Activate();
+		if (Comp)
+		{
+			Comp->Activate();
+		}
 	}
 
 	bIsOpened = !bIsOpened;
