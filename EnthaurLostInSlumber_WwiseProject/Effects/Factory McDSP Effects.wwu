@@ -2,6 +2,13 @@
 <WwiseDocument Type="WorkUnit" ID="{C495E5B0-5DF1-4961-BC6A-4C9887E70704}" SchemaVersion="123">
 	<Effects>
 		<WorkUnit Name="Factory McDSP Effects" ID="{C495E5B0-5DF1-4961-BC6A-4C9887E70704}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Inclusion" Type="bool">
+					<ValueList>
+						<Value>False</Value>
+					</ValueList>
+				</Property>
+			</PropertyList>
 			<ChildrenList>
 				<Folder Name="McDSP FutzBox" ID="{74E8698D-255F-4063-AC4E-1CB2AB78D46F}" ShortID="401436544">
 					<ChildrenList>

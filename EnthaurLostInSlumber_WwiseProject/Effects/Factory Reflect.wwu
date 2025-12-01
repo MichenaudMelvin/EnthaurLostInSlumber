@@ -2,6 +2,13 @@
 <WwiseDocument Type="WorkUnit" ID="{923039AD-F8B4-46D4-BDA7-CB5A6EE595E0}" SchemaVersion="123">
 	<Effects>
 		<WorkUnit Name="Factory Reflect" ID="{923039AD-F8B4-46D4-BDA7-CB5A6EE595E0}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Inclusion" Type="bool">
+					<ValueList>
+						<Value>False</Value>
+					</ValueList>
+				</Property>
+			</PropertyList>
 			<ChildrenList>
 				<Effect Name="Reflect" ID="{37779A87-4754-4420-8175-3236FA46AA12}" PluginName="Wwise Reflect" CompanyID="0" PluginID="171" PluginType="3">
 					<PropertyList>

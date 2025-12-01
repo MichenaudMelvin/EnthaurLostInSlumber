@@ -4,12 +4,9 @@
 #include "Player/States/ENTCharacterFallState.h"
 
 #include "AkGameplayStatics.h"
-#include "AkRtpc.h"
-#include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/ENTDefaultCharacter.h"
 #include "Components/CapsuleComponent.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/ENTDefaultPlayerController.h"
 #include "Player/States/ENTCharacterStateMachine.h"
