@@ -138,6 +138,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Foliage", meta = (Units = s))
 	float GrowthDuration = 3.0f;
 
+	UPROPERTY()
+	bool bShouldFoliagePlay;
+
 	FTimeline FoliageTimeline;
 
 	void TriggerLinkedObjects(TMap<AActor*, ENerveReactiveInteractionType> ObjectReactive);
