@@ -79,6 +79,8 @@ void AENTAmberOre::BeginPlay()
 
 #endif
 
+	bShouldFoliagePlay = bIsEmpty;
+
 	FOnTimelineFloat UpdateEvent;
 	FOnTimelineEvent FinishedEvent;
 
@@ -262,7 +264,7 @@ void AENTAmberOre::FillAmberUpdate(float Alpha)
 
 void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
 {
-	if (!Foliage)
+	if (!Foliage || !bShouldFoliagePlay)
 	{
 		return;
 	}
