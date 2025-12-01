@@ -2584,6 +2584,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<RandomSequenceContainer Name="SFX_Sinew_Tense" ID="{72C69E25-20E8-4F13-8332-0C58C3E80753}" ShortID="684628897">
+											<PropertyList>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-5</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -2699,6 +2706,11 @@
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
 								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 								<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 								<Property Name="OverrideOutput" Type="bool" Value="True"/>
@@ -3755,31 +3767,6 @@
 						</BlendContainer>
 					</ChildrenList>
 				</ActorMixer>
-				<Sound Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{101DF8DD-6286-44B0-BC28-9BB399CB23B3}" ShortID="390036540">
-					<PropertyList>
-						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-					</PropertyList>
-					<ReferenceList>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-						</Reference>
-					</ReferenceList>
-					<ChildrenList>
-						<AudioFileSource Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{6C4BEED0-0D2F-4289-AAC1-82A8750D06F8}">
-							<Language>SFX</Language>
-							<AudioFile>Enthaur_Music_Lvl1_105Bpm_LP.wav</AudioFile>
-							<MediaIDList>
-								<MediaID ID="998349515"/>
-							</MediaIDList>
-						</AudioFileSource>
-					</ChildrenList>
-					<ActiveSourceList>
-						<ActiveSource Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{6C4BEED0-0D2F-4289-AAC1-82A8750D06F8}" Platform="Linked"/>
-					</ActiveSourceList>
-				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>
