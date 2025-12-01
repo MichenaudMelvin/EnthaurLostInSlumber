@@ -907,6 +907,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_PRBite" ID="{EDFCEA97-7CCB-4DE5-BFD7-F05376D73CCE}">
+							<ChildrenList>
+								<Action Name="" ID="{3AD57ADB-1BC2-4C36-A875-30F0CAA8F4D7}" ShortID="288836759">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Parasite_Bite" ID="{2C030FEE-95D3-4185-AA46-6375B0945D90}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">

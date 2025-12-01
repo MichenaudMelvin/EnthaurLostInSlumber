@@ -2906,7 +2906,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>5</Value>
+												<Value>8</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -2942,12 +2942,17 @@
 										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 										<Property Name="UserAuxSendHPF0" Type="int16">
 											<ValueList>
-												<Value>18</Value>
+												<Value>26</Value>
+											</ValueList>
+										</Property>
+										<Property Name="UserAuxSendVolume0" Type="Real64">
+											<ValueList>
+												<Value>4</Value>
 											</ValueList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>4</Value>
+												<Value>8</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>

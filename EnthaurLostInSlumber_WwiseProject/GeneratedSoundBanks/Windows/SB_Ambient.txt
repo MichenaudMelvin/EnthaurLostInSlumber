@@ -2,6 +2,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	210587672	AKE_Growl			\SFX\Ambient\AKE_Growl	
 	399787901	AKE_WeakenedZone			\SFX\Ambient\AKE_WeakenedZone	
 	1339783499	AKE_Breath			\SFX\Ambient\AKE_Breath	
+	1605419071	AKE_Heartbeat			\SFX\Ambient\AKE_Heartbeat	
 	1697351989	AKE_FleshWall			\SFX\Ambient\AKE_FleshWall	
 	2551274193	AKE_CorruptedZone			\SFX\Ambient\AKE_CorruptedZone	
 	2650638779	AKE_Village			\SFX\Ambient\AKE_Village	
@@ -23,14 +24,17 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	106510936	AMB_Heartbeat_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\69\{69DBD403-67D4-8057-C75D-F6F66C49307D}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Heartbeat_LP		381988
 	113684722	AMB_BREATH_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BC\{BC4198B8-0F85-2E53-979E-A4D28B8799F6}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_02		2458996
 	118041272	AMB_BREATH_07	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3D\{3DF201E4-B1AF-6709-60D2-14B4BCC868C4}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_07		2603268
+	182306658	AMB_HeartBeat_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\18\{183628DF-3BEC-A38A-2059-D542EFDAE2B5}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Heartbeat\AMB_HeartBeat_02		958056
 	215594251	AMB_Pad_Necrosed_LP_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\28\{28045F6D-1BAF-4662-0C59-AC4960A862B9}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_03		5842764
 	237539604	AMB_FleshWall_04_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B7\{B7FF760B-1285-1C51-261B-F81D93B123DA}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_FleshWall\AMB_FleshWall_04_LP		1432148
+	269421901	AMB_HeartBeat_04	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\4E\{4E1187A0-F632-8BFE-53A1-27F1F8DE85A6}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Heartbeat\AMB_HeartBeat_04		796692
 	427151800	AMB_BREATH_06	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\37\{37E95FD6-0EB7-FB66-429C-1217CB7D8EF3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_06		1982056
 	452759638	AMB_Pad_01_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C7\{C75BEDBD-9EEB-4B10-6192-A81EFE78DAD4}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_01_LP		19968096
 	481136108	AMB_Pad_Necrosed_LP_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\3D\{3D7CD4A4-3EA2-11A9-6DE9-0B445E86A143}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_02		7576260
 	535431809	AMB_Pad_Village_01_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\F5\{F52D9AA6-829D-5703-E77F-F0BB9AADEFD3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Village\AMB_Pad_Village_01_LP		2771580
 	540471279	AMB_FleshWall_03_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\4B\{4B6F84DF-F4A1-6C3F-CD3A-E3A2812E9661}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_FleshWall\AMB_FleshWall_03_LP		869936
 	610405175	AMB_Growl	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\FD\{FD24ADA8-0B76-6E66-4D27-57B44205A739}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Growl		1042368
+	617557594	AMB_HeartBeat_03	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\F9\{F9FA6A7E-32F6-6628-55E2-60395F05BDE9}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Heartbeat\AMB_HeartBeat_03		939384
 	630202445	AMB_Pad_04_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\4C\{4C088803-B6C9-A382-8C2C-6EC6934FD4F3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_04_LP		4987064
 	659478804	AMB_FleshWall_02_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0F\{0F0BA2EC-837D-6128-1112-903FDA48E80E}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_FleshWall\AMB_FleshWall_02_LP		1792816
 	678510795	AMB_BREATH_04	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\AE\{AE25B41D-9EF0-33DF-FC53-8ECC1A0B07D2}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_04		2218708
@@ -43,6 +47,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	879024324	AMB_Pad_02_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\97\{97D10EEB-9667-A63A-9934-16A5FFE8B640}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Healty\AMB_Pad_02_LP		4318992
 	964612303	AMB_BREATH_10	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\00\{0065A589-7D0D-1AD7-EE1F-4567FDA71B67}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_10		2248288
 	976737059	AMB_Pad_Village_02_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\96\{9647564F-DF68-75FD-9189-B7D1F3355548}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Village\AMB_Pad_Village_02_LP		1244248
+	1055324882	AMB_HeartBeat_01	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\64\{64AB094B-0CC9-D831-AC77-D42D18CA4D88}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Heartbeat\AMB_HeartBeat_01		963976
 	1059098210	AMB_BREATH_05	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\96\{96229D84-843E-D15C-6734-E79516AADD1B}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_05		2070800
 	1066587594	AMB_FleshWall_01_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C1\{C111D854-3891-1DEF-53BE-84D2F679F075}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_FleshWall\AMB_FleshWall_01_LP		1248096
 

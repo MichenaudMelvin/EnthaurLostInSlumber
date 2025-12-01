@@ -1899,7 +1899,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+							<ObjectRef Name="Bus_Music" ID="{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 						</Reference>
 						<Reference Name="TransitionRoot">
 							<Custom>
@@ -3025,20 +3025,6 @@
 							</Reference>
 							<Reference>
 								<Local>
-									<MultiSwitchEntry Name="" ID="{FBB2F5AA-5CEF-4216-BAD8-F41867D6A679}">
-										<ReferenceList/>
-										<ObjectLists>
-											<ObjectList Name="EntryPath">
-												<Reference>
-													<ObjectRef Name="SW_To_Lvl4" ID="{7C18D196-43B4-4B67-8858-FFA1B8304822}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
-												</Reference>
-											</ObjectList>
-										</ObjectLists>
-									</MultiSwitchEntry>
-								</Local>
-							</Reference>
-							<Reference>
-								<Local>
 									<MultiSwitchEntry Name="" ID="{1ECC8B91-D398-4820-9B1A-5C08DAD15392}">
 										<ReferenceList>
 											<Reference Name="AudioNode">
@@ -3080,7 +3066,7 @@
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 						</Reference>
 						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+							<ObjectRef Name="Bus_Music" ID="{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 						</Reference>
 						<Reference Name="TransitionRoot">
 							<Custom>
@@ -3171,6 +3157,17 @@
 												</TransitionFadeIn>
 											</TransitionInfo>
 										</MusicTransition>
+										<MusicTransition Name="Transition" ID="{7CF7E4BE-F364-4D44-95BA-07824FA93182}">
+											<PropertyList>
+												<Property Name="SourceContextType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="SourceContextObject">
+													<ObjectRef Name="PC_Lvl4_High" ID="{2D54F784-5CFE-4CEA-A8AA-B59CC5C3F329}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+												</Reference>
+											</ReferenceList>
+											<TransitionInfo/>
+										</MusicTransition>
 									</ChildrenList>
 									<TransitionInfo/>
 								</MusicTransition>
@@ -3192,6 +3189,7 @@
 											<ChildrenList>
 												<MusicPlaylistItem Name="" ID="{5DBE1E56-9DE4-40FB-8507-EFB5CAEA725D}" ShortID="124286933">
 													<PropertyList>
+														<Property Name="LoopCount" Type="int16" Value="0"/>
 														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
@@ -3323,6 +3321,7 @@
 											<ChildrenList>
 												<MusicPlaylistItem Name="" ID="{B0C2DC85-C1AE-4AFC-95D8-FEFADCA6B14F}" ShortID="369868853">
 													<PropertyList>
+														<Property Name="LoopCount" Type="int16" Value="0"/>
 														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
@@ -3601,6 +3600,7 @@
 											<ChildrenList>
 												<MusicPlaylistItem Name="" ID="{E739CAA5-6D2B-4397-A0F4-7561747811D1}" ShortID="937224226">
 													<PropertyList>
+														<Property Name="LoopCount" Type="int16" Value="0"/>
 														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
 													</PropertyList>
 													<ReferenceList>
@@ -3925,6 +3925,19 @@
 											<ObjectList Name="EntryPath">
 												<Reference>
 													<ObjectRef Name="SW_To_Lvl4" ID="{7C18D196-43B4-4B67-8858-FFA1B8304822}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
+												</Reference>
+											</ObjectList>
+										</ObjectLists>
+									</MultiSwitchEntry>
+								</Local>
+							</Reference>
+							<Reference>
+								<Local>
+									<MultiSwitchEntry Name="" ID="{667BD75B-0AEF-4486-88B2-8E48DD02499E}">
+										<ObjectLists>
+											<ObjectList Name="EntryPath">
+												<Reference>
+													<ObjectRef Name="SW_Stop_Lvl4" ID="{C4E3C809-1510-4722-B962-8C6F5CD6847A}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
 												</Reference>
 											</ObjectList>
 										</ObjectLists>

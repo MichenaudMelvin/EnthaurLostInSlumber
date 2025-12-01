@@ -242,6 +242,27 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{34DF3AC3-8DB9-4FAC-A699-2C5687BC2322}" ShortID="672860285">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Lvl4" ID="{F7562D55-07D3-4467-AC90-7E844FE35CB6}">
+					<ChildrenList>
+						<Action Name="" ID="{EDCF8635-B7C4-4FFA-9A60-B4103B9CB394}" ShortID="350392076">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SC_Lvl4" ID="{853D8270-42F5-45D0-88CD-6E2C1D909425}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 			</ChildrenList>

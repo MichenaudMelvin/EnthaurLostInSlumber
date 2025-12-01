@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{B045D98A-707B-59F7-AA4D-382CB1A4B003}",
+    "Hash": "{5207B711-9229-0078-4789-7825F4088308}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -338,10 +338,28 @@
       "GUID": "{FAA95C9D-3A29-4472-8561-265C9B5BC61D}",
       "Switches": [
        {
+        "Id": "658719994",
+        "Name": "SW_To_Med",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Med",
+        "GUID": "{A08EBC6C-9238-4706-AB1E-3E5204D528BD}"
+       },
+       {
         "Id": "876681807",
         "Name": "SW_To_Lv1",
         "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lv1",
         "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
+       },
+       {
+        "Id": "1275925729",
+        "Name": "SW_Stop_Lvl2",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_Stop_Lvl2",
+        "GUID": "{01ECC8C1-0D2F-4B15-8B7A-89EFD913C51B}"
+       },
+       {
+        "Id": "1275925735",
+        "Name": "SW_Stop_Lvl4",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_Stop_Lvl4",
+        "GUID": "{C4E3C809-1510-4722-B962-8C6F5CD6847A}"
        },
        {
         "Id": "1417415266",
@@ -354,6 +372,12 @@
         "Name": "SW_To_Lvl2",
         "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lvl2",
         "GUID": "{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"
+       },
+       {
+        "Id": "2800183964",
+        "Name": "SW_To_High",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_High",
+        "GUID": "{F61A1368-80C7-4383-81A9-379E062A96A9}"
        }
       ]
      }
@@ -837,6 +861,6 @@
     ]
    }
   ],
-  "FileHash": "{479D1139-AC81-8A63-DA33-00A54E08872C}"
+  "FileHash": "{728536EE-6480-4C1C-9DB3-5729783E4D80}"
  }
 }

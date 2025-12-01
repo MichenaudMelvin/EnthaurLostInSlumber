@@ -11,7 +11,7 @@
     "GUID": "{FAFCEDDF-8A17-4B2E-8573-A6E8A69007B2}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{8A75351B-3F5A-F349-3E9D-71489CBB3F78}",
+    "Hash": "{02FCEB16-E3F4-C903-1FF0-CED1B726D649}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Ambient",
     "ShortName": "SB_Ambient",
     "Path": "SB_Ambient.bnk",
@@ -65,6 +65,14 @@
       "CachePath": "3D/{3DF201E4-B1AF-6709-60D2-14B4BCC868C4}.wem"
      },
      {
+      "Id": "182306658",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_HeartBeat_02.wav",
+      "CachePath": "18/{183628DF-3BEC-A38A-2059-D542EFDAE2B5}.wem"
+     },
+     {
       "Id": "215594251",
       "Language": "SFX",
       "Streaming": "false",
@@ -79,6 +87,14 @@
       "Location": "Memory",
       "ShortName": "AMB_FleshWall_04_LP.wav",
       "CachePath": "B7/{B7FF760B-1285-1C51-261B-F81D93B123DA}.wem"
+     },
+     {
+      "Id": "269421901",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_HeartBeat_04.wav",
+      "CachePath": "4E/{4E1187A0-F632-8BFE-53A1-27F1F8DE85A6}.wem"
      },
      {
       "Id": "427151800",
@@ -127,6 +143,14 @@
       "Location": "Memory",
       "ShortName": "AMB_Growl.wav",
       "CachePath": "FD/{FD24ADA8-0B76-6E66-4D27-57B44205A739}.wem"
+     },
+     {
+      "Id": "617557594",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_HeartBeat_03.wav",
+      "CachePath": "F9/{F9FA6A7E-32F6-6628-55E2-60395F05BDE9}.wem"
      },
      {
       "Id": "630202445",
@@ -225,6 +249,14 @@
       "CachePath": "96/{9647564F-DF68-75FD-9189-B7D1F3355548}.wem"
      },
      {
+      "Id": "1055324882",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_HeartBeat_01.wav",
+      "CachePath": "64/{64AB094B-0CC9-D831-AC77-D42D18CA4D88}.wem"
+     },
+     {
       "Id": "1059098210",
       "Language": "SFX",
       "Streaming": "false",
@@ -316,6 +348,7 @@
       "ObjectPath": "\\Events\\SFX\\Ambient\\AKE_FleshWall",
       "GUID": "{40EFE9DA-B2E9-495A-B7B8-F5D45E38BB8D}",
       "Color": "10",
+      "MaxAttenuation": "1000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -375,6 +408,28 @@
       "MediaRefs": [
        {
         "Id": "610405175"
+       }
+      ]
+     },
+     {
+      "Id": "1605419071",
+      "Name": "AKE_Heartbeat",
+      "ObjectPath": "\\Events\\SFX\\Ambient\\AKE_Heartbeat",
+      "GUID": "{500A71A7-3D23-495A-B1C7-3F51F63E8616}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "182306658"
+       },
+       {
+        "Id": "269421901"
+       },
+       {
+        "Id": "617557594"
+       },
+       {
+        "Id": "1055324882"
        }
       ]
      },
@@ -459,6 +514,6 @@
     ]
    }
   ],
-  "FileHash": "{C38CD675-C16C-76CD-A656-9201EFBE98B6}"
+  "FileHash": "{591E1F7B-EF96-ED50-F046-09284A1AD041}"
  }
 }

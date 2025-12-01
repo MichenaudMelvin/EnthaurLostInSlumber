@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{97EBA94E-9453-DCDB-AF29-DBADC566C9DE}",
+    "Hash": "{497101CF-5BB0-C7A8-4225-81ADDF677BE5}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -103,6 +103,14 @@
       "Location": "Memory",
       "ShortName": "LPX_Nerve_Stretch_Gore_01.wav",
       "CachePath": "E3/{E3339A71-B018-DC4B-E60C-B913810188BE}.wem"
+     },
+     {
+      "Id": "56210201",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Hit_01.wav",
+      "CachePath": "F6/{F6A06C2E-13D7-A3E7-11DC-B1608A5A1CA7}.wem"
      },
      {
       "Id": "57626436",
@@ -239,6 +247,14 @@
       "Location": "Memory",
       "ShortName": "LPX_Nerve_Stretch_03.wav",
       "CachePath": "EF/{EFCBD7B5-1FC7-4CB9-6B69-2EE485144E8A}.wem"
+     },
+     {
+      "Id": "127012957",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Hit_04.wav",
+      "CachePath": "E1/{E18E83D7-E48A-8255-BF41-1C11ADF63B9B}.wem"
      },
      {
       "Id": "131865017",
@@ -617,6 +633,14 @@
       "CachePath": "9D/{9DB1E9E9-8C99-D64E-A2EE-7389839E3024}.wem"
      },
      {
+      "Id": "376827957",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Hit_06.wav",
+      "CachePath": "94/{94164C2C-6285-09C5-E133-02DB7990D29A}.wem"
+     },
+     {
       "Id": "389742043",
       "Language": "SFX",
       "Streaming": "false",
@@ -849,6 +873,14 @@
       "CachePath": "77/{777F743F-F945-B6DC-F9EF-6CEEF667AE50}.wem"
      },
      {
+      "Id": "508697626",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Land.wav",
+      "CachePath": "8C/{8C135E64-0D8D-CF60-89E5-6DDC7995AB6E}.wem"
+     },
+     {
       "Id": "515272845",
       "Language": "SFX",
       "Streaming": "false",
@@ -959,6 +991,14 @@
       "Location": "Memory",
       "ShortName": "MC_Cloth_Run_14.wav",
       "CachePath": "B5/{B5DCCDE3-FC40-E57E-17F4-19B7454693DE}.wem"
+     },
+     {
+      "Id": "567582582",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Hit_05.wav",
+      "CachePath": "08/{08B54C6A-8296-B918-76F6-BCEC319F4AA2}.wem"
      },
      {
       "Id": "570499991",
@@ -1481,6 +1521,14 @@
       "CachePath": "50/{50E7EFFE-254C-5C58-896C-1890CBCAF3FA}.wem"
      },
      {
+      "Id": "835898656",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Bite.wav",
+      "CachePath": "5B/{5BA5C694-A455-0EFA-75FB-950E5ADE4F97}.wem"
+     },
+     {
       "Id": "850557758",
       "Language": "SFX",
       "Streaming": "false",
@@ -1593,6 +1641,14 @@
       "CachePath": "7C/{7CD0B091-C2BD-8390-8D6D-CE616050E94A}.wem"
      },
      {
+      "Id": "926003223",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Hit_02.wav",
+      "CachePath": "1E/{1E49084A-EF4B-FBFF-B0E1-BB9033094E18}.wem"
+     },
+     {
       "Id": "926594296",
       "Language": "SFX",
       "Streaming": "false",
@@ -1687,6 +1743,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_02.wav",
       "CachePath": "6A/{6A381926-1A56-0058-91FA-F38601146289}.wem"
+     },
+     {
+      "Id": "987594267",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Jump.wav",
+      "CachePath": "E0/{E0139ABE-632B-B276-02F1-FD36A3B0A45F}.wem"
      },
      {
       "Id": "992978286",
@@ -1823,6 +1887,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_01.wav",
       "CachePath": "50/{50865F23-C9FA-C77D-9B14-6D89D2CFC3B5}.wem"
+     },
+     {
+      "Id": "1067908482",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Hit_03.wav",
+      "CachePath": "0B/{0B270E4C-7B10-0351-F47B-2CD3140B7DF4}.wem"
      },
      {
       "Id": "1067939987",
@@ -2026,6 +2098,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Close_End",
       "GUID": "{E582D912-9111-4A49-ADA1-C474EC722BAE}",
       "Color": "10",
+      "MaxAttenuation": "4000",
       "DurationType": "OneShot",
       "DurationMin": "1.9956666",
       "DurationMax": "1.9956666",
@@ -2041,6 +2114,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Close_Start",
       "GUID": "{76AD9494-A071-4C11-8765-FF1DC0AB315C}",
       "Color": "10",
+      "MaxAttenuation": "4000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -2078,6 +2152,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Open_End",
       "GUID": "{ED1DB3E2-80E0-4CCD-B2E5-8C3DE5CC6776}",
       "Color": "10",
+      "MaxAttenuation": "4000",
       "DurationType": "OneShot",
       "DurationMin": "1.9956666",
       "DurationMax": "1.9956666",
@@ -2093,6 +2168,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Open_Start",
       "GUID": "{88AAFD6E-67FC-4ADF-9D7D-03B85C905647}",
       "Color": "10",
+      "MaxAttenuation": "4000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -2694,6 +2770,37 @@
       ]
      },
      {
+      "Id": "2367748864",
+      "Name": "AKE_PR_Attack_Hit",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Attack_Hit",
+      "GUID": "{AB8D0613-15F0-40FE-A9D4-36E30F4C2837}",
+      "Color": "10",
+      "MaxAttenuation": "1000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.3817277",
+      "DurationMax": "0.92018735",
+      "MediaRefs": [
+       {
+        "Id": "56210201"
+       },
+       {
+        "Id": "127012957"
+       },
+       {
+        "Id": "376827957"
+       },
+       {
+        "Id": "567582582"
+       },
+       {
+        "Id": "926003223"
+       },
+       {
+        "Id": "1067908482"
+       }
+      ]
+     },
+     {
       "Id": "88206927",
       "Name": "AKE_PR_Attack_Woosh",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Attack_Woosh",
@@ -2985,6 +3092,53 @@
         "Name": "Reflect",
         "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
         "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
+       }
+      ]
+     },
+     {
+      "Id": "801381253",
+      "Name": "AKE_PRBite",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PRBite",
+      "GUID": "{EDFCEA97-7CCB-4DE5-BFD7-F05376D73CCE}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.75",
+      "DurationMax": "1.75",
+      "MediaRefs": [
+       {
+        "Id": "835898656"
+       }
+      ]
+     },
+     {
+      "Id": "2405795183",
+      "Name": "AKE_PRJump",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PRJump",
+      "GUID": "{AF524C70-1B07-4D30-AF81-DCE44777FA02}",
+      "Color": "10",
+      "MaxAttenuation": "9000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.93333334",
+      "DurationMax": "0.93333334",
+      "MediaRefs": [
+       {
+        "Id": "987594267"
+       }
+      ]
+     },
+     {
+      "Id": "48176644",
+      "Name": "AKE_PRLand",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PRLand",
+      "GUID": "{E2704CCC-659C-4110-8785-691E777B51AF}",
+      "Color": "10",
+      "MaxAttenuation": "9000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.519",
+      "DurationMax": "0.519",
+      "MediaRefs": [
+       {
+        "Id": "508697626"
        }
       ]
      },
@@ -3354,6 +3508,6 @@
     ]
    }
   ],
-  "FileHash": "{B4FFB119-D2E3-E1AA-B18F-CA3CFEF3F2F4}"
+  "FileHash": "{57B11857-EFCB-F6D4-870C-AC70FBA0D4C2}"
  }
 }
