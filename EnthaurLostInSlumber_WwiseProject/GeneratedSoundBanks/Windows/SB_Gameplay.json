@@ -11,11 +11,19 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{6F66C61B-C5DE-0302-2D40-0E6B7A43905E}",
+    "Hash": "{97EBA94E-9453-DCDB-AF29-DBADC566C9DE}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
     "Media": [
+     {
+      "Id": "5271368",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Sinew_Tense_02.wav",
+      "CachePath": "F6/{F6BE0E77-C4FE-ABED-5311-B9FE3AFB12E4}.wem"
+     },
      {
       "Id": "11382112",
       "Language": "SFX",
@@ -177,6 +185,14 @@
       "CachePath": "E6/{E6C08014-E8A0-F436-D8F9-1F40B52F6D45}.wem"
      },
      {
+      "Id": "101105012",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Wood, Movement, Low Rumble, Slow Rumble, Deep Subtle Impacts, Massive, Bass, Cinematic Texture  SND59039-glued.wav",
+      "CachePath": "B1/{B10463A1-2AB3-E8E7-5B52-6361C42079CB}.wem"
+     },
+     {
       "Id": "102806602",
       "Language": "SFX",
       "Streaming": "false",
@@ -223,6 +239,14 @@
       "Location": "Memory",
       "ShortName": "LPX_Nerve_Stretch_03.wav",
       "CachePath": "EF/{EFCBD7B5-1FC7-4CB9-6B69-2EE485144E8A}.wem"
+     },
+     {
+      "Id": "131865017",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Close_01_LP.wav",
+      "CachePath": "6A/{6A4ABE6F-C531-6C65-C82E-9FEEF3F939B1}.wem"
      },
      {
       "Id": "135050716",
@@ -329,6 +353,14 @@
       "CachePath": "35/{35AB1C2B-498D-35DF-C5F2-268AAAAAC6AF}.wem"
      },
      {
+      "Id": "190922830",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Ancient_Game_Stone_Door_Slide_2-glued.wav",
+      "CachePath": "AC/{ACD406BD-1B68-258D-41C8-C91E5A794275}.wem"
+     },
+     {
       "Id": "195657945",
       "Language": "SFX",
       "Streaming": "false",
@@ -345,6 +377,14 @@
       "CachePath": "7D/{7DB56DDB-9C5A-C159-4C17-48C1F58C94ED}.wem"
      },
      {
+      "Id": "198318550",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Close_04_LP.wav",
+      "CachePath": "52/{5244A5BD-74BA-14F4-CD57-7C81234B8BD2}.wem"
+     },
+     {
       "Id": "203228580",
       "Language": "SFX",
       "Streaming": "false",
@@ -358,7 +398,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Release_Amber.wav",
-      "CachePath": "35/{35DC24C0-88DC-AAEA-0F12-5A2EBBDBBFB5}.wem"
+      "CachePath": "D1/{D1FB7EF2-B5CA-52E5-28D0-205B398E3BCD}.wem"
      },
      {
       "Id": "208173442",
@@ -457,6 +497,14 @@
       "CachePath": "67/{67A8489B-5591-E783-0C56-912D3312246C}.wem"
      },
      {
+      "Id": "281892925",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Close_02_LP.wav",
+      "CachePath": "66/{66B0726D-3973-A0DA-D9E4-E1A9DE6B53F3}.wem"
+     },
+     {
       "Id": "303207830",
       "Language": "SFX",
       "Streaming": "false",
@@ -497,6 +545,14 @@
       "CachePath": "81/{811D2405-2B7B-703B-EDB2-6480B02FB1D0}.wem"
      },
      {
+      "Id": "318641243",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Leather   Creak, Heavy Jacket by Vrymaa Id-734549-glued.wav",
+      "CachePath": "6A/{6A44B279-9D64-007A-C9E2-94CBF24A65AB}.wem"
+     },
+     {
       "Id": "327066233",
       "Language": "SFX",
       "Streaming": "false",
@@ -519,6 +575,14 @@
       "Location": "Memory",
       "ShortName": "MC_Cloth_Run_10.wav",
       "CachePath": "FF/{FFAA78DA-3CEE-0979-B00F-C55049191365}.wem"
+     },
+     {
+      "Id": "341469609",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Leather, Creak, Leather Crackles, Stretching, Pulling, Retract SND89307-glued.wav",
+      "CachePath": "2D/{2D979FC3-11ED-6C88-C55D-56A8531B308B}.wem"
      },
      {
       "Id": "344427236",
@@ -601,6 +665,14 @@
       "CachePath": "84/{84A31265-4147-D1B0-BE13-E9DBC40E581E}.wem"
      },
      {
+      "Id": "419188619",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Sinew_Tense_03.wav",
+      "CachePath": "17/{178BA323-77F4-AC16-308F-BDDB73158A2A}.wem"
+     },
+     {
       "Id": "424464787",
       "Language": "SFX",
       "Streaming": "false",
@@ -639,6 +711,14 @@
       "Location": "Memory",
       "ShortName": "MC_Cloth_Run_13.wav",
       "CachePath": "E3/{E3F13A27-8A42-7E89-A986-2BCA1C84B278}.wem"
+     },
+     {
+      "Id": "436815233",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Close_08_LP.wav",
+      "CachePath": "82/{8294B4A0-FEDF-7593-B8BA-0B1F5B6C084D}.wem"
      },
      {
       "Id": "448243903",
@@ -697,6 +777,14 @@
       "CachePath": "AF/{AF025AA6-4265-BCF2-BE4F-B9D9489093E7}.wem"
      },
      {
+      "Id": "480834173",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Close_06_LP.wav",
+      "CachePath": "7B/{7BB55371-3E55-EDAD-5052-E43AF91BF31A}.wem"
+     },
+     {
       "Id": "484666369",
       "Language": "SFX",
       "Streaming": "false",
@@ -735,6 +823,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Vein_Jump_04.wav",
       "CachePath": "F6/{F66AF1F2-42AA-4AF5-53DD-19478038AA4D}.wem"
+     },
+     {
+      "Id": "495223518",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411-glued.wav",
+      "CachePath": "43/{433BA4CF-B26A-F48B-16BF-669B2B13366D}.wem"
      },
      {
       "Id": "500580022",
@@ -889,6 +985,14 @@
       "CachePath": "5F/{5F1D13CA-1AC1-402D-E805-C6E0CFEB642B}.wem"
      },
      {
+      "Id": "590728733",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Open_Start.wav",
+      "CachePath": "71/{71FE1545-86F4-B94B-E183-07EBAD2209EA}.wem"
+     },
+     {
       "Id": "590805685",
       "Language": "SFX",
       "Streaming": "false",
@@ -977,6 +1081,14 @@
       "CachePath": "CD/{CDE4381B-B70D-4BC6-D308-7883E39E91FD}.wem"
      },
      {
+      "Id": "620373117",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Sinew_Release_01.wav",
+      "CachePath": "CA/{CAF0DD8E-6BC1-BBD8-0625-5EB39AC40106}.wem"
+     },
+     {
       "Id": "630490779",
       "Language": "SFX",
       "Streaming": "false",
@@ -1007,6 +1119,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Walk_06.wav",
       "CachePath": "B6/{B6A6BECF-0391-92DA-1645-D2B83E1DFEE1}.wem"
+     },
+     {
+      "Id": "640979561",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Close_05_LP.wav",
+      "CachePath": "CF/{CF9AB98D-7AB5-19CB-ABE8-1B623EC7572B}.wem"
      },
      {
       "Id": "645664083",
@@ -1079,6 +1199,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Walk_07.wav",
       "CachePath": "E0/{E0E55673-BDA7-A7B5-E54F-4C8D26AFA211}.wem"
+     },
+     {
+      "Id": "677590440",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Sinew_Release_02.wav",
+      "CachePath": "63/{63B0FA9A-FB8F-154B-24B4-97D64BFED9EB}.wem"
      },
      {
       "Id": "685050445",
@@ -1169,6 +1297,14 @@
       "CachePath": "97/{979F5FE9-078B-FAD9-2EFB-922BEFFE2D21}.wem"
      },
      {
+      "Id": "726730770",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Close_07_LP.wav",
+      "CachePath": "40/{40496570-8A58-C424-EBBC-BD7779847550}.wem"
+     },
+     {
       "Id": "729596033",
       "Language": "SFX",
       "Streaming": "false",
@@ -1241,12 +1377,28 @@
       "CachePath": "93/{93B81D03-F286-2E60-F93A-5C9D47816428}.wem"
      },
      {
+      "Id": "778778069",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Sinew_Tense_01.wav",
+      "CachePath": "62/{6233C170-79F0-FDE0-BB90-226C8F7E80B4}.wem"
+     },
+     {
       "Id": "794150962",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MC_Cloth_Run_02.wav",
       "CachePath": "3A/{3AD7B48F-CD6A-64FC-8493-8889E09AD395}.wem"
+     },
+     {
+      "Id": "801569341",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Sinew_Release_03.wav",
+      "CachePath": "1E/{1EA90051-5F9A-DA10-887B-2F2BDE77F648}.wem"
      },
      {
       "Id": "801782534",
@@ -1489,6 +1641,14 @@
       "CachePath": "F9/{F972F069-FF8D-1E5E-3F23-A80A2921303C}.wem"
      },
      {
+      "Id": "970356254",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 2-glued.wav",
+      "CachePath": "C1/{C1CEE9D3-4C06-83C4-304E-BDA62590F177}.wem"
+     },
+     {
       "Id": "972526069",
       "Language": "SFX",
       "Streaming": "false",
@@ -1537,12 +1697,36 @@
       "CachePath": "44/{44FAEC2E-7EE8-6A9A-CFA8-6173281A977C}.wem"
      },
      {
+      "Id": "997788374",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Close_03_LP.wav",
+      "CachePath": "5B/{5BD764E8-98F0-A949-B6FA-1C4295331C88}.wem"
+     },
+     {
+      "Id": "998170531",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Sinew_Tense_Wobbling.wav",
+      "CachePath": "CF/{CF3B960F-EF97-9039-2A59-277A614CBC91}.wem"
+     },
+     {
       "Id": "999250646",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Legs_08.wav",
       "CachePath": "A7/{A7646CBA-4D30-B5CA-043A-B04936C03686}.wem"
+     },
+     {
+      "Id": "1011658714",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Door_Open_End.wav",
+      "CachePath": "58/{585E5394-85A8-F5A9-C638-614849A75FE6}.wem"
      },
      {
       "Id": "1013574032",
@@ -1553,12 +1737,20 @@
       "CachePath": "9D/{9DB03DA6-6CC6-80FE-C6FE-74D8AD282D37}.wem"
      },
      {
+      "Id": "1015140072",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Bloody Guts Squish Movement 6-glued.wav",
+      "CachePath": "DF/{DFEADF5A-1BCE-1C9F-433E-167954E4EF7A}.wem"
+     },
+     {
       "Id": "1021385064",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_PickUp_Amber.wav",
-      "CachePath": "BB/{BB0F6FA9-6CC7-72BC-FEF8-6B69444473B6}.wem"
+      "CachePath": "12/{12D11E04-BC81-AC77-3986-CBCB30318A51}.wem"
      },
      {
       "Id": "1021487410",
@@ -1567,6 +1759,14 @@
       "Location": "Memory",
       "ShortName": "LPX_Nerve_Stretch_05.wav",
       "CachePath": "C6/{C670B7C1-D2A2-C6C0-AC3C-856F0981C6BB}.wem"
+     },
+     {
+      "Id": "1036467249",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Gore, Bone, Break, Crunch, Deep, Flesh, Vegetables SND10411 1-glued.wav",
+      "CachePath": "87/{8738BBA4-6531-1153-508C-79FA09707F25}.wem"
      },
      {
       "Id": "1040785902",
@@ -1817,6 +2017,110 @@
           "Id": "881039563"
          }
         ]
+       }
+      ]
+     },
+     {
+      "Id": "630092306",
+      "Name": "AKE_Door_Close_End",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Close_End",
+      "GUID": "{E582D912-9111-4A49-ADA1-C474EC722BAE}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.9956666",
+      "DurationMax": "1.9956666",
+      "MediaRefs": [
+       {
+        "Id": "1011658714"
+       }
+      ]
+     },
+     {
+      "Id": "2090048753",
+      "Name": "AKE_Door_Close_Start",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Close_Start",
+      "GUID": "{76AD9494-A071-4C11-8765-FF1DC0AB315C}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "131865017"
+       },
+       {
+        "Id": "198318550"
+       },
+       {
+        "Id": "281892925"
+       },
+       {
+        "Id": "436815233"
+       },
+       {
+        "Id": "480834173"
+       },
+       {
+        "Id": "590728733"
+       },
+       {
+        "Id": "640979561"
+       },
+       {
+        "Id": "726730770"
+       },
+       {
+        "Id": "997788374"
+       }
+      ]
+     },
+     {
+      "Id": "1723216110",
+      "Name": "AKE_Door_Open_End",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Open_End",
+      "GUID": "{ED1DB3E2-80E0-4CCD-B2E5-8C3DE5CC6776}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.9956666",
+      "DurationMax": "1.9956666",
+      "MediaRefs": [
+       {
+        "Id": "1011658714"
+       }
+      ]
+     },
+     {
+      "Id": "316633605",
+      "Name": "AKE_Door_Open_Start",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Open_Start",
+      "GUID": "{88AAFD6E-67FC-4ADF-9D7D-03B85C905647}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "101105012"
+       },
+       {
+        "Id": "190922830"
+       },
+       {
+        "Id": "318641243"
+       },
+       {
+        "Id": "341469609"
+       },
+       {
+        "Id": "495223518"
+       },
+       {
+        "Id": "590728733"
+       },
+       {
+        "Id": "970356254"
+       },
+       {
+        "Id": "1015140072"
+       },
+       {
+        "Id": "1036467249"
        }
       ]
      },
@@ -2121,8 +2425,8 @@
       "GUID": "{14CA4FE7-8867-4283-AD24-5919B3F33532}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "1.1333333",
-      "DurationMax": "1.1333333",
+      "DurationMin": "1.72",
+      "DurationMax": "1.72",
       "MediaRefs": [
        {
         "Id": "206521461"
@@ -2700,6 +3004,49 @@
       ]
      },
      {
+      "Id": "1708445116",
+      "Name": "AKE_SinewRelease",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_SinewRelease",
+      "GUID": "{241DA2BA-0BA7-4AC7-B0D8-58234A6EB6FE}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "0.466",
+      "DurationMax": "0.466",
+      "MediaRefs": [
+       {
+        "Id": "620373117"
+       },
+       {
+        "Id": "677590440"
+       },
+       {
+        "Id": "801569341"
+       }
+      ]
+     },
+     {
+      "Id": "2192633050",
+      "Name": "AKE_SinewTense",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_SinewTense",
+      "GUID": "{8251B621-D354-4B79-95B5-C4470C71F2BA}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "5271368"
+       },
+       {
+        "Id": "419188619"
+       },
+       {
+        "Id": "778778069"
+       },
+       {
+        "Id": "998170531"
+       }
+      ]
+     },
+     {
       "Id": "3340684021",
       "Name": "AKE_StartElevator",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StartElevator",
@@ -2771,6 +3118,46 @@
       ]
      },
      {
+      "Id": "1408075182",
+      "Name": "AKE_StartSinewStretch",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StartSinewStretch",
+      "GUID": "{87446DBD-EAA3-4C98-9682-2743F0A6ED47}",
+      "Color": "10",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "43894004"
+       },
+       {
+        "Id": "122346683"
+       },
+       {
+        "Id": "151884214"
+       },
+       {
+        "Id": "197068285"
+       },
+       {
+        "Id": "429011309"
+       },
+       {
+        "Id": "725331003"
+       },
+       {
+        "Id": "801782534"
+       },
+       {
+        "Id": "804146141"
+       },
+       {
+        "Id": "889954801"
+       },
+       {
+        "Id": "1021487410"
+       }
+      ]
+     },
+     {
       "Id": "4291772511",
       "Name": "AKE_StopElevator",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StopElevator",
@@ -2785,6 +3172,17 @@
       "Name": "AKE_StopNerveStretch",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StopNerveStretch",
       "GUID": "{C2BCB29F-3574-4185-A670-2E3B736BB478}",
+      "Color": "10",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "4290470348",
+      "Name": "AKE_StopSinewStretch",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StopSinewStretch",
+      "GUID": "{ED87CE7E-239B-473F-8BE2-8E108B50DACC}",
       "Color": "10",
       "MaxAttenuation": "0",
       "DurationType": "OneShot",
@@ -2956,6 +3354,6 @@
     ]
    }
   ],
-  "FileHash": "{9565255A-DE58-19FC-0A7D-DBEC3F98AC62}"
+  "FileHash": "{052D7061-1FEB-AC00-4FA7-45127D899458}"
  }
 }

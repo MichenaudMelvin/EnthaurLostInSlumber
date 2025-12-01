@@ -10,26 +10,26 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{8AEDA54D-C0E4-EE41-34F2-84C6DB78DEFC}",
+    "Hash": "{03F8E001-C555-BF33-2752-D8A3C654F107}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
     "Media": [
      {
-      "Id": "99990636",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "OtherBank",
-      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
-      "CachePath": "14/{14BC57F2-623A-F546-F7A4-0B01EB8391FC}.wem"
-     },
-     {
-      "Id": "420614766",
+      "Id": "535111107",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "OtherBank",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
       "CachePath": "9A/{9A4C6E7C-BC0C-A3E0-BCD9-A66441F50BBE}.wem"
+     },
+     {
+      "Id": "1005069349",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "OtherBank",
+      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
+      "CachePath": "14/{14BC57F2-623A-F546-F7A4-0B01EB8391FC}.wem"
      }
     ],
     "Plugins": {
@@ -43,7 +43,7 @@
        "LibId": "8323075",
        "MediaRefs": [
         {
-         "Id": "420614766"
+         "Id": "535111107"
         }
        ]
       },
@@ -56,7 +56,7 @@
        "LibId": "8323075",
        "MediaRefs": [
         {
-         "Id": "99990636"
+         "Id": "1005069349"
         }
        ]
       },
@@ -328,6 +328,32 @@
         "Name": "Walk",
         "ObjectPath": "\\Switches\\Gameplay\\AKSW_FootstepsSpeed\\Walk",
         "GUID": "{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"
+       }
+      ]
+     },
+     {
+      "Id": "2724869341",
+      "Name": "Music_Switch",
+      "ObjectPath": "\\Switches\\Music\\Music_Switch",
+      "GUID": "{FAA95C9D-3A29-4472-8561-265C9B5BC61D}",
+      "Switches": [
+       {
+        "Id": "876681807",
+        "Name": "SW_To_Lv1",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lv1",
+        "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
+       },
+       {
+        "Id": "1417415266",
+        "Name": "SW_To_Lvl4",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lvl4",
+        "GUID": "{7C18D196-43B4-4B67-8858-FFA1B8304822}"
+       },
+       {
+        "Id": "1417415268",
+        "Name": "SW_To_Lvl2",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lvl2",
+        "GUID": "{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"
        }
       ]
      }
@@ -811,6 +837,6 @@
     ]
    }
   ],
-  "FileHash": "{9A46950F-83FB-AD74-22C3-0F5C792CC08E}"
+  "FileHash": "{28ED8AA5-8528-168C-52BC-37F153CCF7E2}"
  }
 }
