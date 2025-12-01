@@ -104,7 +104,12 @@ UENTDefaultSave* UENTWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 			continue;
 		}
 
-		Cast<IENTSaveGameElementInterface>(Actor)->SaveGameElement(CurrentWorldSave);
+		IENTSaveGameElementInterface* SavedActor = Cast<IENTSaveGameElementInterface>(Actor);
+		if (SavedActor)
+		{
+			SavedActor->SaveGameElement(CurrentWorldSave);
+		}
+
 		IENTSaveGameElementInterface::Execute_SaveGameElementBP(Actor, CurrentWorldSave);
 	}
 
@@ -238,6 +243,7 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 
 		if (!InterfaceActor)
 		{
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 			continue;
 		}
 

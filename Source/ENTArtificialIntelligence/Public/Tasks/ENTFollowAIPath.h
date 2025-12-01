@@ -41,7 +41,12 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Ground")
 	FRotator RotationOffset;
 
+	UPROPERTY(EditInstanceOnly, Category = "Ground", meta = (Units = s))
+	float RotationSpeed = 5.0f;
+
 	FVector TargetLocation;
+
+	FRotator TargetRotation;
 
 #pragma region WalkOnFloor
 

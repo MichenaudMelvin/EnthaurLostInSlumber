@@ -633,6 +633,7 @@ void AENTNerve::AttachNerveBall(AActor* ActorToAttach)
 {
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	NerveBall->SetCollisionResponseToChannel(InteractionChannel, ECR_Block);
+	NerveBall->SetVisibility(false);
 
 	bShouldApplyCablePhysics = true;
 
@@ -658,7 +659,7 @@ void AENTNerve::DetachNerveBall(bool bForceDetachment)
 	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, true);
 	NerveBall->AttachToComponent(RootComponent, Rules);
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
+	NerveBall->SetVisibility(true);
 	SplineCable->AddSplinePointAtIndex(DefaultNervePosition, 1, ESplineCoordinateSpace::World, true);
 	SplineCable->SetTangentAtSplinePoint(1, FVector::ZeroVector, ESplineCoordinateSpace::Local);
 
@@ -876,7 +877,7 @@ void AENTNerve::SetCurrentReceptacle(AENTNerveReceptacle* Receptacle)
 
 	FTransform AttachTransform = Receptacle->GetAttachTransform();
 	NerveBall->SetWorldTransform(AttachTransform);
-
+	NerveBall->SetVisibility(true);
 	bIsStretchSoundPlayed = false;
 	NerveStretchComp->Stop();
 	UpdateLastSplinePointLocation(AttachTransform.GetLocation());

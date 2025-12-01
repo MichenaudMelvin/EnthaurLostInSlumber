@@ -144,21 +144,11 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 	}
 #endif
 
-	FHitResult HitResult;
-	bool bHit = TargetPath->GetTracedPointLocation(0, HitResult);
+	FTransform TargetTransform = TargetPath->GetStartTransform(1);
+	FQuat Rotation = TargetTransform.GetRotation() * FRotator(-90.0f, 0.0f, 0.0f).Quaternion();
+	TargetTransform.SetRotation(Rotation);
 
-	if (!bHit)
-	{
-		return;
-	}
-
-	FVector ActorLocation = HitResult.Location;
-	ActorLocation += (TargetPath->GetDirection() * -1 * GetParasiteHalfHeight());
-	SetActorLocation(ActorLocation);
-
-	FQuat Rotation = FRotationMatrix::MakeFromZ(HitResult.Normal).ToQuat();
-	Rotation = Rotation * FRotator(-90.0f, 0.0f, 0.0f).Quaternion();
-	SetActorRotation(Rotation);
+	SetActorTransform(TargetTransform);
 }
 
 #if WITH_EDITOR
@@ -222,6 +212,27 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 }
 #endif
 
+void AENTParasitePawn::RespawnParasite()
+{
+	if (!bAllowRespawn)
+	{
+		return;
+	}
+
+	if (!ParasiteController)
+	{
+		return;
+	}
+
+	if (!ParasiteController->GetBlackboardComponent())
+	{
+		return;
+	}
+
+	FVector SpawnLocation = ParasiteController->GetBlackboardComponent()->GetValueAsVector(SpawnLocationKeyName);
+	SetActorLocation(SpawnLocation);
+}
+
 #pragma region BehaviorTree
 
 void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
@@ -246,6 +257,7 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 		ParasiteController->GetBlackboardComponent()->SetValueAsObject(NavAreaKeyName, NavigationArea);
 	}
 
+	MovementComponent->MaxSpeed = PatrolSpeed;
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(PatrolSpeedKeyName, PatrolSpeed);
 	ParasiteController->GetBlackboardComponent()->SetValueAsFloat(ChaseSpeedKeyName, ChaseSpeed);
 
@@ -259,6 +271,7 @@ void AENTParasitePawn::OnBehaviorTreeStarted_Implementation()
 		if (Character)
 		{
 			Character->OnAmberUpdate.AddDynamic(this, &AENTParasitePawn::ChangeDetectionRange);
+			Character->OnRespawn.AddDynamic(this, &AENTParasitePawn::RespawnParasite);
 			ParasiteController->GetBlackboardComponent()->SetValueAsObject(PlayerKeyName, Character);
 		}
 	}

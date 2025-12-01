@@ -49,6 +49,9 @@ protected:
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 
+	UFUNCTION(BlueprintCallable, Category = "Respawn")
+	void RespawnParasite();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UCapsuleComponent> ParasiteCollision;
 
@@ -84,6 +87,9 @@ protected:
 #pragma region BlackboardKeys
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName SpawnLocationKeyName = "SpawnLocation";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName PathKeyName = "AIPath";
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
@@ -115,19 +121,22 @@ protected:
 
 #pragma endregion
 
-	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior", meta = (ExposeOnSpawn = true))
 	bool bAutoStartBehavior = true;
 
-	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior", meta = (ExposeOnSpawn = true))
 	bool bUseNavMesh = true;
 
-	UPROPERTY(EditInstanceOnly, Category = "AI|Behavior")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior", meta = (ExposeOnSpawn = true))
+	bool bAllowRespawn = true;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI|Behavior", meta = (ExposeOnSpawn = true))
 	TObjectPtr<UBehaviorTree> OverridenBehaviorTree = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Behavior", meta = (Units = "cm/s", ExposeOnSpawn = true))
 	float PatrolSpeed = 600.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI|Behavior", meta = (Units = "cm/s"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Behavior", meta = (Units = "cm/s", ExposeOnSpawn = true))
 	float ChaseSpeed = 1200.0f;
 
 #pragma region BehaviorTree

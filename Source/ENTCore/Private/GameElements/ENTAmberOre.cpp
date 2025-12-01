@@ -79,6 +79,8 @@ void AENTAmberOre::BeginPlay()
 
 #endif
 
+	bShouldFoliagePlay = bIsEmpty;
+
 	FOnTimelineFloat UpdateEvent;
 	FOnTimelineEvent FinishedEvent;
 
@@ -214,6 +216,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		Interactable->RemoveInteractable(MeshInteraction);
 		FillAmberTimeline.PlayFromStart();
 		bIsEmpty = !bIsEmpty;
+		OnFillAmber.Broadcast();
 
 		UAkGameplayStatics::PostEventAtLocation(FoliageGrowthNoise, GetTransform().GetLocation(),GetTransform().Rotator(), this);
 		FoliageTimeline.Play();
@@ -243,6 +246,8 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		FillAmberTimeline.PlayFromStart();
 		FoliageTimeline.Reverse();
 		bIsEmpty = !bIsEmpty;
+		OnEmptyAmber.Broadcast();
+
 		if (LinkedWeakZone)LinkedWeakZone->CorruptZone(this);
 	}
 }
@@ -259,7 +264,7 @@ void AENTAmberOre::FillAmberUpdate(float Alpha)
 
 void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
 {
-	if (!Foliage)
+	if (!Foliage || !bShouldFoliagePlay)
 	{
 		return;
 	}

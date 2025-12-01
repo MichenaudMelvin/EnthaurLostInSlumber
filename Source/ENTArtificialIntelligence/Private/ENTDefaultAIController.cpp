@@ -24,8 +24,15 @@ void AENTDefaultAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	StartupActions();
+}
+
+void AENTDefaultAIController::StartupActions()
+{
 	if (!GetPawn())
 	{
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AENTDefaultAIController::StartupActions, 1.0f, false, 0.2f);
 		return;
 	}
 

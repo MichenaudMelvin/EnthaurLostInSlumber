@@ -20,9 +20,7 @@
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="1"/>
 								<Property Name="Color" Type="int16" Value="9"/>
-								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
-								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 							</PropertyList>
 							<ObjectLists>
 								<ObjectList Name="RTPC">

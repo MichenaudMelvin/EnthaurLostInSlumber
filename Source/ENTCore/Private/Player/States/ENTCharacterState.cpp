@@ -40,6 +40,8 @@ FString StateToString(EENTCharacterStateID State)
 			return "Stop";
 		case EENTCharacterStateID::Anim:
 			return "Anim";
+		case EENTCharacterStateID::LookAt:
+			return "LookAt"; 
 	}
 
 	return "Unknow state; Please fill the StateToString function (Player/State/ENTCharacterState.h/.cpp)";

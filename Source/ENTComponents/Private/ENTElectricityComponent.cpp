@@ -125,7 +125,7 @@ void UENTElectricityComponent::ElectricityMovementUpdate(float Alpha)
 void UENTElectricityComponent::ElectricityMovementFinished()
 {
 	OnElectricityMovementFinished.Broadcast();
-	
+
 	StartRadiusTarget = FirstRadiusTarget;
 	EndRadiusTarget = SecondRadiusTarget;
 	ElectricityRadiusTimeline.SetFloatCurve(SecondElectricityRadiusCurve, "TrackRadius");
@@ -145,7 +145,7 @@ void UENTElectricityComponent::ElectricityOpacityUpdate(float Alpha)
 		return;
 	}
 
-	float ScalarParam = FMath::Lerp(1.0f, 0.0f, Alpha);
+	float ScalarParam = FMath::Lerp(MaxOpacity, MinOpacity, Alpha);
 	ElectricityFeedback->GetMaterial()->SetScalarParameterValue(ElectricityOpacityParam, ScalarParam);
 }
 

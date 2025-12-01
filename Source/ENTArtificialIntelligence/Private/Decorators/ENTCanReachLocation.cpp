@@ -84,6 +84,11 @@ bool UENTCanReachLocation::CalculateRawConditionValue(UBehaviorTreeComponent& Ow
 	if (Location.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
 	{
 		AActor* TargetActor = Cast<AActor>(CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(Location.SelectedKeyName));
+		if (!TargetActor)
+		{
+			return false;
+		}
+
 		TargetLocation = TargetActor->GetActorLocation();
 	}
 	else if (Location.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
@@ -124,7 +129,7 @@ bool UENTCanReachLocation::CalculateRawConditionValue(UBehaviorTreeComponent& Ow
 #endif
 	}
 
-	return bInverseCheck != Controller->IsPointReachable(TargetLocation);
+	return bInverseCheck != Controller->IsPointReachable(TargetLocation, FVector(GroundQueryExtent));
 }
 
 #if WITH_EDITOR

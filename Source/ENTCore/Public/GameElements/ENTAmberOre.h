@@ -16,6 +16,9 @@ class UBoxComponent;
 
 class UENTInteractableComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFillAmber);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEmptyAmber);
+
 UCLASS()
 class ENTCORE_API AENTAmberOre : public AActor, public IENTSaveGameElementInterface
 {
@@ -73,7 +76,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
 	TObjectPtr<UAkAudioEvent> InjectAmberNoise;
 
-	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Amber")
 	bool bIsEmpty;
 
 	UPROPERTY(EditInstanceOnly, Category = "Weak Zone")
@@ -86,6 +89,12 @@ protected:
 	float FillAmberDuration = 1.5f;
 
 	FTimeline FillAmberTimeline;
+
+	UPROPERTY(BlueprintAssignable, Category = "Amber")
+	FOnFillAmber OnFillAmber;
+
+	UPROPERTY(BlueprintAssignable, Category = "Amber")
+	FOnEmptyAmber OnEmptyAmber;
 
 	UFUNCTION()
 	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent);
@@ -128,6 +137,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Foliage", meta = (Units = s))
 	float GrowthDuration = 3.0f;
+
+	UPROPERTY()
+	bool bShouldFoliagePlay;
 
 	FTimeline FoliageTimeline;
 

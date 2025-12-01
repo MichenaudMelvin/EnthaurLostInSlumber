@@ -10,6 +10,8 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "NavAreas/NavArea_Null.h"
 #include "Player/ENTDefaultCharacter.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
 
 AENTSpikeDoor::AENTSpikeDoor()
 {
@@ -139,6 +141,13 @@ void AENTSpikeDoor::GenerateInterMeshes()
 
 		MeshToUse->AddInstance(FTransform(RandRot, PosRel, FVector::OneVector), false);
 
+		if (InterMeshFX)
+		{
+			FVector FXPos = PosRel + FVector(-FXHeight, 0, 0);
+			UNiagaraComponent* FX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshToUse, NAME_None, FXPos,RandRot,EAttachLocation::KeepRelativeOffset,false, false);
+			InterMeshFXComponents.Add(FX);
+		}
+
 		InterInitialRotations.Add(RandRot);
 		InterInitialRelativeLocations.Add(PosRel);
 
@@ -156,6 +165,12 @@ void AENTSpikeDoor::ClearInterMeshes()
 {
 	InterMeshesA->ClearInstances();
 	InterMeshesB->ClearInstances();
+	
+	for (UNiagaraComponent* Comp : InterMeshFXComponents)
+	{
+		if (Comp) Comp->DestroyComponent();
+	} 
+	InterMeshFXComponents.Empty();
 
 	IsInterMeshA.Empty();
 	InterInitialRelativeLocations.Empty();
@@ -181,6 +196,15 @@ void AENTSpikeDoor::OpenDoor()
 	}
 
 	DropTimeline.Play();
+
+	for (UNiagaraComponent* Comp : InterMeshFXComponents)
+	{
+		if (Comp)
+		{
+			Comp->Activate();
+		}
+	}
+
 	bIsOpened = !bIsOpened;
 }
 
@@ -205,11 +229,19 @@ void AENTSpikeDoor::CloseDoor()
 	InterMeshesB->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
 	DropTimeline.Reverse();
+
+	for (UNiagaraComponent* Comp : InterMeshFXComponents)
+	{
+		Comp->Activate();
+	}
+
 	bIsOpened = !bIsOpened;
 }
 
 void AENTSpikeDoor::DropTimelineUpdate(float Alpha)
 {
+	OnTransitioningState.Broadcast(bIsOpened, Alpha);
+
 	if (InterMeshesA->GetNumInstances() == 0 || InterMeshesB->GetNumInstances() == 0) return;
 
 	int32 IndexA = 0;

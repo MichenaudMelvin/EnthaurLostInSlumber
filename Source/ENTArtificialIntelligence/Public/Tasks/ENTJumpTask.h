@@ -58,6 +58,14 @@ protected:
 	UPROPERTY()
 	TObjectPtr<AENTJumpSpline> JumpSpline;
 
+	UPROPERTY(EditInstanceOnly, Category = "Animations")
+	TObjectPtr<UAnimSequenceBase> FirstHalfAnim;
+
+	UPROPERTY(EditInstanceOnly, Category = "Animations")
+	TObjectPtr<UAnimSequenceBase> SecondHalfAnim;
+
+	void SetCurrentAnim(float CurrentTaskDuration);
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
 	bool bDebugTask = false;

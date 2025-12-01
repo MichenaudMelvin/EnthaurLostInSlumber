@@ -8,6 +8,9 @@ USTRUCT(BlueprintType, Category = "SaveData")
 struct ENTSAVES_API FENTGameElementData
 {
 	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "SaveData")
+	TArray<uint8> Bytes;
 };
 
 #pragma region GameElements

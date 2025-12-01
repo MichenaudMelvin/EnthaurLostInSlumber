@@ -8,11 +8,14 @@
 #include "Interface/ENTActivation.h"
 #include "ENTSpikeDoor.generated.h"
 
+class UNiagaraComponent;
+class UNiagaraSystem;
 class UBoxComponent;
 class UAkComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorOpened);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorClosed);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnTransitioningState, bool, bIsOpenning, float, Alpha);
 
 UCLASS()
 class ENTCORE_API AENTSpikeDoor : public AActor, public IENTActivation
@@ -63,11 +66,23 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Door")
 	TObjectPtr<UInstancedStaticMeshComponent> InterMeshesB;
 
+	UPROPERTY(EditDefaultsOnly, Category="Door")
+	TObjectPtr<UNiagaraSystem> InterMeshFX;
+
+	UPROPERTY(EditDefaultsOnly, Category="Door")
+	float FXHeight = 50.f;
+	
+	UPROPERTY()
+	TArray<TObjectPtr<UNiagaraComponent>> InterMeshFXComponents;
+
 	UPROPERTY(BlueprintAssignable, Category = "Door")
 	FOnDoorOpened OnDoorOpened;
 
 	UPROPERTY(BlueprintAssignable, Category = "Door")
 	FOnDoorClosed OnDoorClosed;
+
+	UPROPERTY(BlueprintAssignable, Category = "Door")
+	FOnTransitioningState OnTransitioningState;
 
 	UPROPERTY()
 	TArray<FVector> InterInitialRelativeLocations;
@@ -135,7 +150,7 @@ public:
 #if WITH_EDITOR
 private:
 	/**
-	 * @brief Temp function, use it if the door insn't working correctly
+	 * @brief Editor Only function, Use it if the door isn't working correctly
 	 */
 	UFUNCTION(CallInEditor, Category = "Door")
 	void ClearDoor();
