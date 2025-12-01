@@ -1956,6 +1956,14 @@
 														</PropertyList>
 													</MusicFade>
 												</TransitionFadeIn>
+												<TransitionFadeOut>
+													<MusicFade Name="Transition Fade-out" ID="{BCE3174B-937C-4389-9ECD-EBBD85B022FA}">
+														<PropertyList>
+															<Property Name="FadeTime" Type="Real64" Value="2"/>
+															<Property Name="FadeType" Type="int16" Value="1"/>
+														</PropertyList>
+													</MusicFade>
+												</TransitionFadeOut>
 											</TransitionInfo>
 										</MusicTransition>
 										<MusicTransition Name="Transition" ID="{DECA677D-A1C0-4F10-84DC-4623B6FA814A}">
@@ -2003,11 +2011,18 @@
 								<Reference Name="PlaylistRoot">
 									<Custom>
 										<MusicPlaylistItem Name="" ID="{6F474C49-C1A0-46BE-886D-4E544130004C}" ShortID="255069697">
-											<PropertyList>
-												<Property Name="LoopCount" Type="int16" Value="0"/>
-											</PropertyList>
 											<ChildrenList>
-												<MusicPlaylistItem Name="" ID="{68535D02-A361-4E23-BB41-A1CE1FCF8D1C}" ShortID="349402072">
+												<MusicPlaylistItem Name="" ID="{E08B4650-32B6-4BDC-ADF3-8F0949BDAC20}" ShortID="951447585">
+													<PropertyList>
+														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Segment">
+															<ObjectRef Name="Enthaur_Music_Lvl1_105Bpm_LP_Start" ID="{889F75FA-5DE5-4BD9-98FA-CEF97077AAB6}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+														</Reference>
+													</ReferenceList>
+												</MusicPlaylistItem>
+												<MusicPlaylistItem Name="" ID="{5A0A29AB-CF1C-4543-BE1B-A948AF4EBBAB}" ShortID="534526002">
 													<PropertyList>
 														<Property Name="LoopCount" Type="int16" Value="0"/>
 														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
@@ -2089,8 +2104,6 @@
 																				<MusicClip Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{EF04C2B5-2286-4FEF-A36A-D388AFBFEF78}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="54857.1458333333"/>
-																						<Property Name="FadeInDuration" Type="Real64" Value="63.9928899051483"/>
-																						<Property Name="FadeOutDuration" Type="Real64" Value="102.388623848237"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{3CEE97A7-9FEC-439B-B22A-962FBF7AAFA5}"/>
 																				</MusicClip>
@@ -2272,6 +2285,91 @@
 										</ObjectList>
 									</ObjectLists>
 								</MusicSegment>
+								<MusicSegment Name="Enthaur_Music_Lvl1_105Bpm_LP_Start" ID="{889F75FA-5DE5-4BD9-98FA-CEF97077AAB6}" ShortID="853533931">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="54857.1458333333"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{B68E7D88-3803-4001-9228-E24E367E1D7A}" ShortID="273099093">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{F872A1AC-FEE1-4FAC-9527-84ADB5D1D2E8}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{3E83E2EE-F59F-4304-B8AE-E08227B57133}">
+													<Language>SFX</Language>
+													<AudioFile>Enthaur_Music_Lvl1_105Bpm_LP.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="998349515"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{83A90B96-608B-4476-9BBD-7675575A81F9}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{30828383-3D5A-4372-ADA6-5692E3D521D9}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="54857.1458333333"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="646.900320952795"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="Enthaur_Music_Lvl1_105Bpm_LP" ID="{3E83E2EE-F59F-4304-B8AE-E08227B57133}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<Reference>
+												<Local>
+													<MusicCue Name="Entry Cue" ID="{99B1F4B4-312D-4760-95A9-7B6045F1D89E}"/>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<MusicCue Name="Exit Cue" ID="{0EA98932-697D-46B1-A6EA-5BCAB2C515B0}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="54857.1458333333"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
 							</ChildrenList>
 						</MusicPlaylistContainer>
 						<MusicPlaylistContainer Name="PC_Lvl2" ID="{74039FC7-FFC1-499A-9BC1-C73B60C49020}" ShortID="501708699">
@@ -2341,9 +2439,10 @@
 												<MusicTransition Name="Transition" ID="{12E87D60-3946-4ED1-8CF2-8FC337D74A44}">
 													<PropertyList>
 														<Property Name="DestinationContextType" Type="int16" Value="2"/>
+														<Property Name="EnableDestinationFadeIn" Type="bool" Value="True"/>
 														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
 														<Property Name="EnableTransitionFadeIn" Type="bool" Value="True"/>
-														<Property Name="PlayDestinationPreEntry" Type="bool" Value="False"/>
+														<Property Name="PlayTransitionPostExit" Type="bool" Value="False"/>
 														<Property Name="SourceContextType" Type="int16" Value="2"/>
 														<Property Name="UseTransitionObject" Type="bool" Value="True"/>
 													</PropertyList>
@@ -2360,14 +2459,19 @@
 														<SourceFadeOut>
 															<MusicFade Name="Source Fade-out" ID="{F6D60059-A9D2-4EE7-BD39-212B3247698C}">
 																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="2"/>
-																	<Property Name="FadeTime" Type="Real64" Value="2"/>
+																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
+																	<Property Name="FadeTime" Type="Real64" Value="1"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
 															</MusicFade>
 														</SourceFadeOut>
 														<DestinationFadeIn>
-															<MusicFade Name="Destination Fade-in" ID="{D53F7BA2-52F7-479D-9BDD-A56B45E80AF7}"/>
+															<MusicFade Name="Destination Fade-in" ID="{D53F7BA2-52F7-479D-9BDD-A56B45E80AF7}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="-2"/>
+																	<Property Name="FadeTime" Type="Real64" Value="2"/>
+																</PropertyList>
+															</MusicFade>
 														</DestinationFadeIn>
 														<TransitionFadeIn>
 															<MusicFade Name="Transition Fade-in" ID="{DFE90A3E-CF84-4A00-9D8E-9C03C686833A}">
@@ -2377,6 +2481,14 @@
 																</PropertyList>
 															</MusicFade>
 														</TransitionFadeIn>
+														<TransitionFadeOut>
+															<MusicFade Name="Transition Fade-out" ID="{71E355BD-DFB4-4805-9CF4-1826F0E7AF5F}">
+																<PropertyList>
+																	<Property Name="FadeTime" Type="Real64" Value="1"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</TransitionFadeOut>
 													</TransitionInfo>
 												</MusicTransition>
 												<MusicTransition Name="Transition" ID="{31CCC58D-FB07-46AB-8F02-70A352F6A7D7}">
@@ -2606,7 +2718,7 @@
 																				<MusicClip Name="Enthaur_Music_Lvl2_Start_105Bpm_OS" ID="{4A3FEBA9-46CD-496F-9CAA-469326863A23}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="4571.4375"/>
-																						<Property Name="FadeInDuration" Type="Real64" Value="26.9542297102371"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="43.1267675363792"/>
 																						<Property Name="FadeOutDuration" Type="Real64" Value="43.1267675363792"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="Enthaur_Music_Lvl2_Start_105Bpm_OS" ID="{D67A9256-F0E5-4D5E-ADAE-2D2300604456}"/>
@@ -2752,7 +2864,6 @@
 													<MusicCue Name="Exit Cue" ID="{15E403FD-3176-4AF0-AFAC-5DDF5CF71F2D}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="2003.08505643069"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
@@ -2839,7 +2950,7 @@
 													<MusicCue Name="Exit Cue" ID="{CCE4287A-778A-4131-AC1C-DA0170AA469C}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="15000"/>
+															<Property Name="TimeMs" Type="Real64" Value="14000"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
@@ -2987,7 +3098,7 @@
 													<MusicCue Name="Exit Cue" ID="{AD2F9B23-5F21-4348-8B58-9F63A4F842B6}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="2016.1705335701"/>
+															<Property Name="TimeMs" Type="Real64" Value="1519.54182733423"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
@@ -3122,8 +3233,6 @@
 												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
 												<Property Name="EnableTransitionFadeIn" Type="bool" Value="True"/>
 												<Property Name="ExitSourceAt" Type="int16" Value="3"/>
-												<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
-												<Property Name="PlayTransitionPostExit" Type="bool" Value="False"/>
 												<Property Name="PlayTransitionPreEntry" Type="bool" Value="False"/>
 												<Property Name="SourceContextType" Type="int16" Value="2"/>
 												<Property Name="UseTransitionObject" Type="bool" Value="True"/>
@@ -3141,8 +3250,8 @@
 												<SourceFadeOut>
 													<MusicFade Name="Source Fade-out" ID="{0FB4FD48-988D-45D4-8BCC-355986DFA411}">
 														<PropertyList>
-															<Property Name="FadeOffset" Type="Real64" Value="1"/>
-															<Property Name="FadeTime" Type="Real64" Value="1"/>
+															<Property Name="FadeOffset" Type="Real64" Value="2"/>
+															<Property Name="FadeTime" Type="Real64" Value="2"/>
 															<Property Name="FadeType" Type="int16" Value="1"/>
 														</PropertyList>
 													</MusicFade>
@@ -3269,8 +3378,6 @@
 																				<MusicClip Name="Enthaur_Music_Lvl4_High_130Bpm_LP" ID="{62E7C98F-961F-4026-9EA4-9773F7DC0E3D}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="44307.6875"/>
-																						<Property Name="FadeInDuration" Type="Real64" Value="208.99851817005"/>
-																						<Property Name="FadeOutDuration" Type="Real64" Value="104.499259085023"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="Enthaur_Music_Lvl4_High_130Bpm_LP" ID="{3C0A53B2-6B94-4833-8525-0EC5B18A6DD4}"/>
 																				</MusicClip>
@@ -3319,6 +3426,16 @@
 									<Custom>
 										<MusicPlaylistItem Name="" ID="{A42F6352-FCF5-4790-8951-8A368A047123}" ShortID="212669052">
 											<ChildrenList>
+												<MusicPlaylistItem Name="" ID="{D94A74DE-7EEB-4FBF-8DC7-95E26450FBB8}" ShortID="607563990">
+													<PropertyList>
+														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Segment">
+															<ObjectRef Name="Enthaur_Music_Lvl4_Low_130Bpm_LP_Start" ID="{80FB0A39-E663-43A3-B079-7256FBA53E45}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+														</Reference>
+													</ReferenceList>
+												</MusicPlaylistItem>
 												<MusicPlaylistItem Name="" ID="{B0C2DC85-C1AE-4AFC-95D8-FEFADCA6B14F}" ShortID="369868853">
 													<PropertyList>
 														<Property Name="LoopCount" Type="int16" Value="0"/>
@@ -3401,7 +3518,6 @@
 																				<MusicClip Name="Enthaur_Music_Lvl4_Low_130Bpm_LP" ID="{6DCF0E4B-FA9B-4E14-B7C9-7B87C997CF60}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="44307.6875"/>
-																						<Property Name="FadeInDuration" Type="Real64" Value="365.747406797591"/>
 																						<Property Name="FadeOutDuration" Type="Real64" Value="365.747406797585"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="Enthaur_Music_Lvl4_Low_130Bpm_LP" ID="{A432623A-A13E-459A-8E69-6C71C2C7DA31}"/>
@@ -3576,7 +3692,93 @@
 													<MusicCue Name="Exit Cue" ID="{3AC20074-9616-4C3E-AEBB-4FAF18FF8A76}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="1000"/>
+															<Property Name="TimeMs" Type="Real64" Value="864.29572001597"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
+								<MusicSegment Name="Enthaur_Music_Lvl4_Low_130Bpm_LP_Start" ID="{80FB0A39-E663-43A3-B079-7256FBA53E45}" ShortID="856534041">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="44307.6875"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="Enthaur_Music_Lvl4_Low_130Bpm_LP" ID="{F6CA502A-8E29-4C67-AA00-559664437B2A}" ShortID="447708854">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{7CDFED98-6155-4357-9BC7-C7FEE4310856}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Enthaur_Music_Lvl4_Low_130Bpm_LP" ID="{3F7EE347-582E-437C-8A13-8960C789F6B4}">
+													<Language>SFX</Language>
+													<AudioFile>Enthaur_Music_Lvl4_Low_130Bpm_LP.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="636796751"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{21F2F10C-0763-4F0D-8180-94D1068246CD}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="Enthaur_Music_Lvl4_Low_130Bpm_LP" ID="{514117A6-5367-4411-AD26-1ED78F1D0D4E}">
+																					<PropertyList>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="44307.6875"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="574.745924967639"/>
+																						<Property Name="FadeOutDuration" Type="Real64" Value="365.747406797585"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="Enthaur_Music_Lvl4_Low_130Bpm_LP" ID="{3F7EE347-582E-437C-8A13-8960C789F6B4}"/>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<Reference>
+												<Local>
+													<MusicCue Name="Entry Cue" ID="{38EBB5CC-5ECD-420E-9AC2-001B99B4384F}"/>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<MusicCue Name="Exit Cue" ID="{93A4940A-4518-4E7F-AF45-55A8C5C96E91}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="44307.6875"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
@@ -3680,8 +3882,6 @@
 																				<MusicClip Name="Enthaur_Music_Lvl4_Med_130Bpm_LP" ID="{1F232F5D-B4D2-4723-A7D8-DADFBA29ECA4}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="44307.6875"/>
-																						<Property Name="FadeInDuration" Type="Real64" Value="261.248147712562"/>
-																						<Property Name="FadeOutDuration" Type="Real64" Value="156.748888627539"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="Enthaur_Music_Lvl4_Med_130Bpm_LP" ID="{CDB18412-2024-4DDB-B377-78A77C92E793}"/>
 																				</MusicClip>
@@ -3719,6 +3919,11 @@
 								<MusicSegment Name="Enthaur_Music_Stinger4_Riser_130Bpm_OS" ID="{A31B5F73-D15D-4D1D-A5D2-1F5FECED9C53}" ShortID="77668808">
 									<PropertyList>
 										<Property Name="EndPosition" Type="Real64" Value="5310.95178575659"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -3767,7 +3972,7 @@
 																					<PropertyList>
 																						<Property Name="BeginTrimOffset" Type="Real64" Value="734.064481146919"/>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="5076.91666666667"/>
-																						<Property Name="FadeInDuration" Type="Real64" Value="214.284089844147"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="118.660842854987"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																						<Property Name="PlayAt" Type="Real64" Value="-734.064481146919"/>
 																					</PropertyList>
@@ -3859,7 +4064,7 @@
 													<MusicCue Name="Exit Cue" ID="{B8784849-8818-48BB-A056-C43A7DAB04A2}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="1004.88741903424"/>
+															<Property Name="TimeMs" Type="Real64" Value="751.912080281964"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
