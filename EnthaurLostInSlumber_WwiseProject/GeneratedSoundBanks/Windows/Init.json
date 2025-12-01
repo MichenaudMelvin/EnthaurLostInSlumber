@@ -10,19 +10,11 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{FE7467D7-A000-EB26-ECC7-9B6F96C767F0}",
+    "Hash": "{6D1F065B-D98E-B69B-F332-B150DB87C6A2}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
     "Media": [
-     {
-      "Id": "99990636",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "OtherBank",
-      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
-      "CachePath": "8F/{8FBE8B0A-16F1-460E-3D51-82F27654E6EB}.wem"
-     },
      {
       "Id": "420614766",
       "Language": "SFX",
@@ -30,6 +22,14 @@
       "Location": "OtherBank",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
       "CachePath": "ED/{EDABBC9C-DF05-5B3C-2D1E-C21B5B51F324}.wem"
+     },
+     {
+      "Id": "1005069349",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "OtherBank",
+      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
+      "CachePath": "8F/{8FBE8B0A-16F1-460E-3D51-82F27654E6EB}.wem"
      }
     ],
     "Plugins": {
@@ -56,17 +56,9 @@
        "LibId": "8323075",
        "MediaRefs": [
         {
-         "Id": "99990636"
+         "Id": "1005069349"
         }
        ]
-      },
-      {
-       "Id": "3399505373",
-       "Name": "Reflect_Physically_Based",
-       "ObjectPath": "\\Effects\\Factory Reflect Physically-Based\\Reflect_Physically_Based",
-       "GUID": "{C69F5865-C206-4B45-BC40-315F3F39151A}",
-       "LibName": "Wwise Reflect",
-       "LibId": "11206659"
       }
      ],
      "AudioDevices": [
@@ -90,6 +82,13 @@
     },
     "Busses": [
      {
+      "Id": "17439960",
+      "Name": "Bus_AMB",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC\\Bus_AMB",
+      "GUID": "{314C3F6A-64CF-4BE6-9D36-325408D0DCFF}",
+      "Color": "9"
+     },
+     {
       "Id": "1162281553",
       "Name": "Bus_Music",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Music",
@@ -97,10 +96,24 @@
       "Color": "19"
      },
      {
+      "Id": "1746463750",
+      "Name": "Bus_UI",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC\\Bus_UI",
+      "GUID": "{A4E934B4-9A21-4FAC-8929-1EFF27EB3FDC}",
+      "Color": "9"
+     },
+     {
       "Id": "2930365547",
       "Name": "Bus_SFX_Amb_MC",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
       "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
+      "Color": "9"
+     },
+     {
+      "Id": "3895923845",
+      "Name": "Bus_SFX",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC\\Bus_SFX",
+      "GUID": "{C45C5D65-0B57-449D-92AB-6BF606EB105E}",
       "Color": "9"
      },
      {
@@ -122,14 +135,7 @@
       "Id": "243379636",
       "Name": "Reflect",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
-      "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}",
-      "PluginRefs": {
-       "ShareSets": [
-        {
-         "Id": "3399505373"
-        }
-       ]
-      }
+      "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
      },
      {
       "Id": "933527613",
@@ -328,6 +334,56 @@
         "Name": "Walk",
         "ObjectPath": "\\Switches\\Gameplay\\AKSW_FootstepsSpeed\\Walk",
         "GUID": "{BAF76096-E59A-4EC7-8887-04BEFF9F4127}"
+       }
+      ]
+     },
+     {
+      "Id": "2724869341",
+      "Name": "Music_Switch",
+      "ObjectPath": "\\Switches\\Music\\Music_Switch",
+      "GUID": "{FAA95C9D-3A29-4472-8561-265C9B5BC61D}",
+      "Switches": [
+       {
+        "Id": "658719994",
+        "Name": "SW_To_Med",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Med",
+        "GUID": "{A08EBC6C-9238-4706-AB1E-3E5204D528BD}"
+       },
+       {
+        "Id": "876681807",
+        "Name": "SW_To_Lv1",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lv1",
+        "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
+       },
+       {
+        "Id": "1275925729",
+        "Name": "SW_Stop_Lvl2",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_Stop_Lvl2",
+        "GUID": "{01ECC8C1-0D2F-4B15-8B7A-89EFD913C51B}"
+       },
+       {
+        "Id": "1275925735",
+        "Name": "SW_Stop_Lvl4",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_Stop_Lvl4",
+        "GUID": "{C4E3C809-1510-4722-B962-8C6F5CD6847A}"
+       },
+       {
+        "Id": "1417415266",
+        "Name": "SW_To_Lvl4",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lvl4",
+        "GUID": "{7C18D196-43B4-4B67-8858-FFA1B8304822}"
+       },
+       {
+        "Id": "1417415268",
+        "Name": "SW_To_Lvl2",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lvl2",
+        "GUID": "{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"
+       },
+       {
+        "Id": "2800183964",
+        "Name": "SW_To_High",
+        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_High",
+        "GUID": "{F61A1368-80C7-4383-81A9-379E062A96A9}"
        }
       ]
      }
@@ -811,6 +867,6 @@
     ]
    }
   ],
-  "FileHash": "{FA6E5454-EFA1-9926-C7D4-AEC14A9AA3AF}"
+  "FileHash": "{96643B37-5776-2888-9497-D185A7547E03}"
  }
 }

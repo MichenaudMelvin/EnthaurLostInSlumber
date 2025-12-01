@@ -16,7 +16,8 @@
 								<Property Name="DataFileName" Type="string" Value="AK_Factory_IR\Churches\AK St-Katharinen.wav"/>
 							</PropertyList>
 							<MediaIDList>
-								<MediaID ID="420614766"/>
+								<MediaID ID="535111107"/>
+								<MediaID Platform="Windows" ID="420614766"/>
 							</MediaIDList>
 						</PluginMediaSource>
 					</ChildrenList>

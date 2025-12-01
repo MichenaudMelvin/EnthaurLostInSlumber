@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}" SchemaVersion="123">
+	<Switches>
+		<WorkUnit Name="Music" ID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}" PersistMode="Standalone">
+			<ChildrenList>
+				<SwitchGroup Name="Music_Switch" ID="{FAA95C9D-3A29-4472-8561-265C9B5BC61D}">
+					<ChildrenList>
+						<Switch Name="SW_To_Lvl2" ID="{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"/>
+						<Switch Name="SW_To_Lvl4" ID="{7C18D196-43B4-4B67-8858-FFA1B8304822}"/>
+						<Switch Name="SW_To_Lv1" ID="{C81D7507-C218-4A58-ACE7-D1CD450154B6}"/>
+						<Switch Name="SW_To_Med" ID="{A08EBC6C-9238-4706-AB1E-3E5204D528BD}"/>
+						<Switch Name="SW_To_High" ID="{F61A1368-80C7-4383-81A9-379E062A96A9}"/>
+						<Switch Name="SW_Stop_Lvl2" ID="{01ECC8C1-0D2F-4B15-8B7A-89EFD913C51B}"/>
+						<Switch Name="SW_Stop_Lvl4" ID="{C4E3C809-1510-4722-B962-8C6F5CD6847A}"/>
+					</ChildrenList>
+				</SwitchGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</Switches>
+</WwiseDocument>

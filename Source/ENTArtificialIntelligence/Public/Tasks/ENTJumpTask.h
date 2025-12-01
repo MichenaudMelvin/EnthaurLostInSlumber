@@ -28,6 +28,8 @@ protected:
 
 	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
+	virtual EBTNodeResult::Type AbortTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
 	UPROPERTY(EditInstanceOnly, Category = "Jump")
 	FBlackboardKeySelector JumpLocationKey;
 
@@ -58,13 +60,47 @@ protected:
 	UPROPERTY()
 	TObjectPtr<AENTJumpSpline> JumpSpline;
 
+#pragma region Animations
+
+protected:
+	UPROPERTY(EditInstanceOnly, Category = "Animations")
+	TObjectPtr<UAnimSequenceBase> StartJumpAnim;
+
+	/**
+	 * @brief Negatives values start the jump before the anim ends
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Animations", meta = (Units = s))
+	float StartJumpInitialDelay = -0.1f;
+
 	UPROPERTY(EditInstanceOnly, Category = "Animations")
 	TObjectPtr<UAnimSequenceBase> FirstHalfAnim;
+
+	UPROPERTY(EditInstanceOnly, Category = "Animations", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f))
+	float SecondAnimAlpha = 0.5f;
 
 	UPROPERTY(EditInstanceOnly, Category = "Animations")
 	TObjectPtr<UAnimSequenceBase> SecondHalfAnim;
 
+	UPROPERTY(EditInstanceOnly, Category = "Animations", meta = (ClampMin = 0.0f, ClampMax = 1.0f, UIMin = 0.0f, UIMax = 1.0f))
+	float LandingAnimAlpha = 0.75f;
+
+	UPROPERTY(EditInstanceOnly, Category = "Animations")
+	TObjectPtr<UAnimSequenceBase> LandingAnim;
+
+	UPROPERTY(EditInstanceOnly, Category = "Animations", meta = (Units = s, ClampMin = 0.0f))
+	float LandingDelay = 0.5f;
+
+	FTimerHandle StartJumpAnimTimerHandle;
+
+	FTimerHandle LandingAnimEndDelayTimerHandle;
+
 	void SetCurrentAnim(float CurrentTaskDuration);
+
+	void StartJump();
+
+	void SetPawnAnimToTrigger(UAnimSequenceBase* Anim) const;
+
+#pragma endregion
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
@@ -73,6 +109,9 @@ protected:
 
 	UFUNCTION()
 	virtual void MovementUpdate(float Alpha);
+
+	UFUNCTION()
+	virtual void FinishJumpTimeline();
 
 	UFUNCTION()
 	virtual void FinishTask();
