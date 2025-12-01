@@ -103,6 +103,21 @@ void AENTNerve::BeginPlay()
 		DynamicStretchedLigamentMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, StretchedLigamentMaterial);
 		DynamicStretchedLigamentMaterial->SetScalarParameterValue(FName("TransparencyDistance"), TransparencyDistance);
 	}
+
+	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))
+	{
+		InteractableComponent->OnInteract.AddDynamic(this, &AENTNerve::Interaction);
+	}
+}
+
+void AENTNerve::BeginDestroy()
+{
+	Super::BeginDestroy();
+
+	if (InteractableComponent->OnInteract.IsBound())
+	{
+		InteractableComponent->OnInteract.RemoveDynamic(this, &AENTNerve::Interaction);
+	}
 }
 
 void AENTNerve::OnConstruction(const FTransform& Transform)
@@ -547,10 +562,9 @@ void AENTNerve::FinishRetractCable()
 	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	NerveBall->SetCollisionResponseToChannel(InteractionChannel, ECR_Block);
 
-	InteractableComponent->AddInteractable(NerveBall);
-	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction) && !bIsInWeakZone)
+	if (!bIsInWeakZone)
 	{
-		InteractableComponent->OnInteract.AddDynamic(this, &AENTNerve::Interaction);
+		InteractableComponent->AddInteractable(NerveBall);
 	}
 
 	bIsStretchSoundPlayed = false;
@@ -771,9 +785,9 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 
 	EnterWeakZoneTimeline.Play();
 
-	if (bIsZoneActive && InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))
+	if (bIsZoneActive)
 	{
-		InteractableComponent->OnInteract.RemoveDynamic(this, &AENTNerve::Interaction);
+		InteractableComponent->RemoveInteractable(NerveBall);
 	}
 }
 
@@ -789,12 +803,7 @@ void AENTNerve::OnExitWeakZone_Implementation()
 	}
 	
 	EnterWeakZoneTimeline.Reverse();
-
-
-	if (!InteractableComponent->OnInteract.IsAlreadyBound(this, &AENTNerve::Interaction))
-	{
-		InteractableComponent->OnInteract.AddDynamic(this, &AENTNerve::Interaction);
-	}
+	InteractableComponent->AddInteractable(NerveBall);
 }
 
 void AENTNerve::UpdateEnterWeakZone(float Alpha)

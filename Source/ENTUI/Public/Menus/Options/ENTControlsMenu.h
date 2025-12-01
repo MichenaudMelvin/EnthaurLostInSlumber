@@ -50,4 +50,16 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> ResetButton;
+
+	TArray<FName> InputActionCustomDisplayOrder = {
+		"MoveForward",
+		"MoveBackward",
+		"MoveLeft",
+		"MoveRight",
+		"Sprint",
+		"Crouch",
+		"Jump",
+		"InteractPressed",
+		"Interact Pressed"
+	};
 };
