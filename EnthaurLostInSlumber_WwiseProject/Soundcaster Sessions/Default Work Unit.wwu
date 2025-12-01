@@ -132,8 +132,16 @@
 							<Position X="3" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="AKE_SinewTense" ID="{8251B621-D354-4B79-95B5-C4470C71F2BA}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="3" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="AKE_PR_Scream" ID="{55DBC8D0-3693-45AB-B125-A0531134C332}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="4" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_StopSinewTense" ID="{D896A77A-BA32-4F8B-9E8E-E3CA138AB262}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="4" Y="1"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
