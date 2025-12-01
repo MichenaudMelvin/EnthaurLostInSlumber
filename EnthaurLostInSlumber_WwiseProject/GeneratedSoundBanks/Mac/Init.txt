@@ -26,8 +26,11 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	4262522749	Wood_Bright			\Factory Acoustic Textures\Textures\Wood_Bright	
 
 Audio Bus	ID	Name			Wwise Object Path	Notes
+	17439960	Bus_AMB			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC\Bus_AMB	
 	1162281553	Bus_Music			\Default Work Unit\Master Audio Bus_01\Bus_Music	
+	1746463750	Bus_UI			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC\Bus_UI	
 	2930365547	Bus_SFX_Amb_MC			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC	
+	3895923845	Bus_SFX			\Default Work Unit\Master Audio Bus_01\Bus_SFX_Amb_MC\Bus_SFX	
 	4267419003	Master Audio Bus_01			\Default Work Unit\Master Audio Bus_01	
 	4277214558	Bus_Voice			\Default Work Unit\Master Audio Bus_01\Bus_Voice	
 
@@ -39,7 +42,6 @@ Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 Effect plug-ins	ID	Name	Type				Notes
 	825401838	AK_Convolution_Reverb_Dark_Cathedrale_Small	Wwise Convolution Reverb			
 	3077109135	Dark_Cathedral_Stereo	Wwise Convolution Reverb			Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  
-	3399505373	Reflect_Physically_Based	Wwise Reflect			
 
 Audio Devices	ID	Name	Type				Notes
 	2317455096	No_Output	No Output			

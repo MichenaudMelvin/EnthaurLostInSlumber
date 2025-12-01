@@ -2,6 +2,13 @@
 <WwiseDocument Type="WorkUnit" ID="{1562D13C-41E8-4FA1-A341-D4CB726E2AEC}" SchemaVersion="123">
 	<Effects>
 		<WorkUnit Name="Factory AK Convolution Reverb Effects Ambisonics" ID="{1562D13C-41E8-4FA1-A341-D4CB726E2AEC}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Inclusion" Type="bool">
+					<ValueList>
+						<Value>False</Value>
+					</ValueList>
+				</Property>
+			</PropertyList>
 			<ChildrenList>
 				<Folder Name="Cathedrals and Churches" ID="{907144BF-29AB-4B16-A839-8F3423EDF0D6}" ShortID="672852685">
 					<ChildrenList>

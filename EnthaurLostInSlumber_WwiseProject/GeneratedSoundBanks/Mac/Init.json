@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{412A393E-F0E5-DAE7-FCC3-961189C53874}",
+    "Hash": "{AB605A92-B826-CE41-42BB-871215302707}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -59,14 +59,6 @@
          "Id": "1005069349"
         }
        ]
-      },
-      {
-       "Id": "3399505373",
-       "Name": "Reflect_Physically_Based",
-       "ObjectPath": "\\Effects\\Factory Reflect Physically-Based\\Reflect_Physically_Based",
-       "GUID": "{C69F5865-C206-4B45-BC40-315F3F39151A}",
-       "LibName": "Wwise Reflect",
-       "LibId": "11206659"
       }
      ],
      "AudioDevices": [
@@ -90,6 +82,13 @@
     },
     "Busses": [
      {
+      "Id": "17439960",
+      "Name": "Bus_AMB",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC\\Bus_AMB",
+      "GUID": "{314C3F6A-64CF-4BE6-9D36-325408D0DCFF}",
+      "Color": "9"
+     },
+     {
       "Id": "1162281553",
       "Name": "Bus_Music",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_Music",
@@ -97,10 +96,24 @@
       "Color": "19"
      },
      {
+      "Id": "1746463750",
+      "Name": "Bus_UI",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC\\Bus_UI",
+      "GUID": "{A4E934B4-9A21-4FAC-8929-1EFF27EB3FDC}",
+      "Color": "9"
+     },
+     {
       "Id": "2930365547",
       "Name": "Bus_SFX_Amb_MC",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC",
       "GUID": "{3901B340-3EB3-4D3D-AF95-8CE165D2AFB8}",
+      "Color": "9"
+     },
+     {
+      "Id": "3895923845",
+      "Name": "Bus_SFX",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Bus_SFX_Amb_MC\\Bus_SFX",
+      "GUID": "{C45C5D65-0B57-449D-92AB-6BF606EB105E}",
       "Color": "9"
      },
      {
@@ -122,14 +135,7 @@
       "Id": "243379636",
       "Name": "Reflect",
       "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
-      "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}",
-      "PluginRefs": {
-       "ShareSets": [
-        {
-         "Id": "3399505373"
-        }
-       ]
-      }
+      "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
      },
      {
       "Id": "933527613",
@@ -861,6 +867,6 @@
     ]
    }
   ],
-  "FileHash": "{F9CE18F9-5E6A-FF55-628A-39B0B66BA38D}"
+  "FileHash": "{F04CC01D-6B0D-FC06-F7DB-88E4F8C8FAE8}"
  }
 }

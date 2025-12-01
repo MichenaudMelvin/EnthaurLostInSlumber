@@ -4,6 +4,13 @@
 		<WorkUnit Name="Factory AK Convolution Reverb Effects Stereo" ID="{9D68BE5F-8CA6-43E0-BCE2-C7D59F63E582}" PersistMode="Standalone">
 			<ChildrenList>
 				<Folder Name="Rooms" ID="{8F1E395F-AC8A-4B19-BE8C-74BF69F66604}" ShortID="520744161">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool">
+							<ValueList>
+								<Value>False</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ChildrenList>
 						<Effect Name="Bright_Echo_Chamber_Stereo" ID="{364EC604-EDCB-4908-AF1A-27B6C3898803}" PluginName="Wwise Convolution Reverb" CompanyID="0" PluginID="127" PluginType="3">
 							<Comment>Impulse response created by Pinguin ing.büro
@@ -1497,6 +1504,13 @@ IR Pre-delay: 4ms
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Large Spaces" ID="{E582F9A1-2D34-46D9-B55E-AC8402D7F629}" ShortID="170872515">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool">
+							<ValueList>
+								<Value>False</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ChildrenList>
 						<Effect Name="HamburgParkhaus_Stereo" ID="{D5DA8C30-01BE-4D5D-826A-23A2CBE6779C}" PluginName="Wwise Convolution Reverb" CompanyID="0" PluginID="127" PluginType="3">
 							<Comment>Impulse response created by Pinguin ing.büro
@@ -2374,6 +2388,11 @@ IR Pre-delay: 20ms </Comment>
 								</Property>
 								<Property Name="IRLPFAutomate" Type="bool" Value="True"/>
 								<Property Name="IRLevel" Type="Real32" Value="-45"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
 								<Property Name="PreDelay" Type="Real32" Value="49"/>
 							</PropertyList>
 							<ChildrenList>
@@ -2466,6 +2485,11 @@ IR Pre-delay: 20ms </Comment>
 								<Property Name="IRLPFAutomate" Type="bool" Value="True"/>
 								<Property Name="IRLevel" Type="Real32" Value="-45"/>
 								<Property Name="IRStretch" Type="Real32" Value="151"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ChildrenList>
 								<PluginMediaSource Name="AK St-Katharinen" ID="{E7B574A3-AD36-4D7A-BB0E-E25E3ED6C822}">
@@ -2559,6 +2583,11 @@ IR Pre-delay: 20ms </Comment>
 								<Property Name="IRLPFAutomate" Type="bool" Value="True"/>
 								<Property Name="IRLevel" Type="Real32" Value="-45"/>
 								<Property Name="IRStretch" Type="Real32" Value="155"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
 								<Property Name="PreDelay" Type="Real32" Value="60"/>
 							</PropertyList>
 							<ChildrenList>
@@ -2653,6 +2682,11 @@ IR Pre-delay: 5ms </Comment>
 								<Property Name="IRLPFAutomate" Type="bool" Value="True"/>
 								<Property Name="IRLevel" Type="Real32" Value="-32"/>
 								<Property Name="IRStretch" Type="Real32" Value="68"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
 								<Property Name="PreDelay" Type="Real32" Value="22"/>
 							</PropertyList>
 							<ChildrenList>
@@ -2747,6 +2781,11 @@ IR Pre-delay: 5ms </Comment>
 								<Property Name="IRLPFAutomate" Type="bool" Value="True"/>
 								<Property Name="IRLevel" Type="Real32" Value="-38"/>
 								<Property Name="IRStretch" Type="Real32" Value="123"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
 								<Property Name="PreDelay" Type="Real32" Value="60"/>
 							</PropertyList>
 							<ChildrenList>
@@ -2843,6 +2882,11 @@ IR Pre-delay: 20ms </Comment>
 									</ValueList>
 								</Property>
 								<Property Name="IRLevel" Type="Real32" Value="-42"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
 								<Property Name="PreDelay" Type="Real32" Value="20"/>
 							</PropertyList>
 							<ChildrenList>
@@ -2934,6 +2978,11 @@ IR Pre-delay: 5ms </Comment>
 									</ValueList>
 								</Property>
 								<Property Name="IRLevel" Type="Real32" Value="-38"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
 								<Property Name="PreDelay" Type="Real32" Value="5"/>
 							</PropertyList>
 							<ChildrenList>
@@ -3015,6 +3064,13 @@ IR Pre-delay: 5ms </Comment>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Halls" ID="{6806ADE2-832F-487B-9A0C-597EEDD31F3F}" ShortID="482323779">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool">
+							<ValueList>
+								<Value>False</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ChildrenList>
 						<Effect Name="Large_Bright_Space_Stereo" ID="{550CC1B9-D5A2-4E69-BC22-8EF3C4F0645C}" PluginName="Wwise Convolution Reverb" CompanyID="0" PluginID="127" PluginType="3">
 							<Comment>Impulse response created by Pinguin ing.büro
@@ -3795,6 +3851,13 @@ IR Pre-delay: 10ms
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Exteriors" ID="{4358A3C1-4794-4434-A840-BB3252E4B57A}" ShortID="713698831">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool">
+							<ValueList>
+								<Value>False</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ChildrenList>
 						<Effect Name="HamburgHarburgerSee_Slap_01_Stereo" ID="{2E7C5BA9-9228-4731-BC1C-DFD8146FEA86}" PluginName="Wwise Convolution Reverb" CompanyID="0" PluginID="127" PluginType="3">
 							<Comment>Impulse response created by Pinguin ing.büro

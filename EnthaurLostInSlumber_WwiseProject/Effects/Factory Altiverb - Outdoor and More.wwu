@@ -2,6 +2,13 @@
 <WwiseDocument Type="WorkUnit" ID="{C0E78DAA-768A-438F-8F7B-3701395185C3}" SchemaVersion="123">
 	<Effects>
 		<WorkUnit Name="Factory Altiverb - Outdoor and More" ID="{C0E78DAA-768A-438F-8F7B-3701395185C3}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Inclusion" Type="bool">
+					<ValueList>
+						<Value>False</Value>
+					</ValueList>
+				</Property>
+			</PropertyList>
 			<ChildrenList>
 				<Folder Name="Altiverb - Outdoor and More" ID="{20CF463A-52F5-4EA4-8D92-E953D08279A6}" ShortID="524214845">
 					<ChildrenList>
@@ -1237,7 +1244,6 @@
 © 2011 AudioEase.  All rights reserved.</Comment>
 									<PropertyList>
 										<Property Name="CenterLevel" Type="Real32" Value="-12"/>
-										<Property Name="DryLevel" Type="Real32" Value="-96.3"/>
 										<Property Name="IRConvolutionStop" Type="Real64" Value="0.869616847826087"/>
 										<Property Name="IRConvolutionThreshold" Type="Real32">
 											<ValueList>
@@ -3973,11 +3979,6 @@
 									<PropertyList>
 										<Property Name="CenterLevel" Type="Real32" Value="-12"/>
 										<Property Name="IRConvolutionStop" Type="Real64" Value="0.507961956521739"/>
-										<Property Name="IRConvolutionThreshold" Type="Real32">
-											<ValueList>
-												<Value>-75</Value>
-											</ValueList>
-										</Property>
 										<Property Name="IRLRMix" Type="Real32">
 											<ValueList>
 												<Value>37</Value>
