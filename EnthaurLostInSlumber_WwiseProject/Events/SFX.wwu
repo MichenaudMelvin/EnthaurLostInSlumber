@@ -896,6 +896,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_PR_Attack_Hit" ID="{AB8D0613-15F0-40FE-A9D4-36E30F4C2837}">
+							<ChildrenList>
+								<Action Name="" ID="{50A308E2-9F56-4111-8B0C-5CBA207439FC}" ShortID="798298914">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Attack_Hit" ID="{87B3550C-4C7F-485B-B7FA-F37249DB1452}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">
@@ -1037,6 +1048,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="AMB_FleshWall" ID="{92102F59-E468-4AD5-B9B6-DB17A03B1223}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_Heartbeat" ID="{500A71A7-3D23-495A-B1C7-3F51F63E8616}">
+							<ChildrenList>
+								<Action Name="" ID="{F5ADF8A3-24C0-45BB-BEF7-BA6CA8179FC7}" ShortID="702418944">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AMB_Heartbeat" ID="{8CCB994F-C808-4654-927C-9AA39E9AEB95}" WorkUnitID="{67E15030-33DC-4F9B-9C15-E040E1E6A2B7}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
