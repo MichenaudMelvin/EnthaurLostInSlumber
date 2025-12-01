@@ -169,14 +169,6 @@
 							<ObjectRef Name="AKE_Music" ID="{C09CA8DA-D4F5-4FCE-8AF5-65FDEEC3CA9E}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
 							<Position X="0" Y="0"/>
 						</Module>
-						<Module>
-							<ObjectRef Name="AKE_Lvl2" ID="{F3B9BC6E-319D-4D13-BFF6-651235A9F97D}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
-							<Position X="1" Y="0"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="AKE_Lvl4" ID="{20E746F4-9525-405E-B3FB-CBD80A355706}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
-							<Position X="2" Y="0"/>
-						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true"/>

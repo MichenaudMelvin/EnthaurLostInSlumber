@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{FDC54029-73CB-6629-E422-DDAB432F3448}",
+    "Hash": "{70EAC450-4A00-E43F-E0BB-3E5756868704}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -3010,6 +3010,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PRJump",
       "GUID": "{AF524C70-1B07-4D30-AF81-DCE44777FA02}",
       "Color": "10",
+      "MaxAttenuation": "9000",
       "DurationType": "OneShot",
       "DurationMin": "0.93333334",
       "DurationMax": "0.93333334",
@@ -3025,6 +3026,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PRLand",
       "GUID": "{E2704CCC-659C-4110-8785-691E777B51AF}",
       "Color": "10",
+      "MaxAttenuation": "9000",
       "DurationType": "OneShot",
       "DurationMin": "0.519",
       "DurationMax": "0.519",
@@ -3400,6 +3402,6 @@
     ]
    }
   ],
-  "FileHash": "{822333BF-D78E-37BC-8302-C46F38CE0198}"
+  "FileHash": "{53940823-B55F-E86C-1796-534E9810B847}"
  }
 }

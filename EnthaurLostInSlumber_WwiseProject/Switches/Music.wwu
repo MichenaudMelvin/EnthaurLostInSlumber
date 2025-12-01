@@ -8,6 +8,9 @@
 						<Switch Name="SW_To_Lvl2" ID="{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"/>
 						<Switch Name="SW_To_Lvl4" ID="{7C18D196-43B4-4B67-8858-FFA1B8304822}"/>
 						<Switch Name="SW_To_Lv1" ID="{C81D7507-C218-4A58-ACE7-D1CD450154B6}"/>
+						<Switch Name="SW_To_Med" ID="{A08EBC6C-9238-4706-AB1E-3E5204D528BD}"/>
+						<Switch Name="SW_To_High" ID="{F61A1368-80C7-4383-81A9-379E062A96A9}"/>
+						<Switch Name="SW_Stop_Lvl2" ID="{01ECC8C1-0D2F-4B15-8B7A-89EFD913C51B}"/>
 					</ChildrenList>
 				</SwitchGroup>
 			</ChildrenList>
