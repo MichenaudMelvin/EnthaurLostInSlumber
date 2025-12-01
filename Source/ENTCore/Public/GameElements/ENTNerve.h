@@ -312,6 +312,19 @@ private:
 
 #pragma endregion
 
+#pragma region Noises
+
+public:
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> LigamentReleaseEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> LigamentTenseEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> StopLigamentTenseEvent;
+#pragma endregion
+
 #pragma region Save
 
 protected:
