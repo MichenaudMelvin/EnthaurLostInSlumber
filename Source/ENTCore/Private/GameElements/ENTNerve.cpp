@@ -91,12 +91,16 @@ void AENTNerve::BeginPlay()
 	RetractTimeline.SetTimelineFinishedFunc(FinishEvent);
 
 	UpdateEvent.Unbind();
+	FinishEvent.Unbind();
 
 	UpdateEvent.BindDynamic(this, &AENTNerve::UpdateEnterWeakZone);
+	FinishEvent.BindDynamic(this, &AENTNerve::FinishEnterWeakZone);
 	EnterWeakZoneTimeline.AddInterpFloat(EnterWeakZoneCurve, UpdateEvent);
 	EnterWeakZoneTimeline.SetPlayRate(1 / RetractLigamentDuration);
+	EnterWeakZoneTimeline.SetTimelineFinishedFunc(FinishEvent);
 
 	UpdateEvent.Unbind();
+	FinishEvent.Unbind();
 
 	if (StretchedLigamentMaterial)
 	{
@@ -760,6 +764,8 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 
 #pragma endregion
 
+#pragma region WeakZone
+
 void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
@@ -803,7 +809,6 @@ void AENTNerve::OnExitWeakZone_Implementation()
 	}
 	
 	EnterWeakZoneTimeline.Reverse();
-	InteractableComponent->AddInteractable(NerveBall);
 }
 
 void AENTNerve::UpdateEnterWeakZone(float Alpha)
@@ -821,6 +826,13 @@ void AENTNerve::UpdateEnterWeakZone(float Alpha)
 		CorruptMID->SetScalarParameterValue("Progress", Value);
 	}
 }
+
+void AENTNerve::FinishEnterWeakZone()
+{
+	if (!bIsInWeakZone) InteractableComponent->AddInteractable(NerveBall);
+}
+
+#pragma endregion
 
 #pragma region Save
 
