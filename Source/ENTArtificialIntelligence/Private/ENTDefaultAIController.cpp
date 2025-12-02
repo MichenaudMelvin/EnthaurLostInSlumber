@@ -150,6 +150,7 @@ void AENTDefaultAIController::RunCurrentBehaviorTree()
 	}
 
 	GetBlackboardComponent()->SetValueAsVector(SpawnLocationKeyName, GetPawn()->GetActorLocation());
+	GetBlackboardComponent()->SetValueAsRotator(SpawnRotationKeyName, GetPawn()->GetActorRotation());
 
 	IENTPawnAIInterface::Execute_OnBehaviorTreeStarted(GetPawn());
 }

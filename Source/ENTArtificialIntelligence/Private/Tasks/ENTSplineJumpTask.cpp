@@ -8,7 +8,6 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Int.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
-#include "Components/BoxComponent.h"
 #include "Parasite/ENTParasitePawn.h"
 #include "Path/ENTArtificialIntelligencePath.h"
 #include "Path/ENTJumpSpline.h"
