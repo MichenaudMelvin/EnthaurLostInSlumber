@@ -87,7 +87,13 @@ protected:
 #pragma region BlackboardKeys
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName ResetBehaviorKeyName = "ResetBehavior";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName SpawnLocationKeyName = "SpawnLocation";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
+	FName SpawnRotationKeyName = "SpawnRotation";
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI|Blackboard")
 	FName PathKeyName = "AIPath";

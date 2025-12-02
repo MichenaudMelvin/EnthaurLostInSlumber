@@ -9,7 +9,6 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Parasite/ENTParasitePawn.h"
 #include "Path/ENTJumpSpline.h"
 
@@ -162,6 +161,12 @@ void UENTJumpTask::SetCurrentAnim(float CurrentTaskDuration)
 
 void UENTJumpTask::StartJump()
 {
+	UENTGravityPawnMovement* GravityPawnMovement = Cast<UENTGravityPawnMovement>(CurrentPawn->GetMovementComponent());
+	if (GravityPawnMovement)
+	{
+		GravityPawnMovement->SetGravityScale(0.0f);
+	}
+
 	JumpTimeline.PlayFromStart();
 }
 
