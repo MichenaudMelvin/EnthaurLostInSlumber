@@ -304,6 +304,9 @@ private:
 	UFUNCTION()
 	void UpdateEnterWeakZone(float Alpha);
 
+	UFUNCTION()
+	void FinishEnterWeakZone();
+
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
 	float RetractLigamentDuration = 1.5f;
