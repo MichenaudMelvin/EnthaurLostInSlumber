@@ -81,9 +81,27 @@ void AENTSpikeDoor::BeginPlay()
 	{
 		if (InterMeshFX)
 		{
-			//UKismetSystemLibrary::LineTraceSingle()
-			FVector FXPos = InterInitialRelativeLocations[i] + FVector(-FXHeight, 0, 0);
-			UNiagaraComponent* FX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshesToUse[i], NAME_None, FXPos,InterInitialRotations[i],EAttachLocation::KeepRelativeOffset,false, false);
+			FVector BasePos = InterInitialRelativeLocations[i] + FVector(-FX_X_Offset, 0, 0);
+			
+			FVector StartTrace = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,200);
+			FVector EndTrace   = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,-200);
+
+			FHitResult Hit;
+			
+			FCollisionQueryParams Params;
+			Params.AddIgnoredActor(this);
+			Params.bTraceComplex = true;
+
+			bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartTrace, EndTrace, ECC_Visibility, Params);
+
+			FVector FinalFXPos = BasePos;
+
+			if (bHit)
+			{
+				FinalFXPos.Z = MeshesToUse[i]->GetComponentTransform().InverseTransformPosition(Hit.ImpactPoint).Z + FX_Z_Offset;
+			}
+
+			UNiagaraComponent* FX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshesToUse[i], NAME_None, FinalFXPos,InterInitialRotations[i],EAttachLocation::KeepRelativeOffset,false, false);
 			InterMeshFXComponents.Add(FX);
 		}
 	}

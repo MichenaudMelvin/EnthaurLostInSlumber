@@ -71,7 +71,10 @@ protected:
 	TObjectPtr<UNiagaraSystem> InterMeshFX;
 
 	UPROPERTY(EditDefaultsOnly, Category="Door")
-	float FXHeight = 50.f;
+	float FX_X_Offset = 50.f;
+
+	UPROPERTY(EditDefaultsOnly, Category="Door")
+	float FX_Z_Offset = 50.f;
 	
 	UPROPERTY()
 	TArray<TObjectPtr<UNiagaraComponent>> InterMeshFXComponents;
