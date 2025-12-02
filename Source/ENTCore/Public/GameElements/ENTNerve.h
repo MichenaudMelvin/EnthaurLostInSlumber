@@ -33,6 +33,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void BeginDestroy() override;
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
@@ -310,6 +311,19 @@ private:
 	UPROPERTY()
 	float StartZ;
 
+#pragma endregion
+
+#pragma region Noises
+
+public:
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> LigamentReleaseEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> LigamentTenseEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> StopLigamentTenseEvent;
 #pragma endregion
 
 #pragma region Save

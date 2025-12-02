@@ -8,6 +8,7 @@
 #include "Interface/ENTActivation.h"
 #include "ENTSpikeDoor.generated.h"
 
+class UAkAudioEvent;
 class UNiagaraComponent;
 class UNiagaraSystem;
 class UBoxComponent;
@@ -123,7 +124,16 @@ protected:
 	float CloseDuration = 1.5f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
-	TObjectPtr<UAkComponent> NerveDoorNoises;
+	TObjectPtr<UAkAudioEvent> DoorOpenStartEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> DoorOpenEndEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> DoorCloseStartEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Noise")
+	TObjectPtr<UAkAudioEvent> DoorCloseEndEvent;
 
 	bool bIsOpened = false;
 

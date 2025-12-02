@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{8B5F8651-7F23-562B-DAC1-487D86A6463F}",
+    "Hash": "{083F41FF-4348-7CF0-CE4D-6A9DFD12A31A}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -319,14 +319,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Electricity_Layer_03.wav",
       "CachePath": "D4/{D4C263BE-0141-B0E9-41C7-FA926DC1CB4D}.wem"
-     },
-     {
-      "Id": "158492748",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Musical, Loop, Guitar And Bass Loop, Pop SND84988.wav",
-      "CachePath": "BD/{BD273072-03DA-4EB8-8430-FC86DEFFF9D9}.wem"
      },
      {
       "Id": "165671155",
@@ -3344,6 +3336,17 @@
       "DurationMax": "0"
      },
      {
+      "Id": "4260448178",
+      "Name": "AKE_StopSinewTense",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StopSinewTense",
+      "GUID": "{D896A77A-BA32-4F8B-9E8E-E3CA138AB262}",
+      "Color": "10",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "2721947660",
       "Name": "AKE_StopWindSpeed",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_StopWindSpeed",
@@ -3420,12 +3423,9 @@
       "GUID": "{922BABEE-EE53-4991-B186-0D61FAD7D05D}",
       "Color": "10",
       "MaxAttenuation": "5000",
-      "DurationType": "Infinite",
-      "MediaRefs": [
-       {
-        "Id": "158492748"
-       }
-      ]
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "2275903284",
@@ -3508,6 +3508,6 @@
     ]
    }
   ],
-  "FileHash": "{73B1925E-799C-38C1-BAFE-D5FCD16F3BF7}"
+  "FileHash": "{A7A245E0-2B08-3549-DE0B-0B9B9EBC4581}"
  }
 }

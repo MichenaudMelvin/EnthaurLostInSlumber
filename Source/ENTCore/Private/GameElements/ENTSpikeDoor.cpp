@@ -3,6 +3,7 @@
 
 #include "GameElements/ENTSpikeDoor.h"
 #include "AkComponent.h"
+#include "AkGameplayStatics.h"
 #include "ENTCameraShakeComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
@@ -35,9 +36,6 @@ AENTSpikeDoor::AENTSpikeDoor()
 	InterMeshesB = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("InterMeshesB"));
 	InterMeshesB->SetupAttachment(Root);
 	InterMeshesB->SetCanEverAffectNavigation(false);
-
-	NerveDoorNoises = CreateDefaultSubobject<UAkComponent>(TEXT("NerveDoorNoises"));
-	NerveDoorNoises->SetupAttachment(Root);
 
 	DoorNavModifier = CreateDefaultSubobject<UBoxComponent>(TEXT("DoorNavModifier"));
 	DoorNavModifier->SetupAttachment(Root);
@@ -83,6 +81,7 @@ void AENTSpikeDoor::BeginPlay()
 	{
 		if (InterMeshFX)
 		{
+			//UKismetSystemLibrary::LineTraceSingle()
 			FVector FXPos = InterInitialRelativeLocations[i] + FVector(-FXHeight, 0, 0);
 			UNiagaraComponent* FX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshesToUse[i], NAME_None, FXPos,InterInitialRotations[i],EAttachLocation::KeepRelativeOffset,false, false);
 			InterMeshFXComponents.Add(FX);
@@ -191,17 +190,14 @@ void AENTSpikeDoor::ToggleDoorState()
 
 void AENTSpikeDoor::OpenDoor()
 {
-	if (NerveDoorNoises)
-	{
-		NerveDoorNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
-	}
-
 	if (OpenDuration > KINDA_SMALL_NUMBER)
 	{
 		DropTimeline.SetPlayRate(1.f / OpenDuration);
 	}
 
 	DropTimeline.Play();
+
+	UAkGameplayStatics::PostEvent(DoorOpenStartEvent, this, 0, FOnAkPostEventCallback());
 
 	for (UNiagaraComponent* Comp : InterMeshFXComponents)
 	{
@@ -216,11 +212,6 @@ void AENTSpikeDoor::OpenDoor()
 
 void AENTSpikeDoor::CloseDoor()
 {
-	if (NerveDoorNoises)
-	{
-		NerveDoorNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
-	}
-
 	if (CloseDuration > KINDA_SMALL_NUMBER)
 	{
 		DropTimeline.SetPlayRate(1.f / CloseDuration);
@@ -235,6 +226,8 @@ void AENTSpikeDoor::CloseDoor()
 	InterMeshesB->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
 	DropTimeline.Reverse();
+
+	UAkGameplayStatics::PostEvent(DoorCloseStartEvent, this, 0, FOnAkPostEventCallback());
 
 	for (UNiagaraComponent* Comp : InterMeshFXComponents)
 	{
@@ -317,10 +310,13 @@ void AENTSpikeDoor::DropTimelineFinished()
 
 		InterMeshesA->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		InterMeshesB->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+		UAkGameplayStatics::PostEvent(DoorOpenEndEvent, this, 0, FOnAkPostEventCallback());
 		OnDoorOpened.Broadcast();
 	}
 	else
 	{
+		UAkGameplayStatics::PostEvent(DoorCloseEndEvent, this, 0, FOnAkPostEventCallback());
 		OnDoorClosed.Broadcast();
 	}
 

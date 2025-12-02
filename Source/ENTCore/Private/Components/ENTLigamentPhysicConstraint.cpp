@@ -3,6 +3,7 @@
 
 #include "Components/ENTLigamentPhysicConstraint.h"
 
+#include "AkGameplayStatics.h"
 #include "GameElements/ENTNerve.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -43,7 +44,6 @@ void UENTLigamentPhysicConstraint::ReleasePlayer(const bool DetachFromPlayer)
 	}
 	
 	LinkedNerve->GetDynamicCableStretchedMaterial()->SetScalarParameterValue(FName("VibrationStrength"), 0.f);
-	
 	Super::ReleasePlayer(DetachFromPlayer);
 }
 
@@ -107,6 +107,7 @@ void UENTLigamentPhysicConstraint::TickComponent(float DeltaTime, ELevelTick Tic
 		{
 			bIsPropulsionActive = true;
 			OnPropulsionStateChanged.Broadcast(bIsPropulsionActive);
+			UAkGameplayStatics::PostEvent(LinkedNerve->LigamentTenseEvent, PlayerCharacter, 0, FOnAkPostEventCallback());
 		}
 
 		const float Vibration = Lerp * (LinkedNerve -> GetMaxVibrationStrength());
@@ -119,7 +120,8 @@ void UENTLigamentPhysicConstraint::TickComponent(float DeltaTime, ELevelTick Tic
 			const float Force = FMath::Lerp(LinkedNerve->GetPropulsionForceRange().GetLowerBoundValue(), LinkedNerve->GetPropulsionForceRange().GetUpperBoundValue(), Lerp);
 
 			PlayerCharacter->EjectCharacter(JumpDirection * Force, false);
-
+			UAkGameplayStatics::PostEvent(LinkedNerve->StopLigamentTenseEvent, PlayerCharacter, 0, FOnAkPostEventCallback());
+			UAkGameplayStatics::PostEvent(LinkedNerve->LigamentReleaseEvent, PlayerCharacter, 0, FOnAkPostEventCallback());
 			ReleasePlayer(true);
 		}
 	} else if (Distance < LinkedNerve->GetDistanceNeededToPropulsion())
@@ -127,6 +129,7 @@ void UENTLigamentPhysicConstraint::TickComponent(float DeltaTime, ELevelTick Tic
 		if (bIsPropulsionActive)
 		{
 			bIsPropulsionActive = false;
+			UAkGameplayStatics::PostEvent(LinkedNerve->StopLigamentTenseEvent, PlayerCharacter, 0, FOnAkPostEventCallback());
 			OnPropulsionStateChanged.Broadcast(bIsPropulsionActive);
 			LinkedNerve->GetDynamicCableStretchedMaterial()->SetScalarParameterValue(FName("VibrationStrength"), 0.f);
 		}
