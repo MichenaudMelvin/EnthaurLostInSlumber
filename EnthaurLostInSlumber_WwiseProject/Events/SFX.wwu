@@ -918,6 +918,34 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_StopSinewTense" ID="{D896A77A-BA32-4F8B-9E8E-E3CA138AB262}">
+							<ChildrenList>
+								<Action Name="" ID="{B83CE7C0-98A4-4B0D-8ECB-8D13D058059D}" ShortID="1014419150">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Sinew_Tense" ID="{72C69E25-20E8-4F13-8332-0C58C3E80753}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{19080ECC-CBFF-4B14-8DCA-F884139A677C}" ShortID="1038655757">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Sinew_Tense_Wobbling" ID="{2743BA88-31F7-4CDF-9F3D-54E98D8E4F65}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">

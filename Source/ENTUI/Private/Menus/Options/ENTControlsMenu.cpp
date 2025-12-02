@@ -112,14 +112,20 @@ void UENTControlsMenu::AddInputRows()
 		return;
 	}
 
-	for (const TTuple<FName, FKeyMappingRow>& Key : PlayerMappingRows)
+	for (FName MappingName : InputActionCustomDisplayOrder)
 	{
+		const FKeyMappingRow* PlayerMappingRow = PlayerMappingRows.Find(MappingName);
+		if (!PlayerMappingRow)
+		{
+			continue; // skip if the mapping doesn't exist
+		}
+
 		UUserWidget* UserWidget = CreateWidget(PlayerController, InputSlotClass);
 		UENTInputSlot* InputSlot = Cast<UENTInputSlot>(UserWidget);
 		VBox->AddChild(InputSlot);
 
 		FMapPlayerKeyArgs InArgs;
-		InArgs.MappingName = Key.Key;
+		InArgs.MappingName = MappingName;
 		InArgs.Slot = EPlayerMappableKeySlot::First;
 
 		const FPlayerKeyMapping* PlayerKeyMapping = PlayerMappableKeyProfile->FindKeyMapping(InArgs);
@@ -131,7 +137,7 @@ void UENTControlsMenu::AddInputRows()
 		FText KeyName = FText::AsCultureInvariant(PlayerKeyMapping->GetCurrentKey().ToString());
 		InputSlot->SetKeyName(PlayerKeyMapping->GetDisplayName());
 		InputSlot->SetButtonKeyName(KeyName);
-		InputSlot->SetKeyMappingName(Key.Key);
+		InputSlot->SetKeyMappingName(MappingName);
 		InputSlot->SetControlsMenu(this);
 
 		UVerticalBoxSlot* VerticalBoxSlot = Cast<UVerticalBoxSlot>(InputSlot->Slot);
@@ -142,7 +148,6 @@ void UENTControlsMenu::AddInputRows()
 
 		FSlateChildSize ChildSize;
 		ChildSize.Value = ESlateSizeRule::Fill;
-
 		VerticalBoxSlot->SetSize(ChildSize);
 	}
 }

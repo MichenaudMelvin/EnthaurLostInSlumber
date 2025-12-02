@@ -11,7 +11,7 @@
     "GUID": "{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}",
     "Color": "11",
     "Language": "SFX",
-    "Hash": "{065C256D-D9A6-1350-3028-AD100EB0A214}",
+    "Hash": "{2DBCED0B-99BD-CDA0-F9A1-F48923C96310}",
     "ObjectPath": "\\SoundBanks\\Effects\\SB_Effects",
     "ShortName": "SB_Effects",
     "Path": "SB_Effects.bnk",
@@ -1545,6 +1545,6 @@
     ]
    }
   ],
-  "FileHash": "{6D612E64-7157-C73F-AD91-93BD22735586}"
+  "FileHash": "{B40EAC9A-D5E6-623A-D94F-79D216E7FF4C}"
  }
 }
