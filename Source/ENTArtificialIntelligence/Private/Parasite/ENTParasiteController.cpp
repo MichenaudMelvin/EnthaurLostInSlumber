@@ -32,7 +32,7 @@ void AENTParasiteController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	if (!bDebugAI)
+	if (!bDebugAI || !Blackboard)
 	{
 		return;
 	}

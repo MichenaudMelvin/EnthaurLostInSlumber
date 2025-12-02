@@ -8,6 +8,7 @@
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Interfaces/ENTPawnAIInterface.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Subsystems/ENTArtificialIntelligenceSubsystem.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 
@@ -69,7 +70,7 @@ void AENTDefaultAIController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	if (!bDebugAI)
+	if (!bDebugAI || !Blackboard)
 	{
 		return;
 	}
@@ -79,7 +80,7 @@ void AENTDefaultAIController::Tick(float DeltaSeconds)
 		Cast<IENTPawnAIInterface>(GetPawn())->DebugPawn();
 	}
 
-	FVector SpawnLocationValue = GetBlackboardComponent()->GetValueAsVector(SpawnLocationKeyName);
+	FVector SpawnLocationValue = Blackboard->GetValueAsVector(SpawnLocationKeyName);
 	GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf(TEXT("%s: %s"), *SpawnLocationKeyName.ToString(), *SpawnLocationValue.ToString()));
 }
 #endif
@@ -109,7 +110,21 @@ bool AENTDefaultAIController::IsPointReachable(const FVector& Point, const FVect
 	UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
 
 	FNavLocation NavLocation;
-	return NavSys->ProjectPointToNavigation(Point, NavLocation, Extent, &GetNavAgentPropertiesRef());
+	bool bResult = NavSys->ProjectPointToNavigation(Point, NavLocation, Extent, &GetNavAgentPropertiesRef());
+
+#if WITH_EDITORONLY_DATA
+	if (bDebugAI)
+	{
+		UKismetSystemLibrary::DrawDebugBox(this, Point, Extent, FLinearColor::Red, FRotator::ZeroRotator, 0.0f, 10.0f);
+
+		if (bResult)
+		{
+			UKismetSystemLibrary::DrawDebugPoint(this, NavLocation.Location, 15.0f, FLinearColor::Red);
+		}
+	}
+#endif
+
+	return bResult;
 }
 
 void AENTDefaultAIController::RunCurrentBehaviorTree()
