@@ -230,7 +230,12 @@ void AENTParasitePawn::RespawnParasite()
 	}
 
 	FVector SpawnLocation = ParasiteController->GetBlackboardComponent()->GetValueAsVector(SpawnLocationKeyName);
+	FRotator SpawnRotation = ParasiteController->GetBlackboardComponent()->GetValueAsRotator(SpawnRotationKeyName);
+
 	SetActorLocation(SpawnLocation);
+	SetActorRotation(SpawnRotation);
+
+	ParasiteController->GetBlackboardComponent()->SetValueAsBool(ResetBehaviorKeyName, true);
 }
 
 #pragma region BehaviorTree

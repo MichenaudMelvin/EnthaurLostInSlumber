@@ -36,6 +36,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName SpawnLocationKeyName = "SpawnLocation";
 
+	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
+	FName SpawnRotationKeyName = "SpawnRotation";
+
 	UPROPERTY(BlueprintReadOnly, Category = "AI")
 	bool bIsBehaviorTreeRunning = false;
 
