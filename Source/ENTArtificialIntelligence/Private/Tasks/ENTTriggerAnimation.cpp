@@ -57,7 +57,8 @@ EBTNodeResult::Type UENTTriggerAnimation::ExecuteTask(UBehaviorTreeComponent& Ow
 
 	if (!AnimationToTrigger)
 	{
-		return EBTNodeResult::Failed;
+		Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(AnimationToTrigger);
+		return EBTNodeResult::Succeeded;
 	}
 
 	Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(AnimationToTrigger);
