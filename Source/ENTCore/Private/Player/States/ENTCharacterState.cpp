@@ -171,14 +171,23 @@ void UENTCharacterState::UpdateViewBobbing(float DeltaTime)
 		return;
 	}
 
+	if (StateMachine->GetCurrentStateID() == EENTCharacterStateID::Fall)
+	{
+		Character->StopViewBobbing();
+	}
+	else
+	{
+		Character->StartViewBobbing();
+	}
+
 	const FWaveOscillator CurrentWaveOscillator = Character->GetViewBobbingObject()->GetOscillator();
-	const FWaveOscillator TargetWaveOscillator = GetSettings()->bViewBobbing ? ViewBobbing : UENTViewBobbing::GetEmptyOscillator();
+	FWaveOscillator TargetWaveOscillator = ViewBobbing;
 
 	const float CurrentLocationAmplitudeMultiplier = Character->GetViewBobbingObject()->GetLocationAmplitudeMultiplier();
-	const float TargetLocationAmplitudeMultiplier = GetSettings()->bViewBobbing ? LocationAmplitudeMultiplier : 0.0f;
+	const float TargetLocationAmplitudeMultiplier = LocationAmplitudeMultiplier;
 
 	const float CurrentLocationFrequencyMultiplier = Character->GetViewBobbingObject()->GetLocationFrequencyMultiplier();
-	const float TargetLocationFrequencyMultiplier = GetSettings()->bViewBobbing ? LocationFrequencyMultiplier : 0.0f;
+	const float TargetLocationFrequencyMultiplier = LocationFrequencyMultiplier;
 
 	const float TargetAmplitude = FMath::Lerp(CurrentWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
 	const float TargetFrequency = FMath::Lerp(CurrentWaveOscillator.Frequency, TargetWaveOscillator.Frequency, DeltaTime);
@@ -192,7 +201,7 @@ void UENTCharacterState::UpdateViewBobbing(float DeltaTime)
 	Oscillator.InitialOffsetType = ViewBobbing.InitialOffsetType;
 
 	Character->GetViewBobbingObject()->SetLocationOscillator(Oscillator, AmplitudeMultiplier, FrequencyMultiplier);
-	
+
 	const FWaveOscillator CurrentRollWaveOscillator = Character->GetViewBobbingObject()->GetRollOscillator();
 
 	const UENTCharacterMoveState* MoveState = Cast<UENTCharacterMoveState>(this);
@@ -202,12 +211,12 @@ void UENTCharacterState::UpdateViewBobbing(float DeltaTime)
 	const float NormalizedSpeed = (LastMoveSpeed) ? UKismetMathLibrary::NormalizeToRange(Character->GetCharacterMovement()->Velocity.Length(), 0.0f, (MoveState)? MoveState->GetMoveSpeed() : LastMoveSpeed) : 0.0f;
 
 	const float CurrentRotationAmplitudeMultiplier = Character->GetViewBobbingObject()-> GetRotationAmplitudeMultiplier();
-	const float TargetRotationAmplitudeMultiplier = GetSettings()->bViewBobbing ? LocationAmplitudeMultiplier * NormalizedSpeed * bAllowRollBobbing * 70.0f : 0.0f;
+	const float TargetRotationAmplitudeMultiplier = LocationAmplitudeMultiplier * NormalizedSpeed * bAllowRollBobbing * 70.0f;
 
 	float TargetRotationAmplitude = FMath::Lerp(CurrentRollWaveOscillator.Amplitude, TargetWaveOscillator.Amplitude, DeltaTime);
-	
+
 	float RotationAmplitudeMultiplier = FMath::Lerp(CurrentRotationAmplitudeMultiplier, TargetRotationAmplitudeMultiplier, DeltaTime);
-	
+
 	FWaveOscillator RollOsc;
 	RollOsc.Frequency = TargetFrequency;
 	RollOsc.Amplitude = TargetRotationAmplitude;
