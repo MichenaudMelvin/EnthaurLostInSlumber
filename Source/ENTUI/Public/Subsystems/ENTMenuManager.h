@@ -62,6 +62,7 @@ public:
 	void SetMenuState(EENTMenuState InUIState);
 
 	void SetBackground(bool bIsBackgroundShown);
+	void SetIsRebinding(bool bInIsRebinding);
 
 	void CheckMenuState();
 
@@ -168,6 +169,8 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "UI|AccessibilityMenu")
 	TObjectPtr<UUserWidget> AccessibilityMenu = nullptr;
+
+	bool bIsRebinding = false;
 
 #pragma endregion
 
