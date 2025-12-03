@@ -9,6 +9,7 @@
 #include "Engine/LocalPlayer.h"
 #include "Menus/Elements/ENTCustomButton.h"
 #include "Menus/Elements/ENTInputSlot.h"
+#include "Menus/Options/ENTResetConfirmationMenu.h"
 #include "Subsystems/ENTMenuManager.h"
 #include "UserSettings/EnhancedInputUserSettings.h"
 
@@ -34,15 +35,14 @@ void UENTControlsMenu::NativeOnInitialized()
 void UENTControlsMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
-	
+
+	VBox->ClearChildren();
 	AddInputRows();
 }
 
 void UENTControlsMenu::NativeDestruct()
 {
 	Super::NativeDestruct();
-
-	VBox->ClearChildren();
 }
 
 void UENTControlsMenu::BeginDestroy()
@@ -117,7 +117,7 @@ void UENTControlsMenu::AddInputRows()
 		const FKeyMappingRow* PlayerMappingRow = PlayerMappingRows.Find(MappingName);
 		if (!PlayerMappingRow)
 		{
-			continue; // skip if the mapping doesn't exist
+			continue;
 		}
 
 		UUserWidget* UserWidget = CreateWidget(PlayerController, InputSlotClass);
@@ -193,44 +193,88 @@ void UENTControlsMenu::RebindKey(const FKey& InKey)
 	EnhancedInputUserSettings->SaveSettings();
 
 	ActiveInputSlot = nullptr;
+
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	MenuManager->SetIsRebinding(false);
+	VBox->ClearChildren();
+	AddInputRows();
 }
 
 bool UENTControlsMenu::CheckDuplicateKeys(const FKey& InKey)
 {
-	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
-	if (!InputLocalPlayerSubsystem)
+    UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
+    if (!InputLocalPlayerSubsystem)
+    {
+	    return false;
+    }
+
+    UEnhancedInputUserSettings* UserSettings = InputLocalPlayerSubsystem->GetUserSettings();
+    if (!UserSettings)
+    {
+	    return false;
+    }
+
+    UEnhancedPlayerMappableKeyProfile* Profile = UserSettings->GetActiveKeyProfile();
+    if (!IsValid(Profile))
+    {
+	    return false;
+    }
+
+    const TMap<FName, FKeyMappingRow>& Rows = Profile->GetPlayerMappingRows();
+    const FName CurrentMappingName = ActiveInputSlot->GetMappingName();
+
+	FKey OldKey;
 	{
-		return false;
+    	const FKeyMappingRow* CurrentRow = Rows.Find(CurrentMappingName);
+    	if (CurrentRow && CurrentRow->Mappings.Num() > 0)
+    	{
+    		const FPlayerKeyMapping& FirstMapping = *CurrentRow->Mappings.begin();
+    		OldKey = FirstMapping.GetCurrentKey();
+    	}
+    	else
+    	{
+    		return false;
+    	}
 	}
 
-	UEnhancedInputUserSettings* EnhancedInputUserSettings = InputLocalPlayerSubsystem->GetUserSettings();
-	if (!EnhancedInputUserSettings)
-	{
-		return false;
-	}
+    for (const auto& Pair : Rows)
+    {
+        const FName& OtherMappingName = Pair.Key;
+        const FKeyMappingRow& Row = Pair.Value;
 
-	UEnhancedPlayerMappableKeyProfile* PlayerMappableKeyProfile = EnhancedInputUserSettings->GetActiveKeyProfile();
-	if (!IsValid(PlayerMappableKeyProfile))
-	{
-		return false;
-	}
-	const TMap<FName, FKeyMappingRow>& PlayerMappingRows = PlayerMappableKeyProfile->GetPlayerMappingRows();
+        for (const FPlayerKeyMapping& Mapping : Row.Mappings)
+        {
+            if (Mapping.GetCurrentKey() == InKey &&
+                OtherMappingName != CurrentMappingName)
+            {
+                UE_LOG(LogTemp, Warning, TEXT("Duplicate detected. Swapping %s with %s"),*OldKey.ToString(), *InKey.ToString());
 
-	for (const TTuple<FName, FKeyMappingRow>& Row : PlayerMappingRows)
-	{
-		const FKeyMappingRow& MappingRow = Row.Value;
-		
-		for (const FPlayerKeyMapping& Mapping : MappingRow.Mappings)
-		{
-			if (Mapping.GetCurrentKey() == InKey)
-			{
-				UE_LOG(LogTemp, Warning, TEXT("UENTControlsMenu::CheckDuplicateKeys - Key is already bound to an InputAction"));
-				return true;
-			}
-		}
-	}
+                FMapPlayerKeyArgs SwapOutArgs;
+                SwapOutArgs.NewKey = OldKey;
+                SwapOutArgs.Slot = EPlayerMappableKeySlot::First;
+                SwapOutArgs.MappingName = OtherMappingName;
 
-	return false;
+                FGameplayTagContainer SwapFailure;
+
+                UserSettings->MapPlayerKey(SwapOutArgs, SwapFailure);
+
+                if (!SwapFailure.IsEmpty())
+                {
+                    UE_LOG(LogTemp, Warning, TEXT("Swap failed: %s"), *SwapFailure.ToString());
+                    return false;
+                }
+
+                return false;
+            }
+        }
+    }
+
+    return false;
 }
 
 void UENTControlsMenu::UpdateAnyKeyBind(AENTAnyKeyController* CurrentController)
@@ -246,18 +290,18 @@ void UENTControlsMenu::UpdateAnyKeyBind(AENTAnyKeyController* CurrentController)
 void UENTControlsMenu::OnKeyButton(UENTInputSlot* InInputSlot)
 {
 	ActiveInputSlot = InInputSlot;
+
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	MenuManager->SetIsRebinding(true);
 }
 
-void UENTControlsMenu::OpenResetSettingsMenu()
+void UENTControlsMenu::ResetKeys()
 {
-	// UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
-	// if (!IsValid(MenuManager))
-	// {
-	// 	return;
-	// }
-	//
-	// MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
-
 	UEnhancedInputLocalPlayerSubsystem* InputLocalPlayerSubsystem = GetEnhancedInputLocalPlayerSubsystem();
 	if (!InputLocalPlayerSubsystem)
 	{
@@ -278,4 +322,22 @@ void UENTControlsMenu::OpenResetSettingsMenu()
 	AddInputRows();
 
 	UE_LOG(LogTemp, Warning, TEXT("Reset keys!"));
+}
+
+void UENTControlsMenu::OpenResetSettingsMenu()
+{
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	UENTResetConfirmationMenu* ResetConfirmationMenu = Cast<UENTResetConfirmationMenu>(MenuManager->GetResetConfirmationMenu());
+	if (!IsValid(ResetConfirmationMenu))
+	{
+		return;
+	}
+
+	ResetConfirmationMenu->SetMenuType(EENTResetMenuType::Controls);
+	MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
 }

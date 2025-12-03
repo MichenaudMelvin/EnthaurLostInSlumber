@@ -26,6 +26,9 @@ protected:
 	void OnGammaSliderValueChanged(float InValue);
 	
 	void UpdateWidgetValues();
+
+	UFUNCTION()
+	void OpenResetSettingsMenu();
 	
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UImage> GammaImage;
@@ -35,4 +38,7 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UTextBlock> GammaText;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<UENTCustomButton> ResetButton;
 };

@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{A1195538-C6EA-6E2D-1258-C994259F736D}",
+    "Hash": "{0FF97C98-BE7A-274E-345E-F5686600C238}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -302,7 +302,7 @@
        {
         "SwitchValue": {
          "GroupType": "Switch",
-         "GroupId": "2724869341",
+         "GroupId": "697807138",
          "Id": "1417415268",
          "GUID": "{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"
         },
@@ -330,7 +330,7 @@
        {
         "SwitchValue": {
          "GroupType": "Switch",
-         "GroupId": "2724869341",
+         "GroupId": "697807138",
          "Id": "876681807",
          "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
         },
@@ -340,8 +340,20 @@
          },
          {
           "Id": "998349515"
+         },
+         {
+          "Id": "1010486976"
          }
         ]
+       }
+      ],
+      "ActionSetSwitch": [
+       {
+        "GroupId": "697807138",
+        "Id": "876681807",
+        "Name": "SW_To_Lv1",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Lv1",
+        "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
        }
       ]
      },
@@ -364,7 +376,7 @@
        {
         "SwitchValue": {
          "GroupType": "Switch",
-         "GroupId": "2724869341",
+         "GroupId": "697807138",
          "Id": "658719994",
          "GUID": "{A08EBC6C-9238-4706-AB1E-3E5204D528BD}"
         },
@@ -380,7 +392,7 @@
        {
         "SwitchValue": {
          "GroupType": "Switch",
-         "GroupId": "2724869341",
+         "GroupId": "697807138",
          "Id": "2800183964",
          "GUID": "{F61A1368-80C7-4383-81A9-379E062A96A9}"
         },
@@ -393,7 +405,7 @@
        {
         "SwitchValue": {
          "GroupType": "Switch",
-         "GroupId": "2724869341",
+         "GroupId": "697807138",
          "Id": "1417415266",
          "GUID": "{7C18D196-43B4-4B67-8858-FFA1B8304822}"
         },
@@ -403,65 +415,6 @@
          },
          {
           "Id": "820627929"
-         }
-        ]
-       }
-      ]
-     },
-     {
-      "Id": "1333471630",
-      "Name": "AKE_Music",
-      "ObjectPath": "\\Events\\Musics\\AKE_Music",
-      "GUID": "{C09CA8DA-D4F5-4FCE-8AF5-65FDEEC3CA9E}",
-      "Color": "19",
-      "DurationType": "Infinite",
-      "MediaRefs": [
-       {
-        "Id": "962215703"
-       }
-      ],
-      "SwitchContainers": [
-       {
-        "SwitchValue": {
-         "GroupType": "Switch",
-         "GroupId": "2724869341",
-         "Id": "1417415268",
-         "GUID": "{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"
-        },
-        "MediaRefs": [
-         {
-          "Id": "574035864"
-         },
-         {
-          "Id": "707993649"
-         },
-         {
-          "Id": "737881361"
-         },
-         {
-          "Id": "755939709"
-         },
-         {
-          "Id": "1010486976"
-         },
-         {
-          "Id": "1057258362"
-         }
-        ]
-       },
-       {
-        "SwitchValue": {
-         "GroupType": "Switch",
-         "GroupId": "2724869341",
-         "Id": "876681807",
-         "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
-        },
-        "MediaRefs": [
-         {
-          "Id": "962215703"
-         },
-         {
-          "Id": "998349515"
          }
         ]
        }
@@ -499,51 +452,51 @@
     ],
     "SwitchGroups": [
      {
-      "Id": "2724869341",
-      "Name": "Music_Switch",
-      "ObjectPath": "\\Switches\\Music\\Music_Switch",
+      "Id": "697807138",
+      "Name": "AKSW_Music_Switch",
+      "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch",
       "GUID": "{FAA95C9D-3A29-4472-8561-265C9B5BC61D}",
       "Switches": [
        {
         "Id": "658719994",
         "Name": "SW_To_Med",
-        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Med",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Med",
         "GUID": "{A08EBC6C-9238-4706-AB1E-3E5204D528BD}"
        },
        {
         "Id": "876681807",
         "Name": "SW_To_Lv1",
-        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lv1",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Lv1",
         "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
        },
        {
         "Id": "1275925729",
         "Name": "SW_Stop_Lvl2",
-        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_Stop_Lvl2",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_Stop_Lvl2",
         "GUID": "{01ECC8C1-0D2F-4B15-8B7A-89EFD913C51B}"
        },
        {
         "Id": "1275925735",
         "Name": "SW_Stop_Lvl4",
-        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_Stop_Lvl4",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_Stop_Lvl4",
         "GUID": "{C4E3C809-1510-4722-B962-8C6F5CD6847A}"
        },
        {
         "Id": "1417415266",
         "Name": "SW_To_Lvl4",
-        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lvl4",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Lvl4",
         "GUID": "{7C18D196-43B4-4B67-8858-FFA1B8304822}"
        },
        {
         "Id": "1417415268",
         "Name": "SW_To_Lvl2",
-        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_Lvl2",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Lvl2",
         "GUID": "{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"
        },
        {
         "Id": "2800183964",
         "Name": "SW_To_High",
-        "ObjectPath": "\\Switches\\Music\\Music_Switch\\SW_To_High",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_High",
         "GUID": "{F61A1368-80C7-4383-81A9-379E062A96A9}"
        }
       ]
@@ -551,6 +504,6 @@
     ]
    }
   ],
-  "FileHash": "{A610F502-7BCB-8DFC-0EBA-5623E8B2B910}"
+  "FileHash": "{56BC1F3C-44ED-57B8-C7DA-FD875C19FB42}"
  }
 }
