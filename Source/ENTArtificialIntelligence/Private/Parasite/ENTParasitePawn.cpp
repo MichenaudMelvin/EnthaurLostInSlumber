@@ -407,6 +407,11 @@ void AENTParasitePawn::Attack()
 	FoundedHealthComp.Empty();
 }
 
+bool AENTParasitePawn::SucceedAttack() const
+{
+	return !FoundedHealthComp.IsEmpty();
+}
+
 void AENTParasitePawn::DebugAttackZone(const UObject* WorldContextObject, const FVector& AttackLocation, const FVector& AttackExtent, const FRotator& Rotation, float Duration)
 {
 #if WITH_EDITORONLY_DATA
