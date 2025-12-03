@@ -1927,7 +1927,7 @@
 													<ObjectRef Name="PC_Lvl2" ID="{74039FC7-FFC1-499A-9BC1-C73B60C49020}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 												</Reference>
 												<Reference Name="SourceContextObject">
-													<ObjectRef Name="PC_Lvl1" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+													<ObjectRef Name="PC_Lvl1_2" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 												</Reference>
 											</ReferenceList>
 											<TransitionInfo>
@@ -1996,7 +1996,7 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<MusicPlaylistContainer Name="PC_Lvl1" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" ShortID="656175404">
+						<MusicPlaylistContainer Name="PC_Lvl1_2" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" ShortID="656175404">
 							<PropertyList>
 								<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
 								<Property Name="Tempo" Type="Real64" Value="105"/>
@@ -2370,6 +2370,154 @@
 										</ObjectList>
 									</ObjectLists>
 								</MusicSegment>
+								<MusicSegment Name="Enthaur_Music_Stinger2_Riser_105Bpm_OS" ID="{E0316C12-9D94-4851-868B-A18EA85C0AFF}" ShortID="498933678">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="6700.80228608809"/>
+										<Property Name="Tempo" Type="Real64" Value="105"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="Enthaur_Music_Stinger2_Riser_105Bpm_OS" ID="{00BFAFCA-F7B1-47B1-9003-6DCC687CDE2A}" ShortID="967527826">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{E337BCF1-6C8D-4A2A-A652-5863DE3B88CA}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Enthaur_Music_Stinger2_Riser_105Bpm_OS" ID="{A9807B2B-DCED-4736-845C-1A8487DDED87}">
+													<Language>SFX</Language>
+													<AudioFile>Enthaur_Music_Stinger2_Riser_105Bpm_OS.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1010486976"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<Reference>
+														<Local>
+															<MusicTrackSequence Name="" ID="{3010B601-DA80-4660-B0C4-A0E63132A053}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<Reference>
+																			<Local>
+																				<MusicClip Name="Enthaur_Music_Stinger2_Riser_105Bpm_OS" ID="{3336F072-D5D2-47F1-A0AD-8CAD3665430B}">
+																					<PropertyList>
+																						<Property Name="BeginTrimOffset" Type="Real64" Value="415.093952754759"/>
+																						<Property Name="EndTrimOffset" Type="Real64" Value="6256.05876527942"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="81.536312148256"/>
+																						<Property Name="FadeOutDuration" Type="Real64" Value="340.97003261998"/>
+																						<Property Name="PlayAt" Type="Real64" Value="-415.093952754759"/>
+																					</PropertyList>
+																					<AudioSourceRef Name="Enthaur_Music_Stinger2_Riser_105Bpm_OS" ID="{A9807B2B-DCED-4736-845C-1A8487DDED87}"/>
+																					<PropertyCurveList>
+																						<PropertyCurve PropertyName="Highpass">
+																							<Curve Name="" ID="{B991FAFB-F598-4019-9C8D-7F5593FC59AD}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="1"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0.41509</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>6.25606</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																						<PropertyCurve PropertyName="Lowpass">
+																							<Curve Name="" ID="{6B5E26CB-E834-4CD1-BF8A-469234FFA48E}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="1"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0.41509</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>6.25606</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																						<PropertyCurve PropertyName="Volume">
+																							<Curve Name="" ID="{CFA39ED1-E5F2-499A-A672-13F7C31D8A65}">
+																								<PropertyList>
+																									<Property Name="Flags" Type="int32" Value="3"/>
+																								</PropertyList>
+																								<PointList>
+																									<Point>
+																										<XPos>0.41509</XPos>
+																										<YPos>0</YPos>
+																										<Flags>5</Flags>
+																									</Point>
+																									<Point>
+																										<XPos>6.25606</XPos>
+																										<YPos>0</YPos>
+																										<Flags>37</Flags>
+																									</Point>
+																								</PointList>
+																							</Curve>
+																						</PropertyCurve>
+																					</PropertyCurveList>
+																				</MusicClip>
+																			</Local>
+																		</Reference>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</Local>
+													</Reference>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<Reference>
+												<Local>
+													<MusicCue Name="Entry Cue" ID="{19567A36-B4AE-486F-9C87-B824AC047822}"/>
+												</Local>
+											</Reference>
+											<Reference>
+												<Local>
+													<MusicCue Name="Exit Cue" ID="{06F2C353-632C-4279-90B0-B955A3B3002E}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="1519.54182733423"/>
+														</PropertyList>
+													</MusicCue>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
 							</ChildrenList>
 						</MusicPlaylistContainer>
 						<MusicPlaylistContainer Name="PC_Lvl2" ID="{74039FC7-FFC1-499A-9BC1-C73B60C49020}" ShortID="501708699">
@@ -2529,7 +2677,7 @@
 							<ChildrenList>
 								<MusicSegment Name="Enthaur_Music_Lvl2_105Bpm_LP" ID="{C74AA03E-CBD5-4BB1-A423-B6CEE7D92BC4}" ShortID="94180316">
 									<PropertyList>
-										<Property Name="EndPosition" Type="Real64" Value="50285.7083333333"/>
+										<Property Name="EndPosition" Type="Real64" Value="54285.7083333333"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -2577,7 +2725,7 @@
 																				<MusicClip Name="Enthaur_Music_Lvl2_105Bpm_LP" ID="{0C8949FE-C7BF-4336-9F1E-06AAD6596566}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="50285.7083333333"/>
-																						<Property Name="FadeInDuration" Type="Real64" Value="103.920013969168"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="311.760041907508"/>
 																						<Property Name="FadeOutDuration" Type="Real64" Value="207.84002793832"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="Enthaur_Music_Lvl2_105Bpm_LP" ID="{53043570-EF6E-4F99-983D-C24CE23DF534}"/>
@@ -2652,7 +2800,11 @@
 										<ObjectList Name="Cues">
 											<Reference>
 												<Local>
-													<MusicCue Name="Entry Cue" ID="{7B642E3D-DCB3-476A-B289-0422C09D5F19}"/>
+													<MusicCue Name="Entry Cue" ID="{7B642E3D-DCB3-476A-B289-0422C09D5F19}">
+														<PropertyList>
+															<Property Name="TimeMs" Type="Real64" Value="4000"/>
+														</PropertyList>
+													</MusicCue>
 												</Local>
 											</Reference>
 											<Reference>
@@ -2660,7 +2812,7 @@
 													<MusicCue Name="Exit Cue" ID="{371B61CC-F0A4-4854-831F-1D0C4586B05D}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="50285.7083333333"/>
+															<Property Name="TimeMs" Type="Real64" Value="54285.7083333333"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
@@ -3112,7 +3264,7 @@
 					<ObjectLists>
 						<ObjectList Name="Arguments">
 							<Reference>
-								<ObjectRef Name="Music_Switch" ID="{FAA95C9D-3A29-4472-8561-265C9B5BC61D}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
+								<ObjectRef Name="AKSW_Music_Switch" ID="{FAA95C9D-3A29-4472-8561-265C9B5BC61D}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
 							</Reference>
 						</ObjectList>
 						<ObjectList Name="Entries">
@@ -3139,7 +3291,7 @@
 									<MultiSwitchEntry Name="" ID="{1ECC8B91-D398-4820-9B1A-5C08DAD15392}">
 										<ReferenceList>
 											<Reference Name="AudioNode">
-												<ObjectRef Name="PC_Lvl1" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+												<ObjectRef Name="PC_Lvl1_2" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 											</Reference>
 										</ReferenceList>
 										<ObjectLists>
@@ -4078,7 +4230,7 @@
 					<ObjectLists>
 						<ObjectList Name="Arguments">
 							<Reference>
-								<ObjectRef Name="Music_Switch" ID="{FAA95C9D-3A29-4472-8561-265C9B5BC61D}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
+								<ObjectRef Name="AKSW_Music_Switch" ID="{FAA95C9D-3A29-4472-8561-265C9B5BC61D}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
 							</Reference>
 						</ObjectList>
 						<ObjectList Name="Entries">

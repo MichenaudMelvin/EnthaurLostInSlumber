@@ -10,6 +10,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTDefaultCharacter.generated.h"
 
+class USpringArmComponent;
 class UPostProcessComponent;
 class UAkAudioEvent;
 class AENTRespawnTree;
@@ -53,6 +54,9 @@ protected:
 	TObjectPtr<UCameraComponent> CameraComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
+	TObjectPtr<USpringArmComponent> SpringArmLag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UENTCameraShakeComponent> ShakeManager;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stimuli")
@@ -91,9 +95,6 @@ public:
 #pragma region PostProcess
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "PostProcess")
-	TObjectPtr<UPostProcessComponent> PostProcessComp;
-
 	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
 	TObjectPtr<UMaterialInterface> SpeedEffectMaterialReference;
 
