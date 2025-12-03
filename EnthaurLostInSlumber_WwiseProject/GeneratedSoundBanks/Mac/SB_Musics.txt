@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	154067081	AKE_Voice			\Musics\AKE_Voice	
 	307303121	AKE_Shoulder			\Musics\AKE_Shoulder	
 	2358176991	AKE_Heart			\Musics\AKE_Heart	
 	2604142630	AKE_Full			\Musics\AKE_Full	
@@ -6,6 +7,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3122159521	AKE_Lvl1_2			\Musics\AKE_Lvl1_2	
 	3128581953	AKE_TitleScreen			\Musics\AKE_TitleScreen	
 	4219395823	AKE_Lvl4			\Musics\AKE_Lvl4	
+	4292438126	AKE_Stop_Voice			\Musics\AKE_Stop_Voice	
 
 Switch Group	ID	Name			Wwise Object Path	Notes
 	697807138	AKSW_Music_Switch			\Music\AKSW_Music_Switch	
@@ -18,6 +20,7 @@ Switch	ID	Name	Switch Group			Notes
 	1417415266	SW_To_Lvl4	AKSW_Music_Switch			
 	1417415268	SW_To_Lvl2	AKSW_Music_Switch			
 	2800183964	SW_To_High	AKSW_Music_Switch			
+	4270399094	SW_To_Voice	AKSW_Music_Switch			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	70836845	Enthaur_Music_Stinger4_Riser_130Bpm_OS	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2E\{2E83BBC8-6C45-4433-C96E-D23BEED340C0}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl4_Med\Enthaur_Music_Stinger4_Riser_130Bpm_OS\Enthaur_Music_Stinger4_Riser_130Bpm_OS		974864

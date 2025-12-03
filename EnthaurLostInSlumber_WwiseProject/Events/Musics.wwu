@@ -251,6 +251,16 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{410983CF-F440-411A-B385-71AADB51912B}" ShortID="543244550">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="4"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Enthaur_Music_Lvl2_Pad_Voice_105Bpm_LP" ID="{27D2A3B0-2701-4A05-8046-93ADFEE0D520}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Lvl4" ID="{F7562D55-07D3-4467-AC90-7E844FE35CB6}">
@@ -259,6 +269,36 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="SC_Lvl4" ID="{853D8270-42F5-45D0-88CD-6E2C1D909425}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Voice" ID="{33D33746-9324-4AFE-ABEA-BA6394E901A7}">
+					<ChildrenList>
+						<Action Name="" ID="{4719E7E3-1186-4A61-9EDF-8C3B2C77824A}" ShortID="180021418">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="5"/>
+								<Property Name="FadeTime" Type="Real64" Value="2.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Enthaur_Music_Lvl2_Pad_Voice_105Bpm_LP" ID="{27D2A3B0-2701-4A05-8046-93ADFEE0D520}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Stop_Voice" ID="{95B4B1A4-A502-4E64-B6E0-D50F6186406E}">
+					<ChildrenList>
+						<Action Name="" ID="{B84F29DD-14EC-4B62-8BF9-10D0DCB83E07}" ShortID="325048203">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="4"/>
+								<Property Name="FadeTime" Type="Real64" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Enthaur_Music_Lvl2_Pad_Voice_105Bpm_LP" ID="{27D2A3B0-2701-4A05-8046-93ADFEE0D520}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
