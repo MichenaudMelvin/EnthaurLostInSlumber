@@ -12,7 +12,6 @@
 #include "ENTToolStatics.h"
 #include "Components/ENTLigamentPhysicConstraint.h"
 #include "Components/ENTNervePhysicConstraint.h"
-#include "Components/PostProcessComponent.h"
 #include "GameElements/ENTRespawnTree.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerStart.h"
@@ -32,8 +31,6 @@
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Subsystems/ENTPlayerSaveSubsystem.h"
-
-class UEnhancedInputLocalPlayerSubsystem;
 
 AENTDefaultCharacter::AENTDefaultCharacter()
 {
@@ -574,7 +571,7 @@ void AENTDefaultCharacter::EjectCharacter(const FVector ProjectionVelocity, bool
 	StateMachine->ChangeState(EENTCharacterStateID::Fall);
 }
 
-void AENTDefaultCharacter::LookAtLocation(const FVector Location, float Duration, UCurveFloat* CurveFloat)
+void AENTDefaultCharacter::LookAtLocation(const FVector Location, float Duration, UCurveFloat* CurveFloat, EENTCharacterStateID NextState)
 {
 	UENTCharacterLookAtState* LookAtState = FindState<UENTCharacterLookAtState>(StateMachine);
 	if (!LookAtState)
@@ -582,7 +579,7 @@ void AENTDefaultCharacter::LookAtLocation(const FVector Location, float Duration
 		return;
 	}
 
-	LookAtState->SetLookAtLocation(Location, Duration, CurveFloat);
+	LookAtState->SetLookAtLocation(Location, Duration, CurveFloat, NextState);
 	StateMachine->ChangeState(EENTCharacterStateID::LookAt);
 }
 

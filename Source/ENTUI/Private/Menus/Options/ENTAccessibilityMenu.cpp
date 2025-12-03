@@ -5,6 +5,7 @@
 
 #include "Kismet/KismetTextLibrary.h"
 #include "Menus/Elements/ENTCustomButton.h"
+#include "Menus/Options/ENTResetConfirmationMenu.h"
 #include "Saves/ENTSettingsSave.h"
 #include "Subsystems/ENTMenuManager.h"
 #include "Subsystems/ENTSettingsSaveSubsystem.h"
@@ -167,5 +168,12 @@ void UENTAccessibilityMenu::OpenResetSettingsMenu()
 		return;
 	}
 
+	UENTResetConfirmationMenu* ResetConfirmationMenu = Cast<UENTResetConfirmationMenu>(MenuManager->GetResetConfirmationMenu());
+	if (!IsValid(ResetConfirmationMenu))
+	{
+		return;
+	}
+
+	ResetConfirmationMenu->SetMenuType(EENTResetMenuType::Accessibility);
 	MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
 }

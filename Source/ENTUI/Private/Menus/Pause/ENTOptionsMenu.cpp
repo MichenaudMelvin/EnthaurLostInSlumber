@@ -32,6 +32,10 @@ void UENTOptionsMenu::NativeOnInitialized()
 	{
 		AccessibilityButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::OnAccessibilityButtonClicked);
 	}
+	if (ResetAllButton && ResetAllButton->GetCustomButton())
+	{
+		ResetAllButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTOptionsMenu::ResetAllSettings);
+	}
 }
 
 void UENTOptionsMenu::NativeDestruct()
@@ -67,6 +71,10 @@ void UENTOptionsMenu::BeginDestroy()
 	if (AccessibilityButton && AccessibilityButton->GetCustomButton())
 	{
 		AccessibilityButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::OnAccessibilityButtonClicked);
+	}
+	if (ResetAllButton && ResetAllButton->GetCustomButton())
+	{
+		ResetAllButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTOptionsMenu::ResetAllSettings);
 	}
 }
 
@@ -112,4 +120,22 @@ void UENTOptionsMenu::OnAccessibilityButtonClicked()
 	}
 	
 	MenuManager->OpenMenu(MenuManager->GetAccessibilityMenu(), false);
+}
+
+void UENTOptionsMenu::ResetAllSettings()
+{
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	UENTResetConfirmationMenu* ResetConfirmationMenu = Cast<UENTResetConfirmationMenu>(MenuManager->GetResetConfirmationMenu());
+	if (!IsValid(ResetConfirmationMenu))
+	{
+		return;
+	}
+
+	ResetConfirmationMenu->SetMenuType(EENTResetMenuType::Options);
+	MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
 }

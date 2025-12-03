@@ -26,14 +26,3 @@ void UENTCharacterStopState::StateEnter_Implementation(const EENTCharacterStateI
 	Character->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 	Character->GetCharacterMovement()->GravityScale = 0.0f;
 }
-
-void UENTCharacterStopState::StateTick_Implementation(float DeltaTime)
-{
-	Super::StateTick_Implementation(DeltaTime);
-
-	if (!Controller->GetPlayerInputs().bInputInteractTrigger)
-	{
-		Character->EjectCharacter(Character->GetActorForwardVector() * ImpulsionForce, true);
-	}
-}
-
