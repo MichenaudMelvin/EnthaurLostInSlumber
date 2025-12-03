@@ -35,8 +35,17 @@ void UENTCheckDistance::OnNodeProcessed(FBehaviorTreeSearchData& SearchData, EBT
 	}
 
 	ComputeDistance(SearchData.OwnerComp);
-	bool bSucceed = TraceCollisionTest(SearchData.OwnerComp);
-	ComputeCollisionTestDuration(ElapsedTime.GetSeconds(), bSucceed);
+
+	if (DoCollisionTest(SearchData.OwnerComp))
+	{
+		bCollisionTestResult = TraceCollisionTest(SearchData.OwnerComp);
+	}
+	else
+	{
+		bCollisionTestResult = true;
+	}
+
+	ComputeSucceedDuration(ElapsedTime.GetSeconds(), bCollisionTestResult && bDistanceResult);
 }
 
 void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -44,8 +53,17 @@ void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
 	ComputeDistance(OwnerComp);
-	bool bSucceed = TraceCollisionTest(OwnerComp);
-	ComputeCollisionTestDuration(DeltaSeconds, bSucceed);
+
+	if (DoCollisionTest(OwnerComp))
+	{
+		bCollisionTestResult = TraceCollisionTest(OwnerComp);
+	}
+	else
+	{
+		bCollisionTestResult = true;
+	}
+
+	ComputeSucceedDuration(DeltaSeconds, bCollisionTestResult && bDistanceResult);
 	CheckAbort(OwnerComp, NodeMemory);
 }
 
@@ -93,15 +111,11 @@ bool UENTCheckDistance::CalculateRawConditionValue(UBehaviorTreeComponent& Owner
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf( TEXT("bCollisionTestResult: %s"), (bCollisionTestResult ? TEXT("true") : TEXT("false"))));
 		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf( TEXT("bDistanceResult: %s"), (bDistanceResult ? TEXT("true") : TEXT("false"))));
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf( TEXT("bDurationResult: %s"), (bDurationResult ? TEXT("true") : TEXT("false"))));
 	}
 #endif
 
-	if (DoCollisionTest(OwnerComp))
-	{
-		return bCollisionTestResult && bDistanceResult;
-	}
-
-	return bDistanceResult;
+	return bDurationResult;
 }
 
 #if WITH_EDITOR
@@ -226,16 +240,6 @@ bool UENTCheckDistance::DoCollisionTest(const UBehaviorTreeComponent& OwnerComp)
 
 bool UENTCheckDistance::TraceCollisionTest(UBehaviorTreeComponent& OwnerComp) const
 {
-	if (!bDistanceResult)
-	{
-		return false;
-	}
-
-	if (!DoCollisionTest(OwnerComp))
-	{
-		return false;
-	}
-
 	const UBlackboardComponent* CurrentBlackboard = OwnerComp.GetBlackboardComponent();
 	if (!CurrentBlackboard)
 	{
@@ -282,11 +286,11 @@ bool UENTCheckDistance::TraceCollisionTest(UBehaviorTreeComponent& OwnerComp) co
 	return !UKismetSystemLibrary::LineTraceSingleForObjects(this, Pawn->GetActorLocation(), TargetActor->GetActorLocation(), ObjectTypes, false, ActorsToIgnore, DrawDebugTrace, HitResult, false);
 }
 
-void UENTCheckDistance::ComputeCollisionTestDuration(float DeltaTime, bool bSucceedCollisionTest)
+void UENTCheckDistance::ComputeSucceedDuration(float DeltaTime, bool bSucceedTests)
 {
-	if (CollisionTestDuration <= 0.0f)
+	if (SucceedDuration <= 0.0f)
 	{
-		bCollisionTestResult = bSucceedCollisionTest;
+		bDurationResult = bSucceedTests;
 		return;
 	}
 
@@ -300,20 +304,20 @@ void UENTCheckDistance::ComputeCollisionTestDuration(float DeltaTime, bool bSucc
 	LastTimeTriggered = FDateTime::Now();
 	bHasTriggerAlreadyOnce = true;
 
-	CollisionTestTime += DeltaTime * (bSucceedCollisionTest ? 1 : -1);
-	CollisionTestTime = FMath::Clamp(CollisionTestTime, 0.0f, CollisionTestDuration);
+	SucceedTime += DeltaTime * (bSucceedTests ? 1 : -1);
+	SucceedTime = FMath::Clamp(SucceedTime, 0.0f, SucceedDuration);
 
 #if WITH_EDITORONLY_DATA
 	if (bDebugDecorator)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Cyan, FString::Printf(TEXT("CollisionTestTime %f"), CollisionTestTime));
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Cyan, FString::Printf(TEXT("SucceedTime %f"), SucceedTime));
 	}
 #endif
 
-	bool bCollisionDurationSucceed = CollisionTestTime >= CollisionTestDuration;
-	bool bCollisionDurationFailed = CollisionTestTime <= 0.0f;
+	bool bDurationSucceed = SucceedTime >= SucceedDuration;
+	bool bDurationFailed = SucceedTime <= 0.0f;
 
-	if (bCollisionDurationSucceed)
+	if (bDurationSucceed)
 	{
 		if (bHasTimerAlreadySucceed)
 		{
@@ -322,9 +326,9 @@ void UENTCheckDistance::ComputeCollisionTestDuration(float DeltaTime, bool bSucc
 
 		bHasTimerAlreadyFailed = false;
 		bHasTimerAlreadySucceed = true;
-		bCollisionTestResult = true;
+		bDurationResult = true;
 	}
-	else if (bCollisionDurationFailed)
+	else if (bDurationFailed)
 	{
 		if (bHasTimerAlreadyFailed)
 		{
@@ -333,6 +337,6 @@ void UENTCheckDistance::ComputeCollisionTestDuration(float DeltaTime, bool bSucc
 
 		bHasTimerAlreadyFailed = true;
 		bHasTimerAlreadySucceed = false;
-		bCollisionTestResult = false;
+		bDurationResult = false;
 	}
 }
