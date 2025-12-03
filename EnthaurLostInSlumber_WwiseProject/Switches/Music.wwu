@@ -12,6 +12,7 @@
 						<Switch Name="SW_To_High" ID="{F61A1368-80C7-4383-81A9-379E062A96A9}"/>
 						<Switch Name="SW_Stop_Lvl2" ID="{01ECC8C1-0D2F-4B15-8B7A-89EFD913C51B}"/>
 						<Switch Name="SW_Stop_Lvl4" ID="{C4E3C809-1510-4722-B962-8C6F5CD6847A}"/>
+						<Switch Name="SW_Stop_Med" ID="{E1F1724F-5C9C-4A13-8BFC-3BBA3AC3CA5B}"/>
 					</ChildrenList>
 				</SwitchGroup>
 			</ChildrenList>
