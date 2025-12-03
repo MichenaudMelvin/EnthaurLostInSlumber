@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{0FF97C98-BE7A-274E-345E-F5686600C238}",
+    "Hash": "{4D58EFED-32B3-07BB-75A2-D9E8DC2B3033}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -437,6 +437,17 @@
       ]
      },
      {
+      "Id": "4292438126",
+      "Name": "AKE_Stop_Voice",
+      "ObjectPath": "\\Events\\Musics\\AKE_Stop_Voice",
+      "GUID": "{95B4B1A4-A502-4E64-B6E0-D50F6186406E}",
+      "Color": "19",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "3128581953",
       "Name": "AKE_TitleScreen",
       "ObjectPath": "\\Events\\Musics\\AKE_TitleScreen",
@@ -448,6 +459,17 @@
         "Id": "740215427"
        }
       ]
+     },
+     {
+      "Id": "154067081",
+      "Name": "AKE_Voice",
+      "ObjectPath": "\\Events\\Musics\\AKE_Voice",
+      "GUID": "{33D33746-9324-4AFE-ABEA-BA6394E901A7}",
+      "Color": "19",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
      }
     ],
     "SwitchGroups": [
@@ -504,6 +526,6 @@
     ]
    }
   ],
-  "FileHash": "{EA6002D1-339F-662B-4001-0C423A6DA4A5}"
+  "FileHash": "{334698D6-E009-F59F-BC84-925EDE182DE5}"
  }
 }
