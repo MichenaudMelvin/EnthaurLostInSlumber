@@ -172,12 +172,6 @@
 					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 				<SoundcasterSession Name="Music" ID="{B52AFEB0-0694-4732-9C74-D9CE3653D0FD}">
-					<ModuleList>
-						<Module>
-							<ObjectRef Name="AKE_Music" ID="{C09CA8DA-D4F5-4FCE-8AF5-65FDEEC3CA9E}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
-							<Position X="0" Y="0"/>
-						</Module>
-					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true"/>
 					<CurrentSwitchList ShowAll="true"/>

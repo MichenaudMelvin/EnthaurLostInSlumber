@@ -81,7 +81,7 @@ void AENTSpikeDoor::BeginPlay()
 	{
 		if (InterMeshFX)
 		{
-			FVector BasePos = InterInitialRelativeLocations[i] + FVector(-FX_X_Offset, 0, 0);
+			FVector BasePos = InterInitialRelativeLocations[i];
 			
 			FVector StartTrace = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,200);
 			FVector EndTrace   = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,-200);
@@ -94,15 +94,22 @@ void AENTSpikeDoor::BeginPlay()
 
 			bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, StartTrace, EndTrace, ECC_Visibility, Params);
 
-			FVector FinalFXPos = BasePos;
+			FVector FinalFirstFXPos = BasePos;
+			FVector FinalSecondFXPos = BasePos;
+
+			FinalFirstFXPos.X = FinalFirstFXPos.X + FX_X_Offset;
+			FinalSecondFXPos.X = FinalSecondFXPos.X - FX_X_Offset;
 
 			if (bHit)
 			{
-				FinalFXPos.Z = MeshesToUse[i]->GetComponentTransform().InverseTransformPosition(Hit.ImpactPoint).Z + FX_Z_Offset;
+				FinalFirstFXPos.Z = MeshesToUse[i]->GetComponentTransform().InverseTransformPosition(Hit.ImpactPoint).Z + FX_Z_Offset;
+				FinalSecondFXPos.Z = MeshesToUse[i]->GetComponentTransform().InverseTransformPosition(Hit.ImpactPoint).Z + FX_Z_Offset;
 			}
 
-			UNiagaraComponent* FX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshesToUse[i], NAME_None, FinalFXPos,InterInitialRotations[i],EAttachLocation::KeepRelativeOffset,false, false);
-			InterMeshFXComponents.Add(FX);
+			UNiagaraComponent* FirstFX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshesToUse[i], NAME_None, FinalFirstFXPos,InterInitialRotations[i],EAttachLocation::KeepRelativeOffset,false, false);
+			UNiagaraComponent* SecondFX = UNiagaraFunctionLibrary::SpawnSystemAttached(InterMeshFX,MeshesToUse[i], NAME_None, FinalSecondFXPos,InterInitialRotations[i],EAttachLocation::KeepRelativeOffset,false, false);
+			InterMeshFXComponents.Add(FirstFX);
+			InterMeshFXComponents.Add(SecondFX);
 		}
 	}
 

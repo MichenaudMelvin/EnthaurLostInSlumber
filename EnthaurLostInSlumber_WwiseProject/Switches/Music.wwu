@@ -3,7 +3,7 @@
 	<Switches>
 		<WorkUnit Name="Music" ID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}" PersistMode="Standalone">
 			<ChildrenList>
-				<SwitchGroup Name="Music_Switch" ID="{FAA95C9D-3A29-4472-8561-265C9B5BC61D}">
+				<SwitchGroup Name="AKSW_Music_Switch" ID="{FAA95C9D-3A29-4472-8561-265C9B5BC61D}">
 					<ChildrenList>
 						<Switch Name="SW_To_Lvl2" ID="{2E1A1DBF-FF1A-462D-99E5-6E39E9FC0AE3}"/>
 						<Switch Name="SW_To_Lvl4" ID="{7C18D196-43B4-4B67-8858-FFA1B8304822}"/>
