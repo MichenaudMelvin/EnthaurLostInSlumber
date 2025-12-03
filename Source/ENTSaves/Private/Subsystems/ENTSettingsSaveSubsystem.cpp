@@ -56,12 +56,12 @@ void UENTSettingsSaveSubsystem::Deinitialize()
 void UENTSettingsSaveSubsystem::ResetSaveToDefault(const int SaveIndex)
 {
 	Super::ResetSaveToDefault(SaveIndex);
-	
+
 	if (!Settings)
 	{
 		return;
 	}
-	
+
 	SetGamma(Settings->Gamma);
 }
 

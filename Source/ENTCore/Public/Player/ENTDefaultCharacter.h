@@ -86,8 +86,18 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UENTViewBobbing> ViewBobbing;
 
+	bool bViewBobbingSettingValue;
+
+	bool bIsViewBobbingActive = false;
+
+	void ManageViewBobbing();
+
 public:
 	UENTViewBobbing* GetViewBobbingObject() const {return ViewBobbing;}
+
+	void StartViewBobbing();
+
+	void StopViewBobbing();
 
 #pragma endregion
 
