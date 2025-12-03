@@ -55,10 +55,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Amber")
 	TObjectPtr<UStaticMesh> SourceMesh;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Amber")
 	float EmptyAmberHeight = 0.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Amber")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Amber")
 	float FullAmberHeight = 35.0f;
 
 	UPROPERTY()
