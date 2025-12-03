@@ -113,7 +113,7 @@ void UENTLigamentPhysicConstraint::TickComponent(float DeltaTime, ELevelTick Tic
 		const float Vibration = Lerp * (LinkedNerve -> GetMaxVibrationStrength());
 		LinkedNerve->GetDynamicCableStretchedMaterial()->SetScalarParameterValue(FName("VibrationStrength"), Vibration);
 		
-		if (PlayerController->GetPlayerInputs().bInputInteractPressed && !bIsAlreadyPropelled)
+		if (PlayerController->GetPlayerInputs().bInputInteractPressed && !bIsAlreadyPropelled && bHasReleasedInteraction)
 		{
 			bIsAlreadyPropelled = true;
 			
@@ -134,7 +134,7 @@ void UENTLigamentPhysicConstraint::TickComponent(float DeltaTime, ELevelTick Tic
 			LinkedNerve->GetDynamicCableStretchedMaterial()->SetScalarParameterValue(FName("VibrationStrength"), 0.f);
 		}
 
-		else if (PlayerController->GetPlayerInputs().bInputInteractPressed)
+		else if (PlayerController->GetPlayerInputs().bInputInteractPressed && bHasReleasedInteraction)
 		{
 			ReleasePlayer(true);
 		}
