@@ -103,7 +103,7 @@ void AENTAmberOre::OnConstruction(const FTransform& Transform)
 
 	Mesh->SetStaticMesh(SourceMesh);
 
-	TargetAmberHeight = bIsEmpty? EmptyAmberHeight : FullAmberHeight;
+	TargetAmberHeight = bIsEmpty ? EmptyAmberHeight : FullAmberHeight;
 	FVector ResultLocation = AmberMesh->GetRelativeLocation();
 	ResultLocation.Z = TargetAmberHeight;
 	AmberMesh->SetRelativeLocation(ResultLocation);
@@ -255,7 +255,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 void AENTAmberOre::FillAmberUpdate(float Alpha)
 {
 	FVector CurrentLocation = AmberMesh->GetRelativeLocation();
-	FVector TargetLocation = FVector(0.0f, 0.0f, TargetAmberHeight);
+	FVector TargetLocation = FVector(CurrentLocation.X, CurrentLocation.Y, TargetAmberHeight);
 
 	FVector ResultLocation = FMath::Lerp(CurrentLocation, TargetLocation, Alpha);
 	AmberMesh->SetRelativeLocation(ResultLocation);
