@@ -13,11 +13,9 @@
 #include "Components/ENTLigamentPhysicConstraint.h"
 #include "Components/ENTNervePhysicConstraint.h"
 #include "Components/PostProcessComponent.h"
-#include "GameElements/ENTAmberOre.h"
 #include "GameElements/ENTRespawnTree.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerStart.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Player/ENTDefaultPlayerController.h"
 #include "Player/States/ENTCharacterState.h"
 #include "Player/States/ENTCharacterStateMachine.h"
@@ -26,6 +24,7 @@
 #include "Perception/AISense_Hearing.h"
 #include "Config/ENTCoreConfig.h"
 #include "GameElements/ENTWeakZone.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Player/States/ENTCharacterFallState.h"
 #include "Player/States/ENTCharacterLookAtState.h"
@@ -45,9 +44,17 @@ AENTDefaultCharacter::AENTDefaultCharacter()
 	CameraComponent->SetRelativeLocation(FVector(-10.0f, 0.0f, 60.0f));
 	CameraComponent->bUsePawnControlRotation = true;
 
-	PostProcessComp = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcess"));
-	PostProcessComp->SetupAttachment(CameraComponent);
-	PostProcessComp->bUnbound = true;
+	SpringArmLag = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArmLag->SetupAttachment(CameraComponent);
+	SpringArmLag->bEnableCameraRotationLag = true;
+	SpringArmLag->CameraRotationLagSpeed = 20.0f;
+	SpringArmLag->bDoCollisionTest = false;
+	SpringArmLag->TargetArmLength = 0.0f;
+
+	if (GetMesh())
+	{
+		GetMesh()->SetupAttachment(SpringArmLag);
+	}
 
 	ShakeManager = CreateDefaultSubobject<UENTCameraShakeComponent>(TEXT("Shake Manager"));
 
@@ -65,10 +72,10 @@ void AENTDefaultCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (PostProcessComp && SpeedEffectMaterialReference)
+	if (CameraComponent && SpeedEffectMaterialReference)
 	{
 		SpeedEffectMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, SpeedEffectMaterialReference);
-		PostProcessComp->Settings.AddBlendable(SpeedEffectMaterial, 1.0f);
+		CameraComponent->PostProcessSettings.AddBlendable(SpeedEffectMaterial, 1.0f);
 	}
 
 	if (HealthComponent)
