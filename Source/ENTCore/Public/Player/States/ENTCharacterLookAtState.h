@@ -37,8 +37,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Curve")
 	TObjectPtr<UCurveFloat> StateCurve;
 
+	UPROPERTY(EditDefaultsOnly, Category = "State")
+	EENTCharacterStateID NextState = EENTCharacterStateID::Idle;
+
 	float StateDuration = 1.0f;
 
 public:
-	void SetLookAtLocation(const FVector& InLocationToLookAt, float InStateDuration, UCurveFloat* CurveFloat);
+	void SetLookAtLocation(const FVector& InLocationToLookAt, float InStateDuration, UCurveFloat* CurveFloat, EENTCharacterStateID InNextState);
 };

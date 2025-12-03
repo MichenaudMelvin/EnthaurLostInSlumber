@@ -3,7 +3,10 @@
 
 #include "Menus/Options/ENTGammaMenu.h"
 
+#include "Menus/Elements/ENTCustomButton.h"
+#include "Menus/Options/ENTResetConfirmationMenu.h"
 #include "Saves/ENTSettingsSave.h"
+#include "Subsystems/ENTMenuManager.h"
 #include "Subsystems/ENTSettingsSaveSubsystem.h"
 #include "Util/ColorConstants.h"
 
@@ -14,6 +17,10 @@ void UENTGammaMenu::NativeOnInitialized()
 	if (GammaSlider && GammaSlider->GetCustomSlider())
 	{
 		GammaSlider->GetCustomSlider()->OnValueChanged.AddDynamic(this, &UENTGammaMenu::OnGammaSliderValueChanged);
+	}
+	if (ResetButton && ResetButton->GetCustomButton())
+	{
+		ResetButton->GetCustomButton()->OnClicked.AddDynamic(this, &UENTGammaMenu::OpenResetSettingsMenu);
 	}
 }
 
@@ -31,6 +38,10 @@ void UENTGammaMenu::BeginDestroy()
 	if (GammaSlider && GammaSlider->GetCustomSlider())
 	{
 		GammaSlider->GetCustomSlider()->OnValueChanged.RemoveDynamic(this, &UENTGammaMenu::OnGammaSliderValueChanged);
+	}
+	if (ResetButton && ResetButton->GetCustomButton())
+	{
+		ResetButton->GetCustomButton()->OnClicked.RemoveDynamic(this, &UENTGammaMenu::OpenResetSettingsMenu);
 	}
 }
 
@@ -69,4 +80,22 @@ void UENTGammaMenu::UpdateWidgetValues()
 	}
 	
 	GammaSlider->GetCustomSlider()->SetValue(SettingsSubsystem->GetSettings()->Gamma);
+}
+
+void UENTGammaMenu::OpenResetSettingsMenu()
+{
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	UENTResetConfirmationMenu* ResetConfirmationMenu = Cast<UENTResetConfirmationMenu>(MenuManager->GetResetConfirmationMenu());
+	if (!IsValid(ResetConfirmationMenu))
+	{
+		return;
+	}
+
+	ResetConfirmationMenu->SetMenuType(EENTResetMenuType::Brightness);
+	MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
 }

@@ -33,6 +33,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> GammaButton;
 
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<UENTCustomButton> ResetAllButton;
+
 	UFUNCTION()
 	void OnVolumeButtonClicked();
 	
@@ -44,4 +47,7 @@ protected:
 
 	UFUNCTION()
 	void OnAccessibilityButtonClicked();
+
+	UFUNCTION()
+	void ResetAllSettings();
 };

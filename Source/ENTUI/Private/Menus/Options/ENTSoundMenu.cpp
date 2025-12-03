@@ -6,6 +6,7 @@
 #include "Kismet/KismetTextLibrary.h"
 #include "Menus/Elements/ENTCustomButton.h"
 #include "Menus/Elements/ENTCustomSlider.h"
+#include "Menus/Options/ENTResetConfirmationMenu.h"
 #include "Saves/ENTSettingsSave.h"
 #include "Subsystems/ENTMenuManager.h"
 #include "Subsystems/ENTSettingsSaveSubsystem.h"
@@ -173,5 +174,12 @@ void UENTSoundMenu::OpenResetSettingsMenu()
 		return;
 	}
 
+	UENTResetConfirmationMenu* ResetConfirmationMenu = Cast<UENTResetConfirmationMenu>(MenuManager->GetResetConfirmationMenu());
+	if (!IsValid(ResetConfirmationMenu))
+	{
+		return;
+	}
+	
+	ResetConfirmationMenu->SetMenuType(EENTResetMenuType::Volume);
 	MenuManager->OpenMenu(MenuManager->GetResetConfirmationMenu(), false);
 }

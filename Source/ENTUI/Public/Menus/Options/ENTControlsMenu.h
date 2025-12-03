@@ -19,6 +19,9 @@ class ENTUI_API UENTControlsMenu : public UENTWidgetBasics
 public:
 	void OnKeyButton(UENTInputSlot* InInputSlot);
 
+	UFUNCTION()
+	void ResetKeys();
+
 protected:
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
@@ -33,6 +36,9 @@ protected:
 
 	bool CheckDuplicateKeys(const FKey& InKey);
 
+	UFUNCTION()
+	void OpenResetSettingsMenu();
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UVerticalBox> VBox;
 
@@ -45,9 +51,6 @@ protected:
 	UFUNCTION()
 	void UpdateAnyKeyBind(AENTAnyKeyController* CurrentController);
 
-	UFUNCTION()
-	void OpenResetSettingsMenu();
-
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomButton> ResetButton;
 
@@ -59,6 +62,7 @@ protected:
 		"Sprint",
 		"Crouch",
 		"Jump",
+		"InteractTrigger",
 		"InteractPressed",
 		"Interact Pressed"
 	};

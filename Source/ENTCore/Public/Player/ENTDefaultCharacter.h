@@ -8,9 +8,10 @@
 #include "GameFramework/Character.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
+#include "States/ENTCharacterStateMachine.h"
 #include "ENTDefaultCharacter.generated.h"
 
-class UPostProcessComponent;
+class USpringArmComponent;
 class UAkAudioEvent;
 class AENTRespawnTree;
 class UAkComponent;
@@ -24,7 +25,6 @@ class UENTInteractableComponent;
 class UENTCharacterStateMachine;
 class UAIPerceptionStimuliSourceComponent;
 class UENTCharacterState;
-enum class EENTCharacterStateID : uint8;
 class UCameraComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKOnAmberUpdate, bool, bHasAmber);
@@ -51,6 +51,9 @@ protected:
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> CameraComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
+	TObjectPtr<USpringArmComponent> SpringArmLag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UENTCameraShakeComponent> ShakeManager;
@@ -91,9 +94,6 @@ public:
 #pragma region PostProcess
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "PostProcess")
-	TObjectPtr<UPostProcessComponent> PostProcessComp;
-
 	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
 	TObjectPtr<UMaterialInterface> SpeedEffectMaterialReference;
 
@@ -278,9 +278,10 @@ public:
 	 * @param Location 
 	 * @param Duration Duration in seconds
 	 * @param CurveFloat 
+	 * @param NextState 
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Character")
-	void LookAtLocation(const FVector Location = FVector::ZeroVector, float Duration = 1.0f, UCurveFloat* CurveFloat = nullptr);
+	void LookAtLocation(const FVector Location = FVector::ZeroVector, float Duration = 1.0f, UCurveFloat* CurveFloat = nullptr, EENTCharacterStateID NextState = EENTCharacterStateID::Idle);
 
 #if WITH_EDITOR
 	UFUNCTION(Exec)
