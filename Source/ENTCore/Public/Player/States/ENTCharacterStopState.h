@@ -16,9 +16,4 @@ public:
 
 protected:
 	virtual void StateEnter_Implementation(const EENTCharacterStateID& PreviousStateID) override;
-
-	virtual void StateTick_Implementation(float DeltaTime) override;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Impulsion")
-	float ImpulsionForce = 100.0f;
 };
