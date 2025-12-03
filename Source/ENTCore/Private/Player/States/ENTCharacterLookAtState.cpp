@@ -49,15 +49,17 @@ void UENTCharacterLookAtState::LookAtUpdate(float Alpha)
 
 void UENTCharacterLookAtState::FinishLookAt()
 {
-	StateMachine->ChangeState(EENTCharacterStateID::Idle);
+	StateMachine->ChangeState(NextState);
 }
 
-void UENTCharacterLookAtState::SetLookAtLocation(const FVector& InLocationToLookAt, float InStateDuration, UCurveFloat* CurveFloat)
+void UENTCharacterLookAtState::SetLookAtLocation(const FVector& InLocationToLookAt, float InStateDuration, UCurveFloat* CurveFloat, EENTCharacterStateID InNextState)
 {
 	StateDuration = InStateDuration;
 
 	StartRotation = Controller->GetControlRotation();
 	TargetRotation = FRotationMatrix::MakeFromX(InLocationToLookAt - Character->GetActorLocation()).Rotator();
+
+	NextState = InNextState; 
 
 	if (CurveFloat)
 	{

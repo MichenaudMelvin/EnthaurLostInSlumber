@@ -202,7 +202,7 @@ protected:
 	bool bDebugAttack = false;
 #endif
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "AI|Attack")
 	TSet<TObjectPtr<UENTHealthComponent>> FoundedHealthComp;
 
 	UFUNCTION(BlueprintCallable, Category = "AI|Attack")
@@ -210,6 +210,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "AI|Attack")
 	void Attack();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "AI|Attack")
+	bool SucceedAttack() const;
 
 	/**
 	 * @brief For debug purposes only
