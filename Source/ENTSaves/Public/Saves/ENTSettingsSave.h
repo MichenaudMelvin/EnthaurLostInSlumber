@@ -38,5 +38,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sounds", meta = (ClampMin = 0.0f, ClampMax = 100.0f, UIMin = 0.0f, UIMax = 100.0f))
 	float MusicVolume = 80.0f;
 
+	void ResetVolumeSettings();
+	void ResetAccessibilitySettings();
+	void ResetBrightnessSettings();
+
 #pragma endregion
 };

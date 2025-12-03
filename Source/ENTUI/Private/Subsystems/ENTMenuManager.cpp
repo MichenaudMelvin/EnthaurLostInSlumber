@@ -155,6 +155,11 @@ void UENTMenuManager::CloseCurrentMenu()
 		return;
 	}
 
+	if (bIsRebinding)
+	{
+		return;
+	}
+
 	// If we are in the main menu then we don't want to remove the first UI as we always need the "press any key"
 	if (MenuStack.Num() == 1 && CurrentState == EENTMenuState::AnyMenu)
 	{
@@ -256,6 +261,11 @@ void UENTMenuManager::SetMenuState(EENTMenuState InUIState)
 void UENTMenuManager::SetBackground(bool bIsBackgroundShown)
 {
 	bIsBackgroundDisplayed = bIsBackgroundShown;
+}
+
+void UENTMenuManager::SetIsRebinding(bool bInIsRebinding)
+{
+	bIsRebinding = bInIsRebinding;
 }
 
 void UENTMenuManager::CheckMenuState()
