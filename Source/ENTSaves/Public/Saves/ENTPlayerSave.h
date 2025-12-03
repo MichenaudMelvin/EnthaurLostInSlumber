@@ -25,4 +25,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Lantern")
 	bool bIsLanternActive = false;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Music")
+	FName AkEventPath = NAME_None;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Music")
+	FName AkSwitchPath = NAME_None;
 };
