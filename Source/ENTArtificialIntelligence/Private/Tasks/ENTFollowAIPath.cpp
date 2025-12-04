@@ -127,32 +127,7 @@ EBTNodeResult::Type UENTFollowAIPath::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	}
 
 	StartLocation = CurrentPawn->GetActorLocation();
-
-	FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(StartLocation, TargetLocation);
-
-	FVector EndLocation = StartLocation;
-
-	EndLocation += (Path->GetDirection() * (GroundTraceLength + Path->GetWallOffset()));
-
-	TArray<AActor*> ActorsToIgnore;
-	ActorsToIgnore.Add(CurrentPawn);
-
-	FHitResult HitResult;
-
-	EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
-
-#if WITH_EDITORONLY_DATA
-	if (bDebugTask)
-	{
-		DrawDebugTrace = EDrawDebugTrace::ForDuration;
-	}
-#endif
-
-	UKismetSystemLibrary::LineTraceSingleForObjects(CurrentPawn, StartLocation, EndLocation, GroundObjects, false, ActorsToIgnore, DrawDebugTrace, HitResult, false, FLinearColor::Red, FLinearColor::Green, 5.0f);
-
-	FQuat ResultRotation = FRotationMatrix::MakeFromZX(HitResult.ImpactNormal, ForwardDirection).ToQuat();
-
-	TargetRotation = (ResultRotation * RotationOffset.Quaternion()).Rotator();
+	EndLocationOffset = (Path->GetDirection() * (GroundTraceLength + Path->GetWallOffset()));
 
 	float Distance = FVector::Dist(StartLocation, TargetLocation);
 	float Speed = CurrentPawn->GetMovementComponent()->GetMaxSpeed();
@@ -193,6 +168,32 @@ void UENTFollowAIPath::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 	}
 	else
 	{
+		FVector StartForward = CurrentPawn->GetActorLocation();
+		FVector ForwardDirection = UKismetMathLibrary::GetDirectionUnitVector(StartForward, TargetLocation);
+
+		FVector EndLocation = StartForward;
+		EndLocation += EndLocationOffset;
+
+		TArray<AActor*> ActorsToIgnore;
+		ActorsToIgnore.Add(CurrentPawn);
+
+		FHitResult HitResult;
+
+		EDrawDebugTrace::Type DrawDebugTrace = EDrawDebugTrace::None;
+
+#if WITH_EDITORONLY_DATA
+		if (bDebugTask)
+		{
+			DrawDebugTrace = EDrawDebugTrace::ForOneFrame;
+		}
+#endif
+
+		UKismetSystemLibrary::LineTraceSingleForObjects(CurrentPawn, StartForward, EndLocation, GroundObjects, false, ActorsToIgnore, DrawDebugTrace, HitResult, false, FLinearColor::Red, FLinearColor::Green, 5.0f);
+
+		FQuat ResultRotation = FRotationMatrix::MakeFromZX(HitResult.ImpactNormal, ForwardDirection).ToQuat();
+
+		TargetRotation = (ResultRotation * RotationOffset.Quaternion()).Rotator();
+
 		MovementTimeline.TickTimeline(DeltaSeconds);
 
 		FRotator Rotator = UKismetMathLibrary::RLerp(CurrentPawn->GetActorRotation(), TargetRotation, (DeltaSeconds * RotationSpeed), true);
