@@ -138,6 +138,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Noise")
 	TObjectPtr<UAkAudioEvent> DoorCloseEndEvent;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Door")
 	bool bIsOpened = false;
 
 	UPROPERTY()
