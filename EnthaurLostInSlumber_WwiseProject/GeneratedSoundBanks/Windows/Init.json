@@ -338,6 +338,18 @@
         "Name": "SW_To_High",
         "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_High",
         "GUID": "{F61A1368-80C7-4383-81A9-379E062A96A9}"
+       },
+       {
+        "Id": "3202712997",
+        "Name": "SW_To_Menu",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Menu",
+        "GUID": "{CD833132-3790-4CD0-B412-4AD310D62540}"
+       },
+       {
+        "Id": "3859114701",
+        "Name": "SW_Stop_Med",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_Stop_Med",
+        "GUID": "{E1F1724F-5C9C-4A13-8BFC-3BBA3AC3CA5B}"
        }
       ]
      },
@@ -867,6 +879,6 @@
     ]
    }
   ],
-  "FileHash": "{6BDF8114-4B34-1246-612E-D8EB348B7B98}"
+  "FileHash": "{65028CB6-751C-F7DA-ADF2-9FBADAC8B5B1}"
  }
 }

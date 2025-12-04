@@ -298,8 +298,12 @@ public:
 	void EjectCharacterForward(float Force = 5000.0f) const;
 #endif
 
+	/**
+	 * @brief 
+	 * @param StopDuration Duration in seconds; -1 means infinite to control when you can release the character
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Character")
-	void StopCharacter() const;
+	void StopCharacter(float StopDuration = -1.0f) const;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure,Category = "Character")
 	bool IsStopped() const;

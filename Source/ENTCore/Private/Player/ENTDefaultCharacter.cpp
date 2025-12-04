@@ -27,6 +27,7 @@
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Player/States/ENTCharacterFallState.h"
 #include "Player/States/ENTCharacterLookAtState.h"
+#include "Player/States/ENTCharacterStopState.h"
 #include "Saves/ENTPlayerSave.h"
 #include "Saves/ENTSettingsSave.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
@@ -464,8 +465,7 @@ bool AENTDefaultCharacter::GroundTrace(const FVector& StartLocation, float Trace
 
 	TArray<AActor*> ActorsToIgnore;
 
-	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, CoreConfig->GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
-
+	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, CoreConfig->GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::ForOneFrame, HitResult, true);
 }
 
 void AENTDefaultCharacter::GroundMovement()
@@ -622,7 +622,7 @@ bool AENTDefaultCharacter::GetSlopeProperties(float& SlopeAngle, FVector& SlopeN
 void AENTDefaultCharacter::EjectCharacter(const FVector ProjectionVelocity, bool bOverrideCurrentVelocity) const
 {
 	UENTCharacterFallState* FallState = FindState<UENTCharacterFallState>(StateMachine);
-	if (!FallState)
+	if (!FallState || !StateMachine)
 	{
 		return;
 	}
@@ -634,7 +634,7 @@ void AENTDefaultCharacter::EjectCharacter(const FVector ProjectionVelocity, bool
 void AENTDefaultCharacter::LookAtLocation(const FVector Location, float Duration, UCurveFloat* CurveFloat, EENTCharacterStateID NextState)
 {
 	UENTCharacterLookAtState* LookAtState = FindState<UENTCharacterLookAtState>(StateMachine);
-	if (!LookAtState)
+	if (!LookAtState || !StateMachine)
 	{
 		return;
 	}
@@ -650,13 +650,15 @@ void AENTDefaultCharacter::EjectCharacterForward(float Force) const
 }
 #endif
 
-void AENTDefaultCharacter::StopCharacter() const
+void AENTDefaultCharacter::StopCharacter(float StopDuration) const
 {
-	if (!StateMachine)
+	UENTCharacterStopState* StopState = FindState<UENTCharacterStopState>(StateMachine);
+	if (!StopState || !StateMachine)
 	{
 		return;
 	}
 
+	StopState->SetStopDuration(StopDuration);
 	StateMachine->ChangeState(EENTCharacterStateID::Stop);
 }
 

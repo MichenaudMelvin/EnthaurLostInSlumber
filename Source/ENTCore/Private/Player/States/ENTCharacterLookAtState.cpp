@@ -49,6 +49,7 @@ void UENTCharacterLookAtState::LookAtUpdate(float Alpha)
 
 void UENTCharacterLookAtState::FinishLookAt()
 {
+	OnFinishLookAt.Broadcast();
 	StateMachine->ChangeState(NextState);
 }
 

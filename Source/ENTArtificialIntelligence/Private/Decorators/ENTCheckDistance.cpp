@@ -34,7 +34,7 @@ void UENTCheckDistance::OnNodeProcessed(FBehaviorTreeSearchData& SearchData, EBT
 		ElapsedTime = 0.0f;
 	}
 
-	ComputeDistance(SearchData.OwnerComp);
+	bool bDistanceResult = ComputeDistance(SearchData.OwnerComp);
 
 	if (DoCollisionTest(SearchData.OwnerComp))
 	{
@@ -52,7 +52,7 @@ void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
-	ComputeDistance(OwnerComp);
+	bool bDistanceResult = ComputeDistance(OwnerComp);
 
 	if (DoCollisionTest(OwnerComp))
 	{
@@ -110,10 +110,24 @@ bool UENTCheckDistance::CalculateRawConditionValue(UBehaviorTreeComponent& Owner
 	if (bDebugDecorator)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf( TEXT("bCollisionTestResult: %s"), (bCollisionTestResult ? TEXT("true") : TEXT("false"))));
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf( TEXT("bDistanceResult: %s"), (bDistanceResult ? TEXT("true") : TEXT("false"))));
 		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, FString::Printf( TEXT("bDurationResult: %s"), (bDurationResult ? TEXT("true") : TEXT("false"))));
 	}
 #endif
+
+	if (SucceedDuration <= 0.0f)
+	{
+		bool bDistanceResult = ComputeDistance(OwnerComp);
+
+		if (DoCollisionTest(OwnerComp))
+		{
+			bool bCollisionResult = TraceCollisionTest(OwnerComp);
+			return bCollisionResult && bDistanceResult;
+		}
+		else
+		{
+			return bDistanceResult;
+		}
+	}
 
 	return bDurationResult;
 }
@@ -159,63 +173,63 @@ FString UENTCheckDistance::GetStaticDescription() const
 }
 #endif
 
-void UENTCheckDistance::ComputeDistance(UBehaviorTreeComponent& OwnerComp)
+bool UENTCheckDistance::ComputeDistance(UBehaviorTreeComponent& OwnerComp) const
 {
-	bDistanceResult = false;
-
 	const UBlackboardComponent* CurrentBlackboard = OwnerComp.GetBlackboardComponent();
 	if (!CurrentBlackboard)
 	{
-		return;
+		return false;
 	}
 
 	AAIController* Controller = OwnerComp.GetAIOwner();
 	if (!Controller)
 	{
-		return;
+		return false;
 	}
 
 	APawn* Pawn = Controller->GetPawn();
 	if (!Pawn)
 	{
-		return;
+		return false;
 	}
 
 	const UObject* Object = CurrentBlackboard->GetValue<UBlackboardKeyType_Object>(Actor.SelectedKeyName);
 	if (!Object)
 	{
-		return;
+		return false;
 	}
 
 	const AActor* TargetActor = Cast<AActor>(Object);
 	if (!TargetActor)
 	{
-		return;
+		return false;
 	}
 
 	const float DistanceToActor = Pawn->GetDistanceTo(TargetActor);
 
 	const float DistanceCheck = Distance.GetValue(OwnerComp);
 
+	bool bResult = false;
+
 	switch (CheckMethod)
 	{
 	case EENTCheckMethod::Equal:
-		bDistanceResult = DistanceToActor == DistanceCheck;
+		bResult = DistanceToActor == DistanceCheck;
 		break;
 	case EENTCheckMethod::NotEqual:
-		bDistanceResult = DistanceToActor != DistanceCheck;
+		bResult = DistanceToActor != DistanceCheck;
 		break;
 	case EENTCheckMethod::GreaterThanOrEqualTo:
-		bDistanceResult = DistanceToActor >= DistanceCheck;
+		bResult = DistanceToActor >= DistanceCheck;
 		break;
 	case EENTCheckMethod::LessOrEqual:
-		bDistanceResult = DistanceToActor <= DistanceCheck;
+		bResult = DistanceToActor <= DistanceCheck;
 		break;
 	case EENTCheckMethod::GreaterThan:
-		bDistanceResult = DistanceToActor > DistanceCheck;
+		bResult = DistanceToActor > DistanceCheck;
 		break;
 	case EENTCheckMethod::LessThan:
-		bDistanceResult = DistanceToActor < DistanceCheck;
+		bResult = DistanceToActor < DistanceCheck;
 		break;
 	}
 
@@ -225,6 +239,8 @@ void UENTCheckDistance::ComputeDistance(UBehaviorTreeComponent& OwnerComp)
 		UKismetSystemLibrary::DrawDebugCylinder(Pawn, Pawn->GetActorLocation(), Pawn->GetActorLocation(), DistanceCheck, 12, FLinearColor::Green, 0.0f, 5.0f);
 	}
 #endif
+
+	return bResult;
 }
 
 bool UENTCheckDistance::DoCollisionTest(const UBehaviorTreeComponent& OwnerComp) const
