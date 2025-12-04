@@ -266,6 +266,36 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="AKE_Lvl_Chest" ID="{BC9C91BD-BC74-44A2-A495-9A8A2B6018A9}">
+					<ChildrenList>
+						<Action Name="" ID="{74CAAC53-B954-4EE2-A036-759655F24BB7}" ShortID="805262530">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="1.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Enthaur_Music_Lvl5_PlaceHolder_90Bpm_44_Lp" ID="{5837EE8B-6D31-4C18-BD8C-6E8E0798680F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Stop_Lvl_Chest" ID="{F37615BD-FFEE-4398-B6B4-897A7370D33E}">
+					<ChildrenList>
+						<Action Name="" ID="{E7A4EF03-7CE1-40C1-90C2-3C0626C49068}" ShortID="682743153">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="1.5"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Enthaur_Music_Lvl5_PlaceHolder_90Bpm_44_Lp" ID="{5837EE8B-6D31-4C18-BD8C-6E8E0798680F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

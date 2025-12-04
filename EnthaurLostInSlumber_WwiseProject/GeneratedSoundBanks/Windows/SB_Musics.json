@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{79925E58-2AFD-E64C-75A5-6A8E4008349A}",
+    "Hash": "{DCB52D6C-1DAA-8D61-37BE-D85BD2AF230E}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -143,6 +143,14 @@
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Lvl2_Pad_Voice_105Bpm_LP.wav",
       "CachePath": "E9/{E9501531-8691-FEE4-C4E1-B9B99C2E1E11}.wem"
+     },
+     {
+      "Id": "739088880",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Enthaur_Music_Lvl5_PlaceHolder_90Bpm_44_Lp.wav",
+      "CachePath": "28/{283B255C-10FE-6C0A-0296-6DCD2C0EE47D}.wem"
      },
      {
       "Id": "740215427",
@@ -446,6 +454,21 @@
       ]
      },
      {
+      "Id": "2962969891",
+      "Name": "AKE_Lvl_Chest",
+      "ObjectPath": "\\Events\\Musics\\AKE_Lvl_Chest",
+      "GUID": "{BC9C91BD-BC74-44A2-A495-9A8A2B6018A9}",
+      "Color": "19",
+      "DurationType": "OneShot",
+      "DurationMin": "42.666668",
+      "DurationMax": "42.666668",
+      "MediaRefs": [
+       {
+        "Id": "739088880"
+       }
+      ]
+     },
+     {
       "Id": "307303121",
       "Name": "AKE_Shoulder",
       "ObjectPath": "\\Events\\Musics\\AKE_Shoulder",
@@ -460,6 +483,17 @@
         "Id": "622623971"
        }
       ]
+     },
+     {
+      "Id": "2220893880",
+      "Name": "AKE_Stop_Lvl_Chest",
+      "ObjectPath": "\\Events\\Musics\\AKE_Stop_Lvl_Chest",
+      "GUID": "{F37615BD-FFEE-4398-B6B4-897A7370D33E}",
+      "Color": "19",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "4292438126",
@@ -563,6 +597,6 @@
     ]
    }
   ],
-  "FileHash": "{9D21E073-60CB-2C97-EB79-846CA3DAF548}"
+  "FileHash": "{6A5DA645-936C-F231-A0FA-C385B6AF658C}"
  }
 }
