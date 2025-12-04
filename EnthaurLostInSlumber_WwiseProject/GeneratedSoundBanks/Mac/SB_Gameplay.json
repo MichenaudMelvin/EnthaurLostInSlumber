@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{083F41FF-4348-7CF0-CE4D-6A9DFD12A31A}",
+    "Hash": "{80922AA5-5565-B70D-3B78-E4AE9E44020E}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -1521,6 +1521,14 @@
       "CachePath": "5B/{5BA5C694-A455-0EFA-75FB-950E5ADE4F97}.wem"
      },
      {
+      "Id": "846533876",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PR_Attack_Kill.wav",
+      "CachePath": "C7/{C7B675DA-C02B-149B-2E4A-FE6D90A05F38}.wem"
+     },
+     {
       "Id": "850557758",
       "Language": "SFX",
       "Streaming": "false",
@@ -2000,7 +2008,6 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Cloth",
       "GUID": "{69FE522F-23A7-4F90-9BC1-5A201A346C39}",
       "Color": "10",
-      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "0.237573",
       "DurationMax": "1.1387886",
@@ -2227,7 +2234,6 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Footsteps",
       "GUID": "{40C0DABC-E260-4BE7-9895-167ACF357472}",
       "Color": "10",
-      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "0.16666667",
       "DurationMax": "0.46666667",
@@ -2507,7 +2513,6 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Jump",
       "GUID": "{84B16784-5C30-4EFA-A338-4ACE6DA19306}",
       "Color": "10",
-      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "0.23333333",
       "DurationMax": "0.3",
@@ -2561,7 +2566,6 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Land",
       "GUID": "{27009C7D-31EB-42D4-BEA8-E873A733B256}",
       "Color": "10",
-      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "0.3",
       "DurationMax": "0.4",
@@ -2789,6 +2793,21 @@
        },
        {
         "Id": "1067908482"
+       }
+      ]
+     },
+     {
+      "Id": "3813826453",
+      "Name": "AKE_PR_Attack_Kill",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Attack_Kill",
+      "GUID": "{5E2DB2FB-7BC2-457A-B2AE-8087A3FA05B6}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "1.2155159",
+      "DurationMax": "1.7189988",
+      "MediaRefs": [
+       {
+        "Id": "846533876"
        }
       ]
      },
@@ -3508,6 +3527,6 @@
     ]
    }
   ],
-  "FileHash": "{7E2AA2EA-8C5B-4AEE-C28D-DE8C85858D08}"
+  "FileHash": "{8D89B3E7-A28B-91BC-C0CB-2B0E98C0E5F0}"
  }
 }
