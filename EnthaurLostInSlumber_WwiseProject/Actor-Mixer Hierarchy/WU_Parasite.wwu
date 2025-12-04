@@ -543,6 +543,11 @@
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>8</Value>
+									</ValueList>
+								</Property>
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 							</PropertyList>
 							<ReferenceList>
@@ -1302,8 +1307,19 @@
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
 										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="10"/>
+										<Property Name="UseMaxSoundPerInstance" Type="bool">
+											<ValueList>
+												<Value>True</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -2089,6 +2105,11 @@
 								</RandomSequenceContainer>
 								<Sound Name="SFX_Parasite_Move" ID="{A6E3CD69-148E-4DD8-A9E5-5DA844BCC1E4}" ShortID="27143491">
 									<PropertyList>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
 										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
@@ -2119,7 +2140,7 @@
 										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>4</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideEarlyReflections" Type="bool" Value="True"/>
@@ -2515,7 +2536,7 @@
 										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>4</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideEarlyReflections" Type="bool" Value="True"/>
@@ -2785,16 +2806,16 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="SFX_Parasite_Bite" ID="{1A566DCD-D49A-4D78-B4C3-6EB1D078A616}">
+								<AudioFileSource Name="SFX_Parasite_Bite_V2" ID="{9ED10451-C4FA-4C97-A5A5-17F1A3BCB9F1}">
 									<Language>SFX</Language>
-									<AudioFile>SFX_Parasite_Bite.wav</AudioFile>
+									<AudioFile>SFX_Parasite_Bite_V2.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="835898656"/>
+										<MediaID ID="572498536"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="SFX_Parasite_Bite" ID="{1A566DCD-D49A-4D78-B4C3-6EB1D078A616}" Platform="Linked"/>
+								<ActiveSource Name="SFX_Parasite_Bite_V2" ID="{9ED10451-C4FA-4C97-A5A5-17F1A3BCB9F1}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="PR_Attack_Kill" ID="{7F2D219D-E1E6-41EB-8C1A-456B680A8FD9}" ShortID="311640265">
