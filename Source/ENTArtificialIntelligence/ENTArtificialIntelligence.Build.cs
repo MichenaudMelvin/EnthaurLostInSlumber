@@ -23,6 +23,7 @@ public class ENTArtificialIntelligence : ModuleRules
                 "Slate",
                 "SlateCore",
                 "AIModule",
+                "AkAudio",
                 "GameplayTasks",
                 "NavigationSystem",
                 "ENTSaves",

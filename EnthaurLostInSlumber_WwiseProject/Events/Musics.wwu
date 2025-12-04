@@ -16,46 +16,6 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
-						<Action Name="" ID="{89693C31-FB07-4796-820C-275CED1CDA77}" ShortID="306813185">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="2"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="MU_Full" ID="{BA69C266-C45A-4595-849B-8E043AEEB739}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{09980D9F-2F2C-4B90-B7E7-C6B57E57CB1D}" ShortID="3206590">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="2"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="MU_Village" ID="{8B6A3975-DB73-458F-8BED-4D5F59A7146A}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{32023F83-9D51-4B60-97C0-2B072531984A}" ShortID="202888605">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="2"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="MU_Arm" ID="{E3F909A2-CA63-418C-9065-EC82E50ED2C0}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{25FAFE94-363E-44F4-BD1A-ABFB3D2F6C20}" ShortID="47827830">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="2"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="MU_Shoulder" ID="{321FD815-8473-48C7-9C5A-EF1D5348071F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Heart" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}">
@@ -224,9 +184,10 @@
 				</Event>
 				<Event Name="AKE_Lvl1_2" ID="{D9842495-74DF-429A-BDFD-2A2AFD96DD85}">
 					<ChildrenList>
-						<Action Name="" ID="{34DF3AC3-8DB9-4FAC-A699-2C5687BC2322}" ShortID="672860285">
+						<Action Name="" ID="{718FCC78-4510-4274-A8DD-FC83B8EBB08A}" ShortID="619623255">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">

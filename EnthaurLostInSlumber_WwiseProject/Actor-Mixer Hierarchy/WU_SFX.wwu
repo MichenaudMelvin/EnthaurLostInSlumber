@@ -2864,7 +2864,9 @@
 						</Sound>
 						<ActorMixer Name="AM_Cinematic" ID="{5AFD86DD-AAF4-4C32-85EF-8EA96B16C3A8}" ShortID="849351015">
 							<PropertyList>
+								<Property Name="EnableAttenuation" Type="bool" Value="False"/>
 								<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -2880,6 +2882,11 @@
 										<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="OverrideUserAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -2900,9 +2907,37 @@
 												<MediaID ID="1063071181"/>
 											</MediaIDList>
 										</AudioFileSource>
+										<AudioFileSource Name="SFX_Cinematic_V3" ID="{EF5BD82E-BBBA-45A1-9858-B07B14D329FB}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_V3.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="949189052"/>
+											</MediaIDList>
+										</AudioFileSource>
+										<AudioFileSource Name="SFX_Cinematic_V4" ID="{A3539B7D-C615-4D34-ADE9-20A6EF376E60}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_V4.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="593493255"/>
+											</MediaIDList>
+										</AudioFileSource>
+										<AudioFileSource Name="SFX_Cinematic_V5" ID="{733C4BEF-7DC6-4BD0-B690-9227DCC5D0F7}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_V5.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="181471863"/>
+											</MediaIDList>
+										</AudioFileSource>
+										<AudioFileSource Name="SFX_Cinematic_V6" ID="{E2F703B5-0755-46F6-83B6-06DC099A78E8}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_V6.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="356673089"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="SFX_Cinematic" ID="{FFFF2811-E2F6-441E-BFF6-76A9D1ED9006}" Platform="Linked"/>
+										<ActiveSource Name="SFX_Cinematic_V6" ID="{E2F703B5-0755-46F6-83B6-06DC099A78E8}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="SFX_Cinematic_Parasite_Background" ID="{1E63305F-B85E-4D63-A0D0-A88F451B7A9B}" ShortID="655017007">
@@ -2910,7 +2945,6 @@
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 										<Property Name="OverrideUserAuxSends" Type="bool" Value="True"/>
-										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 										<Property Name="UserAuxSendVolume0" Type="Real64">
 											<ValueList>
 												<Value>5</Value>
@@ -2951,7 +2985,6 @@
 										<Property Name="3DSpatialization" Type="int16" Value="1"/>
 										<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 										<Property Name="OverrideUserAuxSends" Type="bool" Value="True"/>
-										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 										<Property Name="UserAuxSendHPF0" Type="int16">
 											<ValueList>
 												<Value>26</Value>
@@ -3006,16 +3039,44 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="SFX_Cinematic_Without_Reverb" ID="{46C3F7DE-8FDA-4F89-8A06-149C1ED182A4}">
+										<AudioFileSource Name="SFX_Cinematic_Without_Reverb_V5" ID="{BDCC2569-0E11-4ED1-A610-3068FCF722D5}">
 											<Language>SFX</Language>
-											<AudioFile>SFX_Cinematic_Without_Reverb.wav</AudioFile>
+											<AudioFile>SFX_Cinematic_Without_Reverb_V5.wav</AudioFile>
 											<MediaIDList>
-												<MediaID ID="698408162"/>
+												<MediaID ID="1010339101"/>
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="SFX_Cinematic_Without_Reverb" ID="{46C3F7DE-8FDA-4F89-8A06-149C1ED182A4}" Platform="Linked"/>
+										<ActiveSource Name="SFX_Cinematic_Without_Reverb_V5" ID="{BDCC2569-0E11-4ED1-A610-3068FCF722D5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Cinematic_Parasite_Scream" ID="{A6763540-478E-431B-B5E6-0540BBFA22C4}" ShortID="306878835">
+									<PropertyList>
+										<Property Name="OverrideEffect" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+										<Reference Name="UserAuxSend0">
+											<ObjectRef Name="Reverb_Big" ID="{06B51433-C685-4945-9920-67B617503E73}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Cinematic_Parasite_Scream_V3" ID="{DEA346BF-49F8-4344-9217-89866B02DB4C}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_Parasite_Scream_V3.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="198341839"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Cinematic_Parasite_Scream_V3" ID="{DEA346BF-49F8-4344-9217-89866B02DB4C}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>

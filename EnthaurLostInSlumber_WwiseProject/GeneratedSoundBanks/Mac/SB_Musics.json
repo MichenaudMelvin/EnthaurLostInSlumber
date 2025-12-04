@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{4D58EFED-32B3-07BB-75A2-D9E8DC2B3033}",
+    "Hash": "{78C05F92-AAEF-C7E4-2196-431623230952}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -369,6 +369,9 @@
         "Id": "70836845"
        },
        {
+        "Id": "707993649"
+       },
+       {
         "Id": "820627929"
        }
       ],
@@ -386,6 +389,9 @@
          },
          {
           "Id": "219422833"
+         },
+         {
+          "Id": "707993649"
          }
         ]
        },
@@ -398,7 +404,13 @@
         },
         "MediaRefs": [
          {
+          "Id": "70836845"
+         },
+         {
           "Id": "311129035"
+         },
+         {
+          "Id": "707993649"
          }
         ]
        },
@@ -415,6 +427,19 @@
          },
          {
           "Id": "820627929"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "697807138",
+         "Id": "1275925735",
+         "GUID": "{C4E3C809-1510-4722-B962-8C6F5CD6847A}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "707993649"
          }
         ]
        }
@@ -520,12 +545,24 @@
         "Name": "SW_To_High",
         "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_High",
         "GUID": "{F61A1368-80C7-4383-81A9-379E062A96A9}"
+       },
+       {
+        "Id": "3202712997",
+        "Name": "SW_To_Menu",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Menu",
+        "GUID": "{CD833132-3790-4CD0-B412-4AD310D62540}"
+       },
+       {
+        "Id": "3859114701",
+        "Name": "SW_Stop_Med",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_Stop_Med",
+        "GUID": "{E1F1724F-5C9C-4A13-8BFC-3BBA3AC3CA5B}"
        }
       ]
      }
     ]
    }
   ],
-  "FileHash": "{5769A5FF-700C-B7EB-8E85-37DC0281B56D}"
+  "FileHash": "{CC1B242B-3E0E-9D6E-2627-D84F5E2E419C}"
  }
 }
