@@ -20,25 +20,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USceneComponent> SceneComponent;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UENTInteractableComponent> Interaction;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSoftObjectPtr<UWorld> MapToLoad;
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnVeinInteracted);
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnVeinInteracted OnVeinInteracted;
-
-#pragma region WeakZone
-
-private:
-	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
-
-	virtual void OnExitWeakZone_Implementation() override;
-
-	UFUNCTION()
-	void OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractComponent);
-
-#pragma endregion
+	
 };
