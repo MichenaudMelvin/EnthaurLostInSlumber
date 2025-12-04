@@ -102,6 +102,9 @@ protected:
 	UFUNCTION()
 	void FillAmberUpdate(float Alpha);
 
+	UFUNCTION()
+	void OnPlayerAmberUpdate(bool bHasAmber);
+
 #pragma region Foliage
 
 protected:
