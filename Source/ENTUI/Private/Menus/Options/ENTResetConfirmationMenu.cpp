@@ -101,6 +101,10 @@ void UENTResetConfirmationMenu::HandleResetAction()
 	{
 	case EENTResetMenuType::Options:
 		SettingsSubsystem->ResetSaveToDefault(0);
+		SettingsSubsystem->SetMasterVolume(80.0f);
+		SettingsSubsystem->SetMusicVolume(80.0f);
+		SettingsSubsystem->SetSFXVolume(80.0f);
+		SettingsSubsystem->SetGamma(1.0f);
 		ControlsMenu->ResetKeys();
 		break;
 	case EENTResetMenuType::Volume:
