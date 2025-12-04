@@ -184,6 +184,17 @@
 				</Event>
 				<Event Name="AKE_Lvl1_2" ID="{D9842495-74DF-429A-BDFD-2A2AFD96DD85}">
 					<ChildrenList>
+						<Action Name="" ID="{718FCC78-4510-4274-A8DD-FC83B8EBB08A}" ShortID="619623255">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 						<Action Name="" ID="{7AE43B95-23BC-4525-82F1-57279D89598E}" ShortID="218678636">
 							<ReferenceList>
 								<Reference Name="Target">
@@ -197,7 +208,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SW_To_Menu" ID="{CD833132-3790-4CD0-B412-4AD310D62540}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
+									<ObjectRef Name="SW_To_Lv1" ID="{C81D7507-C218-4A58-ACE7-D1CD450154B6}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

@@ -11,7 +11,7 @@
     "GUID": "{25E8C9DA-3544-4101-BC4D-FB75F4AFE615}",
     "Color": "11",
     "Language": "SFX",
-    "Hash": "{2DBCED0B-99BD-CDA0-F9A1-F48923C96310}",
+    "Hash": "{8142D7F3-7E85-BFC3-2B42-717980C3EFC8}",
     "ObjectPath": "\\SoundBanks\\Effects\\SB_Effects",
     "ShortName": "SB_Effects",
     "Path": "SB_Effects.bnk",
@@ -23,6 +23,14 @@
       "Location": "Memory",
       "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
       "CachePath": "9A/{9A4C6E7C-BC0C-A3E0-BCD9-A66441F50BBE}.wem"
+     },
+     {
+      "Id": "560710999",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AK_Factory_IR\\Churches\\AK St-Katharinen.wav",
+      "CachePath": "0F/{0F4699FA-F7BD-6022-8A8F-880E7F358288}.wem"
      },
      {
       "Id": "1005069349",
@@ -1246,6 +1254,19 @@
        "LibId": "7536643"
       },
       {
+       "Id": "3547838510",
+       "Name": "New_AK_Convolution_Reverb_Parasite_Scream",
+       "ObjectPath": "\\Effects\\Default Work Unit\\New_AK_Convolution_Reverb_Parasite_Scream",
+       "GUID": "{9F72222C-1E11-4DF5-8F58-D957F4D75306}",
+       "LibName": "Wwise Convolution Reverb",
+       "LibId": "8323075",
+       "MediaRefs": [
+        {
+         "Id": "560710999"
+        }
+       ]
+      },
+      {
        "Id": "3559982155",
        "Name": "Hall_Stop_Screaming",
        "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Halls\\Hall_Stop_Screaming",
@@ -1545,6 +1566,6 @@
     ]
    }
   ],
-  "FileHash": "{B40EAC9A-D5E6-623A-D94F-79D216E7FF4C}"
+  "FileHash": "{0184DAC6-FF94-F369-B7CE-6A8380078446}"
  }
 }

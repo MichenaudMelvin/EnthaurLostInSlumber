@@ -168,6 +168,7 @@ Effect plug-ins	ID	Name	Type				Notes
 	3491912478	Club_Music_Distant_04	Wwise Parametric EQ			
 	3497757918	Fast_LF_Tremolo_No_Smoothing	Wwise Tremolo			
 	3546444380	Big_Garage1	Wwise Matrix Reverb			
+	3547838510	New_AK_Convolution_Reverb_Parasite_Scream	Wwise Convolution Reverb			
 	3559982155	Hall_Stop_Screaming	Wwise RoomVerb			
 	3563901164	Halfway_There	Wwise Tremolo			
 	3604890626	High_Pass_60Hz	Wwise Parametric EQ			
@@ -195,5 +196,6 @@ Effect plug-ins	ID	Name	Type				Notes
 
 Plug-in Media	ID	Name	Source file	Type	Wwise Object Path	Notes	Data Size
 	535111107	AK_Convolution_Reverb_Dark_Cathedrale_Small	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\9A\{9A4C6E7C-BC0C-A3E0-BCD9-A66441F50BBE}.wem	Wwise Convolution Reverb (Shared)	\Effects\Default Work Unit\AK_Convolution_Reverb_Dark_Cathedrale_Small		189888
+	560710999	New_AK_Convolution_Reverb_Parasite_Scream	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\0F\{0F4699FA-F7BD-6022-8A8F-880E7F358288}.wem	Wwise Convolution Reverb (Shared)	\Effects\Default Work Unit\New_AK_Convolution_Reverb_Parasite_Scream		994592
 	1005069349	Dark_Cathedral_Stereo	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\14\{14BC57F2-623A-F546-F7A4-0B01EB8391FC}.wem	Wwise Convolution Reverb (Shared)	\Effects\Factory AK Convolution Reverb Effects Stereo\Cathedrals and Churches\Dark_Cathedral_Stereo	Impulse response created by Pinguin ing.büro © 2010 Pinguin ing.büro.  All rights reserved. IR Pre-delay: 20ms  	712784
 
