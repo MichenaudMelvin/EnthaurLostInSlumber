@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{3EE18D14-FBE2-164F-7921-E0B19EDE6E8E}",
+    "Hash": "{B666B695-95E4-B98C-55A6-F79165DE9A46}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -422,7 +422,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Release_Amber.wav",
-      "CachePath": "D1/{D1FB7EF2-B5CA-52E5-28D0-205B398E3BCD}.wem"
+      "CachePath": "AA/{AA48D812-DC57-171B-0D6F-3D7CF79C61CA}.wem"
      },
      {
       "Id": "208173442",
@@ -1830,7 +1830,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_PickUp_Amber.wav",
-      "CachePath": "12/{12D11E04-BC81-AC77-3986-CBCB30318A51}.wem"
+      "CachePath": "EC/{EC5B25F5-9C73-1A55-7C92-A741D7E2D14D}.wem"
      },
      {
       "Id": "1021487410",
@@ -2510,8 +2510,8 @@
       "GUID": "{14CA4FE7-8867-4283-AD24-5919B3F33532}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "1.72",
-      "DurationMax": "1.72",
+      "DurationMin": "1.7776042",
+      "DurationMax": "1.7776042",
       "MediaRefs": [
        {
         "Id": "206521461"
@@ -3448,8 +3448,8 @@
       "GUID": "{98E20B7D-1940-43B9-B344-D1F205698516}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "1.32",
-      "DurationMax": "1.32",
+      "DurationMin": "2.168875",
+      "DurationMax": "2.168875",
       "MediaRefs": [
        {
         "Id": "1021385064"
@@ -3548,6 +3548,6 @@
     ]
    }
   ],
-  "FileHash": "{8AF6515F-C866-4DA8-C242-1F25241C8F48}"
+  "FileHash": "{6C13155E-4B7A-EB63-90A4-37BBBA538AEA}"
  }
 }
