@@ -54,29 +54,38 @@ void AENTNerveReceptacle::BeginPlay()
 
 	NerveEndTargetTransform *= GetActorTransform();
 
-	InteractableComponent->AddInteractable(NerveReceptacle);
+	//InteractableComponent->AddInteractable(NerveReceptacle);
 
 	if (!ElectricityComponent)
 	{
 		return;
 	}
 
-	ElectricityComponent->OnElectricityAnimationStarted.AddDynamic(
-		this, &AENTNerveReceptacle::OnElectricityAnimationStarted);
-	ElectricityComponent->OnElectricityRadiusFinished.AddDynamic(
-		this, &AENTNerveReceptacle::OnElectricityRadiusFinished);
-	ElectricityComponent->OnElectricityMovementUpdated.AddDynamic(
-		this, &AENTNerveReceptacle::OnElectricityMovementUpdated);
-	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(
-		this, &AENTNerveReceptacle::OnElectricityMovementFinished);
-	ElectricityComponent->OnElectricityOpacityFinished.AddDynamic(
-		this, &AENTNerveReceptacle::OnElectricityOpacityFinished);
+	ElectricityComponent->OnElectricityAnimationStarted.AddDynamic(this, &AENTNerveReceptacle::OnElectricityAnimationStarted);
+	ElectricityComponent->OnElectricityRadiusFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityRadiusFinished);
+	ElectricityComponent->OnElectricityMovementUpdated.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementUpdated);
+	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementFinished);
+	ElectricityComponent->OnElectricityOpacityFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityOpacityFinished);
+
+	AENTNerve::OnHoldStateUpdate.AddUObject(this, &AENTNerveReceptacle::OnHoldStateChanged);
 }
 
 void AENTNerveReceptacle::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 }
+
+void AENTNerveReceptacle::OnHoldStateChanged(bool bIsHolding)
+{
+	if (bIsHolding)
+	{
+		InteractableComponent->AddInteractable(NerveReceptacle);
+	}else
+	{
+		InteractableComponent->RemoveInteractable(NerveReceptacle);
+	}
+}
+
 
 #if WITH_EDITORONLY_DATA
 
