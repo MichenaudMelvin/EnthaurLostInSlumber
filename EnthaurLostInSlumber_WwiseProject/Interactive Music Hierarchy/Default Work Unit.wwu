@@ -1796,6 +1796,29 @@
 												<MusicTransition Name="Transition" ID="{B3B43987-D279-4E5C-8B92-C0BB4DFECF6B}">
 													<TransitionInfo/>
 												</MusicTransition>
+												<MusicTransition Name="Transition" ID="{15F58653-28CF-45D4-AE54-49871CC91B50}">
+													<PropertyList>
+														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+														<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
+														<Property Name="SourceContextType" Type="int16" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="SourceContextObject">
+															<ObjectRef Name="Enthaur_Music_Menu_LP" ID="{F20EA5B5-9B08-4C4B-B72E-2863F3546853}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+														</Reference>
+													</ReferenceList>
+													<TransitionInfo>
+														<SourceFadeOut>
+															<MusicFade Name="Source Fade-out" ID="{D290B2CD-4C35-41CC-AA92-BE7DF343D9E9}">
+																<PropertyList>
+																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
+																	<Property Name="FadeTime" Type="Real64" Value="1"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</SourceFadeOut>
+													</TransitionInfo>
+												</MusicTransition>
 											</ChildrenList>
 											<TransitionInfo/>
 										</MusicTransition>
