@@ -163,26 +163,6 @@ void AENTRespawnTree::SetRespawnPoint(AENTDefaultCharacter* Player, bool bSave)
 	DefaultGameMode->SaveWorld();
 }
 
-void AENTRespawnTree::OnEnterWeakZone_Implementation(bool bIsZoneActive)
-{
-	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
-
-	if (bIsZoneActive && TriggerBox->OnComponentBeginOverlap.IsAlreadyBound(this, &AENTRespawnTree::TriggerEnter))
-	{
-		TriggerBox->OnComponentBeginOverlap.RemoveDynamic(this, &AENTRespawnTree::TriggerEnter);
-	}
-}
-
-void AENTRespawnTree::OnExitWeakZone_Implementation()
-{
-	IENTWeakZoneInterface::OnExitWeakZone_Implementation();
-
-	if (!TriggerBox->OnComponentBeginOverlap.IsAlreadyBound(this, &AENTRespawnTree::TriggerEnter))
-	{
-		TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AENTRespawnTree::TriggerEnter);
-	}
-}
-
 FENTGameElementData& AENTRespawnTree::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
 	FENTRespawnTreeData Data;
