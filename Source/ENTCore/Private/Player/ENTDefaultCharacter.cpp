@@ -28,9 +28,11 @@
 #include "Player/States/ENTCharacterFallState.h"
 #include "Player/States/ENTCharacterLookAtState.h"
 #include "Saves/ENTPlayerSave.h"
+#include "Saves/ENTSettingsSave.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Subsystems/ENTPlayerSaveSubsystem.h"
+#include "Subsystems/ENTSettingsSaveSubsystem.h"
 
 AENTDefaultCharacter::AENTDefaultCharacter()
 {
@@ -99,6 +101,96 @@ void AENTDefaultCharacter::BeginPlay()
 
 	FirstPersonController = CastedController;
 
+	DefaultFootStepEvent = FootstepsSounds->AkAudioEvent;
+
+	CreateStates();
+	InitStateMachine();
+
+	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(this);
+	if (!GameInstance)
+	{
+		return;
+	}
+
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GameInstance->GetSubsystem<UENTSettingsSaveSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	bViewBobbingSettingValue = !SettingsSubsystem->GetSettings()->bViewBobbing;
+}
+
+void AENTDefaultCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	if (HealthComponent)
+	{
+		HealthComponent->OnHealthNull.RemoveDynamic(this, &AENTDefaultCharacter::OnPlayerDie);
+	}
+
+	OnRespawn.Clear();
+	OnAmberUpdate.Clear();
+	OnInteractionFeedback.Clear();
+}
+
+void AENTDefaultCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	TickStateMachine(DeltaSeconds);
+	InteractionTrace();
+	GroundMovement();
+	UpdateSpeedEffect(DeltaSeconds);
+	ManageViewBobbing();
+
+	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteractPressed && InteractionCoolDown <= 0.0f)
+	{
+		CurrentInteractable->Interact(GetPlayerController(), this);
+		InteractionCoolDown = 0.2f;
+	}
+
+	InteractionCoolDown -= DeltaSeconds;
+}
+
+void AENTDefaultCharacter::IgnoreDamages(bool bIgnore)
+{
+	if (HealthComponent)
+	{
+		HealthComponent->SetCanTakeDamages(!bIgnore);
+	}
+}
+
+void AENTDefaultCharacter::ManageViewBobbing()
+{
+	UGameInstance* GameInstance = UGameplayStatics::GetGameInstance(this);
+	if (!GameInstance)
+	{
+		return;
+	}
+
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GameInstance->GetSubsystem<UENTSettingsSaveSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	// a delegate fired when bViewBobbing is changed will be better than set this in the tick
+	if (bViewBobbingSettingValue != SettingsSubsystem->GetSettings()->bViewBobbing)
+	{
+		bViewBobbingSettingValue = SettingsSubsystem->GetSettings()->bViewBobbing;
+		bViewBobbingSettingValue ? StartViewBobbing() : StopViewBobbing();
+	}
+}
+
+void AENTDefaultCharacter::StartViewBobbing()
+{
+	if (bIsViewBobbingActive)
+	{
+		return;
+	}
+
 	const UENTCoreConfig* CoreConfig = GetDefault<UENTCoreConfig>();
 	if (!CoreConfig)
 	{
@@ -124,50 +216,18 @@ void AENTDefaultCharacter::BeginPlay()
 	}
 
 	ViewBobbing = CastedCameraShake;
-
-	DefaultFootStepEvent = FootstepsSounds->AkAudioEvent;
-
-	CreateStates();
-	InitStateMachine();
+	bIsViewBobbingActive = true;
 }
 
-void AENTDefaultCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void AENTDefaultCharacter::StopViewBobbing()
 {
-	Super::EndPlay(EndPlayReason);
-
-	if (HealthComponent)
+	if (!bIsViewBobbingActive)
 	{
-		HealthComponent->OnHealthNull.RemoveDynamic(this, &AENTDefaultCharacter::OnPlayerDie);
+		return;
 	}
 
-	OnRespawn.Clear();
-	OnAmberUpdate.Clear();
-	OnInteractionFeedback.Clear();
-}
-
-void AENTDefaultCharacter::Tick(float DeltaSeconds)
-{
-	Super::Tick(DeltaSeconds);
-
-	TickStateMachine(DeltaSeconds);
-	InteractionTrace();
-	GroundMovement();
-	UpdateSpeedEffect(DeltaSeconds);
-
-	if (CurrentInteractable && GetPlayerController()->GetPlayerInputs().bInputInteractPressed && InteractionCoolDown <= 0.0f)
-	{
-		CurrentInteractable->Interact(GetPlayerController(), this);
-		InteractionCoolDown = 0.2f;
-	}
-	InteractionCoolDown -= DeltaSeconds;
-}
-
-void AENTDefaultCharacter::IgnoreDamages(bool bIgnore)
-{
-	if (HealthComponent)
-	{
-		HealthComponent->SetCanTakeDamages(!bIgnore);
-	}
+	FirstPersonController->PlayerCameraManager->StopCameraShake(ViewBobbing, false);
+	bIsViewBobbingActive = false;
 }
 
 #pragma region StateMachine

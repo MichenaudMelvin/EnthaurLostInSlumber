@@ -55,9 +55,8 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<AENTDefaultPlayerController> PlayerController;
-
-private:
 	
+	UPROPERTY()
 	bool bHasReleasedInteraction = false;
 	
 };

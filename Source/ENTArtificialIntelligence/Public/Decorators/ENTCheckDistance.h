@@ -66,12 +66,14 @@ private:
 	bool bInverseCollisionTestValue;
 
 	/**
-	 * @brief How long the CollisionTest should succeed to allow decorator to pass, 0 means instant
+	 * @brief How long tests should succeed to allow decorator to pass, 0 means instant
 	 */
-	UPROPERTY(EditInstanceOnly, Category = "Collision", meta = (Units = s, ClampMin = 0.0f))
-	float CollisionTestDuration = 5.0f;
+	UPROPERTY(EditInstanceOnly, Category = "Behavior", meta = (Units = s, ClampMin = 0.0f))
+	float SucceedDuration = 5.0f;
 
-	float CollisionTestTime = 0.0f;
+	float SucceedTime = 0.0f;
+
+	bool bDurationResult = false;
 
 	bool bCollisionTestResult = false;
 
@@ -97,7 +99,7 @@ private:
 	 */
 	bool TraceCollisionTest(UBehaviorTreeComponent& OwnerComp) const;
 
-	void ComputeCollisionTestDuration(float DeltaTime, bool bSucceedCollisionTest);
+	void ComputeSucceedDuration(float DeltaTime, bool bSucceedTests);
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")

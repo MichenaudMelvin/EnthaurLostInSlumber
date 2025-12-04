@@ -55,19 +55,13 @@ void UENTPhysicConstraint::TickComponent(float DeltaTime, ELevelTick TickType, F
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	bShouldChildTick = true;
-
+	
 	if (!PlayerController->GetPlayerInputs().bInputInteractTrigger)
 	{
 		bHasReleasedInteraction = true;
 	}
 
 	if (!LinkedNerve)
-	{
-		bShouldChildTick = false;
-		return;
-	}
-
-	if (!bHasReleasedInteraction)
 	{
 		bShouldChildTick = false;
 	}

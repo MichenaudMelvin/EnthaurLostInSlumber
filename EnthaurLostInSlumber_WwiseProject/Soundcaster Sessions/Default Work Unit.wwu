@@ -172,6 +172,16 @@
 					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 				<SoundcasterSession Name="Music" ID="{B52AFEB0-0694-4732-9C74-D9CE3653D0FD}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="SC_Lvl1_2" ID="{60DEDBE0-ADC5-4DAA-9B45-2E4FE69AA8A5}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="SC_Lvl4" ID="{853D8270-42F5-45D0-88CD-6E2C1D909425}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true"/>
 					<CurrentSwitchList ShowAll="true"/>

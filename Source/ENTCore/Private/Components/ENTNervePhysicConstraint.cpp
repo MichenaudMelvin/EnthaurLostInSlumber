@@ -56,7 +56,7 @@ void UENTNervePhysicConstraint::TickComponent(float DeltaTime, ELevelTick TickTy
 
 	if (!bShouldChildTick) return;
 
-	if (PlayerController->GetPlayerInputs().bInputInteractPressed)
+	if (PlayerController->GetPlayerInputs().bInputInteractPressed && bHasReleasedInteraction)
 	{
 		ReleasePlayer(true);
 	}
