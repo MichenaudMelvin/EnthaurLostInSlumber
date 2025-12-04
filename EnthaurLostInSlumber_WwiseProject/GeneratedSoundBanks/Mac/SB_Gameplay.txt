@@ -38,6 +38,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2721947660	AKE_StopWindSpeed			\SFX\Gameplay\AKE_StopWindSpeed	
 	3147051080	AKE_Cinematic			\SFX\Gameplay\AKE_Cinematic	
 	3189312505	AKE_PR_Legs			\SFX\Gameplay\AKE_PR_Legs	
+	3322828544	AKE_PR_Spasm			\SFX\Gameplay\AKE_PR_Spasm	
 	3340684021	AKE_StartElevator			\SFX\Gameplay\AKE_StartElevator	
 	3397936332	AKE_NerveReceptacleDesactivate			\SFX\Gameplay\AKE_NerveReceptacleDesactivate	
 	3616748465	AKE_Jump			\SFX\Gameplay\AKE_Jump	
@@ -85,6 +86,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	61866964	SFX_FS_Bone_Walk_04	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\6C\{6CD2EC24-F2CB-42DF-ABE0-1AD1465CE4D3}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Walk_Material\MC_FS_Walk_Bone\SFX_FS_Bone_Walk_04		35296
 	63912307	SFX_FS_Bone_Run_15	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\86\{86A8D40C-9E3C-C7FE-5FDF-CD3AC4656727}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Run_Material\MC_FS_Run_Bone\SFX_FS_Bone_Run_15		28896
 	67202430	SFX_FS_Vein_Walk_02	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\74\{7400DAF5-9ECD-1BF0-5D54-60B374FDA76B}.wem		\Actor-Mixer Hierarchy\WU_MC\AM_MC\AM_MC_Footstep\SW_MC_FS_Speed\SW_MC_FS_Walk_Material\MC_FS_Walk_Vein\SFX_FS_Vein_Walk_02		32096
+	69834055	SFX_Parasite_Spasm	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\7F\{7F560912-CFEC-C07D-0770-5929498EA8FB}.wem		\Actor-Mixer Hierarchy\WU_Parasite\AM_Parasite\SFX_Parasite_Spasm		87962
 	71491815	SFX_Parasite_Legs_12	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\B0\{B0BA6D33-BCB5-FD6C-CBBE-6CF9DF654510}.wem		\Actor-Mixer Hierarchy\WU_Parasite\AM_Parasite\PR_Movement\PR_Legs\SFX_Parasite_Legs_12		2570
 	71602376	SFX_Parasite_Foley_Run_06	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D6\{D64A74B0-5F67-A787-2899-2A5EB57918B9}.wem		\Actor-Mixer Hierarchy\WU_Parasite\AM_Parasite\PR_Movement\PR_Run_Foley\SFX_Parasite_Foley_Run_06		48096
 	88949178	SFX_Nerve_Energy_04	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\7D\{7D4A3A6D-39BE-5F60-B7FF-4E09AFD173C0}.wem		\Actor-Mixer Hierarchy\WU_SFX\AM_SFX\AM_SFX_Nerve\SFX_Nerve_Energy\SFX_Nerve_Energy_04		121696
