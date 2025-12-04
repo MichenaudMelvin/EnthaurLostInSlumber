@@ -7,6 +7,8 @@
 #include "Components/TimelineComponent.h"
 #include "ENTCharacterLookAtState.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFinishLookAt);
+
 UCLASS()
 class ENTCORE_API UENTCharacterLookAtState : public UENTCharacterState
 {
@@ -27,6 +29,12 @@ protected:
 
 	UFUNCTION()
 	void FinishLookAt();
+
+	/**
+	 * @brief Fired when the LookAtTimeline is finished, not when switching state from the state machine
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "LookAt");
+	FOnFinishLookAt OnFinishLookAt;
 
 	FTimeline LookAtTimeline;
 

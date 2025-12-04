@@ -55,9 +55,7 @@ private:
 
 	bool bHasTriggerAlreadyOnce = false;
 
-	void ComputeDistance(UBehaviorTreeComponent& OwnerComp);
-
-	bool bDistanceResult = false;
+	bool ComputeDistance(UBehaviorTreeComponent& OwnerComp) const;
 
 	UPROPERTY(EditInstanceOnly, Category = "Collision")
 	FValueOrBBKey_Bool CollisionTest;
