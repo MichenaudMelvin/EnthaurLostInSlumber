@@ -185,6 +185,14 @@
 							<ObjectRef Name="AKE_Lvl1_2" ID="{D9842495-74DF-429A-BDFD-2A2AFD96DD85}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
 							<Position X="2" Y="0"/>
 						</Module>
+						<Module>
+							<ObjectRef Name="AKE_Lvl_Chest" ID="{BC9C91BD-BC74-44A2-A495-9A8A2B6018A9}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_Stop_Lvl_Chest" ID="{F37615BD-FFEE-4398-B6B4-897A7370D33E}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<Position X="4" Y="0"/>
+						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true"/>

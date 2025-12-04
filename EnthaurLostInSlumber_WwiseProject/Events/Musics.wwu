@@ -274,7 +274,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Enthaur_Music_Lvl5_PlaceHolder_90Bpm_44_Lp" ID="{5837EE8B-6D31-4C18-BD8C-6E8E0798680F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+									<ObjectRef Name="PC_Chest" ID="{74C950E2-C410-4B03-9A2C-5CBE22D51857}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -290,7 +290,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Enthaur_Music_Lvl5_PlaceHolder_90Bpm_44_Lp" ID="{5837EE8B-6D31-4C18-BD8C-6E8E0798680F}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+									<ObjectRef Name="PC_Chest" ID="{74C950E2-C410-4B03-9A2C-5CBE22D51857}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

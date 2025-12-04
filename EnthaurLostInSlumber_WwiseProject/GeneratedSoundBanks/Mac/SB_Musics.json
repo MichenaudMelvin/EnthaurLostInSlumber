@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{DCB52D6C-1DAA-8D61-37BE-D85BD2AF230E}",
+    "Hash": "{9F48BE64-484F-CF5B-8A36-656F6125CDAA}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -459,9 +459,7 @@
       "ObjectPath": "\\Events\\Musics\\AKE_Lvl_Chest",
       "GUID": "{BC9C91BD-BC74-44A2-A495-9A8A2B6018A9}",
       "Color": "19",
-      "DurationType": "OneShot",
-      "DurationMin": "42.666668",
-      "DurationMax": "42.666668",
+      "DurationType": "Infinite",
       "MediaRefs": [
        {
         "Id": "739088880"
@@ -597,6 +595,6 @@
     ]
    }
   ],
-  "FileHash": "{C3E3F37E-9852-5FDF-B4F3-658520F2A055}"
+  "FileHash": "{D0FCD47F-F6CD-6D10-69DF-BD514FC8DC35}"
  }
 }
