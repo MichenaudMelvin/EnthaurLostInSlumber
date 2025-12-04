@@ -20,7 +20,8 @@ Switch	ID	Name	Switch Group			Notes
 	1417415266	SW_To_Lvl4	AKSW_Music_Switch			
 	1417415268	SW_To_Lvl2	AKSW_Music_Switch			
 	2800183964	SW_To_High	AKSW_Music_Switch			
-	4270399094	SW_To_Voice	AKSW_Music_Switch			
+	3202712997	SW_To_Menu	AKSW_Music_Switch			
+	3859114701	SW_Stop_Med	AKSW_Music_Switch			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	70836845	Enthaur_Music_Stinger4_Riser_130Bpm_OS	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2E\{2E83BBC8-6C45-4433-C96E-D23BEED340C0}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl4_Med\Enthaur_Music_Stinger4_Riser_130Bpm_OS\Enthaur_Music_Stinger4_Riser_130Bpm_OS		974864
@@ -37,9 +38,9 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	622623971	Shoulder_Start	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\51\{51865892-8794-65FF-FB7F-E26DD7EF9489}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Shoulder\Shoulder_Start\Shoulder_Start		1271823
 	636796751	Enthaur_Music_Lvl4_Low_130Bpm_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2A\{2A4CAB3D-11B9-C569-B135-8CC3BB14223B}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl_4_Low\Enthaur_Music_Lvl4_Low_130Bpm_LP_Start\Enthaur_Music_Lvl4_Low_130Bpm_LP		8507172
 	680603793	Intro	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\CB\{CBB31371-05C6-BB48-2657-86DF55EAD458}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Intro\Intro		250426
-	707993649	Enthaur_Music_Lvl2_Hit_105Bpm_OS	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8C\{8C66A0DC-F3F8-B910-9D91-89AAF951549C}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl1_2\PC_Lvl2\Enthaur_Music_Lvl2_Hit_105Bpm_OS\Enthaur_Music_Lvl2_Hit_105Bpm_OS		3072096
+	707993649	Enthaur_Music_Lvl2_Hit_105Bpm_OS	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8C\{8C66A0DC-F3F8-B910-9D91-89AAF951549C}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl4_Med\Enthaur_Music_Lvl2_Hit_105Bpm_OS\Enthaur_Music_Lvl2_Hit_105Bpm_OS		3072096
 	737881361	Enthaur_Music_Lvl2_Pad_Voice_105Bpm_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\E9\{E9501531-8691-FEE4-C4E1-B9B99C2E1E11}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl1_2\PC_Lvl2\Enthaur_Music_Lvl2_105Bpm_LP\Enthaur_Music_Lvl2_Pad_Voice_105Bpm_LP		9654952
-	740215427	Enthaur_Music_Menu_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C3\{C38915F3-CBAA-5BD6-45B2-E46CF714A71A}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Menu\Enthaur_Music_Menu_LP\Enthaur_Music_Menu_LP		881320
+	740215427	Enthaur_Music_Menu_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\08\{08AF4B6B-AF4B-A2F6-95E5-1F0029444AFE}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl1_2\MU_Menu\Enthaur_Music_Menu_LP\Enthaur_Music_Menu_LP		15241056
 	755939709	Enthaur_Music_Lvl2_105Bpm_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BE\{BEBF7876-0D8E-3803-DC00-1942AFD19ADA}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl1_2\PC_Lvl2\Enthaur_Music_Lvl2_105Bpm_LP\Enthaur_Music_Lvl2_105Bpm_LP		9654952
 	801394838	Outro_Pad	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\BD\{BDE60918-E57C-152B-2368-C6F088706755}.wem		\Interactive Music Hierarchy\Default Work Unit\MU_Gameplay\MU_Full\Outro_Pad\Outro_Pad		182569
 	820627929	Enthaur_Music_Stinger3_Riser_130Bpm_OS	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\22\{226A026A-FB3F-3DD1-7286-CE6188102D6A}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl_4_Low\Enthaur_Music_Stinger3_Riser_130Bpm_OS\Enthaur_Music_Stinger3_Riser_130Bpm_OS		974864
