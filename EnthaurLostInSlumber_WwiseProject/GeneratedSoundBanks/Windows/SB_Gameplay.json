@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{ECD738DF-9E5A-E445-C987-3B6EAD02454C}",
+    "Hash": "{3EE18D14-FBE2-164F-7921-E0B19EDE6E8E}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -151,6 +151,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Walk_02.wav",
       "CachePath": "74/{7400DAF5-9ECD-1BF0-5D54-60B374FDA76B}.wem"
+     },
+     {
+      "Id": "69834055",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Spasm_V2.wav",
+      "CachePath": "7F/{7F560912-CFEC-C07D-0770-5929498EA8FB}.wem"
      },
      {
       "Id": "71491815",
@@ -3047,6 +3055,22 @@
       ]
      },
      {
+      "Id": "3322828544",
+      "Name": "AKE_PR_Spasm",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Spasm",
+      "GUID": "{2BFFD8F3-375D-4536-AB21-C2BC9E98720E}",
+      "Color": "10",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.9152708",
+      "DurationMax": "0.9152708",
+      "MediaRefs": [
+       {
+        "Id": "69834055"
+       }
+      ]
+     },
+     {
       "Id": "3764348078",
       "Name": "AKE_PR_WalkFoley",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_WalkFoley",
@@ -3524,6 +3548,6 @@
     ]
    }
   ],
-  "FileHash": "{06EC792A-E8C7-30C3-5C7B-2A6FFDE99115}"
+  "FileHash": "{8AF6515F-C866-4DA8-C242-1F25241C8F48}"
  }
 }
