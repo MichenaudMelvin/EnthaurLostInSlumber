@@ -14,7 +14,7 @@ class AENTDefaultCharacter;
 class UAkAudioEvent;
 
 UCLASS()
-class ENTCORE_API AENTRespawnTree : public AActor, public IENTWeakZoneInterface, public IENTSaveGameElementInterface
+class ENTCORE_API AENTRespawnTree : public AActor, public IENTSaveGameElementInterface
 {
 	GENERATED_BODY()
 
@@ -71,10 +71,6 @@ protected:
 	FString LastCheckPointName;
 
 	bool bIsActivated = false;
-
-	virtual void OnEnterWeakZone_Implementation(bool bIsZoneActive) override;
-
-	virtual void OnExitWeakZone_Implementation() override;
 
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
