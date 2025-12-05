@@ -306,6 +306,22 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="AKE_Stop_TitleScreen" ID="{3CE2DD5A-57D4-42FA-8454-8DEDB5EAA59D}">
+					<ChildrenList>
+						<Action Name="" ID="{6AE01616-BD2C-4767-9E88-E584A4D80D78}" ShortID="788291987">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

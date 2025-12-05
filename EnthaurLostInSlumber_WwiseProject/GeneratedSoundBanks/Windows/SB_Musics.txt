@@ -4,6 +4,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2220893880	AKE_Stop_Lvl_Chest			\Musics\AKE_Stop_Lvl_Chest	
 	2358176991	AKE_Heart			\Musics\AKE_Heart	
 	2604142630	AKE_Full			\Musics\AKE_Full	
+	2710480974	AKE_Stop_TitleScreen			\Musics\AKE_Stop_TitleScreen	
 	2796820631	AKE_Forearm			\Musics\AKE_Forearm	
 	2962969891	AKE_Lvl_Chest			\Musics\AKE_Lvl_Chest	
 	3122159521	AKE_Lvl1_2			\Musics\AKE_Lvl1_2	
