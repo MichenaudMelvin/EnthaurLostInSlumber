@@ -246,6 +246,16 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{77134FDE-AB39-4540-AB96-085AB112C11B}" ShortID="77758871">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SW_To_Lvl4" ID="{7C18D196-43B4-4B67-8858-FFA1B8304822}" WorkUnitID="{47556DD0-D23D-4037-8DDC-1573746A9AAB}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Voice" ID="{33D33746-9324-4AFE-ABEA-BA6394E901A7}">
