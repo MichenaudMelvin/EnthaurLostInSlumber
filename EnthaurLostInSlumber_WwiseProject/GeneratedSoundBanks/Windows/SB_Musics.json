@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{55E9A3D4-84FD-ABE2-A4F6-3277EFFF769F}",
+    "Hash": "{C2844A4D-1B4E-0EBE-AD83-02F758BAD9C1}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -25,28 +25,12 @@
       "CachePath": "2E/{2E83BBC8-6C45-4433-C96E-D23BEED340C0}.wem"
      },
      {
-      "Id": "152078623",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Enthaur_Music_Village_LP.wav",
-      "CachePath": "9B/{9B609F42-62DF-1ABD-B582-A862B1256184}.wem"
-     },
-     {
       "Id": "219422833",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Lvl4_Med_130Bpm_LP.wav",
       "CachePath": "5D/{5D427FDD-B81E-92EC-4B5A-F511C52865FE}.wem"
-     },
-     {
-      "Id": "257055636",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Intense_Part.wav",
-      "CachePath": "3F/{3F7AFFD9-257C-E32C-C30C-D0492081C05A}.wem"
      },
      {
       "Id": "311129035",
@@ -57,38 +41,6 @@
       "CachePath": "D2/{D2081ADA-04AF-275C-F014-82E81A0AE0ED}.wem"
      },
      {
-      "Id": "351474503",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Intro_pad.wav",
-      "CachePath": "DE/{DE856B69-FE8A-9C74-4D2F-98D8BF1E2D62}.wem"
-     },
-     {
-      "Id": "413814033",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MU_Transition.wav",
-      "CachePath": "00/{00F704E1-3B9F-D1B7-13C9-2F63BAEA7EA0}.wem"
-     },
-     {
-      "Id": "477645610",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Melody.wav",
-      "CachePath": "F1/{F1A0EEB2-3B7B-7766-96CA-B98D5500CAB8}.wem"
-     },
-     {
-      "Id": "558723873",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Arm_LP.wav",
-      "CachePath": "A3/{A3736567-D452-8353-0697-B6708256B34F}.wem"
-     },
-     {
       "Id": "574035864",
       "Language": "SFX",
       "Streaming": "false",
@@ -97,36 +49,12 @@
       "CachePath": "80/{8002C155-6EF0-2F35-45A4-E289ABE0685B}.wem"
      },
      {
-      "Id": "621012726",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Shoulder_LP.wav",
-      "CachePath": "A8/{A8F38F09-DD8E-80FB-5D42-F895CDC6B4D0}.wem"
-     },
-     {
-      "Id": "622623971",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Shoulder_Start.wav",
-      "CachePath": "51/{51865892-8794-65FF-FB7F-E26DD7EF9489}.wem"
-     },
-     {
       "Id": "636796751",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Lvl4_Low_130Bpm_LP.wav",
       "CachePath": "2A/{2A4CAB3D-11B9-C569-B135-8CC3BB14223B}.wem"
-     },
-     {
-      "Id": "680603793",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Intro.wav",
-      "CachePath": "CB/{CBB31371-05C6-BB48-2657-86DF55EAD458}.wem"
      },
      {
       "Id": "707993649",
@@ -169,28 +97,12 @@
       "CachePath": "BE/{BEBF7876-0D8E-3803-DC00-1942AFD19ADA}.wem"
      },
      {
-      "Id": "801394838",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Outro_Pad.wav",
-      "CachePath": "BD/{BDE60918-E57C-152B-2368-C6F088706755}.wem"
-     },
-     {
       "Id": "820627929",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Stinger3_Riser_130Bpm_OS.wav",
       "CachePath": "22/{226A026A-FB3F-3DD1-7286-CE6188102D6A}.wem"
-     },
-     {
-      "Id": "944287877",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Slow_perc_part.wav",
-      "CachePath": "B1/{B1DA27BC-67F1-5CF2-9E9B-46D3428B2CC2}.wem"
      },
      {
       "Id": "962215703",
@@ -217,14 +129,6 @@
       "CachePath": "2D/{2D787974-74C1-144F-EEE5-524F71E60851}.wem"
      },
      {
-      "Id": "1043677490",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Cool_Down.wav",
-      "CachePath": "5A/{5A1AB1BA-9F56-D477-6AAD-989000AEB4DB}.wem"
-     },
-     {
       "Id": "1057258362",
       "Language": "SFX",
       "Streaming": "false",
@@ -234,66 +138,6 @@
      }
     ],
     "Events": [
-     {
-      "Id": "2796820631",
-      "Name": "AKE_Forearm",
-      "ObjectPath": "\\Events\\Musics\\AKE_Forearm",
-      "GUID": "{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}",
-      "Color": "19",
-      "DurationType": "Infinite",
-      "MediaRefs": [
-       {
-        "Id": "558723873"
-       }
-      ]
-     },
-     {
-      "Id": "2604142630",
-      "Name": "AKE_Full",
-      "ObjectPath": "\\Events\\Musics\\AKE_Full",
-      "GUID": "{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}",
-      "Color": "19",
-      "DurationType": "Infinite",
-      "MediaRefs": [
-       {
-        "Id": "257055636"
-       },
-       {
-        "Id": "351474503"
-       },
-       {
-        "Id": "413814033"
-       },
-       {
-        "Id": "477645610"
-       },
-       {
-        "Id": "680603793"
-       },
-       {
-        "Id": "801394838"
-       },
-       {
-        "Id": "944287877"
-       },
-       {
-        "Id": "1043677490"
-       }
-      ]
-     },
-     {
-      "Id": "2358176991",
-      "Name": "AKE_Heart",
-      "ObjectPath": "\\Events\\Musics\\AKE_Heart",
-      "GUID": "{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}",
-      "Color": "19",
-      "DurationType": "Infinite",
-      "MediaRefs": [
-       {
-        "Id": "152078623"
-       }
-      ]
-     },
      {
       "Id": "3122159521",
       "Name": "AKE_Lvl1_2",
@@ -467,22 +311,6 @@
       ]
      },
      {
-      "Id": "307303121",
-      "Name": "AKE_Shoulder",
-      "ObjectPath": "\\Events\\Musics\\AKE_Shoulder",
-      "GUID": "{6078419F-7F68-479D-AA56-581F2E77687E}",
-      "Color": "19",
-      "DurationType": "Infinite",
-      "MediaRefs": [
-       {
-        "Id": "621012726"
-       },
-       {
-        "Id": "622623971"
-       }
-      ]
-     },
-     {
       "Id": "2220893880",
       "Name": "AKE_Stop_Lvl_Chest",
       "ObjectPath": "\\Events\\Musics\\AKE_Stop_Lvl_Chest",
@@ -606,6 +434,6 @@
     ]
    }
   ],
-  "FileHash": "{D3A60737-D0EA-80EC-2FC0-A806E8A605E4}"
+  "FileHash": "{F3CFE8D7-A1AE-6E61-E25C-47D24E2173C3}"
  }
 }

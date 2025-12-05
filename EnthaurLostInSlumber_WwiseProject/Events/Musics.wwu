@@ -19,6 +19,9 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Heart" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
 					<ChildrenList>
 						<Action Name="" ID="{D8DF8765-3393-49B6-B9F9-7F771519F334}" ShortID="649449349">
 							<ReferenceList>
@@ -70,6 +73,9 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
 					<ChildrenList>
 						<Action Name="" ID="{D1725414-084D-4674-96AB-5AEEEBCEF6FB}" ShortID="205815653">
 							<ReferenceList>
@@ -101,6 +107,9 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Forearm" ID="{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
 					<ChildrenList>
 						<Action Name="" ID="{5B2B6DE8-647F-4B07-A33D-2DC41A40F717}" ShortID="221407640">
 							<ReferenceList>
@@ -142,6 +151,9 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Shoulder" ID="{6078419F-7F68-479D-AA56-581F2E77687E}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
 					<ChildrenList>
 						<Action Name="" ID="{3147920C-4AFA-4DA7-874C-F986DFF1804E}" ShortID="1038696695">
 							<ReferenceList>
