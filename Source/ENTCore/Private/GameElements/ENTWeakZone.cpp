@@ -204,6 +204,8 @@ void AENTWeakZone::CureZone(AActor* StartCurePoint)
 	{
 		OnElectricityMovementFinished();
 	}
+
+	OnCure.Broadcast();
 	DestroyZone();
 }
 
@@ -218,6 +220,8 @@ void AENTWeakZone::CorruptZone(AActor* StartCorruptPoint)
 	{
 		OnElectricityMovementFinished();
 	}
+
+	OnCorrupt.Broadcast();
 	CreateZone();
 }
 
