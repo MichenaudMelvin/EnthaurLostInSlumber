@@ -465,7 +465,7 @@ bool AENTDefaultCharacter::GroundTrace(const FVector& StartLocation, float Trace
 
 	TArray<AActor*> ActorsToIgnore;
 
-	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, CoreConfig->GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::ForOneFrame, HitResult, true);
+	return UKismetSystemLibrary::LineTraceSingleForObjects(this, StartLocation, EndLocation, CoreConfig->GroundObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
 }
 
 void AENTDefaultCharacter::GroundMovement()
