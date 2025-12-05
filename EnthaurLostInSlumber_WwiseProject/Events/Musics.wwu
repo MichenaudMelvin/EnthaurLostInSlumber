@@ -19,6 +19,9 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Heart" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
 					<ChildrenList>
 						<Action Name="" ID="{D8DF8765-3393-49B6-B9F9-7F771519F334}" ShortID="649449349">
 							<ReferenceList>
@@ -70,6 +73,9 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
 					<ChildrenList>
 						<Action Name="" ID="{D1725414-084D-4674-96AB-5AEEEBCEF6FB}" ShortID="205815653">
 							<ReferenceList>
@@ -101,6 +107,9 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Forearm" ID="{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
 					<ChildrenList>
 						<Action Name="" ID="{5B2B6DE8-647F-4B07-A33D-2DC41A40F717}" ShortID="221407640">
 							<ReferenceList>
@@ -142,6 +151,9 @@
 					</ChildrenList>
 				</Event>
 				<Event Name="AKE_Shoulder" ID="{6078419F-7F68-479D-AA56-581F2E77687E}">
+					<PropertyList>
+						<Property Name="Inclusion" Type="bool" Value="False"/>
+					</PropertyList>
 					<ChildrenList>
 						<Action Name="" ID="{3147920C-4AFA-4DA7-874C-F986DFF1804E}" ShortID="1038696695">
 							<ReferenceList>
@@ -291,6 +303,32 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="PC_Chest" ID="{74C950E2-C410-4B03-9A2C-5CBE22D51857}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{214B6566-2B5A-4F20-9388-664D04EA8A2D}" ShortID="419366894">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Stop_TitleScreen" ID="{3CE2DD5A-57D4-42FA-8454-8DEDB5EAA59D}">
+					<ChildrenList>
+						<Action Name="" ID="{6AE01616-BD2C-4767-9E88-E584A4D80D78}" ShortID="788291987">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

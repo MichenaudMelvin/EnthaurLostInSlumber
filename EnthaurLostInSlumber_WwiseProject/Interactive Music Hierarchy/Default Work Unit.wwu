@@ -6,6 +6,11 @@
 				<MusicSwitchContainer Name="MU_Gameplay" ID="{3996C662-F412-44B7-B191-1A423E043D0D}" ShortID="144649558">
 					<PropertyList>
 						<Property Name="Color" Type="int16" Value="19"/>
+						<Property Name="Inclusion" Type="bool">
+							<ValueList>
+								<Value>False</Value>
+							</ValueList>
+						</Property>
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
 					</PropertyList>
 					<ReferenceList>
@@ -1748,163 +1753,6 @@
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
 															<Property Name="TimeMs" Type="Real64" Value="192000"/>
-														</PropertyList>
-													</MusicCue>
-												</Local>
-											</Reference>
-										</ObjectList>
-									</ObjectLists>
-								</MusicSegment>
-							</ChildrenList>
-						</MusicPlaylistContainer>
-						<MusicPlaylistContainer Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" ShortID="1008303919">
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Bus_Music" ID="{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-								<Reference Name="PlaylistRoot">
-									<Custom>
-										<MusicPlaylistItem Name="" ID="{D2CD94A5-E495-488B-BF20-8F9E6D48EA85}" ShortID="684251658">
-											<PropertyList>
-												<Property Name="LoopCount" Type="int16" Value="0"/>
-											</PropertyList>
-											<ChildrenList>
-												<MusicPlaylistItem Name="" ID="{9ED1178D-9A8D-4B66-98EF-6B0573B4E5A4}" ShortID="600582488">
-													<PropertyList>
-														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="Segment">
-															<ObjectRef Name="Enthaur_Music_Menu_LP" ID="{F20EA5B5-9B08-4C4B-B72E-2863F3546853}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
-														</Reference>
-													</ReferenceList>
-												</MusicPlaylistItem>
-											</ChildrenList>
-										</MusicPlaylistItem>
-									</Custom>
-								</Reference>
-								<Reference Name="TransitionRoot">
-									<Custom>
-										<MusicTransition Name="Root" ID="{E2A8BD8B-D480-4FDD-B0D5-FE7EE839C9B4}">
-											<PropertyList>
-												<Property Name="IsFolder" Type="bool" Value="True"/>
-											</PropertyList>
-											<ChildrenList>
-												<MusicTransition Name="Transition" ID="{B3B43987-D279-4E5C-8B92-C0BB4DFECF6B}">
-													<TransitionInfo/>
-												</MusicTransition>
-												<MusicTransition Name="Transition" ID="{15F58653-28CF-45D4-AE54-49871CC91B50}">
-													<PropertyList>
-														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
-														<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
-														<Property Name="SourceContextType" Type="int16" Value="2"/>
-													</PropertyList>
-													<ReferenceList>
-														<Reference Name="SourceContextObject">
-															<ObjectRef Name="Enthaur_Music_Menu_LP" ID="{F20EA5B5-9B08-4C4B-B72E-2863F3546853}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
-														</Reference>
-													</ReferenceList>
-													<TransitionInfo>
-														<SourceFadeOut>
-															<MusicFade Name="Source Fade-out" ID="{D290B2CD-4C35-41CC-AA92-BE7DF343D9E9}">
-																<PropertyList>
-																	<Property Name="FadeOffset" Type="Real64" Value="1"/>
-																	<Property Name="FadeTime" Type="Real64" Value="1"/>
-																	<Property Name="FadeType" Type="int16" Value="1"/>
-																</PropertyList>
-															</MusicFade>
-														</SourceFadeOut>
-													</TransitionInfo>
-												</MusicTransition>
-											</ChildrenList>
-											<TransitionInfo/>
-										</MusicTransition>
-									</Custom>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<MusicSegment Name="Enthaur_Music_Menu_LP" ID="{F20EA5B5-9B08-4C4B-B72E-2863F3546853}" ShortID="688875694">
-									<PropertyList>
-										<Property Name="EndPosition" Type="Real64" Value="86400"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<MusicTrack Name="Enthaur_Music_Menu_LP" ID="{C104DEAD-176B-4E3B-962D-5A95F28D53FE}" ShortID="35640312">
-											<ReferenceList>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-												</Reference>
-												<Reference Name="TransitionRoot">
-													<Custom>
-														<MusicTransition Name="Root" ID="{E074376F-124E-474B-B343-22D80EC91F08}">
-															<PropertyList>
-																<Property Name="IsFolder" Type="bool" Value="True"/>
-															</PropertyList>
-															<TransitionInfo/>
-														</MusicTransition>
-													</Custom>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Enthaur_Music_Menu_LP" ID="{2CF15494-F83B-4177-8537-69B3FFADC7E6}">
-													<Language>SFX</Language>
-													<AudioFile>Enthaur_Music_Menu_LP.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="740215427"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ObjectLists>
-												<ObjectList Name="Sequences">
-													<Reference>
-														<Local>
-															<MusicTrackSequence Name="" ID="{A2563DA4-2A1E-4DAA-8BCB-F39F6B80DCA6}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<Reference>
-																			<Local>
-																				<MusicClip Name="Enthaur_Music_Menu_LP" ID="{0E4E006F-BC53-4F83-A5AA-0420A842E209}">
-																					<PropertyList>
-																						<Property Name="EndTrimOffset" Type="Real64" Value="86400"/>
-																						<Property Name="FadeInMode" Type="int16" Value="0"/>
-																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																					</PropertyList>
-																					<AudioSourceRef Name="Enthaur_Music_Menu_LP" ID="{2CF15494-F83B-4177-8537-69B3FFADC7E6}"/>
-																				</MusicClip>
-																			</Local>
-																		</Reference>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</Local>
-													</Reference>
-												</ObjectList>
-											</ObjectLists>
-										</MusicTrack>
-									</ChildrenList>
-									<ObjectLists>
-										<ObjectList Name="Cues">
-											<Reference>
-												<Local>
-													<MusicCue Name="Entry Cue" ID="{E3748201-67EC-4C96-B765-FC32386DC804}"/>
-												</Local>
-											</Reference>
-											<Reference>
-												<Local>
-													<MusicCue Name="Exit Cue" ID="{F6E1A434-8BC6-4DBE-95B0-749CD607F2D8}">
-														<PropertyList>
-															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="86400"/>
 														</PropertyList>
 													</MusicCue>
 												</Local>
@@ -4978,6 +4826,214 @@
 												<PropertyList>
 													<Property Name="CueType" Type="int16" Value="1"/>
 													<Property Name="TimeMs" Type="Real64" Value="42666.6666666667"/>
+												</PropertyList>
+											</MusicCue>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicSegment>
+					</ChildrenList>
+				</MusicPlaylistContainer>
+				<MusicPlaylistContainer Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" ShortID="1008303919">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<Custom>
+								<Conversion Name="Conversion Settings (Custom)" ID="{ECA68DEB-A6E6-4A80-9BCE-8B5AB19FF712}">
+									<PropertyList>
+										<Property Name="Channels" Type="int32">
+											<ValueList>
+												<Value Platform="Mac">4</Value>
+												<Value Platform="Windows">4</Value>
+											</ValueList>
+										</Property>
+										<Property Name="LRMix" Type="Real64">
+											<ValueList>
+												<Value Platform="Mac">0</Value>
+												<Value Platform="Windows">0</Value>
+											</ValueList>
+										</Property>
+										<Property Name="MaxSampleRate" Type="int32">
+											<ValueList>
+												<Value Platform="Mac">48000</Value>
+												<Value Platform="Windows">48000</Value>
+											</ValueList>
+										</Property>
+										<Property Name="MinSampleRate" Type="int32">
+											<ValueList>
+												<Value Platform="Mac">0</Value>
+												<Value Platform="Windows">0</Value>
+											</ValueList>
+										</Property>
+										<Property Name="SampleRate" Type="int32">
+											<ValueList>
+												<Value Platform="Mac">0</Value>
+												<Value Platform="Windows">0</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ConversionPluginInfoList>
+										<ConversionPluginInfo Platform="Mac">
+											<ConversionPlugin Name="" ID="{1D23451E-08C9-46FD-8AD7-B6CF6DDD30EB}" PluginName="WEM Opus" CompanyID="0" PluginID="20">
+												<PropertyList>
+													<Property Name="Quality" Type="int32" Value="40"/>
+												</PropertyList>
+											</ConversionPlugin>
+										</ConversionPluginInfo>
+										<ConversionPluginInfo Platform="Windows">
+											<ConversionPlugin Name="" ID="{B9C04563-9365-4B60-BB41-86D73A9201FD}" PluginName="WEM Opus" CompanyID="0" PluginID="20">
+												<PropertyList>
+													<Property Name="Quality" Type="int32" Value="40"/>
+												</PropertyList>
+											</ConversionPlugin>
+										</ConversionPluginInfo>
+									</ConversionPluginInfoList>
+								</Conversion>
+							</Custom>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Bus_Music" ID="{8EF1C2AA-7AC0-4AE9-9D33-FF7F5AF0FF9B}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+						</Reference>
+						<Reference Name="PlaylistRoot">
+							<Custom>
+								<MusicPlaylistItem Name="" ID="{D2CD94A5-E495-488B-BF20-8F9E6D48EA85}" ShortID="684251658">
+									<PropertyList>
+										<Property Name="LoopCount" Type="int16" Value="0"/>
+									</PropertyList>
+									<ChildrenList>
+										<MusicPlaylistItem Name="" ID="{9ED1178D-9A8D-4B66-98EF-6B0573B4E5A4}" ShortID="600582488">
+											<PropertyList>
+												<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Segment">
+													<ObjectRef Name="Enthaur_Music_Menu_LP" ID="{F20EA5B5-9B08-4C4B-B72E-2863F3546853}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+												</Reference>
+											</ReferenceList>
+										</MusicPlaylistItem>
+									</ChildrenList>
+								</MusicPlaylistItem>
+							</Custom>
+						</Reference>
+						<Reference Name="TransitionRoot">
+							<Custom>
+								<MusicTransition Name="Root" ID="{E2A8BD8B-D480-4FDD-B0D5-FE7EE839C9B4}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<MusicTransition Name="Transition" ID="{B3B43987-D279-4E5C-8B92-C0BB4DFECF6B}">
+											<TransitionInfo/>
+										</MusicTransition>
+										<MusicTransition Name="Transition" ID="{15F58653-28CF-45D4-AE54-49871CC91B50}">
+											<PropertyList>
+												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+												<Property Name="PlaySourcePostExit" Type="bool" Value="False"/>
+												<Property Name="SourceContextType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="SourceContextObject">
+													<ObjectRef Name="Enthaur_Music_Menu_LP" ID="{F20EA5B5-9B08-4C4B-B72E-2863F3546853}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+												</Reference>
+											</ReferenceList>
+											<TransitionInfo>
+												<SourceFadeOut>
+													<MusicFade Name="Source Fade-out" ID="{D290B2CD-4C35-41CC-AA92-BE7DF343D9E9}">
+														<PropertyList>
+															<Property Name="FadeOffset" Type="Real64" Value="1"/>
+															<Property Name="FadeTime" Type="Real64" Value="1"/>
+															<Property Name="FadeType" Type="int16" Value="1"/>
+														</PropertyList>
+													</MusicFade>
+												</SourceFadeOut>
+											</TransitionInfo>
+										</MusicTransition>
+									</ChildrenList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</Custom>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicSegment Name="Enthaur_Music_Menu_LP" ID="{F20EA5B5-9B08-4C4B-B72E-2863F3546853}" ShortID="688875694">
+							<PropertyList>
+								<Property Name="EndPosition" Type="Real64" Value="86400"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicTrack Name="Enthaur_Music_Menu_LP" ID="{C104DEAD-176B-4E3B-962D-5A95F28D53FE}" ShortID="35640312">
+									<ReferenceList>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{E074376F-124E-474B-B343-22D80EC91F08}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Enthaur_Music_Menu_LP" ID="{2CF15494-F83B-4177-8537-69B3FFADC7E6}">
+											<Language>SFX</Language>
+											<AudioFile>Enthaur_Music_Menu_LP.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="740215427"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Sequences">
+											<Reference>
+												<Local>
+													<MusicTrackSequence Name="" ID="{A2563DA4-2A1E-4DAA-8BCB-F39F6B80DCA6}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Enthaur_Music_Menu_LP" ID="{0E4E006F-BC53-4F83-A5AA-0420A842E209}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="86400"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Enthaur_Music_Menu_LP" ID="{2CF15494-F83B-4177-8537-69B3FFADC7E6}"/>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicTrack>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Cues">
+									<Reference>
+										<Local>
+											<MusicCue Name="Entry Cue" ID="{E3748201-67EC-4C96-B765-FC32386DC804}"/>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<MusicCue Name="Exit Cue" ID="{F6E1A434-8BC6-4DBE-95B0-749CD607F2D8}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="86400"/>
 												</PropertyList>
 											</MusicCue>
 										</Local>
