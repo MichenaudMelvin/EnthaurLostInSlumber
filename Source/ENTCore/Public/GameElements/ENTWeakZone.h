@@ -16,6 +16,9 @@ class UENTInteractableComponent;
 class UBoxComponent;
 class UPostProcessComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCure);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCorrupt);
+
 UCLASS()
 class ENTCORE_API AENTWeakZone : public AActor, public IENTSaveGameElementInterface
 {
@@ -83,8 +86,13 @@ protected:
 	UFUNCTION()
 	void CureUpdate(float Alpha);
 
+	UPROPERTY(BlueprintAssignable, Category = "WeakZone")
+	FOnCure OnCure;
+
+	UPROPERTY(BlueprintAssignable, Category = "WeakZone")
+	FOnCorrupt OnCorrupt;
+
 public:
-	
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void CureZone(AActor* StartCurePoint);
 

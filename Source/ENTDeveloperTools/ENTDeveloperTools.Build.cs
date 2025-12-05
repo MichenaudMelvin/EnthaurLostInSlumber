@@ -20,7 +20,8 @@ public class ENTDeveloperTools : ModuleRules
                 "Engine",
                 "Slate",
                 "SlateCore",
-                "InputCore"
+                "InputCore",
+                "AkAudio"
             }
         );
     }
