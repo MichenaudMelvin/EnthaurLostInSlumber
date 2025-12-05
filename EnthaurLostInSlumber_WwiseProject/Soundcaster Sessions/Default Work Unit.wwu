@@ -178,8 +178,16 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="AKE_TitleScreen" ID="{4E2866E6-D300-45F8-B62A-A54678F39D44}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="SC_Lvl4" ID="{853D8270-42F5-45D0-88CD-6E2C1D909425}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_Lvl1_2" ID="{D9842495-74DF-429A-BDFD-2A2AFD96DD85}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<Position X="1" Y="1"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="AKE_Lvl1_2" ID="{D9842495-74DF-429A-BDFD-2A2AFD96DD85}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
