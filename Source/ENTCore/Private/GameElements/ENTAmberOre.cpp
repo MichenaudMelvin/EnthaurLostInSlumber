@@ -56,7 +56,7 @@ AENTAmberOre::AENTAmberOre()
 void AENTAmberOre::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	if (!bIsEmpty) Interactable->AddInteractable(MeshInteraction);
 	Interactable->OnInteract.AddDynamic(this, &AENTAmberOre::OnInteract);
 
