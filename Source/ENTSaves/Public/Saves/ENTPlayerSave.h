@@ -21,7 +21,7 @@ public:
 	uint8 CurrentState = 0;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Amber")
-	bool bHasAmber;
+	bool bHasAmber = false;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Lantern")
 	bool bIsLanternActive = false;

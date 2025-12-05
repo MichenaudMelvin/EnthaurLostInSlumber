@@ -44,6 +44,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
 	TObjectPtr<UPostProcessComponent> BlackAndWhiteShader;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
+	TObjectPtr<UPostProcessComponent> WeakZonePostProcess;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Electricity")
 	TObjectPtr<UENTElectricityComponent> ElectricityComponent;
 

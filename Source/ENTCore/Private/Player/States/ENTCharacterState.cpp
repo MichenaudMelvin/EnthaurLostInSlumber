@@ -38,8 +38,6 @@ FString StateToString(EENTCharacterStateID State)
 			return "Interact";
 		case EENTCharacterStateID::Stop:
 			return "Stop";
-		case EENTCharacterStateID::Anim:
-			return "Anim";
 		case EENTCharacterStateID::LookAt:
 			return "LookAt"; 
 	}

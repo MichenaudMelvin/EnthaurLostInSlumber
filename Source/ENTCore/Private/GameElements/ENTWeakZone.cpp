@@ -31,6 +31,11 @@ AENTWeakZone::AENTWeakZone()
 	BlackAndWhiteShader = CreateDefaultSubobject<UPostProcessComponent>(TEXT("Black and White Shader"));
 	BlackAndWhiteShader->SetupAttachment(RootComponent);
 
+	WeakZonePostProcess = CreateDefaultSubobject<UPostProcessComponent>(TEXT("WeakZonePostProcess"));
+	WeakZonePostProcess->SetupAttachment(BoxComponent);
+	WeakZonePostProcess->SetMobility(EComponentMobility::Static);
+	WeakZonePostProcess->bUnbound = false;
+
 #if WITH_EDITORONLY_DATA
 	BillboardComponent = CreateDefaultSubobject<UBillboardComponent>(TEXT("Billboard"));
 	BillboardComponent->SetupAttachment(RootComponent);

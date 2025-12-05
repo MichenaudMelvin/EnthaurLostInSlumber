@@ -213,12 +213,6 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 			return;
 		}
 
-		if (Character->GetStateMachine())
-		{
-			// play the spike animation
-			Character->GetStateMachine()->ChangeState(EENTCharacterStateID::Anim);
-		}
-
 		bIsEmpty = !bIsEmpty;
 		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
 		Character->UseAmber();
@@ -241,12 +235,6 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		if (Character->HasAmber())
 		{
 			return;
-		}
-
-		if (Character->GetStateMachine())
-		{
-			// play the spike animation
-			Character->GetStateMachine()->ChangeState(EENTCharacterStateID::Anim);
 		}
 
 		AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
