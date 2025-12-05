@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ENTCustomDebugCamera.h"
+
+#include "AkComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PlayerInput.h"
@@ -42,6 +44,15 @@ void AENTCustomDebugCamera::BeginPlay()
 
 	bShowTeleportLocation = false;
 	ToggleDisplay();
+
+	if (PlayerCameraManager)
+	{
+		UActorComponent* ActorComp = PlayerCameraManager->GetComponentByClass(UAkComponent::StaticClass());
+		if (ActorComp)
+		{
+			ActorComp->DestroyComponent();
+		}
+	}
 }
 
 void AENTCustomDebugCamera::Tick(float DeltaSeconds)
