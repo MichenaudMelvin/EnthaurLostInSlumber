@@ -667,6 +667,13 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
+								<Action Name="" ID="{93A254F9-00A3-4FD3-9579-AB224C22C849}" ShortID="887318355">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Parasite_Scream" ID="{A6763540-478E-431B-B5E6-0540BBFA22C4}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
 							</ChildrenList>
 						</Event>
 						<Event Name="AKE_PickUp_Lantern" ID="{9355424F-E3B7-45F8-BA36-21EEA99150D3}">
@@ -952,6 +959,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="PR_Attack_Kill" ID="{7F2D219D-E1E6-41EB-8C1A-456B680A8FD9}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_Spasm" ID="{2BFFD8F3-375D-4536-AB21-C2BC9E98720E}">
+							<ChildrenList>
+								<Action Name="" ID="{C63072F1-F345-4ED2-B06C-C1B5AE3ED75A}" ShortID="589208306">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Parasite_Spasm" ID="{54A4415E-E037-4A33-82FD-11A605D2E3EF}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

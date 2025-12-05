@@ -543,6 +543,11 @@
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>8</Value>
+									</ValueList>
+								</Property>
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 							</PropertyList>
 							<ReferenceList>
@@ -1302,8 +1307,19 @@
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
 										<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="10"/>
+										<Property Name="UseMaxSoundPerInstance" Type="bool">
+											<ValueList>
+												<Value>True</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -2089,6 +2105,11 @@
 								</RandomSequenceContainer>
 								<Sound Name="SFX_Parasite_Move" ID="{A6E3CD69-148E-4DD8-A9E5-5DA844BCC1E4}" ShortID="27143491">
 									<PropertyList>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
 										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
@@ -2119,7 +2140,7 @@
 										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>4</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideEarlyReflections" Type="bool" Value="True"/>
@@ -2515,7 +2536,7 @@
 										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
 											<ValueList>
-												<Value>4</Value>
+												<Value>2</Value>
 											</ValueList>
 										</Property>
 										<Property Name="OverrideEarlyReflections" Type="bool" Value="True"/>
@@ -2785,16 +2806,16 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="SFX_Parasite_Bite" ID="{1A566DCD-D49A-4D78-B4C3-6EB1D078A616}">
+								<AudioFileSource Name="SFX_Parasite_Bite_V2" ID="{9ED10451-C4FA-4C97-A5A5-17F1A3BCB9F1}">
 									<Language>SFX</Language>
-									<AudioFile>SFX_Parasite_Bite.wav</AudioFile>
+									<AudioFile>SFX_Parasite_Bite_V2.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="835898656"/>
+										<MediaID ID="572498536"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="SFX_Parasite_Bite" ID="{1A566DCD-D49A-4D78-B4C3-6EB1D078A616}" Platform="Linked"/>
+								<ActiveSource Name="SFX_Parasite_Bite_V2" ID="{9ED10451-C4FA-4C97-A5A5-17F1A3BCB9F1}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="PR_Attack_Kill" ID="{7F2D219D-E1E6-41EB-8C1A-456B680A8FD9}" ShortID="311640265">
@@ -2816,9 +2837,6 @@
 									</ModifierList>
 								</Property>
 								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>12</Value>
-									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
 											<Modifier Name="" ID="{C24A5730-BE4B-45E8-9FE6-AC17837E2D15}">
@@ -2851,6 +2869,132 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="PR_Attack_Kill" ID="{6BE6072A-A450-463B-AD51-D5C7A8245EDB}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Parasite_Spasm" ID="{54A4415E-E037-4A33-82FD-11A605D2E3EF}" ShortID="856689442">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-4</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<Custom>
+										<Attenuation Name="Attenuation (Custom)" ID="{256C84AB-7579-4922-B36D-13107633FB1B}" ShortID="635235488">
+											<PropertyList>
+												<Property Name="RadiusMax" Type="Real64" Value="5000"/>
+											</PropertyList>
+											<CurveUsageInfoList>
+												<VolumeDryUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+														<Curve Name="VolumeDry" ID="{93642D54-D782-471A-A72B-B7B9F97B801C}">
+															<PropertyList>
+																<Property Name="Flags" Type="int32" Value="3"/>
+															</PropertyList>
+															<PointList>
+																<Point>
+																	<XPos>0</XPos>
+																	<YPos>0</YPos>
+																	<Flags>5</Flags>
+																	<SegmentShape>Exp2</SegmentShape>
+																</Point>
+																<Point>
+																	<XPos>5000</XPos>
+																	<YPos>-200</YPos>
+																	<Flags>37</Flags>
+																</Point>
+															</PointList>
+														</Curve>
+													</CurveUsageInfo>
+												</VolumeDryUsage>
+												<VolumeWetGameUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+												</VolumeWetGameUsage>
+												<VolumeWetUserUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+												</VolumeWetUserUsage>
+												<LowPassFilterUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+												</LowPassFilterUsage>
+												<HighPassFilterUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+												</HighPassFilterUsage>
+												<SpreadUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+												</SpreadUsage>
+												<FocusUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+												</FocusUsage>
+												<ObstructionVolumeUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</ObstructionVolumeUsage>
+												<ObstructionLPFUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</ObstructionLPFUsage>
+												<ObstructionHPFUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</ObstructionHPFUsage>
+												<OcclusionVolumeUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</OcclusionVolumeUsage>
+												<OcclusionLPFUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</OcclusionLPFUsage>
+												<OcclusionHPFUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</OcclusionHPFUsage>
+												<DiffractionVolumeUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</DiffractionVolumeUsage>
+												<DiffractionLPFUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</DiffractionLPFUsage>
+												<DiffractionHPFUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</DiffractionHPFUsage>
+												<TransmissionVolumeUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</TransmissionVolumeUsage>
+												<TransmissionLPFUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</TransmissionLPFUsage>
+												<TransmissionHPFUsage>
+													<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+												</TransmissionHPFUsage>
+											</CurveUsageInfoList>
+										</Attenuation>
+									</Custom>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Parasite_Spasm" ID="{ABF7ABD9-81F9-4650-8EAA-B5379C160217}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Parasite_Spasm.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="279247395"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="SFX_Parasite_Spasm_V2" ID="{F717717B-1CA8-4695-B6AE-3F18EB532ADD}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Parasite_Spasm_V2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="69834055"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Parasite_Spasm_V2" ID="{F717717B-1CA8-4695-B6AE-3F18EB532ADD}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>

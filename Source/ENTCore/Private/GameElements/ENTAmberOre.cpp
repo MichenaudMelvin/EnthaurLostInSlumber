@@ -10,6 +10,7 @@
 #include "GameElements/ENTNerveReceptacle.h"
 #include "GameElements/ENTWeakZone.h"
 #include "Interface/ENTActivation.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/ENTDefaultCharacter.h"
@@ -55,8 +56,8 @@ AENTAmberOre::AENTAmberOre()
 void AENTAmberOre::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	Interactable->AddInteractable(MeshInteraction);
+
+	if (!bIsEmpty) Interactable->AddInteractable(MeshInteraction);
 	Interactable->OnInteract.AddDynamic(this, &AENTAmberOre::OnInteract);
 
 #if WITH_EDITORONLY_DATA
@@ -95,6 +96,17 @@ void AENTAmberOre::BeginPlay()
 	UpdateEvent.BindDynamic(this, &AENTAmberOre::FillAmberUpdate);
 	FillAmberTimeline.AddInterpFloat(FillAmberCurve, UpdateEvent);
 	FillAmberTimeline.SetPlayRate(1 / FillAmberDuration);
+
+	ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
+	if (!PlayerCharacter)
+	{
+		return;
+	}
+	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(PlayerCharacter);
+	if (!Player->OnAmberUpdate.IsAlreadyBound(this, &AENTAmberOre::OnPlayerAmberUpdate))
+	{
+		Player->OnAmberUpdate.AddDynamic(this, &AENTAmberOre::OnPlayerAmberUpdate);
+	}
 }
 
 void AENTAmberOre::OnConstruction(const FTransform& Transform)
@@ -207,6 +219,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 			Character->GetStateMachine()->ChangeState(EENTCharacterStateID::Anim);
 		}
 
+		bIsEmpty = !bIsEmpty;
 		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
 		Character->UseAmber();
 
@@ -215,7 +228,6 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		TargetAmberHeight = FullAmberHeight;
 		Interactable->RemoveInteractable(MeshInteraction);
 		FillAmberTimeline.PlayFromStart();
-		bIsEmpty = !bIsEmpty;
 		OnFillAmber.Broadcast();
 
 		UAkGameplayStatics::PostEventAtLocation(FoliageGrowthNoise, GetTransform().GetLocation(),GetTransform().Rotator(), this);
@@ -238,6 +250,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		}
 
 		AmberOreNoises->PostAssociatedAkEvent(0, FOnAkPostEventCallback());
+		bIsEmpty = !bIsEmpty;
 		Character->MineAmber();
 		TargetAmberHeight = EmptyAmberHeight;
 		TriggerEmptyLinkedObjects();
@@ -245,7 +258,6 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		Interactable->RemoveInteractable(MeshInteraction);
 		FillAmberTimeline.PlayFromStart();
 		FoliageTimeline.Reverse();
-		bIsEmpty = !bIsEmpty;
 		OnEmptyAmber.Broadcast();
 
 		if (LinkedWeakZone)LinkedWeakZone->CorruptZone(this);
@@ -259,6 +271,20 @@ void AENTAmberOre::FillAmberUpdate(float Alpha)
 
 	FVector ResultLocation = FMath::Lerp(CurrentLocation, TargetLocation, Alpha);
 	AmberMesh->SetRelativeLocation(ResultLocation);
+}
+
+void AENTAmberOre::OnPlayerAmberUpdate(bool bHasAmber)
+{
+	if (bHasAmber)
+	{
+		if (bIsEmpty) Interactable->AddInteractable(MeshInteraction);
+		else Interactable->RemoveInteractable(MeshInteraction);
+	}
+	else
+	{
+		if (bIsEmpty) Interactable->RemoveInteractable(MeshInteraction);
+		else Interactable->AddInteractable(MeshInteraction);
+	}
 }
 
 

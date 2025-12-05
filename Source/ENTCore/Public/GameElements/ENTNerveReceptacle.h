@@ -40,6 +40,9 @@ protected:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+	UFUNCTION()
+	void OnHoldStateChanged(bool bIsHolding);
+
 #if WITH_EDITORONLY_DATA
 	virtual void OnConstruction(const FTransform& Transform) override;
 #endif
@@ -96,6 +99,8 @@ private:
 	TObjectPtr<AENTNerve> LinkedNerve;
 
 	bool IsConnected;
+
+	
 
 public:
 	void TriggerLinkedObjects(class AENTNerve* Nerve);

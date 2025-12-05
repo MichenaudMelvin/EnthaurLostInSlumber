@@ -46,6 +46,8 @@ protected:
 
 	FVector TargetLocation;
 
+	FVector EndLocationOffset;
+
 	FRotator TargetRotation;
 
 #pragma region WalkOnFloor

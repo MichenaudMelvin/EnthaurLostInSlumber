@@ -4,7 +4,6 @@
 #include "Player/States/ENTCharacterStopState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/ENTDefaultCharacter.h"
-#include "Player/ENTDefaultPlayerController.h"
 #include "Player/States/ENTCharacterStateMachine.h"
 
 UENTCharacterStopState::UENTCharacterStopState()
@@ -25,4 +24,28 @@ void UENTCharacterStopState::StateEnter_Implementation(const EENTCharacterStateI
 	Character->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	Character->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 	Character->GetCharacterMovement()->GravityScale = 0.0f;
+
+	StopTime = 0.0f;
+}
+
+void UENTCharacterStopState::StateTick_Implementation(float DeltaTime)
+{
+	Super::StateTick_Implementation(DeltaTime);
+
+	if (StopDuration < 0.0f)
+	{
+		return;
+	}
+
+	StopTime += DeltaTime;
+	if (StopTime >= StopDuration)
+	{
+		OnFinishStop.Broadcast();
+		StateMachine->ChangeState(EENTCharacterStateID::Idle);
+	}
+}
+
+void UENTCharacterStopState::SetStopDuration(float InStopDuration)
+{
+	StopDuration = InStopDuration;
 }

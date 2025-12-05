@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{4147AFA7-D057-FDB9-5C56-97499C6602D2}",
+    "Hash": "{AD89FF2B-5968-407E-5C7C-0E55224FC5B6}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -338,6 +338,18 @@
         "Name": "SW_To_High",
         "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_High",
         "GUID": "{F61A1368-80C7-4383-81A9-379E062A96A9}"
+       },
+       {
+        "Id": "3202712997",
+        "Name": "SW_To_Menu",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Menu",
+        "GUID": "{CD833132-3790-4CD0-B412-4AD310D62540}"
+       },
+       {
+        "Id": "3859114701",
+        "Name": "SW_Stop_Med",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_Stop_Med",
+        "GUID": "{E1F1724F-5C9C-4A13-8BFC-3BBA3AC3CA5B}"
        }
       ]
      },
@@ -867,6 +879,6 @@
     ]
    }
   ],
-  "FileHash": "{6BDF8114-4B34-1246-612E-D8EB348B7B98}"
+  "FileHash": "{C04FC70E-D1B6-953E-74F0-7EBFF542BE20}"
  }
 }

@@ -20,6 +20,8 @@
 #include "Player/ENTDefaultCharacter.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 
+FKOnHoldStateUpdateStatic AENTNerve::OnHoldStateUpdate;
+
 AENTNerve::AENTNerve()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -655,6 +657,8 @@ void AENTNerve::AttachNerveBall(AActor* ActorToAttach)
 
 	bShouldApplyCablePhysics = true;
 
+	OnHoldStateUpdate.Broadcast(bIsHolding);
+
 	FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, false);
 	NerveBall->AttachToComponent(ActorToAttach->GetRootComponent(), Rules);
 	NerveBall->SetRelativeLocation(GetDefault<UENTCoreConfig>()->PawnGrabObjectOffset);
@@ -673,6 +677,7 @@ void AENTNerve::DetachNerveBall(bool bForceDetachment)
 	bShouldApplyCablePhysics = false;
 
 	bIsHolding = false;
+	OnHoldStateUpdate.Broadcast(bIsHolding);
 
 	FAttachmentTransformRules Rules(EAttachmentRule::KeepWorld, true);
 	NerveBall->AttachToComponent(RootComponent, Rules);

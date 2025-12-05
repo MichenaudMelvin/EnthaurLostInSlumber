@@ -23,6 +23,8 @@ class AENTNerveReceptacle;
 class UENTPhysicConstraint;
 class UENTInteractableComponent;
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FKOnHoldStateUpdateStatic, bool);
+
 UCLASS()
 class ENTCORE_API AENTNerve : public AActor, public IENTWeakZoneInterface, public IENTSaveGameElementInterface
 {
@@ -156,6 +158,8 @@ protected:
 	void FinishRetractCable();
 
 public:
+	static FKOnHoldStateUpdateStatic OnHoldStateUpdate;
+	
 	FVector GetLastCableLocation(const ESplineCoordinateSpace::Type& CoordinateSpace = ESplineCoordinateSpace::World) const;
 
 	float GetCableLength() const;
