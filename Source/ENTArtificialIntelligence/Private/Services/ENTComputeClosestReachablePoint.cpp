@@ -70,7 +70,7 @@ void UENTComputeClosestReachablePoint::OnBecomeRelevant(UBehaviorTreeComponent& 
 	}
 
 	FNavLocation Result;
-	if (!NavSystem->ProjectPointToNavigation(TargetPoint, Result, QueryExtent))
+	if (!NavSystem->ProjectPointToNavigation(TargetPoint, Result, FVector(QueryExtent)))
 	{
 		return;
 	}

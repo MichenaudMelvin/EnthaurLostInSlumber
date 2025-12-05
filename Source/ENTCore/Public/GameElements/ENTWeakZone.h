@@ -9,6 +9,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTWeakZone.generated.h"
 
+class ALight;
 class UENTElectricityComponent;
 class UAkAudioEvent;
 
@@ -91,6 +92,32 @@ protected:
 
 	UPROPERTY(BlueprintAssignable, Category = "WeakZone")
 	FOnCorrupt OnCorrupt;
+
+	/**
+	 * @brief Lights that will be shown when the zone is cured (will be hidden when corrupted)
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<ALight>> CuredLights;
+
+	/**
+	 * @brief Lights that will be shown when the zone is corrupted (will be hidden when cured)
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<ALight>> CorruptedLights;
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Debug value to display the cured lights
+	 */
+	UPROPERTY(EditInstanceOnly, Transient, Category = "WeakZone")
+	bool bShowCuredLights = false;
+#endif
+
+	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
+	TArray<float> CuredLightsIntensity;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
+	TArray<float> CorruptedLightsIntensity;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")

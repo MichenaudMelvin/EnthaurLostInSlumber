@@ -32,8 +32,8 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Point")
 	FBlackboardKeySelector ClosestPoint;
 
-	UPROPERTY(EditInstanceOnly, Category = "Point")
-	FVector QueryExtent = FVector(100.0f);
+	UPROPERTY(EditInstanceOnly, Category = "Point", meta = (Units = cm, ClampMin = 0.0f))
+	float QueryExtent = 100.0f;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")

@@ -5,8 +5,10 @@
 #include "AkGameplayStatics.h"
 #include "ENTElectricityComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/LightComponent.h"
 #include "Components/PostProcessComponent.h"
 #include "Config/ENTCoreConfig.h"
+#include "Engine/Light.h"
 #include "Player/ENTDefaultCharacter.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
@@ -63,6 +65,27 @@ void AENTWeakZone::BeginPlay()
 	UpdateEvent.Unbind();
 
 	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTWeakZone::OnElectricityMovementFinished);
+
+	for (TObjectPtr<ALight> Light : CuredLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		Light->GetLightComponent()->SetVisibility(true);
+		Light->GetLightComponent()->SetIntensity(0.0f);
+	}
+
+	for (TObjectPtr<ALight> Light : CorruptedLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		Light->GetLightComponent()->SetVisibility(true);
+	}
 }
 
 void AENTWeakZone::OnConstruction(const FTransform& Transform)
@@ -81,6 +104,36 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 	}
 
 	ChangeZoneSize(ZoneSize);
+
+	CuredLightsIntensity.Empty();
+	for (TObjectPtr<ALight> Light : CuredLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		CuredLightsIntensity.Add(Light->GetLightComponent()->Intensity);
+
+#if WITH_EDITORONLY_DATA
+		Light->GetLightComponent()->SetVisibility(bShowCuredLights);
+#endif
+	}
+
+	CorruptedLightsIntensity.Empty();
+	for (TObjectPtr<ALight> Light : CorruptedLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		CorruptedLightsIntensity.Add(Light->GetLightComponent()->Intensity);
+
+#if WITH_EDITORONLY_DATA
+		Light->GetLightComponent()->SetVisibility(!bShowCuredLights);
+#endif
+	}
 }
 
 void AENTWeakZone::Tick(float DeltaSeconds)
@@ -172,11 +225,37 @@ void AENTWeakZone::CureUpdate(float Alpha)
 {
 	float ScalarParam = FMath::Lerp(1.0f, 0.0f, Alpha);
 	DynamicZoneMaterial->SetScalarParameterValue(CureParam, ScalarParam);
+
+	int CuredLightIndex = 0;
+	for (TObjectPtr<ALight> Light : CuredLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		if (CuredLightsIntensity.IsValidIndex(CuredLightIndex))
+		{
+			Light->GetLightComponent()->SetIntensity(FMath::Lerp(0.0f, CuredLightsIntensity[CuredLightIndex++], Alpha));
+		}
+	}
+
+	int CorruptedLightIndex = 0;
+	for (TObjectPtr<ALight> Light : CorruptedLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		if (CorruptedLightsIntensity.IsValidIndex(CorruptedLightIndex))
+		{
+			Light->GetLightComponent()->SetIntensity(FMath::Lerp(CorruptedLightsIntensity[CorruptedLightIndex++], 0.0f, Alpha));
+		}
+	}
 }
 
-void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-                                      UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
-                                      const FHitResult& SweepResult)
+void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor->Implements<UENTWeakZoneInterface>())
 	{
@@ -184,8 +263,7 @@ void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 	}
 }
 
-void AENTWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-                                    UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AENTWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	if (OtherActor->Implements<UENTWeakZoneInterface>())
 	{
@@ -224,7 +302,6 @@ void AENTWeakZone::CorruptZone(AActor* StartCorruptPoint)
 	OnCorrupt.Broadcast();
 	CreateZone();
 }
-
 
 void AENTWeakZone::ActivateZone(bool bActivateZone)
 {
