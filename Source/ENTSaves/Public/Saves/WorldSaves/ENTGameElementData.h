@@ -32,11 +32,14 @@ struct ENTSAVES_API FENTNerveData : public FENTGameElementData
 	/**
 	 * @brief In local space
 	 */
-	UPROPERTY(BlueprintReadWrite, Category= "Nerve")
+	UPROPERTY(BlueprintReadWrite, Category = "Nerve")
 	TArray<FVector> SplinePointsLocations;
 
-	UPROPERTY(BlueprintReadWrite, Category= "Nerve")
+	UPROPERTY(BlueprintReadWrite, Category = "Nerve")
 	TArray<FVector> ImpactNormals;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Nerve")
+	FString LinkedReceptacle;
 };
 
 USTRUCT(BlueprintType, Category = "SaveData")

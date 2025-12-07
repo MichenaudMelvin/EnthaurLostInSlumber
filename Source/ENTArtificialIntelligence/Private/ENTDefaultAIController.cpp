@@ -95,6 +95,7 @@ void AENTDefaultAIController::Destroyed()
 		AISubsystem->RemoveAI(this);
 	}
 }
+
 void AENTDefaultAIController::TickAI_Implementation(float DeltaTime)
 {
 	IENTArtificialIntelligenceInterface::TickAI_Implementation(DeltaTime);

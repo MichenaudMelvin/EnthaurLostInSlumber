@@ -144,6 +144,7 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 void AENTWeakZone::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
 	CureTimeline.TickTimeline(DeltaSeconds);
 }
 
@@ -170,7 +171,11 @@ void AENTWeakZone::InitZone()
 
 void AENTWeakZone::DestroyZone()
 {
-	if (!BoxComponent) return;
+	if (!BoxComponent)
+	{
+		return;
+	}
+
 	TArray<AActor*> OverlappingActors;
 	BoxComponent->GetOverlappingActors(OverlappingActors);
 
@@ -188,12 +193,15 @@ void AENTWeakZone::DestroyZone()
 	}
 
 	bIsZoneActive = false;
-	//BoxComponent->DestroyComponent();
 }
 
 void AENTWeakZone::CreateZone()
 {
-	if (!BoxComponent) return;
+	if (!BoxComponent)
+	{
+		return;
+	}
+
 	TArray<AActor*> OverlappingActors;
 	BoxComponent->GetOverlappingActors(OverlappingActors);
 
@@ -212,7 +220,6 @@ void AENTWeakZone::CreateZone()
 
 	bIsZoneActive = true;
 }
-
 
 void AENTWeakZone::ChangeZoneSize(const FVector& NewSize)
 {
@@ -330,13 +337,11 @@ FENTGameElementData& AENTWeakZone::SaveGameElement(UENTWorldSave* CurrentWorldSa
 void AENTWeakZone::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
 	const FENTWeakZoneData& Data = static_cast<const FENTWeakZoneData&>(GameElementData);
-	if (!Data.bIsActive) CureZone(nullptr);
+	bIsZoneActive = Data.bIsActive;
+	bIsZoneActive ? CreateZone() : CureZone(nullptr);
 }
 
 void AENTWeakZone::OnElectricityMovementFinished()
 {
-	if (!bIsZoneActive)
-		CureTimeline.Play();
-	else
-		CureTimeline.Reverse();
+	bIsZoneActive ? CureTimeline.Reverse() : CureTimeline.Play();
 }

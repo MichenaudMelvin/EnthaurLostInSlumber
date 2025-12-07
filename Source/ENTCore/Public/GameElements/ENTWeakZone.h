@@ -64,9 +64,15 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void InitZone();
 
+	/**
+	 * @brief When zone is destroyed, the box changes size and overlapping actors are notified that they exit the weak zone
+	 */
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
 
+	/**
+	 * @brief When zone is created, the box changes size and overlapping actors are notified that they entered the weak zone
+	 */
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void CreateZone();
 

@@ -15,8 +15,10 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Player/ENTDefaultCharacter.h"
 #include "Player/States/ENTCharacterStateMachine.h"
+#include "Saves/ENTPlayerSave.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
+#include "Subsystems/ENTPlayerSaveSubsystem.h"
 
 AENTAmberOre::AENTAmberOre()
 {
@@ -61,7 +63,6 @@ void AENTAmberOre::BeginPlay()
 	Interactable->OnInteract.AddDynamic(this, &AENTAmberOre::OnInteract);
 
 #if WITH_EDITORONLY_DATA
-
 	if (!Foliage)
 	{
 		return;
@@ -80,7 +81,10 @@ void AENTAmberOre::BeginPlay()
 
 #endif
 
-	bShouldFoliagePlay = bIsEmpty;
+	if (!bIsLoaded)
+	{
+		bShouldFoliagePlay = bIsEmpty;
+	}
 
 	FOnTimelineFloat UpdateEvent;
 	FOnTimelineEvent FinishedEvent;
@@ -102,6 +106,7 @@ void AENTAmberOre::BeginPlay()
 	{
 		return;
 	}
+
 	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(PlayerCharacter);
 	if (!Player->OnAmberUpdate.IsAlreadyBound(this, &AENTAmberOre::OnPlayerAmberUpdate))
 	{
@@ -282,7 +287,7 @@ void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
 	{
 		return;
 	}
-	
+
 	FVector TargetScale = UKismetMathLibrary::VLerp(FVector::ZeroVector, FoliageScale, Alpha);
 
 	for (int32 i = 0; i < Foliage->GetInstanceCount(); i++)
@@ -293,7 +298,7 @@ void AENTAmberOre::FoliageGrowthUpdate(float Alpha)
 
 		Foliage->UpdateInstanceTransform(i, InstanceTransform, true, false, false);
 	}
-	
+
 	Foliage->MarkRenderStateDirty();
 }
 
@@ -350,10 +355,31 @@ FENTGameElementData& AENTAmberOre::SaveGameElement(UENTWorldSave* CurrentWorldSa
 
 void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
+	bShouldFoliagePlay = bIsEmpty;
+
 	const FENTAmberOreData& Data = static_cast<const FENTAmberOreData&>(GameElementData);
+
 	bIsEmpty = Data.bIsEmpty;
-	TargetAmberHeight = bIsEmpty? EmptyAmberHeight : FullAmberHeight;
+	TargetAmberHeight = bIsEmpty ? EmptyAmberHeight : FullAmberHeight;
 	FVector ResultLocation = AmberMesh->GetRelativeLocation();
 	ResultLocation.Z = TargetAmberHeight;
 	AmberMesh->SetRelativeLocation(ResultLocation);
+
+	TriggerEmptyLinkedObjects();
+	TriggerFullLinkedObjects();
+
+	if (bShouldFoliagePlay && !bIsEmpty)
+	{
+		FoliageTimeline.PlayFromStart();
+	}
+
+	bIsLoaded = true;
+
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
+	{
+		return;
+	}
+
+	OnPlayerAmberUpdate(PlayerSaveSubsystem->GetPlayerSave()->bHasAmber);
 }

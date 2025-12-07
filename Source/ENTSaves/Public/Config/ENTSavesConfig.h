@@ -14,6 +14,9 @@ class ENTSAVES_API UENTSavesConfig : public UDeveloperSettings
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, Category = "WorldSave")
+	bool bSaveAfterLeaveALevel = true;
+
 	/**
 	 * @brief The very first gameplay of the game
 	 */
