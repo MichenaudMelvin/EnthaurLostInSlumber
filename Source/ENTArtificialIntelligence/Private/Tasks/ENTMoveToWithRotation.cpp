@@ -92,6 +92,24 @@ void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* 
 
 		FVector EndDirection = StartLocation + (Direction * LineLength);
 
+		FVector MoveToLocation;
+		UBlackboardComponent* BlackboardComponent = OwnerComp.GetBlackboardComponent();
+		if (BlackboardComponent && BlackboardKey.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+		{
+			UObject* KeyValue = BlackboardComponent->GetValue<UBlackboardKeyType_Object>(BlackboardKey.GetSelectedKeyID());
+			AActor* TargetActor = Cast<AActor>(KeyValue);
+			if (TargetActor)
+			{
+				MoveToLocation = TargetActor->GetActorLocation();
+			}
+		}
+		else if (BlackboardComponent && BlackboardKey.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+		{
+			MoveToLocation = BlackboardComponent->GetValue<UBlackboardKeyType_Vector>(BlackboardKey.GetSelectedKeyID());
+		}
+
+		UKismetSystemLibrary::DrawDebugPoint(this, MoveToLocation, 15.0f, FLinearColor::Red, 0.0f);
+
 		UKismetSystemLibrary::DrawDebugLine(this, StartLocation, EndForwardLocation, FLinearColor::Red, 0.0f, 5.0f);
 		UKismetSystemLibrary::DrawDebugLine(this, StartLocation, EndRightLocation, FLinearColor::Green, 0.0f, 5.0f);
 		UKismetSystemLibrary::DrawDebugLine(this, StartLocation, EndUpLocation, FLinearColor::Blue, 0.0f, 5.0f);
