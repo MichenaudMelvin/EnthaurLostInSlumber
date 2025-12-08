@@ -305,8 +305,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Character")
 	void StopCharacter(float StopDuration = -1.0f) const;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure,Category = "Character")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
 	bool IsStopped() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	bool IsMoving(bool bIgnoreZMovement = false);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Character")
+	bool IsMovingOnGround();
 
 	AENTDefaultPlayerController* GetPlayerController() const {return FirstPersonController;}
 

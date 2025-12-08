@@ -46,7 +46,7 @@ protected:
 
 	float FootstepsDelay = 0.0f;
 
-	void PlayFootstepNoise(float DeltaTime);
+	virtual void PlayFootstepNoise(float DeltaTime);
 
 #pragma endregion
 
