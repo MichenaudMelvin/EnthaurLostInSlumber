@@ -26,7 +26,6 @@ enum class EENTCharacterStateID : uint8
 	Fall,
 	Interact,
 	Stop,
-	Anim,
 	LookAt,
 };
 

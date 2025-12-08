@@ -92,6 +92,22 @@ UENTDefaultSave* UENTWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 		}
 	}
 
+	CurrentWorldSave->SublevelsNames.Empty();
+	for (ULevelStreaming* StreamingLevel : GetWorld()->GetStreamingLevels())
+	{
+		if (!StreamingLevel->IsLevelLoaded())
+		{
+			continue;
+		}
+
+		if (!StreamingLevel->GetWorldAsset())
+		{
+			continue;
+		}
+
+		CurrentWorldSave->SublevelsNames.Add(StreamingLevel->GetWorldAsset()->GetFName());
+	}
+
 	TArray<AActor*> Actors;
 	UGameplayStatics::GetAllActorsOfClass(this, AActor::StaticClass(), Actors);
 
@@ -228,14 +244,80 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		return;
 	}
 
+	LoadedLevelIndex = 0;
+	bLoadedPlayer = false;
+	UnloadSublevels();
+
+	CurrentWorldSave->SublevelsNames.IsEmpty() ? FinishLoading() : LoadSublevels();
+}
+
+void UENTWorldSaveSubsystem::UnloadSublevels()
+{
+	for (ULevelStreaming* StreamingLevel : GetWorld()->GetStreamingLevels())
+	{
+		if (!StreamingLevel->GetWorldAsset())
+		{
+			continue;
+		}
+
+		bool bFindLevel = false;
+		for (const FName& SublevelName : CurrentWorldSave->SublevelsNames)
+		{
+			if (SublevelName == StreamingLevel->GetWorldAsset()->GetFName())
+			{
+				bFindLevel = true;
+				break;
+			}
+		}
+
+		if (!bFindLevel)
+		{
+			UGameplayStatics::UnloadStreamLevel(this, StreamingLevel->GetWorldAsset()->GetFName(), FLatentActionInfo(), false);
+		}
+	}
+}
+
+void UENTWorldSaveSubsystem::LoadSublevels()
+{
+	if (!CurrentWorldSave)
+	{
+		return;
+	}
+
+	FLatentActionInfo LatentActionInfo;
+	LatentActionInfo.Linkage = 0;
+	LatentActionInfo.UUID = LoadedLevelIndex;
+	LatentActionInfo.CallbackTarget = this;
+	LatentActionInfo.ExecutionFunction = CurrentWorldSave->SublevelsNames.Num() == LoadedLevelIndex + 1 ? "FinishLoading" : "LoadSublevels";
+
+	UGameplayStatics::LoadStreamLevel(this, CurrentWorldSave->SublevelsNames[LoadedLevelIndex++], true, false, LatentActionInfo);
+}
+
+void UENTWorldSaveSubsystem::FinishLoading()
+{
 	TArray<AActor*> Actors;
 	UGameplayStatics::GetAllActorsOfClass(this, AActor::StaticClass(), Actors);
+
+	APawn* Player = UGameplayStatics::GetPlayerPawn(this, 0);
 
 	// done before any BeginPlay()
 	for (AActor* Actor : Actors)
 	{
 		if (!Actor->Implements<UENTSaveGameElementInterface>())
 		{
+			continue;
+		}
+
+		if (Player == Actor)
+		{
+			if (!bLoadedPlayer)
+			{
+				FENTGameElementData EmptyData;
+				Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(EmptyData, CurrentWorldSave);
+				IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+				bLoadedPlayer = true;
+			}
+
 			continue;
 		}
 
@@ -313,6 +395,11 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 {
 	GetWorld()->OnWorldBeginPlay.Remove(WorldBeginPlayDelegateHandle);
 
+	if (bLoadedPlayer)
+	{
+		return;
+	}
+
 	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
 	if (!Character)
 	{
@@ -327,10 +414,23 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 	FENTGameElementData EmptyData;
 	Cast<IENTSaveGameElementInterface>(Character)->LoadGameElement(EmptyData, CurrentWorldSave);
 	IENTSaveGameElementInterface::Execute_LoadGameElementBP(Character, CurrentWorldSave);
+
+	bLoadedPlayer = true;
 }
 
 void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)
 {
+	const UENTSavesConfig* Config = GetDefault<UENTSavesConfig>();
+	if (!Config)
+	{
+		return;
+	}
+
+	if (!Config->bSaveAfterLeaveALevel)
+	{
+		return;
+	}
+
 	if (!World)
 	{
 		return;

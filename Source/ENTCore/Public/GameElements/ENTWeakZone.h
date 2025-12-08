@@ -9,6 +9,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTWeakZone.generated.h"
 
+class ALight;
 class UENTElectricityComponent;
 class UAkAudioEvent;
 
@@ -43,6 +44,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
 	TObjectPtr<UPostProcessComponent> BlackAndWhiteShader;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
+	TObjectPtr<UPostProcessComponent> WeakZonePostProcess;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Electricity")
 	TObjectPtr<UENTElectricityComponent> ElectricityComponent;
 
@@ -60,9 +64,15 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void InitZone();
 
+	/**
+	 * @brief When zone is destroyed, the box changes size and overlapping actors are notified that they exit the weak zone
+	 */
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
 
+	/**
+	 * @brief When zone is created, the box changes size and overlapping actors are notified that they entered the weak zone
+	 */
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void CreateZone();
 
@@ -91,6 +101,32 @@ protected:
 
 	UPROPERTY(BlueprintAssignable, Category = "WeakZone")
 	FOnCorrupt OnCorrupt;
+
+	/**
+	 * @brief Lights that will be shown when the zone is cured (will be hidden when corrupted)
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<ALight>> CuredLights;
+
+	/**
+	 * @brief Lights that will be shown when the zone is corrupted (will be hidden when cured)
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<ALight>> CorruptedLights;
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Debug value to display the cured lights
+	 */
+	UPROPERTY(EditInstanceOnly, Transient, Category = "WeakZone")
+	bool bShowCuredLights = false;
+#endif
+
+	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
+	TArray<float> CuredLightsIntensity;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
+	TArray<float> CorruptedLightsIntensity;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")

@@ -37,7 +37,7 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace, Units = cm))
 	float GroundTraceLength = 100.0f;
 
-	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace, Units = cm, clampin))
+	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace, Units = cm, ClampMin = 0.0f))
 	float GroundQueryExtent = 100.0f;
 
 	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace))

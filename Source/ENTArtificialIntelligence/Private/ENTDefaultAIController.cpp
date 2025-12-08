@@ -95,6 +95,7 @@ void AENTDefaultAIController::Destroyed()
 		AISubsystem->RemoveAI(this);
 	}
 }
+
 void AENTDefaultAIController::TickAI_Implementation(float DeltaTime)
 {
 	IENTArtificialIntelligenceInterface::TickAI_Implementation(DeltaTime);
@@ -115,7 +116,8 @@ bool AENTDefaultAIController::IsPointReachable(const FVector& Point, const FVect
 #if WITH_EDITORONLY_DATA
 	if (bDebugAI)
 	{
-		UKismetSystemLibrary::DrawDebugBox(this, Point, Extent, FLinearColor::Red, FRotator::ZeroRotator, 0.0f, 10.0f);
+		FLinearColor Color = bResult ? FLinearColor::Green : FLinearColor::Red;
+		UKismetSystemLibrary::DrawDebugBox(this, Point, Extent, Color, FRotator::ZeroRotator, 0.0f, 10.0f);
 
 		if (bResult)
 		{

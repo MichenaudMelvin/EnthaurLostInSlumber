@@ -18,6 +18,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "World")
 	FString WorldName;
 
+	UPROPERTY(BlueprintReadOnly, Category = "World")
+	TArray<FName> SublevelsNames;
+
 	virtual FString GetSlotName() const override {return WorldName + SlotName;}
 
 #pragma region MapData

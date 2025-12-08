@@ -13,6 +13,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Config/ENTCoreConfig.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMaterialLibrary.h"
 #include "Player/ENTDefaultPlayerController.h"
 #include "Player/States/ENTCharacterStateMachine.h"
@@ -651,8 +652,7 @@ void AENTNerve::ForceDetachNerveBallFromPlayer()
 
 void AENTNerve::AttachNerveBall(AActor* ActorToAttach)
 {
-	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	NerveBall->SetCollisionResponseToChannel(InteractionChannel, ECR_Block);
+	NerveBall->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	NerveBall->SetVisibility(false);
 
 	bShouldApplyCablePhysics = true;
@@ -745,7 +745,7 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 	}
 
 	PhysicConstraint->Init(this, Player);
-	
+
 	InteractableComponent->RemoveInteractable(NerveBall);
 
 	PlayerCharacter = Player;
@@ -812,7 +812,7 @@ void AENTNerve::OnExitWeakZone_Implementation()
 		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		CorruptNerveBlocker->SetCastShadow(false);
 	}
-	
+
 	EnterWeakZoneTimeline.Reverse();
 }
 
@@ -853,6 +853,13 @@ FENTGameElementData& AENTNerve::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 	}
 
 	Data.ImpactNormals = ImpactNormals;
+
+	if (CurrentAttachedReceptacle)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The integer value is: %d"), CurrentAttachedReceptacle->GetUniqueID());
+		Data.LinkedReceptacle = CurrentAttachedReceptacle.GetName();
+	}
+
 	return CurrentWorldSave->NerveData.Add(GetName(), Data);
 }
 
@@ -873,6 +880,23 @@ void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData, UENT
 	UpdateSplineMeshes(false, false);
 
 	ImpactNormals = Data.ImpactNormals;
+
+	TArray<AActor*> Receptacles;
+	UGameplayStatics::GetAllActorsOfClass(this, AENTNerveReceptacle::StaticClass(), Receptacles);
+
+	for (AActor* Actor : Receptacles)
+	{
+		AENTNerveReceptacle* Receptacle = Cast<AENTNerveReceptacle>(Actor);
+		if (!Receptacle)
+		{
+			continue;
+		}
+
+		if (Receptacle->GetName() == Data.LinkedReceptacle)
+		{
+			Receptacle->ConnectNerve(this, true);
+		}
+	}
 
 	bIsLoaded = true;
 }

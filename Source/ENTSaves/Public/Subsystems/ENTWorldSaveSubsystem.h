@@ -44,7 +44,19 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "World")
 	TObjectPtr<UENTWorldSave> CurrentWorldSave;
 
+	int32 LoadedLevelIndex = 0;
+
+	bool bLoadedPlayer = false;
+
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
+
+	void UnloadSublevels();
+
+	UFUNCTION()
+	void LoadSublevels();
+
+	UFUNCTION()
+	void FinishLoading();
 
 	void OnNewWorldBeginPlay();
 
