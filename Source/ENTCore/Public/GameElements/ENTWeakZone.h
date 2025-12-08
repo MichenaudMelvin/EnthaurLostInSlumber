@@ -96,6 +96,9 @@ protected:
 	UFUNCTION()
 	void CureUpdate(float Alpha);
 
+	UFUNCTION()
+	void CureFinish();
+
 	UPROPERTY(BlueprintAssignable, Category = "WeakZone")
 	FOnCure OnCure;
 

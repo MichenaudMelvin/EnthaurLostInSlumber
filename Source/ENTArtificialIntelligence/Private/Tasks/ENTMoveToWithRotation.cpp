@@ -92,7 +92,7 @@ void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* 
 
 		FVector EndDirection = StartLocation + (Direction * LineLength);
 
-		FVector MoveToLocation;
+		FVector MoveToLocation = FVector::ZeroVector;
 		UBlackboardComponent* BlackboardComponent = OwnerComp.GetBlackboardComponent();
 		if (BlackboardComponent && BlackboardKey.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
 		{
