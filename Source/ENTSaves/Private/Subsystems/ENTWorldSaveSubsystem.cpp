@@ -233,6 +233,15 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 	{
 		bCannotLoadWorld = true;
 	}
+	else
+	{
+#endif
+		if (GetWorld())
+		{
+			WorldBeginPlayDelegateHandle = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UENTWorldSaveSubsystem::OnNewWorldBeginPlay);
+		}
+#if WITH_EDITOR
+	}
 #endif
 
 	if (bCannotLoadWorld)
@@ -241,11 +250,6 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 	}
 
 	bFinishLoading = false;
-
-	if (GetWorld())
-	{
-		WorldBeginPlayDelegateHandle = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UENTWorldSaveSubsystem::OnNewWorldBeginPlay);
-	}
 
 	LoadedLevelIndex = 0;
 	bLoadedPlayer = false;
