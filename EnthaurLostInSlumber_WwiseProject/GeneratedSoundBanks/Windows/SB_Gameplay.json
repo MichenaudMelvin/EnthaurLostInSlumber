@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{80007E67-2C0E-BB82-29F5-F4B9E7BA3B66}",
+    "Hash": "{6CACB5A3-0DB6-CD84-BCA3-D2F3BE7FC5CA}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -982,7 +982,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Door_Open_Start.wav",
-      "CachePath": "71/{71FE1545-86F4-B94B-E183-07EBAD2209EA}.wem"
+      "CachePath": "40/{40356649-EFB5-5798-F879-A2D1333C1311}.wem"
      },
      {
       "Id": "590805685",
@@ -3392,6 +3392,6 @@
     ]
    }
   ],
-  "FileHash": "{776729EF-2378-7F13-B4DA-AAD5A9707B5F}"
+  "FileHash": "{A482BCE2-C503-9540-22F3-241BE39CF794}"
  }
 }
