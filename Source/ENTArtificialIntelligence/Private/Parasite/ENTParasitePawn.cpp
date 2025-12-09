@@ -212,6 +212,20 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 }
 #endif
 
+void AENTParasitePawn::FellOutOfWorld(const UDamageType& dmgType)
+{
+	// Super::FellOutOfWorld(dmgType);
+
+	if (bAllowRespawn)
+	{
+		RespawnParasite();
+	}
+	else
+	{
+		Destroy();
+	}
+}
+
 void AENTParasitePawn::RespawnParasite()
 {
 	if (!bAllowRespawn)

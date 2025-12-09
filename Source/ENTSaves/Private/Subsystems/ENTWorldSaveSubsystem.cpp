@@ -399,6 +399,7 @@ void UENTWorldSaveSubsystem::FinishLoading()
 	}
 
 	bFinishLoading = true;
+	OnFinishLoading.Broadcast(CurrentWorldSave);
 }
 
 void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()

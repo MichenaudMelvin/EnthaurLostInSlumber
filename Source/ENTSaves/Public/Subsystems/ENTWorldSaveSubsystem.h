@@ -8,6 +8,8 @@
 
 class UENTWorldSave;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnFinishLoading, UENTWorldSave*, WorldSave);
+
 UCLASS()
 class ENTSAVES_API UENTWorldSaveSubsystem : public UENTSaveSubsystem
 {
@@ -33,6 +35,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "World")
 	void DeleteAllWorldSaves(const int SaveIndex);
+
+	UPROPERTY(BlueprintAssignable, Category = "World")
+	FOnFinishLoading OnFinishLoading;
 
 protected:
 	FDelegateHandle WorldInitDelegateHandle;
