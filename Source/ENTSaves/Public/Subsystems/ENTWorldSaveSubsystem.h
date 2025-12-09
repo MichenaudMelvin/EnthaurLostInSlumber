@@ -48,6 +48,8 @@ protected:
 
 	bool bLoadedPlayer = false;
 
+	bool bFinishLoading = true;
+
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
 
 	void UnloadSublevels();

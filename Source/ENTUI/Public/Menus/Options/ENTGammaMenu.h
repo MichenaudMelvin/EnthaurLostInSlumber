@@ -20,8 +20,9 @@ class ENTUI_API UENTGammaMenu : public UENTWidgetBasics
 protected:
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
 	virtual void BeginDestroy() override;
-	
+
 	UFUNCTION()
 	void OnGammaSliderValueChanged(float InValue);
 	
@@ -29,13 +30,13 @@ protected:
 
 	UFUNCTION()
 	void OpenResetSettingsMenu();
-	
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UImage> GammaImage;
-	
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UENTCustomSlider> GammaSlider;
-	
+
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UTextBlock> GammaText;
 

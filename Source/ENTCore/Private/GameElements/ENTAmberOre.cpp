@@ -359,18 +359,23 @@ void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData, U
 
 	const FENTAmberOreData& Data = static_cast<const FENTAmberOreData&>(GameElementData);
 
+	bool bHasTheDefaultStatus = bIsEmpty == Data.bIsEmpty;
+
 	bIsEmpty = Data.bIsEmpty;
 	TargetAmberHeight = bIsEmpty ? EmptyAmberHeight : FullAmberHeight;
 	FVector ResultLocation = AmberMesh->GetRelativeLocation();
 	ResultLocation.Z = TargetAmberHeight;
 	AmberMesh->SetRelativeLocation(ResultLocation);
 
-	TriggerEmptyLinkedObjects();
-	TriggerFullLinkedObjects();
-
-	if (bShouldFoliagePlay && !bIsEmpty)
+	if (!bHasTheDefaultStatus)
 	{
-		FoliageTimeline.PlayFromStart();
+		TriggerEmptyLinkedObjects();
+		TriggerFullLinkedObjects();
+
+		if (bShouldFoliagePlay && !bIsEmpty)
+		{
+			FoliageTimeline.PlayFromStart();
+		}
 	}
 
 	bIsLoaded = true;
