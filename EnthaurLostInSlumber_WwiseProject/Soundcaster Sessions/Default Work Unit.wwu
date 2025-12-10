@@ -38,20 +38,12 @@
 							<Position X="2" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="AKE_Heart" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
-							<Position X="2" Y="2"/>
-						</Module>
-						<Module>
 							<ObjectRef Name="AKE_MuscleSolidTransformation" ID="{704DF249-C842-4399-A326-E93C5BDA66B8}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="3" Y="0"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="AKE_StopElevator" ID="{458D8D98-019E-4FC2-ADA2-AE1C05F0669A}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="3" Y="1"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="AKE_Forearm" ID="{544CD7CE-CD5C-45C5-A5D7-5AB3F7758CF7}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
-							<Position X="3" Y="2"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
@@ -79,14 +71,6 @@
 						<Module>
 							<ObjectRef Name="AKE_VillageHeartbeat" ID="{4F9B89C2-3761-41E6-BF81-653EEBA91D79}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="2" Y="2"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="AKE_Heart" ID="{0D9FCDD8-095E-4FDB-AF13-BF1EA522E36D}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
-							<Position X="3" Y="2"/>
-						</Module>
-						<Module>
-							<ObjectRef Name="AKE_Full" ID="{5CF225F1-E94C-4137-A38C-DD45C1FE66AE}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
-							<Position X="3" Y="3"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="AKE_WeakenedZone" ID="{BA8C452E-00F8-4965-99C7-D6E1BCF4996D}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>

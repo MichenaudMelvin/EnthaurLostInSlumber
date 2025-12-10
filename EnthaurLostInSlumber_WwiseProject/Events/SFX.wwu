@@ -692,7 +692,7 @@
 								<Action Name="" ID="{18715069-49E3-40A9-ABE9-C126D5FA72DB}" ShortID="979302621">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="SFX8bridge_Fall" ID="{86B9659F-2F08-417B-BC6C-ACEE3A501CDD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+											<ObjectRef Name="SFX_bridge_Fall" ID="{86B9659F-2F08-417B-BC6C-ACEE3A501CDD}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

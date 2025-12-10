@@ -24,6 +24,19 @@
 					<ChildrenList>
 						<ActorMixer Name="AM_MC_Footstep" ID="{428D665F-E831-49CD-83E8-AE88A9E3971F}" ShortID="1049094631">
 							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{253EADA5-1673-41EC-846F-4DD005537B85}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="100"/>
+													<Property Name="Min" Type="Real64" Value="-100"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
 										<Value>-6</Value>
@@ -579,6 +592,15 @@
 													</ReferenceList>
 													<ChildrenList>
 														<Sound Name="SFX_FS_Bone_Run_01" ID="{F9B4C91A-3E59-4675-89FD-82D9247BD276}" ShortID="14515836">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{63854BEE-D22F-4C2C-A7E3-C2F0D01DCE28}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -601,6 +623,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_02" ID="{44729802-BAA9-4263-B0DC-240273C0F1EE}" ShortID="997127305">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{4A7D1DF4-6573-48A8-A1BB-7C6EAD9394B4}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -623,6 +654,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_04" ID="{040D1D5C-759D-45E3-8F87-B3AD7C1FDD5B}" ShortID="388304053">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{835CB466-5E60-47B2-8DF7-D3DFFBBC582D}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -645,6 +685,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_06" ID="{A05164EB-639E-4525-8CED-2908D1C686B7}" ShortID="601370245">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{15B9CA68-89F9-4D6D-8EF7-E29D74280981}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -667,6 +716,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_08" ID="{9937518D-713C-475D-AB0B-2FE3C881E3DE}" ShortID="638731853">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{A9D2AC42-456C-40DF-9187-22DDADF803BA}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -689,6 +747,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_09" ID="{F5FC3A3E-59E9-4714-A55E-A6C24946C855}" ShortID="126999087">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{983F1C82-048A-4F3A-8465-054E8FB0E121}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -711,6 +778,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_10" ID="{C5A75327-A350-41FC-92FD-756DC8E8C16D}" ShortID="24101076">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{7FF299E4-3051-45F6-9044-875D460AFED9}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -733,6 +809,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_11" ID="{58D1DCE1-7CE6-4224-8CE9-EE9C84BDCD24}" ShortID="395791559">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{16220DC9-47BC-4B16-A608-95FA135B1D97}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -755,6 +840,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_12" ID="{D54AAB4D-0DFC-468F-9343-F84BCFA60881}" ShortID="725257301">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{26E2BFD0-406D-4F4D-9673-EAE26102B1E5}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -777,6 +871,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_13" ID="{FA86AA7C-A98C-4983-AD4E-93D575ED6EB6}" ShortID="24305985">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{2B0F4B35-30D4-4391-BC29-9BCC130141F0}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -799,6 +902,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_14" ID="{76EE7FD1-D573-469F-947B-B422EAF3051A}" ShortID="930383571">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{17D90083-B3D1-4C45-88DC-FF59AD9F54B1}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -821,6 +933,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_16" ID="{9069097B-20B4-4C59-A905-24E3338415E4}" ShortID="234101721">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{C479ABCA-5D5B-4056-8D7C-372275B39C78}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -843,6 +964,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_17" ID="{A4CE261B-D1B8-486C-BC55-2D0FD712ED23}" ShortID="379905520">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{9E273D1E-7D89-43A8-B892-50C54247CC3D}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -865,6 +995,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_18" ID="{92E6F6A1-0FEB-4D07-8523-51FB81B89482}" ShortID="517189305">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{77102F78-066A-4349-B06D-48A7F2637F55}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -887,6 +1026,15 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Run_20" ID="{DA634D79-2DCA-4863-8FE0-50A06C14F22B}" ShortID="218367983">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{A4132B17-5635-4C8A-AA42-81868A1F5F2B}"/>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -897,6 +1045,10 @@
 															</ReferenceList>
 															<ChildrenList>
 																<AudioFileSource Name="SFX_FS_Bone_Run_20" ID="{D3D161BF-036F-4490-BAA5-4C44C0F56287}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.00462962976760335"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>SFX_FS_Bone_Run_20.wav</AudioFile>
 																	<MediaIDList>

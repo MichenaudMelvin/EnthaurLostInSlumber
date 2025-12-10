@@ -178,32 +178,6 @@
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
-							<StateInfo>
-								<StateGroupList>
-									<StateGroupInfo>
-										<StateGroupRef Name="AKST_WeakenedZone" ID="{BE53788A-24ED-40A0-9285-BE9E6C56B454}"/>
-									</StateGroupInfo>
-								</StateGroupList>
-								<CustomStateList>
-									<CustomState>
-										<StateRef Name="Normal" ID="{0AD74AB7-7EA2-45EB-869F-D2F0AC82DBC6}"/>
-										<CustomState Name="" ID="{D5B1B665-FC32-4B38-BA35-1FA68A14F38A}" ShortID="391451461"/>
-									</CustomState>
-									<CustomState>
-										<StateRef Name="Weakened" ID="{F86BBEAA-3FB6-4A7A-A8B2-78D15527BC20}"/>
-										<CustomState Name="" ID="{0DDB6BD0-5AA6-4B28-9AE6-2196DED97FF5}" ShortID="1021022879">
-											<PropertyList>
-												<Property Name="Lowpass" Type="int16" Value="62"/>
-												<Property Name="Pitch" Type="int32" Value="-550"/>
-											</PropertyList>
-										</CustomState>
-									</CustomState>
-									<CustomState>
-										<StateRef Name="None" ID="{9B262204-A1AC-4F1C-9BC4-BF31394A28C9}"/>
-										<CustomState Name="" ID="{F5C7FE1F-763C-4920-AA03-ED88F9DDB377}" ShortID="383927341"/>
-									</CustomState>
-								</CustomStateList>
-							</StateInfo>
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="AMB_Breath" ID="{8DFF30B6-E63C-422A-B22D-91C24808E3B7}" ShortID="630221540">
 							<PropertyList>
