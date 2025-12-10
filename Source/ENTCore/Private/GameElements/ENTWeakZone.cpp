@@ -96,23 +96,7 @@ void AENTWeakZone::BeginPlay()
 		Light->GetLightComponent()->SetVisibility(true);
 	}
 
-	for (TObjectPtr<AActor> Actor : CuredActors)
-	{
-		if (Actor && Actor->GetRootComponent())
-		{
-			USceneComponent* ActorRootComp = Actor->GetRootComponent();
-			ActorRootComp->SetVisibility(false, true);
-		}
-	}
-
-	for (TObjectPtr<AActor> Actor : CorruptedActors)
-	{
-		if (Actor && Actor->GetRootComponent())
-		{
-			USceneComponent* ActorRootComp = Actor->GetRootComponent();
-			ActorRootComp->SetVisibility(true, true);
-		}
-	}
+	SetActorsVisibility(false);
 }
 
 void AENTWeakZone::OnConstruction(const FTransform& Transform)
@@ -173,23 +157,7 @@ void AENTWeakZone::PostLoad()
 {
 	Super::PostLoad();
 
-	for (TObjectPtr<AActor> Actor : CuredActors)
-	{
-		if (Actor && Actor->GetRootComponent())
-		{
-			USceneComponent* ActorRootComp = Actor->GetRootComponent();
-			ActorRootComp->SetVisibility(false, true);
-		}
-	}
-
-	for (TObjectPtr<AActor> Actor : CorruptedActors)
-	{
-		if (Actor && Actor->GetRootComponent())
-		{
-			USceneComponent* ActorRootComp = Actor->GetRootComponent();
-			ActorRootComp->SetVisibility(true, true);
-		}
-	}
+	SetActorsVisibility(false);
 }
 
 void AENTWeakZone::PreEditChange(FProperty* PropertyAboutToChange)
@@ -203,25 +171,11 @@ void AENTWeakZone::PreEditChange(FProperty* PropertyAboutToChange)
 
 	if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CuredActors))
 	{
-		for (TObjectPtr<AActor> Actor : CuredActors)
-		{
-			if (Actor && Actor->GetRootComponent())
-			{
-				USceneComponent* ActorRootComp = Actor->GetRootComponent();
-				ActorRootComp->SetVisibility(true, true);
-			}
-		}
+		SetCuredActorsVisibility(true);
 	}
 	else if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CorruptedActors))
 	{
-		for (TObjectPtr<AActor> Actor : CorruptedActors)
-		{
-			if (Actor && Actor->GetRootComponent())
-			{
-				USceneComponent* ActorRootComp = Actor->GetRootComponent();
-				ActorRootComp->SetVisibility(true, true);
-			}
-		}
+		SetCorruptedActorsVisibility(true);
 	}
 }
 
@@ -233,23 +187,7 @@ void AENTWeakZone::PostEditChangeProperty(struct FPropertyChangedEvent& Property
 
 	if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CuredActors) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CorruptedActors) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, bShowWeakZoneAsCure))
 	{
-		for (TObjectPtr<AActor> Actor : CuredActors)
-		{
-			if (Actor && Actor->GetRootComponent())
-			{
-				USceneComponent* ActorRootComp = Actor->GetRootComponent();
-				ActorRootComp->SetVisibility(bShowWeakZoneAsCure, true);
-			}
-		}
-
-		for (TObjectPtr<AActor> Actor : CorruptedActors)
-		{
-			if (Actor && Actor->GetRootComponent())
-			{
-				USceneComponent* ActorRootComp = Actor->GetRootComponent();
-				ActorRootComp->SetVisibility(!bShowWeakZoneAsCure, true);
-			}
-		}
+		SetActorsVisibility(bShowWeakZoneAsCure);
 	}
 }
 #endif
@@ -425,6 +363,40 @@ void AENTWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AA
 	}
 }
 
+void AENTWeakZone::SetActorsVisibility(bool bCure) const
+{
+	SetCuredActorsVisibility(bCure);
+	SetCorruptedActorsVisibility(!bCure);
+}
+
+void AENTWeakZone::SetCuredActorsVisibility(bool bVisible) const
+{
+	SetArrayVisibility(bVisible, CuredActors);
+}
+
+void AENTWeakZone::SetCorruptedActorsVisibility(bool bVisible) const
+{
+	SetArrayVisibility(bVisible, CorruptedActors);
+}
+
+void AENTWeakZone::SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const
+{
+	for (TObjectPtr<AActor> Actor : ActorArray)
+	{
+		if (Actor && Actor->GetRootComponent())
+		{
+			USceneComponent* ActorRootComp = Actor->GetRootComponent();
+			ActorRootComp->SetVisibility(bVisible, true);
+
+			APostProcessVolume* PostProcess = Cast<APostProcessVolume>(Actor);
+			if (PostProcess)
+			{
+				PostProcess->bEnabled = bVisible;
+			}
+		}
+	}
+}
+
 void AENTWeakZone::CureZone(AActor* StartCurePoint)
 {
 	if (StartCurePoint != nullptr)
@@ -437,23 +409,7 @@ void AENTWeakZone::CureZone(AActor* StartCurePoint)
 		OnElectricityMovementFinished();
 	}
 
-	for (TObjectPtr<AActor> Actor : CuredActors)
-	{
-		if (Actor && Actor->GetRootComponent())
-		{
-			USceneComponent* ActorRootComp = Actor->GetRootComponent();
-			ActorRootComp->SetVisibility(true, true);
-		}
-	}
-
-	for (TObjectPtr<AActor> Actor : CorruptedActors)
-	{
-		if (Actor && Actor->GetRootComponent())
-		{
-			USceneComponent* ActorRootComp = Actor->GetRootComponent();
-			ActorRootComp->SetVisibility(false, true);
-		}
-	}
+	SetActorsVisibility(true);
 
 	OnCure.Broadcast();
 	DestroyZone();
@@ -471,23 +427,7 @@ void AENTWeakZone::CorruptZone(AActor* StartCorruptPoint)
 		OnElectricityMovementFinished();
 	}
 
-	for (TObjectPtr<AActor> Actor : CuredActors)
-	{
-		if (Actor && Actor->GetRootComponent())
-		{
-			USceneComponent* ActorRootComp = Actor->GetRootComponent();
-			ActorRootComp->SetVisibility(false, true);
-		}
-	}
-
-	for (TObjectPtr<AActor> Actor : CorruptedActors)
-	{
-		if (Actor && Actor->GetRootComponent())
-		{
-			USceneComponent* ActorRootComp = Actor->GetRootComponent();
-			ActorRootComp->SetVisibility(true, true);
-		}
-	}
+	SetActorsVisibility(false);
 
 	OnCorrupt.Broadcast();
 	CreateZone();

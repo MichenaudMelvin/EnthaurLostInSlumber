@@ -143,6 +143,14 @@ protected:
 	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
 	TArray<float> CorruptedLightsIntensity;
 
+	void SetActorsVisibility(bool bCure) const;
+
+	void SetCuredActorsVisibility(bool bVisible) const;
+
+	void SetCorruptedActorsVisibility(bool bVisible) const;
+
+	void SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const;
+
 public:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void CureZone(AActor* StartCurePoint);
