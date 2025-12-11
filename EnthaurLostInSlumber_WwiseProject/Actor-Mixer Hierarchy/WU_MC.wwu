@@ -91,6 +91,11 @@
 													<PropertyList>
 														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="10"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>4</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
@@ -168,6 +173,13 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Walk_04" ID="{EED1E9C6-8E17-46C9-A6A0-392FCE694387}" ShortID="337766928">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>2</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -190,6 +202,13 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Walk_05" ID="{41EA2000-7BF0-4BA5-BDF4-774E39CEC792}" ShortID="529709691">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -212,6 +231,13 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Walk_06" ID="{EF7D8DC0-704A-4EFD-BCFF-46E5113CE186}" ShortID="675418741">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-2</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -256,6 +282,13 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Walk_08" ID="{9B4CE80C-B391-4A9B-B708-C9145E271C7A}" ShortID="692276394">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-5</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -300,6 +333,13 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Walk_10" ID="{5A93DE8E-6782-45E8-BAD2-A0F334783533}" ShortID="112120873">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -322,6 +362,13 @@
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="SFX_FS_Bone_Walk_11" ID="{CD995F72-35C0-4B5B-88D9-DDBF6CAF5158}" ShortID="1014026397">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-3</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -600,6 +647,11 @@
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-3</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -630,6 +682,11 @@
 																			<Modifier Name="" ID="{4A7D1DF4-6573-48A8-A1BB-7C6EAD9394B4}"/>
 																		</ModifierInfo>
 																	</ModifierList>
+																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>2</Value>
+																	</ValueList>
 																</Property>
 															</PropertyList>
 															<ReferenceList>
@@ -662,6 +719,11 @@
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>2</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -693,6 +755,11 @@
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>6</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -723,6 +790,11 @@
 																			<Modifier Name="" ID="{A9D2AC42-456C-40DF-9187-22DDADF803BA}"/>
 																		</ModifierInfo>
 																	</ModifierList>
+																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>2</Value>
+																	</ValueList>
 																</Property>
 															</PropertyList>
 															<ReferenceList>
@@ -817,6 +889,11 @@
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-3</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -910,6 +987,11 @@
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-2</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -940,6 +1022,11 @@
 																			<Modifier Name="" ID="{C479ABCA-5D5B-4056-8D7C-372275B39C78}"/>
 																		</ModifierInfo>
 																	</ModifierList>
+																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>2</Value>
+																	</ValueList>
 																</Property>
 															</PropertyList>
 															<ReferenceList>
@@ -972,6 +1059,11 @@
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-7</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -1003,6 +1095,11 @@
 																		</ModifierInfo>
 																	</ModifierList>
 																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>9</Value>
+																	</ValueList>
+																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Conversion">
@@ -1014,6 +1111,12 @@
 															</ReferenceList>
 															<ChildrenList>
 																<AudioFileSource Name="SFX_FS_Bone_Run_18" ID="{D10D8062-C4B1-4080-B03E-FDBB6BDEA771}">
+																	<PropertyList>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.211894593209538"/>
+																		<Property Name="FadeOutShape" Type="int16" Value="1"/>
+																		<Property Name="LoopBegin" Type="Real64" Value="0"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>SFX_FS_Bone_Run_18.wav</AudioFile>
 																	<MediaIDList>
@@ -1033,6 +1136,11 @@
 																			<Modifier Name="" ID="{A4132B17-5635-4C8A-AA42-81868A1F5F2B}"/>
 																		</ModifierInfo>
 																	</ModifierList>
+																</Property>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-5</Value>
+																	</ValueList>
 																</Property>
 															</PropertyList>
 															<ReferenceList>
@@ -1083,6 +1191,11 @@
 													<PropertyList>
 														<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="10"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>7</Value>
+															</ValueList>
+														</Property>
 													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
@@ -2418,7 +2531,7 @@
 												<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="4"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-15</Value>
+														<Value>-6</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -2432,6 +2545,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<Sound Name="MC_Cloth_Walk_01" ID="{ABEAD1B3-517A-4AF9-BE00-AA6F77B5CF37}" ShortID="205025466">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>5</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -2454,6 +2574,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="MC_Cloth_Walk_02" ID="{0CCE16B9-773E-4D41-8D85-18E9B5139FC7}" ShortID="751848464">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>9</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -2476,6 +2603,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="MC_Cloth_Walk_03" ID="{C23BC3CB-5150-49A0-B9B4-EC5EDC3237F9}" ShortID="861710880">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>4</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -2664,28 +2798,6 @@
 														<ActiveSource Name="MC_Cloth_Run_01" ID="{C976A541-25E2-449A-B416-D5412EDCB50F}" Platform="Linked"/>
 													</ActiveSourceList>
 												</Sound>
-												<Sound Name="MC_Cloth_Run_02" ID="{5F7A7B70-B8A3-43C3-9616-E0D30D54D931}" ShortID="1038640010">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="MC_Cloth_Run_02" ID="{BFCA39BF-FE98-4808-BD1A-46E046D7481D}">
-															<Language>SFX</Language>
-															<AudioFile>MC_Cloth_Run_02.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="794150962"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="MC_Cloth_Run_02" ID="{BFCA39BF-FE98-4808-BD1A-46E046D7481D}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
 												<Sound Name="MC_Cloth_Run_04" ID="{71CF71F8-C25E-46B7-B4B2-E44BACD06F84}" ShortID="492140146">
 													<ReferenceList>
 														<Reference Name="Conversion">
@@ -2797,6 +2909,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="MC_Cloth_Run_11" ID="{146B57E3-2906-48E9-9005-E4FC5F47EA32}" ShortID="490987647">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>6</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -2819,6 +2938,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="MC_Cloth_Run_12" ID="{F02BDEF4-538F-4C72-8D24-5BEFE7CA87C7}" ShortID="1007956211">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>10</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -2863,6 +2989,13 @@
 													</ActiveSourceList>
 												</Sound>
 												<Sound Name="MC_Cloth_Run_14" ID="{2100F264-52DC-40C3-96B2-99A0A5636A2E}" ShortID="205842988">
+													<PropertyList>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>4</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
 													<ReferenceList>
 														<Reference Name="Conversion">
 															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
