@@ -76,8 +76,7 @@ public:
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
-	UFUNCTION()
-	void OnFinishLoading(UENTWorldSave* WorldSave);
+	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) override;
 
 	const FTransform& GetRespawnTransform() const {return RespawnTransform;}
 };

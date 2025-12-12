@@ -75,6 +75,11 @@ void AENTWeakZone::BeginPlay()
 
 	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTWeakZone::OnElectricityMovementFinished);
 
+	if (WeakZonePostProcess)
+	{
+		WeakZonePostProcess->bEnabled = true;;
+	}
+
 	for (TObjectPtr<ALight> Light : CuredLights)
 	{
 		if (!Light || !Light->GetLightComponent())
@@ -150,6 +155,10 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 		Light->GetLightComponent()->SetVisibility(!bShowWeakZoneAsCure);
 #endif
 	}
+
+#if WITH_EDITORONLY_DATA
+	WeakZonePostProcess->bEnabled = !bShowWeakZoneAsCure;
+#endif
 }
 
 #if WITH_EDITOR
@@ -458,6 +467,8 @@ void AENTWeakZone::LoadGameElement(const FENTGameElementData& GameElementData, U
 	bIsZoneActive = Data.bIsActive;
 	bIsZoneActive ? CreateZone() : CureZone(nullptr);
 }
+
+void AENTWeakZone::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
 
 void AENTWeakZone::OnElectricityMovementFinished()
 {

@@ -577,6 +577,8 @@ void AENTMuscle::LoadGameElement(const FENTGameElementData& GameElementData, UEN
 	UpdateMuscleSolidity(false);
 }
 
+void AENTMuscle::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+
 #pragma endregion
 
 #pragma region Debug
