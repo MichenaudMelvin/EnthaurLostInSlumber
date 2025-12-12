@@ -19,11 +19,16 @@ void UENTCameraShakeComponent::BeginPlay()
 
 void UENTCameraShakeComponent::MakeSmallCameraShake() const
 {
-	PlayerController->ClientStartCameraShake(LittleShake);
+	if (PlayerController)
+	{
+		PlayerController->ClientStartCameraShake(LittleShake);
+	}
 }
 
 void UENTCameraShakeComponent::MakeBigCameraShake() const
 {
-	PlayerController->ClientStartCameraShake(BigShake);
+	if (PlayerController)
+	{
+		PlayerController->ClientStartCameraShake(BigShake);
+	}
 }
-
