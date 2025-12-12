@@ -468,6 +468,8 @@ void AENTWeakZone::LoadGameElement(const FENTGameElementData& GameElementData, U
 	bIsZoneActive ? CreateZone() : CureZone(nullptr);
 }
 
+void AENTWeakZone::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+
 void AENTWeakZone::OnElectricityMovementFinished()
 {
 	bIsZoneActive ? CureTimeline.Reverse() : CureTimeline.Play();

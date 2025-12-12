@@ -343,6 +343,8 @@ public:
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
+	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) override;
+
 	bool IsLoaded() const {return bIsLoaded;}
 
 #pragma endregion
