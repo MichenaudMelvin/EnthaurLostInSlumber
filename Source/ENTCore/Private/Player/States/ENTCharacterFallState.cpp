@@ -91,6 +91,8 @@ void UENTCharacterFallState::StateExit_Implementation(const EENTCharacterStateID
 {
 	Super::StateExit_Implementation(NextStateID);
 
+	SetProjectionVelocity(FVector::ZeroVector, false);
+
 	if (bIsWindSFXPlaying)
 	{
 		UAkGameplayStatics::PostEvent(StopWindEvent, Character, 0, FOnAkPostEventCallback());
