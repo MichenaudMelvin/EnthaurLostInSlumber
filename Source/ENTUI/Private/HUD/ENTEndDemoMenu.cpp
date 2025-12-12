@@ -36,8 +36,8 @@ void UENTEndDemoMenu::NativeConstruct()
 		return;
 	}
 
-	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(Controller, this, EMouseLockMode::LockAlways, true);
-	Controller->SetShowMouseCursor(true);
+	UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(Controller, this, EMouseLockMode::DoNotLock, true);
+	Controller->SetShowMouseCursor(false);
 }
 
 void UENTEndDemoMenu::BeginDestroy()
