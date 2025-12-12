@@ -114,10 +114,7 @@
 				</Event>
 				<Event Name="AKE_Lvl_Chest" ID="{BC9C91BD-BC74-44A2-A495-9A8A2B6018A9}">
 					<ChildrenList>
-						<Action Name="" ID="{74CAAC53-B954-4EE2-A036-759655F24BB7}" ShortID="805262530">
-							<PropertyList>
-								<Property Name="FadeTime" Type="Real64" Value="1.5"/>
-							</PropertyList>
+						<Action Name="" ID="{0A4C1BCF-C5AB-4A71-BD29-C183C73DF63E}" ShortID="826121470">
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="PC_Chest" ID="{74C950E2-C410-4B03-9A2C-5CBE22D51857}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
@@ -163,6 +160,31 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="MU_Menu" ID="{883C5F23-ED7C-49F8-A4DF-4CC263E5B5BD}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AKE_Music_Cinematic" ID="{2240BA50-8384-4581-97C3-FEB5891E6A34}">
+					<ChildrenList>
+						<Action Name="" ID="{F9712ECB-174E-44FE-8602-DA95E008D08C}" ShortID="797506254">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PC_Chest" ID="{74C950E2-C410-4B03-9A2C-5CBE22D51857}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{152AA6E7-0D61-446B-AEAD-4F15B3BE01C7}" ShortID="765970693">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PC_Lvl_Cinematic" ID="{5F23F740-5CEB-4F91-8646-3E0EA3569A23}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

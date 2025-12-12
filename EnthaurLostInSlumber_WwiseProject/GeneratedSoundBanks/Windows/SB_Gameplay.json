@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{57BB9C15-3001-4657-DC7F-C053B5D2E628}",
+    "Hash": "{C96568D6-D6E5-2197-A3C3-823262671C4C}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -166,7 +166,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Nerve_Energy_04.wav",
-      "CachePath": "7D/{7D4A3A6D-39BE-5F60-B7FF-4E09AFD173C0}.wem"
+      "CachePath": "DA/{DAF27F21-63EE-986E-0DEF-CB4B26D6A40F}.wem"
      },
      {
       "Id": "94886772",
@@ -302,7 +302,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Nerve_Energy_01.wav",
-      "CachePath": "BF/{BF9D26A6-8E05-B988-E007-1EBAD1706703}.wem"
+      "CachePath": "B9/{B905A0C2-37E7-BBBE-FEC6-1FE482487289}.wem"
      },
      {
       "Id": "171841650",
@@ -334,7 +334,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Nerve_Energy_02.wav",
-      "CachePath": "35/{35AB1C2B-498D-35DF-C5F2-268AAAAAC6AF}.wem"
+      "CachePath": "5E/{5EEE7BAA-775B-AFB1-2EC8-C7DE9B680A68}.wem"
      },
      {
       "Id": "190922830",
@@ -590,7 +590,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Nerve_Energy_06.wav",
-      "CachePath": "45/{45FFC29F-E406-9702-5AE9-C21E51A93822}.wem"
+      "CachePath": "7E/{7E98130D-FBB1-DC05-123C-FFB7568AAB62}.wem"
      },
      {
       "Id": "368998509",
@@ -838,7 +838,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_18.wav",
-      "CachePath": "77/{777F743F-F945-B6DC-F9EF-6CEEF667AE50}.wem"
+      "CachePath": "6D/{6D82506E-2C69-0E9B-35F4-DB63022EEDF1}.wem"
      },
      {
       "Id": "508697626",
@@ -878,7 +878,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Nerve_Energy_05.wav",
-      "CachePath": "A6/{A65E8D5D-7DB4-27FE-2F5A-FE5CA3F4E82C}.wem"
+      "CachePath": "E3/{E302FA7F-87B3-DBD1-8BD1-2FA9AD3436AC}.wem"
      },
      {
       "Id": "525259507",
@@ -1361,14 +1361,6 @@
       "CachePath": "62/{6233C170-79F0-FDE0-BB90-226C8F7E80B4}.wem"
      },
      {
-      "Id": "794150962",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MC_Cloth_Run_02.wav",
-      "CachePath": "3A/{3AD7B48F-CD6A-64FC-8493-8889E09AD395}.wem"
-     },
-     {
       "Id": "801569341",
       "Language": "SFX",
       "Streaming": "false",
@@ -1454,7 +1446,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Nerve_Energy_03.wav",
-      "CachePath": "07/{0756B026-9A81-2B01-7BB8-A67592E66FB0}.wem"
+      "CachePath": "7F/{7FD87FAE-E0A6-B2D3-21E1-95D28E2C1FAA}.wem"
      },
      {
       "Id": "863858004",
@@ -1486,7 +1478,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Nerve_Energy_07.wav",
-      "CachePath": "3C/{3C276D5C-64D6-952B-7736-8E1251B7AA0D}.wem"
+      "CachePath": "D7/{D732B430-3EA5-34F7-8B90-C2BC27F50C18}.wem"
      },
      {
       "Id": "883660353",
@@ -1880,7 +1872,7 @@
       "Color": "10",
       "DurationType": "OneShot",
       "DurationMin": "0.237573",
-      "DurationMax": "1.1387886",
+      "DurationMax": "0.9792429",
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -1913,9 +1905,6 @@
          },
          {
           "Id": "697774580"
-         },
-         {
-          "Id": "794150962"
          },
          {
           "Id": "889515880"
@@ -2716,7 +2705,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Legs",
       "GUID": "{79F94C9C-AFF6-436B-99FA-59569A8F3218}",
       "Color": "10",
-      "MaxAttenuation": "12000",
+      "MaxAttenuation": "6000",
       "DurationType": "OneShot",
       "DurationMin": "0.019604167",
       "DurationMax": "0.076125",
@@ -2840,7 +2829,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_RunFoley",
       "GUID": "{B425CC87-77AE-4B31-AFF7-FAE32D669FF7}",
       "Color": "10",
-      "MaxAttenuation": "6000",
+      "MaxAttenuation": "4000",
       "DurationType": "OneShot",
       "DurationMin": "0.27115718",
       "DurationMax": "0.5452539",
@@ -2920,7 +2909,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_WalkFoley",
       "GUID": "{7BCA8F02-4514-4085-9933-E039BB08A318}",
       "Color": "10",
-      "MaxAttenuation": "6000",
+      "MaxAttenuation": "300",
       "DurationType": "OneShot",
       "DurationMin": "0.27115718",
       "DurationMax": "0.47255337",
@@ -3422,6 +3411,6 @@
     ]
    }
   ],
-  "FileHash": "{AB731B93-55D2-F575-7B64-B95B62DA351B}"
+  "FileHash": "{EC24763B-9580-478B-0385-74C51118C507}"
  }
 }

@@ -1,5 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
 	154067081	AKE_Voice			\Musics\AKE_Voice	
+	1219780288	AKE_Music_Cinematic			\Musics\AKE_Music_Cinematic	
 	2220893880	AKE_Stop_Lvl_Chest			\Musics\AKE_Stop_Lvl_Chest	
 	2710480974	AKE_Stop_TitleScreen			\Musics\AKE_Stop_TitleScreen	
 	2962969891	AKE_Lvl_Chest			\Musics\AKE_Lvl_Chest	
@@ -14,6 +15,7 @@ Switch Group	ID	Name			Wwise Object Path	Notes
 Switch	ID	Name	Switch Group			Notes
 	658719994	SW_To_Med	AKSW_Music_Switch			
 	876681807	SW_To_Lv1	AKSW_Music_Switch			
+	1268243103	SW_To_Cinematic	AKSW_Music_Switch			
 	1275925729	SW_Stop_Lvl2	AKSW_Music_Switch			
 	1275925735	SW_Stop_Lvl4	AKSW_Music_Switch			
 	1417415266	SW_To_Lvl4	AKSW_Music_Switch			
@@ -26,6 +28,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	70836845	Enthaur_Music_Stinger4_Riser_130Bpm_OS	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2E\{2E83BBC8-6C45-4433-C96E-D23BEED340C0}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl4_Med\Enthaur_Music_Stinger4_Riser_130Bpm_OS\Enthaur_Music_Stinger4_Riser_130Bpm_OS		974864
 	219422833	Enthaur_Music_Lvl4_Med_130Bpm_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\5D\{5D427FDD-B81E-92EC-4B5A-F511C52865FE}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl4_Med\Enthaur_Music_Lvl4_Med_130Bpm_LP\Enthaur_Music_Lvl4_Med_130Bpm_LP		8507172
 	311129035	Enthaur_Music_Lvl4_High_130Bpm_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\D2\{D2081ADA-04AF-275C-F014-82E81A0AE0ED}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl4_High\Enthaur_Music_Lvl4_High_130Bpm_LP\Enthaur_Music_Lvl4_High_130Bpm_LP		8507172
+	483900290	4_ Gaur Plain	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\C4\{C4D37706-CA52-2F4D-3C68-8C8637C91106}.wem		\Interactive Music Hierarchy\Default Work Unit\PC_Lvl_Cinematic\4_ Gaur Plain\4_ Gaur Plain		4827462
 	574035864	Enthaur_Music_Transition_105Bpm_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\80\{8002C155-6EF0-2F35-45A4-E289ABE0685B}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl1_2\PC_Lvl2\Enthaur_Music_Transition_105Bpm_LP\Enthaur_Music_Transition_105Bpm_LP		3072096
 	636796751	Enthaur_Music_Lvl4_Low_130Bpm_LP	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\2A\{2A4CAB3D-11B9-C569-B135-8CC3BB14223B}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl_4_Low\Enthaur_Music_Lvl4_Low_130Bpm_LP_Start\Enthaur_Music_Lvl4_Low_130Bpm_LP		8507172
 	707993649	Enthaur_Music_Lvl2_Hit_105Bpm_OS	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\8C\{8C66A0DC-F3F8-B910-9D91-89AAF951549C}.wem		\Interactive Music Hierarchy\Default Work Unit\SC_Lvl4\PC_Lvl4_Med\Enthaur_Music_Lvl2_Hit_105Bpm_OS\Enthaur_Music_Lvl2_Hit_105Bpm_OS		3072096

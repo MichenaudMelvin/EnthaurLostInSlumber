@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{253D842E-C114-3911-0E00-D7B84F2B508D}",
+    "Hash": "{DAA85ACE-8B13-CFF3-5CE3-37B6D71DA142}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -39,6 +39,14 @@
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Lvl4_High_130Bpm_LP.wav",
       "CachePath": "D2/{D2081ADA-04AF-275C-F014-82E81A0AE0ED}.wem"
+     },
+     {
+      "Id": "483900290",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "4. Gaur Plain.wav",
+      "CachePath": "C4/{C4D37706-CA52-2F4D-3C68-8C8637C91106}.wem"
      },
      {
       "Id": "574035864",
@@ -320,6 +328,19 @@
       ]
      },
      {
+      "Id": "1219780288",
+      "Name": "AKE_Music_Cinematic",
+      "ObjectPath": "\\Events\\Musics\\AKE_Music_Cinematic",
+      "GUID": "{2240BA50-8384-4581-97C3-FEB5891E6A34}",
+      "Color": "19",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "483900290"
+       }
+      ]
+     },
+     {
       "Id": "2220893880",
       "Name": "AKE_Stop_Lvl_Chest",
       "ObjectPath": "\\Events\\Musics\\AKE_Stop_Lvl_Chest",
@@ -397,6 +418,12 @@
         "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
        },
        {
+        "Id": "1268243103",
+        "Name": "SW_To_Cinematic",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Cinematic",
+        "GUID": "{DE9ECBFF-BEE2-4802-91F9-CD25EDF087F0}"
+       },
+       {
         "Id": "1275925729",
         "Name": "SW_Stop_Lvl2",
         "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_Stop_Lvl2",
@@ -443,6 +470,6 @@
     ]
    }
   ],
-  "FileHash": "{97766C75-2D9F-74B8-C847-EFDB5C784D1F}"
+  "FileHash": "{EC31563B-F73F-B9C8-3254-1814B28A38DA}"
  }
 }
