@@ -388,3 +388,5 @@ void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData, U
 
 	OnPlayerAmberUpdate(PlayerSaveSubsystem->GetPlayerSave()->bHasAmber);
 }
+
+void AENTAmberOre::FinishLoading(UENTWorldSave* LoadedWorldSave) {}

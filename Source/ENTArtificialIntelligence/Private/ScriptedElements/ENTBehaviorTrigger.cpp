@@ -119,7 +119,6 @@ FENTGameElementData& AENTBehaviorTrigger::SaveGameElement(UENTWorldSave* Current
 	return CurrentWorldSave->ScriptedAIElementsData.Add(GetName(), EmptyData);
 }
 
-void AENTBehaviorTrigger::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
-{
-	
-}
+void AENTBehaviorTrigger::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) {}
+
+void AENTBehaviorTrigger::FinishLoading(UENTWorldSave* LoadedWorldSave) {}

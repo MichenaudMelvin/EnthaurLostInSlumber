@@ -153,19 +153,16 @@ void AENTRespawnTree::LoadGameElement(const FENTGameElementData& GameElementData
 		return;
 	}
 
-	WorldSaveSubsystem->OnFinishLoading.AddDynamic(this, &AENTRespawnTree::OnFinishLoading);
 	LastCheckPointName = WorldSaveSubsystem->GetCurrentWorldSave()->LastCheckPointName;
 }
 
-void AENTRespawnTree::OnFinishLoading(UENTWorldSave* WorldSave)
+void AENTRespawnTree::FinishLoading(UENTWorldSave* LoadedWorldSave)
 {
 	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
 	if(!WorldSaveSubsystem)
 	{
 		return;
 	}
-
-	WorldSaveSubsystem->OnFinishLoading.RemoveDynamic(this, &AENTRespawnTree::OnFinishLoading);
 
 	if (!bIsActivated)
 	{

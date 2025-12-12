@@ -728,6 +728,11 @@ void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElemen
 		return;
 	}
 
+	if (StateMachine)
+	{
+		StateMachine->ChangeState(EENTCharacterStateID::Stop);
+	}
+
 	if (LoadedWorldSave)
 	{
 		SetActorLocation(LoadedWorldSave->PlayerLocation);
@@ -743,10 +748,26 @@ void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElemen
 	}
 
 	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
-	StateMachine->ChangeState(static_cast<EENTCharacterStateID>(SaveData->CurrentState));
-
 	bHasAmber = SaveData->bHasAmber;
 	OnAmberUpdate.Broadcast(bHasAmber);
+}
+
+void AENTDefaultCharacter::FinishLoading(UENTWorldSave* LoadedWorldSave)
+{
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
+	EENTCharacterStateID StateID = static_cast<EENTCharacterStateID>(SaveData->CurrentState);
+	if (StateID == EENTCharacterStateID::None)
+	{
+		StateID = EENTCharacterStateID::Idle;
+	}
+
+	StateMachine->ChangeState(StateID);
 }
 
 #pragma endregion

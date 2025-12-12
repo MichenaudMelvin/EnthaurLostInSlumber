@@ -55,6 +55,8 @@ protected:
 
 	bool bFinishLoading = true;
 
+	bool bCannotLoadWorld = false;
+
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
 
 	void UnloadSublevels();
