@@ -123,3 +123,13 @@ bool UENTCharacterCrouchState::CanStandUp() const
 	FHitResult HitResult;
 	return !UKismetSystemLibrary::CapsuleTraceSingle(Character, TraceLocation, TraceLocation, Character->GetCapsuleComponent()->GetUnscaledCapsuleRadius(), DefaultHalfHeight, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, ActorsToIgnore, DrawDebugTrace, HitResult, false, FLinearColor::Red, FLinearColor::Green, 0.0f);
 }
+
+void UENTCharacterCrouchState::PlayFootstepNoise(float DeltaTime)
+{
+	if (!Character->IsMovingOnGround())
+	{
+		return;
+	}
+
+	Super::PlayFootstepNoise(DeltaTime);
+}

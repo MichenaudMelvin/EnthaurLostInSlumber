@@ -9,6 +9,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTWeakZone.generated.h"
 
+class ALight;
 class UENTElectricityComponent;
 class UAkAudioEvent;
 
@@ -32,6 +33,12 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+#if WITH_EDITOR
+	virtual void PostLoad() override;
+	virtual void PreEditChange(FProperty* PropertyAboutToChange) override;
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+
 	virtual void Tick(float DeltaSeconds) override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
@@ -42,6 +49,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
 	TObjectPtr<UPostProcessComponent> BlackAndWhiteShader;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeakZone")
+	TObjectPtr<UPostProcessComponent> WeakZonePostProcess;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Electricity")
 	TObjectPtr<UENTElectricityComponent> ElectricityComponent;
@@ -60,9 +70,15 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void InitZone();
 
+	/**
+	 * @brief When zone is destroyed, the box changes size and overlapping actors are notified that they exit the weak zone
+	 */
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void DestroyZone();
 
+	/**
+	 * @brief When zone is created, the box changes size and overlapping actors are notified that they entered the weak zone
+	 */
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
 	void CreateZone();
 
@@ -86,11 +102,54 @@ protected:
 	UFUNCTION()
 	void CureUpdate(float Alpha);
 
+	UFUNCTION()
+	void CureFinish();
+
 	UPROPERTY(BlueprintAssignable, Category = "WeakZone")
 	FOnCure OnCure;
 
 	UPROPERTY(BlueprintAssignable, Category = "WeakZone")
 	FOnCorrupt OnCorrupt;
+
+	/**
+	 * @brief Lights that will be shown when the zone is cured (will be hidden when corrupted)
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<ALight>> CuredLights;
+
+	/**
+	 * @brief Lights that will be shown when the zone is corrupted (will be hidden when cured)
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<ALight>> CorruptedLights;
+
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<AActor>> CuredActors;
+
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<AActor>> CorruptedActors;
+
+#if WITH_EDITORONLY_DATA
+	/**
+	 * @brief Debug value to display the cured lights
+	 */
+	UPROPERTY(EditInstanceOnly, Transient, Category = "WeakZone")
+	bool bShowWeakZoneAsCure = false;
+#endif
+
+	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
+	TArray<float> CuredLightsIntensity;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
+	TArray<float> CorruptedLightsIntensity;
+
+	void SetActorsVisibility(bool bCure) const;
+
+	void SetCuredActorsVisibility(bool bVisible) const;
+
+	void SetCorruptedActorsVisibility(bool bVisible) const;
+
+	void SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
@@ -132,6 +191,8 @@ public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
+
+	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) override;
 
 #pragma region Electricity
 

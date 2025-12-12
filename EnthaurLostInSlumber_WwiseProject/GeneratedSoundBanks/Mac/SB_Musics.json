@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{C2844A4D-1B4E-0EBE-AD83-02F758BAD9C1}",
+    "Hash": "{253D842E-C114-3911-0E00-D7B84F2B508D}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -295,6 +295,15 @@
          }
         ]
        }
+      ],
+      "ActionSetSwitch": [
+       {
+        "GroupId": "697807138",
+        "Id": "1417415266",
+        "Name": "SW_To_Lvl4",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Lvl4",
+        "GUID": "{7C18D196-43B4-4B67-8858-FFA1B8304822}"
+       }
       ]
      },
      {
@@ -434,6 +443,6 @@
     ]
    }
   ],
-  "FileHash": "{69A44897-2112-2CB0-8AC6-FB2273FA0A49}"
+  "FileHash": "{AB85BFA6-7272-FCD8-ED83-E89BAA9388FD}"
  }
 }

@@ -504,12 +504,6 @@ void AENTMuscle::Interact(APlayerController* Controller, APawn* Pawn, UPrimitive
 	Player->GetCameraShake()->MakeSmallCameraShake();
 
 	ToggleMuscleSolidity();
-
-	if (Player->GetStateMachine())
-	{
-		// play the spike animation
-		Player->GetStateMachine()->ChangeState(EENTCharacterStateID::Anim);
-	}
 }
 
 #pragma endregion
@@ -582,6 +576,8 @@ void AENTMuscle::LoadGameElement(const FENTGameElementData& GameElementData, UEN
 
 	UpdateMuscleSolidity(false);
 }
+
+void AENTMuscle::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
 
 #pragma endregion
 

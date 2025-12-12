@@ -19,6 +19,7 @@ class ENTUI_API UENTSoundMenu : public UENTWidgetBasics
 public:
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
 	virtual void BeginDestroy() override;
 
 protected:

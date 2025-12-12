@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
 #include "ENTNerveReceptacle.generated.h"
 
@@ -100,10 +99,10 @@ private:
 
 	bool IsConnected;
 
-	
-
 public:
-	void TriggerLinkedObjects(class AENTNerve* Nerve);
+	void ConnectNerve(AENTNerve* Nerve, bool bInstantEffect);
+
+	void TriggerLinkedObjects(AENTNerve* Nerve);
 
 	// Create Event
 	UFUNCTION(BlueprintImplementableEvent, Category = "Nerve")

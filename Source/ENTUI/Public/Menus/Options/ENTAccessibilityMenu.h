@@ -18,6 +18,7 @@ class ENTUI_API UENTAccessibilityMenu : public UENTWidgetBasics
 	GENERATED_BODY()
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
 	virtual void BeginDestroy() override;
 
 protected:

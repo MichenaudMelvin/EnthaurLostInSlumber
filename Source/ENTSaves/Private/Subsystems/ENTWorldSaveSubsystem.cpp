@@ -76,6 +76,11 @@ UENTDefaultSave* UENTWorldSaveSubsystem::CreateSave(const int SaveIndex)
 
 UENTDefaultSave* UENTWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 {
+	if (!bFinishLoading)
+	{
+		return nullptr;
+	}
+
 	if (!CurrentWorldSave)
 	{
 		CreateSave(SaveIndex);
@@ -90,6 +95,22 @@ UENTDefaultSave* UENTWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 #endif
 			return nullptr;
 		}
+	}
+
+	CurrentWorldSave->SublevelsNames.Empty();
+	for (ULevelStreaming* StreamingLevel : GetWorld()->GetStreamingLevels())
+	{
+		if (!StreamingLevel->IsLevelLoaded())
+		{
+			continue;
+		}
+
+		if (!StreamingLevel->GetWorldAsset())
+		{
+			continue;
+		}
+
+		CurrentWorldSave->SublevelsNames.Add(StreamingLevel->GetWorldAsset()->GetFName());
 	}
 
 	TArray<AActor*> Actors;
@@ -203,7 +224,7 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 {
 	LoadSave(0, false);
 
-	bool bCannotLoadWorld = !CurrentWorldSave;
+	bCannotLoadWorld = !CurrentWorldSave;
 
 #if WITH_EDITOR
 	const UENTEditorSettings* EditorSettings = GetDefault<UENTEditorSettings>();
@@ -228,8 +249,64 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		return;
 	}
 
+	bFinishLoading = false;
+
+	LoadedLevelIndex = 0;
+	bLoadedPlayer = false;
+	UnloadSublevels();
+
+	CurrentWorldSave->SublevelsNames.IsEmpty() ? FinishLoading() : LoadSublevels();
+}
+
+void UENTWorldSaveSubsystem::UnloadSublevels()
+{
+	for (ULevelStreaming* StreamingLevel : GetWorld()->GetStreamingLevels())
+	{
+		if (!StreamingLevel->GetWorldAsset())
+		{
+			continue;
+		}
+
+		bool bFindLevel = false;
+		FName SublevelToUnload = StreamingLevel->GetWorldAsset()->GetFName();
+		for (const FName& SublevelName : CurrentWorldSave->SublevelsNames)
+		{
+			if (SublevelName == SublevelToUnload)
+			{
+				bFindLevel = true;
+				break;
+			}
+		}
+
+		if (!bFindLevel)
+		{
+			UGameplayStatics::UnloadStreamLevel(this, SublevelToUnload, FLatentActionInfo(), false);
+		}
+	}
+}
+
+void UENTWorldSaveSubsystem::LoadSublevels()
+{
+	if (!CurrentWorldSave)
+	{
+		return;
+	}
+
+	FLatentActionInfo LatentActionInfo;
+	LatentActionInfo.Linkage = 0;
+	LatentActionInfo.UUID = LoadedLevelIndex;
+	LatentActionInfo.CallbackTarget = this;
+	LatentActionInfo.ExecutionFunction = CurrentWorldSave->SublevelsNames.Num() == LoadedLevelIndex + 1 ? "FinishLoading" : "LoadSublevels";
+
+	UGameplayStatics::LoadStreamLevel(this, CurrentWorldSave->SublevelsNames[LoadedLevelIndex++], true, false, LatentActionInfo);
+}
+
+void UENTWorldSaveSubsystem::FinishLoading()
+{
 	TArray<AActor*> Actors;
 	UGameplayStatics::GetAllActorsOfClass(this, AActor::StaticClass(), Actors);
+
+	APawn* Player = UGameplayStatics::GetPlayerPawn(this, 0);
 
 	// done before any BeginPlay()
 	for (AActor* Actor : Actors)
@@ -239,11 +316,28 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 			continue;
 		}
 
+		if (Player == Actor)
+		{
+			if (!bLoadedPlayer)
+			{
+				FENTGameElementData EmptyData;
+				Cast<IENTSaveGameElementInterface>(Actor)->LoadGameElement(EmptyData, CurrentWorldSave);
+				IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+				bLoadedPlayer = true;
+			}
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
+
+			continue;
+		}
+
 		IENTSaveGameElementInterface* InterfaceActor = Cast<IENTSaveGameElementInterface>(Actor);
 
 		if (!InterfaceActor)
 		{
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -253,6 +347,9 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		{
 			InterfaceActor->LoadGameElement(*MuscleDataPtr, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -261,6 +358,9 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		{
 			InterfaceActor->LoadGameElement(*NerveDataPtr, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -269,6 +369,9 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		{
 			InterfaceActor->LoadGameElement(*AmberOreDataPtr, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -277,6 +380,9 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		{
 			InterfaceActor->LoadGameElement(*WeakZoneDataPtr, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -285,6 +391,9 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		{
 			InterfaceActor->LoadGameElement(*RespawnTreeData, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -293,6 +402,9 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		{
 			InterfaceActor->LoadGameElement(*ParaSiteData, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -301,17 +413,28 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		{
 			InterfaceActor->LoadGameElement(*ScriptedAIElementData, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
 		// if never found, delete the actor
 		Actor->Destroy();
 	}
+
+	bFinishLoading = true;
+	OnFinishLoading.Broadcast(CurrentWorldSave);
 }
 
 void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 {
 	GetWorld()->OnWorldBeginPlay.Remove(WorldBeginPlayDelegateHandle);
+
+	if (bLoadedPlayer)
+	{
+		return;
+	}
 
 	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
 	if (!Character)
@@ -327,19 +450,20 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 	FENTGameElementData EmptyData;
 	Cast<IENTSaveGameElementInterface>(Character)->LoadGameElement(EmptyData, CurrentWorldSave);
 	IENTSaveGameElementInterface::Execute_LoadGameElementBP(Character, CurrentWorldSave);
+
+	bLoadedPlayer = true;
+
+	if (!bCannotLoadWorld)
+	{
+		return;
+	}
+
+	Cast<IENTSaveGameElementInterface>(Character)->FinishLoading(CurrentWorldSave);
+	IENTSaveGameElementInterface::Execute_FinishLoadingBP(Character, CurrentWorldSave);
 }
 
 void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)
 {
-	if (!World)
-	{
-		return;
-	}
-
-	if (!World->GetAuthGameMode())
-	{
-		return;
-	}
-
-	SaveToSlot(0);
+	CurrentWorldSave = nullptr;
+	bLoadedPlayer = false;
 }

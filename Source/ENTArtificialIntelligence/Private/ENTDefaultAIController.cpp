@@ -4,13 +4,13 @@
 #include "ENTDefaultAIController.h"
 
 #include "BrainComponent.h"
-#include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Interfaces/ENTPawnAIInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Subsystems/ENTArtificialIntelligenceSubsystem.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Subsystems/ENTWorldSaveSubsystem.h"
 
 AENTDefaultAIController::AENTDefaultAIController()
 {
@@ -65,6 +65,20 @@ void AENTDefaultAIController::StartupActions()
 	}
 }
 
+void AENTDefaultAIController::LoadingActions(UENTWorldSave* WorldSave)
+{
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
+	if(WorldSaveSubsystem)
+	{
+		if (WorldSaveSubsystem->OnFinishLoading.IsAlreadyBound(this, &AENTDefaultAIController::LoadingActions))
+		{
+			WorldSaveSubsystem->OnFinishLoading.RemoveDynamic(this, &AENTDefaultAIController::LoadingActions);
+		}
+	}
+
+	StartupActions();
+}
+
 #if WITH_EDITORONLY_DATA
 void AENTDefaultAIController::Tick(float DeltaSeconds)
 {
@@ -95,6 +109,7 @@ void AENTDefaultAIController::Destroyed()
 		AISubsystem->RemoveAI(this);
 	}
 }
+
 void AENTDefaultAIController::TickAI_Implementation(float DeltaTime)
 {
 	IENTArtificialIntelligenceInterface::TickAI_Implementation(DeltaTime);
@@ -115,7 +130,8 @@ bool AENTDefaultAIController::IsPointReachable(const FVector& Point, const FVect
 #if WITH_EDITORONLY_DATA
 	if (bDebugAI)
 	{
-		UKismetSystemLibrary::DrawDebugBox(this, Point, Extent, FLinearColor::Red, FRotator::ZeroRotator, 0.0f, 10.0f);
+		FLinearColor Color = bResult ? FLinearColor::Green : FLinearColor::Red;
+		UKismetSystemLibrary::DrawDebugBox(this, Point, Extent, Color, FRotator::ZeroRotator, 0.0f, 10.0f);
 
 		if (bResult)
 		{

@@ -667,6 +667,23 @@ bool AENTDefaultCharacter::IsStopped() const
 	return StateMachine->GetCurrentStateID() == EENTCharacterStateID::Stop;
 }
 
+bool AENTDefaultCharacter::IsMoving(bool bIgnoreZMovement)
+{
+	if (bIgnoreZMovement)
+	{
+		FVector2D Velocity2D = FVector2D(GetVelocity());
+		return Velocity2D.Length() > 0.0f;
+	}
+
+	return GetVelocity().Length() > 0.0f;
+}
+
+bool AENTDefaultCharacter::IsMovingOnGround()
+{
+	// IsMovingOnGround() from character movement only return if the character is on the ground but still return true if not moving
+	return GetCharacterMovement()->IsMovingOnGround() && IsMoving();
+}
+
 #pragma endregion
 
 #pragma region Saves
@@ -711,6 +728,11 @@ void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElemen
 		return;
 	}
 
+	if (StateMachine)
+	{
+		StateMachine->ChangeState(EENTCharacterStateID::Stop);
+	}
+
 	if (LoadedWorldSave)
 	{
 		SetActorLocation(LoadedWorldSave->PlayerLocation);
@@ -726,10 +748,26 @@ void AENTDefaultCharacter::LoadGameElement(const FENTGameElementData& GameElemen
 	}
 
 	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
-	StateMachine->ChangeState(static_cast<EENTCharacterStateID>(SaveData->CurrentState));
-
 	bHasAmber = SaveData->bHasAmber;
 	OnAmberUpdate.Broadcast(bHasAmber);
+}
+
+void AENTDefaultCharacter::FinishLoading(UENTWorldSave* LoadedWorldSave)
+{
+	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
+	if (!PlayerSaveSubsystem)
+	{
+		return;
+	}
+
+	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
+	EENTCharacterStateID StateID = static_cast<EENTCharacterStateID>(SaveData->CurrentState);
+	if (StateID == EENTCharacterStateID::None)
+	{
+		StateID = EENTCharacterStateID::Idle;
+	}
+
+	StateMachine->ChangeState(StateID);
 }
 
 #pragma endregion

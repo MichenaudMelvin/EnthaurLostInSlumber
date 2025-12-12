@@ -8,6 +8,8 @@
 
 class UENTWorldSave;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnFinishLoading, UENTWorldSave*, WorldSave);
+
 UCLASS()
 class ENTSAVES_API UENTWorldSaveSubsystem : public UENTSaveSubsystem
 {
@@ -34,6 +36,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "World")
 	void DeleteAllWorldSaves(const int SaveIndex);
 
+	UPROPERTY(BlueprintAssignable, Category = "World")
+	FOnFinishLoading OnFinishLoading;
+
 protected:
 	FDelegateHandle WorldInitDelegateHandle;
 
@@ -44,7 +49,23 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "World")
 	TObjectPtr<UENTWorldSave> CurrentWorldSave;
 
+	int32 LoadedLevelIndex = 0;
+
+	bool bLoadedPlayer = false;
+
+	bool bFinishLoading = true;
+
+	bool bCannotLoadWorld = false;
+
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
+
+	void UnloadSublevels();
+
+	UFUNCTION()
+	void LoadSublevels();
+
+	UFUNCTION()
+	void FinishLoading();
 
 	void OnNewWorldBeginPlay();
 

@@ -49,6 +49,8 @@ protected:
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 
+	virtual void FellOutOfWorld(const UDamageType& dmgType) override;
+
 	UFUNCTION(BlueprintCallable, Category = "Respawn")
 	void RespawnParasite();
 
@@ -332,6 +334,8 @@ public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
+
+	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) override;
 
 	virtual bool HasReceivedLoadingRequest() const override {return bHasReceivedLoadingRequest;}
 

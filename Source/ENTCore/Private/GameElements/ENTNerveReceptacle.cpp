@@ -116,19 +116,24 @@ void AENTNerveReceptacle::Interaction(APlayerController* Controller, APawn* Pawn
 
 		if (LinkedNerve != nullptr) return;
 
-		LinkedNerve = Nerve;
-		Nerve->SetCurrentReceptacle(this);
+		ConnectNerve(Nerve, false);
 		Character->EmitNoise(NoiseRange);
 		UAkGameplayStatics::PostEvent(GrowlNoise, nullptr, 0, FOnAkPostEventCallback());
-		OnNerveConnect();
 		Constraint->ReleasePlayer();
-		ElectricityComponent->PlayElectricityAnimation(Nerve);
 	}
 	else
 	{
 		if (LinkedNerve == nullptr || ElectricityComponent->IsAnimRunning()) return;
 		LinkedNerve->Interaction(Controller, Pawn, InteractionComponent);
 	}
+}
+
+void AENTNerveReceptacle::ConnectNerve(AENTNerve* Nerve, bool bInstantEffect)
+{
+	LinkedNerve = Nerve;
+	LinkedNerve->SetCurrentReceptacle(this);
+	bInstantEffect ? OnElectricityMovementFinished() : ElectricityComponent->PlayElectricityAnimation(LinkedNerve);
+	OnNerveConnect();
 }
 
 void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)

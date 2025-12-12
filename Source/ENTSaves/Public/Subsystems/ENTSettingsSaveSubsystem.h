@@ -17,7 +17,7 @@ public:
 	UENTSettingsSaveSubsystem();
 
 	virtual void ResetSaveToDefault(const int SaveIndex) override;
-	
+
 protected:
 	virtual UENTDefaultSave* CreateSave(const int SaveIndex) override;
 

@@ -44,35 +44,6 @@ void AENTRespawnTree::BeginPlay()
 		Material = TreeModel->CreateDynamicMaterialInstance(0, TreeModel->GetMaterial(0));
 		Material->SetScalarParameterValue("Emissive", DefaultEmissive);
 	}
-
-	if (bIsActivated)
-	{
-		SetActive();
-
-		if (LastCheckPointName != GetName())
-		{
-			return;
-		}
-
-		ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
-		if (!Character)
-		{
-			return;
-		}
-
-		AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Character);
-		if (!Player)
-		{
-			return;
-		}
-
-		SetRespawnPoint(Player, false);
-	}
-	else
-	{
-		TreeModel->SetMaterial(0, Material);
-		Material->SetScalarParameterValue("Emissive", 0.0f);
-	}
 }
 
 void AENTRespawnTree::Destroyed()
@@ -183,4 +154,39 @@ void AENTRespawnTree::LoadGameElement(const FENTGameElementData& GameElementData
 	}
 
 	LastCheckPointName = WorldSaveSubsystem->GetCurrentWorldSave()->LastCheckPointName;
+}
+
+void AENTRespawnTree::FinishLoading(UENTWorldSave* LoadedWorldSave)
+{
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
+	if(!WorldSaveSubsystem)
+	{
+		return;
+	}
+
+	if (!bIsActivated)
+	{
+		return;
+	}
+
+	SetActive();
+
+	if (LastCheckPointName != GetName())
+	{
+		return;
+	}
+
+	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+	if (!Character)
+	{
+		return;
+	}
+
+	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Character);
+	if (!Player)
+	{
+		return;
+	}
+
+	SetRespawnPoint(Player, false);
 }

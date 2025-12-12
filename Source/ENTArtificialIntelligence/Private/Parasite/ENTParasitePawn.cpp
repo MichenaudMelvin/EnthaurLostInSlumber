@@ -15,6 +15,7 @@
 #include "Player/ENTDefaultCharacter.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
+#include "Subsystems/ENTWorldSaveSubsystem.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Selection.h"
@@ -211,6 +212,20 @@ void AENTParasitePawn::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 	}
 }
 #endif
+
+void AENTParasitePawn::FellOutOfWorld(const UDamageType& dmgType)
+{
+	// Super::FellOutOfWorld(dmgType);
+
+	if (bAllowRespawn)
+	{
+		RespawnParasite();
+	}
+	else
+	{
+		Destroy();
+	}
+}
 
 void AENTParasitePawn::RespawnParasite()
 {
@@ -569,7 +584,17 @@ void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementDat
 
 	bHasReceivedLoadingRequest = true;
 	LoadingData = Data;
+
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
+	if(!WorldSaveSubsystem || !ParasiteController)
+	{
+		return;
+	}
+
+	WorldSaveSubsystem->OnFinishLoading.AddDynamic(ParasiteController, &AENTParasiteController::LoadingActions);
 }
+
+void AENTParasitePawn::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
 
 #pragma endregion
 
