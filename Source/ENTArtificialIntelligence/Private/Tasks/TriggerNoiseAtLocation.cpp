@@ -71,7 +71,7 @@ EBTNodeResult::Type UTriggerNoiseAtLocation::ExecuteTask(UBehaviorTreeComponent&
 
 	if (AudioEvent)
 	{
-		UAkGameplayStatics::PostEventAtLocation(AudioEvent, Location, FRotator::ZeroRotator, CurrentPawn);
+		UAkGameplayStatics::PostEvent(AudioEvent, CurrentPawn, 0, FOnAkPostEventCallback());
 	}
 
 	return EBTNodeResult::Succeeded;
