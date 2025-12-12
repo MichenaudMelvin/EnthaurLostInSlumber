@@ -8,6 +8,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Interfaces/ENTPawnAIInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Navigation/PathFollowingComponent.h"
 #include "Subsystems/ENTArtificialIntelligenceSubsystem.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Subsystems/ENTWorldSaveSubsystem.h"
