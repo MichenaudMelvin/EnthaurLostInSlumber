@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "ENTDefaultAIController.h"
-#include "ENTParasitePawn.h"
 #include "Perception/AIPerceptionTypes.h"
 #include "ENTParasiteController.generated.h"
 
