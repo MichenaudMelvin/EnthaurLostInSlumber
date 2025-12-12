@@ -34,6 +34,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UButton> InvisibleBackButton;
 
-	UPROPERTY(BlueprintReadwrite)
-	TSoftObjectPtr<ULevel> MainMenuLevel;
+	UPROPERTY(BlueprintReadwrite, EditDefaultsOnly)
+	TSoftObjectPtr<UWorld> MainMenuLevel;
 };
