@@ -16,6 +16,7 @@ class ENTUI_API UENTOptionsMenu : public UENTWidgetBasics
 
 protected:
 	virtual void NativeOnInitialized() override;
+	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
 	virtual void BeginDestroy() override;
 

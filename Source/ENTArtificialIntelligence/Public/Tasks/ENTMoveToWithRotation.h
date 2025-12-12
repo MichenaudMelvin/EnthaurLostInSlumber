@@ -15,6 +15,8 @@ public:
 	UENTMoveToWithRotation();
 
 protected:
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
 	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
 #if WITH_EDITOR
@@ -32,6 +34,12 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, Category = "Ground", meta = (Units = s, EditCondition = bLerpRotation))
 	float RotationSpeed = 5.0f;
+
+	FNavigationPath* CurrentPath;
+
+	int32 CurrentIndex = -1;
+
+	FVector CurrentDirection = FVector::ZeroVector;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")

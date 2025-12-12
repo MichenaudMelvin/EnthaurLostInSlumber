@@ -594,6 +594,8 @@ void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementDat
 	WorldSaveSubsystem->OnFinishLoading.AddDynamic(ParasiteController, &AENTParasiteController::LoadingActions);
 }
 
+void AENTParasitePawn::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+
 #pragma endregion
 
 #pragma region DebugSelection

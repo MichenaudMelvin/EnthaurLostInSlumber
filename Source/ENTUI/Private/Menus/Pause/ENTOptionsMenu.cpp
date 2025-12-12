@@ -38,6 +38,26 @@ void UENTOptionsMenu::NativeOnInitialized()
 	}
 }
 
+void UENTOptionsMenu::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	UENTMenuManager* MenuManager = GetGameInstance()->GetSubsystem<UENTMenuManager>();
+	if (!IsValid(MenuManager))
+	{
+		return;
+	}
+
+	if (MenuManager->GetMenuState() == EENTMenuState::MainMenu)
+	{
+		ControlsButton->SetVisibility(ESlateVisibility::Collapsed);
+	}
+	else if (MenuManager->GetMenuState() == EENTMenuState::PauseMenu)
+	{
+		ControlsButton->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
 void UENTOptionsMenu::NativeDestruct()
 {
 	Super::NativeDestruct();
