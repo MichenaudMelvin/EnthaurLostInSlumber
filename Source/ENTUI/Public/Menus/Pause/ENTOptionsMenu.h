@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Menus/ENTWidgetBasics.h"
-#include "Menus/Elements/ENTCustomCheckBox.h"
-#include "Menus/Elements/ENTCustomSlider.h"
 #include "ENTOptionsMenu.generated.h"
 
 class UVerticalBox;

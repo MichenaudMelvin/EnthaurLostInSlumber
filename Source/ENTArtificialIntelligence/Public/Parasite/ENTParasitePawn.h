@@ -49,6 +49,8 @@ protected:
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 
+	virtual void FellOutOfWorld(const UDamageType& dmgType) override;
+
 	UFUNCTION(BlueprintCallable, Category = "Respawn")
 	void RespawnParasite();
 

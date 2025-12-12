@@ -667,6 +667,23 @@ bool AENTDefaultCharacter::IsStopped() const
 	return StateMachine->GetCurrentStateID() == EENTCharacterStateID::Stop;
 }
 
+bool AENTDefaultCharacter::IsMoving(bool bIgnoreZMovement)
+{
+	if (bIgnoreZMovement)
+	{
+		FVector2D Velocity2D = FVector2D(GetVelocity());
+		return Velocity2D.Length() > 0.0f;
+	}
+
+	return GetVelocity().Length() > 0.0f;
+}
+
+bool AENTDefaultCharacter::IsMovingOnGround()
+{
+	// IsMovingOnGround() from character movement only return if the character is on the ground but still return true if not moving
+	return GetCharacterMovement()->IsMovingOnGround() && IsMoving();
+}
+
 #pragma endregion
 
 #pragma region Saves

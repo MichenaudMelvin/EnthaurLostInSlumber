@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ENTWeakZoneInterface.h"
 #include "GameFramework/Actor.h"
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTRespawnTree.generated.h"
@@ -76,6 +75,9 @@ public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
+
+	UFUNCTION()
+	void OnFinishLoading(UENTWorldSave* WorldSave);
 
 	const FTransform& GetRespawnTransform() const {return RespawnTransform;}
 };

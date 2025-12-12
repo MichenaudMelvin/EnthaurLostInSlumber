@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{80007E67-2C0E-BB82-29F5-F4B9E7BA3B66}",
+    "Hash": "{57BB9C15-3001-4657-DC7F-C053B5D2E628}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -375,6 +375,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Cinematic_Parasite_Scream_V3.wav",
       "CachePath": "56/{5667E305-95C2-5DE2-B4F3-7EF1DFBC4CCA}.wem"
+     },
+     {
+      "Id": "201793863",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Bridge_Fall_V3.wav",
+      "CachePath": "7B/{7B57AF57-4B5A-BBC9-1387-305D6DFE2A9F}.wem"
      },
      {
       "Id": "203228580",
@@ -982,7 +990,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Door_Open_Start.wav",
-      "CachePath": "71/{71FE1545-86F4-B94B-E183-07EBAD2209EA}.wem"
+      "CachePath": "46/{46A25D5F-88D2-0CB1-E345-31008D41ACCC}.wem"
      },
      {
       "Id": "590805685",
@@ -1126,7 +1134,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_20.wav",
-      "CachePath": "4D/{4D290209-3391-1B68-ABF2-5F7C3294BE9B}.wem"
+      "CachePath": "61/{617EA17D-A789-894D-AFD1-3B08C1C8C44E}.wem"
      },
      {
       "Id": "649901891",
@@ -1311,14 +1319,6 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_11.wav",
       "CachePath": "B9/{B97827A7-26C7-FC78-455E-17264F431D77}.wem"
-     },
-     {
-      "Id": "750568288",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX8bridge_Fall.wav",
-      "CachePath": "AE/{AE5E974A-47DF-C649-1B37-7ED899734702}.wem"
      },
      {
       "Id": "756656613",
@@ -1821,11 +1821,11 @@
       "Color": "10",
       "MaxAttenuation": "6000",
       "DurationType": "OneShot",
-      "DurationMin": "6.1666665",
-      "DurationMax": "6.1666665",
+      "DurationMin": "7.3333335",
+      "DurationMax": "7.3333335",
       "MediaRefs": [
        {
-        "Id": "750568288"
+        "Id": "201793863"
        }
       ],
       "AuxBusRefs": [
@@ -2105,8 +2105,8 @@
       "GUID": "{40C0DABC-E260-4BE7-9895-167ACF357472}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "0.16666667",
-      "DurationMax": "0.46666667",
+      "DurationMin": "0.15731238",
+      "DurationMax": "0.49441615",
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -2369,8 +2369,8 @@
       "GUID": "{84B16784-5C30-4EFA-A338-4ACE6DA19306}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "0.23333333",
-      "DurationMax": "0.3",
+      "DurationMin": "0.22023733",
+      "DurationMax": "0.31783897",
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -2422,8 +2422,8 @@
       "GUID": "{27009C7D-31EB-42D4-BEA8-E873A733B256}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "0.3",
-      "DurationMax": "0.4",
+      "DurationMin": "0.2831623",
+      "DurationMax": "0.42378527",
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -3066,13 +3066,43 @@
         "Id": "5271368"
        },
        {
+        "Id": "43894004"
+       },
+       {
+        "Id": "122346683"
+       },
+       {
+        "Id": "151884214"
+       },
+       {
+        "Id": "197068285"
+       },
+       {
         "Id": "419188619"
+       },
+       {
+        "Id": "429011309"
+       },
+       {
+        "Id": "725331003"
        },
        {
         "Id": "778778069"
        },
        {
+        "Id": "801782534"
+       },
+       {
+        "Id": "804146141"
+       },
+       {
+        "Id": "889954801"
+       },
+       {
         "Id": "998170531"
+       },
+       {
+        "Id": "1021487410"
        }
       ]
      },
@@ -3392,6 +3422,6 @@
     ]
    }
   ],
-  "FileHash": "{776729EF-2378-7F13-B4DA-AAD5A9707B5F}"
+  "FileHash": "{AB731B93-55D2-F575-7B64-B95B62DA351B}"
  }
 }

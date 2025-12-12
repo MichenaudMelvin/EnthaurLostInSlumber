@@ -27,8 +27,21 @@ void UENTGammaMenu::NativeOnInitialized()
 void UENTGammaMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
-	
+
 	UpdateWidgetValues();
+}
+
+void UENTGammaMenu::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->SaveToSlot(0);
 }
 
 void UENTGammaMenu::BeginDestroy()

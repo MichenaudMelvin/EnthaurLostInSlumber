@@ -7,6 +7,7 @@
 #include "Runtime/AIModule/Classes/AIController.h"
 #include "ENTDefaultAIController.generated.h"
 
+class UENTWorldSave;
 struct FENTAIData;
 
 UCLASS()
@@ -60,6 +61,9 @@ public:
 #pragma region Saves
 
 public:
+	UFUNCTION()
+	void LoadingActions(UENTWorldSave* WorldSave);
+
 	virtual void SaveControllerData(FENTAIData& AIData);
 
 	virtual void LoadControllerData(const FENTAIData& AIData);

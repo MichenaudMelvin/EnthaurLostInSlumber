@@ -583,8 +583,6 @@ void AENTNerve::FinishRetractCable()
 	NerveBall->SetWorldRotation(NerveBallRotator);
 }
 
-
-
 FVector AENTNerve::GetLastCableLocation(const ESplineCoordinateSpace::Type& CoordinateSpace) const
 {
 	int32 LastIndex = (SplineCable->GetNumberOfSplinePoints() - 1);
@@ -932,5 +930,6 @@ void AENTNerve::SetCurrentReceptacle(AENTNerveReceptacle* Receptacle)
 	NerveStretchComp->Stop();
 	UpdateLastSplinePointLocation(AttachTransform.GetLocation());
 	UpdateSplineMeshes(false, false);
+	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);;
 	NerveBall->SetCollisionResponseToChannel(InteractionChannel, ECR_Ignore);
 }

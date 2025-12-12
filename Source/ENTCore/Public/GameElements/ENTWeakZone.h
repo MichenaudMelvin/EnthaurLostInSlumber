@@ -33,6 +33,12 @@ protected:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+#if WITH_EDITOR
+	virtual void PostLoad() override;
+	virtual void PreEditChange(FProperty* PropertyAboutToChange) override;
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+
 	virtual void Tick(float DeltaSeconds) override;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeakZone")
@@ -96,6 +102,9 @@ protected:
 	UFUNCTION()
 	void CureUpdate(float Alpha);
 
+	UFUNCTION()
+	void CureFinish();
+
 	UPROPERTY(BlueprintAssignable, Category = "WeakZone")
 	FOnCure OnCure;
 
@@ -114,12 +123,18 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
 	TArray<TObjectPtr<ALight>> CorruptedLights;
 
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<AActor>> CuredActors;
+
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TArray<TObjectPtr<AActor>> CorruptedActors;
+
 #if WITH_EDITORONLY_DATA
 	/**
 	 * @brief Debug value to display the cured lights
 	 */
 	UPROPERTY(EditInstanceOnly, Transient, Category = "WeakZone")
-	bool bShowCuredLights = false;
+	bool bShowWeakZoneAsCure = false;
 #endif
 
 	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
@@ -127,6 +142,14 @@ protected:
 
 	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
 	TArray<float> CorruptedLightsIntensity;
+
+	void SetActorsVisibility(bool bCure) const;
+
+	void SetCuredActorsVisibility(bool bVisible) const;
+
+	void SetCorruptedActorsVisibility(bool bVisible) const;
+
+	void SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")

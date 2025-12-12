@@ -68,6 +68,19 @@ void UENTSoundMenu::NativeConstruct()
 	OnOverallButtonHovered();
 }
 
+void UENTSoundMenu::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->SaveToSlot(0);
+}
+
 void UENTSoundMenu::BeginDestroy()
 {
 	Super::BeginDestroy();

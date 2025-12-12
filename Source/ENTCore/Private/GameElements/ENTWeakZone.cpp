@@ -13,6 +13,7 @@
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
 #include "Kismet/KismetMaterialLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Components/BillboardComponent.h"
@@ -62,9 +63,12 @@ void AENTWeakZone::BeginPlay()
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &AENTWeakZone::InitZone, 0.2f, false);
 
 	FOnTimelineFloat UpdateEvent;
+	FOnTimelineEvent FinishEvent;
 
 	UpdateEvent.BindDynamic(this, &AENTWeakZone::CureUpdate);
+	FinishEvent.BindDynamic(this, &AENTWeakZone::CureFinish);
 	CureTimeline.AddInterpFloat(CureCurve, UpdateEvent);
+	CureTimeline.SetTimelineFinishedFunc(FinishEvent);
 	CureTimeline.SetPlayRate(1 / CureDuration);
 
 	UpdateEvent.Unbind();
@@ -91,6 +95,8 @@ void AENTWeakZone::BeginPlay()
 
 		Light->GetLightComponent()->SetVisibility(true);
 	}
+
+	SetActorsVisibility(false);
 }
 
 void AENTWeakZone::OnConstruction(const FTransform& Transform)
@@ -106,6 +112,11 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 	{
 		BlackAndWhiteShader->Settings.WeightedBlendables.Array.Empty();
 		BlackAndWhiteShader->Settings.AddBlendable(DynamicZoneMaterial, 1.0f);
+
+#if WITH_EDITORONLY_DATA
+		float ScalarParam = bShowWeakZoneAsCure ? 0.0f : 1.0f;
+		DynamicZoneMaterial->SetScalarParameterValue(CureParam, ScalarParam);
+#endif
 	}
 
 	ChangeZoneSize(ZoneSize);
@@ -121,7 +132,7 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 		CuredLightsIntensity.Add(Light->GetLightComponent()->Intensity);
 
 #if WITH_EDITORONLY_DATA
-		Light->GetLightComponent()->SetVisibility(bShowCuredLights);
+		Light->GetLightComponent()->SetVisibility(bShowWeakZoneAsCure);
 #endif
 	}
 
@@ -136,10 +147,50 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 		CorruptedLightsIntensity.Add(Light->GetLightComponent()->Intensity);
 
 #if WITH_EDITORONLY_DATA
-		Light->GetLightComponent()->SetVisibility(!bShowCuredLights);
+		Light->GetLightComponent()->SetVisibility(!bShowWeakZoneAsCure);
 #endif
 	}
 }
+
+#if WITH_EDITOR
+void AENTWeakZone::PostLoad()
+{
+	Super::PostLoad();
+
+	SetActorsVisibility(false);
+}
+
+void AENTWeakZone::PreEditChange(FProperty* PropertyAboutToChange)
+{
+	Super::PreEditChange(PropertyAboutToChange);
+
+	if (!PropertyAboutToChange)
+	{
+		return;
+	}
+
+	if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CuredActors))
+	{
+		SetCuredActorsVisibility(true);
+	}
+	else if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CorruptedActors))
+	{
+		SetCorruptedActorsVisibility(true);
+	}
+}
+
+void AENTWeakZone::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	const FName& ChangedProperty = PropertyChangedEvent.GetMemberPropertyName();
+
+	if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CuredActors) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CorruptedActors) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, bShowWeakZoneAsCure))
+	{
+		SetActorsVisibility(bShowWeakZoneAsCure);
+	}
+}
+#endif
 
 void AENTWeakZone::Tick(float DeltaSeconds)
 {
@@ -157,7 +208,7 @@ void AENTWeakZone::InitZone()
 
 	for (AActor* OverlappingActor : OverlappingActors)
 	{
-		if (OverlappingActor == nullptr)
+		if (!OverlappingActor)
 		{
 			continue;
 		}
@@ -176,12 +227,15 @@ void AENTWeakZone::DestroyZone()
 		return;
 	}
 
+	FVector LastBoxExtent = BoxComponent->GetUnscaledBoxExtent();
+	BoxComponent->SetBoxExtent(ZoneSize, true);
+
 	TArray<AActor*> OverlappingActors;
 	BoxComponent->GetOverlappingActors(OverlappingActors);
 
 	for (AActor* OverlappingActor : OverlappingActors)
 	{
-		if (OverlappingActor == nullptr)
+		if (!OverlappingActor)
 		{
 			continue;
 		}
@@ -191,6 +245,8 @@ void AENTWeakZone::DestroyZone()
 			IENTWeakZoneInterface::Execute_OnExitWeakZone(OverlappingActor);
 		}
 	}
+
+	BoxComponent->SetBoxExtent(LastBoxExtent, false);
 
 	bIsZoneActive = false;
 }
@@ -202,12 +258,15 @@ void AENTWeakZone::CreateZone()
 		return;
 	}
 
+	FVector LastBoxExtent = BoxComponent->GetUnscaledBoxExtent();
+	BoxComponent->SetBoxExtent(ZoneSize, true);
+
 	TArray<AActor*> OverlappingActors;
 	BoxComponent->GetOverlappingActors(OverlappingActors);
 
 	for (AActor* OverlappingActor : OverlappingActors)
 	{
-		if (OverlappingActor == nullptr)
+		if (!OverlappingActor)
 		{
 			continue;
 		}
@@ -217,6 +276,8 @@ void AENTWeakZone::CreateZone()
 			IENTWeakZoneInterface::Execute_OnEnterWeakZone(OverlappingActor, true);
 		}
 	}
+
+	BoxComponent->SetBoxExtent(LastBoxExtent, false);
 
 	bIsZoneActive = true;
 }
@@ -237,6 +298,9 @@ void AENTWeakZone::CureUpdate(float Alpha)
 {
 	float ScalarParam = FMath::Lerp(1.0f, 0.0f, Alpha);
 	DynamicZoneMaterial->SetScalarParameterValue(CureParam, ScalarParam);
+
+	FVector TargetZoneSize = UKismetMathLibrary::VLerp(ZoneSize, FVector::ZeroVector, Alpha);
+	BoxComponent->SetBoxExtent(TargetZoneSize, false);
 
 	int CuredLightIndex = 0;
 	for (TObjectPtr<ALight> Light : CuredLights)
@@ -267,8 +331,19 @@ void AENTWeakZone::CureUpdate(float Alpha)
 	}
 }
 
+void AENTWeakZone::CureFinish()
+{
+	FVector CurrentBoxExtent = BoxComponent->GetUnscaledBoxExtent();
+	BoxComponent->SetBoxExtent(CurrentBoxExtent, true);
+}
+
 void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	if (CureTimeline.IsPlaying() || CureTimeline.IsReversing())
+	{
+		return;
+	}
+
 	if (OtherActor->Implements<UENTWeakZoneInterface>())
 	{
 		IENTWeakZoneInterface::Execute_OnEnterWeakZone(OtherActor, bIsZoneActive);
@@ -277,9 +352,48 @@ void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 
 void AENTWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	if (CureTimeline.IsPlaying() || CureTimeline.IsReversing())
+	{
+		return;
+	}
+
 	if (OtherActor->Implements<UENTWeakZoneInterface>())
 	{
 		IENTWeakZoneInterface::Execute_OnExitWeakZone(OtherActor);
+	}
+}
+
+void AENTWeakZone::SetActorsVisibility(bool bCure) const
+{
+	SetCuredActorsVisibility(bCure);
+	SetCorruptedActorsVisibility(!bCure);
+}
+
+void AENTWeakZone::SetCuredActorsVisibility(bool bVisible) const
+{
+	SetArrayVisibility(bVisible, CuredActors);
+}
+
+void AENTWeakZone::SetCorruptedActorsVisibility(bool bVisible) const
+{
+	SetArrayVisibility(bVisible, CorruptedActors);
+}
+
+void AENTWeakZone::SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const
+{
+	for (TObjectPtr<AActor> Actor : ActorArray)
+	{
+		if (Actor && Actor->GetRootComponent())
+		{
+			USceneComponent* ActorRootComp = Actor->GetRootComponent();
+			ActorRootComp->SetVisibility(bVisible, true);
+
+			APostProcessVolume* PostProcess = Cast<APostProcessVolume>(Actor);
+			if (PostProcess)
+			{
+				PostProcess->bEnabled = bVisible;
+			}
+		}
 	}
 }
 
@@ -294,6 +408,8 @@ void AENTWeakZone::CureZone(AActor* StartCurePoint)
 	{
 		OnElectricityMovementFinished();
 	}
+
+	SetActorsVisibility(true);
 
 	OnCure.Broadcast();
 	DestroyZone();
@@ -310,6 +426,8 @@ void AENTWeakZone::CorruptZone(AActor* StartCorruptPoint)
 	{
 		OnElectricityMovementFinished();
 	}
+
+	SetActorsVisibility(false);
 
 	OnCorrupt.Broadcast();
 	CreateZone();

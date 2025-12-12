@@ -9,14 +9,6 @@ Event	ID	Name			Wwise Object Path	Notes
 	2691478873	AKE_Gameplay			\SFX\Ambient\AKE_Gameplay	
 	3942717657	AKE_VillageHeartbeat			\SFX\Ambient\AKE_VillageHeartbeat	
 
-State Group	ID	Name			Wwise Object Path	Notes
-	3907450003	AKST_WeakenedZone			\Gameplay\AKST_WeakenedZone	
-
-State	ID	Name	State Group			Notes
-	748895195	None	AKST_WeakenedZone			
-	1160234136	Normal	AKST_WeakenedZone			
-	4120836511	Weakened	AKST_WeakenedZone			
-
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	40028711	AMB_BREATH_12	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\89\{8942449A-973B-9A85-1F1B-EF054CC357C3}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Breath\AMB_BREATH_12		2432368
 	79017697	AMB_Pad_Necrosed_LP_04	F:\SLOPE\IlM A4\Projet\EnthaurLostInSlumber\EnthaurLostInSlumber_WwiseProject\.cache\47\{47D269AE-96F1-4CBE-AFEB-CEACBFB23732}.wem		\Actor-Mixer Hierarchy\WU_AMB\AM_AMB\AMB_Pad_Corrupted\AMB_Pad_Necrosed_LP_04		6338492

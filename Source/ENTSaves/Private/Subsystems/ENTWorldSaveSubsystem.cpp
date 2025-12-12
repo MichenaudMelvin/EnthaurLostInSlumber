@@ -76,6 +76,11 @@ UENTDefaultSave* UENTWorldSaveSubsystem::CreateSave(const int SaveIndex)
 
 UENTDefaultSave* UENTWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 {
+	if (!bFinishLoading)
+	{
+		return nullptr;
+	}
+
 	if (!CurrentWorldSave)
 	{
 		CreateSave(SaveIndex);
@@ -244,6 +249,8 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		return;
 	}
 
+	bFinishLoading = false;
+
 	LoadedLevelIndex = 0;
 	bLoadedPlayer = false;
 	UnloadSublevels();
@@ -261,9 +268,10 @@ void UENTWorldSaveSubsystem::UnloadSublevels()
 		}
 
 		bool bFindLevel = false;
+		FName SublevelToUnload = StreamingLevel->GetWorldAsset()->GetFName();
 		for (const FName& SublevelName : CurrentWorldSave->SublevelsNames)
 		{
-			if (SublevelName == StreamingLevel->GetWorldAsset()->GetFName())
+			if (SublevelName == SublevelToUnload)
 			{
 				bFindLevel = true;
 				break;
@@ -272,7 +280,7 @@ void UENTWorldSaveSubsystem::UnloadSublevels()
 
 		if (!bFindLevel)
 		{
-			UGameplayStatics::UnloadStreamLevel(this, StreamingLevel->GetWorldAsset()->GetFName(), FLatentActionInfo(), false);
+			UGameplayStatics::UnloadStreamLevel(this, SublevelToUnload, FLatentActionInfo(), false);
 		}
 	}
 }
@@ -389,6 +397,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		// if never found, delete the actor
 		Actor->Destroy();
 	}
+
+	bFinishLoading = true;
+	OnFinishLoading.Broadcast(CurrentWorldSave);
 }
 
 void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
@@ -420,26 +431,6 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 
 void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)
 {
-	const UENTSavesConfig* Config = GetDefault<UENTSavesConfig>();
-	if (!Config)
-	{
-		return;
-	}
-
-	if (!Config->bSaveAfterLeaveALevel)
-	{
-		return;
-	}
-
-	if (!World)
-	{
-		return;
-	}
-
-	if (!World->GetAuthGameMode())
-	{
-		return;
-	}
-
-	SaveToSlot(0);
+	CurrentWorldSave = nullptr;
+	bLoadedPlayer = false;
 }

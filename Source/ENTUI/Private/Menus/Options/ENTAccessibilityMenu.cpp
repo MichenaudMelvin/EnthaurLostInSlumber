@@ -63,6 +63,19 @@ void UENTAccessibilityMenu::NativeConstruct()
 	ViewBobbingCheckbox->SetIsOn(SettingsSubsystem->GetSettings()->bViewBobbing, true);
 }
 
+void UENTAccessibilityMenu::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+	UENTSettingsSaveSubsystem* SettingsSubsystem = GetGameInstance()->GetSubsystem<UENTSettingsSaveSubsystem>();
+	if (!SettingsSubsystem)
+	{
+		return;
+	}
+
+	SettingsSubsystem->SaveToSlot(0);
+}
+
 void UENTAccessibilityMenu::BeginDestroy()
 {
 	Super::BeginDestroy();
