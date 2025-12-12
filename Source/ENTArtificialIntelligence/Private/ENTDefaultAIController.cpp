@@ -4,13 +4,13 @@
 #include "ENTDefaultAIController.h"
 
 #include "BrainComponent.h"
-#include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Interfaces/ENTPawnAIInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Subsystems/ENTArtificialIntelligenceSubsystem.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
+#include "Subsystems/ENTWorldSaveSubsystem.h"
 
 AENTDefaultAIController::AENTDefaultAIController()
 {
@@ -63,6 +63,20 @@ void AENTDefaultAIController::StartupActions()
 	{
 		AISubsystem->AddAI(this);
 	}
+}
+
+void AENTDefaultAIController::LoadingActions(UENTWorldSave* WorldSave)
+{
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
+	if(WorldSaveSubsystem)
+	{
+		if (WorldSaveSubsystem->OnFinishLoading.IsAlreadyBound(this, &AENTDefaultAIController::LoadingActions))
+		{
+			WorldSaveSubsystem->OnFinishLoading.RemoveDynamic(this, &AENTDefaultAIController::LoadingActions);
+		}
+	}
+
+	StartupActions();
 }
 
 #if WITH_EDITORONLY_DATA

@@ -2678,7 +2678,7 @@
 												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-12</Value>
+														<Value>-21</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -3160,7 +3160,7 @@
 								<ActiveSource Name="SFX_Release_Amber" ID="{3B4C8C9C-1721-49ED-981C-00E96EB043BB}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="SFX8bridge_Fall" ID="{86B9659F-2F08-417B-BC6C-ACEE3A501CDD}" ShortID="686937423">
+						<Sound Name="SFX_bridge_Fall" ID="{86B9659F-2F08-417B-BC6C-ACEE3A501CDD}" ShortID="686937423">
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
 								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
@@ -3189,9 +3189,23 @@
 										<MediaID ID="750568288"/>
 									</MediaIDList>
 								</AudioFileSource>
+								<AudioFileSource Name="SFX_bridge_Fall_V2" ID="{E8CF408E-5B8B-4712-BD0E-C36987B885E1}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_bridge_Fall_V2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="343710821"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="SFX_Bridge_Fall_V3" ID="{7047C5E8-D5DB-478D-B9A4-B83B1ED941D8}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Bridge_Fall_V3.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="201793863"/>
+									</MediaIDList>
+								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="SFX8bridge_Fall" ID="{70503318-D2A7-4FE4-AA12-A9601F3DF3EE}" Platform="Linked"/>
+								<ActiveSource Name="SFX_Bridge_Fall_V3" ID="{7047C5E8-D5DB-478D-B9A4-B83B1ED941D8}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 						<RandomSequenceContainer Name="SFX_Door_Open" ID="{544B8CFB-74C2-4115-ABAC-BB1A0568BB64}" ShortID="535652467">

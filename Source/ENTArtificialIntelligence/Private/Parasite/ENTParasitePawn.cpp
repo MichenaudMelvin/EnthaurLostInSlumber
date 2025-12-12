@@ -15,6 +15,7 @@
 #include "Player/ENTDefaultCharacter.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Saves/WorldSaves/ENTWorldSave.h"
+#include "Subsystems/ENTWorldSaveSubsystem.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Selection.h"
@@ -583,6 +584,14 @@ void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementDat
 
 	bHasReceivedLoadingRequest = true;
 	LoadingData = Data;
+
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
+	if(!WorldSaveSubsystem || !ParasiteController)
+	{
+		return;
+	}
+
+	WorldSaveSubsystem->OnFinishLoading.AddDynamic(ParasiteController, &AENTParasiteController::LoadingActions);
 }
 
 #pragma endregion
