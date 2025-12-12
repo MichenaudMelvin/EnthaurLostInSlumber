@@ -57,6 +57,11 @@ void UENTElectricityComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 
 void UENTElectricityComponent::PlayElectricityAnimation(AActor* LinkedActor)
 {
+	if(!LinkedActor)
+	{
+		return;
+	}
+
 	OnElectricityAnimationStarted.Broadcast(LinkedActor);
 	PlayElectricityAnimation(LinkedActor->GetTransform());
 }

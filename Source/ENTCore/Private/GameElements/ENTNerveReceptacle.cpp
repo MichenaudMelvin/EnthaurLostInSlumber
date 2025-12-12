@@ -6,7 +6,6 @@
 #include "AkGameplayStatics.h"
 #include "ENTCameraShakeComponent.h"
 #include "ENTElectricityComponent.h"
-#include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "Interface/ENTActivation.h"
 #include "GameElements/ENTNerve.h"
