@@ -899,6 +899,8 @@ void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData, UENT
 	bIsLoaded = true;
 }
 
+void AENTNerve::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+
 #pragma endregion
 
 void AENTNerve::SetCurrentReceptacle(AENTNerveReceptacle* Receptacle)

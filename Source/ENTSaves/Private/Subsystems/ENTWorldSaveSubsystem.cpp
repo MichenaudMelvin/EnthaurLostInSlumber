@@ -224,7 +224,7 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 {
 	LoadSave(0, false);
 
-	bool bCannotLoadWorld = !CurrentWorldSave;
+	bCannotLoadWorld = !CurrentWorldSave;
 
 #if WITH_EDITOR
 	const UENTEditorSettings* EditorSettings = GetDefault<UENTEditorSettings>();
@@ -326,6 +326,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 				bLoadedPlayer = true;
 			}
 
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
+
 			continue;
 		}
 
@@ -334,6 +337,7 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		if (!InterfaceActor)
 		{
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -343,6 +347,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		{
 			InterfaceActor->LoadGameElement(*MuscleDataPtr, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -351,6 +358,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		{
 			InterfaceActor->LoadGameElement(*NerveDataPtr, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -359,6 +369,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		{
 			InterfaceActor->LoadGameElement(*AmberOreDataPtr, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -367,6 +380,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		{
 			InterfaceActor->LoadGameElement(*WeakZoneDataPtr, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -375,6 +391,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		{
 			InterfaceActor->LoadGameElement(*RespawnTreeData, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -383,6 +402,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		{
 			InterfaceActor->LoadGameElement(*ParaSiteData, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -391,6 +413,9 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		{
 			InterfaceActor->LoadGameElement(*ScriptedAIElementData, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
 			continue;
 		}
 
@@ -427,6 +452,14 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 	IENTSaveGameElementInterface::Execute_LoadGameElementBP(Character, CurrentWorldSave);
 
 	bLoadedPlayer = true;
+
+	if (!bCannotLoadWorld)
+	{
+		return;
+	}
+
+	Cast<IENTSaveGameElementInterface>(Character)->FinishLoading(CurrentWorldSave);
+	IENTSaveGameElementInterface::Execute_FinishLoadingBP(Character, CurrentWorldSave);
 }
 
 void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)

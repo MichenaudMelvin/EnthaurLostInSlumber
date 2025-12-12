@@ -335,6 +335,8 @@ public:
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
+	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) override;
+
 	virtual bool HasReceivedLoadingRequest() const override {return bHasReceivedLoadingRequest;}
 
 	virtual const FENTAIData& GetLoadingData() const override {return LoadingData;}
