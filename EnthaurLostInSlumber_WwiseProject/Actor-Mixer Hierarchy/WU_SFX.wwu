@@ -2872,6 +2872,11 @@
 								<Property Name="EnableAttenuation" Type="bool" Value="False"/>
 								<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>9</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -3523,7 +3528,7 @@
 								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>9</Value>
+										<Value>11</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>

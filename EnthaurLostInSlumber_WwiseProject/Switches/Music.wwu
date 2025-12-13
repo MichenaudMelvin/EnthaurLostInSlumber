@@ -14,6 +14,7 @@
 						<Switch Name="SW_Stop_Lvl4" ID="{C4E3C809-1510-4722-B962-8C6F5CD6847A}"/>
 						<Switch Name="SW_Stop_Med" ID="{E1F1724F-5C9C-4A13-8BFC-3BBA3AC3CA5B}"/>
 						<Switch Name="SW_To_Menu" ID="{CD833132-3790-4CD0-B412-4AD310D62540}"/>
+						<Switch Name="SW_To_Cinematic" ID="{DE9ECBFF-BEE2-4802-91F9-CD25EDF087F0}"/>
 					</ChildrenList>
 				</SwitchGroup>
 			</ChildrenList>

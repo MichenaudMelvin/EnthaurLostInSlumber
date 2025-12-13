@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{253D842E-C114-3911-0E00-D7B84F2B508D}",
+    "Hash": "{C1F4B0A6-E822-7E88-F265-E77AE4949DB0}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -31,6 +31,14 @@
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Lvl4_Med_130Bpm_LP.wav",
       "CachePath": "5D/{5D427FDD-B81E-92EC-4B5A-F511C52865FE}.wem"
+     },
+     {
+      "Id": "223929766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS.wav",
+      "CachePath": "1A/{1A592355-3838-54A3-1C36-092955A7FB12}.wem"
      },
      {
       "Id": "311129035",
@@ -320,6 +328,21 @@
       ]
      },
      {
+      "Id": "1219780288",
+      "Name": "AKE_Music_Cinematic",
+      "ObjectPath": "\\Events\\Musics\\AKE_Music_Cinematic",
+      "GUID": "{2240BA50-8384-4581-97C3-FEB5891E6A34}",
+      "Color": "19",
+      "DurationType": "OneShot",
+      "DurationMin": "34.5",
+      "DurationMax": "34.5",
+      "MediaRefs": [
+       {
+        "Id": "223929766"
+       }
+      ]
+     },
+     {
       "Id": "2220893880",
       "Name": "AKE_Stop_Lvl_Chest",
       "ObjectPath": "\\Events\\Musics\\AKE_Stop_Lvl_Chest",
@@ -397,6 +420,12 @@
         "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
        },
        {
+        "Id": "1268243103",
+        "Name": "SW_To_Cinematic",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Cinematic",
+        "GUID": "{DE9ECBFF-BEE2-4802-91F9-CD25EDF087F0}"
+       },
+       {
         "Id": "1275925729",
         "Name": "SW_Stop_Lvl2",
         "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_Stop_Lvl2",
@@ -443,6 +472,6 @@
     ]
    }
   ],
-  "FileHash": "{AB85BFA6-7272-FCD8-ED83-E89BAA9388FD}"
+  "FileHash": "{9BC7503C-FECF-2123-92EB-1FF8D3BCF4AE}"
  }
 }
