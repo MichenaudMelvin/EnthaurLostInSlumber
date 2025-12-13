@@ -9,6 +9,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTWeakZone.generated.h"
 
+class IENTWeakZoneInterface;
 class ALight;
 class UENTElectricityComponent;
 class UAkAudioEvent;
@@ -163,6 +164,9 @@ public:
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeakZone")
 	FVector ZoneSize = FVector(100.0f);
+
+	UPROPERTY(EditInstanceOnly, Category = "WeakZone")
+	TSet<TObjectPtr<AActor>> ActorsToIgnore;
 
 	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
 	TObjectPtr<UMaterialInterface> ZoneMaterial;
