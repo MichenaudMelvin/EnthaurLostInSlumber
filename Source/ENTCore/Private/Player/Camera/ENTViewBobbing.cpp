@@ -92,7 +92,7 @@ void UENTViewBobbing::SetRollOscillator(const FWaveOscillator& Oscillator, float
 {
 	if (!ShakePattern)
 		return;
-	
+
 	ShakePattern->RotationAmplitudeMultiplier = InRotationAmplitudeMultiplier;
 	ShakePattern->RotationFrequencyMultiplier = InRotationFrequencyMultiplier;
 	ShakePattern->Roll = Oscillator;

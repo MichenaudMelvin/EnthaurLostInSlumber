@@ -346,6 +346,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Respawn", meta = (Units = cm, ClampMin = 0.0f))
 	float RespawnGroundTrace = 500.0f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Respawn")
+	int32 ResetLagFrames = 2;
+
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Respawn")
 	FKOnRespawn OnRespawn;
@@ -354,6 +357,7 @@ public:
 
 	void SetRespawnTree(AENTRespawnTree* InRespawnTree) {LastRespawnTree = InRespawnTree;}
 
+	UFUNCTION(Exec)
 	void Respawn();
 
 protected:
