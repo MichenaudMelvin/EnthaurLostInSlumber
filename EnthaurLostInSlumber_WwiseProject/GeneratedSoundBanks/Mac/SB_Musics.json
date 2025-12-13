@@ -11,7 +11,7 @@
     "GUID": "{5BBA00A6-E2D8-45B8-B8CD-40FFD3A78375}",
     "Color": "19",
     "Language": "SFX",
-    "Hash": "{60C0464E-EA66-1722-1156-65490E91C66B}",
+    "Hash": "{C1F4B0A6-E822-7E88-F265-E77AE4949DB0}",
     "ObjectPath": "\\SoundBanks\\Musics\\SB_Musics",
     "ShortName": "SB_Musics",
     "Path": "SB_Musics.bnk",
@@ -33,20 +33,20 @@
       "CachePath": "5D/{5D427FDD-B81E-92EC-4B5A-F511C52865FE}.wem"
      },
      {
+      "Id": "223929766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS.wav",
+      "CachePath": "1A/{1A592355-3838-54A3-1C36-092955A7FB12}.wem"
+     },
+     {
       "Id": "311129035",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Enthaur_Music_Lvl4_High_130Bpm_LP.wav",
       "CachePath": "D2/{D2081ADA-04AF-275C-F014-82E81A0AE0ED}.wem"
-     },
-     {
-      "Id": "483900290",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "4. Gaur Plain.wav",
-      "CachePath": "C4/{C4D37706-CA52-2F4D-3C68-8C8637C91106}.wem"
      },
      {
       "Id": "574035864",
@@ -333,10 +333,12 @@
       "ObjectPath": "\\Events\\Musics\\AKE_Music_Cinematic",
       "GUID": "{2240BA50-8384-4581-97C3-FEB5891E6A34}",
       "Color": "19",
-      "DurationType": "Infinite",
+      "DurationType": "OneShot",
+      "DurationMin": "34.5",
+      "DurationMax": "34.5",
       "MediaRefs": [
        {
-        "Id": "483900290"
+        "Id": "223929766"
        }
       ]
      },
@@ -470,6 +472,6 @@
     ]
    }
   ],
-  "FileHash": "{C391A81E-AD35-4823-E787-5FE346386478}"
+  "FileHash": "{9BC7503C-FECF-2123-92EB-1FF8D3BCF4AE}"
  }
 }

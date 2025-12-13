@@ -5070,14 +5070,13 @@
 							<Custom>
 								<MusicPlaylistItem Name="" ID="{FE6E8FCB-42BB-4D4B-9A6E-3A46CFF618A5}" ShortID="856991876">
 									<ChildrenList>
-										<MusicPlaylistItem Name="" ID="{A27B2795-ECD9-48A0-B516-318AA1FA5637}" ShortID="633680204">
+										<MusicPlaylistItem Name="" ID="{79D4B484-0304-43C0-BBEC-84620B93440C}" ShortID="130441090">
 											<PropertyList>
-												<Property Name="LoopCount" Type="int16" Value="0"/>
 												<Property Name="PlaylistItemType" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Segment">
-													<ObjectRef Name="4_ Gaur Plain" ID="{3EE23496-3B8F-45B7-8B69-BA7C5A7F0A08}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+													<ObjectRef Name="Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS" ID="{983C631B-D066-446A-A1A7-034E799FF0A7}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 												</Reference>
 											</ReferenceList>
 										</MusicPlaylistItem>
@@ -5102,36 +5101,27 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<MusicSegment Name="4_ Gaur Plain" ID="{3EE23496-3B8F-45B7-8B69-BA7C5A7F0A08}" ShortID="546242415">
+						<MusicSegment Name="Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS" ID="{983C631B-D066-446A-A1A7-034E799FF0A7}" ShortID="1067053036">
 							<PropertyList>
-								<Property Name="EndPosition" Type="Real64" Value="253160.083333333"/>
-								<Property Name="OverrideConversion" Type="bool" Value="True"/>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-5</Value>
-									</ValueList>
-								</Property>
+								<Property Name="EndPosition" Type="Real64" Value="34500"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Vorbis Quality High" ID="{53A9DE0F-3F4F-4B59-8614-3F9E3C7358FC}" WorkUnitID="{F6B2880C-85E5-47FA-A126-645B5DFD9ACC}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<MusicTrack Name="4_ Gaur Plain" ID="{57AF0B37-3E58-4960-B412-1088AC82B7E1}" ShortID="639512736">
+								<MusicTrack Name="Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS" ID="{0A7CC91C-E3E5-4A53-943B-CA754ABAD480}" ShortID="860175200">
 									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-										</Reference>
 										<Reference Name="OutputBus">
 											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
 										</Reference>
 										<Reference Name="TransitionRoot">
 											<Custom>
-												<MusicTransition Name="Root" ID="{F5327402-E722-4870-BD74-BAECC8CE7ACB}">
+												<MusicTransition Name="Root" ID="{44F27B3A-1BE4-4E19-8F9C-DA5F6821F1A8}">
 													<PropertyList>
 														<Property Name="IsFolder" Type="bool" Value="True"/>
 													</PropertyList>
@@ -5141,11 +5131,11 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="4_ Gaur Plain" ID="{3CD4B938-4940-49FA-8100-E99A13F59A2B}">
+										<AudioFileSource Name="Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS" ID="{DB4000BE-451B-42BE-B557-D19BBC57BFB8}">
 											<Language>SFX</Language>
-											<AudioFile>4. Gaur Plain.wav</AudioFile>
+											<AudioFile>Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS.wav</AudioFile>
 											<MediaIDList>
-												<MediaID ID="483900290"/>
+												<MediaID ID="223929766"/>
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
@@ -5153,18 +5143,18 @@
 										<ObjectList Name="Sequences">
 											<Reference>
 												<Local>
-													<MusicTrackSequence Name="" ID="{EF372099-6A51-46D2-AA91-B5F6DA4FDC69}">
+													<MusicTrackSequence Name="" ID="{42275250-E43A-4881-B9AE-B6456E960A57}">
 														<ObjectLists>
 															<ObjectList Name="Clips">
 																<Reference>
 																	<Local>
-																		<MusicClip Name="4_ Gaur Plain" ID="{D065C233-CD86-4E68-A77E-34B55D7C22EC}">
+																		<MusicClip Name="Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS" ID="{2036DF4B-D883-4A57-BAD0-AE3D06893A76}">
 																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="253160.083333333"/>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="34500"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
 																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																			</PropertyList>
-																			<AudioSourceRef Name="4_ Gaur Plain" ID="{3CD4B938-4940-49FA-8100-E99A13F59A2B}"/>
+																			<AudioSourceRef Name="Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS" ID="{DB4000BE-451B-42BE-B557-D19BBC57BFB8}"/>
 																		</MusicClip>
 																	</Local>
 																</Reference>
@@ -5181,15 +5171,15 @@
 								<ObjectList Name="Cues">
 									<Reference>
 										<Local>
-											<MusicCue Name="Entry Cue" ID="{0C0BD332-0D80-4363-B2B4-1CF8E322C6C5}"/>
+											<MusicCue Name="Entry Cue" ID="{FCEC55D2-6786-4FF4-BEBB-C34D1601B2FE}"/>
 										</Local>
 									</Reference>
 									<Reference>
 										<Local>
-											<MusicCue Name="Exit Cue" ID="{8286E9FA-AF07-4114-8882-08BD73DE4B05}">
+											<MusicCue Name="Exit Cue" ID="{E7898B1B-F50A-4CF1-BB5E-E8F789AD692A}">
 												<PropertyList>
 													<Property Name="CueType" Type="int16" Value="1"/>
-													<Property Name="TimeMs" Type="Real64" Value="253160.083333333"/>
+													<Property Name="TimeMs" Type="Real64" Value="34500"/>
 												</PropertyList>
 											</MusicCue>
 										</Local>

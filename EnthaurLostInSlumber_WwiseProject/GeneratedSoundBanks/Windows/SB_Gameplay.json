@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{C96568D6-D6E5-2197-A3C3-823262671C4C}",
+    "Hash": "{C1118329-C62D-A9F9-E0E4-3809BEF5661C}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -41,20 +41,20 @@
       "CachePath": "06/{06FB8849-73BC-D99A-3D7F-2F3F433BFAB6}.wem"
      },
      {
-      "Id": "20295217",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Parasite_Detection_01.wav",
-      "CachePath": "4E/{4E9A646F-9297-8EC7-1BDE-CCFE7FBFF67D}.wem"
-     },
-     {
       "Id": "20535296",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Foley_Walk_12.wav",
       "CachePath": "AB/{AB741B67-ACF9-CA90-3F78-7AE652F8ECB1}.wem"
+     },
+     {
+      "Id": "21083036",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Detection_02_V2.wav",
+      "CachePath": "29/{29B7DFB1-9012-A542-5754-ADAE9CE1D2A6}.wem"
      },
      {
       "Id": "21974263",
@@ -761,6 +761,14 @@
       "CachePath": "E3/{E3D95A9F-A7E6-9E5C-83C4-D2EC845A3A2C}.wem"
      },
      {
+      "Id": "475495568",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Detection_03_V2.wav",
+      "CachePath": "E2/{E2A91351-BD35-EEB6-4E10-B38F2C3E35F8}.wem"
+     },
+     {
       "Id": "478343558",
       "Language": "SFX",
       "Streaming": "false",
@@ -889,6 +897,14 @@
       "CachePath": "3F/{3F77088B-8AD5-B82E-9A29-C29CAB3A915C}.wem"
      },
      {
+      "Id": "533448398",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Detection_01_V2.wav",
+      "CachePath": "C0/{C02B7538-E978-17E5-7181-335EF6A862AD}.wem"
+     },
+     {
       "Id": "540850573",
       "Language": "SFX",
       "Streaming": "false",
@@ -969,14 +985,6 @@
       "CachePath": "3B/{3B5DCDC9-21CC-FF60-20AD-2559241D108C}.wem"
      },
      {
-      "Id": "572498536",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Parasite_Bite_V2.wav",
-      "CachePath": "B1/{B1982CFC-0A7F-1E5F-046E-EAE269074990}.wem"
-     },
-     {
       "Id": "581644863",
       "Language": "SFX",
       "Streaming": "false",
@@ -991,14 +999,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Door_Open_Start.wav",
       "CachePath": "46/{46A25D5F-88D2-0CB1-E345-31008D41ACCC}.wem"
-     },
-     {
-      "Id": "590805685",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Parasite_Detection_02.wav",
-      "CachePath": "91/{918746D0-0B5E-56BF-FEA3-FA82ED6E6811}.wem"
      },
      {
       "Id": "592647810",
@@ -1079,6 +1079,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Vein_Land_01.wav",
       "CachePath": "CD/{CDE4381B-B70D-4BC6-D308-7883E39E91FD}.wem"
+     },
+     {
+      "Id": "614574425",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Bite_V3.wav",
+      "CachePath": "D0/{D01C884E-CA9F-D9B2-1C40-14DDE1B69503}.wem"
      },
      {
       "Id": "620373117",
@@ -1465,6 +1473,14 @@
       "CachePath": "FA/{FAFD30C1-562F-385D-2721-4551B5627799}.wem"
      },
      {
+      "Id": "872420068",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Detection_04_V2.wav",
+      "CachePath": "93/{9377FB0C-1A50-9F76-3EBA-3F616FE6C2DD}.wem"
+     },
+     {
       "Id": "881039563",
       "Language": "SFX",
       "Streaming": "false",
@@ -1759,14 +1775,6 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Vein_Run_13.wav",
       "CachePath": "73/{73E9A2AF-4ADF-499B-C5CA-D7BA6E789259}.wem"
-     },
-     {
-      "Id": "1053847861",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Parasite_Detection_03.wav",
-      "CachePath": "8E/{8E42DCE2-B271-0831-9687-954AC02FD428}.wem"
      },
      {
       "Id": "1066500167",
@@ -2870,20 +2878,23 @@
       "Color": "10",
       "MaxAttenuation": "15000",
       "DurationType": "OneShot",
-      "DurationMin": "2.224",
-      "DurationMax": "2.224",
+      "DurationMin": "2.1833334",
+      "DurationMax": "2.2666667",
       "MediaRefs": [
        {
-        "Id": "20295217"
+        "Id": "21083036"
        },
        {
         "Id": "236700595"
        },
        {
-        "Id": "590805685"
+        "Id": "475495568"
        },
        {
-        "Id": "1053847861"
+        "Id": "533448398"
+       },
+       {
+        "Id": "872420068"
        }
       ]
      },
@@ -2971,7 +2982,7 @@
       "DurationMax": "1.75",
       "MediaRefs": [
        {
-        "Id": "572498536"
+        "Id": "614574425"
        }
       ]
      },
@@ -3411,6 +3422,6 @@
     ]
    }
   ],
-  "FileHash": "{EC24763B-9580-478B-0385-74C51118C507}"
+  "FileHash": "{6E3E4DAC-5536-7544-FEA8-52F32B0B6ED3}"
  }
 }
