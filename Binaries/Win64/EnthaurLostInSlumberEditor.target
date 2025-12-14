@@ -32472,6 +32472,10 @@
 			"Type": "NonUFS"
 		},
 		{
+			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkConvolutionReverb.dll",
+			"Type": "NonUFS"
+		},
+		{
 			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/AkDelay.dll",
 			"Type": "NonUFS"
 		},
@@ -32561,6 +32565,10 @@
 		},
 		{
 			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/Auro.dll",
+			"Type": "NonUFS"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/WwiseSoundEngine/ThirdParty/x64_vc170/Profile/bin/MasteringSuite.dll",
 			"Type": "NonUFS"
 		},
 		{
