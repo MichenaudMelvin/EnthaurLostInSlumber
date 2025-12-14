@@ -810,6 +810,11 @@ void AENTDefaultCharacter::Respawn()
 	FHitResult HitResult;
 	bool bHit = GroundTrace(RespawnTransform.GetLocation(), RespawnGroundTrace, HitResult);
 
+	if (SpringArmLag)
+	{
+		SpringArmLag->bEnableCameraRotationLag = false;
+	}
+
 	if (bHit)
 	{
 		HitResult.Location.Z += GetCharacterHalfHeight();
@@ -832,6 +837,18 @@ void AENTDefaultCharacter::Respawn()
 	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	OnRespawn.Broadcast();
+
+	FTimerHandle CameraLagRespawnDelay;
+	auto Func = [&]()
+	{
+		if (SpringArmLag)
+		{
+			SpringArmLag->bEnableCameraRotationLag = true;
+		}
+	};
+
+	float Delay = GetWorld()->GetDeltaSeconds() * ResetLagFrames;
+	GetWorld()->GetTimerManager().SetTimer(CameraLagRespawnDelay, Func, 1.0f, false, Delay);
 }
 
 void AENTDefaultCharacter::FellOutOfWorld(const UDamageType& dmgType)

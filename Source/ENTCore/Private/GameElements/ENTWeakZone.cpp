@@ -217,7 +217,7 @@ void AENTWeakZone::InitZone()
 
 	for (AActor* OverlappingActor : OverlappingActors)
 	{
-		if (!OverlappingActor)
+		if (!OverlappingActor || ActorsToIgnore.Contains(OverlappingActor))
 		{
 			continue;
 		}
@@ -244,7 +244,7 @@ void AENTWeakZone::DestroyZone()
 
 	for (AActor* OverlappingActor : OverlappingActors)
 	{
-		if (!OverlappingActor)
+		if (!OverlappingActor || ActorsToIgnore.Contains(OverlappingActor))
 		{
 			continue;
 		}
@@ -275,7 +275,7 @@ void AENTWeakZone::CreateZone()
 
 	for (AActor* OverlappingActor : OverlappingActors)
 	{
-		if (!OverlappingActor)
+		if (!OverlappingActor || ActorsToIgnore.Contains(OverlappingActor))
 		{
 			continue;
 		}
@@ -348,7 +348,7 @@ void AENTWeakZone::CureFinish()
 
 void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (CureTimeline.IsPlaying() || CureTimeline.IsReversing())
+	if (CureTimeline.IsPlaying() || CureTimeline.IsReversing() || ActorsToIgnore.Contains(OtherActor))
 	{
 		return;
 	}
@@ -361,7 +361,7 @@ void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, 
 
 void AENTWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (CureTimeline.IsPlaying() || CureTimeline.IsReversing())
+	if (CureTimeline.IsPlaying() || CureTimeline.IsReversing() || ActorsToIgnore.Contains(OtherActor))
 	{
 		return;
 	}

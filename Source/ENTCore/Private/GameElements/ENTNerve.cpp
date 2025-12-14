@@ -932,6 +932,6 @@ void AENTNerve::SetCurrentReceptacle(AENTNerveReceptacle* Receptacle)
 	NerveStretchComp->Stop();
 	UpdateLastSplinePointLocation(AttachTransform.GetLocation());
 	UpdateSplineMeshes(false, false);
-	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);;
-	NerveBall->SetCollisionResponseToChannel(InteractionChannel, ECR_Ignore);
+	NerveBall->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	InteractableComponent->AddInteractable(NerveBall);
 }
