@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{C1118329-C62D-A9F9-E0E4-3809BEF5661C}",
+    "Hash": "{7C64A509-27B7-DCDD-506F-83D1C391D558}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -1964,7 +1964,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Close_End",
       "GUID": "{E582D912-9111-4A49-ADA1-C474EC722BAE}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "6000",
       "DurationType": "OneShot",
       "DurationMin": "1.9956666",
       "DurationMax": "1.9956666",
@@ -1980,7 +1980,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Close_Start",
       "GUID": "{76AD9494-A071-4C11-8765-FF1DC0AB315C}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "6000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -2018,7 +2018,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Open_End",
       "GUID": "{ED1DB3E2-80E0-4CCD-B2E5-8C3DE5CC6776}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "6000",
       "DurationType": "OneShot",
       "DurationMin": "1.9956666",
       "DurationMax": "1.9956666",
@@ -2034,7 +2034,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Open_Start",
       "GUID": "{88AAFD6E-67FC-4ADF-9D7D-03B85C905647}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "6000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -3422,6 +3422,6 @@
     ]
    }
   ],
-  "FileHash": "{6E3E4DAC-5536-7544-FEA8-52F32B0B6ED3}"
+  "FileHash": "{22804A35-269C-AB7B-AD4A-5EF3475DAFCD}"
  }
 }

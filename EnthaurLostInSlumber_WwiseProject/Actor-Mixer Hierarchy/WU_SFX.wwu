@@ -3095,6 +3095,11 @@
 							<PropertyList>
 								<Property Name="OverrideGameAuxSends" Type="bool" Value="True"/>
 								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>9</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -3144,6 +3149,13 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="SFX_Release_Amber" ID="{FD767604-8FE0-4C14-9A24-8E99BCDDAEAD}" ShortID="741018283">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>10</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -3213,24 +3225,6 @@
 								<ActiveSource Name="SFX_Bridge_Fall_V3" ID="{7047C5E8-D5DB-478D-B9A4-B83B1ED941D8}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<RandomSequenceContainer Name="SFX_Door_Open" ID="{544B8CFB-74C2-4115-ABAC-BB1A0568BB64}" ShortID="535652467">
-							<PropertyList>
-								<Property Name="3DSpatialization" Type="int16" Value="1"/>
-								<Property Name="OverridePositioning" Type="bool" Value="True"/>
-								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="6"/>
-								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
-								</Reference>
-							</ReferenceList>
-						</RandomSequenceContainer>
 						<BlendContainer Name="SFX_Door_Open_LP" ID="{1D31C73A-B398-4B84-B3E9-088E2C80CC23}" ShortID="906424034">
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="1"/>
@@ -3245,7 +3239,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="ATT_20m" ID="{2A4ACBEE-A8B8-448F-A919-CAD4FCE6E6AB}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+									<ObjectRef Name="ATT_40m" ID="{BE58783D-4683-4F4D-9FF1-32626C97E07D}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -3534,7 +3528,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="ATT_40m" ID="{BE58783D-4683-4F4D-9FF1-32626C97E07D}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+									<ObjectRef Name="ATT_60m" ID="{3531EC2F-BC90-4D75-8AF0-D7C4186A3AA9}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -3569,7 +3563,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="ATT_40m" ID="{BE58783D-4683-4F4D-9FF1-32626C97E07D}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+									<ObjectRef Name="ATT_60m" ID="{3531EC2F-BC90-4D75-8AF0-D7C4186A3AA9}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
@@ -3609,7 +3603,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
-									<ObjectRef Name="ATT_20m" ID="{2A4ACBEE-A8B8-448F-A919-CAD4FCE6E6AB}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+									<ObjectRef Name="ATT_40m" ID="{BE58783D-4683-4F4D-9FF1-32626C97E07D}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
 								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
