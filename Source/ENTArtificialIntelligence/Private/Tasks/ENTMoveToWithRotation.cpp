@@ -22,10 +22,25 @@ UENTMoveToWithRotation::UENTMoveToWithRotation()
 
 EBTNodeResult::Type UENTMoveToWithRotation::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	CurrentIndex = -1;
-	CurrentPath = nullptr;
+	EBTNodeResult::Type NodeResult =  Super::ExecuteTask(OwnerComp, NodeMemory);
 
-	return Super::ExecuteTask(OwnerComp, NodeMemory);
+	CurrentPathIndex = -1;
+
+	UPathFollowingComponent* PathComp = OwnerComp.GetAIOwner()->GetPathFollowingComponent();
+	if (!PathComp)
+	{
+		return NodeResult;
+	}
+
+	FNavigationPath* Path = PathComp->GetPath().Get();
+	if (Path)
+	{
+		Path->AddObserver(FNavigationPath::FPathObserverDelegate::FDelegate::CreateUObject(this, &UENTMoveToWithRotation::OnUpdatePath));
+		CurrentPath = Path;
+		bRequestDirectionUpdate = false;
+	}
+
+	return NodeResult;
 }
 
 void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -74,22 +89,24 @@ void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* 
 	UKismetSystemLibrary::LineTraceSingle(Pawn, PawnLocation, EndLocation, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, Actors, DrawDebugTrace, HitResult, false);
 
 	int32 NextIndex = UAIBlueprintHelperLibrary::GetCurrentPathIndex(OwnerComp.GetAIOwner()) + 1;
-	TArray<FVector> PathPoints = UAIBlueprintHelperLibrary::GetCurrentPathPoints(OwnerComp.GetAIOwner());
 
 	FNavigationPath* Path = PathComp->GetPath().Get();
-	if (Path != CurrentPath || NextIndex != CurrentIndex)
+	if (Path != CurrentPath || NextIndex != CurrentPathIndex || bRequestDirectionUpdate)
 	{
+		TArray<FVector> PathPoints = UAIBlueprintHelperLibrary::GetCurrentPathPoints(OwnerComp.GetAIOwner());
+
 		CurrentPath = Path;
 
-		CurrentIndex = NextIndex;
+		CurrentPathIndex = NextIndex;
 
 		FVector NextPoint = FVector::ZeroVector;
-		if (PathPoints.IsValidIndex(CurrentIndex))
+		if (PathPoints.IsValidIndex(CurrentPathIndex))
 		{
-			NextPoint = PathPoints[CurrentIndex];
+			NextPoint = PathPoints[CurrentPathIndex];
 		}
 
 		CurrentDirection = (NextPoint - HitResult.Location).GetSafeNormal();
+		bRequestDirectionUpdate = false;
 	}
 
 	float SlopePitch;
@@ -123,6 +140,7 @@ void UENTMoveToWithRotation::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* 
 
 		FVector EndDirection = StartLocation + (CurrentDirection * LineLength);
 
+		TArray<FVector> PathPoints = UAIBlueprintHelperLibrary::GetCurrentPathPoints(OwnerComp.GetAIOwner());
 		for (const FVector& Point : PathPoints)
 		{
 			UKismetSystemLibrary::DrawDebugPoint(this, Point, 5.0f, FLinearColor::Red, 0.0f);
@@ -165,5 +183,19 @@ FString UENTMoveToWithRotation::GetStaticDescription() const
 	}
 
 	return FString::Printf(TEXT("Move to: %s"), *KeyDesc);
+}
+
+void UENTMoveToWithRotation::OnUpdatePath(FNavigationPath* InPath, ENavPathEvent::Type Event)
+{
+	switch (Event)
+	{
+		case ENavPathEvent::UpdatedDueToGoalMoved:
+			bRequestDirectionUpdate = true;
+			break;
+		case ENavPathEvent::UpdatedDueToNavigationChanged:
+		case ENavPathEvent::MetaPathUpdate:
+		default:
+			break;
+	}
 }
 #endif

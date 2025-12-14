@@ -69,7 +69,8 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "Behavior", meta = (Units = s, ClampMin = 0.0f))
 	float SucceedDuration = 5.0f;
 
-	float SucceedTime = 0.0f;
+	UPROPERTY(EditInstanceOnly, Category = "Behavior")
+	FValueOrBBKey_Float SucceedTime = 0.0f;
 
 	bool bDurationResult = false;
 
@@ -97,7 +98,7 @@ private:
 	 */
 	bool TraceCollisionTest(UBehaviorTreeComponent& OwnerComp) const;
 
-	void ComputeSucceedDuration(float DeltaTime, bool bSucceedTests);
+	void ComputeSucceedDuration(UBehaviorTreeComponent& OwnerComp, float DeltaTime, bool bSucceedTests);
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
