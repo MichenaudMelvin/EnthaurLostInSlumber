@@ -310,6 +310,12 @@
         "GUID": "{C81D7507-C218-4A58-ACE7-D1CD450154B6}"
        },
        {
+        "Id": "1268243103",
+        "Name": "SW_To_Cinematic",
+        "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_To_Cinematic",
+        "GUID": "{DE9ECBFF-BEE2-4802-91F9-CD25EDF087F0}"
+       },
+       {
         "Id": "1275925729",
         "Name": "SW_Stop_Lvl2",
         "ObjectPath": "\\Switches\\Music\\AKSW_Music_Switch\\SW_Stop_Lvl2",
@@ -879,6 +885,6 @@
     ]
    }
   ],
-  "FileHash": "{2EC0A815-0C34-A555-9073-E26D66135608}"
+  "FileHash": "{60501ED0-8251-8F63-1986-EA00638B0823}"
  }
 }

@@ -110,7 +110,10 @@ void UENTHUDManager::DisplayHUD()
 
 void UENTHUDManager::DisplayDeathTransition()
 {
-	DeathTransition->AddToViewport();
+	if (!DeathTransition->IsInViewport())
+	{
+		DeathTransition->AddToViewport();
+	}
 }
 
 void UENTHUDManager::HideHUD()
