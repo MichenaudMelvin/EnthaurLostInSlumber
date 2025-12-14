@@ -854,7 +854,6 @@ FENTGameElementData& AENTNerve::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 
 	if (CurrentAttachedReceptacle)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("The integer value is: %d"), CurrentAttachedReceptacle->GetUniqueID());
 		Data.LinkedReceptacle = CurrentAttachedReceptacle.GetName();
 	}
 

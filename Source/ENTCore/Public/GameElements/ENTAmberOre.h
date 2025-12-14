@@ -8,6 +8,7 @@
 #include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTAmberOre.generated.h"
 
+class ALight;
 enum class ENerveReactiveInteractionType : uint8;
 class UAkAudioEvent;
 class AENTWeakZone;
@@ -31,6 +32,12 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void OnConstruction(const FTransform& Transform) override;
+
+#if WITH_EDITOR
+	virtual void PostLoad() override;
+	virtual void PreEditChange(FProperty* PropertyAboutToChange) override;
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -69,6 +76,42 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Amber")
 	TMap<AActor*, ENerveReactiveInteractionType> ObjectReactiveEmpty;
+
+#pragma region LightsAndActors
+
+	/**
+	 * @brief Lights that will be shown when the ore is filled (will be hidden when empty)
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	TArray<TObjectPtr<ALight>> FilledLights;
+
+	/**
+	 * @brief Lights that will be shown when the zone is empty (will be hidden when filled)
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	TArray<TObjectPtr<ALight>> EmptyLights;
+
+	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	TArray<TObjectPtr<AActor>> FilledActors;
+
+	UPROPERTY(EditInstanceOnly, Category = "Amber")
+	TArray<TObjectPtr<AActor>> EmptyActors;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "Amber")
+	TArray<float> FilledLightsIntensity;
+
+	UPROPERTY(VisibleInstanceOnly, Category = "Amber")
+	TArray<float> EmptyLightsIntensity;
+
+	void SetActorsVisibility(bool bIsAmberEmpty) const;
+
+	void SetFilledActorsVisibility(bool bVisible) const;
+
+	void SetEmptyActorsVisibility(bool bVisible) const;
+
+	void SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const;
+
+#pragma endregion
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
 	TObjectPtr<UAkAudioEvent> GrowlNoise;
