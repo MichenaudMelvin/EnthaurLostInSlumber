@@ -4966,6 +4966,11 @@
 						<MusicSegment Name="Enthaur_Music_Lvl5_PlaceHolder_90Bpm_44_Lp" ID="{5837EE8B-6D31-4C18-BD8C-6E8E0798680F}" ShortID="101044493">
 							<PropertyList>
 								<Property Name="EndPosition" Type="Real64" Value="42666.6666666667"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-8</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -5104,6 +5109,11 @@
 						<MusicSegment Name="Enthaur_Music_Lvl5_Cinematic_V2_120Bpm_4_4_OS" ID="{983C631B-D066-446A-A1A7-034E799FF0A7}" ShortID="1067053036">
 							<PropertyList>
 								<Property Name="EndPosition" Type="Real64" Value="34500"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>2</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">

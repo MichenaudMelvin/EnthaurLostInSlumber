@@ -1019,6 +1019,39 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_CinematicExplosion02" ID="{008BD733-C8EB-4FB0-B458-82252BE1F5FF}">
+							<ChildrenList>
+								<Action Name="" ID="{1F693B54-1197-4BFC-A981-D4E169716965}" ShortID="528908983">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Explosion_02" ID="{B405A2AB-8309-40DA-A4C6-9C63FCB2A7FF}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_CinematicExplosion01" ID="{5365791D-57BB-494D-A1A5-9C82D7E8D82C}">
+							<ChildrenList>
+								<Action Name="" ID="{242B138E-7F13-4394-BAF5-FF1570DEBDBD}" ShortID="363477081">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Explosion_01" ID="{737855F1-DF5C-4AD9-A142-AB095ED40D31}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_CinematicExplosion03" ID="{0460DD35-8979-44E2-AB3E-7EBA3231E664}">
+							<ChildrenList>
+								<Action Name="" ID="{97FDADFC-7223-4C67-A05B-F2A411A53572}" ShortID="695101234">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Cinematic_Explosion_03" ID="{CC2785BB-104D-425B-97FE-EAA2AED0397B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">
