@@ -7,6 +7,8 @@
 #include "Components/BoxComponent.h"
 #include "ENTInteractableComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
+#include "Components/LightComponent.h"
+#include "Engine/Light.h"
 #include "GameElements/ENTNerveReceptacle.h"
 #include "GameElements/ENTWeakZone.h"
 #include "Interface/ENTActivation.h"
@@ -101,6 +103,8 @@ void AENTAmberOre::BeginPlay()
 	FillAmberTimeline.AddInterpFloat(FillAmberCurve, UpdateEvent);
 	FillAmberTimeline.SetPlayRate(1 / FillAmberDuration);
 
+	SetActorsVisibility(bIsEmpty);
+
 	ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
 	if (!PlayerCharacter)
 	{
@@ -131,7 +135,31 @@ void AENTAmberOre::OnConstruction(const FTransform& Transform)
 #if WITH_EDITORONLY_DATA
 	UKismetSystemLibrary::FlushPersistentDebugLines(this);
 #endif
-	
+
+	FilledLightsIntensity.Empty();
+	for (TObjectPtr<ALight> Light : FilledLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		FilledLightsIntensity.Add(Light->GetLightComponent()->Intensity);
+		Light->GetLightComponent()->SetVisibility(!bIsEmpty);
+	}
+
+	EmptyLightsIntensity.Empty();
+	for (TObjectPtr<ALight> Light : EmptyLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		EmptyLightsIntensity.Add(Light->GetLightComponent()->Intensity);
+		Light->GetLightComponent()->SetVisibility(bIsEmpty);
+	}
+
 	if (!Foliage)
 	{
 		return;
@@ -190,6 +218,46 @@ void AENTAmberOre::OnConstruction(const FTransform& Transform)
 	}
 }
 
+#if WITH_EDITOR
+void AENTAmberOre::PostLoad()
+{
+	Super::PostLoad();
+
+	SetActorsVisibility(false);
+}
+
+void AENTAmberOre::PreEditChange(FProperty* PropertyAboutToChange)
+{
+	Super::PreEditChange(PropertyAboutToChange);
+
+	if (!PropertyAboutToChange)
+	{
+		return;
+	}
+
+	if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AENTAmberOre, FilledActors))
+	{
+		SetFilledActorsVisibility(true);
+	}
+	else if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AENTAmberOre, EmptyActors))
+	{
+		SetEmptyActorsVisibility(true);
+	}
+}
+
+void AENTAmberOre::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	const FName& ChangedProperty = PropertyChangedEvent.GetMemberPropertyName();
+
+	if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTAmberOre, FilledActors) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTAmberOre, EmptyActors) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTAmberOre, bIsEmpty))
+	{
+		SetActorsVisibility(bIsEmpty);
+	}
+}
+#endif
+
 void AENTAmberOre::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
@@ -197,6 +265,38 @@ void AENTAmberOre::Tick(float DeltaSeconds)
 	FoliageTimeline.TickTimeline(DeltaSeconds);
 	FillAmberTimeline.TickTimeline(DeltaSeconds);
 }
+
+#pragma region LightsAndActors
+
+void AENTAmberOre::SetActorsVisibility(bool bIsAmberEmpty) const
+{
+	SetFilledActorsVisibility(!bIsAmberEmpty);
+	SetEmptyActorsVisibility(bIsAmberEmpty);
+}
+
+void AENTAmberOre::SetFilledActorsVisibility(bool bVisible) const
+{
+	SetArrayVisibility(bVisible, FilledActors);
+}
+
+void AENTAmberOre::SetEmptyActorsVisibility(bool bVisible) const
+{
+	SetArrayVisibility(bVisible, EmptyActors);
+}
+
+void AENTAmberOre::SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const
+{
+	for (TObjectPtr<AActor> Actor : ActorArray)
+	{
+		if (Actor && Actor->GetRootComponent())
+		{
+			USceneComponent* ActorRootComp = Actor->GetRootComponent();
+			ActorRootComp->SetVisibility(bVisible, true);
+		}
+	}
+}
+
+#pragma endregion
 
 void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimitiveComponent* InteractionComponent)
 {
@@ -226,6 +326,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 
 		TargetAmberHeight = FullAmberHeight;
 		Interactable->RemoveInteractable(MeshInteraction);
+		SetActorsVisibility(bIsEmpty);
 		FillAmberTimeline.PlayFromStart();
 		OnFillAmber.Broadcast();
 
@@ -249,6 +350,7 @@ void AENTAmberOre::OnInteract(APlayerController* Controller, APawn* Pawn, UPrimi
 		TriggerEmptyLinkedObjects();
 		TriggerFullLinkedObjects();
 		Interactable->RemoveInteractable(MeshInteraction);
+		SetActorsVisibility(bIsEmpty);
 		FillAmberTimeline.PlayFromStart();
 		FoliageTimeline.Reverse();
 		OnEmptyAmber.Broadcast();
@@ -264,6 +366,40 @@ void AENTAmberOre::FillAmberUpdate(float Alpha)
 
 	FVector ResultLocation = FMath::Lerp(CurrentLocation, TargetLocation, Alpha);
 	AmberMesh->SetRelativeLocation(ResultLocation);
+
+	int FilledLightIndex = 0;
+	for (TObjectPtr<ALight> Light : FilledLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		if (FilledLightsIntensity.IsValidIndex(FilledLightIndex))
+		{
+			float Intensity = FilledLightsIntensity[FilledLightIndex++];
+			float StartValue = bIsEmpty ? Intensity : 0.0f;
+			float TargetValue = bIsEmpty ? 0.0f : Intensity;
+			Light->GetLightComponent()->SetIntensity(FMath::Lerp(StartValue, TargetValue, Alpha));
+		}
+	}
+
+	int EmptyLightIndex = 0;
+	for (TObjectPtr<ALight> Light : EmptyLights)
+	{
+		if (!Light || !Light->GetLightComponent())
+		{
+			continue;
+		}
+
+		if (EmptyLightsIntensity.IsValidIndex(EmptyLightIndex))
+		{
+			float Intensity = EmptyLightsIntensity[EmptyLightIndex++];
+			float StartValue = bIsEmpty ? 0.0f : Intensity;
+			float TargetValue = bIsEmpty ? Intensity : 0.0f;
+			Light->GetLightComponent()->SetIntensity(FMath::Lerp(StartValue, TargetValue, Alpha));
+		}
+	}
 }
 
 void AENTAmberOre::OnPlayerAmberUpdate(bool bHasAmber)
