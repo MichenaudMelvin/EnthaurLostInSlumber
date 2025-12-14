@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{C1118329-C62D-A9F9-E0E4-3809BEF5661C}",
+    "Hash": "{F70DD26E-CC1F-B6AD-6DF2-5115C1F242C8}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -89,20 +89,28 @@
       "CachePath": "5F/{5F63E43A-D8AC-C77C-D33E-E04DFE4F7C7D}.wem"
      },
      {
-      "Id": "40395295",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Cinematic_Parasite_Scream_Background.wav",
-      "CachePath": "F7/{F78FE35C-16AB-ABD2-FEAC-0E4B98385DCD}.wem"
-     },
-     {
       "Id": "43894004",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "LPX_Nerve_Stretch_Gore_01.wav",
       "CachePath": "E3/{E3339A71-B018-DC4B-E60C-B913810188BE}.wem"
+     },
+     {
+      "Id": "44687577",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic_Parasite_Scream_Background_V2.wav",
+      "CachePath": "87/{87A47E9B-77AB-CE83-7D8D-1C5B5E9634E5}.wem"
+     },
+     {
+      "Id": "44783146",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic_Explosion_02.wav",
+      "CachePath": "4B/{4BCE5782-C25A-0834-E4A1-42DC343F9196}.wem"
      },
      {
       "Id": "56210201",
@@ -337,6 +345,14 @@
       "CachePath": "5E/{5EEE7BAA-775B-AFB1-2EC8-C7DE9B680A68}.wem"
      },
      {
+      "Id": "182328449",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic_Explosion_03.wav",
+      "CachePath": "3C/{3C08BDDC-7DC7-1101-6CD9-2BB24C186FD8}.wem"
+     },
+     {
       "Id": "190922830",
       "Language": "SFX",
       "Streaming": "false",
@@ -351,6 +367,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_02.wav",
       "CachePath": "E1/{E169499D-E122-081F-D7C3-DF595F08D851}.wem"
+     },
+     {
+      "Id": "196814089",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic_Explosion_01.wav",
+      "CachePath": "88/{880BED0C-6257-2DF9-1342-46F685BA2BB2}.wem"
      },
      {
       "Id": "197068285",
@@ -1848,7 +1872,7 @@
       "DurationMax": "31.8",
       "MediaRefs": [
        {
-        "Id": "40395295"
+        "Id": "44687577"
        },
        {
         "Id": "198341839"
@@ -1869,6 +1893,51 @@
         "Name": "Reverb_Big",
         "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reverb_Big",
         "GUID": "{06B51433-C685-4945-9920-67B617503E73}"
+       }
+      ]
+     },
+     {
+      "Id": "1453879276",
+      "Name": "AKE_CinematicExplosion01",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_CinematicExplosion01",
+      "GUID": "{5365791D-57BB-494D-A1A5-9C82D7E8D82C}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "4.3333335",
+      "DurationMax": "4.3333335",
+      "MediaRefs": [
+       {
+        "Id": "196814089"
+       }
+      ]
+     },
+     {
+      "Id": "1453879279",
+      "Name": "AKE_CinematicExplosion02",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_CinematicExplosion02",
+      "GUID": "{008BD733-C8EB-4FB0-B458-82252BE1F5FF}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "4.3333335",
+      "DurationMax": "4.3333335",
+      "MediaRefs": [
+       {
+        "Id": "44783146"
+       }
+      ]
+     },
+     {
+      "Id": "1453879278",
+      "Name": "AKE_CinematicExplosion03",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_CinematicExplosion03",
+      "GUID": "{0460DD35-8979-44E2-AB3E-7EBA3231E664}",
+      "Color": "10",
+      "DurationType": "OneShot",
+      "DurationMin": "3.6666667",
+      "DurationMax": "3.6666667",
+      "MediaRefs": [
+       {
+        "Id": "182328449"
        }
       ]
      },
@@ -1964,7 +2033,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Close_End",
       "GUID": "{E582D912-9111-4A49-ADA1-C474EC722BAE}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "6000",
       "DurationType": "OneShot",
       "DurationMin": "1.9956666",
       "DurationMax": "1.9956666",
@@ -1980,7 +2049,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Close_Start",
       "GUID": "{76AD9494-A071-4C11-8765-FF1DC0AB315C}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "6000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -2018,7 +2087,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Open_End",
       "GUID": "{ED1DB3E2-80E0-4CCD-B2E5-8C3DE5CC6776}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "6000",
       "DurationType": "OneShot",
       "DurationMin": "1.9956666",
       "DurationMax": "1.9956666",
@@ -2034,7 +2103,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_Door_Open_Start",
       "GUID": "{88AAFD6E-67FC-4ADF-9D7D-03B85C905647}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "6000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -3422,6 +3491,6 @@
     ]
    }
   ],
-  "FileHash": "{626F773F-B39E-0BFE-E44D-777C1F0F09F8}"
+  "FileHash": "{B73E44B7-E301-82FD-3198-498B3D58137A}"
  }
 }

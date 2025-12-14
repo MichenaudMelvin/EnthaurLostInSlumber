@@ -3007,7 +3007,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>8</Value>
+												<Value>-4</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -3030,9 +3030,16 @@
 												<MediaID ID="40395295"/>
 											</MediaIDList>
 										</AudioFileSource>
+										<AudioFileSource Name="SFX_Cinematic_Parasite_Scream_Background_V2" ID="{A7A6F824-C6FD-4915-B86E-EA51E1FAAC7E}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_Parasite_Scream_Background_V2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="44687577"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="SFX_Cinematic_Parasite_Scream_Background" ID="{E2A890A8-476A-4301-9C17-E0A9769F2129}" Platform="Linked"/>
+										<ActiveSource Name="SFX_Cinematic_Parasite_Scream_Background_V2" ID="{A7A6F824-C6FD-4915-B86E-EA51E1FAAC7E}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="SFX_Cinematic_Without_Reverb" ID="{2BDBD25B-7BEE-488A-9F10-B426D41F5E3E}" ShortID="51216643">
@@ -3871,6 +3878,89 @@
 								</Sound>
 							</ChildrenList>
 						</BlendContainer>
+						<ActorMixer Name="AM_Cinematic_Explosion" ID="{B4D982E0-50D9-4500-8950-C3523B07B70F}" ShortID="313741216">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="SFX_Cinematic_Explosion_01" ID="{737855F1-DF5C-4AD9-A142-AB095ED40D31}" ShortID="692617773">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Cinematic_Explosion_01" ID="{AF5635A6-2B9D-427A-992A-0FC769C7B637}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_Explosion_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="196814089"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Cinematic_Explosion_01" ID="{AF5635A6-2B9D-427A-992A-0FC769C7B637}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Cinematic_Explosion_02" ID="{B405A2AB-8309-40DA-A4C6-9C63FCB2A7FF}" ShortID="1016245238">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Cinematic_Explosion_02" ID="{F9A60157-05E7-49DE-A90A-89CFB7D8B9F0}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_Explosion_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="44783146"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Cinematic_Explosion_02" ID="{F9A60157-05E7-49DE-A90A-89CFB7D8B9F0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="SFX_Cinematic_Explosion_03" ID="{CC2785BB-104D-425B-97FE-EAA2AED0397B}" ShortID="336634729">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus_01" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_Cinematic_Explosion_03" ID="{26F140F4-9C67-47A4-A207-A5A1DC87FCE0}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_Explosion_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="182328449"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_Cinematic_Explosion_03" ID="{26F140F4-9C67-47A4-A207-A5A1DC87FCE0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
 					</ChildrenList>
 				</ActorMixer>
 			</ChildrenList>
