@@ -722,6 +722,7 @@
 							<ChildrenList>
 								<RandomSequenceContainer Name="PR_Idle" ID="{E4C4B7A4-52F5-4D50-943C-C0A008B36157}" ShortID="829085665">
 									<PropertyList>
+										<Property Name="GlobalOrPerObject" Type="int16" Value="0"/>
 										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
 										<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
 										<Property Name="MaxSoundPerInstance" Type="int16">
@@ -2179,7 +2180,7 @@
 												<Value>2</Value>
 											</ValueList>
 										</Property>
-										<Property Name="OverrideEarlyReflections" Type="bool" Value="True"/>
+										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
@@ -2194,6 +2195,7 @@
 												</ModifierInfo>
 											</ModifierList>
 										</Property>
+										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="5"/>
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
 												<Value>True</Value>
@@ -2205,7 +2207,7 @@
 											<Custom>
 												<Attenuation Name="Attenuation (Custom)" ID="{E94403F2-41DC-4F68-A164-4E095C31B91A}" ShortID="778198967">
 													<PropertyList>
-														<Property Name="RadiusMax" Type="Real64" Value="300"/>
+														<Property Name="RadiusMax" Type="Real64" Value="600"/>
 													</PropertyList>
 													<CurveUsageInfoList>
 														<VolumeDryUsage>
@@ -2222,7 +2224,7 @@
 																			<SegmentShape>Log3</SegmentShape>
 																		</Point>
 																		<Point>
-																			<XPos>300</XPos>
+																			<XPos>600</XPos>
 																			<YPos>-200</YPos>
 																			<Flags>37</Flags>
 																		</Point>
@@ -2575,7 +2577,6 @@
 												<Value>2</Value>
 											</ValueList>
 										</Property>
-										<Property Name="OverrideEarlyReflections" Type="bool" Value="True"/>
 										<Property Name="OverridePositioning" Type="bool" Value="True"/>
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
@@ -2602,7 +2603,7 @@
 											<Custom>
 												<Attenuation Name="Attenuation (Custom)" ID="{68FB88ED-20D6-4E2C-AB51-AD48AA8D6CD8}" ShortID="647918400">
 													<PropertyList>
-														<Property Name="RadiusMax" Type="Real64" Value="4000"/>
+														<Property Name="RadiusMax" Type="Real64" Value="700"/>
 													</PropertyList>
 													<CurveUsageInfoList>
 														<VolumeDryUsage>
@@ -2619,7 +2620,7 @@
 																			<SegmentShape>Log3</SegmentShape>
 																		</Point>
 																		<Point>
-																			<XPos>4000</XPos>
+																			<XPos>700</XPos>
 																			<YPos>-200</YPos>
 																			<Flags>37</Flags>
 																		</Point>

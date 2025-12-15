@@ -190,6 +190,10 @@
 							<Position X="3" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="AKE_Lvl4" ID="{F7562D55-07D3-4467-AC90-7E844FE35CB6}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
+							<Position X="3" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="AKE_Stop_Lvl_Chest" ID="{F37615BD-FFEE-4398-B6B4-897A7370D33E}" WorkUnitID="{9C814F74-DA07-4EF5-BDAA-8A6A69747D96}"/>
 							<Position X="4" Y="0"/>
 						</Module>
