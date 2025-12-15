@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "ENTArtificialIntelligencePath.generated.h"
 
+class UBoxComponent;
+
 namespace ESplineCoordinateSpace
 {
 	enum Type : int;
@@ -214,6 +216,9 @@ protected:
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "NavLink")
 	TObjectPtr<UStaticMeshComponent> NavLinkPlatform;
+
+	UPROPERTY(EditDefaultsOnly, Category = "NavLink")
+	TObjectPtr<UBoxComponent> NavModifier;
 
 	UPROPERTY(EditInstanceOnly, Category = "NavLink")
 	FVector PlatformOffset = FVector::ZeroVector;

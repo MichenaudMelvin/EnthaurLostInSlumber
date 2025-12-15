@@ -83,7 +83,7 @@ void AENTSpikeDoor::BeginPlay()
 		{
 			FVector BasePos = InterInitialRelativeLocations[i];
 			
-			FVector StartTrace = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,200);
+			FVector StartTrace = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,30);
 			FVector EndTrace   = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,-200);
 
 			FHitResult Hit;

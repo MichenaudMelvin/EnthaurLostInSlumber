@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTService.h"
+#include "Navigation/ENTExcludeJumpNavAreaFilter.h"
 #include "ENTComputeClosestReachablePoint.generated.h"
 
 UCLASS()
@@ -34,6 +35,9 @@ protected:
 
 	UPROPERTY(EditInstanceOnly, Category = "Point", meta = (Units = cm, ClampMin = 0.0f))
 	float QueryExtent = 100.0f;
+
+	UPROPERTY(EditInstanceOnly, Category = "Point")
+	TSubclassOf<UNavigationQueryFilter> FilterClass = UENTExcludeJumpNavAreaFilter::StaticClass();
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")
