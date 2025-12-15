@@ -4,6 +4,7 @@
 #include "Decorators/ENTCheckDistance.h"
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Float.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -45,7 +46,7 @@ void UENTCheckDistance::OnNodeProcessed(FBehaviorTreeSearchData& SearchData, EBT
 		bCollisionTestResult = true;
 	}
 
-	ComputeSucceedDuration(ElapsedTime.GetSeconds(), bCollisionTestResult && bDistanceResult);
+	ComputeSucceedDuration(SearchData.OwnerComp, ElapsedTime.GetSeconds(), bCollisionTestResult && bDistanceResult);
 }
 
 void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -63,7 +64,7 @@ void UENTCheckDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 		bCollisionTestResult = true;
 	}
 
-	ComputeSucceedDuration(DeltaSeconds, bCollisionTestResult && bDistanceResult);
+	ComputeSucceedDuration(OwnerComp, DeltaSeconds, bCollisionTestResult && bDistanceResult);
 	CheckAbort(OwnerComp, NodeMemory);
 }
 
@@ -302,7 +303,7 @@ bool UENTCheckDistance::TraceCollisionTest(UBehaviorTreeComponent& OwnerComp) co
 	return !UKismetSystemLibrary::LineTraceSingleForObjects(this, Pawn->GetActorLocation(), TargetActor->GetActorLocation(), ObjectTypes, false, ActorsToIgnore, DrawDebugTrace, HitResult, false);
 }
 
-void UENTCheckDistance::ComputeSucceedDuration(float DeltaTime, bool bSucceedTests)
+void UENTCheckDistance::ComputeSucceedDuration(UBehaviorTreeComponent& OwnerComp, float DeltaTime, bool bSucceedTests)
 {
 	if (SucceedDuration <= 0.0f)
 	{
@@ -320,18 +321,22 @@ void UENTCheckDistance::ComputeSucceedDuration(float DeltaTime, bool bSucceedTes
 	LastTimeTriggered = FDateTime::Now();
 	bHasTriggerAlreadyOnce = true;
 
-	SucceedTime += DeltaTime * (bSucceedTests ? 1 : -1);
-	SucceedTime = FMath::Clamp(SucceedTime, 0.0f, SucceedDuration);
+	float SucceedTimeValue = SucceedTime.GetValue(OwnerComp);
+
+	SucceedTimeValue += DeltaTime * (bSucceedTests ? 1 : -1);
+	SucceedTimeValue = FMath::Clamp(SucceedTimeValue, 0.0f, SucceedDuration);
+
+	OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Float>(SucceedTime.GetKeyId(OwnerComp), SucceedTimeValue);
 
 #if WITH_EDITORONLY_DATA
 	if (bDebugDecorator)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Cyan, FString::Printf(TEXT("SucceedTime %f"), SucceedTime));
+		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Cyan, FString::Printf(TEXT("SucceedTime %f"), SucceedTimeValue));
 	}
 #endif
 
-	bool bDurationSucceed = SucceedTime >= SucceedDuration;
-	bool bDurationFailed = SucceedTime <= 0.0f;
+	bool bDurationSucceed = SucceedTimeValue >= SucceedDuration;
+	bool bDurationFailed = SucceedTimeValue <= 0.0f;
 
 	if (bDurationSucceed)
 	{

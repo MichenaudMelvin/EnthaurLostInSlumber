@@ -37,9 +37,13 @@ protected:
 
 	FNavigationPath* CurrentPath;
 
-	int32 CurrentIndex = -1;
+	int32 CurrentPathIndex = -1;
 
 	FVector CurrentDirection = FVector::ZeroVector;
+
+	bool bRequestDirectionUpdate = false;
+
+	void OnUpdatePath(FNavigationPath* InPath, ENavPathEvent::Type Event);
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditInstanceOnly, Category = "Debug")

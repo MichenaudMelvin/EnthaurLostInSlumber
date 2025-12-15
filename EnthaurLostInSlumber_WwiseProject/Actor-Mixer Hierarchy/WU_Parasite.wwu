@@ -2926,7 +2926,7 @@
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-4</Value>
+										<Value>-2</Value>
 									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
