@@ -674,6 +674,16 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
+								<Action Name="" ID="{BCB7A583-CB85-4F97-A29C-78CC11247EA2}" ShortID="558940353">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="AM_MC_Footstep" ID="{428D665F-E831-49CD-83E8-AE88A9E3971F}" WorkUnitID="{2852DB03-63DA-4FB0-9CEC-18E70C48DD0C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
 							</ChildrenList>
 						</Event>
 						<Event Name="AKE_PickUp_Lantern" ID="{9355424F-E3B7-45F8-BA36-21EEA99150D3}">
