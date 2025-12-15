@@ -9,6 +9,8 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Components/BoxComponent.h"
+#include "Navigation/ENTJumpNavArea.h"
 #include "Navigation/PathFollowingComponent.h"
 
 #if WITH_EDITORONLY_DATA
@@ -62,6 +64,16 @@ AENTArtificialIntelligencePath::AENTArtificialIntelligencePath()
 	NavLinkPlatform->SetHiddenInGame(true);
 	NavLinkPlatform->CastShadow = false;
 	NavLinkPlatform->bIsEditorOnly = true;
+
+	NavModifier = CreateDefaultSubobject<UBoxComponent>(TEXT("NavModifier"));
+	NavModifier->SetupAttachment(NavLinkPlatform);
+	NavModifier->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	NavModifier->bDynamicObstacle = true;
+	NavModifier->SetAreaClassOverride(UENTJumpNavArea::StaticClass());
+	NavModifier->SetRelativeLocation(FVector(50.0f, 0.0f, 50.0f));
+	NavModifier->SetBoxExtent(FVector(50.0f));
+	NavModifier->SetVisibility(false);
+	NavModifier->bIsEditorOnly = true;
 
 	FistNavLinkDebugArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("FistNavLinkDebugArrow"));
 	FistNavLinkDebugArrow->SetupAttachment(Root);

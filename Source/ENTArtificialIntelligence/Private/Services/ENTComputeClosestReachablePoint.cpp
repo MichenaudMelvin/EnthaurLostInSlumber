@@ -3,6 +3,7 @@
 
 #include "Services/ENTComputeClosestReachablePoint.h"
 
+#include "AIController.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
@@ -46,6 +47,16 @@ void UENTComputeClosestReachablePoint::OnBecomeRelevant(UBehaviorTreeComponent& 
 		return;
 	}
 
+	if (!OwnerComp.GetAIOwner())
+	{
+		return;
+	}
+
+	if (!OwnerComp.GetAIOwner()->GetPawn())
+	{
+		return;
+	}
+
 	FVector TargetPoint = FVector::ZeroVector;
 	if (Point.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
 	{
@@ -69,8 +80,15 @@ void UENTComputeClosestReachablePoint::OnBecomeRelevant(UBehaviorTreeComponent& 
 		return;
 	}
 
+	ANavigationData* NavData = NavSystem->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
+	if (!NavData)
+	{
+		return;
+	}
+
 	FNavLocation Result;
-	if (!NavSystem->ProjectPointToNavigation(TargetPoint, Result, FVector(QueryExtent)))
+	bool bSucceed =NavSystem->ProjectPointToNavigation(TargetPoint, Result, FVector(QueryExtent), NavData, UNavigationQueryFilter::GetQueryFilter(*NavData, this, FilterClass));
+	if (!bSucceed)
 	{
 		return;
 	}
