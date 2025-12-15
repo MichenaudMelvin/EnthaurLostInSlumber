@@ -157,6 +157,8 @@ protected:
 	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Door")
 	void CloseDoor();
 
+	void TriggerPlayerCameraShake() const;
+
 public:
 	virtual void Tick(float DeltaTime) override;
 
