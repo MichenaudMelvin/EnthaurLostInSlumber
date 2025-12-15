@@ -1084,6 +1084,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="AKE_SinewSlide" ID="{065F0580-374F-4418-847F-81CE6FD3A615}">
+							<ChildrenList>
+								<Action Name="" ID="{1678E37F-DCAB-47B8-AFF5-9B4D8FA9BD33}" ShortID="762233004">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_SinewSlide" ID="{D1B5C092-9383-451B-98FE-F8AB2B82830B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambient" ID="{3A507A88-B2DD-4DA1-9E52-9DD5D2517CFF}" ShortID="326699217">
