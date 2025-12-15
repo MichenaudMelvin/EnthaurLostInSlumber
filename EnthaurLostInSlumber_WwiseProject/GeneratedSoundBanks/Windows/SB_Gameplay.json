@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{E0914B82-FC23-0330-2A61-4BD9C3D8718D}",
+    "Hash": "{131CD996-9502-DE54-FCCE-E71780631500}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -1639,14 +1639,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Legs_Run_04.wav",
       "CachePath": "90/{9086AE3C-BDEE-2670-8613-1C1E9026A460}.wem"
-     },
-     {
-      "Id": "918853460",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Wind_Woosh_01.wav",
-      "CachePath": "7C/{7CD0B091-C2BD-8390-8D6D-CE616050E94A}.wem"
      },
      {
       "Id": "926003223",
@@ -3535,13 +3527,8 @@
       "GUID": "{3E4C03C5-C587-4630-B830-812310BDBFC5}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "1.1",
-      "DurationMax": "1.1",
-      "MediaRefs": [
-       {
-        "Id": "918853460"
-       }
-      ],
+      "DurationMin": "0.2831623",
+      "DurationMax": "0.42378527",
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -3690,6 +3677,6 @@
     ]
    }
   ],
-  "FileHash": "{01297C65-2342-4B27-5E9E-C46F3179646F}"
+  "FileHash": "{AE6BA042-6311-7123-5FF9-E6ABCC999366}"
  }
 }
