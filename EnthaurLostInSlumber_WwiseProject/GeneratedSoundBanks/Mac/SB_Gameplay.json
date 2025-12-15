@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{131CD996-9502-DE54-FCCE-E71780631500}",
+    "Hash": "{50680B9F-41FA-E615-ACFF-C25DD52D8A01}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -167,6 +167,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Foley_Run_06.wav",
       "CachePath": "D6/{D64A74B0-5F67-A787-2899-2A5EB57918B9}.wem"
+     },
+     {
+      "Id": "74785656",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_SinewSlide.wav",
+      "CachePath": "B6/{B6B06ABB-BA7E-1F77-7331-F4377DCE3BC4}.wem"
      },
      {
       "Id": "88949178",
@@ -407,14 +415,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Door_Close_04_LP.wav",
       "CachePath": "52/{5244A5BD-74BA-14F4-CD57-7C81234B8BD2}.wem"
-     },
-     {
-      "Id": "198341839",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Cinematic_Parasite_Scream_V3.wav",
-      "CachePath": "56/{5667E305-95C2-5DE2-B4F3-7EF1DFBC4CCA}.wem"
      },
      {
       "Id": "201793863",
@@ -887,14 +887,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Legs_15.wav",
       "CachePath": "AC/{AC073533-D7B1-4D4E-69A2-C6CDE0A23528}.wem"
-     },
-     {
-      "Id": "503362199",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_FS_Bone_Run_18.wav",
-      "CachePath": "6D/{6D82506E-2C69-0E9B-35F4-DB63022EEDF1}.wem"
      },
      {
       "Id": "508697626",
@@ -1726,7 +1718,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_06.wav",
-      "CachePath": "E7/{E7ABFB2B-3AB2-EC96-07C6-DB0758DBB0F4}.wem"
+      "CachePath": "D4/{D407187A-FDF7-BC29-77E2-91864EEA90CB}.wem"
      },
      {
       "Id": "977726567",
@@ -1857,6 +1849,14 @@
       "CachePath": "DA/{DA520519-AB47-7A94-5DAD-EB2C5AAD272E}.wem"
      },
      {
+      "Id": "1052641335",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Cinematic_Parasite_Scream_V2.wav",
+      "CachePath": "16/{16D7830A-D252-0D13-F1F4-2D2BB7C651CC}.wem"
+     },
+     {
       "Id": "1052972106",
       "Language": "SFX",
       "Streaming": "false",
@@ -1932,14 +1932,11 @@
       "GUID": "{4541716E-0E4E-4CF5-972E-D926CBA15137}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "31.8",
-      "DurationMax": "31.8",
+      "DurationMin": "28.666666",
+      "DurationMax": "28.666666",
       "MediaRefs": [
        {
         "Id": "44687577"
-       },
-       {
-        "Id": "198341839"
        },
        {
         "Id": "311687286"
@@ -1949,6 +1946,9 @@
        },
        {
         "Id": "1010339101"
+       },
+       {
+        "Id": "1052641335"
        }
       ],
       "AuxBusRefs": [
@@ -2235,7 +2235,7 @@
       "GUID": "{40C0DABC-E260-4BE7-9895-167ACF357472}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "0.15731238",
+      "DurationMin": "0.11126152",
       "DurationMax": "0.49441615",
       "SwitchContainers": [
        {
@@ -2333,9 +2333,6 @@
            },
            {
             "Id": "490354116"
-           },
-           {
-            "Id": "503362199"
            },
            {
             "Id": "525259507"
@@ -3299,9 +3296,10 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_SinewRelease",
       "GUID": "{241DA2BA-0BA7-4AC7-B0D8-58234A6EB6FE}",
       "Color": "10",
+      "MaxAttenuation": "8000",
       "DurationType": "OneShot",
-      "DurationMin": "0.466",
-      "DurationMax": "0.466",
+      "DurationMin": "0.43984538",
+      "DurationMax": "0.4937098",
       "MediaRefs": [
        {
         "Id": "620373117"
@@ -3311,6 +3309,22 @@
        },
        {
         "Id": "801569341"
+       }
+      ]
+     },
+     {
+      "Id": "1192224192",
+      "Name": "AKE_SinewSlide",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_SinewSlide",
+      "GUID": "{065F0580-374F-4418-847F-81CE6FD3A615}",
+      "Color": "10",
+      "MaxAttenuation": "8000",
+      "DurationType": "OneShot",
+      "DurationMin": "2.7225266",
+      "DurationMax": "3.055933",
+      "MediaRefs": [
+       {
+        "Id": "74785656"
        }
       ]
      },
@@ -3677,6 +3691,6 @@
     ]
    }
   ],
-  "FileHash": "{58BC37F3-0DF5-1C1C-90B4-21BE31F5FBDA}"
+  "FileHash": "{F56B6971-B40A-4934-8376-0A0B3CAA34AC}"
  }
 }

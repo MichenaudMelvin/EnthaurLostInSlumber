@@ -3021,7 +3021,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>8</Value>
+												<Value>3</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -3130,6 +3130,11 @@
 								<Sound Name="SFX_Cinematic_Parasite_Scream" ID="{A6763540-478E-431B-B5E6-0540BBFA22C4}" ShortID="306878835">
 									<PropertyList>
 										<Property Name="OverrideEffect" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -3150,9 +3155,16 @@
 												<MediaID ID="198341839"/>
 											</MediaIDList>
 										</AudioFileSource>
+										<AudioFileSource Name="SFX_Cinematic_Parasite_Scream_V2" ID="{EBDAFAD6-322F-41FA-A1B0-76048E2C8990}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_Cinematic_Parasite_Scream_V2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1052641335"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="SFX_Cinematic_Parasite_Scream_V3" ID="{DEA346BF-49F8-4344-9217-89866B02DB4C}" Platform="Linked"/>
+										<ActiveSource Name="SFX_Cinematic_Parasite_Scream_V2" ID="{EBDAFAD6-322F-41FA-A1B0-76048E2C8990}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
