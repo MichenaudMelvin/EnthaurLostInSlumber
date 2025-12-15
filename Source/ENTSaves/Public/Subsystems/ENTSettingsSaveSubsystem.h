@@ -7,6 +7,7 @@
 #include "ENTSettingsSaveSubsystem.generated.h"
 
 class UENTSettingsSave;
+class UCameraComponent;
 
 UCLASS()
 class ENTSAVES_API UENTSettingsSaveSubsystem : public UENTSaveSubsystem
@@ -29,11 +30,14 @@ protected:
 	TObjectPtr<UENTSettingsSave> Settings;
 
 	UPROPERTY()
-	TObjectPtr<APostProcessVolume> CurrentPostProcess;
+	TObjectPtr<UCameraComponent> CurrentCamera;
 
 	FDelegateHandle WorldInitDelegateHandle;
 
+	FDelegateHandle WorldBeginPlayDelegateHandle;
+
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);
+	void OnNewWorldBeginPlay();
 
 public:
 	UENTSettingsSave* GetSettings() const {return Settings;}

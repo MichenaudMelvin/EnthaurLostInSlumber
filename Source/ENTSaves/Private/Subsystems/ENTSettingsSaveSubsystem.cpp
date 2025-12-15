@@ -5,6 +5,7 @@
 #include "Saves/ENTSettingsSave.h"
 #include "AkGameplayStatics.h"
 #include "AkRtpc.h"
+#include "Camera/CameraComponent.h"
 #include "Config/ENTSavesConfig.h"
 
 UENTSettingsSaveSubsystem::UENTSettingsSaveSubsystem()
@@ -67,14 +68,24 @@ void UENTSettingsSaveSubsystem::ResetSaveToDefault(const int SaveIndex)
 
 void UENTSettingsSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams)
 {
-	AActor* Actor = UGameplayStatics::GetActorOfClass(this, APostProcessVolume::StaticClass());
-	if (!Actor)
+	if (GetWorld())
+	{
+		WorldBeginPlayDelegateHandle = GetWorld()->OnWorldBeginPlay.AddUObject(this, &UENTSettingsSaveSubsystem::OnNewWorldBeginPlay);
+	}
+}
+
+void UENTSettingsSaveSubsystem::OnNewWorldBeginPlay()
+{
+	GetWorld()->OnWorldBeginPlay.Remove(WorldBeginPlayDelegateHandle);
+
+	APawn* Pawn = UGameplayStatics::GetPlayerPawn(this, 0);
+	if (!Pawn)
 	{
 		return;
 	}
 
-	CurrentPostProcess = Cast<APostProcessVolume>(Actor);
-
+	UCameraComponent* CameraComponent = Pawn->GetComponentByClass<UCameraComponent>();
+	CurrentCamera = CameraComponent;
 	SetGamma(Settings->Gamma);
 }
 
@@ -82,21 +93,11 @@ void UENTSettingsSaveSubsystem::SetGamma(float Gamma) const
 {
 	Settings->Gamma = Gamma;
 
-	if (CurrentPostProcess)
+	if (CurrentCamera)
 	{
-		CurrentPostProcess->Settings.bOverride_ColorGamma = true;
-		CurrentPostProcess->Settings.ColorGamma = FVector4(Settings->Gamma, Settings->Gamma, Settings->Gamma);
+		CurrentCamera->PostProcessSettings.bOverride_ColorGamma = true;
+		CurrentCamera->PostProcessSettings.ColorGamma = FVector4(Settings->Gamma, Settings->Gamma, Settings->Gamma);
 	}
-
-#if WITH_EDITOR
-	else
-	{
-		const FString Message = FString::Printf(TEXT("No post process found in the current scene, cannot change the gamma"));
-
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, Message);
-		FMessageLog("BlueprintLog").Error(FText::FromString(Message));
-	}
-#endif
 }
 
 void UENTSettingsSaveSubsystem::SetMasterVolume(float Volume) const
