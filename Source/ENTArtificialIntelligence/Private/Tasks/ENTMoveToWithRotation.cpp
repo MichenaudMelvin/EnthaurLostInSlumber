@@ -184,6 +184,7 @@ FString UENTMoveToWithRotation::GetStaticDescription() const
 
 	return FString::Printf(TEXT("Move to: %s"), *KeyDesc);
 }
+#endif
 
 void UENTMoveToWithRotation::OnUpdatePath(FNavigationPath* InPath, ENavPathEvent::Type Event)
 {
@@ -198,4 +199,3 @@ void UENTMoveToWithRotation::OnUpdatePath(FNavigationPath* InPath, ENavPathEvent
 			break;
 	}
 }
-#endif
