@@ -302,6 +302,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
 	TObjectPtr<UCurveFloat> EnterWeakZoneCurve;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Weak Zone")
+	TObjectPtr<UAkAudioEvent> SinewSlideEvent;
+
 	UPROPERTY()
 	UMaterialInstanceDynamic* CorruptMID;
 
