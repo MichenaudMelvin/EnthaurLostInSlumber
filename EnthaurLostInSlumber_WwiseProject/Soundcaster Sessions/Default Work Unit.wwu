@@ -96,6 +96,10 @@
 							<Position X="0" Y="1"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="AKE_PR_LegsRun" ID="{DFA200EF-F39E-4477-9DA2-4D6A75A58AE7}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="0" Y="2"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="AKE_StopWindSpeed" ID="{3E4C03C5-C587-4630-B830-812310BDBFC5}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
 							<Position X="1" Y="0"/>
 						</Module>

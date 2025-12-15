@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{20CB8BD7-6CE9-1A51-8BFA-6CCFBB55C05B}",
+    "Hash": "{EBAD21A1-5F2C-2E28-6527-0D772FAD003A}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -319,6 +319,22 @@
       "Location": "Memory",
       "ShortName": "MC_Cloth_Run_12.wav",
       "CachePath": "39/{390995E2-6BBF-A3C6-B318-6CE13E0A8281}.wem"
+     },
+     {
+      "Id": "171942091",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_Run_01.wav",
+      "CachePath": "FC/{FCDB7155-60AF-6A70-7157-F8E67E378E43}.wem"
+     },
+     {
+      "Id": "174089264",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_Run_02.wav",
+      "CachePath": "73/{738D6C7A-288A-8FFB-4ECE-99B01597633B}.wem"
      },
      {
       "Id": "174144215",
@@ -1145,6 +1161,14 @@
       "CachePath": "FB/{FBE783BF-8D4B-9C22-2A2D-EDA66023850F}.wem"
      },
      {
+      "Id": "635856202",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_Run_03.wav",
+      "CachePath": "A3/{A39CA5BB-659F-55A1-21D7-407397642A66}.wem"
+     },
+     {
       "Id": "636957395",
       "Language": "SFX",
       "Streaming": "false",
@@ -1465,6 +1489,14 @@
       "CachePath": "C7/{C7B675DA-C02B-149B-2E4A-FE6D90A05F38}.wem"
      },
      {
+      "Id": "846800752",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_Run_05.wav",
+      "CachePath": "58/{58187D83-47BC-0E3D-CEAD-7D17275C9346}.wem"
+     },
+     {
       "Id": "850557758",
       "Language": "SFX",
       "Streaming": "false",
@@ -1567,6 +1599,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Bone_Land_02.wav",
       "CachePath": "99/{99410A2E-A0F7-B6F3-5B11-30ED55FDCE6F}.wem"
+     },
+     {
+      "Id": "918094944",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Legs_Run_04.wav",
+      "CachePath": "90/{9086AE3C-BDEE-2670-8613-1C1E9026A460}.wem"
      },
      {
       "Id": "918853460",
@@ -2880,6 +2920,124 @@
       ]
      },
      {
+      "Id": "2320591380",
+      "Name": "AKE_PR_LegsRun",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_LegsRun",
+      "GUID": "{DFA200EF-F39E-4477-9DA2-4D6A75A58AE7}",
+      "Color": "10",
+      "MaxAttenuation": "6000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.052625",
+      "DurationMax": "0.13333334",
+      "MediaRefs": [
+       {
+        "Id": "11382112"
+       },
+       {
+        "Id": "36785829"
+       },
+       {
+        "Id": "71491815"
+       },
+       {
+        "Id": "94886772"
+       },
+       {
+        "Id": "100845485"
+       },
+       {
+        "Id": "116395768"
+       },
+       {
+        "Id": "171942091"
+       },
+       {
+        "Id": "174089264"
+       },
+       {
+        "Id": "239633529"
+       },
+       {
+        "Id": "252236552"
+       },
+       {
+        "Id": "309109281"
+       },
+       {
+        "Id": "368998509"
+       },
+       {
+        "Id": "412221114"
+       },
+       {
+        "Id": "466718414"
+       },
+       {
+        "Id": "500580022"
+       },
+       {
+        "Id": "542035380"
+       },
+       {
+        "Id": "556495647"
+       },
+       {
+        "Id": "558502773"
+       },
+       {
+        "Id": "571972322"
+       },
+       {
+        "Id": "599646193"
+       },
+       {
+        "Id": "599836086"
+       },
+       {
+        "Id": "634870331"
+       },
+       {
+        "Id": "635856202"
+       },
+       {
+        "Id": "655447205"
+       },
+       {
+        "Id": "660804451"
+       },
+       {
+        "Id": "707409760"
+       },
+       {
+        "Id": "846800752"
+       },
+       {
+        "Id": "863858004"
+       },
+       {
+        "Id": "865855631"
+       },
+       {
+        "Id": "918094944"
+       },
+       {
+        "Id": "928710513"
+       },
+       {
+        "Id": "972526069"
+       },
+       {
+        "Id": "972985862"
+       },
+       {
+        "Id": "977726567"
+       },
+       {
+        "Id": "999250646"
+       }
+      ]
+     },
+     {
       "Id": "735878537",
       "Name": "AKE_PR_Move",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Move",
@@ -3491,6 +3649,6 @@
     ]
    }
   ],
-  "FileHash": "{8CD5A115-8036-D7C9-BD03-0483AD42A15B}"
+  "FileHash": "{78CBC5EF-8E84-9E5C-426B-2BF993B1D849}"
  }
 }
