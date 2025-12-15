@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{131CD996-9502-DE54-FCCE-E71780631500}",
+    "Hash": "{4037A918-BFD8-5BEE-591E-112DD0CFC57A}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -167,6 +167,14 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Foley_Run_06.wav",
       "CachePath": "D6/{D64A74B0-5F67-A787-2899-2A5EB57918B9}.wem"
+     },
+     {
+      "Id": "74785656",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_SinewSlide.wav",
+      "CachePath": "B6/{B6B06ABB-BA7E-1F77-7331-F4377DCE3BC4}.wem"
      },
      {
       "Id": "88949178",
@@ -3299,9 +3307,10 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_SinewRelease",
       "GUID": "{241DA2BA-0BA7-4AC7-B0D8-58234A6EB6FE}",
       "Color": "10",
+      "MaxAttenuation": "8000",
       "DurationType": "OneShot",
-      "DurationMin": "0.466",
-      "DurationMax": "0.466",
+      "DurationMin": "0.43984538",
+      "DurationMax": "0.4937098",
       "MediaRefs": [
        {
         "Id": "620373117"
@@ -3311,6 +3320,22 @@
        },
        {
         "Id": "801569341"
+       }
+      ]
+     },
+     {
+      "Id": "1192224192",
+      "Name": "AKE_SinewSlide",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_SinewSlide",
+      "GUID": "{065F0580-374F-4418-847F-81CE6FD3A615}",
+      "Color": "10",
+      "MaxAttenuation": "8000",
+      "DurationType": "OneShot",
+      "DurationMin": "2.7225266",
+      "DurationMax": "3.055933",
+      "MediaRefs": [
+       {
+        "Id": "74785656"
        }
       ]
      },
@@ -3677,6 +3702,6 @@
     ]
    }
   ],
-  "FileHash": "{AE6BA042-6311-7123-5FF9-E6ABCC999366}"
+  "FileHash": "{637937A9-3D91-6E33-9F94-3901870C4094}"
  }
 }

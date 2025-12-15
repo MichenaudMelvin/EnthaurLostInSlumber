@@ -2087,7 +2087,40 @@
 							</ChildrenList>
 						</RandomSequenceContainer>
 						<ActorMixer Name="AM_Sinew" ID="{4122C969-99B2-4EAD-9617-325AF1E18518}" ShortID="239649377">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="1"/>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{1A00C651-5A70-40E8-AF0C-61D68B528A28}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="100"/>
+													<Property Name="Min" Type="Real64" Value="-100"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{4A074B27-BE0B-41C7-8FC3-98034D52161F}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="2"/>
+													<Property Name="Min" Type="Real64" Value="-2"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="ATT_80m" ID="{3BD77612-C38E-4F78-87B8-03468F8C4B9C}" WorkUnitID="{501FC28E-FB35-4256-AF76-A14821044090}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
 								</Reference>
@@ -2705,6 +2738,32 @@
 										</Sound>
 									</ChildrenList>
 								</ActorMixer>
+								<Sound Name="SFX_SinewSlide" ID="{D1B5C092-9383-451B-98FE-F8AB2B82830B}" ShortID="79807971">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="1"/>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3CDE65EA-07D6-4C52-9618-1789AEB4B655}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Bus_SFX" ID="{C45C5D65-0B57-449D-92AB-6BF606EB105E}" WorkUnitID="{5758A909-4551-4C00-B2F6-793E72899CA7}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="SFX_SinewSlide" ID="{326AC3AB-15DD-4304-978F-67E84979B805}">
+											<Language>SFX</Language>
+											<AudioFile>SFX_SinewSlide.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="74785656"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="SFX_SinewSlide" ID="{326AC3AB-15DD-4304-978F-67E84979B805}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 						<Sound Name="TEST_Obstruction_Oclusion" ID="{4FB14830-D71B-4D31-9262-01BB77FC6EFB}" ShortID="691952857">
