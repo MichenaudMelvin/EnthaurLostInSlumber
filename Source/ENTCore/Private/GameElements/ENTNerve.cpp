@@ -791,6 +791,10 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		CorruptNerveBlocker->SetCastShadow(true);
 	}
+	else
+	{
+		UAkGameplayStatics::PostEvent(SinewSlideEvent, this, 0, FOnAkPostEventCallback());
+	}
 
 	EnterWeakZoneTimeline.Play();
 
@@ -809,6 +813,10 @@ void AENTNerve::OnExitWeakZone_Implementation()
 	{
 		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		CorruptNerveBlocker->SetCastShadow(false);
+	}
+	else
+	{
+		UAkGameplayStatics::PostEvent(SinewSlideEvent, this, 0, FOnAkPostEventCallback());
 	}
 
 	EnterWeakZoneTimeline.Reverse();
