@@ -250,6 +250,7 @@ void AENTSpikeDoor::CloseDoor()
 	InterMeshesA->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	InterMeshesB->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
+	TriggerPlayerCameraShake();
 	DropTimeline.Reverse();
 
 	UAkGameplayStatics::PostEvent(DoorCloseStartEvent, this, 0, FOnAkPostEventCallback());
@@ -263,6 +264,23 @@ void AENTSpikeDoor::CloseDoor()
 	}
 
 	bIsOpened = !bIsOpened;
+}
+
+void AENTSpikeDoor::TriggerPlayerCameraShake() const
+{
+	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
+	if (!Character)
+	{
+		return;
+	}
+
+	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Character);
+	if (!Player)
+	{
+		return;
+	}
+
+	Player->GetCameraShake()->MakeBigCameraShake();
 }
 
 void AENTSpikeDoor::DropTimelineUpdate(float Alpha)
@@ -337,6 +355,7 @@ void AENTSpikeDoor::DropTimelineFinished()
 		InterMeshesB->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 		UAkGameplayStatics::PostEvent(DoorOpenEndEvent, this, 0, FOnAkPostEventCallback());
+		TriggerPlayerCameraShake();
 		OnDoorOpened.Broadcast();
 	}
 	else
@@ -344,20 +363,6 @@ void AENTSpikeDoor::DropTimelineFinished()
 		UAkGameplayStatics::PostEvent(DoorCloseEndEvent, this, 0, FOnAkPostEventCallback());
 		OnDoorClosed.Broadcast();
 	}
-
-	ACharacter* Character = UGameplayStatics::GetPlayerCharacter(this, 0);
-	if (!Character)
-	{
-		return;
-	}
-
-	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(Character);
-	if (!Player)
-	{
-		return;
-	}
-
-	Player->GetCameraShake()->MakeBigCameraShake();
 }
 
 void AENTSpikeDoor::Trigger_Implementation()
