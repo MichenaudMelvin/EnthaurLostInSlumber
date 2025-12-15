@@ -72,7 +72,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="PC_Lvl1_2" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
+									<ObjectRef Name="PC_Lvl1" ID="{00213D55-EB09-4FD7-BBAB-0C29DCD61DEA}" WorkUnitID="{48EFCFE4-27A9-4F85-B750-84149D51C629}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
