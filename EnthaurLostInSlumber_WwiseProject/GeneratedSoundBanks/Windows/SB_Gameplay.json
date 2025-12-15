@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{F2192622-C99F-0371-9031-1D10EDCF25E6}",
+    "Hash": "{131CD996-9502-DE54-FCCE-E71780631500}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -609,6 +609,14 @@
       "CachePath": "B1/{B1C60212-0B42-3005-DDD1-CA2F2ED2EA6D}.wem"
      },
      {
+      "Id": "344995322",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Search_02.wav",
+      "CachePath": "07/{076B6C16-CE95-37F9-1008-F39ECE1B6931}.wem"
+     },
+     {
       "Id": "356673089",
       "Language": "SFX",
       "Streaming": "false",
@@ -1105,6 +1113,14 @@
       "CachePath": "7F/{7FB9FF11-8699-5BEA-E563-391D7C2115BA}.wem"
      },
      {
+      "Id": "606691096",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Search_01.wav",
+      "CachePath": "26/{2630D533-EDE2-D124-CC95-F81C374152AD}.wem"
+     },
+     {
       "Id": "611432390",
       "Language": "SFX",
       "Streaming": "false",
@@ -1465,6 +1481,14 @@
       "CachePath": "FB/{FB769AAB-ADA8-E685-4AFA-E2452485B160}.wem"
      },
      {
+      "Id": "821730719",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Search_04.wav",
+      "CachePath": "6B/{6BC84795-5C13-0C53-C750-3CBEC42FE977}.wem"
+     },
+     {
       "Id": "822325133",
       "Language": "SFX",
       "Streaming": "false",
@@ -1503,6 +1527,14 @@
       "Location": "Memory",
       "ShortName": "SFX_FS_Bone_Run_04.wav",
       "CachePath": "DE/{DE05FE22-F369-CBD0-5D2F-18495707F478}.wem"
+     },
+     {
+      "Id": "855303320",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Parasite_Search_03.wav",
+      "CachePath": "5D/{5D946365-16AE-5C22-3778-B2CE3A1D2ED7}.wem"
      },
      {
       "Id": "857548694",
@@ -1607,14 +1639,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Parasite_Legs_Run_04.wav",
       "CachePath": "90/{9086AE3C-BDEE-2670-8613-1C1E9026A460}.wem"
-     },
-     {
-      "Id": "918853460",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_Wind_Woosh_01.wav",
-      "CachePath": "7C/{7CD0B091-C2BD-8390-8D6D-CE616050E94A}.wem"
      },
      {
       "Id": "926003223",
@@ -3064,7 +3088,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_RunFoley",
       "GUID": "{B425CC87-77AE-4B31-AFF7-FAE32D669FF7}",
       "Color": "10",
-      "MaxAttenuation": "4000",
+      "MaxAttenuation": "700",
       "DurationType": "OneShot",
       "DurationMin": "0.27115718",
       "DurationMax": "0.5452539",
@@ -3086,14 +3110,6 @@
        },
        {
         "Id": "944026625"
-       }
-      ],
-      "AuxBusRefs": [
-       {
-        "Id": "243379636",
-        "Name": "Reflect",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
-        "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
        }
       ]
      },
@@ -3126,6 +3142,31 @@
       ]
      },
      {
+      "Id": "738034874",
+      "Name": "AKE_PR_Search",
+      "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Search",
+      "GUID": "{8DBDA403-F7BC-4976-A0C7-03584D1A1889}",
+      "Color": "10",
+      "MaxAttenuation": "5000",
+      "DurationType": "OneShot",
+      "DurationMin": "0.325",
+      "DurationMax": "0.71666664",
+      "MediaRefs": [
+       {
+        "Id": "344995322"
+       },
+       {
+        "Id": "606691096"
+       },
+       {
+        "Id": "821730719"
+       },
+       {
+        "Id": "855303320"
+       }
+      ]
+     },
+     {
       "Id": "3322828544",
       "Name": "AKE_PR_Spasm",
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_Spasm",
@@ -3147,7 +3188,7 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_PR_WalkFoley",
       "GUID": "{7BCA8F02-4514-4085-9933-E039BB08A318}",
       "Color": "10",
-      "MaxAttenuation": "300",
+      "MaxAttenuation": "600",
       "DurationType": "OneShot",
       "DurationMin": "0.27115718",
       "DurationMax": "0.47255337",
@@ -3187,14 +3228,6 @@
        },
        {
         "Id": "1067939987"
-       }
-      ],
-      "AuxBusRefs": [
-       {
-        "Id": "243379636",
-        "Name": "Reflect",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus_01\\Reflect",
-        "GUID": "{F394F660-B9B4-4A3A-9580-16D1E5E099B9}"
        }
       ]
      },
@@ -3494,13 +3527,8 @@
       "GUID": "{3E4C03C5-C587-4630-B830-812310BDBFC5}",
       "Color": "10",
       "DurationType": "OneShot",
-      "DurationMin": "1.1",
-      "DurationMax": "1.1",
-      "MediaRefs": [
-       {
-        "Id": "918853460"
-       }
-      ],
+      "DurationMin": "0.2831623",
+      "DurationMax": "0.42378527",
       "SwitchContainers": [
        {
         "SwitchValue": {
@@ -3649,6 +3677,6 @@
     ]
    }
   ],
-  "FileHash": "{A4074F2D-9A5F-8605-AEE6-82C8A3BA4C59}"
+  "FileHash": "{AE6BA042-6311-7123-5FF9-E6ABCC999366}"
  }
 }

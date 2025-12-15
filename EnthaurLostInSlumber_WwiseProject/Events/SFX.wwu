@@ -457,13 +457,6 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
-								<Action Name="" ID="{0E7CCE5B-FEDE-4558-BBF0-5811658475AE}" ShortID="14440801">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Woosh_Wind" ID="{B2BF122F-AEA1-4C7E-AD3D-2833A69E663B}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
 								<Action Name="" ID="{E04AA85F-E3BB-4F7B-8636-5D70B5DF7F7C}" ShortID="430216350">
 									<ReferenceList>
 										<Reference Name="Target">
@@ -1075,6 +1068,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="PR_Legs" ID="{D2D64B57-29B2-4894-8893-DB633930A651}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="AKE_PR_Search" ID="{8DBDA403-F7BC-4976-A0C7-03584D1A1889}">
+							<ChildrenList>
+								<Action Name="" ID="{8FA8DDA9-856F-4CC2-9A35-94F062EBD60F}" ShortID="955788074">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="PR_Search" ID="{836D763C-0ACC-4901-B576-F2AA3E323F2E}" WorkUnitID="{3761CB2F-7CD6-46DA-AC75-775354347782}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
