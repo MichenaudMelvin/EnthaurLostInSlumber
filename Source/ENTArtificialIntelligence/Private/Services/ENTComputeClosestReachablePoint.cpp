@@ -47,16 +47,6 @@ void UENTComputeClosestReachablePoint::OnBecomeRelevant(UBehaviorTreeComponent& 
 		return;
 	}
 
-	if (!OwnerComp.GetAIOwner())
-	{
-		return;
-	}
-
-	if (!OwnerComp.GetAIOwner()->GetPawn())
-	{
-		return;
-	}
-
 	FVector TargetPoint = FVector::ZeroVector;
 	if (Point.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
 	{
@@ -86,8 +76,17 @@ void UENTComputeClosestReachablePoint::OnBecomeRelevant(UBehaviorTreeComponent& 
 		return;
 	}
 
+	FVector Extent = FVector(QueryExtent, QueryExtent, QueryHeight);
+
+#if WITH_EDITORONLY_DATA
+	if (bDebugService)
+	{
+		UKismetSystemLibrary::DrawDebugBox(this, TargetPoint, Extent, FLinearColor::Blue, FRotator::ZeroRotator, 15.0f, 5.0f);
+	}
+#endif
+
 	FNavLocation Result;
-	bool bSucceed =NavSystem->ProjectPointToNavigation(TargetPoint, Result, FVector(QueryExtent), NavData, UNavigationQueryFilter::GetQueryFilter(*NavData, this, FilterClass));
+	bool bSucceed = NavSystem->ProjectPointToNavigation(TargetPoint, Result, Extent, NavData, UNavigationQueryFilter::GetQueryFilter(*NavData, this, FilterClass));
 	if (!bSucceed)
 	{
 		return;

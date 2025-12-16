@@ -40,6 +40,9 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace, Units = cm, ClampMin = 0.0f))
 	float GroundQueryExtent = 100.0f;
 
+	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace, Units = cm, ClampMin = 0.0f))
+	float HeightQuery = 100.0f;
+
 	UPROPERTY(EditInstanceOnly, Category = "Location", meta = (EditCondition = bGroundLineTrace))
 	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
 

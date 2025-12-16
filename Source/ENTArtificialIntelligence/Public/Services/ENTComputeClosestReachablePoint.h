@@ -36,6 +36,9 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Point", meta = (Units = cm, ClampMin = 0.0f))
 	float QueryExtent = 100.0f;
 
+	UPROPERTY(EditInstanceOnly, Category = "Point", meta = (Units = cm, ClampMin = 0.0f))
+	float QueryHeight = 100.0f;
+
 	UPROPERTY(EditInstanceOnly, Category = "Point")
 	TSubclassOf<UNavigationQueryFilter> FilterClass = UENTExcludeJumpNavAreaFilter::StaticClass();
 

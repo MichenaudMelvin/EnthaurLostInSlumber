@@ -124,12 +124,12 @@ bool UENTCanReachLocation::CalculateRawConditionValue(UBehaviorTreeComponent& Ow
 		if (bDebugDecorator)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow,FString::Printf(TEXT("TraceSucceed: %s"), (bHit ? TEXT("true") : TEXT("false"))));
-			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow,FString::Printf(TEXT("CanReach: %s"), (Controller->IsPointReachable(TargetLocation) ? TEXT("true") : TEXT("false"))));
+			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow,FString::Printf(TEXT("CanReach: %s"), (Controller->IsPointReachable(TargetLocation, FVector(GroundQueryExtent,  GroundQueryExtent, HeightQuery)) ? TEXT("true") : TEXT("false"))));
 		}
 #endif
 	}
 
-	return bInverseCheck != Controller->IsPointReachable(TargetLocation, FVector(GroundQueryExtent));
+	return bInverseCheck != Controller->IsPointReachable(TargetLocation, FVector(GroundQueryExtent,  GroundQueryExtent, HeightQuery));
 }
 
 #if WITH_EDITOR
