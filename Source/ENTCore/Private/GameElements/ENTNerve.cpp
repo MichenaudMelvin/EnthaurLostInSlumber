@@ -782,7 +782,7 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 {
 	IENTWeakZoneInterface::OnEnterWeakZone_Implementation(bIsZoneActive);
 
-	if (!bIsZoneActive) return;
+	if (!bIsZoneActive || EnterWeakZoneTimeline.IsPlaying() || EnterWeakZoneTimeline.IsReversing()) return;
 
 	bIsInWeakZone = true;
 
@@ -817,6 +817,8 @@ void AENTNerve::OnExitWeakZone_Implementation()
 {
 	IENTWeakZoneInterface::OnExitWeakZone_Implementation();
 	bIsInWeakZone = false;
+
+	if (EnterWeakZoneTimeline.IsPlaying() || EnterWeakZoneTimeline.IsReversing()) return;
 
 	if (!bIsLigament)
 	{
