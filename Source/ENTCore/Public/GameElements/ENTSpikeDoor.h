@@ -75,7 +75,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category="Door")
 	float FX_Z_Offset = 50.f;
-	
+
+	UPROPERTY(EditAnywhere, Category = "Door", meta = (Units = cm))
+	float StartFXTraceHeight = 30.0f;
+
 	UPROPERTY()
 	TArray<TObjectPtr<UNiagaraComponent>> InterMeshFXComponents;
 
