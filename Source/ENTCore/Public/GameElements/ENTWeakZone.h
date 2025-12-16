@@ -144,13 +144,13 @@ protected:
 	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
 	TArray<float> CorruptedLightsIntensity;
 
-	void SetActorsVisibility(bool bCure) const;
+	void SetActorsVisibility(bool bCure);
 
-	void SetCuredActorsVisibility(bool bVisible) const;
+	void SetCuredActorsVisibility(bool bVisible);
 
-	void SetCorruptedActorsVisibility(bool bVisible) const;
+	void SetCorruptedActorsVisibility(bool bVisible);
 
-	void SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const;
+	void SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray);
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
@@ -215,5 +215,27 @@ public:
 protected:
 	UFUNCTION()
 	void OnElectricityMovementFinished();
-#pragma endregion 
+#pragma endregion
+
+#pragma region PostProcessBlend
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
+	TObjectPtr<UCurveFloat> PostProcessBlendCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess", meta = (ClampMin = 0.0f, Units = s))
+	float PostProcessBlendDuration = 0.5f;
+
+	FTimeline PostProcessBlendTimeline;
+
+	UPROPERTY()
+	TObjectPtr<APostProcessVolume> ActivePostProcessVolume;
+
+	UFUNCTION()
+	void PostProcessBlendUpdate(float Alpha);
+
+	UFUNCTION()
+	void PostProcessBlendFinished();
+
+#pragma endregion
 };

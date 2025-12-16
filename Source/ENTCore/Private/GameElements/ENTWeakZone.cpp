@@ -72,6 +72,14 @@ void AENTWeakZone::BeginPlay()
 	CureTimeline.SetPlayRate(1 / CureDuration);
 
 	UpdateEvent.Unbind();
+	FinishEvent.Unbind();
+
+	UpdateEvent.BindDynamic(this, &AENTWeakZone::PostProcessBlendUpdate);
+	FinishEvent.BindDynamic(this, &AENTWeakZone::PostProcessBlendFinished);
+
+	PostProcessBlendTimeline.AddInterpFloat(PostProcessBlendCurve, UpdateEvent);
+	PostProcessBlendTimeline.SetTimelineFinishedFunc(FinishEvent);
+	PostProcessBlendTimeline.SetPlayRate(1.f / PostProcessBlendDuration);
 
 	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTWeakZone::OnElectricityMovementFinished);
 
@@ -213,6 +221,7 @@ void AENTWeakZone::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	CureTimeline.TickTimeline(DeltaSeconds);
+	PostProcessBlendTimeline.TickTimeline(DeltaSeconds);
 }
 
 void AENTWeakZone::InitZone()
@@ -362,6 +371,24 @@ void AENTWeakZone::CureFinish()
 	BoxComponent->SetBoxExtent(CurrentBoxExtent, true);
 }
 
+void AENTWeakZone::PostProcessBlendUpdate(float Alpha)
+{
+	if (ActivePostProcessVolume)
+	{
+		ActivePostProcessVolume->BlendWeight = 1 - Alpha;
+		WeakZonePostProcess->BlendWeight = Alpha;
+	}
+}
+
+void AENTWeakZone::PostProcessBlendFinished()
+{
+	if (ActivePostProcessVolume &&
+		ActivePostProcessVolume->BlendWeight <= 0.f)
+	{
+		ActivePostProcessVolume->bEnabled = false;
+	}
+}
+
 void AENTWeakZone::OnZoneBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (CureTimeline.IsPlaying() || CureTimeline.IsReversing() || ActorsToIgnore.Contains(OtherActor))
@@ -388,23 +415,23 @@ void AENTWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AA
 	}
 }
 
-void AENTWeakZone::SetActorsVisibility(bool bCure) const
+void AENTWeakZone::SetActorsVisibility(bool bCure)
 {
 	SetCuredActorsVisibility(bCure);
 	SetCorruptedActorsVisibility(!bCure);
 }
 
-void AENTWeakZone::SetCuredActorsVisibility(bool bVisible) const
+void AENTWeakZone::SetCuredActorsVisibility(bool bVisible)
 {
 	SetArrayVisibility(bVisible, CuredActors);
 }
 
-void AENTWeakZone::SetCorruptedActorsVisibility(bool bVisible) const
+void AENTWeakZone::SetCorruptedActorsVisibility(bool bVisible)
 {
 	SetArrayVisibility(bVisible, CorruptedActors);
 }
 
-void AENTWeakZone::SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const
+void AENTWeakZone::SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray)
 {
 	for (TObjectPtr<AActor> Actor : ActorArray)
 	{
@@ -412,14 +439,25 @@ void AENTWeakZone::SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AAc
 		{
 			USceneComponent* ActorRootComp = Actor->GetRootComponent();
 			ActorRootComp->SetVisibility(bVisible, true);
-
-			APostProcessVolume* PostProcess = Cast<APostProcessVolume>(Actor);
-			if (PostProcess)
+			
+			if (APostProcessVolume* PostProcess = Cast<APostProcessVolume>(Actor))
 			{
-				PostProcess->bEnabled = bVisible;
+				PostProcess->bEnabled = true;
+				if (bVisible)
+				{
+					PostProcess->BlendWeight = 0.f;
+					ActivePostProcessVolume = PostProcess;
+				}
+				else
+				{
+					PostProcess->BlendWeight = 1.f;
+					ActivePostProcessVolume = PostProcess;
+				}
 			}
 		}
 	}
+	if (bVisible) PostProcessBlendTimeline.PlayFromStart();
+	else PostProcessBlendTimeline.ReverseFromEnd();
 }
 
 void AENTWeakZone::CureZone(AActor* StartCurePoint)
