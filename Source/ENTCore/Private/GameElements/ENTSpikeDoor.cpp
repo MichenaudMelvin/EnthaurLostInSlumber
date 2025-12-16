@@ -82,12 +82,12 @@ void AENTSpikeDoor::BeginPlay()
 		if (InterMeshFX)
 		{
 			FVector BasePos = InterInitialRelativeLocations[i];
-			
-			FVector StartTrace = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,30);
+
+			FVector StartTrace = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,StartFXTraceHeight);
 			FVector EndTrace   = MeshesToUse[i]->GetComponentLocation() + FVector(0,0,-200);
 
 			FHitResult Hit;
-			
+
 			FCollisionQueryParams Params;
 			Params.AddIgnoredActor(this);
 			Params.bTraceComplex = true;

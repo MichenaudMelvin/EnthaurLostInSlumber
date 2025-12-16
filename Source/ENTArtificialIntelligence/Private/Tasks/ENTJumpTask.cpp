@@ -135,6 +135,8 @@ EBTNodeResult::Type UENTJumpTask::AbortTask(UBehaviorTreeComponent& OwnerComp, u
 	GetWorld()->GetTimerManager().ClearTimer(StartJumpAnimTimerHandle);
 	GetWorld()->GetTimerManager().ClearTimer(LandingAnimEndDelayTimerHandle);
 
+	JumpTimeline.Stop();
+
 	if (CurrentPawn)
 	{
 		Cast<IENTPawnAIInterface>(CurrentPawn)->SetAnimToTrigger(nullptr);
