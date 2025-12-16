@@ -178,6 +178,9 @@ protected:
 	FName RadiusParamName = "Radius";
 
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	FName HeightParamName = "Height";
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
 	FName LocationParamName = "Position";
 
 	bool bIsZoneActive = true;

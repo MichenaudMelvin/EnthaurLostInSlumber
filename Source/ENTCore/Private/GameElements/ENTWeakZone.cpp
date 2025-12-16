@@ -108,6 +108,12 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
+	SetActorScale3D(FVector::OneVector);
+	if (BoxComponent)
+	{
+		BoxComponent->SetRelativeScale3D(FVector::OneVector);
+	}
+
 	if (!DynamicZoneMaterial)
 	{
 		DynamicZoneMaterial = UKismetMaterialLibrary::CreateDynamicMaterialInstance(this, ZoneMaterial);
@@ -115,6 +121,7 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 
 	if (DynamicZoneMaterial)
 	{
+		BlackAndWhiteShader->Settings = FPostProcessSettings();
 		BlackAndWhiteShader->Settings.WeightedBlendables.Array.Empty();
 		BlackAndWhiteShader->Settings.AddBlendable(DynamicZoneMaterial, 1.0f);
 
@@ -298,7 +305,9 @@ void AENTWeakZone::ChangeZoneSize(const FVector& NewSize)
 	if (DynamicZoneMaterial)
 	{
 		float Radius = FMath::Sqrt(FMath::Pow(NewSize.X, 2) + FMath::Pow(NewSize.Y, 2));
+		float Height = NewSize.Z;
 		DynamicZoneMaterial->SetScalarParameterValue(RadiusParamName, Radius);
+		DynamicZoneMaterial->SetScalarParameterValue(HeightParamName, Height);
 		DynamicZoneMaterial->SetVectorParameterValue(LocationParamName, GetActorLocation());
 	}
 }
