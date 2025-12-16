@@ -748,8 +748,17 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 
 	PlayerCharacter = Player;
 
-	PlayerCharacter->GetStateMachine()->LockState(EENTCharacterStateID::Sprint, true);
-	PlayerCharacter->GetStateMachine()->LockState(EENTCharacterStateID::Jump, true);
+	UENTCharacterStateMachine* StateMachine = PlayerCharacter->GetStateMachine();
+	if (StateMachine)
+	{
+		StateMachine->LockState(EENTCharacterStateID::Sprint, true);
+		StateMachine->LockState(EENTCharacterStateID::Jump, true);
+
+		if (StateMachine->GetCurrentStateID() == EENTCharacterStateID::Sprint)
+		{
+			StateMachine->ChangeState(EENTCharacterStateID::Walk);
+		}
+	}
 
 #if WITH_EDITOR
 	if (PlayerCharacter->OnRespawn.IsAlreadyBound(this, &AENTNerve::ForceDetachNerveBallFromPlayer))
