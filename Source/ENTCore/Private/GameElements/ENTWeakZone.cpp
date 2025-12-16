@@ -302,14 +302,21 @@ void AENTWeakZone::ChangeZoneSize(const FVector& NewSize)
 {
 	BoxComponent->SetBoxExtent(NewSize);
 
-	if (DynamicZoneMaterial)
+	if (!DynamicZoneMaterial)
 	{
-		float Radius = FMath::Sqrt(FMath::Pow(NewSize.X, 2) + FMath::Pow(NewSize.Y, 2));
-		float Height = NewSize.Z;
-		DynamicZoneMaterial->SetScalarParameterValue(RadiusParamName, Radius);
-		DynamicZoneMaterial->SetScalarParameterValue(HeightParamName, Height);
-		DynamicZoneMaterial->SetVectorParameterValue(LocationParamName, GetActorLocation());
+		return;
 	}
+
+	float Radius = FMath::Sqrt(FMath::Pow(NewSize.X, 2) + FMath::Pow(NewSize.Y, 2));
+
+	DynamicZoneMaterial->SetVectorParameterValue(LocationParamName, GetActorLocation());
+
+	DynamicZoneMaterial->SetVectorParameterValue(ForwardVectorParamName, GetActorForwardVector());
+	DynamicZoneMaterial->SetVectorParameterValue(RightVectorParamName, GetActorRightVector());
+	DynamicZoneMaterial->SetVectorParameterValue(UpVectorParamName, GetActorUpVector());
+
+	DynamicZoneMaterial->SetVectorParameterValue(ZoneSizeParamName, NewSize);
+	DynamicZoneMaterial->SetScalarParameterValue(RadiusParamName, Radius);
 }
 
 void AENTWeakZone::CureUpdate(float Alpha)

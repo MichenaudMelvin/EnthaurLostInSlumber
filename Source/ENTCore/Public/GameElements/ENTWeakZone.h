@@ -178,10 +178,19 @@ protected:
 	FName RadiusParamName = "Radius";
 
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
-	FName HeightParamName = "Height";
+	FName ZoneSizeParamName = "ZoneSize";
 
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
 	FName LocationParamName = "Position";
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	FName ForwardVectorParamName = "ForwardVector";
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	FName RightVectorParamName = "RightVector";
+
+	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
+	FName UpVectorParamName = "UpVector";
 
 	bool bIsZoneActive = true;
 
