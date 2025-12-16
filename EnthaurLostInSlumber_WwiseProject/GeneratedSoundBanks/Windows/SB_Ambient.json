@@ -11,7 +11,7 @@
     "GUID": "{FAFCEDDF-8A17-4B2E-8573-A6E8A69007B2}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{42614B93-DF39-FCE6-2568-4182550D4CF8}",
+    "Hash": "{7A264757-B9DF-FA52-D5AC-AF958C0CC72F}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Ambient",
     "ShortName": "SB_Ambient",
     "Path": "SB_Ambient.bnk",
@@ -514,6 +514,6 @@
     ]
    }
   ],
-  "FileHash": "{238C5487-A4E5-D917-D0A7-5273BF155BFE}"
+  "FileHash": "{68FE914E-51ED-6EC9-11E4-44EFDD47D7F1}"
  }
 }
