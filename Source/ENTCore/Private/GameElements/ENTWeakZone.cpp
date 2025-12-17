@@ -109,7 +109,7 @@ void AENTWeakZone::BeginPlay()
 		Light->GetLightComponent()->SetVisibility(true);
 	}
 
-	SetActorsVisibility(false);
+	SetActorsVisibility(false, false);
 }
 
 void AENTWeakZone::OnConstruction(const FTransform& Transform)
@@ -188,7 +188,7 @@ void AENTWeakZone::PostLoad()
 {
 	Super::PostLoad();
 
-	SetActorsVisibility(false);
+	SetActorsVisibility(false, false);
 }
 
 void AENTWeakZone::PreEditChange(FProperty* PropertyAboutToChange)
@@ -202,11 +202,11 @@ void AENTWeakZone::PreEditChange(FProperty* PropertyAboutToChange)
 
 	if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CuredActors))
 	{
-		SetCuredActorsVisibility(true);
+		SetCuredActorsVisibility(true, false);
 	}
 	else if (PropertyAboutToChange->NamePrivate == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CorruptedActors))
 	{
-		SetCorruptedActorsVisibility(true);
+		SetCorruptedActorsVisibility(true, false);
 	}
 }
 
@@ -218,7 +218,7 @@ void AENTWeakZone::PostEditChangeProperty(struct FPropertyChangedEvent& Property
 
 	if (ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CuredActors) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, CorruptedActors) || ChangedProperty == GET_MEMBER_NAME_CHECKED(AENTWeakZone, bShowWeakZoneAsCure))
 	{
-		SetActorsVisibility(bShowWeakZoneAsCure);
+		SetActorsVisibility(bShowWeakZoneAsCure, false);
 	}
 }
 #endif
@@ -427,23 +427,23 @@ void AENTWeakZone::OnZoneEndOverlap(UPrimitiveComponent* OverlappedComponent, AA
 	}
 }
 
-void AENTWeakZone::SetActorsVisibility(bool bCure)
+void AENTWeakZone::SetActorsVisibility(bool bCure, bool bShouldBlend)
 {
-	SetCuredActorsVisibility(bCure);
-	SetCorruptedActorsVisibility(!bCure);
+	SetCuredActorsVisibility(bCure, bShouldBlend);
+	SetCorruptedActorsVisibility(!bCure, bShouldBlend);
 }
 
-void AENTWeakZone::SetCuredActorsVisibility(bool bVisible)
+void AENTWeakZone::SetCuredActorsVisibility(bool bVisible, bool bShouldBlend)
 {
-	SetArrayVisibility(bVisible, CuredActors);
+	SetArrayVisibility(bVisible, bShouldBlend, CuredActors);
 }
 
-void AENTWeakZone::SetCorruptedActorsVisibility(bool bVisible)
+void AENTWeakZone::SetCorruptedActorsVisibility(bool bVisible, bool bShouldBlend)
 {
-	SetArrayVisibility(bVisible, CorruptedActors);
+	SetArrayVisibility(bVisible, bShouldBlend, CorruptedActors);
 }
 
-void AENTWeakZone::SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray)
+void AENTWeakZone::SetArrayVisibility(bool bVisible, bool bShouldBlend, const TArray<TObjectPtr<AActor>>& ActorArray)
 {
 	for (TObjectPtr<AActor> Actor : ActorArray)
 	{
@@ -454,22 +454,33 @@ void AENTWeakZone::SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AAc
 			
 			if (APostProcessVolume* PostProcess = Cast<APostProcessVolume>(Actor))
 			{
-				PostProcess->bEnabled = true;
-				if (bVisible)
+				if (!bShouldBlend)
 				{
-					PostProcess->BlendWeight = 0.f;
-					ActivePostProcessVolume = PostProcess;
+					PostProcess->bEnabled = bVisible;
 				}
 				else
 				{
-					PostProcess->BlendWeight = 1.f;
-					ActivePostProcessVolume = PostProcess;
+					PostProcess->bEnabled = true;
+					if (bVisible)
+					{
+						PostProcess->BlendWeight = 0.f;
+						ActivePostProcessVolume = PostProcess;
+					}
+					else
+					{
+						PostProcess->BlendWeight = 1.f;
+						ActivePostProcessVolume = PostProcess;
+					}
 				}
 			}
 		}
 	}
-	if (bVisible) PostProcessBlendTimeline.PlayFromStart();
-	else PostProcessBlendTimeline.ReverseFromEnd();
+
+	if (bShouldBlend)
+	{
+		if (bVisible) PostProcessBlendTimeline.PlayFromStart();
+		else PostProcessBlendTimeline.ReverseFromEnd();
+	}
 }
 
 void AENTWeakZone::CureZone(AActor* StartCurePoint)
@@ -484,7 +495,7 @@ void AENTWeakZone::CureZone(AActor* StartCurePoint)
 		OnElectricityMovementFinished();
 	}
 
-	SetActorsVisibility(true);
+	SetActorsVisibility(true, true);
 
 	if (WeakZonePostProcess)
 	{
@@ -507,7 +518,7 @@ void AENTWeakZone::CorruptZone(AActor* StartCorruptPoint)
 		OnElectricityMovementFinished();
 	}
 
-	SetActorsVisibility(false);
+	SetActorsVisibility(false, true);
 
 	if (WeakZonePostProcess)
 	{
