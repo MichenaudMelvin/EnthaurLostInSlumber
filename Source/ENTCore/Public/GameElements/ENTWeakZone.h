@@ -144,13 +144,13 @@ protected:
 	UPROPERTY(VisibleInstanceOnly, Category = "WeakZone")
 	TArray<float> CorruptedLightsIntensity;
 
-	void SetActorsVisibility(bool bCure) const;
+	void SetActorsVisibility(bool bCure);
 
-	void SetCuredActorsVisibility(bool bVisible) const;
+	void SetCuredActorsVisibility(bool bVisible);
 
-	void SetCorruptedActorsVisibility(bool bVisible) const;
+	void SetCorruptedActorsVisibility(bool bVisible);
 
-	void SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray) const;
+	void SetArrayVisibility(bool bVisible, const TArray<TObjectPtr<AActor>>& ActorArray);
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "WeakZone")
@@ -174,6 +174,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
 	TObjectPtr<UMaterialInstanceDynamic> DynamicZoneMaterial;
 
+#pragma region PostProcessParams
+
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
 	FName RadiusParamName = "Radius";
 
@@ -191,6 +193,20 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
 	FName UpVectorParamName = "UpVector";
+
+	/**
+	 * @brief Edit this in the WeakZonePostProcess 
+	 */
+	UPROPERTY(VisibleInstanceOnly, Category = "PostProcess", meta = (Units = cm))
+	float DefaultBlendRadius = 100.0f;
+
+	/**
+	 * @brief Set WeakZonePostProcess blend radius to this value when the weak zone is being cured or corrupted, tweaking this value can help make smoother transitions with postprocess
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "PostProcess", meta = (ClampMin = 0.0f, Units = cm))
+	float MovingBlendRadius = 100.0f;
+
+#pragma endregion
 
 	bool bIsZoneActive = true;
 
@@ -215,5 +231,27 @@ public:
 protected:
 	UFUNCTION()
 	void OnElectricityMovementFinished();
-#pragma endregion 
+#pragma endregion
+
+#pragma region PostProcessBlend
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
+	TObjectPtr<UCurveFloat> PostProcessBlendCurve;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess", meta = (ClampMin = 0.0f, Units = s))
+	float PostProcessBlendDuration = 0.5f;
+
+	FTimeline PostProcessBlendTimeline;
+
+	UPROPERTY()
+	TObjectPtr<APostProcessVolume> ActivePostProcessVolume;
+
+	UFUNCTION()
+	void PostProcessBlendUpdate(float Alpha);
+
+	UFUNCTION()
+	void PostProcessBlendFinished();
+
+#pragma endregion
 };
