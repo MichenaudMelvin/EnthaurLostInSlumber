@@ -171,6 +171,13 @@ void AENTWeakZone::OnConstruction(const FTransform& Transform)
 #endif
 	}
 
+	if (!WeakZonePostProcess)
+	{
+		return;
+	}
+
+	DefaultBlendRadius = WeakZonePostProcess->BlendRadius;
+
 #if WITH_EDITORONLY_DATA
 	WeakZonePostProcess->bEnabled = !bShowWeakZoneAsCure;
 #endif
@@ -369,6 +376,11 @@ void AENTWeakZone::CureFinish()
 {
 	FVector CurrentBoxExtent = BoxComponent->GetUnscaledBoxExtent();
 	BoxComponent->SetBoxExtent(CurrentBoxExtent, true);
+
+	if (WeakZonePostProcess)
+	{
+		WeakZonePostProcess->BlendRadius = DefaultBlendRadius;
+	}
 }
 
 void AENTWeakZone::PostProcessBlendUpdate(float Alpha)
@@ -474,6 +486,11 @@ void AENTWeakZone::CureZone(AActor* StartCurePoint)
 
 	SetActorsVisibility(true);
 
+	if (WeakZonePostProcess)
+	{
+		WeakZonePostProcess->BlendRadius = MovingBlendRadius;
+	}
+
 	OnCure.Broadcast();
 	DestroyZone();
 }
@@ -491,6 +508,11 @@ void AENTWeakZone::CorruptZone(AActor* StartCorruptPoint)
 	}
 
 	SetActorsVisibility(false);
+
+	if (WeakZonePostProcess)
+	{
+		WeakZonePostProcess->BlendRadius = MovingBlendRadius;
+	}
 
 	OnCorrupt.Broadcast();
 	CreateZone();

@@ -174,6 +174,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
 	TObjectPtr<UMaterialInstanceDynamic> DynamicZoneMaterial;
 
+#pragma region PostProcessParams
+
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
 	FName RadiusParamName = "Radius";
 
@@ -191,6 +193,20 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "PostProcess")
 	FName UpVectorParamName = "UpVector";
+
+	/**
+	 * @brief Edit this in the WeakZonePostProcess 
+	 */
+	UPROPERTY(VisibleInstanceOnly, Category = "PostProcess", meta = (Units = cm))
+	float DefaultBlendRadius = 100.0f;
+
+	/**
+	 * @brief Set WeakZonePostProcess blend radius to this value when the weak zone is being cured or corrupted, tweaking this value can help make smoother transitions with postprocess
+	 */
+	UPROPERTY(EditInstanceOnly, Category = "PostProcess", meta = (ClampMin = 0.0f, Units = cm))
+	float MovingBlendRadius = 100.0f;
+
+#pragma endregion
 
 	bool bIsZoneActive = true;
 
