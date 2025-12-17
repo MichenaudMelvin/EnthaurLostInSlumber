@@ -867,20 +867,6 @@
 										</Reference>
 									</ReferenceList>
 								</Action>
-								<Action Name="" ID="{B7F06F23-4901-45B4-BF4D-3E9EDF1A969A}" ShortID="385343457">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="LPX_Sinew_Strech_Gore" ID="{D46DECDB-22A1-4239-8F94-8175658A58B7}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{E813B31C-B406-4F1A-A4C7-BA445006C6BD}" ShortID="879109689">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="LPX_Sinew_Stretch" ID="{6F75092C-4C47-425D-AD8D-A0E595738BB3}" WorkUnitID="{910CCB93-C5C5-47FC-9035-970CDDB13072}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
 							</ChildrenList>
 						</Event>
 						<Event Name="AKE_StartSinewStretch" ID="{87446DBD-EAA3-4C98-9682-2743F0A6ED47}">
