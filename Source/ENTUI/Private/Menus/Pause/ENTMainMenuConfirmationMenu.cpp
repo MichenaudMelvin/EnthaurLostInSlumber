@@ -8,7 +8,7 @@
 
 void UENTMainMenuConfirmationMenu::NativeOnInitialized()
 {
-	Super::NativeConstruct();
+	Super::NativeOnInitialized();
 
 	if (MainMenuButton && MainMenuButton->GetCustomButton())
 	{
