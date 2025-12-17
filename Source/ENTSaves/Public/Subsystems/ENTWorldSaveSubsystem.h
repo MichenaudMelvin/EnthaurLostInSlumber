@@ -53,6 +53,8 @@ protected:
 
 	bool bLoadedPlayer = false;
 
+	bool bLoadSingleLevel = false;
+
 	bool bFinishLoading = true;
 
 	bool bCannotLoadWorld = false;

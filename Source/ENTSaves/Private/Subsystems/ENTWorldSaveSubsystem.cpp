@@ -255,7 +255,8 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 	bLoadedPlayer = false;
 	UnloadSublevels();
 
-	CurrentWorldSave->SublevelsNames.IsEmpty() ? FinishLoading() : LoadSublevels();
+	bLoadSingleLevel = CurrentWorldSave->SublevelsNames.IsEmpty();
+	bLoadSingleLevel ? FinishLoading() : LoadSublevels();
 }
 
 void UENTWorldSaveSubsystem::UnloadSublevels()
@@ -453,13 +454,11 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 
 	bLoadedPlayer = true;
 
-	if (!bCannotLoadWorld)
+	if (bCannotLoadWorld || bLoadSingleLevel)
 	{
-		return;
+		Cast<IENTSaveGameElementInterface>(Character)->FinishLoading(CurrentWorldSave);
+		IENTSaveGameElementInterface::Execute_FinishLoadingBP(Character, CurrentWorldSave);
 	}
-
-	Cast<IENTSaveGameElementInterface>(Character)->FinishLoading(CurrentWorldSave);
-	IENTSaveGameElementInterface::Execute_FinishLoadingBP(Character, CurrentWorldSave);
 }
 
 void UENTWorldSaveSubsystem::OnWorldBeginTearDown(UWorld* World)

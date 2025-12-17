@@ -762,7 +762,7 @@ void AENTDefaultCharacter::FinishLoading(UENTWorldSave* LoadedWorldSave)
 
 	TObjectPtr<UENTPlayerSave> SaveData = PlayerSaveSubsystem->GetPlayerSave();
 	EENTCharacterStateID StateID = static_cast<EENTCharacterStateID>(SaveData->CurrentState);
-	if (StateID == EENTCharacterStateID::None)
+	if (StateID == EENTCharacterStateID::None || StateID == EENTCharacterStateID::Stop)
 	{
 		StateID = EENTCharacterStateID::Idle;
 	}
