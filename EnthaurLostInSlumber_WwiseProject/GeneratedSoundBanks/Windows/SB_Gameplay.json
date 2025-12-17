@@ -11,7 +11,7 @@
     "GUID": "{32268D10-2C94-4BB7-BD2D-D4E674E631DA}",
     "Color": "10",
     "Language": "SFX",
-    "Hash": "{CBD929F6-7C27-2E30-7613-69ADB213C938}",
+    "Hash": "{D31D5CA6-50E8-F5DB-12E0-0E2DE1437462}",
     "ObjectPath": "\\SoundBanks\\SFX\\SB_Gameplay",
     "ShortName": "SB_Gameplay",
     "Path": "SB_Gameplay.bnk",
@@ -3334,49 +3334,20 @@
       "ObjectPath": "\\Events\\SFX\\Gameplay\\AKE_SinewTense",
       "GUID": "{8251B621-D354-4B79-95B5-C4470C71F2BA}",
       "Color": "10",
+      "MaxAttenuation": "10000",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
         "Id": "5271368"
        },
        {
-        "Id": "43894004"
-       },
-       {
-        "Id": "122346683"
-       },
-       {
-        "Id": "151884214"
-       },
-       {
-        "Id": "197068285"
-       },
-       {
         "Id": "419188619"
-       },
-       {
-        "Id": "429011309"
-       },
-       {
-        "Id": "725331003"
        },
        {
         "Id": "778778069"
        },
        {
-        "Id": "801782534"
-       },
-       {
-        "Id": "804146141"
-       },
-       {
-        "Id": "889954801"
-       },
-       {
         "Id": "998170531"
-       },
-       {
-        "Id": "1021487410"
        }
       ]
      },
@@ -3691,6 +3662,6 @@
     ]
    }
   ],
-  "FileHash": "{ED4A14A7-9C11-EC00-7E78-48FF2BC45CBB}"
+  "FileHash": "{4C238D1F-F0AB-B314-BE21-8386E2615A12}"
  }
 }

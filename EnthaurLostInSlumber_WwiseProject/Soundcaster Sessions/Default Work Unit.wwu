@@ -202,6 +202,29 @@
 					<CurrentStateList ShowAll="true"/>
 					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
+				<SoundcasterSession Name="Sinewtense test" ID="{49B1E54D-A406-4077-81BD-FB8E0056599F}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="AKE_StopSinewStretch" ID="{ED87CE7E-239B-473F-8BE2-8E108B50DACC}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_StartSinewStretch" ID="{87446DBD-EAA3-4C98-9682-2743F0A6ED47}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="1" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_StopSinewTense" ID="{D896A77A-BA32-4F8B-9E8E-E3CA138AB262}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="AKE_SinewTense" ID="{8251B621-D354-4B79-95B5-C4470C71F2BA}" WorkUnitID="{3E0841D4-B946-4638-92BD-0C93C60583DC}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundcasterSessions>
