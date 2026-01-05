@@ -36,6 +36,8 @@ protected:
 
 	bool CanStandUp() const;
 
+	void ForceStandUp() const;
+
 	virtual void PlayFootstepNoise(float DeltaTime) override;
 
 private:
