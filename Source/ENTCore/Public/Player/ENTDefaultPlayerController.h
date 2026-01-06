@@ -268,13 +268,4 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	FKey NewKey;
-
-#if WITH_EDITOR
-private:
-	/**
-	 * @brief Should only be used by a console command for debug
-	 */
-	UFUNCTION(Exec)
-	void RemoveAllWidgets();
-#endif
 };

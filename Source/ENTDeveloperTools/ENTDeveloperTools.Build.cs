@@ -21,7 +21,8 @@ public class ENTDeveloperTools : ModuleRules
                 "Slate",
                 "SlateCore",
                 "InputCore",
-                "AkAudio"
+                "AkAudio",
+                "UMG"
             }
         );
     }

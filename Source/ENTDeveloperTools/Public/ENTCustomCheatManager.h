@@ -13,4 +13,11 @@ class ENTDEVELOPERTOOLS_API UENTCustomCheatManager : public UCheatManager
 
 public:
 	UENTCustomCheatManager();
+
+private:
+	/**
+	 * @brief Should only be used by a console command for debug
+	 */
+	UFUNCTION(Exec)
+	void RemoveAllWidgets();
 };
