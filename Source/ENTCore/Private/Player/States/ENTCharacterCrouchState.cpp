@@ -55,6 +55,8 @@ void UENTCharacterCrouchState::StateInit(UENTCharacterStateMachine* InStateMachi
 void UENTCharacterCrouchState::StateEnter_Implementation(const EENTCharacterStateID& PreviousStateID)
 {
 	Super::StateEnter_Implementation(PreviousStateID);
+
+	CurrentDuration = 0.0f;
 }
 
 void UENTCharacterCrouchState::StateTick_Implementation(float DeltaTime)
@@ -82,6 +84,8 @@ void UENTCharacterCrouchState::StateTick_Implementation(float DeltaTime)
 void UENTCharacterCrouchState::StateExit_Implementation(const EENTCharacterStateID& NextStateID)
 {
 	Super::StateExit_Implementation(NextStateID);
+
+	ForceStandUp();
 }
 
 void UENTCharacterCrouchState::LerpCrouch(float DeltaTime, bool bStandUp)
@@ -122,6 +126,19 @@ bool UENTCharacterCrouchState::CanStandUp() const
 
 	FHitResult HitResult;
 	return !UKismetSystemLibrary::CapsuleTraceSingle(Character, TraceLocation, TraceLocation, Character->GetCapsuleComponent()->GetUnscaledCapsuleRadius(), DefaultHalfHeight, UEngineTypes::ConvertToTraceType(ECC_Visibility), false, ActorsToIgnore, DrawDebugTrace, HitResult, false, FLinearColor::Red, FLinearColor::Green, 0.0f);
+}
+
+void UENTCharacterCrouchState::ForceStandUp() const
+{
+	if (!CanStandUp())
+	{
+		return;
+	}
+
+	Character->GetCapsuleComponent()->SetCapsuleHalfHeight(DefaultHalfHeight);
+	Character->GetCharacterMovement()->MaxWalkSpeed = DefaultSpeed;
+
+	Character->GetCamera()->SetRelativeLocation(DefaultCameraLocation);
 }
 
 void UENTCharacterCrouchState::PlayFootstepNoise(float DeltaTime)

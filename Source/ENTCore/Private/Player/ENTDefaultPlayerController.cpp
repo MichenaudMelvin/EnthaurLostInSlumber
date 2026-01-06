@@ -284,10 +284,3 @@ void AENTDefaultPlayerController::SwitchKeyBind()
 
 	Subsystem->AddMappingContext(NewIMC, 0);
 }
-
-#if WITH_EDITOR
-void AENTDefaultPlayerController::RemoveAllWidgets()
-{
-	UWidgetLayoutLibrary::RemoveAllWidgets(this);
-}
-#endif

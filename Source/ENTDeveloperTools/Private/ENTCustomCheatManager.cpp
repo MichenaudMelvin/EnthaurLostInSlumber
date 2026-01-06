@@ -3,8 +3,14 @@
 
 #include "ENTCustomCheatManager.h"
 #include "ENTCustomDebugCamera.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
 
 UENTCustomCheatManager::UENTCustomCheatManager()
 {
 	DebugCameraControllerClass = AENTCustomDebugCamera::StaticClass();
+}
+
+void UENTCustomCheatManager::RemoveAllWidgets()
+{
+	UWidgetLayoutLibrary::RemoveAllWidgets(this);
 }
