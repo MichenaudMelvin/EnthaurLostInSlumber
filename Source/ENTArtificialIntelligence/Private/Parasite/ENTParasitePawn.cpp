@@ -113,6 +113,18 @@ void AENTParasitePawn::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
+	if (!SaveID.IsValid())
+	{
+		SaveID = FGuid::NewGuid();
+
+#if WITH_EDITORONLY_DATA
+		const FString Message = FString::Printf(TEXT("%s has generated a FGuid, make sure to save the asset (or the current level) to ensure the asset will be correctly saved"), *GetActorLabel());
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
+		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
+#endif
+	}
+
 	if (!ParasiteCollision)
 	{
 		return;
@@ -573,7 +585,7 @@ FENTGameElementData& AENTParasitePawn::SaveGameElement(UENTWorldSave* CurrentWor
 		ParasiteController->SaveControllerData(Data);
 	}
 
-	return CurrentWorldSave->ParasiteData.Add(GetName(), Data);
+	return CurrentWorldSave->ParasiteData.Add(SaveID, Data);
 }
 
 void AENTParasitePawn::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)

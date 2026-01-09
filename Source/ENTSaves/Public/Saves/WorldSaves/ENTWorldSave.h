@@ -26,28 +26,28 @@ public:
 #pragma region MapData
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FENTMuscleData> MuscleData;
+	TMap<FGuid, FENTMuscleData> MuscleData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FENTNerveData> NerveData;
+	TMap<FGuid, FENTNerveData> NerveData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FENTAmberOreData> AmberOreData;
+	TMap<FGuid, FENTAmberOreData> AmberOreData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FENTWeakZoneData> WeakZoneData;
+	TMap<FGuid, FENTWeakZoneData> WeakZoneData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FENTRespawnTreeData> RespawnTreeData;
+	TMap<FGuid, FENTRespawnTreeData> RespawnTreeData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FENTParasiteData> ParasiteData;
+	TMap<FGuid, FENTParasiteData> ParasiteData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FETNScriptedAIElementData> ScriptedAIElementsData;
+	TMap<FGuid, FETNScriptedAIElementData> ScriptedAIElementsData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
-	TMap<FString, FENTGameElementData> OtherElements;
+	TMap<FGuid, FENTGameElementData> OtherElements;
 
 #pragma endregion
 

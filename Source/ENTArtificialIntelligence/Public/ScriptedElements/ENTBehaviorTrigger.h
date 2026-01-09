@@ -3,8 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
+#include "Actors/ENTSavedActor.h"
 #include "ENTBehaviorTrigger.generated.h"
 
 class UBoxComponent;
@@ -14,7 +13,7 @@ class AENTDefaultAIController;
  * @brief For now this class only run a behavior tree when an actor with a UAIPerceptionStimuliSourceComponent enter the triggerBox
  */
 UCLASS()
-class ENTARTIFICIALINTELLIGENCE_API AENTBehaviorTrigger : public AActor, public IENTSaveGameElementInterface
+class ENTARTIFICIALINTELLIGENCE_API AENTBehaviorTrigger : public AENTSavedActor
 {
 	GENERATED_BODY()
 

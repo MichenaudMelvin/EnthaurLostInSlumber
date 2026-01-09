@@ -3,9 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/ENTSavedActor.h"
 #include "Components/TimelineComponent.h"
-#include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTAmberOre.generated.h"
 
 class ALight;
@@ -21,7 +20,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFillAmber);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEmptyAmber);
 
 UCLASS()
-class ENTCORE_API AENTAmberOre : public AActor, public IENTSaveGameElementInterface
+class ENTCORE_API AENTAmberOre : public AENTSavedActor
 {
 	GENERATED_BODY()
 

@@ -486,7 +486,7 @@ FENTGameElementData& AENTAmberOre::SaveGameElement(UENTWorldSave* CurrentWorldSa
 	FENTAmberOreData Data;
 	Data.bIsEmpty = bIsEmpty;
 
-	return CurrentWorldSave->AmberOreData.Add(GetName(), Data);
+	return CurrentWorldSave->AmberOreData.Add(SaveID, Data);
 }
 
 void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)

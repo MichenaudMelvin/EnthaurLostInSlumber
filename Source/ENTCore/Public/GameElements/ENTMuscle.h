@@ -4,11 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "ENTWeakZoneInterface.h"
+#include "Actors/ENTSavedActor.h"
 #include "Components/TimelineComponent.h"
-#include "GameFramework/Actor.h"
 #include "Interface/ENTGroundAction.h"
 #include "Interface/ENTActivation.h"
-#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 
 #if WITH_EDITORONLY_DATA
 #include "Player/ENTDefaultCharacter.h"
@@ -28,7 +27,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKOnMuscleStateChange, bool, isSolid
 #pragma endregion
 
 UCLASS()
-class ENTCORE_API AENTMuscle : public AActor, public IENTGroundAction, public IENTActivation, public IENTWeakZoneInterface, public IENTSaveGameElementInterface
+class ENTCORE_API AENTMuscle : public AENTSavedActor, public IENTGroundAction, public IENTActivation, public IENTWeakZoneInterface
 {
 	GENERATED_BODY()
 

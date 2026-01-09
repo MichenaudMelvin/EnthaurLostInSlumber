@@ -4,11 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "ENTWeakZoneInterface.h"
+#include "Actors/ENTSavedActor.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
 #include "Components/TimelineComponent.h"
-#include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTNerve.generated.h"
 
 class UAkComponent;
@@ -26,7 +25,7 @@ class UENTInteractableComponent;
 DECLARE_MULTICAST_DELEGATE_OneParam(FKOnHoldStateUpdateStatic, bool);
 
 UCLASS()
-class ENTCORE_API AENTNerve : public AActor, public IENTWeakZoneInterface, public IENTSaveGameElementInterface
+class ENTCORE_API AENTNerve : public AENTSavedActor, public IENTWeakZoneInterface
 {
 	GENERATED_BODY()
 
@@ -339,16 +338,11 @@ public:
 #pragma region Save
 
 protected:
-	bool bIsLoaded = false;
-
-public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
 	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) override;
-
-	bool IsLoaded() const {return bIsLoaded;}
 
 #pragma endregion
 

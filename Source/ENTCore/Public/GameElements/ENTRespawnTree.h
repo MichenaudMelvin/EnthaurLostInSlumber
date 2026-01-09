@@ -3,8 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
+#include "Actors/ENTSavedActor.h"
 #include "ENTRespawnTree.generated.h"
 
 class UBoxComponent;
@@ -13,7 +12,7 @@ class AENTDefaultCharacter;
 class UAkAudioEvent;
 
 UCLASS()
-class ENTCORE_API AENTRespawnTree : public AActor, public IENTSaveGameElementInterface
+class ENTCORE_API AENTRespawnTree : public AENTSavedActor
 {
 	GENERATED_BODY()
 

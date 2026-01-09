@@ -722,7 +722,6 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 		CurrentAttachedReceptacle = nullptr;
 	}
 
-	bIsLoaded = false;
 	bIsHolding = true;
 
 	UAkGameplayStatics::PostEventAtLocation(GrabNoise, NerveBall->GetComponentLocation(), NerveBall->GetComponentRotation(), this);
@@ -877,7 +876,7 @@ FENTGameElementData& AENTNerve::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 		Data.LinkedReceptacle = CurrentAttachedReceptacle.GetName();
 	}
 
-	return CurrentWorldSave->NerveData.Add(GetName(), Data);
+	return CurrentWorldSave->NerveData.Add(SaveID, Data);
 }
 
 void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
@@ -914,8 +913,6 @@ void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData, UENT
 			Receptacle->ConnectNerve(this, true);
 		}
 	}
-
-	bIsLoaded = true;
 }
 
 void AENTNerve::FinishLoading(UENTWorldSave* LoadedWorldSave) {}

@@ -3,10 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ENTAmberOre.h"
+#include "Actors/ENTSavedActor.h"
 #include "Components/TimelineComponent.h"
-#include "GameFramework/Actor.h"
-#include "Saves/WorldSaves/ENTSaveGameElementInterface.h"
 #include "ENTWeakZone.generated.h"
 
 class IENTWeakZoneInterface;
@@ -22,7 +20,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCure);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCorrupt);
 
 UCLASS()
-class ENTCORE_API AENTWeakZone : public AActor, public IENTSaveGameElementInterface
+class ENTCORE_API AENTWeakZone : public AENTSavedActor
 {
 	GENERATED_BODY()
 

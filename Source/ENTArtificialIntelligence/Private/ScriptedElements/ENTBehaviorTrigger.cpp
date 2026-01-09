@@ -115,8 +115,8 @@ void AENTBehaviorTrigger::OnEnterTriggerBox(UPrimitiveComponent* OverlappedCompo
 
 FENTGameElementData& AENTBehaviorTrigger::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
-	FETNScriptedAIElementData EmptyData;
-	return CurrentWorldSave->ScriptedAIElementsData.Add(GetName(), EmptyData);
+	FETNScriptedAIElementData EmptyAIElementData;
+	return CurrentWorldSave->ScriptedAIElementsData.Add(SaveID, EmptyAIElementData);
 }
 
 void AENTBehaviorTrigger::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) {}

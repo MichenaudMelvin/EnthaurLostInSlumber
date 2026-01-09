@@ -45,6 +45,12 @@ public:
 	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) = 0;
 
 	/**
+	 * @brief Should return a Guid to identify the object when loading
+	 * @return The Guid
+	 */
+	virtual const FGuid& GetSaveID() const = 0;
+
+	/**
 	 * @brief Implement this function to an actor
 	 * @param CurrentWorldSave Ptr will always be valid
 	 */

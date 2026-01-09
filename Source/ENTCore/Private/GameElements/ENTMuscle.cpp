@@ -566,7 +566,7 @@ FENTGameElementData& AENTMuscle::SaveGameElement(UENTWorldSave* CurrentWorldSave
 	FENTMuscleData Data;
 	Data.bIsSolid = bIsSolid;
 
-	return CurrentWorldSave->MuscleData.Add(GetName(), Data);
+	return CurrentWorldSave->MuscleData.Add(SaveID, Data);
 }
 
 void AENTMuscle::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)

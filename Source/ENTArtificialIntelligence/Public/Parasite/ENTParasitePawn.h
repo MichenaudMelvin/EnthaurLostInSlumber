@@ -330,6 +330,9 @@ protected:
 
 	FENTParasiteData LoadingData;
 
+	UPROPERTY(BlueprintReadOnly, VisibleInstanceOnly, Category = "Save")
+	FGuid SaveID;
+
 public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
@@ -340,6 +343,8 @@ public:
 	virtual bool HasReceivedLoadingRequest() const override {return bHasReceivedLoadingRequest;}
 
 	virtual const FENTAIData& GetLoadingData() const override {return LoadingData;}
+
+	virtual const FGuid& GetSaveID() const override {return SaveID;}
 
 #pragma endregion
 

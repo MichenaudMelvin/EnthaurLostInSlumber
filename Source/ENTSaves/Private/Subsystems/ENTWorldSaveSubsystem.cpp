@@ -342,8 +342,10 @@ void UENTWorldSaveSubsystem::FinishLoading()
 			continue;
 		}
 
+		const FGuid& ActorSaveID = InterfaceActor->GetSaveID();
+
 		// TODO refactor
-		FENTMuscleData* MuscleDataPtr = CurrentWorldSave->MuscleData.Find(Actor->GetName());
+		FENTMuscleData* MuscleDataPtr = CurrentWorldSave->MuscleData.Find(ActorSaveID);
 		if (MuscleDataPtr)
 		{
 			InterfaceActor->LoadGameElement(*MuscleDataPtr, CurrentWorldSave);
@@ -354,7 +356,7 @@ void UENTWorldSaveSubsystem::FinishLoading()
 			continue;
 		}
 
-		FENTNerveData* NerveDataPtr = CurrentWorldSave->NerveData.Find(Actor->GetName());
+		FENTNerveData* NerveDataPtr = CurrentWorldSave->NerveData.Find(ActorSaveID);
 		if (NerveDataPtr)
 		{
 			InterfaceActor->LoadGameElement(*NerveDataPtr, CurrentWorldSave);
@@ -365,7 +367,7 @@ void UENTWorldSaveSubsystem::FinishLoading()
 			continue;
 		}
 
-		FENTAmberOreData* AmberOreDataPtr = CurrentWorldSave->AmberOreData.Find(Actor->GetName());
+		FENTAmberOreData* AmberOreDataPtr = CurrentWorldSave->AmberOreData.Find(ActorSaveID);
 		if (AmberOreDataPtr)
 		{
 			InterfaceActor->LoadGameElement(*AmberOreDataPtr, CurrentWorldSave);
@@ -376,7 +378,7 @@ void UENTWorldSaveSubsystem::FinishLoading()
 			continue;
 		}
 
-		FENTWeakZoneData* WeakZoneDataPtr = CurrentWorldSave->WeakZoneData.Find(Actor->GetName());
+		FENTWeakZoneData* WeakZoneDataPtr = CurrentWorldSave->WeakZoneData.Find(ActorSaveID);
 		if (WeakZoneDataPtr)
 		{
 			InterfaceActor->LoadGameElement(*WeakZoneDataPtr, CurrentWorldSave);
@@ -387,7 +389,7 @@ void UENTWorldSaveSubsystem::FinishLoading()
 			continue;
 		}
 
-		FENTRespawnTreeData* RespawnTreeData = CurrentWorldSave->RespawnTreeData.Find(Actor->GetName());
+		FENTRespawnTreeData* RespawnTreeData = CurrentWorldSave->RespawnTreeData.Find(ActorSaveID);
 		if (RespawnTreeData)
 		{
 			InterfaceActor->LoadGameElement(*RespawnTreeData, CurrentWorldSave);
@@ -398,7 +400,7 @@ void UENTWorldSaveSubsystem::FinishLoading()
 			continue;
 		}
 
-		FENTParasiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(Actor->GetName());
+		FENTParasiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(ActorSaveID);
 		if (ParaSiteData)
 		{
 			InterfaceActor->LoadGameElement(*ParaSiteData, CurrentWorldSave);
@@ -409,7 +411,7 @@ void UENTWorldSaveSubsystem::FinishLoading()
 			continue;
 		}
 
-		FETNScriptedAIElementData* ScriptedAIElementData = CurrentWorldSave->ScriptedAIElementsData.Find(Actor->GetName());
+		FETNScriptedAIElementData* ScriptedAIElementData = CurrentWorldSave->ScriptedAIElementsData.Find(ActorSaveID);
 		if (ScriptedAIElementData)
 		{
 			InterfaceActor->LoadGameElement(*ScriptedAIElementData, CurrentWorldSave);

@@ -323,17 +323,20 @@ public:
 private:
 	FENTGameElementData EmptyData;
 
+	FGuid InvalidGuid = FGuid(0, 0, 0, 0);
+
 #if WITH_EDITOR
 	UFUNCTION(Exec)
 	void SavePlayer();
 #endif
 
-public:
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 
 	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
 
 	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) override;
+
+	virtual const FGuid& GetSaveID() const override {return InvalidGuid;}
 
 #pragma endregion
 
