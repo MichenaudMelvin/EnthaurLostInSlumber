@@ -543,6 +543,8 @@ void AENTWeakZone::ActivateZone(bool bActivateZone)
 
 FENTGameElementData& AENTWeakZone::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
+	Super::SaveGameElement(CurrentWorldSave);
+
 	FENTWeakZoneData Data = FENTWeakZoneData();
 	Data.bIsActive = bIsZoneActive;
 	return CurrentWorldSave->WeakZoneData.Add(SaveID, Data);
@@ -550,12 +552,17 @@ FENTGameElementData& AENTWeakZone::SaveGameElement(UENTWorldSave* CurrentWorldSa
 
 void AENTWeakZone::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
+	Super::LoadGameElement(GameElementData, LoadedWorldSave);
+
 	const FENTWeakZoneData& Data = static_cast<const FENTWeakZoneData&>(GameElementData);
 	bIsZoneActive = Data.bIsActive;
 	bIsZoneActive ? CreateZone() : CureZone(nullptr);
 }
 
-void AENTWeakZone::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+void AENTWeakZone::FinishLoading(UENTWorldSave* LoadedWorldSave)
+{
+	Super::FinishLoading(LoadedWorldSave);
+}
 
 void AENTWeakZone::OnElectricityMovementFinished()
 {

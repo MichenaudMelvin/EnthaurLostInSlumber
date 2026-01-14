@@ -55,7 +55,9 @@ protected:
 
 	bool bLoadSingleLevel = false;
 
-	bool bFinishLoading = true;
+	bool bIsLoading = false;
+
+	bool bIsLoaded = false;
 
 	bool bCannotLoadWorld = false;
 
@@ -75,4 +77,8 @@ protected:
 
 public:
 	TObjectPtr<UENTWorldSave> GetCurrentWorldSave() const {return CurrentWorldSave;}
+
+	bool IsLoading() const {return bIsLoading;}
+
+	bool IsLoaded() const {return bIsLoaded;}
 };

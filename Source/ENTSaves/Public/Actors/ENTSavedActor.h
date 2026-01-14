@@ -21,8 +21,9 @@ protected:
 
 	FENTGameElementData EmptyData;
 
-	// TODO this
-	// bool bIsLoaded = false;
+	bool bIsLoading = false;
+
+	bool bIsLoaded = false;
 
 	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
 

@@ -76,7 +76,7 @@ UENTDefaultSave* UENTWorldSaveSubsystem::CreateSave(const int SaveIndex)
 
 UENTDefaultSave* UENTWorldSaveSubsystem::SaveToSlot(const int SaveIndex)
 {
-	if (!bFinishLoading)
+	if (bIsLoading)
 	{
 		return nullptr;
 	}
@@ -249,7 +249,8 @@ void UENTWorldSaveSubsystem::OnNewWorldStarted(const FActorsInitializedParams& A
 		return;
 	}
 
-	bFinishLoading = false;
+	bIsLoading = true;
+	bIsLoaded = false;
 
 	LoadedLevelIndex = 0;
 	bLoadedPlayer = false;
@@ -426,7 +427,8 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		Actor->Destroy();
 	}
 
-	bFinishLoading = true;
+	bIsLoading = false;
+	bIsLoaded = true;
 	OnFinishLoading.Broadcast(CurrentWorldSave);
 }
 
@@ -460,6 +462,9 @@ void UENTWorldSaveSubsystem::OnNewWorldBeginPlay()
 	{
 		Cast<IENTSaveGameElementInterface>(Character)->FinishLoading(CurrentWorldSave);
 		IENTSaveGameElementInterface::Execute_FinishLoadingBP(Character, CurrentWorldSave);
+
+		bIsLoading = false;
+		bIsLoaded = true;
 	}
 }
 

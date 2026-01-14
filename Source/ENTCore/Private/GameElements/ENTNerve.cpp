@@ -860,6 +860,8 @@ void AENTNerve::FinishEnterWeakZone()
 
 FENTGameElementData& AENTNerve::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
+	Super::SaveGameElement(CurrentWorldSave);
+
 	FENTNerveData Data;
 
 	for (int32 i = 0; i < SplineCable->GetNumberOfSplinePoints(); i++)
@@ -881,6 +883,8 @@ FENTGameElementData& AENTNerve::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 
 void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
+	Super::LoadGameElement(GameElementData, LoadedWorldSave);
+
 	const FENTNerveData& Data = static_cast<const FENTNerveData&>(GameElementData);
 
 	ResetCables(true);
@@ -915,7 +919,10 @@ void AENTNerve::LoadGameElement(const FENTGameElementData& GameElementData, UENT
 	}
 }
 
-void AENTNerve::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+void AENTNerve::FinishLoading(UENTWorldSave* LoadedWorldSave)
+{
+	Super::FinishLoading(LoadedWorldSave);
+}
 
 #pragma endregion
 

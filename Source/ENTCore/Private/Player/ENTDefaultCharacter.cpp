@@ -705,9 +705,28 @@ FENTGameElementData& AENTDefaultCharacter::SaveGameElement(UENTWorldSave* Curren
 
 	if (CurrentWorldSave)
 	{
-		CurrentWorldSave->PlayerLocation = GetActorLocation();
-		CurrentWorldSave->PlayerCameraRotation = GetControlRotation();
-		CurrentWorldSave->LastCheckPointName = GetRespawnTree() ? GetRespawnTree().GetName() : "";
+		if (GetRespawnTree())
+		{
+			const FTransform& RespawnTransform = GetRespawnTree()->GetRespawnTransform();
+
+			FHitResult HitResult;
+			bool bHit = GroundTrace(RespawnTransform.GetLocation(), RespawnGroundTrace, HitResult);
+
+			if (bHit)
+			{
+				HitResult.Location.Z += GetCharacterHalfHeight();
+			}
+
+			CurrentWorldSave->PlayerLocation = HitResult.Location;
+			CurrentWorldSave->PlayerCameraRotation = RespawnTransform.GetRotation().Rotator();
+			CurrentWorldSave->LastCheckPointName = GetRespawnTree().GetName();
+		}
+		else
+		{
+			CurrentWorldSave->PlayerLocation = GetActorLocation();
+			CurrentWorldSave->PlayerCameraRotation = GetControlRotation();
+			CurrentWorldSave->LastCheckPointName = "";
+		}
 	}
 
 	if (StateMachine)

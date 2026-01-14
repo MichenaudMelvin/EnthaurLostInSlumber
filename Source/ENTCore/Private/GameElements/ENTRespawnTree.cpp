@@ -81,19 +81,29 @@ void AENTRespawnTree::OnConstruction(const FTransform& Transform)
 
 void AENTRespawnTree::TriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	UENTWorldSaveSubsystem* SaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
+	if (SaveSubsystem && SaveSubsystem->IsLoading())
+	{
+		return;
+	}
+	else if (bIsLoading)
+	{
+		return;
+	}
+
 	AENTDefaultCharacter* Player = Cast<AENTDefaultCharacter>(OtherActor);
 	if (!Player)
 	{
 		return;
 	}
 
-	if (!bIsActivated)
+	if (bIsActivated)
 	{
-		SetActive();
+		return;
 	}
 
+	SetActive();
 	SetRespawnPoint(Player, true);
-
 	TriggerBox->OnComponentBeginOverlap.RemoveDynamic(this, &AENTRespawnTree::TriggerEnter);
 }
 
@@ -136,6 +146,8 @@ void AENTRespawnTree::SetRespawnPoint(AENTDefaultCharacter* Player, bool bSave)
 
 FENTGameElementData& AENTRespawnTree::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
+	Super::SaveGameElement(CurrentWorldSave);
+
 	FENTRespawnTreeData Data;
 	Data.bIsActive = bIsActivated;
 
@@ -144,6 +156,8 @@ FENTGameElementData& AENTRespawnTree::SaveGameElement(UENTWorldSave* CurrentWorl
 
 void AENTRespawnTree::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
+	Super::LoadGameElement(GameElementData, LoadedWorldSave);
+
 	const FENTRespawnTreeData& Data = static_cast<const FENTRespawnTreeData&>(GameElementData);
 	bIsActivated = Data.bIsActive;
 
@@ -158,6 +172,8 @@ void AENTRespawnTree::LoadGameElement(const FENTGameElementData& GameElementData
 
 void AENTRespawnTree::FinishLoading(UENTWorldSave* LoadedWorldSave)
 {
+	Super::FinishLoading(LoadedWorldSave);
+
 	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
 	if(!WorldSaveSubsystem)
 	{

@@ -28,8 +28,11 @@ FENTGameElementData& AENTSavedActor::SaveGameElement(UENTWorldSave* CurrentWorld
 
 void AENTSavedActor::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
+	bIsLoading = true;
 }
 
 void AENTSavedActor::FinishLoading(UENTWorldSave* LoadedWorldSave)
 {
+	bIsLoading = false;
+	bIsLoaded = true;
 }

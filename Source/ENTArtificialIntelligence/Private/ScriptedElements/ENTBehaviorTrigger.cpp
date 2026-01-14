@@ -115,10 +115,18 @@ void AENTBehaviorTrigger::OnEnterTriggerBox(UPrimitiveComponent* OverlappedCompo
 
 FENTGameElementData& AENTBehaviorTrigger::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
+	Super::SaveGameElement(CurrentWorldSave);
+
 	FETNScriptedAIElementData EmptyAIElementData;
 	return CurrentWorldSave->ScriptedAIElementsData.Add(SaveID, EmptyAIElementData);
 }
 
-void AENTBehaviorTrigger::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) {}
+void AENTBehaviorTrigger::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
+{
+	Super::LoadGameElement(GameElementData, LoadedWorldSave);
+}
 
-void AENTBehaviorTrigger::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+void AENTBehaviorTrigger::FinishLoading(UENTWorldSave* LoadedWorldSave)
+{
+	Super::FinishLoading(LoadedWorldSave);
+}

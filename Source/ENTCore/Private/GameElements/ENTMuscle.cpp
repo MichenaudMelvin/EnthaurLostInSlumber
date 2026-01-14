@@ -563,6 +563,8 @@ void AENTMuscle::SetLock_Implementation(bool bState)
 
 FENTGameElementData& AENTMuscle::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
+	Super::SaveGameElement(CurrentWorldSave);
+
 	FENTMuscleData Data;
 	Data.bIsSolid = bIsSolid;
 
@@ -571,13 +573,18 @@ FENTGameElementData& AENTMuscle::SaveGameElement(UENTWorldSave* CurrentWorldSave
 
 void AENTMuscle::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
+	Super::LoadGameElement(GameElementData, LoadedWorldSave);
+
 	const FENTMuscleData& Data = static_cast<const FENTMuscleData&>(GameElementData);
 	bIsSolid = Data.bIsSolid;
 
 	UpdateMuscleSolidity(false);
 }
 
-void AENTMuscle::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+void AENTMuscle::FinishLoading(UENTWorldSave* LoadedWorldSave)
+{
+	Super::FinishLoading(LoadedWorldSave);
+}
 
 #pragma endregion
 

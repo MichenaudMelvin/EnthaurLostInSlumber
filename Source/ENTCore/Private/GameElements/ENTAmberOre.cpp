@@ -83,7 +83,7 @@ void AENTAmberOre::BeginPlay()
 
 #endif
 
-	if (!bIsLoaded)
+	if (!bIsLoaded || !bIsLoading)
 	{
 		bShouldFoliagePlay = bIsEmpty;
 	}
@@ -483,6 +483,8 @@ void AENTAmberOre::TriggerEmptyLinkedObjects()
 
 FENTGameElementData& AENTAmberOre::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {
+	Super::SaveGameElement(CurrentWorldSave);
+
 	FENTAmberOreData Data;
 	Data.bIsEmpty = bIsEmpty;
 
@@ -491,6 +493,8 @@ FENTGameElementData& AENTAmberOre::SaveGameElement(UENTWorldSave* CurrentWorldSa
 
 void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
 {
+	Super::LoadGameElement(GameElementData, LoadedWorldSave);
+
 	bShouldFoliagePlay = bIsEmpty;
 
 	const FENTAmberOreData& Data = static_cast<const FENTAmberOreData&>(GameElementData);
@@ -514,8 +518,6 @@ void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData, U
 		}
 	}
 
-	bIsLoaded = true;
-
 	UENTPlayerSaveSubsystem* PlayerSaveSubsystem = GetGameInstance()->GetSubsystem<UENTPlayerSaveSubsystem>();
 	if (!PlayerSaveSubsystem || !PlayerSaveSubsystem->GetPlayerSave())
 	{
@@ -525,4 +527,7 @@ void AENTAmberOre::LoadGameElement(const FENTGameElementData& GameElementData, U
 	OnPlayerAmberUpdate(PlayerSaveSubsystem->GetPlayerSave()->bHasAmber);
 }
 
-void AENTAmberOre::FinishLoading(UENTWorldSave* LoadedWorldSave) {}
+void AENTAmberOre::FinishLoading(UENTWorldSave* LoadedWorldSave)
+{
+	Super::FinishLoading(LoadedWorldSave);
+}
