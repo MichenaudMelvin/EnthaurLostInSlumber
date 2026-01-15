@@ -20,7 +20,7 @@ class ENTUI_API UENTEndDemoMenu : public UENTWidgetBasics
 public:
 	virtual void NativeConstruct() override;
 	virtual void BeginDestroy() override;
-	
+
 protected:
 	UFUNCTION()
 	void GoBackToMainMenu();
