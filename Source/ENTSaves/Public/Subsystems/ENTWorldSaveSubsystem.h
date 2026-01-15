@@ -51,14 +51,19 @@ protected:
 
 	int32 LoadedLevelIndex = 0;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Loading")
 	bool bLoadedPlayer = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Loading")
 	bool bLoadSingleLevel = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Loading")
 	bool bIsLoading = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Loading")
 	bool bIsLoaded = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Loading")
 	bool bCannotLoadWorld = false;
 
 	void OnNewWorldStarted(const FActorsInitializedParams& ActorsInitializedParams);

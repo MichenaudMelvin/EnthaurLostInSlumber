@@ -4,22 +4,29 @@
 #include "Actors/ENTSavedActor.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 
-void AENTSavedActor::OnConstruction(const FTransform& Transform)
-{
-	Super::OnConstruction(Transform);
-
-	if (!SaveID.IsValid())
-	{
-		SaveID = FGuid::NewGuid();
-
 #if WITH_EDITORONLY_DATA
-		const FString Message = FString::Printf(TEXT("%s has generated a FGuid, make sure to save the asset (or the current level) to ensure the asset will be correctly saved"), *GetActorLabel());
+void AENTSavedActor::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	if (!IsValidChecked(this))
+	{
+		return;
+	}
+
+	UWorld* World = GetWorld();
+
+	const bool bPlacedInWorld = (World->bStartup);
+
+	if (!SaveID.IsValid() && bPlacedInWorld)
+	{
+		const FString Message = FString::Printf(TEXT("Generate the SaveID of %s and make sure to save the asset (or the current level) to ensure the asset will be correctly saved"), *GetActorLabel());
 
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Message);
 		FMessageLog("BlueprintLog").Warning(FText::FromString(Message));
-#endif
 	}
 }
+#endif
 
 FENTGameElementData& AENTSavedActor::SaveGameElement(UENTWorldSave* CurrentWorldSave)
 {

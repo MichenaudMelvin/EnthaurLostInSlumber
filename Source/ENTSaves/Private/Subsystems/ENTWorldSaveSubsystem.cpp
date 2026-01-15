@@ -294,6 +294,12 @@ void UENTWorldSaveSubsystem::LoadSublevels()
 		return;
 	}
 
+	if (CurrentWorldSave->SublevelsNames.IsEmpty())
+	{
+		FinishLoading();
+		return;
+	}
+
 	FLatentActionInfo LatentActionInfo;
 	LatentActionInfo.Linkage = 0;
 	LatentActionInfo.UUID = LoadedLevelIndex;
@@ -416,6 +422,17 @@ void UENTWorldSaveSubsystem::FinishLoading()
 		if (ScriptedAIElementData)
 		{
 			InterfaceActor->LoadGameElement(*ScriptedAIElementData, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
+			continue;
+		}
+
+		FENTGameElementData* OtherElementData = CurrentWorldSave->OtherElements.Find(ActorSaveID);
+		if (OtherElementData)
+		{
+			InterfaceActor->LoadGameElement(*OtherElementData, CurrentWorldSave);
 			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
 
 			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);

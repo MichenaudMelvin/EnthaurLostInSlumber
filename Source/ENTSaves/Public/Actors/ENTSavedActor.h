@@ -14,7 +14,9 @@ class ENTSAVES_API AENTSavedActor : public AActor, public IENTSaveGameElementInt
 	GENERATED_BODY()
 
 protected:
-	virtual void OnConstruction(const FTransform& Transform) override;
+#if WITH_EDITORONLY_DATA
+	virtual void PostInitializeComponents() override;
+#endif
 
 	UPROPERTY(BlueprintReadOnly, VisibleInstanceOnly, Category = "Save")
 	FGuid SaveID;
@@ -32,4 +34,7 @@ protected:
 	virtual void FinishLoading(UENTWorldSave* LoadedWorldSave) override;
 
 	virtual const FGuid& GetSaveID() const override {return SaveID;}
+
+	UFUNCTION(CallInEditor, Category = "Save")
+	void GenerateSaveID() {SaveID = FGuid::NewGuid();}
 };

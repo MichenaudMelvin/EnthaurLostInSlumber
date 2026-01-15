@@ -121,6 +121,11 @@ void AENTNerve::BeginDestroy()
 {
 	Super::BeginDestroy();
 
+	if (!InteractableComponent)
+	{
+		return;
+	}
+
 	if (InteractableComponent->OnInteract.IsBound())
 	{
 		InteractableComponent->OnInteract.RemoveDynamic(this, &AENTNerve::Interaction);

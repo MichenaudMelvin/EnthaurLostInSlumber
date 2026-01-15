@@ -68,6 +68,7 @@ protected:
 
 	FString LastCheckPointName;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Respawn")
 	bool bIsActivated = false;
 
 public:

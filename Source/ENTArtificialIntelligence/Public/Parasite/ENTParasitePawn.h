@@ -39,6 +39,10 @@ protected:
 	virtual void Tick(float DeltaSeconds) override;
 #endif
 
+#if WITH_EDITORONLY_DATA
+	virtual void PostInitializeComponents() override;
+#endif
+
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void OnConstruction(const FTransform& Transform) override;
@@ -345,6 +349,9 @@ public:
 	virtual const FENTAIData& GetLoadingData() const override {return LoadingData;}
 
 	virtual const FGuid& GetSaveID() const override {return SaveID;}
+
+	UFUNCTION(CallInEditor, Category = "Save")
+	void GenerateSaveID() {SaveID = FGuid::NewGuid();}
 
 #pragma endregion
 
