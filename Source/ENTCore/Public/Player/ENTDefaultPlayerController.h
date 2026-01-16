@@ -128,11 +128,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction JumpAction;
 
+	/**
+	 * @brief This one is not a FAction a will be bind with Started, Trigger and Completed
+	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
-	FAction InteractPressedAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
-	FAction InteractTriggerAction;
+	TObjectPtr<UInputAction> InteractPressedAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inputs Default")
 	FAction PauseGameAction;

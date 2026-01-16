@@ -5,10 +5,6 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
-#if WITH_EDITOR
-#include "Blueprint/WidgetLayoutLibrary.h"
-#endif
-
 FAction::FAction()
 {
 	TriggerEvents.Add(ETriggerEvent::Triggered);
@@ -169,8 +165,6 @@ void AENTDefaultPlayerController::SetupInputComponent()
 	SprintAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AENTDefaultPlayerController, OnInputSprint, const FInputActionValue&);
 	CrouchAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AENTDefaultPlayerController, OnInputCrouch, const FInputActionValue&);
 	JumpAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AENTDefaultPlayerController, OnInputJump, const FInputActionValue&);
-	InteractPressedAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AENTDefaultPlayerController, OnInputInteractPressed, const FInputActionValue&);
-	InteractTriggerAction.FunctionName = GET_FUNCTION_NAME_CHECKED_OneParam(AENTDefaultPlayerController, OnInputInteractTrigger, const FInputActionValue&);
 	PauseGameAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AENTDefaultPlayerController, OnInputPauseGame);
 
 	NavigateAction.FunctionName = GET_FUNCTION_NAME_CHECKED(AENTDefaultPlayerController, OnInputNavigate);
@@ -183,14 +177,19 @@ void AENTDefaultPlayerController::SetupInputComponent()
 	SprintAction.BindAction(EnhancedInputComponent, this);
 	CrouchAction.BindAction(EnhancedInputComponent, this);
 	JumpAction.BindAction(EnhancedInputComponent, this);
-	InteractPressedAction.BindAction(EnhancedInputComponent, this);
-	InteractTriggerAction.BindAction(EnhancedInputComponent, this);
 	PauseGameAction.BindAction(EnhancedInputComponent, this);
 
 	NavigateAction.BindAction(EnhancedInputComponent, this);
 	SelectAction.BindAction(EnhancedInputComponent, this);
 	BackAction.BindAction(EnhancedInputComponent, this);
 	ResumeAction.BindAction(EnhancedInputComponent, this);
+
+	FName PressedFunc = GET_FUNCTION_NAME_CHECKED_OneParam(AENTDefaultPlayerController, OnInputInteractPressed, const FInputActionValue&);
+	FName TriggerFunc = GET_FUNCTION_NAME_CHECKED_OneParam(AENTDefaultPlayerController, OnInputInteractTrigger, const FInputActionValue&);
+
+	EnhancedInputComponent->BindAction(InteractPressedAction, ETriggerEvent::Started, this, PressedFunc);
+	EnhancedInputComponent->BindAction(InteractPressedAction, ETriggerEvent::Completed, this, PressedFunc);
+	EnhancedInputComponent->BindAction(InteractPressedAction, ETriggerEvent::Triggered, this, TriggerFunc);
 }
 
 void AENTDefaultPlayerController::OnInputMove(const FInputActionValue& InputActionValue)
