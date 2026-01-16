@@ -35,7 +35,10 @@ void AENTRespawnTree::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AENTRespawnTree::TriggerEnter);
+	if (TriggerBox && !TriggerBox->OnComponentBeginOverlap.IsAlreadyBound(this, &AENTRespawnTree::TriggerEnter))
+	{
+		TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AENTRespawnTree::TriggerEnter);
+	}
 
 	RespawnTransform *= GetActorTransform();
 

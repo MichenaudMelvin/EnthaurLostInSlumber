@@ -55,8 +55,18 @@ void AENTWeakZone::BeginPlay()
 		return;
 	}
 
-	BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AENTWeakZone::OnZoneBeginOverlap);
-	BoxComponent->OnComponentEndOverlap.AddDynamic(this, &AENTWeakZone::OnZoneEndOverlap);
+	if (BoxComponent)
+	{
+		if (!BoxComponent->OnComponentBeginOverlap.IsAlreadyBound(this, &AENTWeakZone::OnZoneBeginOverlap))
+		{
+			BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AENTWeakZone::OnZoneBeginOverlap);
+		}
+
+		if (!BoxComponent->OnComponentEndOverlap.IsAlreadyBound(this, &AENTWeakZone::OnZoneEndOverlap))
+		{
+			BoxComponent->OnComponentEndOverlap.AddDynamic(this, &AENTWeakZone::OnZoneEndOverlap);
+		}
+	}
 
 	// short delay because GetOverlappingActors does not work properly at the BeginPlay
 	FTimerHandle TimerHandle;
@@ -81,7 +91,10 @@ void AENTWeakZone::BeginPlay()
 	PostProcessBlendTimeline.SetTimelineFinishedFunc(FinishEvent);
 	PostProcessBlendTimeline.SetPlayRate(1.f / PostProcessBlendDuration);
 
-	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTWeakZone::OnElectricityMovementFinished);
+	if (ElectricityComponent && !ElectricityComponent->OnElectricityMovementFinished.IsAlreadyBound(this, &AENTWeakZone::OnElectricityMovementFinished))
+	{
+		ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTWeakZone::OnElectricityMovementFinished);
+	}
 
 	if (WeakZonePostProcess)
 	{

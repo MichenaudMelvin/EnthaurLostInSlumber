@@ -60,11 +60,30 @@ void AENTNerveReceptacle::BeginPlay()
 		return;
 	}
 
-	ElectricityComponent->OnElectricityAnimationStarted.AddDynamic(this, &AENTNerveReceptacle::OnElectricityAnimationStarted);
-	ElectricityComponent->OnElectricityRadiusFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityRadiusFinished);
-	ElectricityComponent->OnElectricityMovementUpdated.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementUpdated);
-	ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementFinished);
-	ElectricityComponent->OnElectricityOpacityFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityOpacityFinished);
+	if (!ElectricityComponent->OnElectricityAnimationStarted.IsAlreadyBound(this, &AENTNerveReceptacle::OnElectricityAnimationStarted))
+	{
+		ElectricityComponent->OnElectricityAnimationStarted.AddDynamic(this, &AENTNerveReceptacle::OnElectricityAnimationStarted);
+	}
+
+	if (!ElectricityComponent->OnElectricityRadiusFinished.IsAlreadyBound(this, &AENTNerveReceptacle::OnElectricityRadiusFinished))
+	{
+		ElectricityComponent->OnElectricityRadiusFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityRadiusFinished);
+	}
+
+	if (!ElectricityComponent->OnElectricityMovementUpdated.IsAlreadyBound(this, &AENTNerveReceptacle::OnElectricityMovementUpdated))
+	{
+		ElectricityComponent->OnElectricityMovementUpdated.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementUpdated);
+	}
+
+	if (!ElectricityComponent->OnElectricityMovementFinished.IsAlreadyBound(this, &AENTNerveReceptacle::OnElectricityMovementFinished))
+	{
+		ElectricityComponent->OnElectricityMovementFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityMovementFinished);
+	}
+
+	if (!ElectricityComponent->OnElectricityOpacityFinished.IsAlreadyBound(this, &AENTNerveReceptacle::OnElectricityOpacityFinished))
+	{
+		ElectricityComponent->OnElectricityOpacityFinished.AddDynamic(this, &AENTNerveReceptacle::OnElectricityOpacityFinished);
+	}
 
 	AENTNerve::OnHoldStateUpdate.AddUObject(this, &AENTNerveReceptacle::OnHoldStateChanged);
 }

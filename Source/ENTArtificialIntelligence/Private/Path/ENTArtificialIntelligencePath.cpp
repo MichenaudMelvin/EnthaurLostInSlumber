@@ -101,13 +101,23 @@ void AENTArtificialIntelligencePath::BeginPlay()
 	Super::BeginPlay();
 
 #if WITH_EDITORONLY_DATA
-	DebugMeshComp->DestroyComponent();
+	if (DebugMeshComp)
+	{
+		DebugMeshComp->DestroyComponent();
+	}
 #endif
 
 	if (bIsAClosedLoop || IsOnFloor())
 	{
-		FirstNavLink->DestroyComponent();
-		SecondNavLink->DestroyComponent();
+		if (FirstNavLink)
+		{
+			FirstNavLink->DestroyComponent();
+		}
+
+		if (SecondNavLink)
+		{
+			SecondNavLink->DestroyComponent();
+		}
 	}
 
 #if WITH_EDITORONLY_DATA

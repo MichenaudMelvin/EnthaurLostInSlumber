@@ -62,8 +62,15 @@ void AENTNerve::BeginPlay()
 {
 	Super::BeginPlay();
 
-	InteractableComponent->AddInteractable(NerveBall);
-	DefaultNervePosition = NerveBall->GetComponentLocation();
+	if (NerveBall)
+	{
+		if (InteractableComponent)
+		{
+			InteractableComponent->AddInteractable(NerveBall);
+		}
+
+		DefaultNervePosition = NerveBall->GetComponentLocation();
+	}
 
 	if (CorruptNerveBlocker)
 	{
@@ -77,17 +84,21 @@ void AENTNerve::BeginPlay()
 
 	if (bIsLigament)
 	{
-		CorruptNerveBlocker->DestroyComponent();
+		if (CorruptNerveBlocker)
+		{
+			CorruptNerveBlocker->DestroyComponent();
+		}
 	}else
 	{
-		CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		if (CorruptNerveBlocker)
+		{
+			CorruptNerveBlocker->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		}
 	}
-
-	//TargetMesh = (bIsLigament) ? LigamentMesh : NerveMesh;
 
 	FOnTimelineFloat UpdateEvent;
 	FOnTimelineEvent FinishEvent;
-	
+
 	UpdateEvent.BindDynamic(this, &AENTNerve::RetractCable);
 	FinishEvent.BindDynamic(this, &AENTNerve::FinishRetractCable);
 	RetractTimeline.AddInterpFloat(RetractionCurve, UpdateEvent);

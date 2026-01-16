@@ -61,8 +61,18 @@ void AENTAmberOre::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (!bIsEmpty) Interactable->AddInteractable(MeshInteraction);
-	Interactable->OnInteract.AddDynamic(this, &AENTAmberOre::OnInteract);
+	if (Interactable)
+	{
+		if (!bIsEmpty)
+		{
+			Interactable->AddInteractable(MeshInteraction);
+		}
+
+		if (!Interactable->OnInteract.IsAlreadyBound(this, &AENTAmberOre::OnInteract))
+		{
+			Interactable->OnInteract.AddDynamic(this, &AENTAmberOre::OnInteract);
+		}
+	}
 
 #if WITH_EDITORONLY_DATA
 	if (!Foliage)
