@@ -15,6 +15,7 @@ void UENTWorldSave::ClearMapData()
 	AmberOreData.Empty();
 	WeakZoneData.Empty();
 	RespawnTreeData.Empty();
+	SpikeDoorData.Empty();
 	ParasiteData.Empty();
 	ScriptedAIElementsData.Empty();
 	OtherElements.Empty();

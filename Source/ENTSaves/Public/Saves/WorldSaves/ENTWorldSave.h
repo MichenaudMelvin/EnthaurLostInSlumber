@@ -41,6 +41,9 @@ public:
 	TMap<FGuid, FENTRespawnTreeData> RespawnTreeData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
+	TMap<FGuid, FENTSpikeDoorData> SpikeDoorData;
+
+	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")
 	TMap<FGuid, FENTParasiteData> ParasiteData;
 
 	UPROPERTY(BlueprintReadWrite, Category = "World|GameElements")

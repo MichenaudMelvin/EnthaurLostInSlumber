@@ -734,7 +734,7 @@ void AENTNerve::Interaction(APlayerController* Controller, APawn* Pawn, UPrimiti
 		}
 
 		CurrentAttachedReceptacle->DisableReceptacle();
-		CurrentAttachedReceptacle->TriggerLinkedObjects(this);
+		CurrentAttachedReceptacle->TriggerLinkedObjects();
 		CurrentAttachedReceptacle = nullptr;
 	}
 
@@ -806,7 +806,7 @@ void AENTNerve::OnEnterWeakZone_Implementation(bool bIsZoneActive)
 		if (CurrentAttachedReceptacle != nullptr && bIsZoneActive)
 		{
 			CurrentAttachedReceptacle->DisableReceptacle();
-			CurrentAttachedReceptacle->TriggerLinkedObjects(this);
+			CurrentAttachedReceptacle->TriggerLinkedObjects();
 			CurrentAttachedReceptacle = nullptr;
 
 			DetachNerveBall(false);

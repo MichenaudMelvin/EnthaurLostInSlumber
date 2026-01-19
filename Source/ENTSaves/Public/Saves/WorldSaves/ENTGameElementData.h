@@ -69,6 +69,15 @@ struct ENTSAVES_API FENTRespawnTreeData : public FENTGameElementData
 	bool bIsActive = false;
 };
 
+USTRUCT(BlueprintType)
+struct ENTSAVES_API FENTSpikeDoorData : public FENTGameElementData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, Category = "Door")
+	bool bIsOpen = false;
+};
+
 #pragma endregion
 
 #pragma region AI

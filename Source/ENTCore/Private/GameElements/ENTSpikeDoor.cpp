@@ -13,6 +13,7 @@
 #include "Player/ENTDefaultCharacter.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Saves/WorldSaves/ENTWorldSave.h"
 
 AENTSpikeDoor::AENTSpikeDoor()
 {
@@ -199,7 +200,8 @@ void AENTSpikeDoor::ClearInterMeshes()
 	for (UNiagaraComponent* Comp : InterMeshFXComponents)
 	{
 		if (Comp) Comp->DestroyComponent();
-	} 
+	}
+
 	InterMeshFXComponents.Empty();
 
 	IsInterMeshA.Empty();
@@ -213,8 +215,18 @@ void AENTSpikeDoor::ToggleDoorState()
 	bIsOpened ? CloseDoor() : OpenDoor();
 }
 
-void AENTSpikeDoor::OpenDoor()
+void AENTSpikeDoor::OpenDoor(bool bInstant)
 {
+	bIsOpened = true;
+
+	bInstantEffect = bInstant;
+
+	if (bInstant)
+	{
+		DropTimeline.SetPlaybackPosition(1.0f, true, true);
+		return;
+	}
+
 	if (OpenDuration > KINDA_SMALL_NUMBER)
 	{
 		DropTimeline.SetPlayRate(1.f / OpenDuration);
@@ -231,24 +243,32 @@ void AENTSpikeDoor::OpenDoor()
 			Comp->Activate();
 		}
 	}
-
-	bIsOpened = !bIsOpened;
 }
 
-void AENTSpikeDoor::CloseDoor()
+void AENTSpikeDoor::CloseDoor(bool bInstant)
 {
-	if (CloseDuration > KINDA_SMALL_NUMBER)
-	{
-		DropTimeline.SetPlayRate(1.f / CloseDuration);
-	}
-
-	DoorNavModifier->SetRelativeLocation(NavModifierDefaultLocation);
-
 	InterMeshesA->SetVisibility(true);
 	InterMeshesB->SetVisibility(true);
 
 	InterMeshesA->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	InterMeshesB->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+
+	DoorNavModifier->SetRelativeLocation(NavModifierDefaultLocation);
+
+	bIsOpened = false;
+
+	bInstantEffect = bInstant;
+
+	if (bInstant)
+	{
+		DropTimeline.SetPlaybackPosition(0.0f, true, true);
+		return;
+	}
+
+	if (CloseDuration > KINDA_SMALL_NUMBER)
+	{
+		DropTimeline.SetPlayRate(1.f / CloseDuration);
+	}
 
 	TriggerPlayerCameraShake();
 	DropTimeline.Reverse();
@@ -262,8 +282,6 @@ void AENTSpikeDoor::CloseDoor()
 			Comp->Activate();
 		}
 	}
-
-	bIsOpened = !bIsOpened;
 }
 
 void AENTSpikeDoor::TriggerPlayerCameraShake() const
@@ -354,13 +372,21 @@ void AENTSpikeDoor::DropTimelineFinished()
 		InterMeshesA->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		InterMeshesB->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-		UAkGameplayStatics::PostEvent(DoorOpenEndEvent, this, 0, FOnAkPostEventCallback());
-		TriggerPlayerCameraShake();
+		if (!bInstantEffect)
+		{
+			UAkGameplayStatics::PostEvent(DoorOpenEndEvent, this, 0, FOnAkPostEventCallback());
+			TriggerPlayerCameraShake();
+		}
+
 		OnDoorOpened.Broadcast();
 	}
 	else
 	{
-		UAkGameplayStatics::PostEvent(DoorCloseEndEvent, this, 0, FOnAkPostEventCallback());
+		if (!bInstantEffect)
+		{
+			UAkGameplayStatics::PostEvent(DoorCloseEndEvent, this, 0, FOnAkPostEventCallback());
+		}
+
 		OnDoorClosed.Broadcast();
 	}
 }
@@ -378,6 +404,30 @@ void AENTSpikeDoor::SetLock_Implementation(bool bState)
 
 	Trigger_Implementation();
 }
+
+#pragma region Saves
+
+FENTGameElementData& AENTSpikeDoor::SaveGameElement(UENTWorldSave* CurrentWorldSave)
+{
+	Super::SaveGameElement(CurrentWorldSave);
+
+	FENTSpikeDoorData Data;
+
+	Data.bIsOpen = bIsOpened;
+
+	return CurrentWorldSave->SpikeDoorData.Add(SaveID, Data);
+}
+
+void AENTSpikeDoor::LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave)
+{
+	Super::LoadGameElement(GameElementData, LoadedWorldSave);
+
+	const FENTSpikeDoorData& Data = static_cast<const FENTSpikeDoorData&>(GameElementData);
+
+	Data.bIsOpen ? OpenDoor(true) : CloseDoor(true);
+}
+
+#pragma endregion
 
 #if WITH_EDITOR
 void AENTSpikeDoor::ClearDoor()

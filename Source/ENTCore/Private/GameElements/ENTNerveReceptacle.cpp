@@ -150,14 +150,19 @@ void AENTNerveReceptacle::ConnectNerve(AENTNerve* Nerve, bool bInstantEffect)
 {
 	LinkedNerve = Nerve;
 	LinkedNerve->SetCurrentReceptacle(this);
-	bInstantEffect ? OnElectricityMovementFinished() : ElectricityComponent->PlayElectricityAnimation(LinkedNerve);
+	bInstantEffect ? InvertConnect() : ElectricityComponent->PlayElectricityAnimation(LinkedNerve);
 	OnNerveConnect();
 }
 
-void AENTNerveReceptacle::TriggerLinkedObjects(AENTNerve* Nerve)
+void AENTNerveReceptacle::InvertConnect()
 {
 	IsConnected = !IsConnected;
 	OnNerveDisconnect(IsConnected);
+}
+
+void AENTNerveReceptacle::TriggerLinkedObjects()
+{
+	InvertConnect();
 
 	TArray<AActor*> Actors;
 	ObjectReactive.GetKeys(Actors);
@@ -228,7 +233,7 @@ void AENTNerveReceptacle::OnElectricityMovementFinished()
 		NerveReceptaclesNoises->PostAkEvent(EnabledNoise);
 	}
 
-	TriggerLinkedObjects(LinkedNerve);
+	TriggerLinkedObjects();
 }
 
 void AENTNerveReceptacle::OnElectricityOpacityFinished()
