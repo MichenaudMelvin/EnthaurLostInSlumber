@@ -92,6 +92,9 @@ struct ENTSAVES_API FENTAIData : public FENTGameElementData
 
 	UPROPERTY(BlueprintReadWrite, Category = "AI")
 	FTransform PawnTransform;
+
+	UPROPERTY(BlueprintReadWrite, Category = "AI")
+	FTransform PawnStartTransform;
 };
 
 USTRUCT(BlueprintType, Category = "SaveData")
