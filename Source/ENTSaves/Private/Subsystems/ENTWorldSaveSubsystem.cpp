@@ -407,6 +407,17 @@ void UENTWorldSaveSubsystem::FinishLoading()
 			continue;
 		}
 
+		FENTSpikeDoorData* SpikeDoorData = CurrentWorldSave->SpikeDoorData.Find(ActorSaveID);
+		if (SpikeDoorData)
+		{
+			InterfaceActor->LoadGameElement(*SpikeDoorData, CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_LoadGameElementBP(Actor, CurrentWorldSave);
+
+			Cast<IENTSaveGameElementInterface>(Actor)->FinishLoading(CurrentWorldSave);
+			IENTSaveGameElementInterface::Execute_FinishLoadingBP(Actor, CurrentWorldSave);
+			continue;
+		}
+
 		FENTParasiteData* ParaSiteData = CurrentWorldSave->ParasiteData.Find(ActorSaveID);
 		if (ParaSiteData)
 		{

@@ -86,4 +86,6 @@ public:
 	bool IsLoading() const {return bIsLoading;}
 
 	bool IsLoaded() const {return bIsLoaded;}
+
+	bool LoadSingleLevel() const {return bLoadSingleLevel;}
 };

@@ -8,7 +8,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Interfaces/ENTPawnAIInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Navigation/PathFollowingComponent.h"
+#include "Player/ENTDefaultCharacter.h"
 #include "Subsystems/ENTArtificialIntelligenceSubsystem.h"
 #include "Saves/WorldSaves/ENTGameElementData.h"
 #include "Subsystems/ENTWorldSaveSubsystem.h"
@@ -25,6 +25,11 @@ AENTDefaultAIController::AENTDefaultAIController()
 void AENTDefaultAIController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (GetPawn())
+	{
+		PawnStartTransform = GetPawn()->GetActorTransform();
+	}
 
 	StartupActions();
 }
@@ -64,20 +69,6 @@ void AENTDefaultAIController::StartupActions()
 	{
 		AISubsystem->AddAI(this);
 	}
-}
-
-void AENTDefaultAIController::LoadingActions(UENTWorldSave* WorldSave)
-{
-	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
-	if(WorldSaveSubsystem)
-	{
-		if (WorldSaveSubsystem->OnFinishLoading.IsAlreadyBound(this, &AENTDefaultAIController::LoadingActions))
-		{
-			WorldSaveSubsystem->OnFinishLoading.RemoveDynamic(this, &AENTDefaultAIController::LoadingActions);
-		}
-	}
-
-	StartupActions();
 }
 
 #if WITH_EDITORONLY_DATA
@@ -151,6 +142,24 @@ void AENTDefaultAIController::RunCurrentBehaviorTree()
 		return;
 	}
 
+	UENTWorldSaveSubsystem* WorldSaveSubsystem = GetGameInstance()->GetSubsystem<UENTWorldSaveSubsystem>();
+	if (!WorldSaveSubsystem)
+	{
+		return;
+	}
+
+	if (WorldSaveSubsystem->LoadSingleLevel())
+	{
+		AActor* ResultActor = UGameplayStatics::GetActorOfClass(this, AENTDefaultCharacter::StaticClass());
+
+		if (!ResultActor)
+		{
+			FTimerHandle TimerHandle;
+			GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AENTDefaultAIController::RunCurrentBehaviorTree, 1.0f, false, 0.2f);
+			return;
+		}
+	}
+
 	UBehaviorTree* PawnBehaviorTree = IENTPawnAIInterface::Execute_GetOverridenBehaviorTree(GetPawn());
 	UBehaviorTree* TargetBehaviorTree = PawnBehaviorTree ? PawnBehaviorTree : BehaviorTree.Get();
 
@@ -166,8 +175,8 @@ void AENTDefaultAIController::RunCurrentBehaviorTree()
 		return;
 	}
 
-	GetBlackboardComponent()->SetValueAsVector(SpawnLocationKeyName, GetPawn()->GetActorLocation());
-	GetBlackboardComponent()->SetValueAsRotator(SpawnRotationKeyName, GetPawn()->GetActorRotation());
+	GetBlackboardComponent()->SetValueAsVector(SpawnLocationKeyName, PawnStartTransform.GetLocation());
+	GetBlackboardComponent()->SetValueAsRotator(SpawnRotationKeyName, PawnStartTransform.GetRotation().Rotator());
 
 	IENTPawnAIInterface::Execute_OnBehaviorTreeStarted(GetPawn());
 }
@@ -183,10 +192,13 @@ void AENTDefaultAIController::StopBehaviorTree()
 void AENTDefaultAIController::SaveControllerData(FENTAIData& AIData)
 {
 	AIData.bRunningBehaviorTree = bIsBehaviorTreeRunning;
+	AIData.PawnStartTransform = PawnStartTransform;
 }
 
 void AENTDefaultAIController::LoadControllerData(const FENTAIData& AIData)
 {
+	PawnStartTransform = AIData.PawnStartTransform;
+
 	if (AIData.bRunningBehaviorTree)
 	{
 		RunCurrentBehaviorTree();

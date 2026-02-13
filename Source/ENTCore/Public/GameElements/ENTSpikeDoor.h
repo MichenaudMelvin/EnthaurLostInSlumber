@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/ENTSavedActor.h"
 #include "Components/TimelineComponent.h"
-#include "GameFramework/Actor.h"
 #include "Interface/ENTActivation.h"
 #include "ENTSpikeDoor.generated.h"
 
@@ -19,7 +19,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorClosed);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnTransitioningState, bool, bIsOpenning, float, Alpha);
 
 UCLASS()
-class ENTCORE_API AENTSpikeDoor : public AActor, public IENTActivation
+class ENTCORE_API AENTSpikeDoor : public AENTSavedActor, public IENTActivation
 {
 	GENERATED_BODY()
 
@@ -155,10 +155,16 @@ protected:
 	void ToggleDoorState();
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Door")
-	void OpenDoor();
+	void OpenDoor() {OpenDoor(false);}
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Door")
-	void CloseDoor();
+	void CloseDoor() {CloseDoor(false);}
+
+	void OpenDoor(bool bInstant);
+
+	void CloseDoor(bool bInstant);
+
+	bool bInstantEffect = false;
 
 	void TriggerPlayerCameraShake() const;
 
@@ -169,6 +175,15 @@ public:
 
 	virtual void SetLock_Implementation(bool bState) override;
 
+#pragma region Saves
+
+protected:
+	virtual FENTGameElementData& SaveGameElement(UENTWorldSave* CurrentWorldSave) override;
+
+	virtual void LoadGameElement(const FENTGameElementData& GameElementData, UENTWorldSave* LoadedWorldSave) override;
+
+#pragma endregion
+
 #if WITH_EDITOR
 private:
 	/**
@@ -176,6 +191,5 @@ private:
 	 */
 	UFUNCTION(CallInEditor, Category = "Door")
 	void ClearDoor();
-
 #endif
 };

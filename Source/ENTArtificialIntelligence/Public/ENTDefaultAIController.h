@@ -21,8 +21,11 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+public:
+	UFUNCTION()
 	virtual void StartupActions();
 
+protected:
 #if WITH_EDITORONLY_DATA
 	virtual void Tick(float DeltaSeconds) override;
 #endif
@@ -39,6 +42,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI|Blackboard")
 	FName SpawnRotationKeyName = "SpawnRotation";
+
+	FTransform PawnStartTransform;
 
 	UPROPERTY(BlueprintReadOnly, Category = "AI")
 	bool bIsBehaviorTreeRunning = false;
@@ -61,9 +66,6 @@ public:
 #pragma region Saves
 
 public:
-	UFUNCTION()
-	void LoadingActions(UENTWorldSave* WorldSave);
-
 	virtual void SaveControllerData(FENTAIData& AIData);
 
 	virtual void LoadControllerData(const FENTAIData& AIData);

@@ -102,7 +102,9 @@ private:
 public:
 	void ConnectNerve(AENTNerve* Nerve, bool bInstantEffect);
 
-	void TriggerLinkedObjects(AENTNerve* Nerve);
+	void InvertConnect();
+
+	void TriggerLinkedObjects();
 
 	// Create Event
 	UFUNCTION(BlueprintImplementableEvent, Category = "Nerve")
